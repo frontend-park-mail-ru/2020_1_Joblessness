@@ -1,0 +1,38 @@
+{
+  "name": "joblessness",
+  "version": "0.0.1",
+  "description": "Need job - No job",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "nodemon server/index.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/frontend-park-mail-ru/2020_1_Joblessness.git"
+  },
+  "keywords": [
+    "hh.ru",
+    "job",
+    "work",
+    "find",
+    "need",
+    "want",
+    "work",
+    "money"
+  ],
+  "author": "Joblessness",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/frontend-park-mail-ru/2020_1_Joblessness/issues"
+  },
+  "homepage": "https://github.com/frontend-park-mail-ru/2020_1_Joblessness#readme",
+  "dependencies": {
+    "body-parser": "^1.19.0",
+    "cors": "^2.8.5",
+    "debug": "^4.1.1",
+    "express": "^4.17.1",
+    "morgan": "^1.9.1",
+    "nodemon": "^2.0.2"
+  }
+}
