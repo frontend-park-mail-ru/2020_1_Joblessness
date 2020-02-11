@@ -48,10 +48,10 @@
                             <option>USD</option>
                         </select>
                         <br>
-                        <input id="before_taxes" type="radio" value="before_taxes">
+                        <input name="salary" id="before_taxes" type="radio" value="before_taxes">
                         <label for="before_taxes">До выплаты налогов</label>
                         <br>
-                        <input id="after_taxes" type="radio" value="after_taxes">
+                        <input name="salary" id="after_taxes" type="radio" value="after_taxes">
                         <label for="after_taxes">На руки</label>
                     </div>
                     <span class="input_description">Подсказка5</span>
@@ -72,13 +72,13 @@
                 <section class="oneline">
                     <label class="input_name">Адрес офиса</label>
                     <div class="input">
-                        <input id="show_adr" type="radio" value="show_adr">
-                        <label for="show_adr">Показывать адрес</label>
+                        <input name="address" id="show_addr" type="radio" value="show_addr">
+                        <label for="show_addr">Показывать адрес</label>
                         <br>
-                        <input id="dont_show_adr" type="radio" value="dont_show_adr">
-                        <label for="dont_show_adr">Не показывать адрес</label>
+                        <input name="address" id="dont_show_addr" type="radio" value="dont_show_addr">
+                        <label for="dont_show_addr">Не показывать адрес</label>
                         <br>
-                        <input class="width_100" type="search" id="adress">
+                        <input class="width_100" type="search" id="address">
                         <div class="spliter"></div>
                         <input id="show_only_metro" type="checkbox" value="show_only_metro">
                         <label for="show_only_metro">Показывать только станцию метро</label>
@@ -118,10 +118,10 @@
                 <section class="oneline">
                     <label class="input_name">Контактная информация</label>
                     <div class="input">
-                        <input id="show_contact" type="radio" value="show_contact">
+                        <input name="contact" id="show_contact" type="radio" value="show_contact">
                         <label for="show_contact">Показывать в вакансии</label>
                         <br>
-                        <input id="dont_show_contact" type="radio" value="dont_show_contact">
+                        <input name="contact" id="dont_show_contact" type="radio" value="dont_show_contact">
                         <label for="dont_show_contact">Не показывать в вакансии</label>
                     </div>
                     <span class="input_description">Подсказка7</span>
@@ -159,6 +159,7 @@
         <footer>
             <input id="save_temp" type="checkbox" value="save_temp">
             <label for="save_temp">Сохранить как шаблон</label>
+            <br>
             <button type="submit">Разместить</button>
         </footer>
 
