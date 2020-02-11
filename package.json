@@ -1,0 +1,57 @@
+{
+  "name": "joblessness",
+  "version": "0.0.1",
+  "description": "Need job - No job",
+  "main": "index.js",
+  "scripts": {
+    "start:dev": "webpack-dev-server",
+    "build": "webpack"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/frontend-park-mail-ru/2020_1_Joblessness.git"
+  },
+  "babel": {
+    "presets": [
+      "@babel/preset-env"
+    ],
+    "plugins": [
+      "@babel/plugin-proposal-class-properties"
+    ]
+  },
+  "keywords": [
+    "hh.ru",
+    "job",
+    "work",
+    "find",
+    "need",
+    "want",
+    "work",
+    "money"
+  ],
+  "author": "Joblessness",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/frontend-park-mail-ru/2020_1_Joblessness/issues"
+  },
+  "homepage": "https://github.com/frontend-park-mail-ru/2020_1_Joblessness#readme",
+  "dependencies": {
+    "@babel/core": "^7.8.4",
+    "@babel/preset-stage-3": "^7.8.3",
+    "babel-loader": "^8.0.6",
+    "extract-loader": "^4.0.3",
+    "handlebars": "^4.7.3",
+    "handlebars-loader": "^1.7.1",
+    "style-loader": "^1.1.3"
+  },
+  "devDependencies": {
+    "@babel/plugin-proposal-class-properties": "^7.8.3",
+    "@babel/preset-env": "^7.8.4",
+    "babel-preset-es2015": "^6.24.1",
+    "css-loader": "^3.4.2",
+    "html-webpack-plugin": "^3.2.0",
+    "webpack": "^4.41.5",
+    "webpack-cli": "^3.3.10",
+    "webpack-dev-server": "^3.10.3"
+  }
+}
