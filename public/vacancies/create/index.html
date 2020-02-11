@@ -2,9 +2,166 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Title</title>
+    <title>Создать вакансию</title>
+
+    <link rel="stylesheet" type="text/css" href="style.css">
 </head>
 <body>
-    <a href="/">home</a>
+    <form>
+        <header><h1>Новая вакансия</h1></header>
+        <main>
+            <section class="sub_form">
+                <h3>Основная информация</h3>
+
+                <section class="oneline">
+                    <label class="input_name" for="job_title">Название вакансии</label>
+                    <input class="input" type="text" id="job_title">
+                    <span class="input_description">Подсказка1</span>
+                </section>
+
+                <section class="oneline">
+                    <label class="input_name">Специальность</label>
+                    <a class="input" href="/">Укажите профобласть</a>
+                    <span class="input_description">Подсказка2</span>
+                </section>
+
+                <section class="oneline">
+                    <label class="input_name" for="description">Описание</label>
+                    <textarea class="input" id="description"></textarea>
+                    <span class="input_description">Подсказка3</span>
+                </section>
+
+                <section class="oneline">
+                    <label class="input_name" for="skills">Основные навыки</label>
+                    <input class="input" type="text" id="skills">
+                    <span class="input_description">Подсказка4</span>
+                </section>
+
+                <section class="oneline">
+                    <label class="input_name">Предположительный уровень дохода</label>
+                    <div class="input">
+                        <input type="number" id="payment_from">
+                        <input type="number" id="payment_to">
+                        <select id="currency">
+                            <option>руб.</option>
+                            <option>EUR</option>
+                            <option>USD</option>
+                        </select>
+                        <br>
+                        <input id="before_taxes" type="radio" value="before_taxes">
+                        <label for="before_taxes">До выплаты налогов</label>
+                        <br>
+                        <input id="after_taxes" type="radio" value="after_taxes">
+                        <label for="after_taxes">На руки</label>
+                    </div>
+                    <span class="input_description">Подсказка5</span>
+                </section>
+            </section>
+
+            <div class="spliter"></div>
+
+            <section class="sub_form">
+                <h3>Место работы</h3>
+
+                <section class="oneline">
+                    <label class="input_name" for="town">Вакансия в городе</label>
+                    <input class="input" type="text" id="town">
+                    <span class="input_description">Подсказка6</span>
+                </section>
+
+                <section class="oneline">
+                    <label class="input_name">Адрес офиса</label>
+                    <div class="input">
+                        <input id="show_adr" type="radio" value="show_adr">
+                        <label for="show_adr">Показывать адрес</label>
+                        <br>
+                        <input id="dont_show_adr" type="radio" value="dont_show_adr">
+                        <label for="dont_show_adr">Не показывать адрес</label>
+                        <br>
+                        <input class="width_100" type="search" id="adress">
+                        <div class="spliter"></div>
+                        <input id="show_only_metro" type="checkbox" value="show_only_metro">
+                        <label for="show_only_metro">Показывать только станцию метро</label>
+                    </div>
+                    <span class="input_description">Подсказка7</span>
+                </section>
+
+            </section>
+
+            <div class="spliter"></div>
+
+            <section class="sub_form">
+                <h3>Дополнительно</h3>
+
+                <section class="oneline">
+                    ***
+                </section>
+
+            </section>
+
+            <div class="spliter"></div>
+
+            <section class="sub_form">
+                <h3>Контактные данные</h3>
+
+                <section class="oneline">
+                    <label class="input_name">Менеджер вакансии</label>
+                    <div class="input">
+                        <input class="width_100" type="text" id="manager">
+                        <div class="spliter"></div>
+                        <input id="notificatione_by_email" type="checkbox" value="show_only_metro">
+                        <label for="show_only_metro">Уведомлять о вакансиях по почте</label>
+                    </div>
+                    <span class="input_description">Подсказка</span>
+                </section>
+
+                <section class="oneline">
+                    <label class="input_name">Контактная информация</label>
+                    <div class="input">
+                        <input id="show_contact" type="radio" value="show_contact">
+                        <label for="show_contact">Показывать в вакансии</label>
+                        <br>
+                        <input id="dont_show_contact" type="radio" value="dont_show_contact">
+                        <label for="dont_show_contact">Не показывать в вакансии</label>
+                    </div>
+                    <span class="input_description">Подсказка7</span>
+                </section>
+
+                <section class="oneline">
+                    <label class="input_name" for="manager_name">Контактное лицо</label>
+                    <input class="input" id="manager_name" type="text">
+                    <span class="input_description">Подсказка7</span>
+                </section>
+
+                <section class="oneline">
+                    <label class="input_name" for="manager_email">Email</label>
+                    <input class="input" id="manager_email" type="email">
+                    <span class="input_description">Подсказка7</span>
+                </section>
+
+                <section class="oneline">
+                    <label class="input_name" for="manager_phone">Телефон</label>
+                    <input class="input" id="manager_phone" type="tel" pattern="+7-[0-9]{3}-[0-9]{3}-[0-9]{4}">
+                    <span class="input_description">Подсказка7</span>
+                </section>
+
+                <section class="oneline">
+                    <label class="input_name" for="comment">Комментарий</label>
+                    <input class="input" id="comment" type="text">
+                    <span class="input_description">Подсказка7</span>
+                </section>
+
+            </section>
+        </main>
+
+        <div class="spliter"></div>
+
+        <footer>
+            <input id="save_temp" type="checkbox" value="save_temp">
+            <label for="save_temp">Сохранить как шаблон</label>
+            <button type="submit">Разместить</button>
+        </footer>
+
+    </form>
 </body>
 </html>

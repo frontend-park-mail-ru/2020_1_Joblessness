@@ -1,0 +1,44 @@
+form {
+    padding: 2%;
+    background-color: gainsboro;
+    border-radius: 15px;
+}
+
+section.oneline {
+    clear: both;
+    text-align: right;
+}
+
+.input_name {
+    width: 25%;
+    float: left;
+    text-align: left;
+}
+
+.input {
+    margin-top: 1px;
+    width: 50%;
+    float: left;
+    text-align: left;
+}
+
+.input_description {
+    text-align: left;
+    color: dimgray;
+    height: 100%;
+}
+
+.input_description:hover {
+    color: black;
+    width: 25%;
+    float: left;
+}
+
+.spliter {
+    clear: both;
+    width: 100%;
+}
+
+.width_100 {
+    width: 100%;
+}
