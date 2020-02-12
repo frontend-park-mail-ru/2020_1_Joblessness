@@ -47,18 +47,22 @@
                             <option>EUR</option>
                             <option>USD</option>
                         </select>
-                        <br>
-                        <input name="salary" id="before_taxes" type="radio" value="before_taxes">
-                        <label for="before_taxes">До выплаты налогов</label>
-                        <br>
-                        <input name="salary" id="after_taxes" type="radio" value="after_taxes">
-                        <label for="after_taxes">На руки</label>
+
+<!--                        <br>-->
+                        <label for="before_taxes">
+                            <input name="salary" id="before_taxes" type="radio" value="before_taxes">
+                            До выплаты налогов
+                        </label>
+<!--                        <br>-->
+                        <label for="after_taxes">
+                            <input name="salary" id="after_taxes" type="radio" value="after_taxes">
+                            На руки
+                        </label>
+
                     </div>
                     <span class="input_description">Подсказка5</span>
                 </section>
             </section>
-
-            <div class="spliter"></div>
 
             <section class="sub_form">
                 <h3>Место работы</h3>
@@ -72,23 +76,24 @@
                 <section class="oneline">
                     <label class="input_name">Адрес офиса</label>
                     <div class="input">
-                        <input name="address" id="show_addr" type="radio" value="show_addr">
-                        <label for="show_addr">Показывать адрес</label>
-                        <br>
-                        <input name="address" id="dont_show_addr" type="radio" value="dont_show_addr">
-                        <label for="dont_show_addr">Не показывать адрес</label>
-                        <br>
-                        <input class="width_100" type="search" id="address">
-                        <div class="spliter"></div>
-                        <input id="show_only_metro" type="checkbox" value="show_only_metro">
-                        <label for="show_only_metro">Показывать только станцию метро</label>
+                        <label for="show_addr">
+                            <input name="address" id="show_addr" type="radio" value="show_addr">
+                            Показывать адрес
+                        </label>
+                        <label for="dont_show_addr">
+                            <input name="address" id="dont_show_addr" type="radio" value="dont_show_addr">
+                            Не показывать адрес
+                        </label>
+                        <input type="text" id="address">
+                        <label for="show_only_metro">
+                            <input id="show_only_metro" type="checkbox" value="show_only_metro">
+                            Показывать только станцию метро
+                        </label>
                     </div>
                     <span class="input_description">Подсказка7</span>
                 </section>
 
             </section>
-
-            <div class="spliter"></div>
 
             <section class="sub_form">
                 <h3>Дополнительно</h3>
@@ -99,18 +104,17 @@
 
             </section>
 
-            <div class="spliter"></div>
-
             <section class="sub_form">
                 <h3>Контактные данные</h3>
 
                 <section class="oneline">
                     <label class="input_name">Менеджер вакансии</label>
                     <div class="input">
-                        <input class="width_100" type="text" id="manager">
-                        <div class="spliter"></div>
-                        <input id="notificatione_by_email" type="checkbox" value="show_only_metro">
-                        <label for="show_only_metro">Уведомлять о вакансиях по почте</label>
+                        <input type="text" id="manager">
+                        <label for="show_only_metro">
+                            <input id="notificatione_by_email" type="checkbox" value="show_only_metro">
+                            Уведомлять о вакансиях по почте
+                        </label>
                     </div>
                     <span class="input_description">Подсказка</span>
                 </section>
@@ -118,11 +122,14 @@
                 <section class="oneline">
                     <label class="input_name">Контактная информация</label>
                     <div class="input">
-                        <input name="contact" id="show_contact" type="radio" value="show_contact">
-                        <label for="show_contact">Показывать в вакансии</label>
-                        <br>
-                        <input name="contact" id="dont_show_contact" type="radio" value="dont_show_contact">
-                        <label for="dont_show_contact">Не показывать в вакансии</label>
+                        <label for="show_contact">
+                            <input name="contact" id="show_contact" type="radio" value="show_contact">
+                            Показывать в вакансии
+                        </label>
+                        <label for="dont_show_contact">
+                            <input name="contact" id="dont_show_contact" type="radio" value="dont_show_contact">
+                            Не показывать в вакансии
+                        </label>
                     </div>
                     <span class="input_description">Подсказка7</span>
                 </section>
@@ -153,8 +160,6 @@
 
             </section>
         </main>
-
-        <div class="spliter"></div>
 
         <footer>
             <input id="save_temp" type="checkbox" value="save_temp">
