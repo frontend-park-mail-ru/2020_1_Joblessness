@@ -2,10 +2,154 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Title</title>
+    <title>Создание резюме</title>
+
+    <link rel="stylesheet" type="text/css" href="style.css">
 </head>
 <body>
-    Create Summary
-    <a href="/">home</a>
+    <form>
+        <header><h1>Ваше резюме</h1></header>
+        <main>
+            <section class="settings-section">
+                <div class="summary-preparation-actions">
+                    <button>Загрузить из файла</button>
+                    <button>Заказать резюме</button>
+                </div>
+
+                <div class="user-summary-actions">
+                    <select id="summary-lang">
+                        <option id="en" value="en">In English</option>
+                        <option id="ru" value="en">По-русски</option>
+                    </select>
+                    <div class="only-icons-buttons">
+                        <button>Печать</button>
+                        <button>Удалить</button>
+                    </div>
+                </div>
+            </section>
+
+            <section class="sub-form">
+                <h3>Контактные данные</h3>
+
+                <section class="oneline-two-elements">
+                    <label class="input-name">Имя</label>
+                    <input class="input" type="text" id="name">
+                </section>
+
+                <section class="oneline-two-elements">
+                    <label class="input-name">Фамилия</label>
+                    <input class="input" type="text" id="surname">
+                </section>
+
+                <section class="oneline-two-elements">
+                    <label class="input-name">Мобильный телефон</label>
+                    <input class="input" type="tel" id="phone" pattern="+7-[0-9]{3}-[0-9]{3}-[0-9]{4}">
+                </section>
+
+                <section class="oneline-two-elements">
+                    <label class="input-name">Город проживания</label>
+                    <input class="input" type="text" id="city">
+                </section>
+
+            </section>
+
+            <section class="sub-form">
+                <h3>Основная информация</h3>
+
+                <section class="oneline-two-elements">
+                    <label class="input-name">Дата рождения</label>
+                    <div class="inputs-wrapper">
+                        <div class="input date" id="birthday">
+                            <input type="number" id="day" placeholder="День">
+                            <select id="month">
+                                <option>Месяц</option>
+                            </select>
+                            <input type="number" id="year" placeholder="Год">
+                        </div>
+                    </div>
+
+                </section>
+
+                <section class="oneline-two-elements">
+                    <label class="input-name">Пол</label>
+                    <div class="inputs-wrapper">
+                        <label for="male">
+                            <input name="sex" id="male" type="radio" value="male">
+                            Мужской
+                        </label>
+                        <label for="female">
+                            <input name="sex" id="female" type="radio" value="female">
+                            Женский
+                        </label>
+                    </div>
+
+                </section>
+
+                <section class="oneline-two-elements">
+                    <label class="input-name">Гражданство</label>
+                    <div class="inputs-wrapper">
+                        <input class="input" type="text" id="citizenship">
+                        <div class="tags-place">
+                            <div class="tag">
+                                <span class="tag-name">Россия</span>
+                                <button>X</button>
+                            </div>
+
+                        </div>
+                    </div>
+
+                </section>
+
+                <section class="oneline-two-elements">
+                    <label class="input-name">Опыт работы</label>
+                    <div class="inputs-wrapper">
+                        <label for="male">
+                            <input name="experience" id="have" type="radio" value="have">
+                            Есть опыт работы
+                        </label>
+                        <label for="female">
+                            <input name="experience" id="dont-have" type="radio" value="dont-have">
+                            Нет опыта работы
+                        </label>
+                        <div>
+                            <span>
+                                80% работодателей не рассматривают кандидатов без опыта работы.
+                                Рекомендуем указать опыт или объяснить почему его нет,
+                                выбрав причину из предложенных или описав свою.
+                            </span>
+
+                            <div class="template-explanations">
+                                <span class="template-explanation">Учеба</span>
+                                <span class="template-explanation">Армия</span>
+                                <span class="template-explanation">Безработный</span>
+                            </div>
+
+                            <textarea class="input" id="no-exp-explanation"></textarea>
+                        </div>
+                    </div>
+
+                </section>
+
+            </section>
+
+            <section class="sub-form">
+                <h3>Специальность</h3>
+
+                ***
+            </section>
+
+            <section class="sub-form">
+                <h3>Другая важная информация</h3>
+
+                ***
+            </section>
+
+        </main>
+
+        <footer>
+            <button type="submit">Сохранить и опубликовать</button>
+        </footer>
+
+    </form>
 </body>
 </html>
