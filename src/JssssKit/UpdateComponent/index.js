@@ -12,7 +12,16 @@ function updateHostComponent(fiber) {
   if (!fiber.dom) {
     fiber.dom = createDom(fiber);
   }
-  reconcileChildren(fiber, fiber.props.children);
+  const newChildren = []
+  
+  for( let child of fiber.props.children ) {
+    if( child instanceof Array ) {
+      child.forEach( c => newChildren.push(c) );
+    } else {
+      newChildren.push( child );
+    }
+  }
+  reconcileChildren(fiber, newChildren);
 }
 export {
   updateFunctionComponent,

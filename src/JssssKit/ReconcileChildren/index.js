@@ -39,7 +39,7 @@ const reconcileChildren = (wipFiber, elements) => {
         ...oldFiber,
         effectTag : DELETION,
       }
-      deletions.push(oldFiber);
+      window.JssssKit.deletions.push(oldFiber);
     }
   
     if (oldFiber) {
