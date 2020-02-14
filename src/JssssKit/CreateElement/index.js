@@ -5,13 +5,17 @@ import { TEXT_ELEMENT } from '../typedefs'
  * @param {string} text - text to be shown
  * @return {Object} JssssKit object of TEXT_ELEMENT type
  */
-const createTextElement = (text) => ({
-  type: TEXT_ELEMENT,
-  props: {
-    nodeValue: text,
-    children: []
-  },
-})
+const createTextElement = (text) => {
+  const object = {
+    type: TEXT_ELEMENT,
+    props: {
+      nodeValue: text,
+      children: []
+    },
+  }
+  // Object.freeze(object)
+  return object
+}
 
 
 /**
@@ -22,15 +26,21 @@ const createTextElement = (text) => ({
  * Object - for other components
  * @return {Object} JssssKit object of TEXT_ELEMENT type
  */
-const createElement = (type, props, ...children) =>({
-  type,
-  props: {
-    ...props,
-    children: children.map(child =>
-        typeof child === "object" ? child : createTextElement(child)
-    )
-  },
-})
+const createElement = (type, props, ...children) =>{
+  const newChildren = [
+    ...(props ? props.children ? props.children : []: []),
+    ...children.map(child =>
+    typeof child === "object" ? child : createTextElement(child)
+  )
+  ]
+  return {
+    type,
+    props : {
+      ...props,
+      children : newChildren,
+    },
+  }
+}
 
 export {
   createElement,

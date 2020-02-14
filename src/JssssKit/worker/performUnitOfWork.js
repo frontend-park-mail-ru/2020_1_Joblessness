@@ -1,13 +1,17 @@
 import x from '../vars'
 import {
+  updateClassComponent,
   updateFunctionComponent,
   updateHostComponent
 } from '../UpdateComponent'
 
 const performUnitOfWork = (fiber) => {
-  const isFunctionComponent = fiber.type instanceof Function;
+  const isClassComponent = fiber.type && fiber.type.isClassComponent;
+  const isFunctionComponent = fiber.type instanceof Function && !isClassComponent;
   if (isFunctionComponent) {
     updateFunctionComponent(fiber);
+  } else if(isClassComponent) {
+    updateClassComponent(fiber)
   } else {
     updateHostComponent(fiber);
   }

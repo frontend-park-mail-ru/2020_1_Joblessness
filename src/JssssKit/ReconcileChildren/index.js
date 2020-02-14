@@ -8,14 +8,15 @@ const reconcileChildren = (wipFiber, elements) => {
   while ( index < elements.length || oldFiber != null ) {
     const element = elements[ index ];
     let newFiber = null
-  
+    
     const sameType =
       oldFiber &&
       element &&
-      element.type === oldFiber.type;
+      (element.type === oldFiber.type || element.instance === oldFiber.instance);
   
     if (sameType) {
       newFiber = {
+        ...oldFiber,
         type: oldFiber.type,
         props: element.props,
         dom: oldFiber.dom,
@@ -24,8 +25,11 @@ const reconcileChildren = (wipFiber, elements) => {
         effectTag: UPDATE
       };
     }
+    if( element && !sameType && element.isClassComponent)
+      console.log(wipFiber)
     if (element && !sameType) {
       newFiber = {
+        ...oldFiber,
         type: element.type,
         props: element.props,
         dom: null,

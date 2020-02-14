@@ -7,7 +7,8 @@ if(!window.JssssKit) {
     nextUnitOfWork : null, // Next Unit to be rendered (Since we devide rendering process)
     currentRoot : null, // To track Root component
     wipRoot :  null, // To track work progress. (Work In Progress Root),
-    timesImported : 1
+    timesImported : 1,
+    stateIndex : null
   };
 } else {
   ++window.JssssKit.timesImported;

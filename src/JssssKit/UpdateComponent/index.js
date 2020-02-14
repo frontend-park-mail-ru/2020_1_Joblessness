@@ -1,6 +1,18 @@
 import { createDom } from '../CreateDom'
 import { reconcileChildren } from '../ReconcileChildren'
-import x from '../vars'
+
+function updateClassComponent(fiber) {
+  if( !fiber.instance ) {
+    fiber.instance = new fiber.type(fiber.props)
+    // fiber.type = new fiber.type(fiber.props)
+  }
+  window.JssssKit.wipFiber = fiber;
+  // window.JssssKit.wipFiber.state = fiber.type.state;
+  fiber.instance.props = fiber.props
+  const children = [fiber.instance.requestRender.apply(fiber.instance)]
+  reconcileChildren(fiber, children);
+}
+
 function updateFunctionComponent(fiber) {
   window.JssssKit.wipFiber = fiber;
   window.JssssKit.hookIndex = 0;
@@ -8,6 +20,7 @@ function updateFunctionComponent(fiber) {
   const children = [fiber.type(fiber.props)];
   reconcileChildren(fiber, children);
 }
+
 function updateHostComponent(fiber) {
   if (!fiber.dom) {
     fiber.dom = createDom(fiber);
@@ -26,4 +39,5 @@ function updateHostComponent(fiber) {
 export {
   updateFunctionComponent,
   updateHostComponent,
+  updateClassComponent
 }

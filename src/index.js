@@ -1,6 +1,11 @@
 import JssssKit, { useState, Component } from './JssssKit'
 import './style.sass'
-import Counter from './counterExample'
+import UserPage from './UserPage'
 
-const container = document.getElementById("root");
-JssssKit.render(<Counter/>, container);
+const App = () => (
+  <div className='app-holder'>
+    <UserPage/>
+  </div>
+)
+
+JssssKit.render(<App/>, document.getElementById('root'));
