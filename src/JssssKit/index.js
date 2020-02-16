@@ -1,23 +1,27 @@
-import globalVars from './vars'
-import { render } from './Render'
-import { createElement } from './CreateElement'
-import { useState } from './Hooks'
-import { Component } from './Component'
-import { workLoop } from './worker'
-//@TODO request single workloop on import
-if( window.JssssKit.timesImported <= 1)
-  window.requestIdleCallback(workLoop);
-const jssssKit = {
-  render,
-  createElement,
-  useState,
-  Component
+import {render} from './Render'
+import {createElement} from './CreateElement'
+import {useState} from './Hooks'
+import {Component} from './Component'
+import {workLoop} from './worker'
+import './vars'
+/* exported JssssKit */
+/*global JssssKit*/
+class JssssKit {
+    render = render;
+    createElement = createElement;
+    useState = useState;
+    Component = Component;
+
+    constructor() {
+        globalThis.requestIdleCallback(workLoop);
+    }
 }
-//@TODO class Components
+const instance = new JssssKit();
+export default instance;
+
 export {
-  render,
-  createElement,
-  useState,
-  Component
+    useState,
+    render,
+    createElement,
+    Component
 }
-export default jssssKit

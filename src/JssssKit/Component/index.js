@@ -1,66 +1,67 @@
-import { UPDATE } from '../typedefs'
-
+//@TODO implement setState function
 class Component {
-  
-  static isClassComponent = true
-  state = null
-  componentWillMount = null
-  componentDidMount = null
-  
-  componentWillUnmount = () => {
-    console.log('willUnmount')
-  }
 
-  constructor(children, ...props) {
-  }
+    static isClassComponent = true;
+    state = null;
+    componentWillMount = null;
+    componentDidMount = null;
 
-  setState(st) {
-    const oldState =
-      window.JssssKit.wipFiber.alternate &&
-      window.JssssKit.wipFiber.alternate.state &&
-      window.JssssKit.wipFiber.alternate.state;
-    console.log(JssssKit)
-    const state = {
-      ...this.state,
-      ...(typeof st === 'function' ? st(this.state) : st),
-    };
-    if(window.JssssKit.wipFiber.alternate) {
-      window.JssssKit.wipFiber.alternate.state = state
-      window.JssssKit.wipFiber.alternate.instance.state = state
-      // this.state = state
-      console.log(window.JssssKit.wipFiber)
+    constructor(children, ...props) {
     }
-    // window.JssssKit.wipRoot = {...window.JssssKit.currentRoot}
-    // console.log(window.JssssKit.wipRoot.child)
-    window.JssssKit.wipFiber.instance.state = state
-    window.JssssKit.wipRoot = {
-      dom: window.JssssKit.currentRoot.dom,
-      props: window.JssssKit.currentRoot.props,
-      alternate: window.JssssKit.currentRoot,
-      // child: this
-    };
-    window.JssssKit.nextUnitOfWork = window.JssssKit.wipRoot;
-    window.JssssKit.deletions = [];
 
-    // window.JssssKit.wipFiber.state = state;
-    // window.JssssKit.wipFiber.instance.state = state
-  }
-  
-  requestRender() {
-    this.componentWillMount && this.componentWillMount();
-    const res = this.render();
-    this.componentDidMount && this.componentDidMount();
-    return res;
-  }
-  
-  requestDerender() {
-    this.componentWillUnmount && this.componentWillUnmount();
-  }
-  render() {
-    console.log('render')
-    return null
-  }
+    componentWillUnmount = () => {
+        console.log('willUnmount')
+    };
+
+    setState(st) {
+        const oldState =
+            globalThis.JssssKit.wipFiber.alternate &&
+            globalThis.JssssKit.wipFiber.alternate.state &&
+            globalThis.JssssKit.wipFiber.alternate.state;
+        console.log(oldState);
+        const state = {
+            ...this.state,
+            ...(typeof st === 'function' ? st(this.state) : st),
+        };
+        if (globalThis.JssssKit.wipFiber.alternate) {
+            globalThis.JssssKit.wipFiber.alternate.state = state;
+            globalThis.JssssKit.wipFiber.alternate.instance.state = state;
+            // this.state = state
+            console.log(globalThis.JssssKit.wipFiber)
+        }
+        // globalThis.JssssKit.wipRoot = {...globalThis.JssssKit.currentRoot}
+        // console.log(globalThis.JssssKit.wipRoot.child)
+        globalThis.JssssKit.wipFiber.instance.state = state;
+        globalThis.JssssKit.wipRoot = {
+            dom: globalThis.JssssKit.currentRoot.dom,
+            props: globalThis.JssssKit.currentRoot.props,
+            alternate: globalThis.JssssKit.currentRoot,
+            // child: this
+        };
+        globalThis.JssssKit.nextUnitOfWork = globalThis.JssssKit.wipRoot;
+        globalThis.JssssKit.deletions = [];
+
+        // globalThis.JssssKit.wipFiber.state = state;
+        // globalThis.JssssKit.wipFiber.instance.state = state
+    }
+
+    requestRender() {
+        this.componentWillMount && this.componentWillMount();
+        const res = this.render();
+        this.componentDidMount && this.componentDidMount();
+        return res;
+    }
+
+    requestDerender() {
+        this.componentWillUnmount && this.componentWillUnmount();
+    }
+
+    render() {
+        console.log('render');
+        return null;
+    }
 }
+
 export {
-  Component
-}
+    Component
+};

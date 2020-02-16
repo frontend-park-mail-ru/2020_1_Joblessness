@@ -1,16 +1,12 @@
-import x from '../vars'
-import { updateDom } from '../UpdateDom'
-import {updateHostComponent, updateFunctionComponent} from '../UpdateComponent'
+import {commitRoot} from './commitRoot'
 
-import { commitRoot } from './commitRoot'
+import {commitWork} from './commitWork'
 
-import { commitWork } from './commitWork'
+import {commitDeletion} from './commitDeletion'
 
-import { commitDeletion } from './commitDeletion'
+import {workLoop} from './workLoop'
 
-import { workLoop } from './workLoop'
-
-import { performUnitOfWork } from './performUnitOfWork'
+import {performUnitOfWork} from './performUnitOfWork'
 
 export {
   commitDeletion,

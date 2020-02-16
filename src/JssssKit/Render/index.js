@@ -1,18 +1,20 @@
-import { workLoop } from '../worker'
-// window.requestIdleCallback(workLoop);
-
+/**
+ * renders JssssKit elements on page
+ * @param {Object} element - element to be rendered on page
+ * @param {HTMLElement} container - parent node for all elements
+ */
 const render = (element, container) => {
-  window.JssssKit.wipRoot = {
-    dom: container,
-    props: {
-      children: [element]
-    },
-    alternate: window.JssssKit.currentRoot
-  };
-  window.JssssKit.deletions = [];
-  window.JssssKit.nextUnitOfWork = window.JssssKit.wipRoot;
-}
+    globalThis.JssssKit.wipRoot = {
+        dom: container,
+        props: {
+            children: [element]
+        },
+        alternate: globalThis.JssssKit.currentRoot
+    };
+    globalThis.JssssKit.deletions = [];
+    globalThis.JssssKit.nextUnitOfWork = globalThis.JssssKit.wipRoot;
+};
 
 export {
-  render
-}
+    render
+};

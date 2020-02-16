@@ -1,34 +1,44 @@
+/**
+ * updates state of function component
+ * @param {Object} initial - Initial state of a property
+ * @return {[Object, function]} state of property and setter
+ */
 const useState = (initial) => {
-  const oldHook =
-    window.JssssKit.wipFiber.alternate &&
-    window.JssssKit.wipFiber.alternate.hooks &&
-    window.JssssKit.wipFiber.alternate.hooks[window.JssssKit.hookIndex];
-  const hook = {
-    state: oldHook ? oldHook.state : initial,
-    queue: []
-  };
-  
-  const actions = oldHook ? oldHook.queue : [];
-  actions.forEach(action => {
-    hook.state = action(hook.state);
-  });
-  
-  const setState = action => {
-    hook.queue.push(action);
-    window.JssssKit.wipRoot = {
-      dom: window.JssssKit.currentRoot.dom,
-      props: window.JssssKit.currentRoot.props,
-      alternate: window.JssssKit.currentRoot
+  // Get info from previous hook state
+    const oldHook =
+        globalThis.JssssKit.wipFiber.alternate &&
+        globalThis.JssssKit.wipFiber.alternate.hooks &&
+        globalThis.JssssKit.wipFiber.alternate.hooks[globalThis.JssssKit.hookIndex];
+    // Init new hook
+    const hook = {
+        state: oldHook ? oldHook.state : initial,
+        queue: []
     };
-    window.JssssKit.nextUnitOfWork = window.JssssKit.wipRoot;
-    window.JssssKit.deletions = [];
-  };
-  
-  window.JssssKit.wipFiber.hooks.push(hook);
-  window.JssssKit.hookIndex++;
-  return [hook.state, setState];
-}
+    // Process all actions (runs when component is rendered)
+    const actions = oldHook ? oldHook.queue : [];
+    actions.forEach(action => {
+        hook.state = action(hook.state);
+    });
+    //Setter
+    const setState = action => {
+        // Adds action in queue to dispatch
+        hook.queue.push(action);
+        // Sets new wipRoot
+        globalThis.JssssKit.wipRoot = {
+            dom: globalThis.JssssKit.currentRoot.dom,
+            props: globalThis.JssssKit.currentRoot.props,
+            alternate: globalThis.JssssKit.currentRoot
+        };
+        globalThis.JssssKit.nextUnitOfWork = globalThis.JssssKit.wipRoot;
+        globalThis.JssssKit.deletions = [];
+    };
+    // Updates wipFiber
+    globalThis.JssssKit.wipFiber.hooks.push(hook);
+    globalThis.JssssKit.hookIndex++;
+
+    return [hook.state, setState];
+};
 
 export {
-  useState
-}
+    useState
+};
