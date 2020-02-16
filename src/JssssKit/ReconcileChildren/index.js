@@ -15,7 +15,6 @@ const reconcileChildren = (wipFiber, elements) => {
     let index = 0;
     let oldFiber = wipFiber.alternate && wipFiber.alternate.child;
     let prevSibling = null;
-
     while (index < elements.length || oldFiber != null) {
         const element = elements[index];
         let newFiber = null;
@@ -23,12 +22,11 @@ const reconcileChildren = (wipFiber, elements) => {
         const sameType =
             oldFiber &&
             element &&
-            (element.type === oldFiber.type || element.instance === oldFiber.instance);
-
+            (element.type === oldFiber.type);
         if (sameType) {
             // Should only update dom element
             newFiber = {
-                ...oldFiber,
+                // ...oldFiber,
                 type: oldFiber.type,
                 props: element.props,
                 dom: oldFiber.dom,
@@ -41,7 +39,7 @@ const reconcileChildren = (wipFiber, elements) => {
         //     console.log(wipFiber)
         if (element && !sameType) {
             newFiber = {
-                ...oldFiber,
+                // ...oldFiber,
                 type: element.type,
                 props: element.props,
                 dom: null,
