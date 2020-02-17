@@ -14,9 +14,9 @@ export default class CreateVacancy {
     createSection (labelText, inputCell, tipText) {
         let section = document.createElement('section')
         section.className = 'oneline-three-elements';
-        section.innerHTML = '<label class="input-name">' + labelText + '</label>';
+        section.innerHTML = '<label class="input_name">' + labelText + '</label>';
         section.appendChild(inputCell);
-        section.innerHTML += '<span class="input-description">' + tipText + '</span>';
+        section.innerHTML += '<span class="input_description">' + tipText + '</span>';
 
         return section
     }

@@ -13,7 +13,7 @@ section.oneline-two-elements {
     grid-auto-columns: minmax(min-content, max-content);
 }
 
-.input-name {
+.input_name {
     text-align: left;
 }
 
@@ -22,12 +22,12 @@ section.oneline-two-elements {
     text-align: left;
 }
 
-.input-description {
+.input_description {
     text-align: left;
     color: dimgray;
 }
 
-.input-description:hover {
+.input_description:hover {
     color: black;
 }
 
@@ -37,12 +37,12 @@ section.oneline-two-elements {
     width: 100%;
 }
 
-.inputs-wrapper {
+.inputs_wrapper {
     margin-top: 1px;
     text-align: left;
 }
 
-.inputs-wrapper > *:not(.payment) {
+.inputs_wrapper > *:not(.payment) {
     display: block;
 }
 
