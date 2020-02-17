@@ -1,12 +1,10 @@
 "use strict";
 
 import { Page } from "../../Page.js";
+import template from "./VacancyPage.pug";
 
 // смотри пояснения к резюме
 export class VacancyPage extends Page {
-    constructor() {
-        super();
-    }
 
     name(lang='en') {
         if (lang === 'en') {
@@ -16,11 +14,17 @@ export class VacancyPage extends Page {
         }
     }
 
-    template() { // заменить на pug
-        return `<div>ВАКАНСИИ</div>`;
+    addEventsOn() {
+
     }
 
+    //  не нужен, если используется pug
+    // template() { // заменить на pug
+    //     return `<div>ВАКАНСИИ</div>`;
+    // }
+
+    // был this.template, когда не было pug
     render() {
-        this.createDomBox(this.domName()).innerHTML = this.template();
+        this.createDomBox(this.domName()).innerHTML = template();
     }
 }
