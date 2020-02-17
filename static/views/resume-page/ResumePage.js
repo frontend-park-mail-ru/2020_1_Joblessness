@@ -1,6 +1,7 @@
 "use strict";
 
 import Page from './../../modules/Page.js';
+import template from "./resume-page.pug";
 
 // наследуемся от страницы
 export default class ResumePage extends Page {
@@ -19,12 +20,16 @@ export default class ResumePage extends Page {
         }
     }
 
-    template() {
-        let vacancyForm = ``
-        return `<div>РЕЗЮМЕ</div>`;
+    addEventsOn() {
+
     }
 
+    // template() {
+    //     let vacancyForm = ``
+    //     return `<div>РЕЗЮМЕ</div>`;
+    // }
+
     render() {
-        this.createDomBox(this.domName()).innerHTML = this.template();
+        this.createDomBox(this.domName()).innerHTML = template();
     }
 }

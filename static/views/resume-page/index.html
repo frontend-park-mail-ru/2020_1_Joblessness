@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Создание резюме</title>
+
+    <link rel="stylesheet" type="text/css" href="style.css">
+</head>
+<body>
+    <div class="vacancy_form">
+        <header><h1>Ваше резюме</h1></header>
+        <main>
+            <section class="section_settings">
+                <div class="summary_preparation_actions">
+                    <button class="button load_button">Загрузить из файла</button>
+                    <button class="button buy_button">Заказать резюме</button>
+                </div>
+
+                <div class="user_summary_actions">
+                    <select class="input" name="summary_lang">
+                        <option id="en" value="en">In English</option>
+                        <option id="ru" value="ru">По-русски</option>
+                    </select>
+                    <div class="only_icons_buttons">
+                        <button class="button print_button">Печать</button>
+                        <button class="button delete_summary_button">Удалить</button>
+                    </div>
+                </div>
+            </section>
+
+            <section class="sub_form">
+                <h3>Контактные данные</h3>
+
+                <section class="form__section_two_elements">
+                    <label class="input_name">Имя</label>
+                    <input class="input" type="text" name="name">
+                </section>
+
+                <section class="form__section_two_elements">
+                    <label class="input_name">Фамилия</label>
+                    <input class="input" type="text" name="surname">
+                </section>
+
+                <section class="form__section_two_elements">
+                    <label class="input_name">Мобильный телефон</label>
+                    <input class="input" type="tel" name="phone" pattern="+7-[0-9]{3}-[0-9]{3}-[0-9]{4}">
+                </section>
+
+                <section class="form__section_two_elements">
+                    <label class="input_name">Город проживания</label>
+                    <input class="input" type="text" name="city">
+                </section>
+
+            </section>
+
+            <section class="sub_form">
+                <h3>Основная информация</h3>
+
+                <section class="form__section_two_elements">
+                    <label class="input_name">Дата рождения</label>
+                    <div class="inputs_wrapper">
+                        <div class="inputs_wrapper_filling date">
+                            <input class="input" type="number" name="day" placeholder="День">
+                            <select class="input" name="month">
+                                <option>Месяц</option>
+                            </select>
+                            <input class="input" type="number" name="year" placeholder="Год">
+                        </div>
+                    </div>
+
+                </section>
+
+                <section class="form__section_two_elements">
+                    <label class="input_name">Пол</label>
+                    <div class="inputs_wrapper">
+                        <label class="form__section_two_elements">
+                            <input class="input_checkbox" name="male" type="radio" value="male">
+                            Мужской
+                        </label>
+                        <label class="form__section_two_elements">
+                            <input class="input_checkbox" name="female" type="radio" value="female">
+                            Женский
+                        </label>
+                    </div>
+
+                </section>
+
+                <section class="form__section_two_elements">
+                    <label class="input_name">Гражданство</label>
+                    <div class="inputs_wrapper">
+                        <input class="inputs_wrapper_filling input" type="text" name="citizenship">
+                        <div class="inputs_wrapper_filling tags_place">
+                            <div class="tag">
+                                <span class="tag_name">Россия</span>
+                                <button class="button delete_tag_button">X</button>
+                            </div>
+
+                        </div>
+                    </div>
+
+                </section>
+
+                <section class="form__section_two_elements">
+                    <label class="input_name">Опыт работы</label>
+                    <div class="inputs_wrapper">
+                        <label class="inputs_wrapper_filling">
+                            <input class="input_checkbox" name="have" type="radio" value="have">
+                            Есть опыт работы
+                        </label>
+                        <label class="inputs_wrapper_filling">
+                            <input class="input_checkbox" name="dont_have" type="radio" value="dont_have">
+                            Нет опыта работы
+                        </label>
+                        <div>
+                            <span>
+                                80% работодателей не рассматривают кандидатов без опыта работы.
+                                Рекомендуем указать опыт или объяснить почему его нет,
+                                выбрав причину из предложенных или описав свою.
+                            </span>
+
+                            <textarea class="input" name="no_exp_explanation"></textarea>
+                        </div>
+                    </div>
+
+                </section>
+
+            </section>
+
+            <section class="sub_form">
+                <h3>Специальность</h3>
+
+                ***
+            </section>
+
+            <section class="sub_form">
+                <h3>Другая важная информация</h3>
+
+                ***
+            </section>
+
+        </main>
+
+        <footer>
+            <button class="button from__button_submit">Сохранить и опубликовать</button>
+        </footer>
+
+    </div>
+</body>
+</html>

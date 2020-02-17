@@ -3,6 +3,7 @@
     background-color: gainsboro;
     border-radius: 15px;
     min-width: 600px;
+    max-width: 1200px;
 }
 
 .form__section_three_elements {
@@ -27,7 +28,7 @@
     text-align: left;
 }
 
-.inputs_wrapper_filling {
+.inputs_wrapper__filling {
     grid-column-start: 2;
     grid-column-end: 3;
     display: block;

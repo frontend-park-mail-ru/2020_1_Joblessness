@@ -84,7 +84,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
   /******/__webpack_require__.p = "";
   /******/
   /******/ // Load entry module and return exports
-  /******/return __webpack_require__(__webpack_require__.s = 1);
+  /******/return __webpack_require__(__webpack_require__.s = 2);
   /******/
 })(
 /************************************************************************/
@@ -148,206 +148,6 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
   /***/
 },
 /* 1 */
-/***/function (module, __webpack_exports__, __webpack_require__) {
-
-  "use strict";
-
-  Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
-  /* harmony import */var __WEBPACK_IMPORTED_MODULE_0__Navigator_js__ = __webpack_require__(2);
-
-  // запускает все приложение. Точка создание - навигатор
-
-  var App = function App() {
-    _classCallCheck(this, App);
-
-    console.log("Application was created");
-    new __WEBPACK_IMPORTED_MODULE_0__Navigator_js__["a" /* default */]();
-  };
-  /* harmony export (immutable) */
-
-  __webpack_exports__["default"] = App;
-
-  window.addEventListener("load", function () {
-    new App();
-    document.querySelector("#app-box").hidden = false;
-  });
-
-  /***/
-},
-/* 2 */
-/***/function (module, __webpack_exports__, __webpack_require__) {
-
-  "use strict";
-  /* harmony import */
-  var __WEBPACK_IMPORTED_MODULE_0__ulils_showPage_js__ = __webpack_require__(3);
-  /* harmony import */var __WEBPACK_IMPORTED_MODULE_1__views_vacancy_page_VacancyPage_js__ = __webpack_require__(4);
-  /* harmony import */var __WEBPACK_IMPORTED_MODULE_2__views_resume_page_ResumePage_js__ = __webpack_require__(8);
-
-  var Navigator = function () {
-    function Navigator() {
-      _classCallCheck(this, Navigator);
-
-      // сюда добавляете свои страницы
-      this.vacancyPage = new __WEBPACK_IMPORTED_MODULE_1__views_vacancy_page_VacancyPage_js__["a" /* default */]();
-      this.resumePage = new __WEBPACK_IMPORTED_MODULE_2__views_resume_page_ResumePage_js__["a" /* default */]();
-
-      this.render();
-
-      this.addNavEvents();
-    }
-
-    // родительский элемент
-
-
-    _createClass(Navigator, [{
-      key: 'parentDom',
-      value: function parentDom() {
-        return '#app-box';
-      }
-
-      // имя класса самого элемента
-
-    }, {
-      key: 'domName',
-      value: function domName() {
-        return 'nav-bar';
-      }
-
-      // возвращает строку, которая в html описывает наполнение элемента
-
-    }, {
-      key: 'htmlTemplate',
-      value: function htmlTemplate() {
-        // здесь ссылка переход на страницу
-        return '\n            <button class="nav-btn to-page-' + this.vacancyPage.name('en') + '">' + this.vacancyPage.name('ru') + '</button>\n            <button class="nav-btn to-page-' + this.resumePage.name('en') + '">' + this.resumePage.name('ru') + '</button>\n        ';
-      }
-
-      // создает сам dom элемент
-
-    }, {
-      key: 'render',
-      value: function render() {
-        var domBox = document.createElement("div");
-        domBox.className = '' + this.domName();
-        document.querySelector("#app-box").appendChild(domBox);
-        domBox.innerHTML = this.htmlTemplate();
-      }
-
-      // здесь определяется событие перехода на страницу. querySelector позволяет определить элемент по классу
-
-    }, {
-      key: 'addNavEvents',
-      value: function addNavEvents() {
-        var _this = this;
-
-        document.querySelector('.to-page-' + this.vacancyPage.name('en')).addEventListener('click', function () {
-          return Object(__WEBPACK_IMPORTED_MODULE_0__ulils_showPage_js__["a" /* default */])(_this.vacancyPage.domName());
-        });
-        document.querySelector('.to-page-' + this.resumePage.name('en')).addEventListener('click', function () {
-          return Object(__WEBPACK_IMPORTED_MODULE_0__ulils_showPage_js__["a" /* default */])(_this.resumePage.domName());
-        });
-      }
-    }]);
-
-    return Navigator;
-  }();
-  /* harmony export (immutable) */
-
-  __webpack_exports__["a"] = Navigator;
-
-  /***/
-},
-/* 3 */
-/***/function (module, __webpack_exports__, __webpack_require__) {
-
-  "use strict";
-  /* harmony export (immutable) */
-  __webpack_exports__["a"] = showPage;
-
-  function showPage(pageDomName) {
-    console.log('PAGE');
-    console.log(pageDomName);
-    var allPages = document.getElementsByClassName("page");
-    for (var i = 0; i < allPages.length; i++) {
-      allPages[i].hidden = true;
-    }
-    document.querySelector('.' + pageDomName).hidden = false;
-  }
-
-  /***/
-},
-/* 4 */
-/***/function (module, __webpack_exports__, __webpack_require__) {
-
-  "use strict";
-  /* harmony import */
-  var __WEBPACK_IMPORTED_MODULE_0__modules_Page_js__ = __webpack_require__(0);
-  /* harmony import */var __WEBPACK_IMPORTED_MODULE_1__vacancy_page_pug__ = __webpack_require__(5);
-  /* harmony import */var __WEBPACK_IMPORTED_MODULE_1__vacancy_page_pug___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_1__vacancy_page_pug__);
-
-  // смотри пояснения к резюме
-
-  var VacancyPage = function (_WEBPACK_IMPORTED_MO) {
-    _inherits(VacancyPage, _WEBPACK_IMPORTED_MO);
-
-    function VacancyPage() {
-      _classCallCheck(this, VacancyPage);
-
-      return _possibleConstructorReturn(this, (VacancyPage.__proto__ || Object.getPrototypeOf(VacancyPage)).call(this));
-    }
-
-    _createClass(VacancyPage, [{
-      key: 'name',
-      value: function name() {
-        var lang = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : 'en';
-
-        if (lang === 'en') {
-          return 'vacancy';
-        } else if (lang === 'ru') {
-          return 'вакансии';
-        }
-      }
-    }, {
-      key: 'addEventsOn',
-      value: function addEventsOn() {}
-
-      //  не нужен, если используется pug
-      // template() { // заменить на pug
-      //     return `<div>ВАКАНСИИ</div>`;
-      // }
-
-      // был this.template, когда не было pug
-
-    }, {
-      key: 'render',
-      value: function render() {
-        this.createDomBox(this.domName()).innerHTML = __WEBPACK_IMPORTED_MODULE_1__vacancy_page_pug___default()();
-      }
-    }]);
-
-    return VacancyPage;
-  }(__WEBPACK_IMPORTED_MODULE_0__modules_Page_js__["a" /* default */]);
-  /* harmony export (immutable) */
-
-  __webpack_exports__["a"] = VacancyPage;
-
-  /***/
-},
-/* 5 */
-/***/function (module, exports, __webpack_require__) {
-
-  var pug = __webpack_require__(6);
-
-  function template(locals) {
-    var pug_html = "",
-        pug_mixins = {},
-        pug_interp;pug_html = pug_html + '<div class="vacancy_form"><header><h1>\u041D\u043E\u0432\u0430\u044F \u0432\u0430\u043A\u0430\u043D\u0441\u0438\u044F</h1></header><main><section class="sub_form"><h3>\u041E\u0441\u043D\u043E\u0432\u043D\u0430\u044F \u0438\u043D\u0444\u043E\u0440\u043C\u0430\u0446\u0438\u044F</h3><section class="form__section_three_elements"><label class="input_name">\u041D\u0430\u0437\u0432\u0430\u043D\u0438\u0435 \u0432\u0430\u043A\u0430\u043D\u0441\u0438\u0438</label><input class="input" name="job-title" type="text"><span class="input_description">\u041F\u043E\u0434\u0441\u043A\u0430\u0437\u043A\u04301</span></section><section class="form__section_three_elements"><label class="input_name">\u041E\u043F\u0438\u0441\u0430\u043D\u0438\u0435</label><textarea class="input" name="description"></textarea><span class="input_description">\u041F\u043E\u0434\u0441\u043A\u0430\u0437\u043A\u04303</span></section><section class="form__section_three_elements"><label class="input_name">\u041E\u0441\u043D\u043E\u0432\u043D\u044B\u0435 \u043D\u0430\u0432\u044B\u043A\u0438</label><input class="input" name="skills" type="text"><span class="input_description">\u041F\u043E\u0434\u0441\u043A\u0430\u0437\u043A\u04304</span></section><section class="form__section_three_elements"><label class="input_name">\u041F\u0440\u0435\u0434\u043F\u043E\u043B\u043E\u0436\u0438\u0442\u0435\u043B\u044C\u043D\u044B\u0439 \u0443\u0440\u043E\u0432\u0435\u043D\u044C \u0434\u043E\u0445\u043E\u0434\u0430</label><div class="inputs_wrapper"><div class="payment inputs_wrapper_filling"><input class="input" name="payment-from" type="number"><input class="input" name="payment-to" type="number"><select class="input" name="currency"><option value="rub">\u0440\u0443\u0431.</option><option value="eur">EUR</option><option value="usd">USD</option></select></div><label class="inputs_wrapper_filling"><input class="input_checkbox" name="before-taxes" type="radio" value="before-taxes">                            \u0414\u043E \u0432\u044B\u043F\u043B\u0430\u0442\u044B \u043D\u0430\u043B\u043E\u0433\u043E\u0432</label><label class="inputs_wrapper_filling"><input class="input_checkbox" name="after-taxes" type="radio" value="after-taxes">                            \u041D\u0430 \u0440\u0443\u043A\u0438</label></div><span class="input_description">\u041F\u043E\u0434\u0441\u043A\u0430\u0437\u043A\u04305</span></section></section><section class="sub_form"><h3>\u041C\u0435\u0441\u0442\u043E \u0440\u0430\u0431\u043E\u0442\u044B</h3><section class="form__section_three_elements"><label class="input_name">\u0412\u0430\u043A\u0430\u043D\u0441\u0438\u044F \u0432 \u0433\u043E\u0440\u043E\u0434\u0435</label><input class="input" name="town" type="text"><span class="input_description">\u041F\u043E\u0434\u0441\u043A\u0430\u0437\u043A\u04306</span></section><section class="form__section_three_elements"><label class="input_name">\u0410\u0434\u0440\u0435\u0441 \u043E\u0444\u0438\u0441\u0430</label><div class="inputs_wrapper"><label class="inputs_wrapper_filling"><input class="input_checkbox" name="show-addr" type="radio" value="show-addr">                            \u041F\u043E\u043A\u0430\u0437\u044B\u0432\u0430\u0442\u044C \u0430\u0434\u0440\u0435\u0441</label><label class="inputs_wrapper_filling"><input class="input_checkbox" name="dont-show-addr" type="radio" value="dont-show-addr">                            \u041D\u0435 \u043F\u043E\u043A\u0430\u0437\u044B\u0432\u0430\u0442\u044C \u0430\u0434\u0440\u0435\u0441</label><input class="input inputs_wrapper_filling" name="address" type="text"><label class="inputs_wrapper_filling"><input class="input_checkbox" name="show-only-metro" type="checkbox" value="show-only-metro">                            \u041F\u043E\u043A\u0430\u0437\u044B\u0432\u0430\u0442\u044C \u0442\u043E\u043B\u044C\u043A\u043E \u0441\u0442\u0430\u043D\u0446\u0438\u044E \u043C\u0435\u0442\u0440\u043E</label></div><span class="input_description">\u041F\u043E\u0434\u0441\u043A\u0430\u0437\u043A\u04307</span></section></section><section class="sub_form"><h3>\u041A\u043E\u043D\u0442\u0430\u043A\u0442\u043D\u044B\u0435 \u0434\u0430\u043D\u043D\u044B\u0435</h3><section class="form__section_three_elements"><label class="input_name">\u041C\u0435\u043D\u0435\u0434\u0436\u0435\u0440 \u0432\u0430\u043A\u0430\u043D\u0441\u0438\u0438</label><div class="inputs-wrapper"><input class="input inputs_wrapper_filling" name="manager" type="text"><label class="inputs_wrapper_filling"><input class="input_checkbox" name="notificatione-by-email" type="checkbox" value="show-only-metro">                            \u0423\u0432\u0435\u0434\u043E\u043C\u043B\u044F\u0442\u044C \u043E \u0432\u0430\u043A\u0430\u043D\u0441\u0438\u044F\u0445 \u043F\u043E \u043F\u043E\u0447\u0442\u0435</label></div><span class="input_description">\u041F\u043E\u0434\u0441\u043A\u0430\u0437\u043A\u0430</span></section><section class="form__section_three_elements"><label class="input_name">\u041A\u043E\u043D\u0442\u0430\u043A\u0442\u043D\u0430\u044F \u0438\u043D\u0444\u043E\u0440\u043C\u0430\u0446\u0438\u044F</label><div class="inputs_wrapper"><label class="inputs_wrapper_filling"><input class="input_checkbox" name="show-contact" type="radio" value="show-contact">                            \u041F\u043E\u043A\u0430\u0437\u044B\u0432\u0430\u0442\u044C \u0432 \u0432\u0430\u043A\u0430\u043D\u0441\u0438\u0438</label><label class="inputs_wrapper_filling"><input class="input_checkbox" name="dont-show-contact" type="radio" value="dont-show-contact">                            \u041D\u0435 \u043F\u043E\u043A\u0430\u0437\u044B\u0432\u0430\u0442\u044C \u0432 \u0432\u0430\u043A\u0430\u043D\u0441\u0438\u0438</label></div><span class="input_description">\u041F\u043E\u0434\u0441\u043A\u0430\u0437\u043A\u04307</span></section><section class="form__section_three_elements"><label class="input_name">Email</label><input class="input" name="manager-email" type="email"><span class="input_description">\u041F\u043E\u0434\u0441\u043A\u0430\u0437\u043A\u04307</span></section><section class="form__section_three_elements"><label class="input_name">\u0422\u0435\u043B\u0435\u0444\u043E\u043D</label><input class="input" name="manager-phone" type="tel" pattern="+7-[0-9]{3}-[0-9]{3}-[0-9]{4}"><span class="input_description">\u041F\u043E\u0434\u0441\u043A\u0430\u0437\u043A\u04307</span></section><section class="form__section_three_elements"><label class="input_name">\u041A\u043E\u043C\u043C\u0435\u043D\u0442\u0430\u0440\u0438\u0439</label><input class="input" name="comment" type="text"><span class="input_description">\u041F\u043E\u0434\u0441\u043A\u0430\u0437\u043A\u04307</span></section></section></main><footer><label><input class="input_checkbox" name="save-temp" type="checkbox" value="save-temp">                \u0421\u043E\u0445\u0440\u0430\u043D\u0438\u0442\u044C \u043A\u0430\u043A \u0448\u0430\u0431\u043B\u043E\u043D</label><br><button class="button form__button_submit">\u0420\u0430\u0437\u043C\u0435\u0441\u0442\u0438\u0442\u044C</button></footer></div>';;return pug_html;
-  };
-  module.exports = template;
-
-  /***/
-},
-/* 6 */
 /***/function (module, exports, __webpack_require__) {
 
   "use strict";
@@ -611,6 +411,206 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 
   /***/
 },
+/* 2 */
+/***/function (module, __webpack_exports__, __webpack_require__) {
+
+  "use strict";
+
+  Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
+  /* harmony import */var __WEBPACK_IMPORTED_MODULE_0__Navigator_js__ = __webpack_require__(3);
+
+  // запускает все приложение. Точка создание - навигатор
+
+  var App = function App() {
+    _classCallCheck(this, App);
+
+    console.log("Application was created");
+    new __WEBPACK_IMPORTED_MODULE_0__Navigator_js__["a" /* default */]();
+  };
+  /* harmony export (immutable) */
+
+  __webpack_exports__["default"] = App;
+
+  window.addEventListener("load", function () {
+    new App();
+    document.querySelector("#app-box").hidden = false;
+  });
+
+  /***/
+},
+/* 3 */
+/***/function (module, __webpack_exports__, __webpack_require__) {
+
+  "use strict";
+  /* harmony import */
+  var __WEBPACK_IMPORTED_MODULE_0__ulils_showPage_js__ = __webpack_require__(4);
+  /* harmony import */var __WEBPACK_IMPORTED_MODULE_1__views_vacancy_page_VacancyPage_js__ = __webpack_require__(5);
+  /* harmony import */var __WEBPACK_IMPORTED_MODULE_2__views_resume_page_ResumePage_js__ = __webpack_require__(8);
+
+  var Navigator = function () {
+    function Navigator() {
+      _classCallCheck(this, Navigator);
+
+      // сюда добавляете свои страницы
+      this.vacancyPage = new __WEBPACK_IMPORTED_MODULE_1__views_vacancy_page_VacancyPage_js__["a" /* default */]();
+      this.resumePage = new __WEBPACK_IMPORTED_MODULE_2__views_resume_page_ResumePage_js__["a" /* default */]();
+
+      this.render();
+
+      this.addNavEvents();
+    }
+
+    // родительский элемент
+
+
+    _createClass(Navigator, [{
+      key: 'parentDom',
+      value: function parentDom() {
+        return '#app-box';
+      }
+
+      // имя класса самого элемента
+
+    }, {
+      key: 'domName',
+      value: function domName() {
+        return 'nav-bar';
+      }
+
+      // возвращает строку, которая в html описывает наполнение элемента
+
+    }, {
+      key: 'htmlTemplate',
+      value: function htmlTemplate() {
+        // здесь ссылка переход на страницу
+        return '\n            <button class="nav-btn to-page-' + this.vacancyPage.name('en') + '">' + this.vacancyPage.name('ru') + '</button>\n            <button class="nav-btn to-page-' + this.resumePage.name('en') + '">' + this.resumePage.name('ru') + '</button>\n        ';
+      }
+
+      // создает сам dom элемент
+
+    }, {
+      key: 'render',
+      value: function render() {
+        var domBox = document.createElement("div");
+        domBox.className = '' + this.domName();
+        document.querySelector("#app-box").appendChild(domBox);
+        domBox.innerHTML = this.htmlTemplate();
+      }
+
+      // здесь определяется событие перехода на страницу. querySelector позволяет определить элемент по классу
+
+    }, {
+      key: 'addNavEvents',
+      value: function addNavEvents() {
+        var _this = this;
+
+        document.querySelector('.to-page-' + this.vacancyPage.name('en')).addEventListener('click', function () {
+          return Object(__WEBPACK_IMPORTED_MODULE_0__ulils_showPage_js__["a" /* default */])(_this.vacancyPage.domName());
+        });
+        document.querySelector('.to-page-' + this.resumePage.name('en')).addEventListener('click', function () {
+          return Object(__WEBPACK_IMPORTED_MODULE_0__ulils_showPage_js__["a" /* default */])(_this.resumePage.domName());
+        });
+      }
+    }]);
+
+    return Navigator;
+  }();
+  /* harmony export (immutable) */
+
+  __webpack_exports__["a"] = Navigator;
+
+  /***/
+},
+/* 4 */
+/***/function (module, __webpack_exports__, __webpack_require__) {
+
+  "use strict";
+  /* harmony export (immutable) */
+  __webpack_exports__["a"] = showPage;
+
+  function showPage(pageDomName) {
+    console.log('PAGE');
+    console.log(pageDomName);
+    var allPages = document.getElementsByClassName("page");
+    for (var i = 0; i < allPages.length; i++) {
+      allPages[i].hidden = true;
+    }
+    document.querySelector('.' + pageDomName).hidden = false;
+  }
+
+  /***/
+},
+/* 5 */
+/***/function (module, __webpack_exports__, __webpack_require__) {
+
+  "use strict";
+  /* harmony import */
+  var __WEBPACK_IMPORTED_MODULE_0__modules_Page_js__ = __webpack_require__(0);
+  /* harmony import */var __WEBPACK_IMPORTED_MODULE_1__vacancy_page_pug__ = __webpack_require__(6);
+  /* harmony import */var __WEBPACK_IMPORTED_MODULE_1__vacancy_page_pug___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_1__vacancy_page_pug__);
+
+  // смотри пояснения к резюме
+
+  var VacancyPage = function (_WEBPACK_IMPORTED_MO) {
+    _inherits(VacancyPage, _WEBPACK_IMPORTED_MO);
+
+    function VacancyPage() {
+      _classCallCheck(this, VacancyPage);
+
+      return _possibleConstructorReturn(this, (VacancyPage.__proto__ || Object.getPrototypeOf(VacancyPage)).call(this));
+    }
+
+    _createClass(VacancyPage, [{
+      key: 'name',
+      value: function name() {
+        var lang = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : 'en';
+
+        if (lang === 'en') {
+          return 'vacancy';
+        } else if (lang === 'ru') {
+          return 'вакансии';
+        }
+      }
+    }, {
+      key: 'addEventsOn',
+      value: function addEventsOn() {}
+
+      //  не нужен, если используется pug
+      // template() { // заменить на pug
+      //     return `<div>ВАКАНСИИ</div>`;
+      // }
+
+      // был this.template, когда не было pug
+
+    }, {
+      key: 'render',
+      value: function render() {
+        this.createDomBox(this.domName()).innerHTML = __WEBPACK_IMPORTED_MODULE_1__vacancy_page_pug___default()();
+      }
+    }]);
+
+    return VacancyPage;
+  }(__WEBPACK_IMPORTED_MODULE_0__modules_Page_js__["a" /* default */]);
+  /* harmony export (immutable) */
+
+  __webpack_exports__["a"] = VacancyPage;
+
+  /***/
+},
+/* 6 */
+/***/function (module, exports, __webpack_require__) {
+
+  var pug = __webpack_require__(1);
+
+  function template(locals) {
+    var pug_html = "",
+        pug_mixins = {},
+        pug_interp;pug_html = pug_html + '<div class="vacancy_form"><header><h1>\u041D\u043E\u0432\u0430\u044F \u0432\u0430\u043A\u0430\u043D\u0441\u0438\u044F</h1></header><main><section class="sub_form"><h3>\u041E\u0441\u043D\u043E\u0432\u043D\u0430\u044F \u0438\u043D\u0444\u043E\u0440\u043C\u0430\u0446\u0438\u044F</h3><section class="form__section_three_elements"><label class="input_name">\u041D\u0430\u0437\u0432\u0430\u043D\u0438\u0435 \u0432\u0430\u043A\u0430\u043D\u0441\u0438\u0438</label><input class="input" name="job-title" type="text"><span class="input_description">\u041F\u043E\u0434\u0441\u043A\u0430\u0437\u043A\u04301</span></section><section class="form__section_three_elements"><label class="input_name">\u041E\u043F\u0438\u0441\u0430\u043D\u0438\u0435</label><textarea class="input" name="description"></textarea><span class="input_description">\u041F\u043E\u0434\u0441\u043A\u0430\u0437\u043A\u04303</span></section><section class="form__section_three_elements"><label class="input_name">\u041E\u0441\u043D\u043E\u0432\u043D\u044B\u0435 \u043D\u0430\u0432\u044B\u043A\u0438</label><input class="input" name="skills" type="text"><span class="input_description">\u041F\u043E\u0434\u0441\u043A\u0430\u0437\u043A\u04304</span></section><section class="form__section_three_elements"><label class="input_name">\u041F\u0440\u0435\u0434\u043F\u043E\u043B\u043E\u0436\u0438\u0442\u0435\u043B\u044C\u043D\u044B\u0439 \u0443\u0440\u043E\u0432\u0435\u043D\u044C \u0434\u043E\u0445\u043E\u0434\u0430</label><div class="inputs_wrapper"><div class="payment inputs_wrapper_filling"><input class="input" name="payment-from" type="number"><input class="input" name="payment-to" type="number"><select class="input" name="currency"><option value="rub">\u0440\u0443\u0431.</option><option value="eur">EUR</option><option value="usd">USD</option></select></div><label class="inputs_wrapper_filling"><input class="input_checkbox" name="before-taxes" type="radio" value="before-taxes">                            \u0414\u043E \u0432\u044B\u043F\u043B\u0430\u0442\u044B \u043D\u0430\u043B\u043E\u0433\u043E\u0432</label><label class="inputs_wrapper_filling"><input class="input_checkbox" name="after-taxes" type="radio" value="after-taxes">                            \u041D\u0430 \u0440\u0443\u043A\u0438</label></div><span class="input_description">\u041F\u043E\u0434\u0441\u043A\u0430\u0437\u043A\u04305</span></section></section><section class="sub_form"><h3>\u041C\u0435\u0441\u0442\u043E \u0440\u0430\u0431\u043E\u0442\u044B</h3><section class="form__section_three_elements"><label class="input_name">\u0412\u0430\u043A\u0430\u043D\u0441\u0438\u044F \u0432 \u0433\u043E\u0440\u043E\u0434\u0435</label><input class="input" name="town" type="text"><span class="input_description">\u041F\u043E\u0434\u0441\u043A\u0430\u0437\u043A\u04306</span></section><section class="form__section_three_elements"><label class="input_name">\u0410\u0434\u0440\u0435\u0441 \u043E\u0444\u0438\u0441\u0430</label><div class="inputs_wrapper"><label class="inputs_wrapper_filling"><input class="input_checkbox" name="show-addr" type="radio" value="show-addr">                            \u041F\u043E\u043A\u0430\u0437\u044B\u0432\u0430\u0442\u044C \u0430\u0434\u0440\u0435\u0441</label><label class="inputs_wrapper_filling"><input class="input_checkbox" name="dont-show-addr" type="radio" value="dont-show-addr">                            \u041D\u0435 \u043F\u043E\u043A\u0430\u0437\u044B\u0432\u0430\u0442\u044C \u0430\u0434\u0440\u0435\u0441</label><input class="input inputs_wrapper_filling" name="address" type="text"><label class="inputs_wrapper_filling"><input class="input_checkbox" name="show-only-metro" type="checkbox" value="show-only-metro">                            \u041F\u043E\u043A\u0430\u0437\u044B\u0432\u0430\u0442\u044C \u0442\u043E\u043B\u044C\u043A\u043E \u0441\u0442\u0430\u043D\u0446\u0438\u044E \u043C\u0435\u0442\u0440\u043E</label></div><span class="input_description">\u041F\u043E\u0434\u0441\u043A\u0430\u0437\u043A\u04307</span></section></section><section class="sub_form"><h3>\u041A\u043E\u043D\u0442\u0430\u043A\u0442\u043D\u044B\u0435 \u0434\u0430\u043D\u043D\u044B\u0435</h3><section class="form__section_three_elements"><label class="input_name">\u041C\u0435\u043D\u0435\u0434\u0436\u0435\u0440 \u0432\u0430\u043A\u0430\u043D\u0441\u0438\u0438</label><div class="inputs-wrapper"><input class="input inputs_wrapper_filling" name="manager" type="text"><label class="inputs_wrapper_filling"><input class="input_checkbox" name="notificatione-by-email" type="checkbox" value="show-only-metro">                            \u0423\u0432\u0435\u0434\u043E\u043C\u043B\u044F\u0442\u044C \u043E \u0432\u0430\u043A\u0430\u043D\u0441\u0438\u044F\u0445 \u043F\u043E \u043F\u043E\u0447\u0442\u0435</label></div><span class="input_description">\u041F\u043E\u0434\u0441\u043A\u0430\u0437\u043A\u0430</span></section><section class="form__section_three_elements"><label class="input_name">\u041A\u043E\u043D\u0442\u0430\u043A\u0442\u043D\u0430\u044F \u0438\u043D\u0444\u043E\u0440\u043C\u0430\u0446\u0438\u044F</label><div class="inputs_wrapper"><label class="inputs_wrapper_filling"><input class="input_checkbox" name="show-contact" type="radio" value="show-contact">                            \u041F\u043E\u043A\u0430\u0437\u044B\u0432\u0430\u0442\u044C \u0432 \u0432\u0430\u043A\u0430\u043D\u0441\u0438\u0438</label><label class="inputs_wrapper_filling"><input class="input_checkbox" name="dont-show-contact" type="radio" value="dont-show-contact">                            \u041D\u0435 \u043F\u043E\u043A\u0430\u0437\u044B\u0432\u0430\u0442\u044C \u0432 \u0432\u0430\u043A\u0430\u043D\u0441\u0438\u0438</label></div><span class="input_description">\u041F\u043E\u0434\u0441\u043A\u0430\u0437\u043A\u04307</span></section><section class="form__section_three_elements"><label class="input_name">Email</label><input class="input" name="manager-email" type="email"><span class="input_description">\u041F\u043E\u0434\u0441\u043A\u0430\u0437\u043A\u04307</span></section><section class="form__section_three_elements"><label class="input_name">\u0422\u0435\u043B\u0435\u0444\u043E\u043D</label><input class="input" name="manager-phone" type="tel" pattern="+7-[0-9]{3}-[0-9]{3}-[0-9]{4}"><span class="input_description">\u041F\u043E\u0434\u0441\u043A\u0430\u0437\u043A\u04307</span></section><section class="form__section_three_elements"><label class="input_name">\u041A\u043E\u043C\u043C\u0435\u043D\u0442\u0430\u0440\u0438\u0439</label><input class="input" name="comment" type="text"><span class="input_description">\u041F\u043E\u0434\u0441\u043A\u0430\u0437\u043A\u04307</span></section></section></main><footer><label><input class="input_checkbox" name="save-temp" type="checkbox" value="save-temp">                \u0421\u043E\u0445\u0440\u0430\u043D\u0438\u0442\u044C \u043A\u0430\u043A \u0448\u0430\u0431\u043B\u043E\u043D</label><br><button class="button form__button_submit">\u0420\u0430\u0437\u043C\u0435\u0441\u0442\u0438\u0442\u044C</button></footer></div>';;return pug_html;
+  };
+  module.exports = template;
+
+  /***/
+},
 /* 7 */
 /***/function (module, exports) {
 
@@ -623,6 +623,8 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
   "use strict";
   /* harmony import */
   var __WEBPACK_IMPORTED_MODULE_0__modules_Page_js__ = __webpack_require__(0);
+  /* harmony import */var __WEBPACK_IMPORTED_MODULE_1__resume_page_pug__ = __webpack_require__(9);
+  /* harmony import */var __WEBPACK_IMPORTED_MODULE_1__resume_page_pug___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_1__resume_page_pug__);
 
   // наследуемся от страницы
 
@@ -652,15 +654,18 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
         }
       }
     }, {
-      key: 'template',
-      value: function template() {
-        var vacancyForm = '';
-        return '<div>\u0420\u0415\u0417\u042E\u041C\u0415</div>';
-      }
+      key: 'addEventsOn',
+      value: function addEventsOn() {}
+
+      // template() {
+      //     let vacancyForm = ``
+      //     return `<div>РЕЗЮМЕ</div>`;
+      // }
+
     }, {
       key: 'render',
       value: function render() {
-        this.createDomBox(this.domName()).innerHTML = this.template();
+        this.createDomBox(this.domName()).innerHTML = __WEBPACK_IMPORTED_MODULE_1__resume_page_pug___default()();
       }
     }]);
 
@@ -669,6 +674,20 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
   /* harmony export (immutable) */
 
   __webpack_exports__["a"] = ResumePage;
+
+  /***/
+},
+/* 9 */
+/***/function (module, exports, __webpack_require__) {
+
+  var pug = __webpack_require__(1);
+
+  function template(locals) {
+    var pug_html = "",
+        pug_mixins = {},
+        pug_interp;pug_html = pug_html + '<div class="vacancy_form"><header><h1>\u0412\u0430\u0448\u0435 \u0440\u0435\u0437\u044E\u043C\u0435</h1></header><main><section class="section_settings"><div class="summary_preparation_actions"><button class="button load_button">\u0417\u0430\u0433\u0440\u0443\u0437\u0438\u0442\u044C \u0438\u0437 \u0444\u0430\u0439\u043B\u0430</button><button class="button buy_button">\u0417\u0430\u043A\u0430\u0437\u0430\u0442\u044C \u0440\u0435\u0437\u044E\u043C\u0435</button></div><div class="user_summary_actions"><select class="input choose_summary_lang" name="summary_lang"><option name="en" value="en">In English</option><option name="ru" value="ru">\u041F\u043E-\u0440\u0443\u0441\u0441\u043A\u0438</option></select><div class="only_icons_buttons"><button class="button print_button">\u041F\u0435\u0447\u0430\u0442\u044C</button><button class="button delete_summary_button">\u0423\u0434\u0430\u043B\u0438\u0442\u044C</button></div></div></section><section class="sub_form"><h3>\u041A\u043E\u043D\u0442\u0430\u043A\u0442\u043D\u044B\u0435 \u0434\u0430\u043D\u043D\u044B\u0435</h3><section class="form__section_two_elements"><label class="input_name">\u0418\u043C\u044F</label><input class="input" type="text" name="name"></section><section class="form__section_two_elements"><label class="input_name">\u0424\u0430\u043C\u0438\u043B\u0438\u044F</label><input class="input" type="text" name="surname"></section><section class="form__section_two_elements"><label class="input_name">\u041C\u043E\u0431\u0438\u043B\u044C\u043D\u044B\u0439 \u0442\u0435\u043B\u0435\u0444\u043E\u043D</label><input class="input" type="tel" name="phone" pattern="+7-[0-9]{3}-[0-9]{3}-[0-9]{4}"></section><section class="form__section_two_elements"><label class="input_name">\u0413\u043E\u0440\u043E\u0434 \u043F\u0440\u043E\u0436\u0438\u0432\u0430\u043D\u0438\u044F</label><input class="input" type="text" name="city"></section></section><section class="sub_form"><h3>\u041E\u0441\u043D\u043E\u0432\u043D\u0430\u044F \u0438\u043D\u0444\u043E\u0440\u043C\u0430\u0446\u0438\u044F</h3><section class="form__section_two_elements"><label class="input_name">\u0414\u0430\u0442\u0430 \u0440\u043E\u0436\u0434\u0435\u043D\u0438\u044F</label><div class="inputs_wrapper"><div class="inputs_wrapper_filling date"><input class="input" type="number" name="day" placeholder="\u0414\u0435\u043D\u044C"><select class="input" name="month"><option>\u041C\u0435\u0441\u044F\u0446</option></select><input class="input" type="number" name="year" placeholder="\u0413\u043E\u0434"></div></div></section><section class="form__section_two_elements"><label class="input_name">\u041F\u043E\u043B</label><div class="inputs_wrapper"><label class="inputs_wrapper_filling"><input class="input_checkbox" name="male" type="radio" value="male">                            \u041C\u0443\u0436\u0441\u043A\u043E\u0439</label><label class="inputs_wrapper_filling"><input class="input_checkbox" name="female" type="radio" value="female">                            \u0416\u0435\u043D\u0441\u043A\u0438\u0439</label></div></section><section class="form__section_two_elements"><label class="input_name">\u0413\u0440\u0430\u0436\u0434\u0430\u043D\u0441\u0442\u0432\u043E</label><div class="inputs_wrapper"><input class="inputs_wrapper_filling input" type="text" name="citizenship"><div class="inputs_wrapper_filling tags_place"><div class="tag"><span class="tag_name">\u0420\u043E\u0441\u0441\u0438\u044F</span><button class="button delete_tag_button">X</button></div></div></div></section><section class="form__section_two_elements"><label class="input_name">\u041E\u043F\u044B\u0442 \u0440\u0430\u0431\u043E\u0442\u044B</label><div class="inputs_wrapper"><label class="inputs_wrapper_filling"><input class="input_checkbox" name="have" type="radio" value="have">                            \u0415\u0441\u0442\u044C \u043E\u043F\u044B\u0442 \u0440\u0430\u0431\u043E\u0442\u044B</label><label class="inputs_wrapper_filling"><input class="input_checkbox" name="dont_have" type="radio" value="dont_have">                            \u041D\u0435\u0442 \u043E\u043F\u044B\u0442\u0430 \u0440\u0430\u0431\u043E\u0442\u044B</label><div><span>80% \u0440\u0430\u0431\u043E\u0442\u043E\u0434\u0430\u0442\u0435\u043B\u0435\u0439 \u043D\u0435 \u0440\u0430\u0441\u0441\u043C\u0430\u0442\u0440\u0438\u0432\u0430\u044E\u0442 \u043A\u0430\u043D\u0434\u0438\u0434\u0430\u0442\u043E\u0432 \u0431\u0435\u0437 \u043E\u043F\u044B\u0442\u0430 \u0440\u0430\u0431\u043E\u0442\u044B.\n\u0420\u0435\u043A\u043E\u043C\u0435\u043D\u0434\u0443\u0435\u043C \u0443\u043A\u0430\u0437\u0430\u0442\u044C \u043E\u043F\u044B\u0442 \u0438\u043B\u0438 \u043E\u0431\u044A\u044F\u0441\u043D\u0438\u0442\u044C \u043F\u043E\u0447\u0435\u043C\u0443 \u0435\u0433\u043E \u043D\u0435\u0442,\n\u0432\u044B\u0431\u0440\u0430\u0432 \u043F\u0440\u0438\u0447\u0438\u043D\u0443 \u0438\u0437 \u043F\u0440\u0435\u0434\u043B\u043E\u0436\u0435\u043D\u043D\u044B\u0445 \u0438\u043B\u0438 \u043E\u043F\u0438\u0441\u0430\u0432 \u0441\u0432\u043E\u044E.</span><textarea class="input" name="no_exp_explanation"></textarea></div></div></section></section><section class="sub_form"><h3>\u0421\u043F\u0435\u0446\u0438\u0430\u043B\u044C\u043D\u043E\u0441\u0442\u044C</h3>                ***</section><section class="sub_form"><h3>\u0414\u0440\u0443\u0433\u0430\u044F \u0432\u0430\u0436\u043D\u0430\u044F \u0438\u043D\u0444\u043E\u0440\u043C\u0430\u0446\u0438\u044F</h3>                ***</section></main><footer><button class="button from__button_submit">\u0421\u043E\u0445\u0440\u0430\u043D\u0438\u0442\u044C \u0438 \u043E\u043F\u0443\u0431\u043B\u0438\u043A\u043E\u0432\u0430\u0442\u044C</button></footer></div>';;return pug_html;
+  };
+  module.exports = template;
 
   /***/
 }]
