@@ -8,6 +8,7 @@
 export default class Page {
     constructor() {
         this.render();
+        this.addEventsOn();
     }
 
     name() {}
@@ -16,6 +17,8 @@ export default class Page {
         console.log(`${this.name()}-page`);
         return `${this.name()}-page`;
     }
+
+    addEventsOn() {}
 
     createDomBox(domName) {
         let domBox = document.createElement("div");

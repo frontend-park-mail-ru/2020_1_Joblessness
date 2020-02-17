@@ -17,6 +17,10 @@ export default class VacancyPage extends Page {
         }
     }
 
+    addEventsOn() {
+
+    }
+
     //  не нужен, если используется pug
     // template() { // заменить на pug
     //     return `<div>ВАКАНСИИ</div>`;
