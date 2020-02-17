@@ -1,12 +1,16 @@
-import JssssKit from './JssssKit';
-import './style.sass';
-import UserPage from './UserPage';
-import Counter from './counterExample'
-const App = () => (
-    <div className='app-holder'>
-        {/*<UserPage/>*/}
-        <Counter/>
-    </div>
-);
+"use strict";
 
-JssssKit.render(<App/>, document.getElementById('root'));
+import Navigator from './Navigator.js';
+
+// запускает все приложение. Точка создание - навигатор
+export default class Index {
+    constructor() {
+        console.log("Application was created");
+        new Navigator();
+    }
+}
+
+window.addEventListener("load", function () {
+    new Index();
+    document.querySelector("#root").hidden = false;
+});

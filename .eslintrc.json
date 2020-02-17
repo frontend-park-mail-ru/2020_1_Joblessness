@@ -4,7 +4,6 @@
         "es6": true
     },
     "extends": [
-        "plugin:react/recommended",
         "google"
     ],
     "globals": {
@@ -19,13 +18,9 @@
         "sourceType": "module"
     },
     "plugins": [
-        "react"
     ],
     "rules": {
     },
     "settings": {
-        "react" : {
-            "pragma": "JssssKit"
-        }
     }
 }

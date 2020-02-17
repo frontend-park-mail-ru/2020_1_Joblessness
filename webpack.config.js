@@ -15,6 +15,10 @@ module.exports = {
   module: {
     rules : [
       {
+        test: /\.pug$/,
+        use: "pug-loader"
+      },
+      {
         test : /\.js$/,
         exclude: /node_modules/,
         use: {
@@ -29,8 +33,6 @@ module.exports = {
         use: [
           'style-loader',
           'css-loader',
-          // 'handlebars-loader', // handlebars loader expects raw resource string
-          // 'extract-loader',
         ],
       },
       {
