@@ -1,0 +1,13 @@
+@import url("https://fonts.googleapis.com/css?family=Istok+Web&display=swap");
+.app-holder {
+  display: flex;
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  background: #FAFAFA;
+  font-family: "Istok Web", sans-serif;
+}
+
+/*# sourceMappingURL=style.css.map */

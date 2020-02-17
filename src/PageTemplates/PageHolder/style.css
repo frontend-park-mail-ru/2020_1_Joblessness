@@ -1,0 +1,17 @@
+@import url("https://fonts.googleapis.com/css?family=Istok+Web&display=swap");
+.page-holder {
+  display: flex;
+  width: 80%;
+  height: 100%;
+  margin: auto;
+  background: #FFFFFF;
+  box-shadow: 0 0 5px rgba(0, 0, 0, 0.2);
+}
+@media only screen and (max-width: 768px) {
+  .page-holder {
+    width: 100%;
+    box-shadow: none;
+  }
+}
+
+/*# sourceMappingURL=style.css.map */
