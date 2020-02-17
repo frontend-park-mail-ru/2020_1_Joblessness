@@ -20,6 +20,7 @@ export default class ResumePage extends Page {
     }
 
     template() {
+        let vacancyForm = ``
         return `<div>РЕЗЮМЕ</div>`;
     }
 
