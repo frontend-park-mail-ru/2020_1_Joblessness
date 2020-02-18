@@ -5,6 +5,7 @@ import { LoginPage } from "./AuthPages/LoginPage";
 import { EmployerSignupPage } from "./AuthPages/EmployerSignupPage";
 import { EmployeeSignupPage } from "./AuthPages/EmployeeSignupPage";
 import { Header } from "./Header";
+import { Footer } from "./Footer";
 
 export {
     VacancyPage,
@@ -14,4 +15,5 @@ export {
     EmployerSignupPage,
     EmployeeSignupPage,
     Header,
+    Footer,
 }

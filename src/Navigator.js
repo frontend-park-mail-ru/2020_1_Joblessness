@@ -1,13 +1,16 @@
 "use strict";
 
 import { showPage } from './ulils';
-import { ResumePage,
-         UserPage,
-         VacancyPage,
-         LoginPage,
-         EmployerSignupPage,
-         EmployeeSignupPage,
-         Header } from './views';
+import {
+    ResumePage,
+    UserPage,
+    VacancyPage,
+    LoginPage,
+    EmployerSignupPage,
+    EmployeeSignupPage,
+    Header,
+    Footer,
+} from './views';
 
 export default class Navigator {
     constructor() {
@@ -19,9 +22,11 @@ export default class Navigator {
         this.employerSignupPage = new EmployerSignupPage();
         this.employeeSignupPage = new EmployeeSignupPage();
         this.header = new Header();
+        this.footer = new Footer();
         this.render();
-        
+
         showPage(this.header.domName());
+        showPage(this.footer.domName());
 
         this.addNavEvents();
     }
