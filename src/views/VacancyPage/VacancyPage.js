@@ -1,10 +1,15 @@
-"use strict";
+'use strict';
 
-import { Page } from "../../Page.js";
-import template from "./VacancyPage.pug";
+import { Page } from '../../Page.js';
+import { VacancyForm } from './VacancyForms.js';
+import template from './vacancy-page.pug';
 
 // смотри пояснения к резюме
-export class VacancyPage extends Page {
+class VacancyPage extends Page {
+    constructor() {
+        super();
+        this.form = new VacancyForm();
+    }
 
     name(lang='en') {
         if (lang === 'en') {
@@ -12,10 +17,6 @@ export class VacancyPage extends Page {
         } else if (lang === 'ru') {
             return 'вакансии'
         }
-    }
-
-    addEventsOn() {
-
     }
 
     //  не нужен, если используется pug
@@ -27,4 +28,8 @@ export class VacancyPage extends Page {
     render() {
         this.createDomBox(this.domName()).innerHTML = template();
     }
+}
+
+export {
+    VacancyPage
 }

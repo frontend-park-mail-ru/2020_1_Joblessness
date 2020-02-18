@@ -1,9 +1,10 @@
 "use strict";
 
 import { Page } from '../../Page.js';
+import template from "./resume-page.pug";
 
 // наследуемся от страницы
-export class ResumePage extends Page {
+class ResumePage extends Page {
     constructor() {
         // вызов родительского конструктора
         super();
@@ -19,11 +20,20 @@ export class ResumePage extends Page {
         }
     }
 
-    template() {
-        return `<div>РЕЗЮМЕ</div>`;
+    addEventsOn() {
+
     }
 
+    // template() {
+    //     let vacancyForm = ``
+    //     return `<div>РЕЗЮМЕ</div>`;
+    // }
+
     render() {
-        this.createDomBox(this.domName()).innerHTML = this.template();
+        this.createDomBox(this.domName()).innerHTML = template();
     }
+}
+
+export {
+    ResumePage
 }
