@@ -67,3 +67,7 @@ class VacancyPage extends Page {
         this.createDomBox(this.domName()).innerHTML = template();
     }
 }
+
+export {
+    VacancyPage
+}

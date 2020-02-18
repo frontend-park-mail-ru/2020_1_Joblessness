@@ -3,7 +3,7 @@ const messagesFromHost = {
     XHR_READY : 4
 };
 
-class RequestToHost {
+class RequestManager {
 
     /**
      * Возвращает url backend сервера
@@ -108,9 +108,13 @@ class RequestToHost {
      */
     static auth(login, password, callback) {
         const user = {login, password};
-        RequestToHost.requestPost("api/users/signin", user, callback);
+        RequestManager.requestPost("api/users/signin", user, callback);
     }
 
     // если нужны какие-то методы для запроса чего-то конкретного, добавлять сюда.
     // например запрос для авторизации или регистрации или чего-нибудь еще
+}
+
+export {
+    RequestManager
 }

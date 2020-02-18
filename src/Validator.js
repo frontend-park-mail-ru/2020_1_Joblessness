@@ -39,19 +39,18 @@ class Validator {
         return 'OK_MESSAGE';
     }
 
-    //TODO заменить проверки чисел на регулярки
     /**
      * Проверка строки на соответствие положительному числу
      * @param number строка с числом
      * @returns {string} код результата
      */
     static correctNumberPositive(number) {
-        let parsedNumber = parseFloat(number);
-        if (isNaN(parsedNumber) || parsedNumber <= 0) {
-            return 'INCORRECT_MESSAGE';
+        if (!number) {
+            return 'EMPTY_MESSAGE';
         }
 
-        return 'OK_MESSAGE';
+        const numberRegexp = /^[0-9]*[.,]?[0-9]+$/;
+        return (numberRegexp.test(number)) ? 'OK_MESSAGE' : 'INCORRECT_MESSAGE';
     }
 
     /**
@@ -60,15 +59,17 @@ class Validator {
      * @returns {string} код результата
      */
     static correctNumber(number) {
-        let parsedNumber = parseFloat(number);
-        if (isNaN(parsedNumber)) {
-            return 'INCORRECT_MESSAGE';
+        if (!number) {
+            return 'EMPTY_MESSAGE';
         }
 
-        return 'OK_MESSAGE';
+        const numberRegexp = /^-?[0-9]*[.,]?[0-9]+$/;
+        return (numberRegexp.test(number)) ? 'OK_MESSAGE' : 'INCORRECT_MESSAGE';
     }
 
     //TODO валидация радиобатонов
+}
 
-
+export {
+    Validator
 }
