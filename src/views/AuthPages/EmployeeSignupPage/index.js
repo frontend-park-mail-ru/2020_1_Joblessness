@@ -1,7 +1,8 @@
 'use strict';
 
-import { Page } from '../../Page'
+import { Page } from '../../../Page'
 import template from './EmployeeSignupPage.pug'
+import '../style.css'
 
 export class EmployeeSignupPage extends Page {
 

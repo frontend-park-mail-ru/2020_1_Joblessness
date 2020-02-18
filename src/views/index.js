@@ -1,9 +1,10 @@
 import { VacancyPage } from "./VacancyPage";
 import { ResumePage } from "./ResumePage";
 import { UserPage } from "./UserPage";
-import { LoginPage } from "./LoginPage";
-import { EmployerSignupPage } from "./EmployerSignupPage";
-import { EmployeeSignupPage } from "./EmployeeSignupPage";
+import { LoginPage } from "./AuthPages/LoginPage";
+import { EmployerSignupPage } from "./AuthPages/EmployerSignupPage";
+import { EmployeeSignupPage } from "./AuthPages/EmployeeSignupPage";
+import { Header } from "./Header";
 
 export {
     VacancyPage,
@@ -12,4 +13,5 @@ export {
     LoginPage,
     EmployerSignupPage,
     EmployeeSignupPage,
+    Header,
 }
