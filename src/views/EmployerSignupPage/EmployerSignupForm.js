@@ -39,4 +39,14 @@ class EmployerSignupForm {
 
         return true
     }
+
+    submit() {
+        document.querySelector('.employer-signup-form-submit').addEventListener('click', () => {
+            if (this.validate()) {
+                alert('valid');
+            } else {
+                alert('invalid');
+            }
+        })
+    }
 }
