@@ -1,0 +1,33 @@
+div.main-container
+    div.form-container
+        form
+            span.form-caption Регистрация работодателя
+            div.section
+                select.form-select
+                    option ООО
+                    option ПАО
+            input.form-input(type="text" placeholder="Название компании")
+            div.form-checkbox
+                input.form-input(type="text" placeholder="Сайт")
+                select.form-select
+                    option Мене 50 сотрудников
+                    option От 51 до 100 сотрудников
+                    option От 101 до 250 сотрудников
+                    option От 251 до 500 сотрудников
+                    option Более 500 сотрудников
+                input.form-input(type="text" placeholder="Город")
+            span.form-caption Контактное лицо
+                span.form-caption-hont (конфиденциально)
+            input.form-input(type="text" placeholder="Имя")
+            input.form-input(type="text" placeholder="Фамиилия")
+            div.separator
+            div.section
+                input.form-input(type="text" placeholder="Электронная почта")
+                div.phone-input-container
+                    input.phone-input-monor.form-input(type="text" value="+7")
+                    input.phone-input-minor.form-input(type="text" placeholder="Код")
+                    input.phone-input-main.form-input(type="text" placeholder="Номер")
+                input.form-input(type="text" placeholder="Добавочный номер")
+            span.form-hint Нажимая "Зарегистрировать компанию",<br>вы подтверждаете, что ознакомлены<br>и полностью согласны<br>с
+                a(href="#") условиями использования сайта.
+            input.form-submit(type="submit" value="Зарегистрировать компанию")

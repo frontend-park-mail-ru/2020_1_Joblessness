@@ -1,8 +1,7 @@
 "use strict";
 
-import {showPage} from './ulils';
-import {ResumePage, UserPage, VacancyPage} from './views';
-import {LoginPage} from "./views/LoginPage";
+import { showPage } from './ulils';
+import { ResumePage, UserPage, VacancyPage, LoginPage, EmployerSignupPage } from './views';
 
 export default class Navigator {
     constructor() {
@@ -11,6 +10,7 @@ export default class Navigator {
         this.resumePage = new ResumePage();
         this.userPage = new UserPage();
         this.loginPage = new LoginPage();
+        this.employerSignupPage = new EmployerSignupPage();
         this.render();
 
         this.addNavEvents();
@@ -34,6 +34,7 @@ export default class Navigator {
             <button class="nav-btn to-page-${this.resumePage.name('en')}">${this.resumePage.name('ru')}</button>
             <button class="nav-btn to-page-${this.userPage.name('en')}">${this.userPage.name('ru')}</button>
             <button class="nav-btn to-page-${this.loginPage.name('en')}">${this.loginPage.name('ru')}</button>
+            <button class="nav-btn to-page-${this.employerSignupPage.name('en')}">${this.employerSignupPage.name('ru')}</button>
         `;
     }
 
@@ -55,5 +56,7 @@ export default class Navigator {
             .addEventListener('click', () => showPage(this.userPage.domName()));
         document.querySelector(`.to-page-${this.loginPage.name('en')}`)
             .addEventListener('click', () => showPage(this.loginPage.domName()));
+        document.querySelector(`.to-page-${this.employerSignupPage.name('en')}`)
+            .addEventListener('click', () => showPage(this.employerSignupPage.domName()));
     }
 }

@@ -1,15 +1,15 @@
 'use strict';
 
 import { Page } from '../../Page'
-import template from './LoginPage.pug'
+import template from './EmployerSignupPage.pug'
 
-export class LoginPage extends Page {
+export class EmployerSignupPage extends Page {
 
     name(lang = 'en') {
         if (lang === 'en') {
-            return 'login'
+            return 'employer-signup'
         } else if (lang === 'ru') {
-            return 'Вход'
+            return 'Регистрация работодателя'
         }
     }
 
