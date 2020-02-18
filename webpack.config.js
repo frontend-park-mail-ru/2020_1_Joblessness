@@ -1,4 +1,5 @@
 var path = require('path');
+var HtmlWebpackPlugin = require('html-webpack-plugin');
 
 module.exports = {
   entry: "./static/modules/App.js",
@@ -14,8 +15,18 @@ module.exports = {
   module: {
     rules : [
       {
-          test: /\.pug$/,
-          use: "pug-loader"
+        test: /\.pug$/,
+        use: "pug-loader"
+      },
+      {
+        test : /\.js$/,
+        exclude: /node_modules/,
+        use: {
+          loader : 'babel-loader',
+          query : {
+            presets : [ '@babel/preset-env' ]
+          }
+        }
       },
       {
         test: /\.css$/i,
@@ -43,5 +54,10 @@ module.exports = {
         loader: 'url-loader'
       },
     ]
-  }
-};
+  },
+  plugins: [
+    new HtmlWebpackPlugin({
+      filename: "__index.html"
+    })
+  ]
+}

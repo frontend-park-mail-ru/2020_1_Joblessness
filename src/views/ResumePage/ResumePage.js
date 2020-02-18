@@ -1,10 +1,10 @@
 "use strict";
 
-import Page from './../../modules/Page.js';
+import Page from '../../../static/modules/Page.js';
 import template from "./resume-page.pug";
 
 // наследуемся от страницы
-export default class ResumePage extends Page {
+class ResumePage extends Page {
     constructor() {
         // вызов родительского конструктора
         super();

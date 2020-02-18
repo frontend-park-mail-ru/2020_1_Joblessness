@@ -1,15 +1,14 @@
 "use strict";
 
-import showPage from './../ulils/showPage.js';
-import VacancyPage from './../views/vacancy-page/VacancyPage.js';
-import ResumePage from "../views/resume-page/ResumePage.js";
+import {showPage} from './ulils';
+import {ResumePage, UserPage, VacancyPage} from './views';
 
 export default class Navigator {
     constructor() {
         // сюда добавляете свои страницы
         this.vacancyPage = new VacancyPage();
         this.resumePage = new ResumePage();
-
+        this.userPage = new UserPage();
         this.render();
 
         this.addNavEvents();
@@ -17,7 +16,7 @@ export default class Navigator {
 
     // родительский элемент
     parentDom() {
-        return '#app-box';
+        return '#index';
     }
 
     // имя класса самого элемента
@@ -31,6 +30,7 @@ export default class Navigator {
         return `
             <button class="nav-btn to-page-${this.vacancyPage.name('en')}">${this.vacancyPage.name('ru')}</button>
             <button class="nav-btn to-page-${this.resumePage.name('en')}">${this.resumePage.name('ru')}</button>
+            <button class="nav-btn to-page-${this.userPage.name('en')}">${this.userPage.name('ru')}</button>
         `;
     }
 
@@ -38,7 +38,7 @@ export default class Navigator {
     render() {
         let domBox = document.createElement("div");
         domBox.className = `${this.domName()}`;
-        document.querySelector("#app-box").appendChild(domBox);
+        document.querySelector("#root").appendChild(domBox);
         domBox.innerHTML = this.htmlTemplate();
     }
 
@@ -48,5 +48,7 @@ export default class Navigator {
             .addEventListener('click', () => showPage(this.vacancyPage.domName()));
         document.querySelector(`.to-page-${this.resumePage.name('en')}`)
             .addEventListener('click', () => showPage(this.resumePage.domName()));
+        document.querySelector(`.to-page-${this.userPage.name('en')}`)
+            .addEventListener('click', () => showPage(this.userPage.domName()));
     }
 }
