@@ -55,22 +55,6 @@
     font-size: 12px;
 }
 
-.phone-input-container {
-    display: flex;
-    flex-direction: row;
-}
-
-.phone-input-minor {
-    display: block;
-    width: 25%;
-}
-
-.phone-input-main {
-    display: block;
-    width: 50%;
-    margin-right: -4px;
-}
-
 .main-container {
     display: flex;
     justify-content: center;
