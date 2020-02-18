@@ -10,7 +10,7 @@
                 span.input_description Подсказка1
             section.form__section_three_elements
                 label.input_name Описание
-                textarea.input(name="description")
+                textarea.input(name="description" type="text")
                 span.input_description Подсказка3
             section.form__section_three_elements
                 label.input_name Основные навыки
@@ -26,12 +26,13 @@
                             option(value="rub") руб.
                             option(value="eur") EUR
                             option(value="usd") USD
-                    label.inputs_wrapper_filling
-                        input.input_checkbox(name="before-taxes" type="radio" value="before-taxes")
-                        |                             До выплаты налогов
-                    label.inputs_wrapper_filling
-                        input.input_checkbox(name="after-taxes" type="radio" value="after-taxes")
-                        |                             На руки
+                    div.inputs_wrapper_filling.radio_buttons_set
+                        label
+                            input.input_radio(name="salary_type" type="radio" value="before-taxes")
+                            |                             До выплаты налогов
+                        label
+                            input.input_radio(name="salary_type" type="radio" value="after-taxes")
+                            |                             На руки
                 span.input_description Подсказка5
         section.sub_form
             h3 Место работы
@@ -43,15 +44,9 @@
                 label.input_name Адрес офиса
                 .inputs_wrapper
                     label.inputs_wrapper_filling
-                        input.input_checkbox(name="show-addr" type="radio" value="show-addr")
-                        |                             Показывать адрес
-                    label.inputs_wrapper_filling
-                        input.input_checkbox(name="dont-show-addr" type="radio" value="dont-show-addr")
+                        input.input_checkbox(name="invisible_address" type="checkbox" value="dont-show-addr")
                         |                             Не показывать адрес
                     input.input.inputs_wrapper_filling(name="address" type="text")
-                    label.inputs_wrapper_filling
-                        input.input_checkbox(name="show-only-metro" type="checkbox" value="show-only-metro")
-                        |                             Показывать только станцию метро
                 span.input_description Подсказка7
         section.sub_form
             h3 Контактные данные
@@ -60,17 +55,14 @@
                 .inputs-wrapper
                     input.input.inputs_wrapper_filling(name="manager" type="text")
                     label.inputs_wrapper_filling
-                        input.input_checkbox(name="notificatione-by-email" type="checkbox" value="show-only-metro")
+                        input.input_checkbox.notificate_by_email(name="notification-by-email" type="checkbox")
                         |                             Уведомлять о вакансиях по почте
                 span.input_description Подсказка
             section.form__section_three_elements
                 label.input_name Контактная информация
                 .inputs_wrapper
                     label.inputs_wrapper_filling
-                        input.input_checkbox(name="show-contact" type="radio" value="show-contact")
-                        |                             Показывать в вакансии
-                    label.inputs_wrapper_filling
-                        input.input_checkbox(name="dont-show-contact" type="radio" value="dont-show-contact")
+                        input.input_checkbox(name="invisible_contacts" type="checkbox" value="dont-show-contact")
                         |                             Не показывать в вакансии
                 span.input_description Подсказка7
             section.form__section_three_elements
@@ -87,7 +79,7 @@
                 span.input_description Подсказка7
     footer
         label
-            input.input_checkbox(name="save-temp" type="checkbox" value="save-temp")
+            input.input_checkbox.save_temp(name="save-temp" type="checkbox" value="save-temp")
             |                 Сохранить как шаблон
         br
-        button.button.form__button_submit Разместить
+        button.button.vacancy_page__button_submit Разместить
