@@ -1,6 +1,6 @@
 "use strict";
 
-import Page from '../../../static/modules/Page.js';
+import { Page } from '../../Page.js';
 import template from "./resume-page.pug";
 
 // наследуемся от страницы

@@ -2,10 +2,11 @@ var path = require('path');
 var HtmlWebpackPlugin = require('html-webpack-plugin');
 
 module.exports = {
-  entry: "./static/modules/App.js",
+  //...
+  // entry: 'src/index.js',
   output: {
-      path: __dirname + '/static/public/webpack_output',
-      filename: "bundle.js"
+    path: __dirname + '/public',
+    filename: 'bundle.js'
   },
   devServer: {
     contentBase: path.join(__dirname, 'public'),
@@ -51,7 +52,9 @@ module.exports = {
       },
       {
         test : /\.(png|svg|jpg|gif)$/,
-        loader: 'url-loader'
+        use : [
+          'file-loader',
+        ],
       },
     ]
   },
