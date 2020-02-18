@@ -3,6 +3,7 @@ import { ResumePage } from "./ResumePage";
 import { UserPage } from "./UserPage";
 import { LoginPage } from "./LoginPage";
 import { EmployerSignupPage } from "./EmployerSignupPage";
+import { EmployeeSignupPage } from "./EmployeeSignupPage";
 
 export {
     VacancyPage,
@@ -10,4 +11,5 @@ export {
     UserPage,
     LoginPage,
     EmployerSignupPage,
+    EmployeeSignupPage,
 }
