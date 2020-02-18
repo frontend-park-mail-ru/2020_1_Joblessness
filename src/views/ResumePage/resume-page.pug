@@ -1,79 +1,69 @@
-.vacancy_form
+.resume_form
     header
         h1 Ваше резюме
     main
         section.section_settings
-            .summary_preparation_actions
-                button.button.load_button Загрузить из файла
-                button.button.buy_button Заказать резюме
-            .user_summary_actions
-                select.input.choose_summary_lang(name="summary_lang")
-                    option(name="en" value="en") In English
-                    option(name="ru" value="ru") По-русски
-                .only_icons_buttons
-                    button.button.print_button Печать
-                    button.button.delete_summary_button Удалить
+            button.button.resume_form__print_button Печать
+            button.button.resume_form__delete_summary_button Удалить
         section.sub_form
             h3 Контактные данные
             section.form__section_two_elements
                 label.input_name Имя
-                input.input(type="text" name="name")
+                input.input.resume_form__name(type="text")
             section.form__section_two_elements
                 label.input_name Фамилия
-                input.input(type="text" name="surname")
+                input.input.resume_form__surname(type="text")
             section.form__section_two_elements
                 label.input_name Мобильный телефон
-                input.input(type="tel" name="phone" pattern="+7-[0-9]{3}-[0-9]{3}-[0-9]{4}")
+                input.input.resume_form__phone(type="tel")
             section.form__section_two_elements
                 label.input_name Город проживания
-                input.input(type="text" name="city")
+                input.input.resume_form__city(type="text")
         section.sub_form
             h3 Основная информация
             section.form__section_two_elements
                 label.input_name Дата рождения
                 .inputs_wrapper
                     .inputs_wrapper_filling.date
-                        input.input(type="number" name="day" placeholder="День")
-                        select.input(name="month")
-                            option Месяц
-                        input.input(type="number" name="year" placeholder="Год")
+                        input.input.resume_form__day(type="number" placeholder="День")
+                        select.input.resume_form__month
+                            - let month = ['Январь', 'Февраль','Март','Апрель','Май','Июнь','Июль','Август','Сентября','Октябрь','Ноябрь','Декабрь', ]
+                            each val, index in month
+                                option(value=`${index}`)=val
+                        input.input.resume_form__year(type="number" placeholder="Год")
             section.form__section_two_elements
                 label.input_name Пол
                 .inputs_wrapper
-                    label.inputs_wrapper_filling
-                        input.input_checkbox(name="male" type="radio" value="male")
-                        |                             Мужской
-                    label.inputs_wrapper_filling
-                        input.input_checkbox(name="female" type="radio" value="female")
-                        |                             Женский
+                    .inputs_wrapper_filling.radio_buttons_set
+                        label
+                            input.input_radio.resume_form__sex(name="sex" type="radio" value="male")
+                            |                             Мужской
+                        label
+                            input.input_radio.resume_form__sex(name="sex" type="radio" value="female")
+                            |                             Женский
             section.form__section_two_elements
                 label.input_name Гражданство
                 .inputs_wrapper
-                    input.inputs_wrapper_filling.input(type="text" name="citizenship")
-                    .inputs_wrapper_filling.tags_place
-                        .tag
-                            span.tag_name Россия
-                            button.button.delete_tag_button X
+                    input.inputs_wrapper_filling.input.resume_form__citizenship(type="text")
+                    //.inputs_wrapper_filling.tags_place
+                    //    .tag
+                    //        span.tag_name Россия
+                    //        button.button.delete_tag_button X
             section.form__section_two_elements
                 label.input_name Опыт работы
                 .inputs_wrapper
-                    label.inputs_wrapper_filling
-                        input.input_checkbox(name="have" type="radio" value="have")
-                        |                             Есть опыт работы
-                    label.inputs_wrapper_filling
-                        input.input_checkbox(name="dont_have" type="radio" value="dont_have")
-                        |                             Нет опыта работы
-                    div
-                        span
-                            | 80% работодателей не рассматривают кандидатов без опыта работы.
-                            | Рекомендуем указать опыт или объяснить почему его нет,
-                            | выбрав причину из предложенных или описав свою.
-                        textarea.input(name="no_exp_explanation")
+                    span
+                        | 80% работодателей не рассматривают кандидатов без опыта работы.
+                        | Рекомендуем указать опыт или объяснить почему его нет,
+                        | выбрав причину из предложенных или описав свою.
+                    textarea.input.resume_form__no_exp_explanation
         section.sub_form
-            h3 Специальность
-            |                 ***
+            h3 Образование
+            section.form__section_two_elements
+                label.input_name Высшее образование получено в
+                input.input.resume_form__education(type="text")
         section.sub_form
-            h3 Другая важная информация
+            h3
             |                 ***
     footer
-        button.button.from__button_submit Сохранить и опубликовать
+        button.button.resume_from__button_submit Сохранить и опубликовать

@@ -1,13 +1,15 @@
 "use strict";
 
 import { Page } from '../../Page.js';
+// import { ResumeForm } from './ResumeForms.js';
 import template from "./resume-page.pug";
 
 // наследуемся от страницы
 class ResumePage extends Page {
     constructor() {
-        // вызов родительского конструктора
         super();
+        // this.settings = new FormSettings()
+        // this.form = new ResumePage()
     }
 
     // просто возврат имени. Используется для определения, какую страницу отрисовывать

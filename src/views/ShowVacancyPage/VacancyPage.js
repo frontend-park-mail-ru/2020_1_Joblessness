@@ -3,7 +3,7 @@
 import './style.css'
 import { Page } from '../../Page.js';
 import { VacancyForm } from './VacancyForms.js';
-import template from './vacancy-page.pug';
+import template from './show-vacancy-page.pug';
 
 // смотри пояснения к резюме
 class VacancyPage extends Page {

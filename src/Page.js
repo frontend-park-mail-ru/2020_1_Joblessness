@@ -14,7 +14,6 @@ export class Page {
     }
 
     domName() {
-        console.log(`${this.name()}-page`);
         return `${this.name()}-page`;
     }
 
