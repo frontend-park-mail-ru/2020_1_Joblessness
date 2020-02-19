@@ -22,7 +22,7 @@ export class Page {
         domBox.className = `page ${domName}`;
         // все страницы по умолчанию скрыты
         domBox.hidden = true;
-        document.querySelector("#root").appendChild(domBox);
+        document.querySelector('#root').appendChild(domBox);
         return domBox;
     }
 
