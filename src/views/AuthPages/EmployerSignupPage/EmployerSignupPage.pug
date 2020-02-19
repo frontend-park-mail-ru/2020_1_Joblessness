@@ -6,25 +6,41 @@ div.main-container
                 select.form-select
                     option ООО
                     option ПАО
-            input.form-input.employer-signup-form-company-name(type="text" placeholder="Название компании")
+            div.form-input-wrapper.employer-signup-form-company-name
+                input.form-input(type="text" placeholder="Название компании")
+                div.form-input-err
             div.form-checkbox
-                input.form-input.employer-signup-form-site(type="text" placeholder="Сайт")
+                div.form-input-wrapper.employer-signup-form-site
+                    input.form-input(type="text" placeholder="Сайт")
+                    div.form-input-err
                 select.form-select
                     option Мене 50 сотрудников
                     option От 51 до 100 сотрудников
                     option От 101 до 250 сотрудников
                     option От 251 до 500 сотрудников
                     option Более 500 сотрудников
-                input.form-input.employer-signup-form-city(type="text" placeholder="Город")
+                div.form-input-wrapper.employer-signup-form-city
+                    input.form-input(type="text" placeholder="Город")
+                    div.form-input-err
             span.form-caption Контактное лицо
                 span.form-caption-hont (конфиденциально)
-            input.form-input.employer-signup-form-first-name(type="text" placeholder="Имя")
-            input.form-input.employer-signup-form--second-name(type="text" placeholder="Фамиилия")
+            div.form-input-wrapper.employer-signup-form-first-name
+                input.form-input(type="text" placeholder="Имя")
+                div.form-input-err
+            div.form-input-wrapper.employer-signup-form-second-name
+                input.form-input(type="text" placeholder="Фамиилия")
+                div.form-input-err
             div.separator
             div.section
-                input.form-input.employer-signup-form-email(type="text" placeholder="Электронная почта")
-                input.form-input.employer-signup-form-number(type="text" placeholder="Номер")
-                input.form-input.employer-signup-form-additional_number(type="text" placeholder="Добавочный номер")
-            span.form-hint Нажимая "Зарегистрировать компанию",<br>вы подтверждаете, что ознакомлены<br>и полностью согласны<br>с
+                div.form-input-wrapper.employer-signup-form-email
+                    input.form-input(type="text" placeholder="Электронная почта")
+                    div.form-input-err
+                div.form-input-wrapper.employer-signup-form-number
+                    input.form-input(type="text" placeholder="Номер")
+                    div.form-input-err
+                div.form-input-wrapper.employer-signup-form-additional-number
+                    input.form-input(type="text" placeholder="Добавочный номер")
+                    div.form-input-err
+            span.form-hint Нажимая "Зарегистрировать компанию",<br>вы подтверждаете, что ознакомлены<br>и полностью согласны<br>c&nbsp;
                 a(href="#") условиями использования сайта.
             input.form-submit.employer-signup-form-submit(type="submit" value="Зарегистрировать компанию")

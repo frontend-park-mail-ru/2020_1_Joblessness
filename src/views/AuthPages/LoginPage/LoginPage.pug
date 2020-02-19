@@ -2,10 +2,14 @@ div.main-container
     div.form-container
         form
             span.form-caption Вход в личный кабинет
-            input.form-input(type="text" placeholder="Email или телефон")
+            div.form-input-wrapper.login-form-email-or-phone
+                input.form-input(type="text" placeholder="Email или телефон")
+                div.form-input-err
             div.separator
-            input.form-input(type="password" placeholder="Пароль")
-            input.form-submit(type="submit" value="Войти в личный кабинет")
+            div.form-input-wrapper.login-form-password
+                input.form-input(type="password" placeholder="Пароль")
+                div.form-input-err
+            input.form-submit.login-form-submit(type="submit" value="Войти в личный кабинет")
             div.remember-main
                 div
                     input(type="checkbox" id="remember")

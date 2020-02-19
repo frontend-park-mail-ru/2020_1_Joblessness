@@ -2,9 +2,16 @@
 
 import { Page } from '../../../Page'
 import template from './LoginPage.pug'
+import  { LoginForm } from './LoginForm';
 import '../style.css'
 
 export class LoginPage extends Page {
+
+    constructor() {
+        super();
+
+        this.form = new LoginForm();
+    }
 
     name(lang = 'en') {
         if (lang === 'en') {

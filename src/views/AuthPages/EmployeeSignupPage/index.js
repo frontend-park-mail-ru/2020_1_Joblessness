@@ -2,9 +2,16 @@
 
 import { Page } from '../../../Page'
 import template from './EmployeeSignupPage.pug'
+import { EmployeeSignupForm } from './EmployeeSignupForm';
 import '../style.css'
 
 export class EmployeeSignupPage extends Page {
+
+    constructor() {
+        super();
+
+        this.form = new EmployeeSignupForm();
+    }
 
     name(lang = 'en') {
         if (lang === 'en') {
