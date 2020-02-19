@@ -1,10 +1,10 @@
-import { Validator } from "../../Validator.js";
-import { RequestManager } from "../../RequestManager.js";
+import { Validator } from '../../Validator.js';
+import { RequestManager } from '../../RequestManager.js';
 
 const statusMessages = {
-    OK_MESSAGE : "Успешно",
-    EMPTY_MESSAGE : "Выделенные поля нельзя оставлять пустыми",
-    INCORRECT_MESSAGE : "Некорректный формат ввода",
+    OK_MESSAGE : 'Успешно',
+    EMPTY_MESSAGE : 'Выделенные поля нельзя оставлять пустыми',
+    INCORRECT_MESSAGE : 'Некорректный формат ввода',
 };
 
 class ResumeForm {
@@ -13,29 +13,48 @@ class ResumeForm {
         this.addSubmitEvent();
 
         this.textInputs = {
-            name:  "",
-            surname: "",
-            city: "",
-            town: "",
-            citizenship: "",
-            no_exp_explanation: "",
+            name:  '',
+            surname: '',
+            city: '',
+            town: '',
+            citizenship: '',
+            no_exp_explanation: '',
         };
+        for (const [key, value] of Object.entries(this.textInputs)) {
+            this.textInputs[key] = document.querySelector(`.resume_form__${key}`);
+        }
 
-        this.phone = "";
-        this.day= "";
-        this.year= "";
-        this.sex = "";
+        this.phone = document.querySelector('.resume_form__phone');
+        this.day= document.querySelector('.resume_form__day');
+        this.year= document.querySelector('.resume_form__year');
+        this.sex = '';
 
     }
 
     validateForm() {
         let inputIsValid = true;
         for (const [key, value] of Object.entries(this.textInputs)) {
-            this.textInputs[key] = document.querySelector(`.resume_form__${key}`).value;
-            if (Validator.correctText(this.textInputs[key]) !== 'OK_MESSAGE') {
+            let validationResult = Validator.correctText(this.textInputs[key].value);
+            if (validationResult !== 'OK_MESSAGE') {
+                //TODO смена класса
+                this.textInputs[key].value = statusMessages[validationResult];
                 inputIsValid = false;
             }
         }
+
+        if (Validator.correctTel(this.phone.value) !== 'OK_MESSAGE') {
+            inputIsValid = false;
+        }
+
+        document.querySelectorAll('.resume_form__sex').forEach(radiobutton => {
+            if (radiobutton.checked) {
+                this.salary_type = radiobutton.value;
+            }
+        });
+        if (this.sex === "") {
+            inputIsValid = false;
+        }
+
 
         return inputIsValid;
     }

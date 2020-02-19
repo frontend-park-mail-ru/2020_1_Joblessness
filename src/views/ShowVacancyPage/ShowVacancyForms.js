@@ -7,7 +7,7 @@ const statusMessages = {
     INCORRECT_MESSAGE : "Некорректный формат ввода",
 };
 
-class VacancyForm {
+class ShowVacancyForm {
 
     constructor() {
         this.addSubmitEvent();
@@ -101,5 +101,5 @@ class VacancyForm {
 }
 
 export {
-    VacancyForm
+    ShowVacancyForm
 }
