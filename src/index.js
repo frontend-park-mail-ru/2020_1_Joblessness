@@ -1,10 +1,11 @@
 import { Header } from './views/Header';
 import { Footer } from './views/Footer';
+import { IndexPage } from './views/IndexPage';
 import { LoginPage } from './views/AuthPages/LoginPage';
 import { EmployeeSignupPage } from './views/AuthPages/EmployeeSignupPage';
 import { EmployerSignupPage } from './views/AuthPages/EmployerSignupPage';
 
-const app = document.getElementById('root');
+const root = document.getElementById('root');
 
 const header = document.getElementById('header');
 const footer = document.getElementById('footer');
@@ -15,22 +16,31 @@ headerPage.render();
 const footerPage = new Footer(footer);
 footerPage.render();
 
+const indexPage = new IndexPage(root);
+indexPage.render();
+
+function createIndex() {
+    const indexPage = new IndexPage(root);
+    indexPage.render();
+}
+
 function createLogin() {
-    const loginPage = new LoginPage(app);
+    const loginPage = new LoginPage(root);
     loginPage.render();
 }
 
 function createEmployeeSignup() {
-    const employeeSignupPage = new EmployeeSignupPage(app);
+    const employeeSignupPage = new EmployeeSignupPage(root);
     employeeSignupPage.render();
 }
 
 function createEmployerSignup() {
-    const employerSignupPage = new EmployerSignupPage(app);
+    const employerSignupPage = new EmployerSignupPage(root);
     employerSignupPage.render();
 }
 
 const routes = {
+    index: createIndex,
     login: createLogin,
     employeeSignup: createEmployeeSignup,
     employerSignup: createEmployerSignup,
@@ -43,7 +53,5 @@ document.body.addEventListener('click', (e) => {
         e.preventDefault();
 
         routes[target.dataset.page]();
-
-        window.history.pushState({}, 'hh.ru', target.dataset.page)
     }
 });

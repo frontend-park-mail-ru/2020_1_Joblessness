@@ -1,5 +1,5 @@
 import { Page } from '../../../Page'
-import  { LoginForm } from './LoginForm';
+import { LoginForm } from './LoginForm';
 import template from './LoginPage.pug'
 import '../style.css'
 
