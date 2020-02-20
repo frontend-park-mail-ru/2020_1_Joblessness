@@ -1,16 +1,49 @@
-"use strict";
+import { Header } from './views/Header';
+import { Footer } from './views/Footer';
+import { LoginPage } from './views/AuthPages/LoginPage';
+import { EmployeeSignupPage } from './views/AuthPages/EmployeeSignupPage';
+import { EmployerSignupPage } from './views/AuthPages/EmployerSignupPage';
 
-import Navigator from './Navigator.js';
+const app = document.getElementById('root');
 
-// запускает все приложение. Точка создание - навигатор
-export default class Index {
-    constructor() {
-        console.log("Application was created");
-        new Navigator();
-    }
+const header = document.getElementById('header');
+const footer = document.getElementById('footer');
+
+const headerPage = new Header(header);
+headerPage.render();
+
+const footerPage = new Footer(footer);
+footerPage.render();
+
+function createLogin() {
+    const loginPage = new LoginPage(app);
+    loginPage.render();
 }
 
-window.addEventListener("load", function () {
-    new Index();
-    document.querySelector("#root").hidden = false;
+function createEmployeeSignup() {
+    const employeeSignupPage = new EmployeeSignupPage(app);
+    employeeSignupPage.render();
+}
+
+function createEmployerSignup() {
+    const employerSignupPage = new EmployerSignupPage(app);
+    employerSignupPage.render();
+}
+
+const routes = {
+    login: createLogin,
+    employeeSignup: createEmployeeSignup,
+    employerSignup: createEmployerSignup,
+};
+
+document.body.addEventListener('click', (e) => {
+    const {target} = e;
+
+    if (target instanceof HTMLAnchorElement) {
+        e.preventDefault();
+
+        routes[target.dataset.page]();
+
+        window.history.pushState({}, 'hh.ru', target.dataset.page)
+    }
 });
