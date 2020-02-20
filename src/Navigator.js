@@ -78,18 +78,18 @@ export default class Navigator {
     }
 
     // здесь определяется событие перехода на страницу. querySelector позволяет определить элемент по классу
-    addNavEvents() {
-        document.querySelector(`.to-page-${this.vacancyPage.name('en')}`)
-            .addEventListener('click', () => showPage(this.vacancyPage.domName()));
-        document.querySelector(`.to-page-${this.resumePage.name('en')}`)
-            .addEventListener('click', () => showPage(this.resumePage.domName()));
-        document.querySelector(`.to-page-${this.userPage.name('en')}`)
-            .addEventListener('click', () => showPage(this.userPage.domName()));
-        document.querySelector(`.to-page-${this.loginPage.name('en')}`)
-            .addEventListener('click', () => showPage(this.loginPage.domName()));
-        document.querySelector(`.to-page-${this.employerSignupPage.name('en')}`)
-            .addEventListener('click', () => showPage(this.employerSignupPage.domName()));
-        document.querySelector(`.to-page-${this.employeeSignupPage.name('en')}`)
-            .addEventListener('click', () => showPage(this.employeeSignupPage.domName()));
-    }
+    // addNavEvents() {
+    //     document.querySelector(`.to-page-${this.vacancyPage.name('en')}`)
+    //         .addEventListener('click', () => showPage(this.vacancyPage.domName()));
+    //     document.querySelector(`.to-page-${this.resumePage.name('en')}`)
+    //         .addEventListener('click', () => showPage(this.resumePage.domName()));
+    //     document.querySelector(`.to-page-${this.userPage.name('en')}`)
+    //         .addEventListener('click', () => showPage(this.userPage.domName()));
+    //     document.querySelector(`.to-page-${this.loginPage.name('en')}`)
+    //         .addEventListener('click', () => showPage(this.loginPage.domName()));
+    //     document.querySelector(`.to-page-${this.employerSignupPage.name('en')}`)
+    //         .addEventListener('click', () => showPage(this.employerSignupPage.domName()));
+    //     document.querySelector(`.to-page-${this.employeeSignupPage.name('en')}`)
+    //         .addEventListener('click', () => showPage(this.employeeSignupPage.domName()));
+    // }
 }

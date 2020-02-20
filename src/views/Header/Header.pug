@@ -15,17 +15,20 @@ div.header-container
 div.header-container.search-bar-container
     div.header-group
         div.header-link-wrapper.header-link-wrapper-first
-            a(href="#")
-                span.search-bar-logo
-        div.header-link-wrapper
-            a.search-bar-link(href="#") Прайс-лист
-        div.header-link-wrapper
-            a.search-bar-link(href="#") Помощь
+            //a(href="#" data-page="index")
+            //    span.search-bar-logo
+            a.search-bar-link(href="#" data-page="index") Главная
+        //div.header-link-wrapper
+        //    a.search-bar-link(href="#") Прайс-лист
+        //div.header-link-wrapper
+        //    a.search-bar-link(href="#") Помощь
     div.header-fill
     div.header-group
         div.header-link-wrapper
             a.search-bar-link(href="#") Поиск
         div.header-link-wrapper
-            a.search-bar-link(href="#") Разместить вакансию
+            a.search-bar-link(href="#" data-page="create_vacancy") Разместить вакансию
         div.header-link-wrapper
-            a.search-bar-link(href="#") Войти
+            a.search-bar-link(href="#") Создать резюме
+        div.header-link-wrapper
+            a.search-bar-link(href="#" data-page="login") Войти

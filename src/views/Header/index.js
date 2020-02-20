@@ -1,20 +1,12 @@
 'use strict';
 
-import { StaticPage } from "../../StaticPage";
+import { Page } from "../../Page";
 import template from './Header.pug'
 import './style.css'
 
-export class Header extends StaticPage {
-
-    name(lang = 'en') {
-        if (lang === 'en') {
-            return 'header'
-        } else if (lang === 'ru') {
-            return 'Header'
-        }
-    }
+export class Header extends Page {
 
     render() {
-        this.createDomBox(this.domName(), 'header').innerHTML = template();
+        this.container.innerHTML = template();
     }
 }

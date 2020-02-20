@@ -6,8 +6,8 @@
  * наверное можно заменить на миксин createDomBox
  */
 export class Page {
-    constructor() {
-        this.render();
+    constructor(container) {
+        this.container = container
     }
 
     name() {
@@ -30,9 +30,5 @@ export class Page {
         return domBox;
     }
 
-    template() {
-    }
-
-    render() {
-    }
+    render() {}
 }
