@@ -1,0 +1,85 @@
+.vacancy_form
+    header
+        h1 Новая вакансия
+    main
+        section.sub_form
+            h3 Основная информация
+            section.form__section_three_elements
+                label.input_name Название вакансии
+                input.input.vacancy_form__job_title(type="text")
+                span.input_description Подсказка1
+            section.form__section_three_elements
+                label.input_name Описание
+                textarea.input.vacancy_form__description(type="text")
+                span.input_description Подсказка3
+            section.form__section_three_elements
+                label.input_name Основные навыки
+                input.input.vacancy_form__skills(type="text")
+                span.input_description Подсказка4
+            section.form__section_three_elements
+                label.input_name Предположительный уровень дохода
+                .inputs_wrapper
+                    .payment.inputs_wrapper_filling
+                        input.input.vacancy_form__payment_from(type="number")
+                        input.input.vacancy_form__payment_to(type="number")
+                        select.input.vacancy_form__currency
+                            option(value="rub") руб.
+                            option(value="eur") EUR
+                            option(value="usd") USD
+                    div.inputs_wrapper_filling.radio_buttons_set
+                        label
+                            input.input_radio.vacancy_form__salary_type(name="salary_type" type="radio" value="before-taxes")
+                            |                             До выплаты налогов
+                        label
+                            input.input_radio.vacancy_form__salary_type(name="salary_type" type="radio" value="after-taxes")
+                            |                             На руки
+                span.input_description Подсказка5
+        section.sub_form
+            h3 Место работы
+            section.form__section_three_elements
+                label.input_name Вакансия в городе
+                input.input.vacancy_form__town(type="text")
+                span.input_description Подсказка6
+            section.form__section_three_elements
+                label.input_name Адрес офиса
+                .inputs_wrapper
+                    label.inputs_wrapper_filling
+                        input.input_checkbox.vacancy_form__invisible_address(type="checkbox" value="dont-show-addr")
+                        |                             Не показывать адрес
+                    input.input.inputs_wrapper_filling.vacancy_form__address(type="text")
+                span.input_description Подсказка7
+        section.sub_form
+            h3 Контактные данные
+            section.form__section_three_elements
+                label.input_name Менеджер вакансии
+                .inputs-wrapper
+                    input.input.inputs_wrapper_filling.vacancy_form__manager(type="text")
+                    label.inputs_wrapper_filling
+                        input.input_checkbox.vacancy_form__notificate_by_email(type="checkbox")
+                        |                             Уведомлять о вакансиях по почте
+                span.input_description Подсказка
+            section.form__section_three_elements
+                label.input_name Контактная информация
+                .inputs_wrapper
+                    label.inputs_wrapper_filling
+                        input.input_checkbox.vacancy_form__invisible_contacts(type="checkbox")
+                        |                             Не показывать в вакансии
+                span.input_description Подсказка7
+            section.form__section_three_elements
+                label.input_name Email
+                input.input.vacancy_form__manager_email(type="email")
+                span.input_description Подсказка7
+            section.form__section_three_elements
+                label.input_name Телефон
+                input.input.vacancy_form__manager_phone(type="tel")
+                span.input_description Подсказка7
+            section.form__section_three_elements
+                label.input_name Комментарий
+                input.input.vacancy_form__comment(type="text")
+                span.input_description Подсказка7
+    footer
+        label
+            input.input_checkbox.vacancy_form__save_temp(type="checkbox")
+            |                 Сохранить как шаблон
+        br
+        button.button.vacancy_page__button_submit Разместить

@@ -1,0 +1,93 @@
+.vacancy_form {
+    padding: 2%;
+    background-color: gainsboro;
+    border-radius: 15px;
+    min-width: 600px;
+    max-width: 1200px;
+}
+
+.choose_summary_lang {
+    max-width: 137px;
+}
+
+.form__section_two_elements {
+    display: grid;
+    grid-template-columns: 1fr 2fr;
+    grid-column-gap: 2%;
+    grid-auto-columns: minmax(min-content, max-content);
+}
+
+.input_name {
+    text-align: left;
+}
+
+.input {
+    margin-top: 1px;
+    text-align: left;
+}
+
+.input_description {
+    text-align: left;
+    color: dimgray;
+}
+
+.input_description:hover {
+    color: black;
+}
+
+.input {
+    margin-top: 1px;
+    text-align: left;
+    width: 100%;
+}
+
+.inputs_wrapper {
+    margin-top: 1px;
+    text-align: left;
+}
+
+/*.inputs_wrapper > *:not(.payment)*/
+.inputs_wrapper__filling {
+    display: block;
+}
+
+.section_settings {
+    display: grid;
+    grid-template-columns: auto auto;
+    grid-column-gap: 2%;
+}
+
+.summary_preparation_actions {
+    text-align: left;
+}
+
+.user_summary_actions {
+    text-align: right;
+}
+
+.user_summary_actions__filling {
+    display: inline;
+}
+
+.date {
+    display: flex;
+}
+
+.tags-place {
+
+}
+
+.tag {
+    display: inline-flex;
+    background-color: aquamarine;
+}
+
+.template_explanations {
+
+}
+
+.template_explanations * {
+    color: blue;
+    text-decoration: underline;
+    text-decoration-style: dashed;
+}

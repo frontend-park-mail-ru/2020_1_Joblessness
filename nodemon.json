@@ -1,7 +1,0 @@
-{
-  "NODE_ENV" : "dev",
-  "env" : {
-    "HTTP_PORT" : 4000,
-    "HTTPS_PORT" : 5000
-  }
-}

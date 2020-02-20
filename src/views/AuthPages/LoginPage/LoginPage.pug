@@ -1,0 +1,42 @@
+div.main-container
+    div.form-container
+        form
+            span.form-caption Вход в личный кабинет
+            div.form-input-wrapper.login-form-email-or-phone
+                input.form-input(type="text" placeholder="Email или телефон")
+                div.form-input-err
+            div.separator
+            div.form-input-wrapper.login-form-password
+                input.form-input(type="password" placeholder="Пароль")
+                div.form-input-err
+            input.form-submit.login-form-submit(type="submit" value="Войти в личный кабинет")
+            div.remember-main
+                div
+                    input(type="checkbox" id="remember")
+                    label(for="remember") Запомнить
+                div
+                    a(href="#") Получить пароль
+            div.section
+                span.section-label Вход через соцсети
+                div.social-main
+                    span.social-btn
+                        a(href="#")
+                    span.social-btn
+                        a(href="#")
+                    span.social-btn
+                        a(href="#")
+                    span.social-btn
+                        a(href="#")
+                    span.social-btn
+                        a(href="#")
+                    span.social-btn
+                        a(href="#")
+                    span.social-btn
+                        a(href="#")
+            div.section
+                span.section-label Регистрация
+                div.signup-main
+                    div.signup-btn
+                        a(href="#" data-page="employeeSignup") Соискателя
+                    div.signup-btn
+                        a(href="#" data-page="employerSignup") Работодателя
