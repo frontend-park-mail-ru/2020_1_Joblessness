@@ -23,10 +23,6 @@ class ResumePage extends Page {
         }
     }
 
-    addEventsOn() {
-
-    }
-
     render() {
         this.createDomBox(this.domName()).innerHTML = template();
     }

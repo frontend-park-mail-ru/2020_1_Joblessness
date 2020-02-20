@@ -1,3 +1,4 @@
+import getBus from "../../ulils/getBus";
 import { Validator } from "../../Validator.js";
 import { RequestManager } from "../../RequestManager.js";
 
@@ -94,6 +95,8 @@ class VacancyForm {
             if ( this.validateForm() ) {
                 console.log('da');
                 //TODO создание запроса
+                getBus().pagesOnScreen.vacancyPage.hidden = true;
+                getBus().pagesOnScreen.showVacancyPage.hidden = false;
             }
         });
     }

@@ -17,6 +17,10 @@ export class Page {
         return `${this.name()}-page`;
     }
 
+    getDomElem() {
+        return document.querySelector(`.${this.domName()}`);
+    }
+
     createDomBox(domName) {
         let domBox = document.createElement("div");
         domBox.className = `page ${domName}`;

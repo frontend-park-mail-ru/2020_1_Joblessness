@@ -19,6 +19,10 @@ class ShowVacancyPage extends Page {
         }
     }
 
+    fillThePage() {
+
+    }
+
     render() {
         this.createDomBox(this.domName()).innerHTML = template();
     }

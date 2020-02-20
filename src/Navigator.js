@@ -1,10 +1,12 @@
 "use strict";
 
+import getBus from "./ulils/getBus";
 import { showPage } from './ulils';
 import {
     ResumePage,
     UserPage,
     VacancyPage,
+    ShowVacancyPage,
     LoginPage,
     EmployerSignupPage,
     EmployeeSignupPage,
@@ -16,6 +18,7 @@ export default class Navigator {
     constructor() {
         // сюда добавляете свои страницы
         this.vacancyPage = new VacancyPage();
+        this.showVacancyPage = new ShowVacancyPage();
         this.resumePage = new ResumePage();
         this.userPage = new UserPage();
         this.loginPage = new LoginPage();
@@ -24,6 +27,18 @@ export default class Navigator {
         this.header = new Header();
         this.footer = new Footer();
         this.render();
+
+        getBus().pagesOnScreen = {
+            vacancyPage: this.vacancyPage.getDomElem(),
+            showVacancyPage: this.showVacancyPage.getDomElem(),
+            resumePage: this.resumePage.getDomElem(),
+            userPage: this.userPage.getDomElem(),
+            loginPage: this.loginPage.getDomElem(),
+            employerSignupPage: this.employerSignupPage.getDomElem(),
+            employeeSignupPage: this.employeeSignupPage.getDomElem(),
+        };
+
+        console.log(getBus());
 
         showPage(this.header.domName());
         showPage(this.footer.domName());
