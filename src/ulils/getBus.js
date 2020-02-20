@@ -2,6 +2,10 @@
 
 const BUS = {};
 
-export default function getBus() {
+function getBus() {
     return BUS;
+}
+
+export {
+    getBus,
 }

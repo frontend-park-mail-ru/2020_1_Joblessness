@@ -1,7 +1,6 @@
 "use strict";
 
-import getBus from "./ulils/getBus";
-import { showPage } from './ulils';
+import { getBus } from "./ulils/getBus";
 import {
     ResumePage,
     UserPage,
@@ -10,25 +9,63 @@ import {
     LoginPage,
     EmployerSignupPage,
     EmployeeSignupPage,
-    Header,
-    Footer,
 } from './views';
+import {IndexPage} from "./views/IndexPage";
+import {hideAll} from "./ulils/showPage";
 
-export default class Navigator {
+const routes = {
+    createResume: showCreateResume,
+    createVacancy: showCreateVacancy,
+    index: showIndex,
+    login: showLogin,
+    employeeSignup: showEmployeeSignup,
+    employerSignup: showEmployerSignup,
+};
+
+function showIndex() {
+    hideAll();
+    getBus().pagesOnScreen.indexPage.hidden = false;
+}
+
+function showLogin() {
+    hideAll();
+    getBus().pagesOnScreen.loginPage.hidden = false;
+}
+
+function showEmployeeSignup() {
+    hideAll();
+    getBus().pagesOnScreen.employeeSignupPage.hidden = false;
+}
+
+function showEmployerSignup() {
+    hideAll();
+    getBus().pagesOnScreen.employerSignupPage.hidden = false;
+}
+
+function showCreateVacancy() {
+    hideAll();
+    getBus().pagesOnScreen.vacancyPage.hidden = false;
+}
+
+function showCreateResume() {
+    hideAll();
+    getBus().pagesOnScreen.resumePage.hidden = false;
+}
+
+class Navigator {
     constructor() {
         // сюда добавляете свои страницы
-        this.vacancyPage = new VacancyPage();
-        this.showVacancyPage = new ShowVacancyPage();
-        this.resumePage = new ResumePage();
-        this.userPage = new UserPage();
-        this.loginPage = new LoginPage();
-        this.employerSignupPage = new EmployerSignupPage();
-        this.employeeSignupPage = new EmployeeSignupPage();
-        this.header = new Header();
-        this.footer = new Footer();
-        this.render();
+        this.indexPage = new IndexPage('.root');
+        this.vacancyPage = new VacancyPage('.root');
+        this.showVacancyPage = new ShowVacancyPage('.root');
+        this.resumePage = new ResumePage('.root');
+        this.userPage = new UserPage('.root');
+        this.loginPage = new LoginPage('.root');
+        this.employerSignupPage = new EmployerSignupPage('.root');
+        this.employeeSignupPage = new EmployeeSignupPage('.root');
 
         getBus().pagesOnScreen = {
+            indexPage: this.indexPage.getDomElem(),
             vacancyPage: this.vacancyPage.getDomElem(),
             showVacancyPage: this.showVacancyPage.getDomElem(),
             resumePage: this.resumePage.getDomElem(),
@@ -38,17 +75,12 @@ export default class Navigator {
             employeeSignupPage: this.employeeSignupPage.getDomElem(),
         };
 
-        console.log(getBus());
-
-        showPage(this.header.domName());
-        showPage(this.footer.domName());
-
         this.addNavEvents();
     }
 
     // родительский элемент
     parentDom() {
-        return '#index';
+        return '#root';
     }
 
     // имя класса самого элемента
@@ -56,40 +88,19 @@ export default class Navigator {
         return 'nav-bar'
     }
 
-    // возвращает строку, которая в html описывает наполнение элемента
-    htmlTemplate() {
-        // здесь ссылка переход на страницу
-        return `
-            <button class="nav-btn to-page-${this.vacancyPage.name('en')}">${this.vacancyPage.name('ru')}</button>
-            <button class="nav-btn to-page-${this.resumePage.name('en')}">${this.resumePage.name('ru')}</button>
-            <button class="nav-btn to-page-${this.userPage.name('en')}">${this.userPage.name('ru')}</button>
-            <button class="nav-btn to-page-${this.loginPage.name('en')}">${this.loginPage.name('ru')}</button>
-            <button class="nav-btn to-page-${this.employerSignupPage.name('en')}">${this.employerSignupPage.name('ru')}</button>
-            <button class="nav-btn to-page-${this.employeeSignupPage.name('en')}">${this.employeeSignupPage.name('ru')}</button>
-        `;
-    }
+    addNavEvents() {
+        document.body.addEventListener('click', (e) => {
+            const {target} = e;
 
-    // создает сам dom элемент
-    render() {
-        let domBox = document.createElement("div");
-        domBox.className = `${this.domName()}`;
-        document.querySelector("#root").appendChild(domBox);
-        domBox.innerHTML = this.htmlTemplate();
-    }
+            if (target instanceof HTMLAnchorElement) {
+                e.preventDefault();
 
-    // здесь определяется событие перехода на страницу. querySelector позволяет определить элемент по классу
-    // addNavEvents() {
-    //     document.querySelector(`.to-page-${this.vacancyPage.name('en')}`)
-    //         .addEventListener('click', () => showPage(this.vacancyPage.domName()));
-    //     document.querySelector(`.to-page-${this.resumePage.name('en')}`)
-    //         .addEventListener('click', () => showPage(this.resumePage.domName()));
-    //     document.querySelector(`.to-page-${this.userPage.name('en')}`)
-    //         .addEventListener('click', () => showPage(this.userPage.domName()));
-    //     document.querySelector(`.to-page-${this.loginPage.name('en')}`)
-    //         .addEventListener('click', () => showPage(this.loginPage.domName()));
-    //     document.querySelector(`.to-page-${this.employerSignupPage.name('en')}`)
-    //         .addEventListener('click', () => showPage(this.employerSignupPage.domName()));
-    //     document.querySelector(`.to-page-${this.employeeSignupPage.name('en')}`)
-    //         .addEventListener('click', () => showPage(this.employeeSignupPage.domName()));
-    // }
+                routes[target.dataset.page]();
+            }
+        });
+    }
+}
+
+export {
+    Navigator,
 }

@@ -18,15 +18,15 @@ class ResumeForm {
             city: '',
             town: '',
             citizenship: '',
-            no_exp_explanation: '',
+            "no-exp-explanation": '',
         };
         for (const [key, value] of Object.entries(this.textInputs)) {
-            this.textInputs[key] = document.querySelector(`.resume_form__${key}`);
+            this.textInputs[key] = document.querySelector(`.resume-form__${key}`);
         }
 
-        this.phone = document.querySelector('.resume_form__phone');
-        this.day= document.querySelector('.resume_form__day');
-        this.year= document.querySelector('.resume_form__year');
+        this.phone = document.querySelector('.resume-form__phone');
+        this.day= document.querySelector('.resume-form__day');
+        this.year= document.querySelector('.resume-form__year');
         this.sex = '';
 
     }
@@ -46,7 +46,7 @@ class ResumeForm {
             inputIsValid = false;
         }
 
-        document.querySelectorAll('.resume_form__sex').forEach(radiobutton => {
+        document.querySelectorAll('.resume-form__sex').forEach(radiobutton => {
             if (radiobutton.checked) {
                 this.salary_type = radiobutton.value;
             }
@@ -60,7 +60,7 @@ class ResumeForm {
     }
 
     addSubmitEvent() {
-        document.querySelector('.vacancy_page__button_submit').addEventListener('click', () => {
+        document.querySelector('.vacancy-page__button-submit').addEventListener('click', () => {
             if ( this.validateForm() ) {
                 console.log('da');
                 //TODO создание запроса

@@ -6,8 +6,12 @@
  * наверное можно заменить на миксин createDomBox
  */
 export class Page {
+
     constructor(container) {
-        this.container = container
+        if (!!container) {
+            this.container = document.querySelector(container);
+        }
+        this.render();
     }
 
     name() {
@@ -26,7 +30,8 @@ export class Page {
         domBox.className = `page ${domName}`;
         // все страницы по умолчанию скрыты
         domBox.hidden = true;
-        document.querySelector('#root').appendChild(domBox);
+        console.log('!!!!!!!!!!' + this.container + ' - ' + this.domName());
+        this.container.appendChild(domBox);
         return domBox;
     }
 

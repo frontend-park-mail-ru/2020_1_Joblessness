@@ -7,8 +7,8 @@ import template from './show-vacancy-page.pug';
 
 // смотри пояснения к резюме
 class ShowVacancyPage extends Page {
-    constructor() {
-        super();
+    constructor(container) {
+        super(container);
     }
 
     name(lang='en') {

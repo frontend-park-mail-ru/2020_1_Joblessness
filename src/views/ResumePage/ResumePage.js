@@ -7,8 +7,8 @@ import template from "./resume-page.pug";
 
 // наследуемся от страницы
 class ResumePage extends Page {
-    constructor() {
-        super();
+    constructor(container) {
+        super(container);
         // this.settings = new FormSettings()
         // this.form = new ResumePage()
     }

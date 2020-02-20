@@ -1,4 +1,4 @@
-.resume_form {
+.resume-form {
     padding: 2%;
     background-color: gainsboro;
     border-radius: 15px;
@@ -6,18 +6,18 @@
     max-width: 1200px;
 }
 
-.choose_summary_lang {
+.choose-summary-lang {
     max-width: 137px;
 }
 
-.form__section_two_elements {
+.form__section-two-elements {
     display: grid;
     grid-template-columns: 1fr 2fr;
     grid-column-gap: 2%;
     grid-auto-columns: minmax(min-content, max-content);
 }
 
-.input_name {
+.input-name {
     text-align: left;
 }
 
@@ -26,12 +26,12 @@
     text-align: left;
 }
 
-.input_description {
+.input-description {
     text-align: left;
     color: dimgray;
 }
 
-.input_description:hover {
+.input-description:hover {
     color: black;
 }
 
@@ -41,31 +41,31 @@
     width: 100%;
 }
 
-.inputs_wrapper {
+.inputs-wrapper {
     margin-top: 1px;
     text-align: left;
 }
 
-/*.inputs_wrapper > *:not(.payment)*/
-.inputs_wrapper__filling {
+/*.inputs-wrapper > *:not(.payment)*/
+.inputs-wrapper__filling {
     display: block;
 }
 
-.section_settings {
+.section-settings {
     display: grid;
     grid-template-columns: auto auto;
     grid-column-gap: 2%;
 }
 
-.summary_preparation_actions {
+.summary-preparation-actions {
     text-align: left;
 }
 
-.user_summary_actions {
+.user-summary-actions {
     text-align: right;
 }
 
-.user_summary_actions__filling {
+.user-summary-actions__filling {
     display: inline;
 }
 
@@ -82,11 +82,11 @@
     background-color: aquamarine;
 }
 
-.template_explanations {
+.template-explanations {
 
 }
 
-.template_explanations * {
+.template-explanations * {
     color: blue;
     text-decoration: underline;
     text-decoration-style: dashed;

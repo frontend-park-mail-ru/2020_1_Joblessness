@@ -1,4 +1,4 @@
-.vacancy_show {
+.vacancy-show {
     padding: 2%;
     background-color: gainsboro;
     border-radius: 15px;
@@ -6,14 +6,14 @@
     max-width: 1200px;
 }
 
-.form__section_three_elements {
+.form__section-three-elements {
     display: grid;
     grid-template-columns: 1fr 2fr 1fr;
     grid-column-gap: 2%;
     grid-auto-columns: minmax(min-content, max-content);
 }
 
-.input_name {
+.input-name {
     text-align: left;
 }
 
@@ -23,23 +23,23 @@
     width: 100%;
 }
 
-.inputs_wrapper {
+.inputs-wrapper {
     margin-top: 1px;
     text-align: left;
 }
 
-.inputs_wrapper__filling {
+.inputs-wrapper__filling {
     grid-column-start: 2;
     grid-column-end: 3;
     display: block;
 }
 
-.input_description {
+.input-description {
     text-align: left;
     color: dimgray;
 }
 
-.input_description:hover {
+.input-description:hover {
     color: black;
 }
 

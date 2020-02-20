@@ -1,4 +1,4 @@
-import getBus from "../../ulils/getBus";
+import { getBus } from "../../ulils/getBus";
 import { Validator } from "../../Validator.js";
 import { RequestManager } from "../../RequestManager.js";
 
@@ -14,7 +14,7 @@ class VacancyForm {
         this.addSubmitEvent();
 
         this.textInputs = {
-            job_title:  "",
+            "job-title":  "",
             description: "",
             skills: "",
             town: "",
@@ -23,26 +23,26 @@ class VacancyForm {
             comment: "",
         };
         for (const [key, value] of Object.entries(this.textInputs)) {
-            this.textInputs[key] = document.querySelector(`.vacancy_form__${key}`);
+            this.textInputs[key] = document.querySelector(`.vacancy-form__${key}`);
         }
 
         this.checkboxInputs = {
-            invisible_address: false,
-            notificate_by_email: false,
-            invisible_contacts: false,
-            save_temp: false,
+            "invisible-address": false,
+            "notificate-by-email": false,
+            "invisible-contacts": false,
+            "save-temp": false,
         };
 
         this.numberInputs = {
-            payment_from: "",
-            payment_to: "",
+            "payment-from": "",
+            "payment-to": "",
         };
         for (const [key, value] of Object.entries(this.numberInputs)) {
-            this.numberInputs[key] = document.querySelector(`.vacancy_form__${key}`);
+            this.numberInputs[key] = document.querySelector(`.vacancy-form__${key}`);
         }
 
-        this.manager_email = document.querySelector('.vacancy_form__manager_email');
-        this.manager_phone = document.querySelector('.vacancy_form__manager_phone');
+        this.manager_email = document.querySelector('.vacancy-form__manager-email');
+        this.manager_phone = document.querySelector('.vacancy-form__manager-phone');
         this.salary_type = "";
 
     }
@@ -74,7 +74,7 @@ class VacancyForm {
             inputIsValid = false;
         }
 
-        document.querySelectorAll('.vacancy_form__salary_type').forEach(radiobutton => {
+        document.querySelectorAll('.vacancy-form__salary-type').forEach(radiobutton => {
            if (radiobutton.checked) {
                this.salary_type = radiobutton.value;
            }
@@ -84,19 +84,21 @@ class VacancyForm {
         }
 
         for (const [key, value] of Object.entries(this.checkboxInputs)) {
-            this.checkboxInputs[key] = document.querySelector(`.vacancy_form__${key}`).checked;
+            this.checkboxInputs[key] = document.querySelector(`.vacancy-form__${key}`).checked;
         }
 
         return inputIsValid;
     }
 
     addSubmitEvent() {
-        document.querySelector('.vacancy_page__button_submit').addEventListener('click', () => {
+        document.querySelector('.vacancy-page__button-submit').addEventListener('click', () => {
             if ( this.validateForm() ) {
                 console.log('da');
                 //TODO создание запроса
                 getBus().pagesOnScreen.vacancyPage.hidden = true;
                 getBus().pagesOnScreen.showVacancyPage.hidden = false;
+            } else {
+                console.log(this.textInputs["job-title"]);
             }
         });
     }
