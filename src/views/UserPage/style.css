@@ -1,0 +1,49 @@
+.vacancy-form {
+    padding: 2%;
+    background-color: gainsboro;
+    border-radius: 15px;
+    min-width: 600px;
+    max-width: 1200px;
+}
+
+.form__section-three-elements {
+
+    display: grid;
+    grid-template-columns: 1fr 2fr 1fr;
+    grid-column-gap: 2%;
+    grid-auto-columns: minmax(min-content, max-content);
+}
+
+.input-name {
+    text-align: left;
+}
+
+.input {
+    margin-top: 1px;
+    text-align: left;
+    width: 100%;
+}
+
+.inputs-wrapper {
+    margin-top: 1px;
+    text-align: left;
+}
+
+.inputs-wrapper__filling {
+    grid-column-start: 2;
+    grid-column-end: 3;
+    display: block;
+}
+
+.input-description {
+    text-align: left;
+    color: dimgray;
+}
+
+.input-description:hover {
+    color: black;
+}
+
+.payment {
+    display: flex;
+}

@@ -12,7 +12,7 @@ export class Page {
      * @param container - контейнер, в который будет помещена страница
      */
     constructor(container) {
-        if (!!container) {
+        if (container) {
             this.container = document.querySelector(container);
         }
         this.render();

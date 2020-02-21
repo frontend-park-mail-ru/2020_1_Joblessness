@@ -1,99 +1,35 @@
 "use strict";
 
 import { getBus } from "./ulils/getBus";
-import {
-    ResumePage,
-    UserPage,
-    VacancyPage,
-    ShowVacancyPage,
-    LoginPage,
-    EmployerSignupPage,
-    EmployeeSignupPage,
-} from './views';
-import {IndexPage} from "./views/IndexPage";
+import { validators } from './ulils';
 import {hideAll} from "./ulils/showPage";
-import {ShowResumePage} from "./views/ShowResumePage";
-
-const routes = {
-    createResume: showCreateResume,
-    createVacancy: showCreateVacancy,
-    index: showIndex,
-    login: showLogin,
-    employeeSignup: showEmployeeSignup,
-    employerSignup: showEmployerSignup,
-};
-
-function showIndex() {
-    hideAll();
-    getBus().pagesOnScreen.indexPage.showPage();
-}
-
-function showLogin() {
-    hideAll();
-    getBus().pagesOnScreen.loginPage.showPage();
-}
-
-function showEmployeeSignup() {
-    hideAll();
-    getBus().pagesOnScreen.employeeSignupPage.showPage();
-}
-
-function showEmployerSignup() {
-    hideAll();
-    getBus().pagesOnScreen.employerSignupPage.showPage();
-}
-
-function showCreateVacancy() {
-    hideAll();
-    getBus().pagesOnScreen.vacancyPage.showPage();
-}
-
-function showCreateResume() {
-    hideAll();
-    getBus().pagesOnScreen.resumePage.showPage();
-}
 
 class Navigator {
     /**
      * Все страницы создаются здесь и помещаются в глобальный объект Bus
      */
-    constructor() {
-        // сюда добавляете свои страницы
-        this.indexPage = new IndexPage('.root');
-        this.vacancyPage = new VacancyPage('.root');
-        this.showVacancyPage = new ShowVacancyPage('.root');
-        this.resumePage = new ResumePage('.root');
-        this.showResumePage = new ShowResumePage('.root');
-        this.userPage = new UserPage('.root');
-        this.loginPage = new LoginPage('.root');
-        this.employerSignupPage = new EmployerSignupPage('.root');
-        this.employeeSignupPage = new EmployeeSignupPage('.root');
-
-        getBus().pagesOnScreen = {
-            indexPage: this.indexPage,
-            vacancyPage: this.vacancyPage,
-            showVacancyPage: this.showVacancyPage,
-            resumePage: this.resumePage,
-            showResumePage: this.showResumePage,
-            userPage: this.userPage,
-            loginPage: this.loginPage,
-            employerSignupPage: this.employerSignupPage,
-            employeeSignupPage: this.employeeSignupPage,
-        };
-
+    constructor(routes = {}) {
         this.addNavEvents();
+        this.routes = routes
     }
-
-    // родительский элемент
-    parentDom() {
-        return '#root';
-    }
-
+    showPage = (pageName) => {
+        hideAll();
+        if( typeof this.routes[pageName] === 'string' ) {
+            if( !getBus || !getBus().pagesOnScreen ) {
+                throw new Error(`
+                Unable to get BUS. Report bug at https://github.com/frontend-park-mail-ru/2020_1_Joblessness`);
+            }
+            getBus().pagesOnScreen?.[this.routes[pageName]]?.showPage()
+        } else {
+            throw new Error(`
+            Unable to find ${pageName} in routes. 
+            You must have forgotten to add it to Application Routes!`);
+        }
+    };
     // имя класса самого элемента
     domName() {
         return 'nav-bar'
     }
-
     /**
      * Обработка нажатий на все ссылки с целью перехода на другую страницу
      */
@@ -103,13 +39,30 @@ class Navigator {
 
             if (target instanceof HTMLAnchorElement) {
                 e.preventDefault();
-
-                routes[target.dataset.page]();
+                this.showPage(target.dataset.page);
             }
         });
     }
 }
 
+
+
+const withBus = (pages, routes, container) => {
+    validators.validateString(container, "container", true);
+    //@TODO validate pages
+    let pagesToShow = {};
+    for( let page of Object.keys(pages) ) {
+        pagesToShow[page] = new pages[page](container)
+    }
+
+    getBus().pagesOnScreen = {
+        ...getBus().pagesOnScreen,
+        ...pagesToShow,
+    };
+    return new Navigator(routes)
+};
+
 export {
+    withBus,
     Navigator,
 }

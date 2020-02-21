@@ -1,10 +1,21 @@
 "use strict";
 
-import { Navigator } from './Navigator.js';
-import {Header} from "./views/Header";
-import {Footer} from "./views/Footer";
+import { withBus as Navigator } from './Navigator.js';
+import {
+    ResumePage,
+    UserPage,
+    VacancyPage,
+    ShowVacancyPage,
+    LoginPage,
+    EmployerSignupPage,
+    EmployeeSignupPage,
+    ShowResumePage,
+    IndexPage,
+    Footer,
+    Header
+} from './views';
 
-class Index {
+class App {
     /**
      * Создание неизменяемых элементов, таких как хедер и футер
      */
@@ -14,15 +25,32 @@ class Index {
         let domBox = document.createElement("div");
         domBox.className = 'root';
         document.querySelector('body').appendChild(domBox);
-        new Navigator();
+
+        const routes = {
+            createResume: 'ResumePage',
+            createVacancy: 'VacancyPage',
+            userPage: 'UserPage',
+            index: 'IndexPage',
+            login: 'LoginPage',
+            employeeSignup: 'EmployeeSignupPage',
+            employerSignup: 'EmployerSignupPage',
+        };
+
+        new Navigator({
+            ResumePage,
+            UserPage,
+            VacancyPage,
+            ShowVacancyPage,
+            LoginPage,
+            EmployerSignupPage,
+            EmployeeSignupPage,
+            ShowResumePage,
+            IndexPage,
+        }, routes, '.root');
         new Footer('body');
     }
 }
 
 window.addEventListener("load", function () {
-    new Index();
+    new App();
 });
-
-export {
-    Index,
-}
