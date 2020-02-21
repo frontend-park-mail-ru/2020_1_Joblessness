@@ -13,6 +13,8 @@ import {
 import {IndexPage} from "./views/IndexPage";
 import {hideAll} from "./ulils/showPage";
 import {ShowResumePage} from "./views/ShowResumePage";
+import {VacanciesListPage} from "./views/VacanciesListPage";
+import {ShowVacanciesListPage} from "./views/ShowVacanciesListPage";
 
 const routes = {
     createResume: showCreateResume,
@@ -21,6 +23,7 @@ const routes = {
     login: showLogin,
     employeeSignup: showEmployeeSignup,
     employerSignup: showEmployerSignup,
+    vacanciesList: showVacanciesList,
 };
 
 function showIndex() {
@@ -53,6 +56,11 @@ function showCreateResume() {
     getBus().pagesOnScreen.resumePage.showPage();
 }
 
+function showVacanciesList() {
+    hideAll();
+    getBus().pagesOnScreen.vacanciesListPage.showPage();
+}
+
 class Navigator {
     /**
      * Все страницы создаются здесь и помещаются в глобальный объект Bus
@@ -68,6 +76,8 @@ class Navigator {
         this.loginPage = new LoginPage('.root');
         this.employerSignupPage = new EmployerSignupPage('.root');
         this.employeeSignupPage = new EmployeeSignupPage('.root');
+        this.vacanciesListPage = new VacanciesListPage('.root');
+        this.showVacanciesListPage = new ShowVacanciesListPage('.root');
 
         getBus().pagesOnScreen = {
             indexPage: this.indexPage,
@@ -79,6 +89,8 @@ class Navigator {
             loginPage: this.loginPage,
             employerSignupPage: this.employerSignupPage,
             employeeSignupPage: this.employeeSignupPage,
+            vacanciesListPage: this.vacanciesListPage,
+            showVacanciesListPage: this.showVacanciesListPage,
         };
 
         this.addNavEvents();
