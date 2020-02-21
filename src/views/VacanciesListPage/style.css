@@ -1,0 +1,15 @@
+.list-of-vacancies, h1 {
+    width: auto;
+    display: flex;
+    justify-content: center;
+}
+
+.one-vacancy {
+    border : 2px solid #F5A528;
+}
+
+.button-list {
+    border: 1px solid gray;
+    text-align: center;
+    vertical-align: center;
+}
