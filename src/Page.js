@@ -34,5 +34,28 @@ export class Page {
         return domBox;
     }
 
+    clearPage() {
+        document.querySelectorAll(`.${this.domName()} .input`).forEach( element => {
+            if (element.type === 'text') {
+                element.value = '';
+            } else {
+                element.checked = false;
+            }
+        });
+
+        document.querySelectorAll(`.${this.domName()} .output`).forEach( element => {
+            element.innerHTML = '';
+        });
+    }
+
+    hidePage() {
+        this.clearPage();
+        this.getDomElem().hidden = true;
+    }
+
+    showPage() {
+        this.getDomElem().hidden = false;
+    }
+
     render() {}
 }

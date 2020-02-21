@@ -25,32 +25,32 @@ const routes = {
 
 function showIndex() {
     hideAll();
-    getBus().pagesOnScreen.indexPage.hidden = false;
+    getBus().pagesOnScreen.indexPage.showPage();
 }
 
 function showLogin() {
     hideAll();
-    getBus().pagesOnScreen.loginPage.hidden = false;
+    getBus().pagesOnScreen.loginPage.showPage();
 }
 
 function showEmployeeSignup() {
     hideAll();
-    getBus().pagesOnScreen.employeeSignupPage.hidden = false;
+    getBus().pagesOnScreen.employeeSignupPage.showPage();
 }
 
 function showEmployerSignup() {
     hideAll();
-    getBus().pagesOnScreen.employerSignupPage.hidden = false;
+    getBus().pagesOnScreen.employerSignupPage.showPage();
 }
 
 function showCreateVacancy() {
     hideAll();
-    getBus().pagesOnScreen.vacancyPage.hidden = false;
+    getBus().pagesOnScreen.vacancyPage.showPage();
 }
 
 function showCreateResume() {
     hideAll();
-    getBus().pagesOnScreen.resumePage.hidden = false;
+    getBus().pagesOnScreen.resumePage.showPage();
 }
 
 class Navigator {
@@ -67,15 +67,15 @@ class Navigator {
         this.employeeSignupPage = new EmployeeSignupPage('.root');
 
         getBus().pagesOnScreen = {
-            indexPage: this.indexPage.getDomElem(),
-            vacancyPage: this.vacancyPage.getDomElem(),
-            showVacancyPage: this.showVacancyPage.getDomElem(),
-            resumePage: this.resumePage.getDomElem(),
-            showResumePage: this.showResumePage.getDomElem(),
-            userPage: this.userPage.getDomElem(),
-            loginPage: this.loginPage.getDomElem(),
-            employerSignupPage: this.employerSignupPage.getDomElem(),
-            employeeSignupPage: this.employeeSignupPage.getDomElem(),
+            indexPage: this.indexPage,
+            vacancyPage: this.vacancyPage,
+            showVacancyPage: this.showVacancyPage,
+            resumePage: this.resumePage,
+            showResumePage: this.showResumePage,
+            userPage: this.userPage,
+            loginPage: this.loginPage,
+            employerSignupPage: this.employerSignupPage,
+            employeeSignupPage: this.employeeSignupPage,
         };
 
         this.addNavEvents();

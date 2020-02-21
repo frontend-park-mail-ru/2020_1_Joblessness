@@ -69,8 +69,8 @@ class ResumeForm {
         document.querySelector('.resume-form__button-submit').addEventListener('click', () => {
             if ( this.validateForm() ) {
                 //TODO создание запроса
-                getBus().pagesOnScreen.resumePage.hidden = true;
-                getBus().pagesOnScreen.showResumePage.hidden = false;
+                getBus().pagesOnScreen.resumePage.hidePage();
+                getBus().pagesOnScreen.showResumePage.showPage();
             } else {
                 console.log(this.phone.value)
 

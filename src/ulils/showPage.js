@@ -3,21 +3,17 @@
 import {getBus} from "./getBus";
 
 function showPage(pageDomName) {
-    console.log('PAGE');
-    console.log(pageDomName);
-    let allPages = document.getElementsByClassName("page");
-    for (let i = 0; i < allPages.length; i++) {
-        allPages[i].hidden = true;
+    for (const [key, value] of Object.entries(getBus().pagesOnScreen)) {
+        value.hidePage();
     }
+
     document.querySelector(`.${pageDomName}`).hidden = false;
 }
 
 function hideAll() {
-    let allPages = document.getElementsByClassName("page");
-    for (let i = 0; i < allPages.length; i++) {
-        allPages[i].hidden = true;
+    for (const [key, value] of Object.entries(getBus().pagesOnScreen)) {
+        value.hidePage();
     }
-    // document.querySelector(`.${pageDomName}`).hidden = false;
 }
 
 export {

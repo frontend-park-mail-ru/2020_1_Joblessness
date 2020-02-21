@@ -103,8 +103,8 @@ class VacancyForm {
         document.querySelector('.vacancy-page__button-submit').addEventListener('click', () => {
             if ( this.validateForm() ) {
                 //TODO создание запроса
-                getBus().pagesOnScreen.vacancyPage.hidden = true;
-                getBus().pagesOnScreen.showVacancyPage.hidden = false;
+                getBus().pagesOnScreen.vacancyPage.hidePage();
+                getBus().pagesOnScreen.showVacancyPage.showPage();
             } else {
             }
         });
