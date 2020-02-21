@@ -1,6 +1,112 @@
 var path = require('path');
 var HtmlWebpackPlugin = require('html-webpack-plugin');
 
+const user = {
+  user: {
+    firstname : 'Михаил',
+    lastname : 'Балицкий',
+    tag: '@mikstime',
+    avatar: 'бал.jpg'
+  },
+  summaries : [
+    {
+      title: "Резюме на должность веб разработчика",
+      contacts : {
+        firstname: "Михаил",
+        lastname: "Балицкий",
+        mobile: 89250499222,
+        city: "Moscow",
+      },
+      info : {
+        birth : {
+          year : 2000,
+          month : 5,
+          day : 4,
+        },
+        sex : "man",
+        country: "Российская Федерация",
+        experience: "Опыт работы в компаниях отсутстует",
+      },
+      education : [
+        {
+          degree : "МГТУ"
+        }
+      ]
+    },
+    {
+      title: "Резюме на должность веб разработчика",
+      contacts : {
+        firstname: "Михаил",
+        lastname: "Балицкий",
+        mobile: 89250499222,
+        city: "Moscow",
+      },
+      info : {
+        birth : {
+          year : 2000,
+          month : 5,
+          day : 4,
+        },
+        sex : "man",
+        country: "Российская Федерация",
+        experience: "Опыт работы в компаниях отсутстует",
+      },
+      education : [
+        {
+          degree : "МГТУ"
+        }
+      ]
+    },
+    {
+      title: "Резюме на должность веб разработчика",
+      contacts : {
+        firstname: "Михаил",
+        lastname: "Балицкий",
+        mobile: 89250499222,
+        city: "Moscow",
+      },
+      info : {
+        birth : {
+          year : 2000,
+          month : 5,
+          day : 4,
+        },
+        sex : "man",
+        country: "Российская Федерация",
+        experience: "Опыт работы в компаниях отсутстует",
+      },
+      education : [
+        {
+          degree : "МГТУ"
+        }
+      ]
+    },
+    {
+      title: "Резюме на должность веб разработчика",
+      contacts : {
+        firstname: "Михаил",
+        lastname: "Балицкий",
+        mobile: 89250499222,
+        city: "Moscow",
+      },
+      info : {
+        birth : {
+          year : 2000,
+          month : 5,
+          day : 4,
+        },
+        sex : "man",
+        country: "Российская Федерация",
+        experience: "Опыт работы в компаниях отсутстует",
+      },
+      education : [
+        {
+          degree : "МГТУ"
+        }
+      ]
+    }
+  ]
+}
 module.exports = {
   //...
   // entry: 'src/index.js',
@@ -34,113 +140,11 @@ module.exports = {
       app.get('/404', function (req, res) {
         res.sendfile(path.join(__dirname,'public/index.html'))
       });
+      app.post('/api/setAvatar', function (req, res) {
+        res.json(user)
+      });
       app.get('/api/userPage', function (req, res) {
-        res.json({
-          user: {
-            firstname : 'Михаил',
-            lastname : 'Балицкий',
-            tag: '@mikstime',
-            avatar: 'бал.jpg'
-          },
-          summaries : [
-            {
-              title: "Резюме на должность веб разработчика",
-              contacts : {
-                firstname: "Михаил",
-                lastname: "Балицкий",
-                mobile: 89250499222,
-                city: "Moscow",
-              },
-              info : {
-                birth : {
-                  year : 2000,
-                  month : 5,
-                  day : 4,
-                },
-                sex : "man",
-                country: "Российская Федерация",
-                experience: "Опыт работы в компаниях отсутстует",
-              },
-              education : [
-                {
-                  degree : "МГТУ"
-                }
-              ]
-            },
-            {
-              title: "Резюме на должность веб разработчика",
-              contacts : {
-                firstname: "Михаил",
-                lastname: "Балицкий",
-                mobile: 89250499222,
-                city: "Moscow",
-              },
-              info : {
-                birth : {
-                  year : 2000,
-                  month : 5,
-                  day : 4,
-                },
-                sex : "man",
-                country: "Российская Федерация",
-                experience: "Опыт работы в компаниях отсутстует",
-              },
-              education : [
-                {
-                  degree : "МГТУ"
-                }
-              ]
-            },
-            {
-              title: "Резюме на должность веб разработчика",
-              contacts : {
-                firstname: "Михаил",
-                lastname: "Балицкий",
-                mobile: 89250499222,
-                city: "Moscow",
-              },
-              info : {
-                birth : {
-                  year : 2000,
-                  month : 5,
-                  day : 4,
-                },
-                sex : "man",
-                country: "Российская Федерация",
-                experience: "Опыт работы в компаниях отсутстует",
-              },
-              education : [
-                {
-                  degree : "МГТУ"
-                }
-              ]
-            },
-            {
-              title: "Резюме на должность веб разработчика",
-              contacts : {
-                firstname: "Михаил",
-                lastname: "Балицкий",
-                mobile: 89250499222,
-                city: "Moscow",
-              },
-              info : {
-                birth : {
-                  year : 2000,
-                  month : 5,
-                  day : 4,
-                },
-                sex : "man",
-                country: "Российская Федерация",
-                experience: "Опыт работы в компаниях отсутстует",
-              },
-              education : [
-                {
-                  degree : "МГТУ"
-                }
-              ]
-            }
-          ]
-        });
+        res.json(user);
       });
     },
   },

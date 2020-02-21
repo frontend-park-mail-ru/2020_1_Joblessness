@@ -1,6 +1,8 @@
 include avarar
 include name
+include settings
 mixin bio(user, events)
     div(class="bio-section")
         +avatar(src=user.avatar, id=events.changeAvatar.id)
         +name(user.firstname, user.lastname, user.tag)
+        +settings(id=events.openSettings.id)

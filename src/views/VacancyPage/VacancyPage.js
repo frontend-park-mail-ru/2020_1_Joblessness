@@ -18,9 +18,11 @@ class VacancyPage extends Page {
             return 'вакансии'
         }
     }
-
+    componentDidMount = ()=> {
+        this.form = new VacancyForm();
+    };
     render() {
-        this.createDomBox(this.domName()).innerHTML = template();
+        return template();
     }
 }
 

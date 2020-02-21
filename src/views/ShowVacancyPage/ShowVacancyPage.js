@@ -19,7 +19,9 @@ class ShowVacancyPage extends Page {
     fillThePage() {
 
     }
-
+    componentDidMount = () => {
+        this.form = new ShowVacancyForm
+    }
     render() {
         return template();
     }
