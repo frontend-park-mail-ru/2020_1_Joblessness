@@ -1,2 +1,4 @@
-bio
-    img(src=locals.user.avatar)
+include avarar
+mixin bio
+    div(class="user-bio")
+        +avatar(src=locals.user.avatar)

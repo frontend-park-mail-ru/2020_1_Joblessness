@@ -15,7 +15,7 @@ import {
     Header,
     NotFoundPage,
 } from './views';
-import { withNetwork} from "./views/UserPage/UserPage";
+// import { withNetwork} from "./views/UserPage/UserPage";
 
 class App {
     /**
@@ -42,8 +42,8 @@ class App {
 
         const nav = new Navigator({
             ResumePage,
-            //UserPage,
-            UserPage : withNetwork(UserPage, "UserData"),
+            UserPage,
+            // UserPage : withNetwork(UserPage, "UserData"),
             VacancyPage,
             ShowVacancyPage,
             LoginPage,

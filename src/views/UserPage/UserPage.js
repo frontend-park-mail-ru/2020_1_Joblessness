@@ -1,39 +1,40 @@
 'use strict';
 
-import './style.css'
-import { Page } from '../../Page.js';
+import './style.sass'
+import {Page} from '../../Page.js';
 import template from './pug/index.pug';
 
 class UserPage extends Page {
 
-    name(lang='en') {
-        if (lang === 'en') {
-            return 'user-page'
-        } else if (lang === 'ru') {
-            return 'Страница Пользователя'
-        }
-    }
     render() {
-        console.log({...this.props.UserData})
         return template({...this.props.UserData});
     }
 }
 
-const withNetwork = (WrappedComponent, propName) => {
+const withNetwork = (WrappedComponent, propName, defaultProps = {}) => {
 
     return class extends WrappedComponent {
         constructor(...args) {
             super(args);
+            this.props[propName] = defaultProps;
+
             fetch("/api/userPage")
-                .then( r => r.json())
-                .then( json => {
+                .then(r => r.json())
+                .then(json => {
                     console.log(json);
                     this.props[propName] = json;
-                    this.requestRender()
-                });
+                    if (!this.domBox.hidden)
+                        this.requestRender()
+                })
+                .catch(console.log);
         }
     }
 };
+UserPage = withNetwork(UserPage, "UserData", {
+    user: {
+        avatar: ""
+    }
+});
 export {
     UserPage,
     withNetwork,

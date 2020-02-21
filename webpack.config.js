@@ -41,7 +41,32 @@ module.exports = {
             lastname : 'Балицкий',
             tag: '@mikstime',
             avatar: 'бал.jpg'
-          }
+          },
+          summaries : [
+            {
+              contacts : {
+                firstname: "Михаил",
+                lastname: "Балицкий",
+                mobile: 89250499222,
+                city: "Moscow",
+              },
+              info : {
+                birth : {
+                  year : 2000,
+                  month : 5,
+                  day : 4,
+                },
+                sex : "man",
+                country: "Российская Федерация",
+                experience: "Опыт работы в компаниях отсутстует",
+              },
+              education : [
+                {
+                  degree : "МГТУ"
+                }
+              ]
+            }
+          ]
         });
       });
     },
