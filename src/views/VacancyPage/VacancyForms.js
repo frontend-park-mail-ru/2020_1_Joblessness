@@ -43,6 +43,7 @@ class VacancyForm {
 
         this.manager_email = document.querySelector('.vacancy-form__manager-email');
         this.manager_phone = document.querySelector('.vacancy-form__manager-phone');
+
         this.salary_type = "";
 
     }
@@ -56,6 +57,7 @@ class VacancyForm {
                 //TODO смена класса
                 this.textInputs[key].value = '';
                 this.textInputs[key].placeholder = statusMessages[validationResult];
+
                 inputIsValid = false;
             }
         }
@@ -65,6 +67,7 @@ class VacancyForm {
             if (validationResult !== 'OK_MESSAGE') {
                 this.numberInputs[key].value = '';
                 this.numberInputs[key].placeholder = statusMessages[validationResult];
+
                 inputIsValid = false;
             }
         }
@@ -84,6 +87,7 @@ class VacancyForm {
         }
 
         document.querySelectorAll('.vacancy-form__salary-type').forEach(radiobutton => {
+
            if (radiobutton.checked) {
                this.salary_type = radiobutton.value;
            }
@@ -106,6 +110,7 @@ class VacancyForm {
                 getBus().pagesOnScreen.vacancyPage.hidePage();
                 getBus().pagesOnScreen.showVacancyPage.showPage();
             } else {
+
             }
         });
     }

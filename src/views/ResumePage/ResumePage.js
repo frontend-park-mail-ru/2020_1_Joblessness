@@ -23,6 +23,15 @@ class ResumePage extends Page {
         }
     }
 
+    addEventsOn() {
+
+    }
+
+    // template() {
+    //     let vacancyForm = ``
+    //     return `<div>РЕЗЮМЕ</div>`;
+    // }
+
     render() {
         this.createDomBox(this.domName()).innerHTML = template();
     }
