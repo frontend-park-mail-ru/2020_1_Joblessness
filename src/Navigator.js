@@ -54,6 +54,9 @@ function showCreateResume() {
 }
 
 class Navigator {
+    /**
+     * Все страницы создаются здесь и помещаются в глобальный объект Bus
+     */
     constructor() {
         // сюда добавляете свои страницы
         this.indexPage = new IndexPage('.root');
@@ -91,6 +94,9 @@ class Navigator {
         return 'nav-bar'
     }
 
+    /**
+     * Обработка нажатий на все ссылки с целью перехода на другую страницу
+     */
     addNavEvents() {
         document.body.addEventListener('click', (e) => {
             const {target} = e;

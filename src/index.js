@@ -4,8 +4,10 @@ import { Navigator } from './Navigator.js';
 import {Header} from "./views/Header";
 import {Footer} from "./views/Footer";
 
-// запускает все приложение. Точка создание - навигатор
 class Index {
+    /**
+     * Создание неизменяемых элементов, таких как хедер и футер
+     */
     constructor() {
         console.log("Application was created");
         new Header('body');

@@ -7,6 +7,10 @@
  */
 export class Page {
 
+    /**
+     * Конструктор рендерит страницу
+     * @param container - контейнер, в который будет помещена страница
+     */
     constructor(container) {
         if (!!container) {
             this.container = document.querySelector(container);
@@ -14,17 +18,33 @@ export class Page {
         this.render();
     }
 
+    /**
+     * Абстрактный метод, возвращает имя страницы
+     */
     name() {
     }
 
+    /**
+     * Имя dom-элемента страницы
+     * @returns {string}
+     */
     domName() {
         return `${this.name()}-page`;
     }
 
+    /**
+     * Геттер dom-элемента старицы
+     * @returns {Element}
+     */
     getDomElem() {
         return document.querySelector(`.${this.domName()}`);
     }
 
+    /**
+     * Создать блок страницы и поместить его в контейнер
+     * @param domName - имя создаваемого блока
+     * @returns {HTMLDivElement}
+     */
     createDomBox(domName) {
         let domBox = document.createElement("div");
         domBox.className = `page ${domName}`;
@@ -34,6 +54,9 @@ export class Page {
         return domBox;
     }
 
+    /**
+     * Очистить страницу к начальному состоянию
+     */
     clearPage() {
         document.querySelectorAll(`.${this.domName()} .input`).forEach( element => {
             if (element.type === 'text') {
@@ -48,11 +71,17 @@ export class Page {
         });
     }
 
+    /**
+     * Спрятать страницу
+     */
     hidePage() {
         this.clearPage();
         this.getDomElem().hidden = true;
     }
 
+    /**
+     * Показать страницу
+     */
     showPage() {
         this.getDomElem().hidden = false;
     }
