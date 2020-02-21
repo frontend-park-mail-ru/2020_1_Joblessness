@@ -1,7 +1,7 @@
 import {showPage} from "./showPage";
-import validators from "./validators";
+import {validateString} from "./validators";
 
 export {
     showPage,
-    validators,
+    validateString,
 }

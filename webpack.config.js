@@ -11,7 +11,39 @@ module.exports = {
   devServer: {
     contentBase: path.join(__dirname, 'public'),
     compress: true,
-    port: 8080
+    port: 8080,
+    before: function (app, server, compiler) {
+      app.get('/userPage', function (req, res) {
+        res.sendfile(path.join(__dirname,'public/index.html'))
+      });
+      app.get('/createVacancy', function (req, res) {
+        res.sendfile(path.join(__dirname,'public/index.html'))
+      });
+      app.get('/index', function (req, res) {
+        res.sendfile(path.join(__dirname,'public/index.html'))
+      });
+      app.get('/createResume', function (req, res) {
+        res.sendfile(path.join(__dirname,'public/index.html'))
+      });
+      app.get('/login', function (req, res) {
+        res.sendfile(path.join(__dirname,'public/index.html'))
+      });
+      app.get('/signup', function (req, res) {
+        res.sendfile(path.join(__dirname,'public/index.html'))
+      });
+      app.get('/404', function (req, res) {
+        res.sendfile(path.join(__dirname,'public/index.html'))
+      });
+      app.get('/api/userPage', function (req, res) {
+        res.json({
+          user: {
+            firstname : 'Михаил',
+            lastname : 'Балицкий',
+            tag: '@mikstime',
+          }
+        });
+      });
+    },
   },
   module: {
     rules : [

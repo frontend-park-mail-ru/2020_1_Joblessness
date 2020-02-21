@@ -1,7 +1,7 @@
 "use strict";
 
-import { getBus } from "./ulils/getBus";
-import { validators } from './ulils';
+import {getBus} from "./ulils/getBus";
+import {validateString} from './ulils';
 import {hideAll} from "./ulils/showPage";
 
 class Navigator {
@@ -12,24 +12,31 @@ class Navigator {
         this.addNavEvents();
         this.routes = routes
     }
+
     showPage = (pageName) => {
         hideAll();
-        if( typeof this.routes[pageName] === 'string' ) {
-            if( !getBus || !getBus().pagesOnScreen ) {
+        if (typeof this.routes[pageName] === 'string') {
+            if (!getBus || !getBus().pagesOnScreen) {
                 throw new Error(`
                 Unable to get BUS. Report bug at https://github.com/frontend-park-mail-ru/2020_1_Joblessness`);
             }
-            getBus().pagesOnScreen?.[this.routes[pageName]]?.showPage()
+            getBus().pagesOnScreen?.[this.routes[pageName]]?.showPage();
+            window.history.replaceState({}, '', pageName);
         } else {
-            throw new Error(`
-            Unable to find ${pageName} in routes. 
-            You must have forgotten to add it to Application Routes!`);
+            console.log(getBus().pagesOnScreen);
+            getBus().pagesOnScreen?.NotFoundPage?.showPage();
+            window.history.replaceState({}, '', "404");
+            // throw new Error(`
+            // Unable to find ${pageName} in routes.
+            // You must have forgotten to add it to Application Routes!`);
         }
     };
+
     // имя класса самого элемента
     domName() {
         return 'nav-bar'
     }
+
     /**
      * Обработка нажатий на все ссылки с целью перехода на другую страницу
      */
@@ -46,12 +53,11 @@ class Navigator {
 }
 
 
-
 const withBus = (pages, routes, container) => {
-    validators.validateString(container, "container", true);
+    validateString(container, "container", true);
     //@TODO validate pages
     let pagesToShow = {};
-    for( let page of Object.keys(pages) ) {
+    for (let page of Object.keys(pages)) {
         pagesToShow[page] = new pages[page](container)
     }
 
@@ -61,7 +67,6 @@ const withBus = (pages, routes, container) => {
     };
     return new Navigator(routes)
 };
-
 export {
     withBus,
     Navigator,

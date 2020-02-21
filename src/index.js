@@ -12,7 +12,8 @@ import {
     ShowResumePage,
     IndexPage,
     Footer,
-    Header
+    Header,
+    NotFoundPage,
 } from './views';
 
 class App {
@@ -34,9 +35,10 @@ class App {
             login: 'LoginPage',
             employeeSignup: 'EmployeeSignupPage',
             employerSignup: 'EmployerSignupPage',
+            '404' : 'NotFoundPage',
         };
 
-        new Navigator({
+        const nav = new Navigator({
             ResumePage,
             UserPage,
             VacancyPage,
@@ -46,11 +48,11 @@ class App {
             EmployeeSignupPage,
             ShowResumePage,
             IndexPage,
+            NotFoundPage,
         }, routes, '.root');
+        const loc = window.location.pathname.replace('/', '')
+        nav.showPage( loc ? loc : 'index') ;
         new Footer('body');
     }
 }
-
-window.addEventListener("load", function () {
-    new App();
-});
+new App();

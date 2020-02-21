@@ -1,14 +1,14 @@
 "use strict";
 
-import { getBus } from "./ulils/getBus";
+import {getBus} from "./ulils/getBus";
 import {
+    EmployeeSignupPage,
+    EmployerSignupPage,
+    LoginPage,
     ResumePage,
+    ShowVacancyPage,
     UserPage,
     VacancyPage,
-    ShowVacancyPage,
-    LoginPage,
-    EmployerSignupPage,
-    EmployeeSignupPage,
 } from './views';
 import {IndexPage} from "./views/IndexPage";
 import {hideAll} from "./ulils/showPage";
@@ -23,10 +23,12 @@ const routes = {
     employeeSignup: showEmployeeSignup,
     employerSignup: showEmployerSignup,
 };
+
 function showUserPage() {
     hideAll();
     getBus().pagesOnScreen.indexPage.showPage();
 }
+
 function showIndex() {
     hideAll();
     getBus().pagesOnScreen.indexPage.showPage();
