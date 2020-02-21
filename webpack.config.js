@@ -40,6 +40,7 @@ module.exports = {
             firstname : 'Михаил',
             lastname : 'Балицкий',
             tag: '@mikstime',
+            avatar: 'бал.jpg'
           }
         });
       });

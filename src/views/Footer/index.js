@@ -29,7 +29,7 @@ export class Footer extends Page {
     }
 
     render() {
-        this.createDomBox(this.domName()).innerHTML = template();
+        return template();
     }
 
 }

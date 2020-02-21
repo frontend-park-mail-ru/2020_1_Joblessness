@@ -8,7 +8,7 @@ import template from './vacancy-page.pug';
 class VacancyPage extends Page {
     constructor(container) {
         super(container);
-        this.form = new VacancyForm();
+        // this.form = new VacancyForm();
     }
 
     name(lang='en') {

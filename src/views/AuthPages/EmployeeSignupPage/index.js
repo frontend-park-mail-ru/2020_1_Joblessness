@@ -9,7 +9,6 @@ export class EmployeeSignupPage extends Page {
 
     constructor(container) {
         super(container);
-        this.form = new EmployeeSignupForm();
     }
 
     name(lang='en') {
@@ -20,8 +19,11 @@ export class EmployeeSignupPage extends Page {
         }
     }
 
+    componentDidMount = () => {
+        this.form = new EmployeeSignupForm();
+    };
     render() {
-        this.createDomBox(this.domName()).innerHTML = template();
+        return template()
     }
 
 }

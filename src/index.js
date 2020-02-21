@@ -15,6 +15,7 @@ import {
     Header,
     NotFoundPage,
 } from './views';
+import { withNetwork} from "./views/UserPage/UserPage";
 
 class App {
     /**
@@ -22,7 +23,8 @@ class App {
      */
     constructor() {
         console.log("Application was created");
-        new Header('body');
+        const header = new Header('body');
+        header.requestRender();
         let domBox = document.createElement("div");
         domBox.className = 'root';
         document.querySelector('body').appendChild(domBox);
@@ -40,7 +42,8 @@ class App {
 
         const nav = new Navigator({
             ResumePage,
-            UserPage,
+            //UserPage,
+            UserPage : withNetwork(UserPage, "UserData"),
             VacancyPage,
             ShowVacancyPage,
             LoginPage,
@@ -50,7 +53,7 @@ class App {
             IndexPage,
             NotFoundPage,
         }, routes, '.root');
-        const loc = window.location.pathname.replace('/', '')
+        const loc = window.location.pathname.replace('/', '');
         nav.showPage( loc ? loc : 'index') ;
         new Footer('body');
     }

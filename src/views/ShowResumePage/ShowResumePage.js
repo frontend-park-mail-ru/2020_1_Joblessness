@@ -24,7 +24,7 @@ class ShowResumePage extends Page {
     }
 
     render() {
-        this.createDomBox(this.domName()).innerHTML = template();
+        return template();
     }
 }
 

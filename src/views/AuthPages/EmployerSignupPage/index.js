@@ -7,11 +7,6 @@ import '../style.css'
 
 export class EmployerSignupPage extends Page {
 
-    constructor(container) {
-        super(container);
-        this.form = new EmployerSignupForm();
-    }
-
     name(lang='en') {
         if (lang === 'en') {
             return 'employer-signup'
@@ -20,8 +15,11 @@ export class EmployerSignupPage extends Page {
         }
     }
 
+    componentDidMount = () => {
+        this.form = new EmployerSignupForm();
+    };
     render() {
-        this.createDomBox(this.domName()).innerHTML = template();
+        return template()
     }
 
 }

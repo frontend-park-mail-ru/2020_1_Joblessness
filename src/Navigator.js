@@ -20,11 +20,11 @@ class Navigator {
                 throw new Error(`
                 Unable to get BUS. Report bug at https://github.com/frontend-park-mail-ru/2020_1_Joblessness`);
             }
-            getBus().pagesOnScreen?.[this.routes[pageName]]?.showPage();
+            getBus().pagesOnScreen?.[this.routes[pageName]]?.requestRender();
             window.history.replaceState({}, '', pageName);
         } else {
             console.log(getBus().pagesOnScreen);
-            getBus().pagesOnScreen?.NotFoundPage?.showPage();
+            getBus().pagesOnScreen?.NotFoundPage?.requestRender();
             window.history.replaceState({}, '', "404");
             // throw new Error(`
             // Unable to find ${pageName} in routes.

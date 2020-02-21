@@ -7,9 +7,6 @@ import template from './show-vacancy-page.pug';
 
 // смотри пояснения к резюме
 class ShowVacancyPage extends Page {
-    constructor(container) {
-        super(container);
-    }
 
     name(lang='en') {
         if (lang === 'en') {
@@ -24,7 +21,7 @@ class ShowVacancyPage extends Page {
     }
 
     render() {
-        this.createDomBox(this.domName()).innerHTML = template();
+        return template();
     }
 }
 

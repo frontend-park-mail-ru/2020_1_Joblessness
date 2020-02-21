@@ -1,0 +1,6 @@
+const withNetwork = () => {
+
+};
+export {
+    withNetwork
+}

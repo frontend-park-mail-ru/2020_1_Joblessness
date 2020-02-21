@@ -4,6 +4,7 @@ import { Page } from '../../Page.js';
 
 // наследуемся от страницы
 class NotFoundPage extends Page {
+
     name(lang='en') {
         if (lang === 'en') {
             return 'not-found'
@@ -13,7 +14,7 @@ class NotFoundPage extends Page {
     }
 
     render() {
-        this.createDomBox(this.domName()).innerHTML = `<div>Page Was Not Found</div>`
+        return `<div>Page Was Not Found</div>`
     }
 }
 
