@@ -30,7 +30,6 @@ export class Page {
         domBox.className = `page ${domName}`;
         // все страницы по умолчанию скрыты
         domBox.hidden = true;
-        console.log('!!!!!!!!!!' + this.container + ' - ' + this.domName());
         this.container.appendChild(domBox);
         return domBox;
     }

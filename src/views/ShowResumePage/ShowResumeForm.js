@@ -17,9 +17,9 @@ class ResumeForm {
             name:  '',
             surname: '',
             city: '',
+            town: '',
             citizenship: '',
             "no-exp-explanation": '',
-            education: '',
         };
         for (const [key, value] of Object.entries(this.textInputs)) {
             this.textInputs[key] = document.querySelector(`.resume-form__${key}`);
@@ -39,22 +39,19 @@ class ResumeForm {
             validationResult = Validator.correctText(this.textInputs[key].value);
             if (validationResult !== 'OK_MESSAGE') {
                 //TODO смена класса
-                this.textInputs[key].value = "";
-                this.textInputs[key].placeholder = statusMessages[validationResult];
+                this.textInputs[key].value = statusMessages[validationResult];
                 inputIsValid = false;
             }
         }
 
         validationResult = Validator.correctTel(this.phone.value);
         if ( validationResult !== 'OK_MESSAGE') {
-            this.phone.value = "";
-            this.phone.placeholder = statusMessages[validationResult];
             inputIsValid = false;
         }
 
         document.querySelectorAll('.resume-form__gender').forEach(radiobutton => {
             if (radiobutton.checked) {
-                this.gender = radiobutton.value;
+                this.salary_type = radiobutton.value;
             }
         });
         if (this.gender === "") {
@@ -72,9 +69,8 @@ class ResumeForm {
                 getBus().pagesOnScreen.resumePage.hidden = true;
                 getBus().pagesOnScreen.showResumePage.hidden = false;
             } else {
-                console.log(this.phone.value)
-
                 //TODO вместо алерт добавить какое-то поле для ошибок
+                alert(this.validateForm());
             }
         });
     }

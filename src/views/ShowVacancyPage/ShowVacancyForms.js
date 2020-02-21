@@ -92,7 +92,6 @@ class ShowVacancyForm {
     addSubmitEvent() {
         document.querySelector('.vacancy_page__button_submit').addEventListener('click', () => {
             if ( this.validateForm() ) {
-                console.log('da');
                 //TODO создание запроса
             }
         });

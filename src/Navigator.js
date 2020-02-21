@@ -12,6 +12,7 @@ import {
 } from './views';
 import {IndexPage} from "./views/IndexPage";
 import {hideAll} from "./ulils/showPage";
+import {ShowResumePage} from "./views/ShowResumePage";
 
 const routes = {
     createResume: showCreateResume,
@@ -59,6 +60,7 @@ class Navigator {
         this.vacancyPage = new VacancyPage('.root');
         this.showVacancyPage = new ShowVacancyPage('.root');
         this.resumePage = new ResumePage('.root');
+        this.showResumePage = new ShowResumePage('.root');
         this.userPage = new UserPage('.root');
         this.loginPage = new LoginPage('.root');
         this.employerSignupPage = new EmployerSignupPage('.root');
@@ -69,6 +71,7 @@ class Navigator {
             vacancyPage: this.vacancyPage.getDomElem(),
             showVacancyPage: this.showVacancyPage.getDomElem(),
             resumePage: this.resumePage.getDomElem(),
+            showResumePage: this.showResumePage.getDomElem(),
             userPage: this.userPage.getDomElem(),
             loginPage: this.loginPage.getDomElem(),
             employerSignupPage: this.employerSignupPage.getDomElem(),

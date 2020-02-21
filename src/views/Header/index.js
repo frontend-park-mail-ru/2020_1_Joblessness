@@ -9,7 +9,6 @@ export class Header extends Page {
     constructor(container) {
         super(container);
         this.getDomElem().hidden = false;
-        console.log(this.getDomElem().hidden);
     }
 
     name(lang='en') {

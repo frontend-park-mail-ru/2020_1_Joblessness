@@ -49,28 +49,37 @@ class VacancyForm {
 
     validateForm() {
         let inputIsValid = true;
+        let validationResult;
         for (const [key, value] of Object.entries(this.textInputs)) {
-            let validationResult = Validator.correctText(this.textInputs[key].value);
+            validationResult = Validator.correctText(this.textInputs[key].value);
             if (validationResult !== 'OK_MESSAGE') {
                 //TODO смена класса
-                this.textInputs[key].value = statusMessages[validationResult];
+                this.textInputs[key].value = '';
+                this.textInputs[key].placeholder = statusMessages[validationResult];
                 inputIsValid = false;
             }
         }
 
         for (const [key, value] of Object.entries(this.numberInputs)) {
-            let validationResult = Validator.correctText(this.numberInputs[key].value);
+            validationResult = Validator.correctText(this.numberInputs[key].value);
             if (validationResult !== 'OK_MESSAGE') {
-                this.numberInputs[key].value = statusMessages[validationResult];
+                this.numberInputs[key].value = '';
+                this.numberInputs[key].placeholder = statusMessages[validationResult];
                 inputIsValid = false;
             }
         }
 
-        if (Validator.correctMail(this.manager_email.value) !== 'OK_MESSAGE') {
+        validationResult = Validator.correctMail(this.manager_email.value);
+        if (validationResult !== 'OK_MESSAGE') {
+            this.manager_email.value = '';
+            this.manager_email.placeholder = statusMessages[validationResult];
             inputIsValid = false;
         }
 
-        if (Validator.correctTel(this.manager_phone.value) !== 'OK_MESSAGE') {
+        validationResult = Validator.correctTel(this.manager_phone.value);
+        if ( validationResult !== 'OK_MESSAGE') {
+            this.manager_phone.value = '';
+            this.manager_phone.placeholder = statusMessages[validationResult];
             inputIsValid = false;
         }
 
@@ -93,12 +102,10 @@ class VacancyForm {
     addSubmitEvent() {
         document.querySelector('.vacancy-page__button-submit').addEventListener('click', () => {
             if ( this.validateForm() ) {
-                console.log('da');
                 //TODO создание запроса
                 getBus().pagesOnScreen.vacancyPage.hidden = true;
                 getBus().pagesOnScreen.showVacancyPage.hidden = false;
             } else {
-                console.log(this.textInputs["job-title"]);
             }
         });
     }

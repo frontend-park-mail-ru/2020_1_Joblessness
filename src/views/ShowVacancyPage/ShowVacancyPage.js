@@ -13,7 +13,7 @@ class ShowVacancyPage extends Page {
 
     name(lang='en') {
         if (lang === 'en') {
-            return 'show-vacancy'
+            return 'vacancy-show'
         } else if (lang === 'ru') {
             return 'показать вакансию'
         }
