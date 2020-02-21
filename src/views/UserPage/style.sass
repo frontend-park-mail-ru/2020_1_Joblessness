@@ -1,2 +1,48 @@
+@import "../../CONSTANTS"
+.user-page
+  width: 100%
+  margin: auto
+.bio-section
+  display: flex
+  justify-content: center
+  align-items: center
+  flex: 1
+  height: 190px
 .user-avatar
   border-radius: 50%
+  width: 150px
+  height: 150px
+  display: flex
+  overflow: hidden
+  background-size: cover
+.user-name
+  padding: 20px
+  display: flex
+  .tag
+    color: $GRAY
+    background: none
+.user-summaries
+  display: flex
+  flex-direction: column
+.user-summary
+  background: $LIGHT_GRAY
+  //border-top: 1px solid $GRAY
+  border-bottom: 1px solid $LIGHT_GRAY_2
+  padding: 0 20px 0 20px
+  margin: 0 0 5px 0
+.show-more
+  width: 100%
+  background: $LIGHT_GRAY
+  border-bottom: 1px solid $LIGHT_GRAY_2
+  height: 10px
+  display: flex
+  justify-content: center
+  align-items: center
+  div
+    text-align: center
+    vertical-align: center
+    line-height: 20px
+    background: $LIGHT_GRAY_2
+    border-radius: 50%
+    width: 20px
+    height: 20px

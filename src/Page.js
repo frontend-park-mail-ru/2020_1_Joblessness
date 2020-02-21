@@ -51,6 +51,7 @@ export class Page {
      * Спрятать страницу
      */
     hidePage() {
+        this.getDomElem().style.display = "none"
         this.getDomElem().hidden = true;
     }
 
@@ -104,6 +105,7 @@ export class Page {
             )
         }
         dom.hidden = false;
+        dom.style.display = ""
     }
 
     requestRender() {

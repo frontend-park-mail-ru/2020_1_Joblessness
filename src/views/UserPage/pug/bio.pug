@@ -1,4 +1,6 @@
 include avarar
-mixin bio
-    div(class="user-bio")
-        +avatar(src=locals.user.avatar)
+include name
+mixin bio(user, events)
+    div(class="bio-section")
+        +avatar(src=user.avatar, id=events.changeAvatar.id)
+        +name(user.firstname, user.lastname, user.tag)

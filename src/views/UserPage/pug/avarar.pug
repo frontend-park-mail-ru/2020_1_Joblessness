@@ -1,3 +1,4 @@
 mixin avatar()
-    div(class="user-avatar")
-        img(src!=attributes.src)
+    div(class="user-avatar"
+        id=attributes.id
+        style="background-image: url("+attributes.src+")")
