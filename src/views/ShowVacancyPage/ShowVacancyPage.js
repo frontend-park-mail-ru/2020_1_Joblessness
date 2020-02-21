@@ -2,21 +2,25 @@
 
 import './style.css'
 import { Page } from '../../Page.js';
-import { VacancyForm } from './VacancyForms.js';
-import template from './vacancy-page.pug';
+import { ShowVacancyForm } from './ShowVacancyForms.js';
+import template from './show-vacancy-page.pug';
 
-class VacancyPage extends Page {
+// смотри пояснения к резюме
+class ShowVacancyPage extends Page {
     constructor(container) {
         super(container);
-        this.form = new VacancyForm();
     }
 
     name(lang='en') {
         if (lang === 'en') {
-            return 'vacancy'
+            return 'vacancy-show'
         } else if (lang === 'ru') {
-            return 'вакансии'
+            return 'показать вакансию'
         }
+    }
+
+    fillThePage() {
+
     }
 
     render() {
@@ -25,5 +29,5 @@ class VacancyPage extends Page {
 }
 
 export {
-    VacancyPage
+    ShowVacancyPage
 }

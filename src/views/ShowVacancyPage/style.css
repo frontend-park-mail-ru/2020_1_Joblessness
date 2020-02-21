@@ -1,4 +1,4 @@
-.vacancy-form {
+.vacancy-show {
     padding: 2%;
     background-color: gainsboro;
     border-radius: 15px;
@@ -7,7 +7,6 @@
 }
 
 .form__section-three-elements {
-
     display: grid;
     grid-template-columns: 1fr 2fr 1fr;
     grid-column-gap: 2%;

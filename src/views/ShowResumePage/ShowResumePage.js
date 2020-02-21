@@ -2,35 +2,26 @@
 
 import './style.css'
 import { Page } from '../../Page.js';
-import { ResumeForm } from './ResumeForm.js';
-import template from "./resume-page.pug";
+import { ShowResumeForm } from './ShowResumeForm.js';
+import template from "./show-resume-page.pug";
 
 // наследуемся от страницы
-class ResumePage extends Page {
+class ShowResumePage extends Page {
     constructor(container) {
         super(container);
         // this.settings = new FormSettings()
-        this.form = new ResumeForm()
+        // this.form = new ResumePage()
     }
 
     // просто возврат имени. Используется для определения, какую страницу отрисовывать
     // см showPage и page, там это используется
     name(lang='en') {
         if (lang === 'en') {
-            return 'resume'
+            return 'show-resume'
         } else if (lang === 'ru') {
-            return 'резюме'
+            return 'Показать резюме'
         }
     }
-
-    addEventsOn() {
-
-    }
-
-    // template() {
-    //     let vacancyForm = ``
-    //     return `<div>РЕЗЮМЕ</div>`;
-    // }
 
     render() {
         this.createDomBox(this.domName()).innerHTML = template();
@@ -38,5 +29,5 @@ class ResumePage extends Page {
 }
 
 export {
-    ResumePage
+    ShowResumePage
 }

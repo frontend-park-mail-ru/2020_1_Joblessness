@@ -1,57 +1,28 @@
-import { Header } from './views/Header';
-import { Footer } from './views/Footer';
-import { IndexPage } from './views/IndexPage';
-import { LoginPage } from './views/AuthPages/LoginPage';
-import { EmployeeSignupPage } from './views/AuthPages/EmployeeSignupPage';
-import { EmployerSignupPage } from './views/AuthPages/EmployerSignupPage';
+"use strict";
 
-const root = document.getElementById('root');
+import { Navigator } from './Navigator.js';
+import {Header} from "./views/Header";
+import {Footer} from "./views/Footer";
 
-const header = document.getElementById('header');
-const footer = document.getElementById('footer');
-
-const headerPage = new Header(header);
-headerPage.render();
-
-const footerPage = new Footer(footer);
-footerPage.render();
-
-const indexPage = new IndexPage(root);
-indexPage.render();
-
-function createIndex() {
-    const indexPage = new IndexPage(root);
-    indexPage.render();
-}
-
-function createLogin() {
-    const loginPage = new LoginPage(root);
-    loginPage.render();
-}
-
-function createEmployeeSignup() {
-    const employeeSignupPage = new EmployeeSignupPage(root);
-    employeeSignupPage.render();
-}
-
-function createEmployerSignup() {
-    const employerSignupPage = new EmployerSignupPage(root);
-    employerSignupPage.render();
-}
-
-const routes = {
-    index: createIndex,
-    login: createLogin,
-    employeeSignup: createEmployeeSignup,
-    employerSignup: createEmployerSignup,
-};
-
-document.body.addEventListener('click', (e) => {
-    const {target} = e;
-
-    if (target instanceof HTMLAnchorElement) {
-        e.preventDefault();
-
-        routes[target.dataset.page]();
+class Index {
+    /**
+     * Создание неизменяемых элементов, таких как хедер и футер
+     */
+    constructor() {
+        console.log("Application was created");
+        new Header('body');
+        let domBox = document.createElement("div");
+        domBox.className = 'root';
+        document.querySelector('body').appendChild(domBox);
+        new Navigator();
+        new Footer('body');
     }
+}
+
+window.addEventListener("load", function () {
+    new Index();
 });
+
+export {
+    Index,
+}
