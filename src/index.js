@@ -15,7 +15,6 @@ import {
     Header,
     NotFoundPage,
 } from './views';
-// import { withNetwork} from "./views/UserPage/UserPage";
 
 class App {
     /**
