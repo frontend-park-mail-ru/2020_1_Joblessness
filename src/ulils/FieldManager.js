@@ -6,7 +6,7 @@
 export class FieldManager {
     /**
      * Данный класс работает с оберткой withEvents
-     * @param {string[] | Object[]} fieldsToValidate - массив из строк и/или объектов
+     * @param {Object<string> | Object<Object>} fieldsToValidate - объект из строк и/или объектов
      * Если элемент - строка, то создается стандартный ивент,
      * привязанный к элементу, у которого id равно значению строки
      * @example
