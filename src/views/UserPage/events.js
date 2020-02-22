@@ -33,3 +33,17 @@ export const onUpdateAvatarRequest = (e, page) => {
         })
         .catch(console.log)
 };
+export const onSettingsChangeRequest = (event, that, field, callWarnings) => {
+    const {validateFirstName, validateLastName, validatePassword} = field;
+    if (validateFirstName && validateLastName && validatePassword) {
+        //@TODO send request on server
+        //Optimistic update
+        that.props.userData.user.firstname = validateFirstName;
+        that.props.userData.user.lastname = validateLastName;
+        //Rerender page with new Data
+        that.requestRender()
+    } else {
+        // Turn input fields red
+        callWarnings()
+    }
+};

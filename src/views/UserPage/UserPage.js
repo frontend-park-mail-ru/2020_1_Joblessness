@@ -3,10 +3,14 @@
 import './style.sass'
 import {Page} from '../../Page.js';
 import template from './pug/index.pug';
-import {uuid, withEvents, withNetwork, FieldManager} from '../../ulils';
+import {FieldManager, uuid, withEvents, withNetwork} from '../../ulils';
 import {isPassword, isSlavicName} from '../../ulils/validators';
 import defaultUser from './userDefault';
-import {onOpenSettingsRequest, onUpdateAvatarRequest} from './events';
+import {onOpenSettingsRequest, onSettingsChangeRequest, onUpdateAvatarRequest} from './events';
+
+// UserPage class itself returns only html elements
+// userData - user info loaded from server
+// events - events attached to page
 class UserPage extends Page {
 
     render() {
@@ -17,22 +21,9 @@ class UserPage extends Page {
     }
 }
 
+// preload data
 UserPage = withNetwork('/api/userPage', UserPage, 'userData', defaultUser);
 
-const onSettingsChangeRequest = (event, that, field, callWarnings) => {
-    const {validateFirstName, validateLastName, validatePassword} = field;
-    if (validateFirstName && validateLastName && validatePassword) {
-        //@TODO send request on server
-        //Optimistic update
-        that.props.userData.user.firstname = validateFirstName;
-        that.props.userData.user.lastname = validateLastName;
-        //Rerender page with new Data
-        that.requestRender()
-    } else {
-        // Turn input fields red
-        callWarnings()
-    }
-};
 
 const fieldManager = new FieldManager(
     {
@@ -65,10 +56,10 @@ const fieldManager = new FieldManager(
     },
     'applyChanges'
 );
+
 UserPage = withEvents(UserPage, 'events',
     {
         ...fieldManager.fieldsToValidate,
-        // applyChanges: fieldManager.acceptField,
         openSettings: {
             id: uuid(),
             eventName: 'click',
@@ -93,6 +84,7 @@ UserPage = withEvents(UserPage, 'events',
         },
     }
 );
+
 export {
     UserPage,
 }
