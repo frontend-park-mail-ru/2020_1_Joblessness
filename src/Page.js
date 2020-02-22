@@ -1,6 +1,8 @@
 "use strict";
-import { uuid } from './ulils'
+import {uuid} from './ulils'
+
 /**
+ * @class
  * Page - класс от которого наследуются страницы
  * описывает общие методы и реализует метод создания в DOM бокса под страницу
  * наверное можно заменить на миксин createDomBox
@@ -11,6 +13,7 @@ export class Page {
     componentDidMount = null;
     componentWillMount = null;
     static isPageComponent = true;
+
     /**
      * Геттер dom-элемента старицы
      * @returns {Element}
@@ -40,8 +43,7 @@ export class Page {
      * @returns {string}
      */
     domName() {
-        if( typeof this.name === "function" ) {
-            // console.error(`Names are not supported anymore!`);
+        if (typeof this.name === "function") {
             return `${this.name()}`;
         }
         return this.__name;
@@ -51,19 +53,19 @@ export class Page {
      * Спрятать страницу
      */
     hidePage() {
-        this.getDomElem().style.display = "none"
+        this.getDomElem().style.display = "none";
         this.getDomElem().hidden = true;
     }
 
     /**
      * Создать блок страницы и поместить его в контейнер
-     * @param domName - имя создаваемого блока
+     * @param domName - имя-класс создаваемого блока
      * @returns {HTMLDivElement}
      */
     createDomBox(domName) {
-        if( !this.domBox ) {
+        if (!this.domBox) {
             this.domBox = document.createElement("div");
-            this.domBox.className = domName;
+            this.domBox.className = domName; //@TODO should replace with id?
             // все страницы по умолчанию скрыты
             this.domBox.hidden = true;
             this.container.appendChild(this.domBox);
@@ -72,10 +74,20 @@ export class Page {
 
     }
 
-    render() {}
+    /**
+     * Возвращает строку с содержимым страницы.
+     * @WARNING не использовать напрямую
+     */
+    render() {
+        throw new Error(`
+        Method render must be overwritten!
+        `)
+    };
 
     /**
-     * Очистить страницу к начальному состоянию
+     * Очистить страницу к начальному состоянию.
+     * @deprecated
+     * Более не нужен, так как это выполняется при перерисовке страницы через requestRender()
      */
     clearPage() {
         console.error(`
@@ -99,7 +111,7 @@ export class Page {
      */
     showPage() {
         const dom = this.getDomElem();
-        if( !dom ) {
+        if (!dom) {
             throw new Error(`
             Render function must return string!`
             )
@@ -109,9 +121,15 @@ export class Page {
     }
 
     requestRender() {
+        if (typeof this.render !== "function") {
+            throw new Error(`
+            Method render is reserved by Page Component and
+            must be overwritten by function with return
+            value of type string!`);
+        }
         this.componentWillMount && this.componentWillMount();
         const toShow = this.render();
-        if( toShow ) {
+        if (toShow) {
             this.domBox.innerHTML = toShow;
         } else {
             console.error(`
