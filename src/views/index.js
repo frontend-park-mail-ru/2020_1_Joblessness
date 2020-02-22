@@ -7,7 +7,7 @@ import {EmployerSignupPage} from './AuthPages/EmployerSignupPage';
 import {EmployeeSignupPage} from './AuthPages/EmployeeSignupPage';
 import {Header} from './Header';
 import {Footer} from './Footer';
-import {IndexPage} from './indexPage';
+import {IndexPage} from './IndexPage';
 import {ShowResumePage} from './ShowResumePage';
 import {NotFoundPage} from './NotFoundPage';
 
