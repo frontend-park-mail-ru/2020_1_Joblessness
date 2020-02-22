@@ -1,6 +1,4 @@
-'use strict';
-
-import './style.sass'
+import './style.sass';
 import {Page} from '../../Page.js';
 import template from './pug/index.pug';
 import {FieldManager, uuid, withEvents, withNetwork} from '../../ulils';
@@ -20,9 +18,9 @@ class UserPage extends Page {
         });
     }
 }
-
+const prepareRequestBody = (page) => {}
 // preload data
-UserPage = withNetwork('/api/userPage', UserPage, 'userData', defaultUser);
+UserPage = withNetwork('/api/userPage', prepareRequestBody, UserPage, 'userData', defaultUser);
 
 
 const fieldManager = new FieldManager(

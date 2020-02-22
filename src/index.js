@@ -34,8 +34,8 @@ class App {
             userPage: 'UserPage',
             index: 'IndexPage',
             login: 'LoginPage',
-            employeeSignup: 'EmployeeSignupPage',
-            employerSignup: 'EmployerSignupPage',
+            'signup/employee': 'EmployeeSignupPage',
+            'signup/employer': 'EmployerSignupPage',
             '404' : 'NotFoundPage',
         };
 

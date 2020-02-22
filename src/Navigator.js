@@ -38,10 +38,10 @@ class Navigator {
                 Unable to get BUS. Report bug at https://github.com/frontend-park-mail-ru/2020_1_Joblessness`);
             }
             getBus().pagesOnScreen?.[this.routes[pageName]]?.requestRender();
-            window.history.replaceState({}, '', pageName);
+            window.history.replaceState({}, '', '/' + pageName);
         } else {
             getBus().pagesOnScreen?.NotFoundPage?.requestRender();
-            window.history.replaceState({}, '', "404");
+            window.history.replaceState({}, '', "/404");
             //@TODO Are there any cases when we should throw this error?
             // throw new Error(`
             // Unable to find ${pageName} in routes.

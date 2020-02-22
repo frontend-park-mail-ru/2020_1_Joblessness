@@ -3,7 +3,8 @@ export default {
         firstname: 'Имя',
         lastname: 'Фамилия',
         tag: '@username',
-        avatar: 'default-avatar.jpg'
+        avatar: 'default-avatar.jpg',
+        mobile: 89123456789,
     },
     summaries: [
         {
@@ -26,7 +27,20 @@ export default {
             },
             education: [
                 {
-                    degree: "Университет"
+                    degree: "Название университета",
+                    start : {
+                        year: 1900,
+                        month: 1,
+                        day: 1,
+                    },
+                    graduation : {
+                        year: 1900,
+                        month: 1,
+                        day: 1,
+                    },
+                    faculty: "Название Факультета",
+                    specialisation: "Название Специализации",
+
                 }
             ]
         }

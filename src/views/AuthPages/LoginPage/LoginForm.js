@@ -1,58 +1,110 @@
-import { Validator } from "../../../Validator";
-
-export class LoginForm {
-
-    constructor() {
-        this.textInputNames = ['password'];
-
-        this.emailOrPhoneNames = ['email-or-phone'];
-
-        this.addSubmit();
+import {Validator} from "../../../Validator";
+import {validateString} from "../../../ulils";
+//@TODO JsDoc
+//@TODO refactoring
+export const withForm = (WrappedComponent, inputFields, submitField, onValid, onInvalid = null, propName = "inputFields") => {
+    if (!WrappedComponent.isPageComponent) {
+        throw new Error(`
+        Expected Page component as WrappedComponent at withForm!
+        `)
+    }
+    if (typeof inputFields !== "object") {
+        throw new Error(`
+        Expected Object as inputFields at withForm!
+        `)
+    }
+    if (typeof submitField !== "object") {
+        throw new Error(`
+        Expected Object as submitField at withForm!
+        `)
+    }
+    if (onInvalid !== null && typeof onInvalid !== "function") {
+        throw new Error(`
+        Expected function as onInvalid property at withForm!
+        `)
+    }
+    if (typeof propName !== 'string') {
+        throw new Error(`
+        Expected string as propName at withForm!
+        `)
     }
 
-    validate() {
-        let valid = true;
+    return class extends WrappedComponent {
+        constructor(...args) {
+            super(...args);
+            this.props[propName] = {
+                ...inputFields,
+                submitField,
+            };
+            this.__expectedLength = Object
+                .keys(inputFields)
+                .map(k => inputFields[k].required)
+                .filter(e => e)
+                .length
+        }
 
-        this.textInputNames.forEach(inputName => {
-            const inputBlock = document.querySelector(`.login-form-${inputName}`);
+        componentDidMount = () => {
+            this.addSubmit()
+        };
+        showWarning = (inputBlock, warnMessage) => {
+            const warnBlock = inputBlock.lastElementChild;
+            warnBlock.textContent = warnMessage || 'Обязательное поле';
+            setTimeout(
+                () => {
+                    warnBlock.textContent = ''
+                }, 500
+            )
+        };
+        validateInputById = (key) => {
+            const {required, id, validator = () => true, warnMessage = ''} = inputFields[key];
+            const inputBlock = document.getElementById(id);
+            if (inputBlock === null) {
+                throw new Error(`
+                    Input block with id ${id} was not found!
+                    Check if it exists.
+                    `);
+            }
             const inputText = inputBlock.firstElementChild.value;
             const inputErrBlock = inputBlock.lastElementChild;
+            if (validateString(inputText)) {
+                //ski
+                if (!required && inputText === '')
+                    return false;
 
-            if (Validator.correctText(inputText) !== 'OK_MESSAGE') {
-                valid = false;
-
-                inputErrBlock.textContent = 'Обязательное поле'
+                if (!validator(inputText)) {
+                    this.showWarning(inputBlock, warnMessage);
+                    return false;
+                }
+                return {
+                    field: key,
+                    value: inputText,
+                }
             } else {
-                inputErrBlock.textContent = ''
+                throw new Error(`
+                    Input may only text. Recieved type ${typeof inputText}
+                    `);
             }
-        });
+        };
+        validate = () => {
+            const validInputs = Object.keys(inputFields).map(this.validateInputById).filter(e => e);
+            return validInputs.length >= this.__expectedLength ? validInputs : null;
 
-        this.emailOrPhoneNames.forEach(inputName => {
-            const inputBlock = document.querySelector(`.login-form-${inputName}`);
-            const inputText = inputBlock.firstElementChild.value;
-            const inputErrBlock = inputBlock.lastElementChild;
+        };
 
-            if (Validator.correctMail(inputText) === 'OK_MESSAGE' || Validator.correctTel(inputText) === 'OK_MESSAGE') {
-                inputErrBlock.textContent = ''
-            } else {
-                valid = false;
-
-                inputErrBlock.textContent = 'Обязательное поле'
-            }
-        });
-
-        return valid
+        addSubmit() {
+            document.getElementById(submitField.id).addEventListener('click', (e) => {
+                e.preventDefault();
+                const inputData = this.validate();
+                if (inputData) {
+                    const arg = inputData.reduce((acc, v) => {
+                        acc[v.field] = v.value;
+                        return acc;
+                    }, {});
+                    onValid && onValid(arg)
+                } else {
+                    onInvalid && onInvalid()
+                }
+            })
+        }
     }
-
-    addSubmit() {
-        document.querySelector('.login-form-submit').addEventListener('click', (e) => {
-            e.preventDefault();
-
-            if (this.validate()) {
-                console.log('valid')
-            } else {
-                console.log('invalid')
-            }
-        })
-    }
-}
+};

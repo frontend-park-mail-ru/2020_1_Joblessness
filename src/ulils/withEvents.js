@@ -28,7 +28,7 @@ export const withEvents = (WrappedComponent, propName, events) => {
     }
     return class extends WrappedComponent {
         constructor(...args) {
-            super(args);
+            super(...args);
             this.props[propName] = events;
         }
         // overwrites componentDidMountMethod!

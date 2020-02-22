@@ -1,0 +1,11 @@
+mixin signin-form
+    span.form-caption Вход в личный кабинет
+        +input-field(id=attributes.loginId placeholder="Email или телефон")
+        div.separator
+        +input-field(id=attributes.passwordId type="password" placeholder="Пароль")
+        input.form-submit(id=attributes.submitId type="submit" value="Войти в личный кабинет")
+
+mixin input-field
+    dev.form-input-wrapper(id=attributes.id)
+        input.form-input(type=attributes.type || "text" placeholder=attributes.placeholder)
+        div.form-input-err

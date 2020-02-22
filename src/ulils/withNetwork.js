@@ -7,10 +7,12 @@
  * @returns {Page} - Wrapped Component
  */
 import {validateString} from "./index";
+import {validateFunction} from "./validators";
 
-const withNetwork = (url, WrappedComponent, propName="fetched", defaultProps = {}) => {
+const withNetwork = (url, prepareRequestBody, WrappedComponent, propName="fetched", defaultProps = {}) => {
     validateString(url, "url", true);
     validateString(propName, "propName", true);
+    validateFunction(prepareRequestBody, prepareRequestBody, true);
     if(!WrappedComponent.isPageComponent) {
         throw new Error(`
         Expected Page Component as WrappedComponent
@@ -18,10 +20,10 @@ const withNetwork = (url, WrappedComponent, propName="fetched", defaultProps = {
     }
     return class extends WrappedComponent {
         constructor(...args) {
-            super(args);
+            super(...args);
             this.props[propName] = defaultProps;
 
-            fetch(url)
+            fetch(url, prepareRequestBody(this))
                 .then(r => r.json())
                 .then(json => {
                     this.props[propName] = json;
