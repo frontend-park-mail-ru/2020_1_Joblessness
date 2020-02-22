@@ -2,18 +2,20 @@ include bio
 include summaries
 mixin settingspage
     div(class="settings-holder")
-        p Имя:
+        h1 Имя:
         input(type="text" id=attributes.firstNameId)
-        p Фамилия:
+        h1 Фамилия:
         input(type="text" id=attributes.lastNameId)
-        p Новый пароль:
-        input(type="text" id=attributes.newPasswordId)
-        div Принять
+        h1 Новый пароль:
+        input(type="password" id=attributes.newPasswordId)
+        div(class="apply-changes" id=attributes.applyId)
+            h1 Принять
 +bio(locals.user, locals.events)
 +summaries(locals.summaries, locals.events)
 div(id="user-page-modal")
     +settingspage(
-        firstNameId=locals.events.validateFirstame.id
+        firstNameId=locals.events.validateFirstName.id
         lastNameId=locals.events.validateLastName.id
         newPasswordId=locals.events.validatePassword.id
+        applyId=locals.events.applyChanges.id
     )

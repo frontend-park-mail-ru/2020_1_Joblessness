@@ -43,7 +43,6 @@ class App {
         const nav = new Navigator({
             ResumePage,
             UserPage,
-            // UserPage : withNetwork(UserPage, "UserData"),
             VacancyPage,
             ShowVacancyPage,
             LoginPage,
@@ -55,7 +54,8 @@ class App {
         }, routes, '.root');
         const loc = window.location.pathname.replace('/', '');
         nav.showPage( loc ? loc : 'index') ;
-        new Footer('body');
+        const footer = new Footer('body');
+        footer.requestRender('body')
     }
 }
 new App();

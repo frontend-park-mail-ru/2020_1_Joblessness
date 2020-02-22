@@ -68,9 +68,28 @@
   backdrop-filter: blur(3px)
   .settings-holder
     width : 80%
-    height : 50%
+    min-height : 50%
     border-radius: 5px
     padding: 20px
     background: white
     margin: auto
     color: black
+    display: flex
+    justify-content: center
+    align-items: center
+    flex-direction: column
+  input
+    width: 60%
+    height: 48px
+    font-size: 36px
+    border-radius: 10px
+  .apply-changes
+    margin-top: 10px
+    background: $GRAY
+    border-radius: 5px
+    padding: 0 8px 0 8px
+    color: white
+.red-input
+  color : red
+  border-color: red
+  outline-color: red
