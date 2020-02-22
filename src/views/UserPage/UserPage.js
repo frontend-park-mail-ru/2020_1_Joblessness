@@ -62,13 +62,13 @@ const fieldManager = new FieldManager(
         id: uuid(),
         eventName: 'click',
         event: onSettingsChangeRequest
-    }
+    },
+    'applyChanges'
 );
-
 UserPage = withEvents(UserPage, 'events',
     {
         ...fieldManager.fieldsToValidate,
-        applyChanges: fieldManager.acceptField,
+        // applyChanges: fieldManager.acceptField,
         openSettings: {
             id: uuid(),
             eventName: 'click',
