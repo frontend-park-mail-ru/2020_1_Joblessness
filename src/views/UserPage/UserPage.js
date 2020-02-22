@@ -3,14 +3,10 @@
 import './style.sass'
 import {Page} from '../../Page.js';
 import template from './pug/index.pug';
-import {withNetwork} from './withNetwork';
-import {uuid} from '../../ulils';
-import {withEvents} from './withEvents';
-import {FieldManager} from './FieldManager';
+import {uuid, withEvents, withNetwork, FieldManager} from '../../ulils';
 import {isPassword, isSlavicName} from '../../ulils/validators';
 import defaultUser from './userDefault';
 import {onOpenSettingsRequest, onUpdateAvatarRequest} from './events';
-
 class UserPage extends Page {
 
     render() {

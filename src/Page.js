@@ -10,7 +10,7 @@ export class Page {
     props = {};
     componentDidMount = null;
     componentWillMount = null;
-
+    static isPageComponent = true;
     /**
      * Геттер dom-элемента старицы
      * @returns {Element}
