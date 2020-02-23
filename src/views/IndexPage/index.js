@@ -10,7 +10,7 @@ class IndexPage extends Page {
 }
 class StartPage extends Page {
     render() {
-        console.log(1)
+        console.log(1);
         return `Start Page`
     }
 }

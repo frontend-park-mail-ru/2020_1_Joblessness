@@ -1,6 +1,13 @@
 mixin input-field
-    dev.form-input-wrapper(id=attributes.id)
+    div.form-input-wrapper(id=attributes.id)
         input.form-input(type=attributes.type || "text" placeholder=attributes.placeholder value=attributes.value)
+        block
+        div.form-input-err
+
+mixin triple-field
+    section.section-three-elements
+        label.input-name #{attributes.placeholder}
+        block
         div.form-input-err
 
 mixin tos-agreement

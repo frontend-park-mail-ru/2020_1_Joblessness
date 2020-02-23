@@ -1,4 +1,4 @@
-import { validateString } from "./validators";
+import {validateString} from "./validators";
 
 export const withForm = (WrappedComponent, inputFields, submitField,
                          onValid, onInvalid = null, propName = "inputFields") => {
@@ -52,22 +52,20 @@ export const withForm = (WrappedComponent, inputFields, submitField,
         showWarning = (inputBlock, warnMessage) => {
             const warnBlock = inputBlock.lastElementChild;
             warnBlock.textContent = warnMessage || 'Обязательное поле';
-            setTimeout(
+            const tid = setTimeout(
                 () => {
                     warnBlock.textContent = ''
-                }, 500
-            )
+                }, 10000
+            );
+            const removeWarn = () => {
+                clearTimeout(tid);
+                warnBlock.textContent = '';
+                document.removeEventListener('click', removeWarn, true);
+            };
+            document.addEventListener('click', removeWarn, true)
         };
-        validateInputById = (key) => {
-            const {required, id, validator = (s) => s.length, warnMessage = ''} = inputFields[key];
-            const inputBlock = document.getElementById(id);
-            if (inputBlock === null) {
-                throw new Error(`
-                    Input block with id ${id} was not found!
-                    Check if it exists.
-                    `);
-            }
-            const inputText = inputBlock.firstElementChild.value;
+        validateInput = (inputBlock, required, validator, warnMessage, key) => {
+            const inputText = inputBlock.firstElementChild?.value;
             const inputErrBlock = inputBlock.lastElementChild;
             if (validateString(inputText)) {
                 //ski
@@ -84,14 +82,36 @@ export const withForm = (WrappedComponent, inputFields, submitField,
                 }
             } else {
                 throw new Error(`
-                    Input may only text. Recieved type ${typeof inputText}
+                    Input may contain only text. Recieved type ${typeof inputText}
                     `);
             }
         };
-        validate = () => {
-            const validInputs = Object.keys(inputFields).map(this.validateInputById).filter(e => e);
-            return validInputs.length >= this.__expectedLength ? validInputs : null;
 
+        validateInputById = (key) => {
+            const {required, id, validator = (s) => s.length, warnMessage = '', inputValidator} = inputFields[key];
+            const inputBlock = document.getElementById(id);
+            if (!inputValidator) {
+                if (inputBlock === null) {
+                    throw new Error(`
+                    Input block with id ${id} was not found at key ${key}!
+                    Check if it exists.
+                    `);
+                }
+                return this.validateInput(inputBlock, required, validator, warnMessage, key)
+            } else {
+                return inputValidator(inputBlock, required, validator, warnMessage, key)
+            }
+        };
+
+        validate = () => {
+            let requiredLength = 0;
+            const validInputs = Object.keys(inputFields).map(this.validateInputById).filter((e) => {
+                if (e && inputFields[e.field].required) {
+                    ++requiredLength;
+                }
+                return e;
+            });
+            return requiredLength >= this.__expectedLength ? validInputs : null;
         };
 
         addSubmit() {
@@ -109,5 +129,34 @@ export const withForm = (WrappedComponent, inputFields, submitField,
                 }
             })
         }
+    }
+};
+
+export const validateRadio = (radios, required, validator, warnMessage, key) => {
+    const v = document.querySelector(`input[name="${key}"]:checked`);
+    if (v && required && !v.value)
+        return false;
+    if (!v) {
+        return {
+            field: key,
+            value: null,
+        }
+    }
+    return {
+        field: key,
+        value: v.value,
+    }
+};
+
+export const validateCheckBox = (inputBlock, required, validator, warnMessage, key) => {
+    const checkbox = inputBlock;
+    if (required && !checkbox?.checked) {
+        console.log('req chek false');
+        return false;
+    }
+    console.log('chek true');
+    return {
+        field: key,
+        value: checkbox.checked
     }
 };

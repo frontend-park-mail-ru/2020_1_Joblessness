@@ -63,7 +63,6 @@ class Navigator {
     addNavEvents() {
         document.body.addEventListener('click', (e) => {
             const {target} = e;
-
             if (target instanceof HTMLAnchorElement) {
                 e.preventDefault();
                 this.showPage(target.dataset.page);

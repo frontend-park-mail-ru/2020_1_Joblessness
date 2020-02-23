@@ -1,11 +1,24 @@
 import { Page } from "../../Page";
-import template from './Header.pug'
+import authHeader from './pug/auth_header.pug'
+import unAuthHeader from './pug/unauth_header.pug'
 import './style.sass'
+import {withAuth} from "../../ulils";
 
-export class Header extends Page {
+class AuthHeader extends Page {
 
     render() {
-        return template();
+        return authHeader();
     }
 
+}
+class UnAuthHeader extends Page {
+    render() {
+        return unAuthHeader();
+    }
+}
+
+const Header = withAuth(UnAuthHeader, AuthHeader);
+
+export {
+    Header
 }

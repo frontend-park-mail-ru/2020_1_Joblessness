@@ -1,12 +1,11 @@
 .vacancy-form {
     padding: 2%;
-    background-color: gainsboro;
     border-radius: 15px;
     min-width: 600px;
     max-width: 1200px;
 }
 
-.form__section-three-elements {
+.section-three-elements {
 
     display: grid;
     grid-template-columns: 1fr 2fr 1fr;
@@ -15,6 +14,8 @@
 }
 
 .input-name {
+    display: flex;
+    align-items: center;
     text-align: left;
 }
 

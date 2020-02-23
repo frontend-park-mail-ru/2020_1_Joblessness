@@ -1,0 +1,9 @@
+mixin search-bar-link
+    div.header-link-wrapper
+        a.search-bar-link(href="#" data-page=attributes.href)
+            block
+
+mixin header-link
+    div.header-link-wrapper
+        a.header-link(href="#" data-page=attributes.href)
+            block
