@@ -21,9 +21,14 @@ class VacanciesListPage extends Page {
     }
   }
 
-  // template() {
-  //   return `<div>Список вакансий</div>`;
-  // }
+  SubmitVacancy() {
+    document.querySelector('.button-list').addEventListener('click', (e) => {
+      e.preventDefault();
+
+      //ajax
+
+    })
+  }
 
   // eslint-disable-next-line require-jsdoc
   render() {
