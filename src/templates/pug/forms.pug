@@ -1,4 +1,8 @@
 mixin input-field
     dev.form-input-wrapper(id=attributes.id)
-        input.form-input(type=attributes.type || "text" placeholder=attributes.placeholder)
+        input.form-input(type=attributes.type || "text" placeholder=attributes.placeholder value=attributes.value)
         div.form-input-err
+
+mixin tos-agreement
+    span.form-hint Нажимая #{attributes.buttonName || "Регистрация"},<br>Вы подтверждаете, что ознакомлены<br>и полностью согласны<br>c&nbsp;
+        a(href="#") условиями использования сайта.

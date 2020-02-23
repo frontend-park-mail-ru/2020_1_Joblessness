@@ -4,7 +4,7 @@ include signin-form
 div.main-container
     div.form-container
         form
-            +signin-form(loginId=locals.emailOrPhone.id passwordId=locals.password.id submitId=locals.submitField.id)
+            +signin-form(loginId=locals.userName.id passwordId=locals.password.id submitId=locals.submitField.id)
             div.remember-main
                 div
                     input(type="checkbox" id="remember")

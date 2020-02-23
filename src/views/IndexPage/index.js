@@ -1,17 +1,20 @@
 import { Page } from '../../Page';
 import template from './IndexPage.pug'
+import {withAuth} from "../../ulils";
 
-export class IndexPage extends Page {
-
-    name(lang='en') {
-        if (lang === 'en') {
-            return 'index'
-        } else if (lang === 'ru') {
-            return 'Стартовая'
-        }
-    }
+class IndexPage extends Page {
 
     render() {
         return template();
     }
+}
+class StartPage extends Page {
+    render() {
+        console.log(1)
+        return `Start Page`
+    }
+}
+IndexPage = withAuth(IndexPage, StartPage);
+export {
+    IndexPage
 }

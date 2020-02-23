@@ -1,27 +1,31 @@
-import {validateString} from '.'
-//@TODO JsDoc
-//@TODO refactoring
-export const withForm = (WrappedComponent, inputFields, submitField, onValid, onInvalid = null, propName = "inputFields") => {
+import { validateString } from "./validators";
+
+export const withForm = (WrappedComponent, inputFields, submitField,
+                         onValid, onInvalid = null, propName = "inputFields") => {
     if (!WrappedComponent.isPageComponent) {
         throw new Error(`
         Expected Page component as WrappedComponent at withForm!
         `)
     }
+
     if (typeof inputFields !== "object") {
         throw new Error(`
         Expected Object as inputFields at withForm!
         `)
     }
+
     if (typeof submitField !== "object") {
         throw new Error(`
         Expected Object as submitField at withForm!
         `)
     }
+
     if (onInvalid !== null && typeof onInvalid !== "function") {
         throw new Error(`
         Expected function as onInvalid property at withForm!
         `)
     }
+
     if (typeof propName !== 'string') {
         throw new Error(`
         Expected string as propName at withForm!

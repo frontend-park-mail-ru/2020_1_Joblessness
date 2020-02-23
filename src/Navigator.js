@@ -1,12 +1,9 @@
 "use strict";
 
-import {getBus} from "./ulils/getBus";
-import {validateString} from './ulils';
-import {hideAll} from "./ulils/showPage";
-
 /**
  * Navigator
  * @class
+ * @singleton
  * Осуществляет переключение между страницами
  * На вход получает объект routes,
  * в котором ключем является data-page элемента,
@@ -18,45 +15,47 @@ class Navigator {
      */
     constructor(routes = {}) {
         this.addNavEvents();
-        if( typeof routes !== 'object' || routes === null ) {
+        if (typeof routes !== 'object' || routes === null) {
             throw new Error(`
             Expected object as field routes. Received ${routes}!`)
         }
         this.routes = routes
     }
 
+    hideAll(container) {
+        if (!container) {
+            Object
+                .keys(this.routes)
+                .forEach(p => this.routes[p].hidePage())
+        } else {
+            Object
+                .keys(this.routes)
+                .filter(p => this.routes[p].container === container)
+                .forEach(p => this.routes[p].hidePage())
+        }
+    }
+
     /**
      * Open requested page in navigator
      * @public
-     * @param {string} pageName
+     * @param {string} path
      */
-    showPage = (pageName) => {
-        hideAll();
-        if (typeof this.routes[pageName] === 'string') {
-            if (!getBus || !getBus().pagesOnScreen) {
-                throw new Error(`
-                Unable to get BUS. Report bug at https://github.com/frontend-park-mail-ru/2020_1_Joblessness`);
+    showPage = (path) => {
+        //Hide all pages
+        //@TODO should hide only pages appended to specific container
+        if (this.routes[path]) {
+            const page = this.routes[path];
+            if (page) {
+                this.hideAll(page.container);
+                this.routes[path]?.requestRender();
+                window.history.replaceState({}, '', '/' + path);
             }
-            getBus().pagesOnScreen?.[this.routes[pageName]]?.requestRender();
-            window.history.replaceState({}, '', '/' + pageName);
         } else {
-            getBus().pagesOnScreen?.NotFoundPage?.requestRender();
+            this.hideAll();
+            this.routes['404']?.requestRender();
             window.history.replaceState({}, '', "/404");
-            //@TODO Are there any cases when we should throw this error?
-            // throw new Error(`
-            // Unable to find ${pageName} in routes.
-            // You must have forgotten to add it to Application Routes!`);
         }
     };
-
-    // имя класса самого элемента
-    /**
-     * @deprecated
-     * Navigator на данный момент не привязывается к элементу на странице.
-     */
-    // domName() {
-    //     return 'nav-bar'
-    // }
 
     /**
      * Обработка нажатий на все ссылки с целью перехода на другую страницу
@@ -71,36 +70,18 @@ class Navigator {
             }
         });
     }
+
+    addRoutes(newRoutes) {
+        //@TODO validation
+        this.routes = {
+            ...this.routes,
+            ...newRoutes,
+        }
+    }
 }
 
+Navigator = new Navigator();
 
-/**
- * Automatically adds pages to BUS and creates navigator with desired pages.
- * Useful shortcut.
- * @param {Page} pages - Page components to be shown
- * @param {Object} routes - Page components to be displayed at
- * @param {string} container - dom element id to insert elements
- * @returns {Navigator}
- */
-const withBus = (pages, routes, container) => {
-    //@TODO убрать привязку к BUS.
-    validateString(container, "container", true);
-    let pagesToShow = {};
-    for (let page of Object.keys(pages)) {
-        if(!pages[page].isPageComponent) {
-            throw new Error(`
-            Expected Page Component as value in route ${page}. Received ${pages[pages]}`)
-        }
-        pagesToShow[page] = new pages[page](container)
-    }
-
-    getBus().pagesOnScreen = {
-        ...getBus().pagesOnScreen,
-        ...pagesToShow,
-    };
-    return new Navigator(routes)
-};
 export {
-    withBus,
     Navigator,
 }

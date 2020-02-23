@@ -1,6 +1,5 @@
 import { Validator } from '../../Validator.js';
 import { RequestManager } from '../../RequestManager.js';
-import {getBus} from "../../ulils/getBus";
 
 const statusMessages = {
     OK_MESSAGE : 'Успешно',
@@ -66,8 +65,8 @@ class ResumeForm {
         document.querySelector('.resume-form__button-submit').addEventListener('click', () => {
             if ( this.validateForm() ) {
                 //TODO создание запроса
-                getBus().pagesOnScreen.resumePage.hidden = true;
-                getBus().pagesOnScreen.showResumePage.hidden = false;
+                // getBus().pagesOnScreen.resumePage.hidden = true;
+                // getBus().pagesOnScreen.showResumePage.hidden = false;
             } else {
                 //TODO вместо алерт добавить какое-то поле для ошибок
                 alert(this.validateForm());

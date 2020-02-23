@@ -1,7 +1,7 @@
 import './style.sass';
 import {Page} from '../../Page.js';
 import template from './pug/index.pug';
-import {FieldManager, uuid, withEvents, withNetwork} from '../../ulils';
+import {FieldManager, uuid, withAuth, withEvents, withNetwork} from '../../ulils';
 import {isPassword, isSlavicName} from '../../ulils/validators';
 import defaultUser from './userDefault';
 import {onOpenSettingsRequest, onSettingsChangeRequest, onUpdateAvatarRequest} from './events';
@@ -82,7 +82,12 @@ UserPage = withEvents(UserPage, 'events',
         },
     }
 );
-
+class NoAuthUserPage extends Page {
+    render() {
+        return `Авторизируйтесь пожалуйста`
+    }
+}
+UserPage = withAuth(NoAuthUserPage, UserPage);
 export {
     UserPage,
 }

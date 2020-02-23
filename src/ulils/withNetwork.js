@@ -6,8 +6,7 @@
  * @param {Object} defaultProps - default value - used before response is received (Optimistic update)
  * @returns {Page} - Wrapped Component
  */
-import {validateString} from "./index";
-import {validateFunction} from "./validators";
+import {validateFunction, validateString} from "./validators";
 
 const withNetwork = (url, prepareRequestBody, WrappedComponent, propName="fetched", defaultProps = {}) => {
     validateString(url, "url", true);
@@ -27,8 +26,9 @@ const withNetwork = (url, prepareRequestBody, WrappedComponent, propName="fetche
                 .then(r => r.json())
                 .then(json => {
                     this.props[propName] = json;
-                    if (!this.domBox.hidden)
+                    if (!this.isHidden()) {
                         this.requestRender()
+                    }
                 })
                 .catch(console.err);
         }

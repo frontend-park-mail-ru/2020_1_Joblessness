@@ -13,7 +13,6 @@ class EmployerSignupPage extends Page {
     };
 
     render() {
-        console.log(this.props.inputFields);
         return template(this.props.inputFields)
     }
 
@@ -32,7 +31,7 @@ EmployerSignupPage = withForm(EmployerSignupPage,
         city: {
             id: uuid(),
             required: true
-            
+
         },
         firstName: {
             id: uuid(),
@@ -53,6 +52,14 @@ EmployerSignupPage = withForm(EmployerSignupPage,
             id: uuid(),
             required: true,
             validator: isEmail,
+        },
+        companyType: {
+            id: uuid(),
+            required: true,
+        },
+        amountOfWorkers: {
+            id: uuid(),
+            required: true
         }
     },
     {
@@ -60,6 +67,9 @@ EmployerSignupPage = withForm(EmployerSignupPage,
     },
     (a, b) => {
         console.log(a, b)
+    },
+    (a, b) => {
+        console.log('fail')
     }
 );
 

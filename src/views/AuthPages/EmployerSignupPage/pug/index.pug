@@ -1,8 +1,5 @@
 include employer-signup-form
 
-mixin tos-agreement
-    span.form-hint Нажимая #{attributes.buttonName || "Регистрация"},<br>вы подтверждаете, что ознакомлены<br>и полностью согласны<br>c&nbsp;
-        a(href="#") условиями использования сайта.
 div.main-container
     div.form-container
         form
@@ -13,6 +10,8 @@ div.main-container
                 lastNameId=locals.lastName.id
                 emailId=locals.email.id
                 phoneId=locals.phone.id
+                companyTypeId=locals.companyType.id
+                amountOfWorkersId=locals.amountOfWorkers.id
             )
             +tos-agreement(buttonName="Зарегистрировать компанию")
             input.form-submit.employer-signup-form-submit(type="submit" value="Зарегистрировать компанию" id=locals.submitField.id)

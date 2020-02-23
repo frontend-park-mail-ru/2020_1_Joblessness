@@ -1,4 +1,3 @@
-import { getBus } from "../../ulils/getBus";
 import { Validator } from "../../Validator.js";
 import { RequestManager } from "../../RequestManager.js";
 
@@ -107,8 +106,8 @@ class VacancyForm {
         document.querySelector('.vacancy-page__button-submit').addEventListener('click', () => {
             if ( this.validateForm() ) {
                 //TODO создание запроса
-                getBus().pagesOnScreen.vacancyPage.hidePage();
-                getBus().pagesOnScreen.showVacancyPage.showPage();
+                // getBus().pagesOnScreen.vacancyPage.hidePage();
+                // getBus().pagesOnScreen.showVacancyPage.showPage();
             } else {
 
             }

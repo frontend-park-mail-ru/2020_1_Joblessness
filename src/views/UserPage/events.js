@@ -1,3 +1,5 @@
+import {fileToB64} from '../../ulils'
+
 export const onOpenSettingsRequest = (e, page) => {
     const settings = document.getElementById('user-page-modal');
     settings.style.display = 'flex';
@@ -9,30 +11,26 @@ export const onOpenSettingsRequest = (e, page) => {
     };
     settings.addEventListener('click', toggleWindow)
 };
-const fileToB64 = (file) => new Promise(
-    //https://gist.github.com/n1ru4l/dc99062577b746e0783410b1298ab897
-    (resolve, reject) => {
-        const fileReader = new FileReader();
-        fileReader.onload = () => {
-            resolve(fileReader.result);
-        };
-        fileReader.readAsDataURL(file);
-    }
-);
 export const onUpdateAvatarRequest = async (e, page) => {
     let formData = new FormData();
     formData.append('file', e.target.files[0]);
     formData.append('name', 'some value user types');
     formData.append('description', 'some value user types');
     const b64 = await fileToB64(e.target.files[0]);
-    let r = await fetch('/api/setAvatar', {
+    let r = await fetch('http://91.210.170.6:8000/api/users/1/avatar', {
         method: 'POST',
-        headers: {'Content-Type': 'multipart/form-data'},
+        headers: {
+            'Content-Type': 'application/json',
+            Origin: 'http://91.210.170.6:8000'
+        },
+        mode: 'no-cors',
         body: {
             avatar: b64
         }
-    });
-    r = await r.json();
+    }).catch(console.log);
+    r = await r.json()
+        .catch(console.log);
+
     //@TODO load from server
     page.props.userData.user.avatar = b64;
     console.log(page.props);

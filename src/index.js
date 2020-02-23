@@ -1,6 +1,6 @@
 "use strict";
 import "@babel/polyfill"
-import { withBus as Navigator } from './Navigator.js';
+import { Navigator } from './Navigator.js';
 import {
     ResumePage,
     UserPage,
@@ -29,30 +29,18 @@ class App {
         document.querySelector('body').appendChild(domBox);
 
         const routes = {
-            createResume: 'ResumePage',
-            createVacancy: 'VacancyPage',
-            userPage: 'UserPage',
-            index: 'IndexPage',
-            login: 'LoginPage',
-            'signup/employee': 'EmployeeSignupPage',
-            'signup/employer': 'EmployerSignupPage',
-            '404' : 'NotFoundPage',
+            createResume: new ResumePage('.root'),
+            createVacancy: new VacancyPage('.root'),
+            userPage: new UserPage('.root'),
+            index: new IndexPage('.root'),
+            login: new LoginPage('.root'),
+            'signup/employee': new EmployeeSignupPage('.root'),
+            'signup/employer': new EmployerSignupPage('.root'),
+            '404' : new NotFoundPage('.root'),
         };
-
-        const nav = new Navigator({
-            ResumePage,
-            UserPage,
-            VacancyPage,
-            ShowVacancyPage,
-            LoginPage,
-            EmployerSignupPage,
-            EmployeeSignupPage,
-            ShowResumePage,
-            IndexPage,
-            NotFoundPage,
-        }, routes, '.root');
+        Navigator.addRoutes(routes);
         const loc = window.location.pathname.replace('/', '');
-        nav.showPage( loc ? loc : 'index') ;
+        Navigator.showPage( loc ? loc : 'index') ;
         const footer = new Footer('body');
         footer.requestRender('body')
     }

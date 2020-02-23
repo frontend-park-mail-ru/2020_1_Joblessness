@@ -1,0 +1,11 @@
+mixin emplyee-signup-form
+    span.form-caption Регистрация соискателя
+        +input-field(placeholder="Имя пользователя" id=attributes.userNameId value="mikstime")
+        div.separator
+        +input-field(placeholder="Имя" id=attributes.firstNameId value="Михаил")
+        +input-field(placeholder="Фамилия" id=attributes.lastNameId value="Балицкий")
+        div.separator
+        div.section
+            +input-field(placeholder="Электронная почта" id=attributes.emailId value="9250499222@mail.ru")
+            +input-field(placeholder="Номер телефона" id=attributes.phoneId value="89250499222")
+            +input-field(placeholder="Пароль" type="password" id=attributes.passwordId value="Password1")
