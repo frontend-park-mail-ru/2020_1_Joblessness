@@ -13,7 +13,9 @@
   },
   "babel": {
     "presets": [
-      "@babel/preset-env"
+      ["@babel/preset-env", {
+        "useBuiltIns": "usage"
+      }]
     ],
     "plugins": [
       "@babel/plugin-proposal-class-properties"
@@ -37,8 +39,10 @@
   "homepage": "https://github.com/frontend-park-mail-ru/2020_1_Joblessness#readme",
   "dependencies": {
     "@babel/core": "^7.8.4",
+    "@babel/polyfill": "^7.8.3",
     "@babel/preset-stage-3": "^7.8.3",
     "babel-loader": "^8.0.6",
+    "babel-polyfill": "^6.26.0",
     "extract-loader": "^4.0.3",
     "handlebars-loader": "^1.7.1",
     "node-sass": "^4.13.1",

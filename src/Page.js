@@ -93,17 +93,6 @@ export class Page {
         console.error(`
         Method clearPage is not supported anymore!
         Page automatically clears on reload`)
-        // document.querySelectorAll(`.${this.domName()} .input`).forEach( element => {
-        //     if (element.type === 'text') {
-        //         element.value = '';
-        //     } else {
-        //         element.checked = false;
-        //     }
-        // });
-        //
-        // document.querySelectorAll(`.${this.domName()} .output`).forEach( element => {
-        //     element.innerHTML = '';
-        // });
     }
 
     /**
@@ -111,6 +100,7 @@ export class Page {
      */
     showPage() {
         const dom = this.getDomElem();
+
         if (!dom) {
             throw new Error(`
             Render function must return string!`
@@ -127,8 +117,10 @@ export class Page {
             must be overwritten by function with return
             value of type string!`);
         }
+
         this.componentWillMount && this.componentWillMount();
         const toShow = this.render();
+
         if (toShow) {
             this.domBox.innerHTML = toShow;
         } else {
@@ -136,6 +128,7 @@ export class Page {
             Render function must return string.
             Setting innerHTML is not supported anymore!`)
         }
+
         this.showPage();
         this.componentDidMount && this.componentDidMount();
     }

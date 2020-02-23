@@ -1,5 +1,5 @@
 import {Page} from '../../../Page'
-import {LoginForm, withForm} from './LoginForm';
+import {withForm} from '../../../ulils/withForm';
 import template from './pug/index.pug'
 import '../style.css'
 import {uuid} from "../../../ulils";

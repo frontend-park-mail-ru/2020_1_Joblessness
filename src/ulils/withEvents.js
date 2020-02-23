@@ -1,5 +1,4 @@
 import {Page} from "../Page";
-
 /**
  * Easy way to add events on page
  * @constructor
@@ -40,8 +39,8 @@ export const withEvents = (WrappedComponent, propName, events) => {
                     There are no dom element with id ${events[e].id}. 
                     You must have forgotten to add it to the page`)
                 }
-                dom.addEventListener(events[e].eventName, (ev) => {
-                    events[e].event(ev, this)
+                dom.addEventListener(events[e].eventName, async (ev) => {
+                    await events[e].event(ev, this)
                 })
             })
         }

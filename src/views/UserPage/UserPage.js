@@ -5,7 +5,6 @@ import {FieldManager, uuid, withEvents, withNetwork} from '../../ulils';
 import {isPassword, isSlavicName} from '../../ulils/validators';
 import defaultUser from './userDefault';
 import {onOpenSettingsRequest, onSettingsChangeRequest, onUpdateAvatarRequest} from './events';
-
 // UserPage class itself returns only html elements
 // userData - user info loaded from server
 // events - events attached to page
@@ -18,7 +17,8 @@ class UserPage extends Page {
         });
     }
 }
-const prepareRequestBody = (page) => {}
+
+const prepareRequestBody = (page) => ({});
 // preload data
 UserPage = withNetwork('/api/userPage', prepareRequestBody, UserPage, 'userData', defaultUser);
 

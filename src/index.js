@@ -1,5 +1,5 @@
 "use strict";
-
+import "@babel/polyfill"
 import { withBus as Navigator } from './Navigator.js';
 import {
     ResumePage,

@@ -1,5 +1,4 @@
-import {Validator} from "../../../Validator";
-import {validateString} from "../../../ulils";
+import {validateString} from '.'
 //@TODO JsDoc
 //@TODO refactoring
 export const withForm = (WrappedComponent, inputFields, submitField, onValid, onInvalid = null, propName = "inputFields") => {
@@ -56,7 +55,7 @@ export const withForm = (WrappedComponent, inputFields, submitField, onValid, on
             )
         };
         validateInputById = (key) => {
-            const {required, id, validator = () => true, warnMessage = ''} = inputFields[key];
+            const {required, id, validator = (s) => s.length, warnMessage = ''} = inputFields[key];
             const inputBlock = document.getElementById(id);
             if (inputBlock === null) {
                 throw new Error(`
