@@ -5,11 +5,54 @@
 }
 
 .one-vacancy {
-    border : 2px solid #F5A528;
+    padding: 20px;
+    border: 1px solid #e7e7e7;
+    position: relative;
+    margin-top: -1px;
+    font-size: 14px;
+    line-height: 1.571;
 }
 
 .button-list {
-    border: 1px solid gray;
-    text-align: center;
-    vertical-align: center;
+    display: inline;
+    outline: none;
+    border: 0;
+    text-decoration: none;
+    cursor: pointer;
+    padding: 0;
+    font-size: inherit;
+    background: transparent;
+    background-size: auto;
+    box-shadow: none;
+    transition: color .1s,opacity .1s;
+    color: #609fcf;
+}
+
+.left {
+    display: inline-block;
+    vertical-align: top;
+    padding: 0;
+    position: static;
+    margin-left: 0;
+    top: 0;
+    border: 0;
+    outline: none;
+    background: transparent;
+    width: 240px;
+}
+
+.list-of-vacancies {
+    padding: 0;
+    margin: 0;
+    border: 0;
+    outline: none;
+    background: transparent;
+    font-family: Arial,sans-serif;
+    font-size: 14px;
+    color: #333;
+    line-height: 21px;
+}
+
+h3 {
+    color: #333333;
 }
