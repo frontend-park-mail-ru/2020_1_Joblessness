@@ -15,7 +15,7 @@ import {
     Header,
     NotFoundPage,
 } from './views';
-
+window.isAuthenticated = true
 class App {
     /**
      * Создание неизменяемых элементов, таких как хедер и футер
