@@ -29,10 +29,10 @@ class App {
         document.querySelector('body').appendChild(domBox);
 
         const routes = {
-            createResume: new ResumePage('.root'),
-            createVacancy: new VacancyPage('.root'),
-            userPage: new UserPage('.root'),
-            index: new IndexPage('.root'),
+            'summaries/create': new ResumePage('.root'),
+            'vacancies/create': new VacancyPage('.root'),
+            'user': new UserPage('.root'),
+            'index': new IndexPage('.root'),
             login: new LoginPage('.root'),
             'signup/employee': new EmployeeSignupPage('.root'),
             'signup/employer': new EmployerSignupPage('.root'),

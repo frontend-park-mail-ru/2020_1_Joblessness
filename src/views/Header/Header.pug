@@ -1,3 +1,11 @@
+mixin search-bar-link
+    div.header-link-wrapper
+        a.search-bar-link(href="#" data-page=attributes.href)
+            block
+
+mixin header-link
+    div.header-link-wrapper.header-link-wrapper-first
+        a.header-link(href="#") Москва
 div.header-container
     div.header-group
         div.header-link-wrapper.header-link-wrapper-first
@@ -15,22 +23,11 @@ div.header-container
 div.header-container.search-bar-container
     div.header-group
         div.header-link-wrapper.header-link-wrapper-first
-            //a(href="#" data-page="index")
-            //    span.search-bar-logo
             a.search-bar-link(href="#" data-page="index") Главная
-        //div.header-link-wrapper
-        //    a.search-bar-link(href="#") Прайс-лист
-        //div.header-link-wrapper
-        //    a.search-bar-link(href="#") Помощь
     div.header-fill
     div.header-group
-        div.header-link-wrapper
-            a.search-bar-link(href="#") Поиск
-        div.header-link-wrapper
-            a.search-bar-link(href="#" data-page="createVacancy") Разместить вакансию
-        div.header-link-wrapper
-            a.search-bar-link(href="#" data-page="createResume") Создать резюме
-        div.header-link-wrapper
-            a.search-bar-link(href="#" data-page="userPage") Страница Пользователя
-        div.header-link-wrapper
-            a.search-bar-link(href="#" data-page="login") Войти
+        +search-bar-link Поиск
+        +search-bar-link(href="vacancies/create") Разместить вакансию
+        +search-bar-link(href="summaries/create") Создать резюме
+        +search-bar-link(href="user") Страница Пользователя
+        +search-bar-link(href="login") Войти

@@ -119,16 +119,16 @@ module.exports = {
     port: 8080,
     before: function (app, server, compiler) {
 
-      app.get('/userPage', function (req, res) {
+      app.get('/user', function (req, res) {
         res.sendfile(path.join(__dirname,'public/index.html'))
       });
-      app.get('/createVacancy', function (req, res) {
+      app.get('/vacancies/create', function (req, res) {
         res.sendfile(path.join(__dirname,'public/index.html'))
       });
       app.get('/index', function (req, res) {
         res.sendfile(path.join(__dirname,'public/index.html'))
       });
-      app.get('/createResume', function (req, res) {
+      app.get('/summaries/create', function (req, res) {
         res.sendfile(path.join(__dirname,'public/index.html'))
       });
       app.get('/login', function (req, res) {

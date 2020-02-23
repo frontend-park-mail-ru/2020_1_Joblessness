@@ -1,6 +1,6 @@
 import { Page } from "../../Page";
 import template from './Header.pug'
-import './style.css'
+import './style.sass'
 
 export class Header extends Page {
 
