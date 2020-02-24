@@ -1,0 +1,61 @@
+include ../../../templates/pug/forms
+.resume-form
+    header
+        h1 Ваше резюме
+    main
+        section.sub-form
+            h3 Контактные данные
+            +triple-field(placeholder="Имя")
+                +input-field(placeholder="Имя")
+            +triple-field(placeholder="Фамилия")
+                +input-field(placeholder="Имя")
+            +triple-field(placeholder="Мобильный телефон")
+                +input-field(placeholder="Мобильный телефон")
+            +triple-field(placeholder="Город проживания")
+                +input-field(placeholder="Город проживания")
+        section.sub-form
+            h3 Основная информация
+            +triple-field(placeholder="Дата рождения")
+                div.input-inner-col
+                    div.input-inner
+                        +input-field(placeholder="День")
+                        select.form-input-select
+                            - let month = ['Январь', 'Февраль','Март','Апрель',
+                            -              'Май','Июнь','Июль','Август','Сентября',
+                            -              'Октябрь','Ноябрь','Декабрь', ]
+                            each val, index in month
+                                option(value=`${index}`)=val
+                        +input-field(placeholder="Год")
+            +triple-field(placeholder="Пол")
+                div.input-inner
+                    label
+                    input.input-radio.vacancy-form__salary-type(
+                        name="gender"
+                        type="radio"
+                        value="male")
+                    |                              Мужской&nbsp;
+                    label
+                    input.input-radio.vacancy-form__salary-type(
+                        name="gender"
+                        type="radio"
+                        value="female")
+                    |                                    Женский
+            +triple-field(placeholder="Гражданство")
+                +input-field(placeholder="Гражданство")
+            +triple-field(placeholder="Опыт работты")
+                div.input-inner-col
+                    +input-field(placeholder="Опыт работы" tag="textarea" style="resize: vertical; min-height: 38px")
+                    .inputs-wrapper
+                        span
+                            | 80% работодателей не рассматривают кандидатов без опыта работы.
+                            | Рекомендуем указать опыт или объяснить почему его нет,
+                            | выбрав причину из предложенных или описав свою.
+        section.sub-form
+            h3 Образование
+            +triple-field(placeholder="Высшее образование")
+                +input-field(placeholder="Высшее образование получено в")
+            +triple-field(placeholder="Среднее образование")
+                +input-field(placeholder="Среднее образование получено в")
+    footer
+        br
+        button.button.resume-form__button-submit Сохранить и опубликовать

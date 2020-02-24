@@ -2,7 +2,7 @@
 import '@babel/polyfill';
 import {Navigator} from './Navigator.js';
 import {
-  ResumePage,
+  SummaryPage,
   UserPage,
   VacancyPage,
   LoginPage,
@@ -31,7 +31,7 @@ class App {
     document.querySelector('body').appendChild(domBox);
 
     const routes = {
-      'summaries/create': new ResumePage('.root'),
+      'summaries/create': new SummaryPage('.root'),
       'vacancies/create': new VacancyPage('.root'),
       'user': new UserPage('.root'),
       'index': new IndexPage('.root'),

@@ -2,12 +2,12 @@
 
 import './style.css';
 import {Page} from '../../Page.js';
-import template from './resume-page.pug';
+import template from './pug/index.pug';
 
 /**
  * summary creation forms
  */
-class ResumePage extends Page {
+class SummaryPage extends Page {
   /**
      * @return {string} - page to render
      */
@@ -17,5 +17,5 @@ class ResumePage extends Page {
 }
 
 export {
-  ResumePage,
+  SummaryPage,
 };

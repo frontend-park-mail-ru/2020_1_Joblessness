@@ -1,7 +1,7 @@
 .resume-form {
     padding: 2%;
-    background-color: gainsboro;
     border-radius: 15px;
+    margin: auto;
     min-width: 600px;
     max-width: 1200px;
 }
