@@ -1,6 +1,7 @@
 'use strict';
 
 import {Page} from '../../Page.js';
+import {RequestManager} from "../../RequestManager";
 import template from './VacanciesListPage.pug';
 import './style.css';
 
@@ -26,7 +27,11 @@ class VacanciesListPage extends Page {
       e.preventDefault();
 
       //ajax
-      console.log('pushed')
+      console.log('pushed');
+      RequestManager.requestGet(`/vacancies/${vacancy_id}`, function () {
+
+      });
+
     })
   }
 
