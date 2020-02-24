@@ -26,10 +26,21 @@ class UserPage extends Page {
 }
 
 const prepareRequestBody = (page) => ({});
+const parseResponse = async (r) => {
+  const j = await r.json();
+  console.log(j);
+  return {
+    user: {
+      firstname: j.user['first-name'],
+      lastname: j.user['last-name'],
+      avatar: j.user.avatar,
+    },
+    summaries: j.summaries,
+  };
+};
 // preload data
-UserPage = withNetwork('/api/userPage', prepareRequestBody,
-    UserPage, 'userData', defaultUser);
-
+UserPage = withNetwork('http://91.210.170.6:8000/api/user/2', prepareRequestBody,
+    UserPage, 'userData', defaultUser, parseResponse);
 
 const fieldManager = new FieldManager(
     {
@@ -90,15 +101,14 @@ UserPage = withEvents(UserPage, 'events',
       },
     },
 );
-
 /**
  * unauthorised user page
  */
 class NoAuthUserPage extends Page {
   /**
-     *
-     * @return {string} - page to render
-     */
+   *
+   * @return {string} - page to render
+   */
   render() {
     return `Авторизируйтесь пожалуйста`;
   }

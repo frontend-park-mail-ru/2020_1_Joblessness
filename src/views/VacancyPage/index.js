@@ -1,4 +1,4 @@
-import {VacancyPage} from './ShowVacancyPage';
+import {VacancyPage} from './VacancyPage';
 
 export {
   VacancyPage,

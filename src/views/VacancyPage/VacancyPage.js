@@ -1,6 +1,6 @@
-import './style.css';
+import './style.sass';
 import {Page} from '../../Page.js';
-import template from './show-vacancy-page.pug';
+import template from './pug/index.pug';
 import {withNetwork} from '../../ulils';
 
 /**

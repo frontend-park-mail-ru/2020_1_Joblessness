@@ -24,6 +24,7 @@ const withNetwork = (url, prepareRequestBody = () => ({}), WrappedComponent,
   }
   // eslint-disable-next-line
   return class extends WrappedComponent {
+    #wasSent;
     /**
        * fetch on creation. Draw after response.
        * @param {any}args - constructor args
@@ -31,15 +32,21 @@ const withNetwork = (url, prepareRequestBody = () => ({}), WrappedComponent,
     constructor(...args) {
       super(...args);
       this.props[propName] = defaultProps;
-
-      fetch(url, prepareRequestBody(this))
-          .then(async (r) => {
-            this.props[propName] = await parseResponse(r);
-            if (!this.isHidden()) {
-              this.requestRender();
-            }
-          })
-          .catch(console.err);
+      this.#wasSent = false;
+    }
+    componentWillMount = () => {
+      if (!this.#wasSent) {
+        fetch(url, prepareRequestBody(this))
+            .then(async (r) => {
+              const res = await parseResponse(r);
+              this.props[propName] = res;
+              if (!this.isHidden()) {
+                this.requestRender();
+              }
+              this.#wasSent = true;
+            })
+            .catch(console.err);
+      }
     }
   };
 };

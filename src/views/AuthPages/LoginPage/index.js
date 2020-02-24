@@ -4,6 +4,8 @@ import template from './pug/index.pug';
 import '../style.css';
 import {uuid} from '../../../ulils';
 import {isLogin, isPassword} from '../../../ulils/validators';
+import {requestSignIn} from '../../../ulils/postRequest';
+import {Navigator} from '../../../Navigator';
 
 /**
  * User login page
@@ -16,7 +18,6 @@ class LoginPage extends Page {
     return template(this.props.inputFields);
   }
 }
-
 const inputFields = {
   password: {
     id: uuid(),
@@ -35,36 +36,14 @@ LoginPage = withForm(LoginPage, inputFields, {
   id: uuid(),
 },
 (data) => {
-  // @TODO authorize
-  fetch(' http://91.210.170.6:8000/api/users/login',
-      {
-        credentials: 'include',
-        mode: 'no-cors',
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: {
-          login: data.userName,
-          password: data.password,
-        },
+  requestSignIn(data.userName, data.password)
+      .then( () => {
+        document.cookie = `reg_data=${data.userName}:::::${data.password}`;
+        window.isAuthenticated = true;
+        Navigator.updateAllPages();
+        Navigator.showPage('index');
       })
-      .then( (r) => r.text())
-      .then((r) => {
-        if (!r) {
-          alert('Неверный логин или пароль');
-        } else {
-          // function getCookie(name) {
-          //     var match = document.cookie
-          //     .match(new RegExp('(^| )' + name + '=([^;]+)'));
-          //     if (match) return match[2];
-          // }
-          // document.cookie = "session_id=SOMEVALUE"
-          // document.cookie = "session_i2d=SOMEVALUE"
-          console.log(document.cookie);
-        }
-      })
-      .catch(() => alert('Невозможно соединиться с сервером'));
+      .catch(() => alert('Неверные логин или пароль!'));
 },
 (fields) => {
   console.log('fail');

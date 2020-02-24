@@ -30,7 +30,7 @@ const isPhoneNumber = (phone) =>
 const isEmail = (email) =>
   /^[a-zA-Z0-9]+@[a-zA-Z0-9]+\.[a-zA-Z0-9]+$/.test(email);
 
-const isDomElement = (e) => e instanceof HTMLAnchorElement;
+const isDomElement = (e) => e instanceof HTMLElement;
 const hasId = (e) => e.id;
 const isBody = (e) => e === document.body;
 const isString = (s) => typeof s === 'string';

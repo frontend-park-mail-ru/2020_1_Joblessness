@@ -1,0 +1,15 @@
+mixin salary(income)
+    -const [from, to] = income.split('-')
+    p
+        |Зарабатная плата от&nbsp
+        b #{from}&nbsp
+        |до&nbsp
+        b #{to} руб
+mixin vacancy
+    div.vacancy-holder
+        h1 #{attributes.name}
+        p Описание: #{attributes.description}
+        p Требуемые навыки: #{attributes.skills}
+        +salary(attributes.salary)
+        p Адрес офиса: #{attributes.address}
+        p Телефон для связи: #{attributes.phone}

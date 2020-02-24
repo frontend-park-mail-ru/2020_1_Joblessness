@@ -8,7 +8,7 @@ import {isDomElement, isBody, isString, hasId} from './ulils/validators';
  */
 export class Page {
     static isPageComponent = true;
-    #dom;
+    // #dom;
     #pageId;
     #container;
     props = {};
@@ -29,7 +29,6 @@ export class Page {
         // get dom or use provided one
       const dom = isString(container) ? document.querySelector(container) :
                         isDomElement(container) ? container: null;
-
       if (!selector || !dom) {
         throw new Error(`
             Expected id or DOM element with id or body as container. 
@@ -39,8 +38,8 @@ export class Page {
 
       this.#container = {selector, dom};
       this.#pageId = uuid(); // to identify page
-      this.#dom = this._createDomBox(this.#pageId); // to store children
-      this.#dom.id = this.#pageId;
+      this.dom = this._createDomBox(this.#pageId); // to store children
+      this.dom.id = this.#pageId;
     }
 
     /**
@@ -56,15 +55,16 @@ export class Page {
      * @return {boolean}
      */
     isHidden() {
-      return this.#dom.hidden || getComputedStyle(this.#dom).display === 'none';
+      return this.dom.hidden || getComputedStyle(this.dom).display === 'none';
     }
 
     /**
      * Спрятать страницу
      */
     hidePage() {
-      this.#dom.style.display = 'none';
-      this.#dom.innerHTML = '';
+      this.dom.style.display = 'none';
+      this.dom.innerHTML = '';
+      this.dom.hidden = true;
     }
 
     /**
@@ -73,14 +73,14 @@ export class Page {
      * @return {HTMLDivElement}
      */
     _createDomBox(domName) {
-      if (!this.#dom) {
-        this.#dom = document.createElement('div');
-        this.#dom.id = domName; // @TODO should replace with id?
+      if (!this.dom) {
+        this.dom = document.createElement('div');
+        this.dom.id = domName; // @TODO should replace with id?
         // все страницы по умолчанию скрыты
-        this.#dom.hidden = true;
-        this.#container.dom.appendChild(this.#dom);
+        this.dom.hidden = true;
+        this.#container.dom.appendChild(this.dom);
       }
-      return this.#dom;
+      return this.dom;
     }
 
     /**
@@ -98,8 +98,8 @@ export class Page {
      */
     showPage() {
       if (this.isHidden()) {
-        this.#dom.hidden = false;
-        this.#dom.style.display = '';
+        this.dom.hidden = false;
+        this.dom.style.display = '';
       }
     }
 
@@ -119,7 +119,7 @@ export class Page {
       const toShow = this.render();
 
       if (toShow) {
-        this.#dom.innerHTML = toShow;
+        this.dom.innerHTML = toShow;
       } else {
         console.error(`
             Render function must return string.

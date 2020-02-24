@@ -1,4 +1,5 @@
 import {CreateVacancyPage} from './CreateVacancyPage';
+import {VacancyListPage} from './VacancyList';
 import {VacancyPage} from './VacancyPage';
 import {CreateSummaryPage} from './CreateSummaryPage';
 import {UserPage} from './UserPage';
@@ -12,6 +13,7 @@ import {ShowResumePage} from './ShowResumePage';
 import {NotFoundPage} from './NotFoundPage';
 
 export {
+  VacancyListPage,
   CreateVacancyPage,
   VacancyPage,
   CreateSummaryPage,
@@ -26,6 +28,7 @@ export {
   NotFoundPage,
 };
 export default {
+  VacancyListPage,
   CreateVacancyPage,
   VacancyPage,
   CreateSummaryPage,

@@ -30,7 +30,7 @@ class Navigator {
     if (!container) {
       Object
           .keys(this.routes)
-          .forEach((p) => this.routes[p].hidePage());
+          .forEach((p) => p[0]!== '_' && this.routes[p].hidePage());
     } else {
       Object
           .keys(this.routes)
@@ -73,6 +73,20 @@ class Navigator {
     });
   }
 
+  /**
+   *
+   */
+  updateAllPages() {
+    Object
+        .keys(this.routes)
+        .forEach( (k) => {
+          if (!this.routes[k].isHidden()) {
+            console.log(k);
+            this.routes[k].requestRender();
+          }
+          // !this.routes[k].isHidden() && this.routes[k].requestRender();
+        });
+  }
   /**
    * add new routes to this.routes
    * @param {object} newRoutes

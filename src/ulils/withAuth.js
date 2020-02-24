@@ -18,38 +18,46 @@ export const withAuth = (WcUnAuth, WcAuth) => {
         constructor(...args) {
           super(...args);
           // @TODO create on first render
-          this.#authenticated = new WcAuth(...args);
-          this.#unauthenticated = new WcUnAuth(...args);
+          this.#authenticated = new WcAuth(this.dom);
+          this.#authenticated.requestRender = () => {
+            this.requestRender();
+          };
+          this.#authenticated.isHidden = () => this.isHidden();
+
+          this.#unauthenticated = new WcUnAuth(this.dom);
+          this.#unauthenticated.requestRender = () => {
+            this.requestRender();
+          };
+          this.#unauthenticated.isHidden = () => this.isHidden();
         }
 
         /**
-       * check Page docs
-       * @return {*}
-       */
-        get container() {
-          return window.isAuthenticated ?
-                this.#authenticated.container :
-                this.#unauthenticated.container;
-        }
-        /**
-       * check Page docs
-       */
+     *
+     */
         requestRender() {
-          // super.requestRender();
-          if (window.isAuthenticated) {
-            this.#authenticated.props = {
-              ...this.#authenticated.props,
-              ...this.props,
-            };
-            this.#authenticated.requestRender();
-          } else {
-            this.#unauthenticated.props = {
-              ...this.#unauthenticated.props,
-              ...this.props,
-            };
-            // this.#unauthenticated.props = this.props;
-            this.#unauthenticated.requestRender();
+          const page = window.isAuthenticated ? this.#authenticated :
+            this.#unauthenticated;
+          if (typeof page.render !== 'function') {
+            throw new Error(`
+            Method render is reserved by Page Component and
+            must be overwritten by function with return
+            value of type string!`);
           }
+          page.componentWillMount &&
+            page.componentWillMount();
+          const toShow = page.render();
+
+          if (toShow) {
+            this.dom.innerHTML = toShow;
+          } else {
+            console.error(`
+            Render function must return string.
+            Setting innerHTML is not supported anymore!`);
+          }
+
+          this.showPage();
+          page.componentDidMount &&
+            page.componentDidMount();
         }
         /**
        * check Page docs
@@ -59,32 +67,6 @@ export const withAuth = (WcUnAuth, WcAuth) => {
           return window.isAuthenticated ?
                 this.#authenticated.render() :
                 this.#unauthenticated.render();
-        }
-        /**
-       * check Page docs
-       * @return {bool}
-       */
-        isHidden() {
-          return window.isAuthenticated ?
-                this.#authenticated.isHidden() :
-                this.#unauthenticated.isHidden();
-        }
-        /**
-       * check Page docs
-       */
-        hidePage() {
-          this.#authenticated.hidePage();
-          this.#unauthenticated.hidePage();
-        }
-        /**
-       * check Page docs
-       */
-        showPage() {
-          if (this.isHidden()) {
-                window.isAuthenticated ?
-                    this.#authenticated.showPage() :
-                    this.#unauthenticated.showPage();
-          }
         }
   };
 };
