@@ -1,5 +1,5 @@
-import { ShowResumePage } from "./ShowResumePage";
+import {ShowResumePage} from './ShowResumePage';
 
 export {
-    ShowResumePage,
-}
+  ShowResumePage,
+};

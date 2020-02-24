@@ -161,6 +161,17 @@ module.exports = {
         use: "pug-loader"
       },
       {
+        enforce: 'pre',
+        test: /\.js$/,
+        exclude: /node_modules/,
+        loader: 'eslint-loader',
+        options: {
+          fix: true,
+          failOnError: false,
+          failOnWarning: false,
+        },
+      },
+      {
         test : /\.js$/,
         exclude: /node_modules/,
         use: {

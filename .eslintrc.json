@@ -18,8 +18,13 @@
         "sourceType": "module"
     },
     "plugins": [
+        "pug",
+        "babel"
     ],
+    "parser": "babel-eslint",
     "rules": {
+        "no-invalid-this": 0,
+        "babel/no-invalid-this": 1
     },
     "settings": {
     }
