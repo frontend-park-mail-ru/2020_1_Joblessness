@@ -132,10 +132,10 @@ export const withForm = (WrappedComponent, inputFields, submitField,
                     `);
         }
         return this.validateInput(inputBlock, required,
-            validator, warnMessage, key);
+            validator, warnMessage, key, inputFields[key]);
       } else {
         return inputValidator(inputBlock, required,
-            validator, warnMessage, key);
+            validator, warnMessage, key, inputFields[key]);
       }
     };
 
@@ -186,13 +186,14 @@ export const withForm = (WrappedComponent, inputFields, submitField,
  * @param {function} validator
  * @param {string} warnMessage
  * @param {string} key
+ * @param {object} inputField
  * @return {{field: *, value: *}|boolean|{field: *, value: null}}
  */
 export const validateRadio = (radios, required,
-    validator, warnMessage, key) => {
+    validator, warnMessage, key, inputField) => {
   const v =
       document
-          .querySelector(`input[name="${key}"]:checked`);
+          .querySelector(`input[name="${inputField.id}"]:checked`);
   if (v && required && !v.value) {
     return false;
   }
@@ -227,3 +228,20 @@ export const validateCheckBox = (inputBlock, required,
     value: checkbox.checked,
   };
 };
+/**
+ *
+ * @param {HTMLAnchorElement} inputBlock - array
+ * @param {bool} required
+ * @param {function} validator
+ * @param {string} warnMessage
+ * @param {string} key
+ * @return {{field: string, value: string}}
+ */
+export const validateSelect = (inputBlock, required,
+    validator, warnMessage, key) => {
+  return {
+    field: key,
+    value: inputBlock.value,
+  };
+};
+

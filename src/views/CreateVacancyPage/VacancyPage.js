@@ -24,22 +24,27 @@ VacancyPage = withForm(VacancyPage,
       vacancyName: {
         id: uuid(),
         required: true,
+        warnMessage: 'Укажите название вакансии',
       },
       description: {
         id: uuid(),
         required: true,
+        warnMessage: 'Введите описание вакансии',
       },
       mainSkills: {
         id: uuid(),
         required: true,
+        warnMessage: 'Какие навыки требуются от соискателя?',
       },
       expectedIncomeFrom: {
         id: uuid(),
         required: true,
+        warnMessage: 'Минимальная зп',
       },
       expectedIncomeTo: {
         id: uuid(),
         required: true,
+        warnMessage: 'Максимальная зп',
       },
       expectedIncomeCurrency: {
         id: uuid(),
@@ -53,10 +58,12 @@ VacancyPage = withForm(VacancyPage,
       cityName: {
         id: uuid(),
         required: true,
+        warnMessage: 'Место работы',
       },
       officeAddress: {
         id: uuid(),
         required: true,
+        warnMessage: 'Адрес вашего офиса',
       },
       showAddress: {
         id: uuid(),
@@ -65,6 +72,7 @@ VacancyPage = withForm(VacancyPage,
       vacancyManager: {
         id: uuid(),
         required: true,
+        warnMessage: 'Контактное лицо',
       },
       notify: {
         id: uuid(),
@@ -78,15 +86,17 @@ VacancyPage = withForm(VacancyPage,
         id: uuid(),
         required: true,
         validator: isEmail,
+        warnMessage: 'Введите email для связи',
       },
       phone: {
         id: uuid(),
         required: true,
         validator: isPhoneNumber,
+        warnMessage: 'Телефон для связи',
       },
       comment: {
         id: uuid(),
-        required: true,
+        warnMessage: 'Прочая информация',
       },
     },
     {

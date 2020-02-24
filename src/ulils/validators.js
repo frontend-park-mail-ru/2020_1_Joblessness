@@ -16,6 +16,10 @@ const validateFunction = validateXXX(
     (s) => typeof s === 'function', 'Function');
 
 const isSlavicName = (name) => /[A-ЯЁ][а-яё]/.test(name);
+const isMonthId = (n) => 0 <= parseInt(n) && parseInt(n) <= 11;
+const isDay = (n) => 0 <= parseInt(n) && parseInt(n) <= 31;
+const isYear = (n) =>
+  1900 <= parseInt(n) && parseInt(n) <= new Date().getFullYear();
 // https://stackoverflow.com/questions/19605150/regex-for-password-mu
 // st-contain-at-least-eight-characters-at-least-one-number-a
 // Minimum eight characters, at least one letter and one number:
@@ -44,6 +48,9 @@ const isLogin = (login) =>
 export default {
   validateString,
   validateFunction,
+  isMonthId,
+  isYear,
+  isDay,
   isSlavicName,
   isPassword,
   isPhoneNumber,
@@ -59,6 +66,9 @@ export default {
 export {
   validateString,
   validateFunction,
+  isMonthId,
+  isYear,
+  isDay,
   isSlavicName,
   isPassword,
   isPhoneNumber,
