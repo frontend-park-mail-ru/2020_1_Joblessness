@@ -11,6 +11,7 @@ class VacanciesListPage extends Page {
   // eslint-disable-next-line require-jsdoc
   constructor(container) {
     super(container);
+    this.SubmitVacancy()
   }
 
   // eslint-disable-next-line require-jsdoc
