@@ -26,7 +26,7 @@ class VacanciesListPage extends Page {
       e.preventDefault();
 
       //ajax
-
+      console.log('pushed')
     })
   }
 

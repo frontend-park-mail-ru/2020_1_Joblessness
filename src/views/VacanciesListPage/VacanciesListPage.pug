@@ -4,34 +4,54 @@ main
     -
         var vacancys = [
             {
-                position: "Backend разработчик",
-                organization: "ООО Свекор",
+                id: 1,
+                name: "Backend разработчик",
+                //organization: "ООО Свекор",
                 discription: "Проектировать архитектуру и разрабатывать решения по отказоустойчивости.",
-                salary: "100 000-120 000 руб."
+                skills: "-",
+                salary: "100 000-120 000 руб.",
+                address: "-",
+                phoneNumber: "8 919 534 50 03",
             },
             {
-                position: "Ведущий Bitrix-разработчик (PHP Team Lead)",
-                organization: "DDPlanet",
+                id: 2,
+                name: "Ведущий Bitrix-разработчик (PHP Team Lead)",
+                //organization: "DDPlanet",
                 discription: "Руководство отделом разработки. Развитие инфраструктуры Bitrix-разработки.",
-                salary: "от 150 000 руб."
+                skills: "-",
+                salary: "от 150 000 руб.",
+                address: "-",
+                phoneNumber: "8 919 534 50 03",
             },
             {
-                position: "Разработчик C++/Qt & QML (middle+ / senior)",
-                organization: "CommuniGate Systems Russia",
+                id: 3,
+                name: "Разработчик C++/Qt & QML (middle+ / senior)",
+                //organization: "CommuniGate Systems Russia",
                 discription: "Занимался разработкой на Qt / С++ приложений с развитым GUI.",
-                salary: "70 000-110 000 руб."
+                skills: "-",
+                salary: "70 000-110 000 руб.",
+                address: "-",
+                phoneNumber: "8 919 534 50 03",
             },
             {
-                position: "Senior Full Stack Developer .NET",
-                organization: "CBS Interactive",
+                id: 4,
+                name: "Senior Full Stack Developer .NET",
+                //organization: "CBS Interactive",
                 discription: "Разрабатывать сложные многокомпонентные системы, входящие в продукты команды.",
-                salary: "до 250 000 руб."
+                skills: "-",
+                salary: "до 250 000 руб.",
+                address: "-",
+                phoneNumber: "8 919 534 50 03",
             },
             {
-                position: "Разработчик программного обеспечения",
-                organization: "ИНКОМ-НЕДВИЖИМОСТЬ",
+                id: 5,
+                name: "Разработчик программного обеспечения",
+                //organization: "ИНКОМ-НЕДВИЖИМОСТЬ",
                 discription: "Участие в проекте по внедрению внутренней корпоративной системы (риэлти.net).",
-                salary: "100 000-140 000 руб."
+                skills: "-",
+                salary: "100 000-140 000 руб.",
+                address: "-",
+                phoneNumber: "8 919 534 50 03",
             }
         ]
 
@@ -40,10 +60,13 @@ main
             ul
                 - for (var i = 0;i < vacancys.length; i++)
                     div.one-vacancy
-                        h3= vacancys[i].position
+                        h3= vacancys[i].name
+                        h4= vacancys[i].salary
                         li= vacancys[i].discription
-                        h5= vacancys[i].organization
-                        h3= vacancys[i].salary
+                        li= vacancys[i].skills
+                        //h5= vacancys[i].organization
+                        h5= vacancys[i].address
+                        h5=  vacancys[i].phoneNumber
                         input.button-list(type="submit" value="Просмотреть")
         else
             div.no-vacancies
