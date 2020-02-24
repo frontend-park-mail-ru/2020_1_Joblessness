@@ -17,7 +17,7 @@ export const onUpdateAvatarRequest = async (e, page) => {
   formData.append('name', 'some value user types');
   formData.append('description', 'some value user types');
   const b64 = await fileToB64(e.target.files[0]);
-  const r = await fetch('http://91.210.170.6:8000/api/users/1/avatar', {
+  fetch('http://91.210.170.6:8000/api/users/1/avatar', {
     method: 'POST',
     headers: {
       'Content-Type': 'application/json',
@@ -28,8 +28,8 @@ export const onUpdateAvatarRequest = async (e, page) => {
       avatar: b64,
     },
   }).catch(console.log);
-  await r.json()
-      .catch(console.log);
+  // const r = await r.json()
+  //     .catch(console.log);
 
   // @TODO load from server
   page.props.userData.user.avatar = b64;

@@ -7,11 +7,13 @@ import {validateFunction, validateString} from './validators';
  * @param {Page} WrappedComponent - Component to wrap
  * @param {string} propName - key to store response in Component.props[key]
  * @param {Object} defaultProps - default value -
+ * @param {function} parseResponse - prepare props from response
  * used before response is received (Optimistic update)
  * @return {Page} - Wrapped Component
  */
 const withNetwork = (url, prepareRequestBody = () => ({}), WrappedComponent,
-    propName='fetched', defaultProps = {}) => {
+    propName='fetched', defaultProps = {},
+    parseResponse = async (r) => r.json()) => {
   validateString(url, 'url', true);
   validateString(propName, 'propName', true);
   validateFunction(prepareRequestBody, prepareRequestBody, true);
@@ -20,6 +22,7 @@ const withNetwork = (url, prepareRequestBody = () => ({}), WrappedComponent,
         Expected Page Component as WrappedComponent
         `);
   }
+  // eslint-disable-next-line
   return class extends WrappedComponent {
     /**
        * fetch on creation. Draw after response.
@@ -30,9 +33,8 @@ const withNetwork = (url, prepareRequestBody = () => ({}), WrappedComponent,
       this.props[propName] = defaultProps;
 
       fetch(url, prepareRequestBody(this))
-          .then((r) => r.json())
-          .then((json) => {
-            this.props[propName] = json;
+          .then(async (r) => {
+            this.props[propName] = await parseResponse(r);
             if (!this.isHidden()) {
               this.requestRender();
             }

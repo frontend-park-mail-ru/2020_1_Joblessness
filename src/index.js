@@ -2,7 +2,8 @@
 import '@babel/polyfill';
 import {Navigator} from './Navigator.js';
 import {
-  SummaryPage,
+  CreateSummaryPage,
+  CreateVacancyPage,
   UserPage,
   VacancyPage,
   LoginPage,
@@ -24,27 +25,27 @@ class App {
      */
   constructor() {
     console.log('Application was created');
-    const header = new Header('body');
+    const header = new Header('#holder');
     header.requestRender();
     const domBox = document.createElement('div');
-    domBox.className = 'root';
-    document.querySelector('body').appendChild(domBox);
-
+    domBox.id = 'root';
+    document.querySelector('#holder').appendChild(domBox);
+    const footer = new Footer('#holder');
+    footer.requestRender('body');
     const routes = {
-      'summaries/create': new SummaryPage('.root'),
-      'vacancies/create': new VacancyPage('.root'),
-      'user': new UserPage('.root'),
-      'index': new IndexPage('.root'),
-      'login': new LoginPage('.root'),
-      'signup/employee': new EmployeeSignupPage('.root'),
-      'signup/employer': new EmployerSignupPage('.root'),
-      '404': new NotFoundPage('.root'),
+      'summaries/create': new CreateSummaryPage('#root'),
+      'vacancies/create': new CreateVacancyPage('#root'),
+      'vacancies': new VacancyPage('#root'),
+      'user': new UserPage('#root'),
+      'index': new IndexPage('#root'),
+      'login': new LoginPage('#root'),
+      'signup/employee': new EmployeeSignupPage('#root'),
+      'signup/employer': new EmployerSignupPage('#root'),
+      '404': new NotFoundPage('#root'),
     };
     Navigator.addRoutes(routes);
     const loc = window.location.pathname.replace('/', '');
     Navigator.showPage( loc ? loc : 'index');
-    const footer = new Footer('body');
-    footer.requestRender('body');
   }
 }
 new App();

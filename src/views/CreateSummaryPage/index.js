@@ -1,5 +1,5 @@
-import {SummaryPage} from './SummaryPage';
+import {CreateSummaryPage} from './CreateSummaryPage';
 
 export {
-  SummaryPage,
+  CreateSummaryPage,
 };

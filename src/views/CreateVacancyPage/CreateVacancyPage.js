@@ -10,7 +10,7 @@ import {isEmail, isPhoneNumber} from '../../ulils/validators';
 /**
  * Vacancy creation page
  */
-class VacancyPage extends Page {
+class CreateVacancyPage extends Page {
   /**
      * @return {string} - page to render
      */
@@ -19,7 +19,7 @@ class VacancyPage extends Page {
   }
 }
 
-VacancyPage = withForm(VacancyPage,
+CreateVacancyPage = withForm(CreateVacancyPage,
     {
       vacancyName: {
         id: uuid(),
@@ -121,5 +121,5 @@ VacancyPage = withForm(VacancyPage,
     },
 );
 export {
-  VacancyPage,
+  CreateVacancyPage,
 };

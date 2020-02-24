@@ -3,14 +3,12 @@ html, body {
 }
 
 .footer-container {
-    /*background-color: #333;*/
-    background-color: orange;
+    background-color: #333;
     color: #ccc;
+    height: 130px;
+    width: 100%;
+    bottom: 0;
     padding: 35px 20px;
-}
-
-.root {
-    min-height: 50%;
 }
 
 .footer-section {
@@ -74,11 +72,18 @@ html, body {
 li {
     list-style: none;
 }
-
-html, body {
-    height: 100%;
+#holder {
+    display: flex;
+    justify-content: stretch;
+    flex-direction: column;
+    min-height: 100%;
 }
-
 #root {
-    min-height: 50%;
+    display: flex;
+    flex: 1;
+    flex-direction: column;
+    justify-content: stretch;
+    width: 100%;
+    padding: 0;
+    margin: 0;
 }

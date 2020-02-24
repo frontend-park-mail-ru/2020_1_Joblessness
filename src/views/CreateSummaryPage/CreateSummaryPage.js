@@ -1,5 +1,3 @@
-'use strict';
-
 import './style.css';
 import {Page} from '../../Page.js';
 import template from './pug/index.pug';
@@ -11,7 +9,7 @@ import {isDay, isMonthId, isPhoneNumber,
 /**
  * summary creation forms
  */
-class SummaryPage extends Page {
+class CreateSummaryPage extends Page {
   /**
      * @return {string} - page to render
      */
@@ -20,7 +18,7 @@ class SummaryPage extends Page {
   }
 }
 
-SummaryPage = withForm(SummaryPage,
+CreateSummaryPage = withForm(CreateSummaryPage,
     {
       firstName: {
         id: uuid(),
@@ -101,5 +99,5 @@ SummaryPage = withForm(SummaryPage,
       });
     });
 export {
-  SummaryPage,
+  CreateSummaryPage,
 };

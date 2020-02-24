@@ -1,6 +1,6 @@
-import {VacancyPage} from './CreateVacancyPage';
-import {ShowVacancyPage} from './ShowVacancyPage';
-import {SummaryPage} from './CreateSummaryPage';
+import {CreateVacancyPage} from './CreateVacancyPage';
+import {VacancyPage} from './VacancyPage';
+import {CreateSummaryPage} from './CreateSummaryPage';
 import {UserPage} from './UserPage';
 import {LoginPage} from './AuthPages/LoginPage';
 import {EmployerSignupPage} from './AuthPages/EmployerSignupPage';
@@ -12,9 +12,9 @@ import {ShowResumePage} from './ShowResumePage';
 import {NotFoundPage} from './NotFoundPage';
 
 export {
+  CreateVacancyPage,
   VacancyPage,
-  ShowVacancyPage,
-  SummaryPage,
+  CreateSummaryPage,
   UserPage,
   LoginPage,
   EmployerSignupPage,
@@ -26,9 +26,9 @@ export {
   NotFoundPage,
 };
 export default {
+  CreateVacancyPage,
   VacancyPage,
-  ShowVacancyPage,
-  SummaryPage,
+  CreateSummaryPage,
   UserPage,
   LoginPage,
   EmployerSignupPage,
