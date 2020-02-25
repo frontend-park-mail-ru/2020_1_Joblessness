@@ -54,7 +54,7 @@ class App {
   }
 }
 const createApp = async () => {
-  // await loginOnReload();
+  await loginOnReload();
   new App();
 };
 createApp();

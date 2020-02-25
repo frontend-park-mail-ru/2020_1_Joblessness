@@ -12,8 +12,8 @@ export const onSignUp = (fields) => {
     'phone-number': fields.phone,
   }).then((r) => {
     if (r.status === 201) {
-      document.cookie =
-        `reg_data=${fields.userName}:::::${fields.password}`;
+      // document.cookie =
+      //   `reg_data=${fields.userName}:::::${fields.password}`;
       requestSignIn(fields.userName, fields.password)
           .then( async (sr) => {
             console.log(sr);

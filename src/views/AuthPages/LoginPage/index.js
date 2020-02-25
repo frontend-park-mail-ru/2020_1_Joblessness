@@ -39,7 +39,7 @@ LoginPage = withForm(LoginPage, inputFields, {
   requestSignIn(data.userName, data.password)
       .then( async (r) => {
         if (r.status === 201) {
-          document.cookie = `reg_data=${data.userName}:::::${data.password}`;
+          // document.cookie = `reg_data=${data.userName}:::::${data.password}`;
           window.isAuthenticated = true;
           try {
             const user = await r.json();
