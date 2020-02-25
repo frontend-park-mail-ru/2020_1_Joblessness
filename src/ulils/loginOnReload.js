@@ -1,7 +1,7 @@
 /**
  * Отправляет запрос на авторизацию при загрузке страницы
  */
-import {postRequest, requestSignIn} from './postRequest';
+import {postRequest} from './postRequest';
 import {Navigator} from '../Navigator';
 
 export const loginOnReload = () => {
@@ -24,13 +24,12 @@ export const loginOnReload = () => {
 
   });
 };
-}
 /**
  * // https://www.w3schools.com/js/js_cookies.asp
  * @param {string}cname - cookie name to get
  * @return {string} cookie value
  */
-const getCookie = (cname) => {
+export const getCookie = (cname) => {
   const name = cname + '=';
   const decodedCookie = decodeURIComponent(document.cookie);
   const ca = decodedCookie.split(';');
