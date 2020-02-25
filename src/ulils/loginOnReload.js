@@ -9,10 +9,12 @@ export const loginOnReload = () => {
   const [login, password] = c.split(':::::');
   if ( login && password ) {
     requestSignIn(login, password)
-        .then((r) => {
+        .then(async (r) => {
           console.log(r);
           if ( r.status === 201) {
             window.isAuthenticated = true;
+            const user = await r.json();
+            window.userId = user.id;
             Navigator.updateAllPages();
           } else {
             // delete cookie

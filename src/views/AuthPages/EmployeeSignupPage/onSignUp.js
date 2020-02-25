@@ -15,10 +15,13 @@ export const onSignUp = (fields) => {
       document.cookie =
         `reg_data=${fields.userName}:::::${fields.password}`;
       requestSignIn(fields.userName, fields.password)
-          .then( (sr) => {
+          .then( async (sr) => {
             console.log(sr);
             if ( sr.status === 201 ) {
               window.isAuthenticated = true;
+
+              const user = await sr.json();
+              window.userId = user.id;
               Navigator.updateAllPages();
               Navigator.showPage('index');
             } else {

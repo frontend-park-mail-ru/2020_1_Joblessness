@@ -20,6 +20,7 @@ class AuthHeader extends Page {
       document.cookie = 'reg_data=; ' +
         'expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;';
       window.isAuthenticated = false;
+      window.userId = '';
       Navigator.updateAllPages();
     };
   };
@@ -31,7 +32,9 @@ class AuthHeader extends Page {
    * @return {string} - page to render
    */
   render() {
-    return authHeader();
+    return authHeader({
+      userId: window.userId || '',
+    });
   }
 }
 

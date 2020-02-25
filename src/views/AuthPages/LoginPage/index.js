@@ -37,10 +37,12 @@ LoginPage = withForm(LoginPage, inputFields, {
 },
 (data) => {
   requestSignIn(data.userName, data.password)
-      .then( (r) => {
+      .then( async (r) => {
         if (r.status === 201) {
           document.cookie = `reg_data=${data.userName}:::::${data.password}`;
           window.isAuthenticated = true;
+          const user = await r.json();
+          window.userId = user.id;
           Navigator.updateAllPages();
           Navigator.showPage('index');
         } else {

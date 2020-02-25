@@ -34,7 +34,7 @@ class App {
       'summaries/create': new CreateSummaryPage('#root'),
       'vacancies/create': new CreateVacancyPage('#root'),
       'vacancies': new VacancyListPage('#root'),
-      'user': new UserPage('#root'),
+      'users/*': new UserPage('#root'),
       'index': new IndexPage('#root'),
       'login': new LoginPage('#root'),
       'signup/employee': new EmployeeSignupPage('#root'),

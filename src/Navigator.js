@@ -47,7 +47,13 @@ class Navigator {
   showPage(path) {
     // Hide all pages
     if (this.routes[path]) {
-      const page = this.routes[path];
+      const page = this.routes[path];// check static paths
+      const dynamicPaths =
+        Object
+            .keys(this.routes)
+            .filter((r) => r.indexOf('*') !== -1);
+      console.log(dynamicPaths);
+      console.log(new RegExp(dynamicPaths[0]).test(path));
       if (page) {
         this.hideAll(page.container);
                 this.routes[path]?.requestRender();

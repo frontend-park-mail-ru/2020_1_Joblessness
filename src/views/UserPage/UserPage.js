@@ -39,7 +39,8 @@ const parseResponse = async (r) => {
   };
 };
 // preload data
-UserPage = withNetwork('http://91.210.170.6:8000/api/user/2', prepareRequestBody,
+UserPage = withNetwork('https://91.210.170.6:8000/api/user/2',
+    prepareRequestBody,
     UserPage, 'userData', defaultUser, parseResponse);
 
 const fieldManager = new FieldManager(
