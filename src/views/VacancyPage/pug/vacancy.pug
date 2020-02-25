@@ -1,5 +1,7 @@
 mixin salary(income)
-    -const [from, to] = income.split('-')
+    - let from, to;
+    - if(typeof income === 'string') [from, to] = income.split('-')
+    - else [from, to] = ['', '']
     p
         |Зарабатная плата от&nbsp
         b #{from}&nbsp
@@ -13,3 +15,4 @@ mixin vacancy
         +salary(attributes.salary)
         p Адрес офиса: #{attributes.address}
         p Телефон для связи: #{attributes.phone}
+        block

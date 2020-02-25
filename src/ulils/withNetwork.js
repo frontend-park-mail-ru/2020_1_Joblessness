@@ -11,8 +11,8 @@ import {validateFunction, validateString} from './validators';
  * used before response is received (Optimistic update)
  * @return {Page} - Wrapped Component
  */
-const withNetwork = (url, prepareRequestBody = () => ({}), WrappedComponent,
-    propName='fetched', defaultProps = {},
+const withNetwork = (url, prepareRequestBody = async () => ({}),
+    WrappedComponent, propName='fetched', defaultProps = {},
     parseResponse = async (r) => r.json()) => {
   validateString(propName, 'propName', true);
   validateFunction(prepareRequestBody, prepareRequestBody, true);
@@ -35,8 +35,8 @@ const withNetwork = (url, prepareRequestBody = () => ({}), WrappedComponent,
     /**
      *
      */
-    componentWillMount = () => {
-      const realUrl = typeof url === 'function' ? url() : url;
+    componentWillMount = async () => {
+      const realUrl = typeof url === 'function' ? await url() : url;
       // console.log('will!!');
       fetch(realUrl, prepareRequestBody(this))
           .then(async (r) => {

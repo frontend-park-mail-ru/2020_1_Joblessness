@@ -9,4 +9,6 @@ div.vacancy-list
             address=vac.address
             phone=vac.phone
         )
+            a(href="#" data-page="vacancies/"+vac.id)
+                |Перейти на страницу вакансии
     div.show-more(id=locals.events.showMore.id)

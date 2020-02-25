@@ -58,22 +58,22 @@ class Navigator {
     if (this.#routes[path]) {
       const page = this.#routes[path];// check static paths
       if (page) {
+        window.history.replaceState({}, '', '/' + path);
         this.hideAll(page.container);
         this.#routes[path]?.requestRender();
-        window.history.replaceState({}, '', '/' + path);
       }
     } else {
       for (const r of Object.keys(this.#dynamicRoutes)) {
         if (new RegExp(r).test(path)) {
+          window.history.replaceState({}, '', '/' + path);
           this.hideAll(this.#dynamicRoutes[r].container);
           this.#dynamicRoutes[r]?.requestRender();
-          window.history.replaceState({}, '', '/' + path);
           return;
         }
       }
+      window.history.replaceState({}, '', '/404');
       this.hideAll();
       this.#routes['404']?.requestRender();
-      window.history.replaceState({}, '', '/404');
     }
   };
 
@@ -102,7 +102,6 @@ class Navigator {
         .keys(allRoutes)
         .forEach((k) => {
           if (!allRoutes[k].isHidden()) {
-            console.log(k);
             allRoutes[k].requestRender();
           }
         // !this.routes[k].isHidden() && this.routes[k].requestRender();

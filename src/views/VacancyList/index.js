@@ -15,32 +15,39 @@ class VacancyListPage extends Page {
     return template(this.props);
   }
 }
-const defaultVacancy = {
-  name: 'Имя вакансии',
-  description: 'Описание вакансии',
-  skills: 'Требуемые навыки',
-  salary: 'от-до',
-  city: 'Город',
-  address: 'Адрес офиса',
-  email: 'email@company.com',
-  phone_number: '89123456789',
-  comment: 'Дополнительная информация',
-};
+// const defaultVacancy = {
+//   name: 'Имя вакансии',
+//   description: 'Описание вакансии',
+//   skills: 'Требуемые навыки',
+//   salary: 'от-до',
+//   city: 'Город',
+//   address: 'Адрес офиса',
+//   email: 'email@company.com',
+//   phone_number: '89123456789',
+//   comment: 'Дополнительная информация',
+// };
 const prepareRequestBody = () => GET_HEADERS;
 const parseResponse = async (r) => {
-  const vacancies = await r.json();
-  return vacancies.map( (v) => ({
-    name: v.name,
-    description: v.description,
-    skills: v.skills,
-    salary: v.salary,
-    address: v.address,
-    phone: v['phone-number'],
-  }));
+  try {
+    const vacancies = await r.json();
+    return vacancies.map((v) => ({
+      name: v.name,
+      description: v.description,
+      skills: v.skills,
+      salary: v.salary,
+      address: v.address,
+      phone: v['phone-number'],
+      id: v.id,
+    }));
+  } catch (e) {
+    console.log(e);
+    alert('Ошибка при обращении к списку доступных вакансий');
+    return [];
+  }
 };
 // preload data
 VacancyListPage = withNetwork('http://91.210.170.6:8000/api/vacancies', prepareRequestBody,
-    VacancyListPage, 'vacancies', [defaultVacancy],
+    VacancyListPage, 'vacancies', [],
     parseResponse);
 
 VacancyListPage = withEvents(VacancyListPage, 'events',
@@ -52,7 +59,6 @@ VacancyListPage = withEvents(VacancyListPage, 'events',
         // @TODO load more vacancies from server
           b.props.vacancies = [
             ...b.props.vacancies,
-            defaultVacancy,
           ];
           b.requestRender();
         },

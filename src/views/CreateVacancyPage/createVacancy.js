@@ -1,4 +1,5 @@
 import {postRequest} from '../../ulils/postRequest';
+import {Navigator} from '../../Navigator';
 
 export const createVacancy = (v) => {
   postRequest('/api/vacancies', {
@@ -12,10 +13,8 @@ export const createVacancy = (v) => {
       .then(async (r) => {
         if ( r.status === 201 ) {
           try {
-            alert('Резюме успешно создано');
             const j = await r.json();
-            console.log(j);
-            Navigator.showPage(`/vacancy/${j.id}`);
+            Navigator.showPage(`vacancies/${j.id}`);
           } catch (e) {
             console.log(e);
             alert('Что-то пошло не так');
