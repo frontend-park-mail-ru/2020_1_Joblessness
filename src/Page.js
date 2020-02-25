@@ -99,9 +99,7 @@ export class Page {
     showPage() {
       const toShow = this.render();
 
-      if (toShow) {
-        this.dom.innerHTML = toShow;
-      } else {
+      if (!toShow) {
         console.error(`
               Render function must return string.
               Setting innerHTML is not supported anymore!`);

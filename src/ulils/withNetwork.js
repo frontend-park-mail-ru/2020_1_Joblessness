@@ -45,6 +45,7 @@ const withNetwork = (url, prepareRequestBody = async () => ({}),
               this.props[propName] = res;
               if (!this.isHidden()) {
                 super.showPage();
+                this.componentDidMount && this.componentDidMount();
               }
             }
           })

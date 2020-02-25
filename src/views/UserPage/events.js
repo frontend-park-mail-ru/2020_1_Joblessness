@@ -41,7 +41,8 @@ export const onSettingsChangeRequest = (event, that, field, callWarnings) => {
     that.props.userData.user.firstname = validateFirstName;
     that.props.userData.user.lastname = validateLastName;
     // Rerender page with new Data
-    that.requestRender();
+    that.showPage();
+    that.componentDidMount();
   } else {
     // Turn input fields red
     callWarnings();
