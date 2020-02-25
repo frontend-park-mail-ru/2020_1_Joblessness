@@ -13,7 +13,8 @@ import {
   Footer,
   VacancyPage,
   Header,
-  NotFoundPage, VacancyListPage,
+  NotFoundPage,
+  VacancyListPage, SummaryPage,
 } from './views';
 
 /**
@@ -36,6 +37,7 @@ class App {
       'vacancies': new VacancyListPage('#root'),
       'users/*': new UserPage('#root'),
       'vacancies/*': new VacancyPage('#root'),
+      'summaries/*': new SummaryPage('#root'),
       'index': new IndexPage('#root'),
       'login': new LoginPage('#root'),
       'signup/employee': new EmployeeSignupPage('#root'),

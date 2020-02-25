@@ -48,6 +48,9 @@ module.exports = {
       app.get('/vacancies/*', function (req, res) {
         res.sendFile(path.join(__dirname,'public/index.html'))
       });
+      app.get('/summaries/*', function (req, res) {
+        res.sendFile(path.join(__dirname,'public/index.html'))
+      });
       app.get('/404', function (req, res) {
         res.sendFile(path.join(__dirname,'public/index.html'))
       });

@@ -15,17 +15,7 @@ class VacancyListPage extends Page {
     return template(this.props);
   }
 }
-// const defaultVacancy = {
-//   name: 'Имя вакансии',
-//   description: 'Описание вакансии',
-//   skills: 'Требуемые навыки',
-//   salary: 'от-до',
-//   city: 'Город',
-//   address: 'Адрес офиса',
-//   email: 'email@company.com',
-//   phone_number: '89123456789',
-//   comment: 'Дополнительная информация',
-// };
+
 const prepareRequestBody = () => GET_HEADERS;
 const parseResponse = async (r) => {
   try {

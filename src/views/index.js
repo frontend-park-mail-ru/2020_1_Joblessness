@@ -9,7 +9,7 @@ import {EmployeeSignupPage} from './AuthPages/EmployeeSignupPage';
 import {Header} from './Header';
 import {Footer} from './Footer';
 import {IndexPage} from './IndexPage';
-import {ShowResumePage} from './ShowResumePage';
+import {SummaryPage} from './SummaryPage';
 import {NotFoundPage} from './NotFoundPage';
 
 export {
@@ -24,7 +24,7 @@ export {
   Header,
   Footer,
   IndexPage,
-  ShowResumePage,
+  SummaryPage,
   NotFoundPage,
 };
 export default {
@@ -39,6 +39,6 @@ export default {
   Header,
   Footer,
   IndexPage,
-  ShowResumePage,
+  SummaryPage,
   NotFoundPage,
 };

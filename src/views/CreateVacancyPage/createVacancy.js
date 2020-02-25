@@ -9,19 +9,17 @@ export const createVacancy = (v) => {
     'salary': `${v.expectedIncomeFrom}-${v.expectedIncomeTo}`,
     'address': v.officeAddress,
     'phone-number': v.phone,
-  })
-      .then(async (r) => {
-        if ( r.status === 201 ) {
-          try {
-            const j = await r.json();
-            Navigator.showPage(`vacancies/${j.id}`);
-          } catch (e) {
-            console.log(e);
-            alert('Что-то пошло не так');
-          }
-        } else {
-          alert('Что-то пошло не так');
-        }
-      })
-      .catch(() => alert('Невозможно создать резюме'));
+  }).then(async (r) => {
+    if ( r.status === 201 ) {
+      try {
+        const j = await r.json();
+        Navigator.showPage(`vacancies/${j.id}`);
+      } catch (e) {
+        console.log(e);
+        alert('Что-то пошло не так');
+      }
+    } else {
+      alert('Что-то пошло не так');
+    }
+  }).catch(() => alert('Невозможно создать вакансию'));
 };
