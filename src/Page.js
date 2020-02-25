@@ -97,10 +97,18 @@ export class Page {
      * Показать страницу
      */
     showPage() {
-      if (this.isHidden()) {
-        this.dom.hidden = false;
-        this.dom.style.display = '';
+      const toShow = this.render();
+
+      if (toShow) {
+        this.dom.innerHTML = toShow;
+      } else {
+        console.error(`
+              Render function must return string.
+              Setting innerHTML is not supported anymore!`);
       }
+      this.dom.hidden = false;
+      this.dom.style.display = '';
+      this.dom.innerHTML = toShow;
     }
 
     /**
@@ -117,16 +125,6 @@ export class Page {
 
 
       this.componentWillMount && this.componentWillMount();
-      const toShow = this.render();
-
-      if (toShow) {
-        this.dom.innerHTML = toShow;
-      } else {
-        console.error(`
-            Render function must return string.
-            Setting innerHTML is not supported anymore!`);
-      }
-
       this.showPage();
       this.componentDidMount && this.componentDidMount();
     }

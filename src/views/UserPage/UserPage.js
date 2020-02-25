@@ -1,13 +1,14 @@
 import './style.sass';
 import {Page} from '../../Page.js';
 import template from './pug/index.pug';
-import {FieldManager, uuid, withAuth,
+import {FieldManager, uuid,
   withEvents, withNetwork} from '../../ulils';
 import {isPassword, isSlavicName} from '../../ulils/validators';
 import defaultUser from './userDefault';
 import {onOpenSettingsRequest, onSettingsChangeRequest,
   onUpdateAvatarRequest} from './events';
 import {GET_HEADERS} from '../../ulils/postRequest';
+import {Navigator} from '../../Navigator';
 
 /**
  * UserPage class itself returns only html elements
@@ -28,6 +29,10 @@ class UserPage extends Page {
 
 const prepareRequestBody = (page) => (GET_HEADERS);
 const parseResponse = async (r) => {
+  if (r.status === 404) {
+    Navigator.showPage('404');
+    return null;
+  }
   const j = await r.json();
   console.log(j);
   return {
@@ -40,8 +45,17 @@ const parseResponse = async (r) => {
   };
 };
 // preload data
+const getUserId = () => {
+  const name = location.pathname;
+  console.log(name);
+  if (name.startsWith('/users/')) {
+    return name.replace('/users/', '') ||
+      window.userId || 1;
+  }
+  return window.userId || 1;
+};
 UserPage = withNetwork(
-    () => (`http://91.210.170.6:8000/api/user/${window.userId || ''}`),
+    () => (`http://91.210.170.6:8000/api/user/${getUserId()}`),
     prepareRequestBody,
     UserPage, 'userData', defaultUser, parseResponse);
 
@@ -107,16 +121,16 @@ UserPage = withEvents(UserPage, 'events',
 /**
  * unauthorised user page
  */
-class NoAuthUserPage extends Page {
-  /**
-   *
-   * @return {string} - page to render
-   */
-  render() {
-    return `Авторизируйтесь пожалуйста`;
-  }
-}
-UserPage = withAuth(NoAuthUserPage, UserPage);
+// class NoAuthUserPage extends Page {
+//   /**
+//    *
+//    * @return {string} - page to render
+//    */
+//   render() {
+//     return `Авторизируйтесь пожалуйста`;
+//   }
+// }
+// UserPage = withAuth(NoAuthUserPage, UserPage);
 export {
   UserPage,
 };

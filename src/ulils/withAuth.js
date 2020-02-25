@@ -28,6 +28,7 @@ export const withAuth = (WcUnAuth, WcAuth) => {
       this.#unauthenticated.requestRender = () => {
         this.requestRender();
       };
+      this.#authenticated.props.requestRender = this.requestRender;
       this.#unauthenticated.isHidden = () => this.isHidden();
     }
 

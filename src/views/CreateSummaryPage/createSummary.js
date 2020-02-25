@@ -1,7 +1,7 @@
 import {postRequest} from '../../ulils/postRequest';
 
 export const createSummary = (s) => {
-  postRequest(`/api/summaries/`, {
+  postRequest(`/api/summaries`, {
     'first-name': s.firstName,
     'last-name': s.lastName,
     'phone-number': s.phone,

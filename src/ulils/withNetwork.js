@@ -37,15 +37,15 @@ const withNetwork = (url, prepareRequestBody = () => ({}), WrappedComponent,
      */
     componentWillMount = () => {
       const realUrl = typeof url === 'function' ? url() : url;
+      // console.log('will!!');
       fetch(realUrl, prepareRequestBody(this))
           .then(async (r) => {
             const res = await parseResponse(r);
-            this.props[propName] = res;
-            if (!this.isHidden()) {
-              // super.requestRender();
-              // @TODO fix
-              console.log('received', res);
-              console.log(super.dom);
+            if ( res !== null ) {
+              this.props[propName] = res;
+              if (!this.isHidden()) {
+                super.showPage();
+              }
             }
           })
           .catch(console.err);

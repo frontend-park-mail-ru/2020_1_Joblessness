@@ -11,6 +11,7 @@ import {
   EmployeeSignupPage,
   IndexPage,
   Footer,
+  VacancyPage,
   Header,
   NotFoundPage, VacancyListPage,
 } from './views';
@@ -34,6 +35,7 @@ class App {
       'vacancies/create': new CreateVacancyPage('#root'),
       'vacancies': new VacancyListPage('#root'),
       'users/*': new UserPage('#root'),
+      'vacancies/*': new VacancyPage('#root'),
       'index': new IndexPage('#root'),
       'login': new LoginPage('#root'),
       'signup/employee': new EmployeeSignupPage('#root'),
