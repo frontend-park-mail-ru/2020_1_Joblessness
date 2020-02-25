@@ -8,6 +8,9 @@
  * а значением - название конструктора страницы, находящейся в BUS
  */
 class Navigator {
+  #routes;
+  #dynamicRoutes;
+
   /**
    * Переключает страницы
    * @param {object} routes - allowed pages and 404 page
@@ -18,7 +21,9 @@ class Navigator {
       throw new Error(`
             Expected object as field routes. Received ${routes}!`);
     }
-    this.routes = routes;
+    this.#routes = {};
+    this.#dynamicRoutes = {};
+    this.addRoutes(routes);
   }
 
   /**
@@ -27,48 +32,54 @@ class Navigator {
    */
   hideAll(container) {
     // Parse based on type of container
+    const allRoutes = {
+      ...this.#routes,
+      ...this.#dynamicRoutes,
+    };
     if (!container) {
       Object
-          .keys(this.routes)
-          .forEach((p) => p[0]!== '_' && this.routes[p].hidePage());
+          .keys(allRoutes)
+          .forEach((p) => p[0] !== '_' && allRoutes[p].hidePage());
     } else {
       Object
-          .keys(this.routes)
-          .filter((p) => this.routes[p].container === container)
-          .forEach((p) => this.routes[p].hidePage());
+          .keys(allRoutes)
+          .filter((p) => allRoutes[p].container === container)
+          .forEach((p) => allRoutes[p].hidePage());
     }
   }
 
   /**
-     * Open requested page in navigator
-     * @public
-     * @param {string} path
-     */
+   * Open requested page in navigator
+   * @public
+   * @param {string} path
+   */
   showPage(path) {
     // Hide all pages
-    if (this.routes[path]) {
-      const page = this.routes[path];// check static paths
-      const dynamicPaths =
-        Object
-            .keys(this.routes)
-            .filter((r) => r.indexOf('*') !== -1);
-      console.log(dynamicPaths);
-      console.log(new RegExp(dynamicPaths[0]).test(path));
+    if (this.#routes[path]) {
+      const page = this.#routes[path];// check static paths
       if (page) {
         this.hideAll(page.container);
-                this.routes[path]?.requestRender();
-                window.history.replaceState({}, '', '/' + path);
+        this.#routes[path]?.requestRender();
+        window.history.replaceState({}, '', '/' + path);
       }
     } else {
+      for (const r of Object.keys(this.#dynamicRoutes)) {
+        if (new RegExp(r).test(path)) {
+          this.hideAll(this.#dynamicRoutes[r].container);
+          this.#dynamicRoutes[r]?.requestRender();
+          window.history.replaceState({}, '', '/' + path);
+          return;
+        }
+      }
       this.hideAll();
-            this.routes['404']?.requestRender();
-            window.history.replaceState({}, '', '/404');
+      this.#routes['404']?.requestRender();
+      window.history.replaceState({}, '', '/404');
     }
   };
 
   /**
-     * Обработка нажатий на все ссылки с целью перехода на другую страницу
-     */
+   * Обработка нажатий на все ссылки с целью перехода на другую страницу
+   */
   addNavEvents() {
     document.body.addEventListener('click', (e) => {
       const {target} = e;
@@ -83,26 +94,34 @@ class Navigator {
    *
    */
   updateAllPages() {
+    const allRoutes = {
+      ...this.#dynamicRoutes,
+      ...this.#routes,
+    };
     Object
-        .keys(this.routes)
-        .forEach( (k) => {
-          if (!this.routes[k].isHidden()) {
+        .keys(allRoutes)
+        .forEach((k) => {
+          if (!allRoutes[k].isHidden()) {
             console.log(k);
-            this.routes[k].requestRender();
+            allRoutes[k].requestRender();
           }
-          // !this.routes[k].isHidden() && this.routes[k].requestRender();
+        // !this.routes[k].isHidden() && this.routes[k].requestRender();
         });
   }
+
   /**
    * add new routes to this.routes
-   * @param {object} newRoutes
+   * @param {object} routes
    */
-  addRoutes(newRoutes) {
-    // @TODO validation
-    this.routes = {
-      ...this.routes,
-      ...newRoutes,
-    };
+  addRoutes(routes) {
+    const isDynamic = /[?*]/;
+    for (const route of Object.keys(routes)) {
+      if (isDynamic.test(route)) {
+        this.#dynamicRoutes[route] = routes[route];
+      } else {
+        this.#routes[route] = routes[route];
+      }
+    }
   }
 }
 

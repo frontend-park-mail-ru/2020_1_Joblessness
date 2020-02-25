@@ -61,10 +61,3 @@ EmployeeSignupPage = withForm(EmployeeSignupPage,
 export {
   EmployeeSignupPage,
 };
-// function getCookie(name) {
-//     var match = document.
-//     cookie.match(new RegExp('(^| )' + name + '=([^;]+)'));
-//     if (match) return match[2];
-// }
-// document.cookie = "session_id=SOMEVALUE"
-// document.cookie = "session_i2d=SOMEVALUE"

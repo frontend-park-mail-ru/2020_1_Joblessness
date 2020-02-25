@@ -7,6 +7,7 @@ import {isPassword, isSlavicName} from '../../ulils/validators';
 import defaultUser from './userDefault';
 import {onOpenSettingsRequest, onSettingsChangeRequest,
   onUpdateAvatarRequest} from './events';
+import {GET_HEADERS} from '../../ulils/postRequest';
 
 /**
  * UserPage class itself returns only html elements
@@ -25,7 +26,7 @@ class UserPage extends Page {
   }
 }
 
-const prepareRequestBody = (page) => ({});
+const prepareRequestBody = (page) => (GET_HEADERS);
 const parseResponse = async (r) => {
   const j = await r.json();
   console.log(j);
@@ -39,7 +40,8 @@ const parseResponse = async (r) => {
   };
 };
 // preload data
-UserPage = withNetwork('https://91.210.170.6:8000/api/user/2',
+UserPage = withNetwork(
+    () => (`http://91.210.170.6:8000/api/user/${window.userId || ''}`),
     prepareRequestBody,
     UserPage, 'userData', defaultUser, parseResponse);
 

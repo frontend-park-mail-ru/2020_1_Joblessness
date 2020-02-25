@@ -6,32 +6,34 @@ include ../../../templates/pug/forms
         section.sub-form
             h3 Контактные данные
             +triple-field(placeholder="Имя")
-                +input-field(placeholder="Имя" id=locals.firstName.id)
+                +input-field(placeholder="Имя" id=locals.firstName.id value="Михаил")
             +triple-field(placeholder="Фамилия")
-                +input-field(placeholder="Имя" id=locals.lastName.id)
+                +input-field(placeholder="Имя" id=locals.lastName.id value="Балицкий")
             +triple-field(placeholder="Мобильный телефон")
-                +input-field(placeholder="Мобильный телефон" id=locals.phone.id)
+                +input-field(placeholder="Мобильный телефон" id=locals.phone.id value="89123456789")
             +triple-field(placeholder="Город проживания")
-                +input-field(placeholder="Город проживания" id=locals.city.id)
+                +input-field(placeholder="Город проживания" id=locals.city.id value="Москва")
+            +triple-field(placeholder="Email")
+                +input-field(placeholder="Email" id=locals.email.id value="example@example.com")
         section.sub-form
             h3 Основная информация
             +triple-field(placeholder="Дата рождения")
                 div.input-inner-col
                     div.input-inner
-                        +input-field(placeholder="День" id=locals.birthDay.id)
+                        +input-field(placeholder="День" id=locals.birthDay.id value="12")
                         select.form-input-select(id=locals.birthMonth.id)
                             - let month = ['Январь', 'Февраль','Март','Апрель',
                             -              'Май','Июнь','Июль','Август','Сентября',
                             -              'Октябрь','Ноябрь','Декабрь', ]
                             each val, index in month
                                 option(value=`${index}`)=val
-                        +input-field(placeholder="Год" id=locals.birthYear.id)
+                        +input-field(placeholder="Год" id=locals.birthYear.id value="1923")
             +triple-field(placeholder="Пол")
                 div.input-inner
                     label
                     input.input-radio.vacancy-form__salary-type(
                         name=locals.sex.id
-                        type="radio"
+                        type="radio" checked=1
                         value="male")
                     |                              Мужской&nbsp;
                     label
@@ -41,10 +43,10 @@ include ../../../templates/pug/forms
                         value="female")
                     |                                    Женский
             +triple-field(placeholder="Гражданство")
-                +input-field(placeholder="Гражданство" id=locals.citizenship.id)
+                +input-field(placeholder="Гражданство" id=locals.citizenship.id value="Российская Федерация")
             +triple-field(placeholder="Опыт работты")
                 div.input-inner-col
-                    +input-field(placeholder="Опыт работы" tag="textarea" id=locals.experience.id
+                    +input-field(placeholder="Опыт работы" tag="textarea" id=locals.experience.id value="Отсутствует"
                         style="resize: vertical; min-height: 38px")
                     .inputs-wrapper
                         span

@@ -7,16 +7,16 @@ include ../../templates/pug/forms
         section.sub-form
             h3 Основная информация
             +triple-field(placeholder="Название вакансии")
-                +input-field(placeholder="Название вакансии" id=locals.vacancyName.id)
+                +input-field(placeholder="Название вакансии" id=locals.vacancyName.id value="Работа мечты")
             +triple-field(placeholder="Описание")
-                +input-field(placeholder="Описание" id=locals.description.id)
+                +input-field(placeholder="Описание" id=locals.description.id value="Классная работа")
             +triple-field(placeholder="Основные навыки")
-                +input-field(placeholder="Основные навыки" id=locals.mainSkills.id)
+                +input-field(placeholder="Основные навыки" id=locals.mainSkills.id value="Умение писать и читать")
             +triple-field(placeholder="Предположительный уровень дохода")
                 div.input-inner-col
                     div.input-inner
-                        +input-field(placeholder="от" id=locals.expectedIncomeFrom.id)
-                        +input-field(placeholder="до" id=locals.expectedIncomeTo.id)
+                        +input-field(placeholder="от" id=locals.expectedIncomeFrom.id value="100")
+                        +input-field(placeholder="до" id=locals.expectedIncomeTo.id value="2000")
                         select.form-input-select(id=locals.expectedIncomeCurrency.id)
                             option(value="rub") руб.
                             option(value="eur") EUR
@@ -29,32 +29,32 @@ include ../../templates/pug/forms
                         |                   До выплаты налогов&nbsp;
                         label
                         input.input-radio.vacancy-form__salary-type(
-                            name=locals.withTax.id type="radio"
+                            name=locals.withTax.id checked=1 type="radio"
                             value="after-taxes")
                         |                                    На руки
         section.sub-form
         h3 Место работы
         +triple-field(placeholder="Вакансия в городе")
-            +input-field(placeholder="Вакансия в городе" id=locals.cityName.id)
+            +input-field(placeholder="Вакансия в городе" id=locals.cityName.id value="Москва")
         +triple-field(placeholder="Адрес офиса")
-            +input-field(placeholder="Адрес офиса" id=locals.officeAddress.id)
+            +input-field(placeholder="Адрес офиса" id=locals.officeAddress.id value="Кремль, 3в")
                 input.input-checkbox.vacancy-form__invisible-address(type="checkbox" id=locals.showAddress.id)
                 |                                                 Не показывать адрес
         section.sub-form
 
         h3 Контактные данные
         +triple-field(placeholder="Менеджер вакансии")
-            +input-field(placeholder="Менеджер вакансии" id=locals.vacancyManager.id)
+            +input-field(placeholder="Менеджер вакансии" id=locals.vacancyManager.id value="Вася Пупкин")
                 input.input-checkbox.vacancy-form__notificate-by-email(type="checkbox" id=locals.notify.id)
                 |                                       Уведомлять о вакансиях по почте
         +triple-field(placeholder="Контактная информация")
-            +input-field(placeholder="Контактная информация")
+            +input-field(placeholder="Контактная информация" value="присутствует")
                 input.input-checkbox.vacancy-form__invisible-contacts(type="checkbox" id=locals.showInVacancy.id)
                 |                                             Не показывать в вакансии
         +triple-field(placeholder="Email")
-            +input-field(placeholder="Email" id=locals.email.id)
+            +input-field(placeholder="Email" id=locals.email.id value="email@example.com")
         +triple-field(placeholder="Телефон")
-            +input-field(placeholder="Телефон" id=locals.phone.id)
+            +input-field(placeholder="Телефон" id=locals.phone.id value="89123456789")
         +triple-field(placeholder="Комментарий")
             +input-field(placeholder="Комментарий" id=locals.comment.id)
     button.button.vacancy-page__button-submit(id=locals.submitField.id) Разместить

@@ -115,6 +115,7 @@ export class Page {
             value of type string!`);
       }
 
+
       this.componentWillMount && this.componentWillMount();
       const toShow = this.render();
 

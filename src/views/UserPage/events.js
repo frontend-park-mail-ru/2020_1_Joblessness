@@ -18,7 +18,7 @@ export const onUpdateAvatarRequest = async (e, page) => {
   formData.append('name', 'some value user types');
   formData.append('description', 'some value user types');
   const b64 = await fileToB64(e.target.files[0]);
-  postRequest('/api/users/2/avatar', {
+  postRequest(`/api/users/${window.userId || ''}/avatar`, {
     avatar: b64,
   }).then(() => {
     page.props.userData.user.avatar = b64;
@@ -32,7 +32,7 @@ export const onSettingsChangeRequest = (event, that, field, callWarnings) => {
   const {validateFirstName, validateLastName, validatePassword} = field;
   if (validateFirstName && validateLastName && validatePassword) {
     // @TODO send request on server
-    postRequest('/api/user/2', {
+    postRequest(`/api/user/${window.userId || ''}`, {
       'first-name': validateFirstName,
       'last-name': validateLastName,
     }).then(console.log)

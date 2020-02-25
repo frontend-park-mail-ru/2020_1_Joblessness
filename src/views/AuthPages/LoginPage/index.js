@@ -41,10 +41,14 @@ LoginPage = withForm(LoginPage, inputFields, {
         if (r.status === 201) {
           document.cookie = `reg_data=${data.userName}:::::${data.password}`;
           window.isAuthenticated = true;
-          const user = await r.json();
-          window.userId = user.id;
-          Navigator.updateAllPages();
-          Navigator.showPage('index');
+          try {
+            const user = await r.json();
+            window.userId = user.id;
+            Navigator.updateAllPages();
+            Navigator.showPage('index');
+          } catch (e) {
+            alert('Что-то пошло не так');
+          }
         } else {
           alert('Невернные логин или пароль');
         }

@@ -40,9 +40,10 @@ export const withEvents = (WrappedComponent, propName, events) => {
     }
 
     /**
-     * overwrites componentDidMountMethod!
+     * overwrites componentDidMount Method!
      */
     componentDidMount = () => {
+      super.componentDidMount && super.componentDidMount();
       Object.keys(events).map((e) => {
         const dom = document.getElementById(events[e].id);
         if (!dom) {

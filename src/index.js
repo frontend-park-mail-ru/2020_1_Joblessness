@@ -1,6 +1,7 @@
 'use strict';
 import '@babel/polyfill';
 import {Navigator} from './Navigator.js';
+import {loginOnReload} from './ulils/loginOnReload';
 import {
   CreateSummaryPage,
   CreateVacancyPage,
@@ -13,9 +14,7 @@ import {
   Header,
   NotFoundPage, VacancyListPage,
 } from './views';
-import {loginOnReload} from './ulils/loginOnReload';
-// window.isAuthenticated = true;
-loginOnReload();
+
 /**
  * App
  */
@@ -50,4 +49,8 @@ class App {
     Navigator.showPage( loc ? loc : 'index');
   }
 }
-new App();
+const createApp = async () => {
+  await loginOnReload();
+  new App();
+};
+createApp();

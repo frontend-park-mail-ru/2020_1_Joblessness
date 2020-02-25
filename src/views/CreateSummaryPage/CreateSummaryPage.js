@@ -3,16 +3,19 @@ import {Page} from '../../Page.js';
 import template from './pug/index.pug';
 import {validateRadio, validateSelect, withForm} from '../../ulils/withForm';
 import {uuid} from '../../ulils';
-import {isDay, isMonthId, isPhoneNumber,
-  isSlavicName, isYear} from '../../ulils/validators';
+import {
+  isDay, isEmail, isMonthId, isPhoneNumber,
+  isSlavicName, isYear,
+} from '../../ulils/validators';
+import {createSummary} from './createSummary';
 
 /**
  * summary creation forms
  */
 class CreateSummaryPage extends Page {
   /**
-     * @return {string} - page to render
-     */
+   * @return {string} - page to render
+   */
   render() {
     return template(this.props.inputFields);
   }
@@ -62,9 +65,13 @@ CreateSummaryPage = withForm(CreateSummaryPage,
       },
       sex: {
         id: uuid(),
-        required: true,
         inputValidator: validateRadio,
         warnMessage: 'Выберите Ваш пол',
+      },
+      email: {
+        id: uuid(),
+        validator: isEmail,
+        warnMessage: 'Укажите почту',
       },
       citizenship: {
         id: uuid(),
@@ -84,20 +91,8 @@ CreateSummaryPage = withForm(CreateSummaryPage,
     {
       id: uuid(),
     },
-    (d) => {
-      console.log(d);
-      fetch('http://91.210.170.6:8000/api/summaries/create', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: {
-          summary: {
-            ...d, // @TODO form real summary
-          },
-        },
-      });
-    });
+    createSummary,
+);
 export {
   CreateSummaryPage,
 };

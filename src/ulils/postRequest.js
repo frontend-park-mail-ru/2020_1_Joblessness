@@ -33,7 +33,7 @@ export const PUT_HEADERS = {
 
 export const postRequest = (url, body, headers = {}) => (
   new Promise((resolve, reject) => {
-    fetch('https://91.210.170.6:8000' + url, {
+    fetch('http://91.210.170.6:8000' + url, {
       ...POST_HEADERS,
       ...headers,
       body: JSON.stringify(body),
@@ -44,7 +44,7 @@ export const postRequest = (url, body, headers = {}) => (
 
 export const putRequest = (url, body, headers = {}) => (
   new Promise((resolve, reject) => {
-    fetch('https://91.210.170.6:8000' + url, {
+    fetch('http://91.210.170.6:8000' + url, {
       ...PUT_HEADERS,
       ...headers,
       body: JSON.stringify(body),

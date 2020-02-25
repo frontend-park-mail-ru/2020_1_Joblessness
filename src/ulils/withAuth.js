@@ -8,65 +8,65 @@ import {Page} from '../Page';
  */
 export const withAuth = (WcUnAuth, WcAuth) => {
   return class extends Page {
-        #authenticated;
-        #unauthenticated;
+    #authenticated;
+    #unauthenticated;
 
-        /**
-       * store 2 component versions
-       * @param {any} args
-       */
-        constructor(...args) {
-          super(...args);
-          // @TODO create on first render
-          this.#authenticated = new WcAuth(this.dom);
-          this.#authenticated.requestRender = () => {
-            this.requestRender();
-          };
-          this.#authenticated.isHidden = () => this.isHidden();
+    /**
+     * store 2 component versions
+     * @param {any} args
+     */
+    constructor(...args) {
+      super(...args);
+      // @TODO create on first render
+      this.#authenticated = new WcAuth(this.dom);
+      this.#authenticated.requestRender = () => {
+        this.requestRender();
+      };
+      this.#authenticated.isHidden = () => this.isHidden();
 
-          this.#unauthenticated = new WcUnAuth(this.dom);
-          this.#unauthenticated.requestRender = () => {
-            this.requestRender();
-          };
-          this.#unauthenticated.isHidden = () => this.isHidden();
-        }
+      this.#unauthenticated = new WcUnAuth(this.dom);
+      this.#unauthenticated.requestRender = () => {
+        this.requestRender();
+      };
+      this.#unauthenticated.isHidden = () => this.isHidden();
+    }
 
-        /**
+    /**
      *
      */
-        requestRender() {
-          const page = window.isAuthenticated ? this.#authenticated :
-            this.#unauthenticated;
-          if (typeof page.render !== 'function') {
-            throw new Error(`
+    requestRender() {
+      const page = window.isAuthenticated ? this.#authenticated :
+        this.#unauthenticated;
+      if (typeof page.render !== 'function') {
+        throw new Error(`
             Method render is reserved by Page Component and
             must be overwritten by function with return
             value of type string!`);
-          }
-          page.componentWillMount &&
-            page.componentWillMount();
-          const toShow = page.render();
+      }
+      page.componentWillMount &&
+      page.componentWillMount();
+      const toShow = page.render();
 
-          if (toShow) {
-            this.dom.innerHTML = toShow;
-          } else {
-            console.error(`
+      if (toShow) {
+        this.dom.innerHTML = toShow;
+      } else {
+        console.error(`
             Render function must return string.
             Setting innerHTML is not supported anymore!`);
-          }
+      }
 
-          this.showPage();
-          page.componentDidMount &&
-            page.componentDidMount();
-        }
-        /**
-       * check Page docs
-       * @return {string}
-       */
-        render() {
-          return window.isAuthenticated ?
-                this.#authenticated.render() :
-                this.#unauthenticated.render();
-        }
+      this.showPage();
+      page.componentDidMount &&
+      page.componentDidMount();
+    }
+    /**
+     * check Page docs
+     * @return {string}
+     */
+    render() {
+      return window.isAuthenticated ?
+        this.#authenticated.render() :
+        this.#unauthenticated.render();
+    }
   };
 };

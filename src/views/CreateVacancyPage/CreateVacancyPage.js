@@ -1,12 +1,10 @@
-'use strict';
-
 import './style.css';
 import {Page} from '../../Page.js';
 import template from './vacancy-page.pug';
 import {validateRadio, validateCheckBox, withForm} from '../../ulils/withForm';
 import {uuid} from '../../ulils';
 import {isEmail, isPhoneNumber} from '../../ulils/validators';
-
+import {createVacancy} from './createVacancy';
 /**
  * Vacancy creation page
  */
@@ -102,23 +100,7 @@ CreateVacancyPage = withForm(CreateVacancyPage,
     {
       id: uuid(),
     },
-    (d) => {
-      console.log(d);
-      // @TODO perform creation and open vacancy page
-      fetch('http://91.210.170.6:8000/api/', {
-        method: 'POST',
-        mode: 'no-cors',
-        headers: {
-          'content-type': 'application/json',
-        },
-        body: {
-          ...d,
-        },
-      }).catch(console.log);
-    },
-    () => {
-      console.log('fail');
-    },
+    createVacancy,
 );
 export {
   CreateVacancyPage,
