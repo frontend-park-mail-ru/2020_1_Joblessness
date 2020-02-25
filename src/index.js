@@ -13,13 +13,9 @@ import {
   Header,
   NotFoundPage, VacancyListPage,
 } from './views';
+import {loginOnReload} from './ulils/loginOnReload';
 // window.isAuthenticated = true;
-const updateSession = () => {
-  // const cookie = document.cookie;
-  // @TODO get auth info from cookie
-  // @TODO fetch and login
-};
-updateSession();
+loginOnReload();
 /**
  * App
  */

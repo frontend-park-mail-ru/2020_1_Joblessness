@@ -58,10 +58,7 @@ export const requestSignIn = (login, password) => (
   new Promise((resolve, reject) => {
     postRequest('/api/users/login', {
       login, password,
-    }).then((r) => r.json())
-        .then((r) => {
-          resolve(r);
-        })
+    }).then(resolve)
         .catch(reject);
   },
   )

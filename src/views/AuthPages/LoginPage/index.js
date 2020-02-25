@@ -37,13 +37,17 @@ LoginPage = withForm(LoginPage, inputFields, {
 },
 (data) => {
   requestSignIn(data.userName, data.password)
-      .then( () => {
-        document.cookie = `reg_data=${data.userName}:::::${data.password}`;
-        window.isAuthenticated = true;
-        Navigator.updateAllPages();
-        Navigator.showPage('index');
+      .then( (r) => {
+        if (r.status === 201) {
+          document.cookie = `reg_data=${data.userName}:::::${data.password}`;
+          window.isAuthenticated = true;
+          Navigator.updateAllPages();
+          Navigator.showPage('index');
+        } else {
+          alert('Невернные логин или пароль');
+        }
       })
-      .catch(() => alert('Неверные логин или пароль!'));
+      .catch(() => alert('Невозможно соединиться с сервером'));
 },
 (fields) => {
   console.log('fail');

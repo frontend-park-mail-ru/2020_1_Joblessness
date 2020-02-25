@@ -12,15 +12,20 @@ export const onSignUp = (fields) => {
     'phone-number': fields.phone,
   }).then((r) => {
     if (r.status === 201) {
+      document.cookie =
+        `reg_data=${fields.userName}:::::${fields.password}`;
       requestSignIn(fields.userName, fields.password)
-          .then(() => {
-            document.cookie =
-            `reg_data=${fields.userName}:::::${fields.password}`;
-            window.isAuthenticated = true;
-            Navigator.updateAllPages();
-            Navigator.showPage('index');
+          .then( (sr) => {
+            console.log(sr);
+            if ( sr.status === 201 ) {
+              window.isAuthenticated = true;
+              Navigator.updateAllPages();
+              Navigator.showPage('index');
+            } else {
+              alert('Невозможно войти в учетную запись');
+            }
           })
-          .catch(() => alert('Невозможно войти в учетную запись'));
+          .catch(console.log);
     } else {
       alert('Пользователь уже существует');
     }
