@@ -10,14 +10,12 @@ import {Navigator} from '../../Navigator';
  */
 class AuthHeader extends Page {
   #signOut;
-  #wasCalled;
   /**
    * init evennt for sign out
    * @param {any} args
    */
   constructor(args) {
     super(args);
-    this.#wasCalled = false;
     this.#signOut = () => {
       document.cookie = 'reg_data=; ' +
         'expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;';
@@ -26,11 +24,8 @@ class AuthHeader extends Page {
     };
   };
   componentDidMount = () => {
-    if (!this.#wasCalled) {
-      document.getElementById('sign-out')
-          .addEventListener('click', this.#signOut);
-    }
-    this.#wasCalled = true;
+    document.getElementById('sign-out')
+        .addEventListener('click', this.#signOut);
   };
   /**
    * @return {string} - page to render
