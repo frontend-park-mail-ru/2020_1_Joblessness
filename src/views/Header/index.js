@@ -4,6 +4,7 @@ import unAuthHeader from './pug/unauth_header.pug';
 import './style.sass';
 import {withAuth} from '../../ulils';
 import {Navigator} from '../../Navigator';
+import {postRequest} from '../../ulils/postRequest';
 
 /**
  * auth header
@@ -17,11 +18,9 @@ class AuthHeader extends Page {
   constructor(args) {
     super(args);
     this.#signOut = () => {
-      document.cookie = 'reg_data=; ' +
-        'expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;';
-      window.isAuthenticated = false;
-      window.userId = '';
-      Navigator.updateAllPages();
+      postRequest('/users/logout', {}).then((r) => {
+        Navigator.updateAllPages();
+      });
     };
   };
   componentDidMount = () => {
