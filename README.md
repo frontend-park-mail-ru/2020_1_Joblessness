@@ -22,7 +22,7 @@ Dev server: npm run start:dev
 
 Backend: Артем Бакулев
 
-Frontend: Нозим Янусов
+Frontend: Нозим Юнусов
 
 Репозитории
 
