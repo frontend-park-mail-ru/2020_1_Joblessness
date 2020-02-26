@@ -1,0 +1,121 @@
+@import url("https://fonts.googleapis.com/css?family=Istok+Web&display=swap");
+.user-page {
+  width: 100%;
+  margin: auto;
+}
+
+.bio-section {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex: 1;
+  height: 190px;
+}
+
+.user-avatar {
+  border-radius: 50%;
+  width: 150px;
+  height: 150px;
+  display: flex;
+  overflow: hidden;
+  background-size: cover;
+}
+.user-avatar .pick-avatar {
+  display: block;
+  width: 100%;
+  height: 100%;
+  opacity: 0;
+}
+
+.user-name {
+  padding: 20px;
+  display: flex;
+}
+.user-name .tag {
+  color: #787878;
+  background: none;
+}
+
+.user-summaries {
+  display: flex;
+  flex-direction: column;
+}
+
+.user-summary {
+  background: #FAFAFA;
+  border-bottom: 1px solid #D1D1D1;
+  padding: 0 20px 0 20px;
+  margin: 0 0 5px 0;
+}
+
+.show-more {
+  width: 100%;
+  background: #FAFAFA;
+  border-bottom: 1px solid #D1D1D1;
+  height: 10px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.show-more div {
+  text-align: center;
+  vertical-align: center;
+  line-height: 20px;
+  background: #D1D1D1;
+  border-radius: 50%;
+  width: 20px;
+  height: 20px;
+}
+
+.settings-button {
+  background: #787878;
+  border-radius: 5px;
+  padding: 0 8px 0 8px;
+  color: white;
+}
+
+#user-page-modal {
+  display: none;
+  position: fixed;
+  width: 100%;
+  height: 100%;
+  top: 0;
+  left: 0;
+  z-index: 10;
+  background: rgba(0, 0, 0, 0.5);
+  backdrop-filter: blur(3px);
+}
+#user-page-modal .settings-holder {
+  width: 80%;
+  min-height: 50%;
+  border-radius: 5px;
+  padding: 20px;
+  background: white;
+  margin: auto;
+  color: black;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+}
+#user-page-modal input {
+  width: 60%;
+  height: 48px;
+  font-size: 36px;
+  border-radius: 10px;
+}
+#user-page-modal .apply-changes {
+  margin-top: 10px;
+  background: #787878;
+  border-radius: 5px;
+  padding: 0 8px 0 8px;
+  color: white;
+}
+
+.red-input {
+  color: red;
+  border-color: red;
+  outline-color: red;
+}
+
+/*# sourceMappingURL=style.css.map */

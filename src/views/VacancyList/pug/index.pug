@@ -1,0 +1,14 @@
+include ../../VacancyPage/pug/vacancy
+div.vacancy-list
+    each vac in locals.vacancies
+        +vacancy(
+            name=vac.name
+            description=vac.description
+            skills=vac.skills
+            salary=vac.salary
+            address=vac.address
+            phone=vac.phone
+        )
+            a(href="#" data-page="vacancies/"+vac.id)
+                |Перейти на страницу вакансии
+    div.show-more(id=locals.events.showMore.id)

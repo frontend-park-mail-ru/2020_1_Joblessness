@@ -1,0 +1,18 @@
+include ../../../../templates/pug/forms
+include emolyee-signup-form
+div.main-container
+    div.form-container
+        form
+            +emplyee-signup-form(
+                firstNameId=locals.firstName.id
+                lastNameId=locals.lastName.id
+                emailId=locals.email.id
+                phoneId=locals.phone.id
+                passwordId=locals.password.id
+                userNameId=locals.userName.id
+            )
+            +tos-agreement(buttonName="Зарегистрироваться")
+            input.form-submit.employee-signup-form-submit(
+                type="submit"
+                value="Зарегистрироваться"
+                id=locals.submitField.id)
