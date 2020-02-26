@@ -1,5 +1,6 @@
-var path = require('path');
-var HtmlWebpackPlugin = require('html-webpack-plugin');
+const path = require('path');
+const HtmlWebpackPlugin = require('html-webpack-plugin');
+const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 
 
 module.exports = {
@@ -16,48 +17,48 @@ module.exports = {
     before: function (app, server, compiler) {
 
       app.get('/user', function (req, res) {
-        res.sendFile(path.join(__dirname,'public/index.html'))
+        res.sendFile(path.join(__dirname, 'public/index.html'))
       });
       app.get('/vacancies', function (req, res) {
-        res.sendFile(path.join(__dirname,'public/index.html'))
+        res.sendFile(path.join(__dirname, 'public/index.html'))
       });
       app.get('/vacancies/create', function (req, res) {
-        res.sendFile(path.join(__dirname,'public/index.html'))
+        res.sendFile(path.join(__dirname, 'public/index.html'))
       });
       app.get('/index', function (req, res) {
-        res.sendFile(path.join(__dirname,'public/index.html'))
+        res.sendFile(path.join(__dirname, 'public/index.html'))
       });
       app.get('/summaries/create', function (req, res) {
-        res.sendFile(path.join(__dirname,'public/index.html'))
+        res.sendFile(path.join(__dirname, 'public/index.html'))
       });
       app.get('/login', function (req, res) {
-        res.sendFile(path.join(__dirname,'public/index.html'))
+        res.sendFile(path.join(__dirname, 'public/index.html'))
       });
       app.get('/signup', function (req, res) {
-        res.sendFile(path.join(__dirname,'public/index.html'))
+        res.sendFile(path.join(__dirname, 'public/index.html'))
       });
       app.get('/signup/employer', function (req, res) {
-        res.sendFile(path.join(__dirname,'public/index.html'))
+        res.sendFile(path.join(__dirname, 'public/index.html'))
       });
       app.get('/signup/employee', function (req, res) {
-        res.sendFile(path.join(__dirname,'public/index.html'))
+        res.sendFile(path.join(__dirname, 'public/index.html'))
       });
       app.get('/users/*', function (req, res) {
-        res.sendFile(path.join(__dirname,'public/index.html'))
+        res.sendFile(path.join(__dirname, 'public/index.html'))
       });
       app.get('/vacancies/*', function (req, res) {
-        res.sendFile(path.join(__dirname,'public/index.html'))
+        res.sendFile(path.join(__dirname, 'public/index.html'))
       });
       app.get('/summaries/*', function (req, res) {
-        res.sendFile(path.join(__dirname,'public/index.html'))
+        res.sendFile(path.join(__dirname, 'public/index.html'))
       });
       app.get('/404', function (req, res) {
-        res.sendFile(path.join(__dirname,'public/index.html'))
+        res.sendFile(path.join(__dirname, 'public/index.html'))
       });
     },
   },
   module: {
-    rules : [
+    rules: [
       {
         test: /\.pug$/,
         use: "pug-loader"
@@ -74,12 +75,12 @@ module.exports = {
         },
       },
       {
-        test : /\.js$/,
+        test: /\.js$/,
         exclude: /node_modules/,
         use: {
-          loader : 'babel-loader',
-          query : {
-            presets : [ '@babel/preset-env' ]
+          loader: 'babel-loader',
+          query: {
+            presets: ['@babel/preset-env']
           }
         }
       },
@@ -87,6 +88,7 @@ module.exports = {
         test: /\.css$/i,
         use: [
           'style-loader',
+          MiniCssExtractPlugin.loader,
           'css-loader',
         ],
       },
@@ -105,8 +107,8 @@ module.exports = {
         ]
       },
       {
-        test : /\.(png|svg|jpg|gif)$/,
-        use : [
+        test: /\.(png|svg|jpg|gif)$/,
+        use: [
           'file-loader',
         ],
       },
@@ -114,7 +116,13 @@ module.exports = {
   },
   plugins: [
     new HtmlWebpackPlugin({
-      filename: "__index.html"
-    })
+      hash: true,
+      filename: __dirname + '/public/index.html',
+      title: 'Ха-ха.ру',
+      template: __dirname + '/src/index.html',
+    }),
+    new MiniCssExtractPlugin({
+      filename: 'style.css',
+    }),
   ]
-}
+};
