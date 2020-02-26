@@ -15,44 +15,13 @@ module.exports = {
     compress: true,
     port: 8080,
     before: function (app, server, compiler) {
-
-      app.get('/user', function (req, res) {
-        res.sendFile(path.join(__dirname, 'public/index.html'))
+      app.get('*.js*', function (req, res) {
+        res.sendFile(path.join(__dirname, 'public/bundle.js'))
       });
-      app.get('/vacancies', function (req, res) {
-        res.sendFile(path.join(__dirname, 'public/index.html'))
+      app.get('*.css*', function (req, res) {
+        res.sendFile(path.join(__dirname, 'public/style.css'))
       });
-      app.get('/vacancies/create', function (req, res) {
-        res.sendFile(path.join(__dirname, 'public/index.html'))
-      });
-      app.get('/index', function (req, res) {
-        res.sendFile(path.join(__dirname, 'public/index.html'))
-      });
-      app.get('/summaries/create', function (req, res) {
-        res.sendFile(path.join(__dirname, 'public/index.html'))
-      });
-      app.get('/login', function (req, res) {
-        res.sendFile(path.join(__dirname, 'public/index.html'))
-      });
-      app.get('/signup', function (req, res) {
-        res.sendFile(path.join(__dirname, 'public/index.html'))
-      });
-      app.get('/signup/employer', function (req, res) {
-        res.sendFile(path.join(__dirname, 'public/index.html'))
-      });
-      app.get('/signup/employee', function (req, res) {
-        res.sendFile(path.join(__dirname, 'public/index.html'))
-      });
-      app.get('/users/*', function (req, res) {
-        res.sendFile(path.join(__dirname, 'public/index.html'))
-      });
-      app.get('/vacancies/*', function (req, res) {
-        res.sendFile(path.join(__dirname, 'public/index.html'))
-      });
-      app.get('/summaries/*', function (req, res) {
-        res.sendFile(path.join(__dirname, 'public/index.html'))
-      });
-      app.get('/404', function (req, res) {
+      app.get('*', function (req, res) {
         res.sendFile(path.join(__dirname, 'public/index.html'))
       });
     },
