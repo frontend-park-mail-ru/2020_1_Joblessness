@@ -8,7 +8,7 @@ export const loginOnReload = () => {
   // const c = getCookie('reg_data');
   // const [login, password] = c.split(':::::');
   // if ( login && password ) {
-  postRequest('/api/users/login', {}).then(async (r) => {
+  postRequest('/api/users/check', {}).then(async (r) => {
     console.log(r);
     if (r.status === 201) {
       window.isAuthenticated = true;
