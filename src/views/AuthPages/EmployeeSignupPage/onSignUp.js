@@ -12,16 +12,14 @@ export const onSignUp = (fields) => {
     'phone-number': fields.phone,
   }).then((r) => {
     if (r.status === 201) {
-      // document.cookie =
-      //   `reg_data=${fields.userName}:::::${fields.password}`;
       requestSignIn(fields.userName, fields.password)
-          .then( async (sr) => {
+          .then(async (sr) => {
             console.log(sr);
-            if ( sr.status === 201 ) {
-              window.isAuthenticated = true;
-
+            if (sr.status === 201) {
               const user = await sr.json();
+              window.isAuthenticated = true;
               window.userId = user.id;
+
               Navigator.updateAllPages();
               Navigator.showPage('index');
             } else {

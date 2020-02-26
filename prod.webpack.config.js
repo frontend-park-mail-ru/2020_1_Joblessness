@@ -1,30 +1,14 @@
 const path = require('path');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
-
+const { CleanWebpackPlugin } = require('clean-webpack-plugin');
 
 module.exports = {
   //...
   // entry: 'src/index.js',
   output: {
     path: __dirname + '/public',
-    filename: 'bundle.js'
-  },
-  devServer: {
-    contentBase: path.join(__dirname, 'public'),
-    compress: true,
-    port: 8080,
-    before: function (app, server, compiler) {
-      app.get('*.js*', function (req, res) {
-        res.sendFile(path.join(__dirname, 'public/bundle.js'))
-      });
-      app.get('*.css*', function (req, res) {
-        res.sendFile(path.join(__dirname, 'public/style.css'))
-      });
-      app.get('*', function (req, res) {
-        res.sendFile(path.join(__dirname, 'public/index.html'))
-      });
-    },
+    filename: "./bundle.js",
   },
   module: {
     rules: [
@@ -39,8 +23,6 @@ module.exports = {
         loader: 'eslint-loader',
         options: {
           fix: true,
-          failOnError: false,
-          failOnWarning: false,
         },
       },
       {
@@ -84,6 +66,7 @@ module.exports = {
     ]
   },
   plugins: [
+    new CleanWebpackPlugin(),
     new HtmlWebpackPlugin({
       hash: true,
       filename: __dirname + '/public/index.html',

@@ -15,9 +15,8 @@ export const withAuth = (WcUnAuth, WcAuth) => {
      * store 2 component versions
      * @param {any} args
      */
-    constructor(...args) {
-      super(...args);
-      // @TODO create on first render
+    constructor(args) {
+      super(args);
       this.#authenticated = new WcAuth(this.dom);
       this.#authenticated.requestRender = () => {
         this.requestRender();

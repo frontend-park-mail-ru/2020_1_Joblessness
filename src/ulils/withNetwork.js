@@ -1,7 +1,8 @@
 import {validateFunction, validateString} from './validators';
 
 /**
- *
+ * sends request on server before rendering and updates component after
+ * response is received
  * @param {string|function} url - url to fetch
  * @param {function} prepareRequestBody - request body to send
  * @param {Page} WrappedComponent - Component to wrap
