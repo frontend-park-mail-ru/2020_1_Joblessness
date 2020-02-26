@@ -1,5 +1,19 @@
 include bio
-include summaries
+mixin showmore()
+    div(class="show-more" id=attributes.id)
+        div &#x25BC
+mixin userSummary(s)
+    div.summary-holder
+        h1 Резюме
+        p Имя: #{s.firstName}
+        p Фамилия: #{s.lastName}
+        p Телефон: #{s.phone}
+        p Email: #{s.email}
+        p Дата рождения: #{s.birthDate}
+        p пол: #{s.sex}
+        p Опыт работы: #{s.experience}
+        p Образование: #{s.education}
+        block
 mixin settingspage
     div(class="settings-holder")
         h1 Имя:
@@ -10,12 +24,18 @@ mixin settingspage
         input(type="password" id=attributes.newPasswordId)
         div(class="apply-changes" id=attributes.applyId)
             h1 Принять
-+bio(locals.user, locals.events)
-+summaries(locals.summaries, locals.events)
-div(id="user-page-modal")
-    +settingspage(
-        firstNameId=locals.events.validateFirstName.id
-        lastNameId=locals.events.validateLastName.id
-        newPasswordId=locals.events.validatePassword.id
-        applyId=locals.events.applyChanges.id
-    )
+div
+    +bio(locals.user, locals.events)
+    h2 Ваши Резюме
+        div.user-summaries
+            each sum in (locals.summaries || [])
+                +userSummary(sum)
+                    a(href="#" data-page="summaries/"+sum.id) Открыть страницу резюме
+            +showmore(id=locals.events.showMore.id)
+    div(id="user-page-modal")
+        +settingspage(
+            firstNameId=locals.events.validateFirstName.id
+            lastNameId=locals.events.validateLastName.id
+            newPasswordId=locals.events.validatePassword.id
+            applyId=locals.events.applyChanges.id
+        )

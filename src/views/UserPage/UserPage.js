@@ -38,22 +38,22 @@ const parseResponse = async (r) => {
     return null;
   }
   const j = await r.json();
-  console.log(j);
   try {
     const sumRes = await getRequest(
         `/api/summaries`);
     const sumRaw = await sumRes.json();
-    const sum = sumRaw.filter((s) => s.author === getUserId()).map((s) => ({
-      firstName: s['first-name'],
-      lastName: s['last-name'],
-      phone: s['phone-number'],
-      email: s.email,
-      birthDate: j['birth-date'],
-      sex: s['gender'],
-      experience: s.experience,
-      education: s.education,
-      id: s.id,
-    }));
+    const sum = sumRaw.filter((s) => s.author === parseInt(getUserId()))
+        .map((s) => ({
+          firstName: s['first-name'],
+          lastName: s['last-name'],
+          phone: s['phone-number'],
+          email: s.email,
+          birthDate: s['birth-date'],
+          sex: s['gender'],
+          experience: s.experience,
+          education: s.education,
+          id: s.id,
+        }));
     return {
       user: {
         firstname: j.user['first-name'],
@@ -63,7 +63,6 @@ const parseResponse = async (r) => {
       summaries: sum,
     };
   } catch (e) {
-    console.log(e);
     return {
       user: {
         firstname: j.user['first-name'],
@@ -77,7 +76,6 @@ const parseResponse = async (r) => {
 // preload data
 const getUserId = () => {
   const name = location.pathname;
-  console.log(name);
   if (name.startsWith('/users/')) {
     return name.replace('/users/', '') ||
       window.userId || 1;
