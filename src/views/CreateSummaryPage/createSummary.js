@@ -8,7 +8,7 @@ export const createSummary = (s) => {
     'last-name': s.lastName,
     'phone-number': s.phone,
     'email': s.email,
-    'birth-date': `${s.birthDay}/${s.birthMonth}/${s.birthYear}`,
+    'birth-date': `${s.birthDay}/${s.birthMonth + 1}/${s.birthYear}`,
     'gender': s.sex,
     'experience': s.experience,
     'education': s.education,
