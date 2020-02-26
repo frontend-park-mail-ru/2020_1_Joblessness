@@ -19,6 +19,8 @@ class AuthHeader extends Page {
     super(args);
     this.#signOut = () => {
       postRequest('/api/users/logout', {}).then((r) => {
+        window.userId = null;
+        window.isAuthenticated = false;
         Navigator.updateAllPages();
       });
     };
