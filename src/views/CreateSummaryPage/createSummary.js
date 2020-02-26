@@ -11,6 +11,7 @@ export const createSummary = (s) => {
     'gender': s.sex,
     'experience': s.experience,
     'education': s.education,
+    'author': window.userId || 0,
   }).then(async (r) => {
     if ( r.status === 201 ) {
       try {
