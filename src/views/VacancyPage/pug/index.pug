@@ -1,0 +1,9 @@
+include vacancy
+div.vacancy-holder
+    +vacancy(
+        name=locals.vacancy.name
+        description=locals.vacancy.description
+        salary=locals.vacancy.salary
+        address=locals.vacancy.address
+        phone=locals.vacancy.phone)
+            a(href="#" data-page="vacancies") К списку вакансий

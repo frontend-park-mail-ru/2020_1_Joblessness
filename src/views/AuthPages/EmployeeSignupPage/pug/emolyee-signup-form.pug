@@ -1,0 +1,11 @@
+mixin emplyee-signup-form
+    span.form-caption Регистрация соискателя
+        +input-field(placeholder="Имя пользователя" id=attributes.userNameId)
+        div.separator
+        +input-field(placeholder="Имя" id=attributes.firstNameId)
+        +input-field(placeholder="Фамилия" id=attributes.lastNameId)
+        div.separator
+        div.section
+            +input-field(placeholder="Электронная почта" id=attributes.emailId)
+            +input-field(placeholder="Номер телефона" id=attributes.phoneId)
+            +input-field(placeholder="Пароль" type="password" id=attributes.passwordId)
