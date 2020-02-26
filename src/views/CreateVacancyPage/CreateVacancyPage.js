@@ -1,6 +1,6 @@
 import './style.css';
 import {Page} from '../../Page.js';
-import template from './vacancy-page.pug';
+import template from './pug/index.pug';
 import {validateRadio, validateCheckBox, withForm} from '../../ulils/withForm';
 import {uuid} from '../../ulils';
 import {isEmail, isPhoneNumber} from '../../ulils/validators';

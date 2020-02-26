@@ -1,13 +1,17 @@
 import './style.sass';
 import {Page} from '../../Page.js';
 import template from './pug/index.pug';
-import {FieldManager, uuid,
-  withEvents, withNetwork} from '../../ulils';
+import {
+  FieldManager, uuid,
+  withEvents, withNetwork,
+} from '../../ulils';
 import {isPassword, isSlavicName} from '../../ulils/validators';
 import defaultUser from './userDefault';
-import {onOpenSettingsRequest, onSettingsChangeRequest,
-  onUpdateAvatarRequest} from './events';
-import {GET_HEADERS} from '../../ulils/postRequest';
+import {
+  onOpenSettingsRequest, onSettingsChangeRequest,
+  onUpdateAvatarRequest,
+} from './events';
+import {GET_HEADERS, getRequest} from '../../ulils/postRequest';
 import {Navigator} from '../../Navigator';
 
 /**
@@ -17,8 +21,8 @@ import {Navigator} from '../../Navigator';
  */
 class UserPage extends Page {
   /**
-     * @return {string} - page to render
-     */
+   * @return {string} - page to render
+   */
   render() {
     return template({
       ...this.props.userData,
@@ -35,14 +39,40 @@ const parseResponse = async (r) => {
   }
   const j = await r.json();
   console.log(j);
-  return {
-    user: {
-      firstname: j.user['first-name'],
-      lastname: j.user['last-name'],
-      avatar: j.user.avatar,
-    },
-    summaries: j.summaries,
-  };
+  try {
+    const sumRes = await getRequest(
+        `/api/user/${getUserId()}/summaries`);
+    const sumRaw = await sumRes.json();
+    const sum = sumRaw.map((s) => ({
+      firstName: s['first-name'],
+      lastName: s['last-name'],
+      phone: s['phone-number'],
+      email: s.email,
+      birthDate: j['birth-date'],
+      sex: s['gender'],
+      experience: s.experience,
+      education: s.education,
+      id: s.id,
+    }));
+    return {
+      user: {
+        firstname: j.user['first-name'],
+        lastname: j.user['last-name'],
+        avatar: j.user.avatar,
+      },
+      summaries: sum,
+    };
+  } catch (e) {
+    console.log(e);
+    return {
+      user: {
+        firstname: j.user['first-name'],
+        lastname: j.user['last-name'],
+        avatar: j.user.avatar,
+      },
+      summaries: [],
+    };
+  }
 };
 // preload data
 const getUserId = () => {
@@ -108,7 +138,7 @@ UserPage = withEvents(UserPage, 'events',
         id: uuid(),
         eventName: 'click',
         event: (a, b) => {
-          // @TODO load more summaries from server
+        // @TODO load more summaries from server
           b.props.userData.summaries = [
             ...b.props.userData.summaries,
             defaultUser.summaries[0],

@@ -9,5 +9,6 @@ mixin summary(s)
         p пол: #{s.sex}
         p Опыт работы: #{s.experience}
         p Образование: #{s.education}
+        block
 
 +summary(locals.summary)

@@ -6,28 +6,28 @@ include ../../../templates/pug/forms
         section.sub-form
             h3 Контактные данные
             +triple-field(placeholder="Имя")
-                +input-field(placeholder="Имя" id=locals.firstName.id value="Михаил")
+                +input-field(placeholder="Имя" id=locals.firstName.id)
             +triple-field(placeholder="Фамилия")
-                +input-field(placeholder="Имя" id=locals.lastName.id value="Балицкий")
+                +input-field(placeholder="Имя" id=locals.lastName.id)
             +triple-field(placeholder="Мобильный телефон")
-                +input-field(placeholder="Мобильный телефон" id=locals.phone.id value="89123456789")
+                +input-field(placeholder="Мобильный телефон" id=locals.phone.id)
             +triple-field(placeholder="Город проживания")
-                +input-field(placeholder="Город проживания" id=locals.city.id value="Москва")
+                +input-field(placeholder="Город проживания" id=locals.city.id)
             +triple-field(placeholder="Email")
-                +input-field(placeholder="Email" id=locals.email.id value="example@example.com")
+                +input-field(placeholder="Email" id=locals.email.id)
         section.sub-form
             h3 Основная информация
             +triple-field(placeholder="Дата рождения")
                 div.input-inner-col
                     div.input-inner
-                        +input-field(placeholder="День" id=locals.birthDay.id value="12")
+                        +input-field(placeholder="День" id=locals.birthDay.id)
                         select.form-input-select(id=locals.birthMonth.id)
                             - let month = ['Январь', 'Февраль','Март','Апрель',
                             -              'Май','Июнь','Июль','Август','Сентября',
                             -              'Октябрь','Ноябрь','Декабрь', ]
                             each val, index in month
                                 option(value=`${index}`)=val
-                        +input-field(placeholder="Год" id=locals.birthYear.id value="1923")
+                        +input-field(placeholder="Год" id=locals.birthYear.id)
             +triple-field(placeholder="Пол")
                 div.input-inner
                     label
@@ -43,10 +43,10 @@ include ../../../templates/pug/forms
                         value="female")
                     |                                    Женский
             +triple-field(placeholder="Гражданство")
-                +input-field(placeholder="Гражданство" id=locals.citizenship.id value="Российская Федерация")
+                +input-field(placeholder="Гражданство" id=locals.citizenship.id)
             +triple-field(placeholder="Опыт работты")
                 div.input-inner-col
-                    +input-field(placeholder="Опыт работы" tag="textarea" id=locals.experience.id value="Отсутствует"
+                    +input-field(placeholder="Опыт работы" tag="textarea" id=locals.experience.id
                         style="resize: vertical; min-height: 38px")
                     .inputs-wrapper
                         span

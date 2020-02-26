@@ -1,31 +1,8 @@
-mixin summaries(list, events)
+include ../../SummaryPage/pug/index
+mixin summaries(summs, events)
     h2 Ваши Резюме
-    ul(class="user-summaries")
-         each item in list
-            +summary(item)
-         +showmore(id=events.showMore.id)
-mixin showmore()
-    div(class="show-more" id=attributes.id)
-        div &#x25BC
-mixin contacts(c)
-    p #{c.firstname} #{c.lastname}
-    p телефон: #{c.mobile}
-    p город: #{c.city}
-mixin date(d)
-    p #{d.year}/#{d.month}/#{d.day}
-mixin info(i)
-    +date(i.birth)
-    p страна: #{i.country}
-    p пол: #{i.sex}
-    p опыт работы: #{i.experience}
-mixin education(eList)
-    p образование:
-        each e in eList
-            p #{e.degree}
-mixin summary(s)
-    li(class="user-summary")
-        article
-            p #{s.title}
-            +contacts(s.contacts)
-            +info(s.info)
-            +education(s.education)
+        div(class="user-summaries")
+            each sum in summs
+                +summary(sum)
+                    a(href="#" data-page="summaries/"+sum.id) Открыть страницу резюме
+            +showmore(id=events.showMore.id)

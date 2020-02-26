@@ -1,7 +1,7 @@
 include ../../../../../src/templates/pug/forms
 mixin signin-form
     span.form-caption Вход в личный кабинет
-        +input-field(id=attributes.loginId placeholder="Имя пользователя" value="mikstime")
+        +input-field(id=attributes.loginId placeholder="Имя пользователя")
         div.separator
-        +input-field(id=attributes.passwordId type="password" placeholder="Пароль" value="Password1")
-        input.form-submit(id=attributes.submitId type="submit" value="Войти в личный кабинет")
+        +input-field(id=attributes.passwordId type="password" placeholder="Пароль")
+        input.form-submit(id=attributes.submitId type="submit")

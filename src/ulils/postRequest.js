@@ -30,6 +30,15 @@ export const PUT_HEADERS = {
   },
 };
 
+export const getRequest = (url, headers = {}) => (
+  new Promise((resolve, reject) => {
+    fetch('http://91.210.170.6:8000' + url, {
+      ...GET_HEADERS,
+      ...headers,
+    }).then(resolve).catch(reject);
+  },
+  )
+);
 
 export const postRequest = (url, body, headers = {}) => (
   new Promise((resolve, reject) => {
