@@ -16,8 +16,6 @@ Dev server: npm run start:dev
 
 Марат Ишимбаев
 
-Сергей Мельников
-
 Менторы
 
 Backend: Артем Бакулев
