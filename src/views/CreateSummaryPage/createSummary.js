@@ -3,7 +3,7 @@ import {Navigator} from '../../Navigator';
 
 export const createSummary = (s) => {
   postRequest(`/api/summaries`, {
-    'author': window.userId || 0,
+    'author': (window.userId || 0).toString(),
     'first-name': s.firstName,
     'last-name': s.lastName,
     'phone-number': s.phone,
