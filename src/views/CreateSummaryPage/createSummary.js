@@ -3,6 +3,7 @@ import {Navigator} from '../../Navigator';
 
 export const createSummary = (s) => {
   postRequest(`/api/summaries`, {
+    'author': window.userId || 0,
     'first-name': s.firstName,
     'last-name': s.lastName,
     'phone-number': s.phone,
@@ -11,7 +12,6 @@ export const createSummary = (s) => {
     'gender': s.sex,
     'experience': s.experience,
     'education': s.education,
-    'author': window.userId || 0,
   }).then(async (r) => {
     if ( r.status === 201 ) {
       try {
