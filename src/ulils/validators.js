@@ -1,3 +1,9 @@
+/**
+ * Validation wrapper
+ * @param {function} compare - comporator
+ * @param {string} msg - error message
+ * @return {Function}
+ */
 const validateXXX = (compare, msg) => {
   return (prop, propName, throwError) => {
     if (compare(prop)) return true;
@@ -9,15 +15,20 @@ const validateXXX = (compare, msg) => {
         `);
   };
 };
-
+// validate string, throw error if necessary
 const validateString = validateXXX(
     (s) => typeof s === 'string', 'String');
+// validate function, throw error if necessary
 const validateFunction = validateXXX(
     (s) => typeof s === 'function', 'Function');
 
+// Начинается с заглавной русской буквы, содержит хотя бы 2 буквы
 const isSlavicName = (name) => /[A-ЯЁ][а-яё]/.test(name);
+// 0 - 11
 const isMonthId = (n) => 0 <= parseInt(n) && parseInt(n) <= 11;
+// 0 - 31
 const isDay = (n) => 0 <= parseInt(n) && parseInt(n) <= 31;
+// 1900 - нынешний год
 const isYear = (n) =>
   1900 <= parseInt(n) && parseInt(n) <= new Date().getFullYear();
 // https://stackoverflow.com/questions/19605150/regex-for-password-mu
@@ -25,8 +36,10 @@ const isYear = (n) =>
 // Minimum eight characters, at least one letter and one number:
 const isPassword = (password) =>
   /^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{8,}$/.test(password);
+// Удовлетворяет почти любому формату ввода телефона
 const isPhoneNumber = (phone) =>
   /^(\s*)?(\+)?([- _():=+]?\d[- _():=+]?){10,14}(\s*)?$/.test(phone);
+// Несложная валидация почты
 const isEmail = (email) =>
   /^[a-zA-Z0-9]+@[a-zA-Z0-9]+\.[a-zA-Z0-9]+$/.test(email);
 

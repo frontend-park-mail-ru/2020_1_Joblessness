@@ -1,5 +1,15 @@
 import {validateString} from './validators';
 
+/**
+ * Добавляет поддержку валидации форм
+ * @param {Page} WrappedComponent
+ * @param {Object}inputFields
+ * @param {Object}submitField
+ * @param {function}onValid
+ * @param {function}onInvalid
+ * @param {string}propName
+ * @return {Page}
+ */
 export const withForm = (WrappedComponent, inputFields, submitField,
     onValid, onInvalid = null, propName = 'inputFields') => {
   if (!WrappedComponent.isPageComponent) {
@@ -37,8 +47,8 @@ export const withForm = (WrappedComponent, inputFields, submitField,
        * call default constructor and set element's props
        * @param {any} args
        */
-    constructor(...args) {
-      super(...args);
+    constructor(args) {
+      super(args);
       this.props[propName] = {
         ...inputFields,
         submitField,
