@@ -41,9 +41,9 @@ const parseResponse = async (r) => {
   console.log(j);
   try {
     const sumRes = await getRequest(
-        `/api/user/${getUserId()}/summaries`);
+        `/api/summaries`);
     const sumRaw = await sumRes.json();
-    const sum = sumRaw.map((s) => ({
+    const sum = sumRaw.filter((s) => s.author === getUserId()).map((s) => ({
       firstName: s['first-name'],
       lastName: s['last-name'],
       phone: s['phone-number'],
