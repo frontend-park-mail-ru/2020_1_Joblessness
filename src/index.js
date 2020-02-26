@@ -21,6 +21,9 @@ import {
  * App
  */
 class App {
+  /**
+   * Init everything
+   */
   constructor() {
     console.log('Application was created');
 

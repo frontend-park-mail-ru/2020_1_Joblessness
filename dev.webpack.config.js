@@ -40,8 +40,6 @@ module.exports = {
         loader: 'eslint-loader',
         options: {
           fix: true,
-          failOnError: false,
-          failOnWarning: false,
         },
       },
       {
