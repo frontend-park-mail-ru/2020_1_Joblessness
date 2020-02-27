@@ -1,6 +1,4 @@
-import {uuid} from '../../../ulils';
-import {isLogin, isPassword} from '../../../ulils/validators';
-import {withForm} from '../../../ulils/withForm';
+import {uuid, withForm, validators} from '../../../ulils';
 import {tryLogin} from './tryLogin';
 
 /**
@@ -12,14 +10,14 @@ export const appendWithForm = Wrappee => withForm(Wrappee, {
     password: {
       id: uuid(),
       required: true,
-      validator: isPassword,
+      validator: validators.isPassword,
       warnMessage: 'Пароль должен содержать ' +
         'хотя бы 8 символов, одну заглавную букву и цифру',
     },
     userName: {
       id: uuid(),
       required: true,
-      validator: isLogin,
+      validator: validators.isLogin,
     },
   }, {
     id: uuid(),

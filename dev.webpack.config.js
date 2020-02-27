@@ -16,15 +16,6 @@ module.exports = {
     historyApiFallback: true,
 
   },
-  // devServer: {
-  //   hot: true,
-  //   compress: true,
-  //   contentBase: path.join(__dirname, 'dev/'),
-  //   inline: true,
-  //   disableHostCheck: true,
-  //   port: 8080,
-  //   historyApiFallback: true
-  // },
   module: {
     rules: [
       {

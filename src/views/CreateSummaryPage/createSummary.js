@@ -1,4 +1,4 @@
-import {request} from '../../ulils';
+import {currentSession, request} from '../../ulils';
 import {Navigator} from '../../Navigator';
 
 export const createSummary = (s) => {
@@ -8,8 +8,9 @@ export const createSummary = (s) => {
   education += s.secondaryEducation ?
     'Среднее образование: '+ s.secondaryEducation + '.' :
     '';
+  console.log(s);
   request.post(`/api/summaries`, {
-    'author': (window.userId || 0).toString(),
+    'author': (currentSession.user.id).toString(),
     'first-name': s.firstName,
     'last-name': s.lastName,
     'phone-number': s.phone,

@@ -1,5 +1,4 @@
-import {request} from '../../../ulils';
-import {currentSession} from '../../../ulils';
+import {request, currentSession} from '../../../ulils';
 import {Navigator} from '../../../Navigator';
 
 export const tryLogin = (data) => {
@@ -9,6 +8,7 @@ export const tryLogin = (data) => {
           try {
             const user = await r.json();
             currentSession.session = user.id;
+
             Navigator.updateAllPages();
             Navigator.showPage(`users/${user.id}`);
           } catch (e) {

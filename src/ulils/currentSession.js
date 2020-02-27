@@ -14,7 +14,7 @@ class CurrentSession {
   }
   /**
    * set session
-   * @param {string|number} id - user id to set
+   * @param {string|number|null} id - user id to set
    */
   set session(id) {
     if (typeof id === 'string') {
@@ -32,11 +32,15 @@ class CurrentSession {
       }
       this.#userId = Math.floor(id);
       this.#isAuthenticated = true;
+    } else if (id === null) {
+      this.#userId = 0;
+      this.#isAuthenticated = false;
     } else {
       throw new Error(`
       Expected string or number as ID.
+      Or null to clear session.
       String or number may represent integer.
-      otherwise it will be floored.
+      otherwise it will be floored
       received ${id}`);
     }
   }
@@ -47,7 +51,9 @@ class CurrentSession {
    */
   get user() {
     if (this.#userId === 0) {
-      return null;
+      return {
+        id: 0,
+      };
     }
     return {
       id: this.#userId,

@@ -6,7 +6,7 @@ import {onSignUp} from './onSignUp';
  * @param {EmployeeSignUpPage} Wrappee
  * @return {EmployeeSignUpPage}
  */
-export const appendWithForm = (Wrappee) => withForm(Wrappee,
+export const appendForm = (Wrappee) => withForm(Wrappee,
     {
       firstName: {
         id: uuid(),

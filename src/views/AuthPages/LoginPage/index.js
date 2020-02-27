@@ -1,10 +1,7 @@
-import {Page} from '../../../Page';
-import {withForm} from '../../../ulils/withForm';
-import template from './pug/index.pug';
 import '../style.sass';
-import {uuid} from '../../../ulils';
-import {isLogin, isPassword} from '../../../ulils/validators';
-import {tryLogin} from './tryLogin';
+import {Page} from '../../../Page';
+import template from './pug/index.pug';
+import {appendForm} from './appendForm';
 
 /**
  * User login page
@@ -17,24 +14,8 @@ class LoginPage extends Page {
     return template(this.props.inputFields);
   }
 }
-const inputFields = {
-  password: {
-    id: uuid(),
-    required: true,
-    validator: isPassword,
-    warnMessage: 'Введите пароль!',
-  },
-  userName: {
-    id: uuid(),
-    required: true,
-    validator: isLogin,
-  },
-};
-LoginPage = withForm(LoginPage, inputFields, {
-  id: uuid(),
-},
-tryLogin,
-);
+
+LoginPage = appendForm(LoginPage);
 export {
   LoginPage,
 };
