@@ -5,8 +5,10 @@ import {withEvents} from './withEvents';
 import {withNetwork} from './withNetwork';
 import {fileToB64} from './fileToB64';
 import {withAuth} from './withAuth';
+import {currentSession} from './currentSession';
 
 export {
+  currentSession,
   validators,
   uuid,
   FieldManager,
@@ -14,4 +16,12 @@ export {
   withEvents,
   withAuth,
   fileToB64,
+};
+export default {
+  validators,
+  wrappers: {
+    withNetwork,
+    withEvents,
+    withAuth,
+  },
 };

@@ -1,11 +1,10 @@
 import {Page} from '../../../Page';
 import {withForm} from '../../../ulils/withForm';
 import template from './pug/index.pug';
-import '../style.css';
+import '../style.sass';
 import {uuid} from '../../../ulils';
 import {isLogin, isPassword} from '../../../ulils/validators';
-import {requestSignIn} from '../../../ulils/postRequest';
-import {Navigator} from '../../../Navigator';
+import {tryLogin} from './tryLogin';
 
 /**
  * User login page
@@ -35,29 +34,7 @@ const inputFields = {
 LoginPage = withForm(LoginPage, inputFields, {
   id: uuid(),
 },
-(data) => {
-  requestSignIn(data.userName, data.password)
-      .then( async (r) => {
-        if (r.status === 201) {
-          // document.cookie = `reg_data=${data.userName}:::::${data.password}`;
-          window.isAuthenticated = true;
-          try {
-            const user = await r.json();
-            window.userId = user.id;
-            Navigator.updateAllPages();
-            Navigator.showPage('index');
-          } catch (e) {
-            alert('Что-то пошло не так');
-          }
-        } else {
-          alert('Невернные логин или пароль');
-        }
-      })
-      .catch(() => alert('Невозможно соединиться с сервером'));
-},
-(fields) => {
-  console.log('fail');
-},
+tryLogin,
 );
 export {
   LoginPage,

@@ -2,6 +2,7 @@ import './style.sass';
 import {Page} from '../../Page.js';
 import template from './pug/index.pug';
 import {
+  currentSession,
   FieldManager, uuid,
   withEvents, withNetwork,
 } from '../../ulils';
@@ -77,10 +78,12 @@ const parseResponse = async (r) => {
 const getUserId = () => {
   const name = location.pathname;
   if (name.startsWith('/users/')) {
-    return name.replace('/users/', '') ||
-      window.userId || 1;
+    return name
+        .replace('/users/', '')
+        .replace('/', '') ||
+      currentSession.user.id || 1;
   }
-  return window.userId || 1;
+  return currentSession.user.id || 1;
 };
 UserPage = withNetwork(
     () => (`http://91.210.170.6:8000/api/user/${getUserId()}`),

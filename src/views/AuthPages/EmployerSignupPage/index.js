@@ -1,6 +1,6 @@
 import {Page} from '../../../Page';
 import template from './pug/index.pug';
-import '../style.css';
+import '../style.sass';
 import {withForm} from '../../../ulils/withForm';
 import {uuid} from '../../../ulils';
 import {isEmail, isPhoneNumber, isSlavicName} from '../../../ulils/validators';

@@ -2,6 +2,7 @@
 import '@babel/polyfill';
 import {Navigator} from './Navigator.js';
 import {loginOnReload} from './ulils/loginOnReload';
+import './style.sass';
 import {
   CreateSummaryPage,
   CreateVacancyPage,

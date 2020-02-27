@@ -1,6 +1,6 @@
 import {Page} from '../../../Page';
 import template from './pug/index.pug';
-import '../style.css';
+import '../style.sass';
 import {withForm} from '../../../ulils/withForm';
 import {uuid, validators} from '../../../ulils';
 import {onSignUp} from './onSignUp';
@@ -60,9 +60,6 @@ EmployeeSignupPage = withForm(EmployeeSignupPage,
       id: uuid(),
     },
     onSignUp,
-    () => {
-      console.log('fail');
-    },
 );
 export {
   EmployeeSignupPage,
