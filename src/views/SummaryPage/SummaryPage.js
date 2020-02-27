@@ -1,7 +1,6 @@
 import {Page} from '../../Page.js';
 import template from './pug/index.pug';
-import {withNetwork} from '../../ulils';
-import {GET_HEADERS} from '../../ulils/postRequest';
+import {withNetwork, request} from '../../ulils';
 import {Navigator} from '../../Navigator';
 
 /**
@@ -25,7 +24,7 @@ const getSummaryId = () => {
 };
 SummaryPage = withNetwork(
     () => `http://91.210.170.6:8000/api/summaries/${getSummaryId()}`,
-    () => GET_HEADERS, SummaryPage,
+    () => request.GET_HEADERS, SummaryPage,
     'summary', {
       firstName: 'Имя',
       lastName: 'Фамиилия',

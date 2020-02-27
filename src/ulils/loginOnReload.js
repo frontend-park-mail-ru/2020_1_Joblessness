@@ -1,12 +1,11 @@
-import {postRequest} from './postRequest';
 import {Navigator} from '../Navigator';
-import {currentSession} from './index';
+import {currentSession, request} from './index';
 
 /**
  * Отправляет запрос на авторизацию при загрузке страницы
  */
 export const loginOnReload = () => {
-  postRequest('/api/users/check', {})
+  request.post('/api/users/check', {})
       .then(async (r) => {
         if (r.status === 201) {
           try {

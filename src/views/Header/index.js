@@ -4,7 +4,7 @@ import unAuthHeader from './pug/unauth_header.pug';
 import './style.sass';
 import {withAuth} from '../../ulils';
 import {Navigator} from '../../Navigator';
-import {postRequest} from '../../ulils/postRequest';
+import {request} from '../../ulils';
 
 /**
  * auth header
@@ -18,7 +18,7 @@ class AuthHeader extends Page {
   constructor(args) {
     super(args);
     this.#signOut = () => {
-      postRequest('/api/users/logout', {}).then((r) => {
+      request.post('/api/users/logout', {}).then((r) => {
         window.userId = null;
         window.isAuthenticated = false;
         Navigator.updateAllPages();

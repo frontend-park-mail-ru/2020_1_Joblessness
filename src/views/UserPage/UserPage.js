@@ -5,6 +5,7 @@ import {
   currentSession,
   FieldManager, uuid,
   withEvents, withNetwork,
+  request,
 } from '../../ulils';
 import {isPassword, isSlavicName} from '../../ulils/validators';
 import defaultUser from './userDefault';
@@ -12,7 +13,6 @@ import {
   onOpenSettingsRequest, onSettingsChangeRequest,
   onUpdateAvatarRequest,
 } from './events';
-import {GET_HEADERS, getRequest} from '../../ulils/postRequest';
 import {Navigator} from '../../Navigator';
 
 /**
@@ -32,7 +32,7 @@ class UserPage extends Page {
   }
 }
 
-const prepareRequestBody = (page) => (GET_HEADERS);
+const prepareRequestBody = (page) => (request.GET_HEADERS);
 const parseResponse = async (r) => {
   if (r.status === 404) {
     Navigator.showPage('404');
@@ -40,7 +40,7 @@ const parseResponse = async (r) => {
   }
   const j = await r.json();
   try {
-    const sumRes = await getRequest(
+    const sumRes = await request.get(
         `/api/summaries`);
     const sumRaw = await sumRes.json();
     const sum = sumRaw.filter((s) => s.author === parseInt(getUserId()))
@@ -142,26 +142,12 @@ UserPage = withEvents(UserPage, 'events',
         // @TODO load more summaries from server
           b.props.userData.summaries = [
             ...b.props.userData.summaries,
-            defaultUser.summaries[0],
           ];
           b.requestRender();
         },
       },
     },
 );
-/**
- * unauthorised user page
- */
-// class NoAuthUserPage extends Page {
-//   /**
-//    *
-//    * @return {string} - page to render
-//    */
-//   render() {
-//     return `Авторизируйтесь пожалуйста`;
-//   }
-// }
-// UserPage = withAuth(NoAuthUserPage, UserPage);
 export {
   UserPage,
 };

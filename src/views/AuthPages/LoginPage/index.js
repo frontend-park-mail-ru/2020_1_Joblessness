@@ -22,8 +22,7 @@ const inputFields = {
     id: uuid(),
     required: true,
     validator: isPassword,
-    warnMessage: 'Пароль должен содержать ' +
-        'хотя бы 8 символов, одну заглавную букву и цифру',
+    warnMessage: 'Введите пароль!',
   },
   userName: {
     id: uuid(),

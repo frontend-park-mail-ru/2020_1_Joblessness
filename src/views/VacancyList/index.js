@@ -2,7 +2,7 @@ import {Page} from '../../Page';
 import template from './pug/index.pug';
 import './style.sass';
 import {uuid, withEvents, withNetwork} from '../../ulils';
-import {GET_HEADERS} from '../../ulils/postRequest';
+import {request} from '../../ulils';
 
 /**
  * Vacancies
@@ -16,7 +16,7 @@ class VacancyListPage extends Page {
   }
 }
 
-const prepareRequestBody = () => GET_HEADERS;
+const prepareRequestBody = () => request.GET_HEADERS;
 const parseResponse = async (r) => {
   try {
     const vacancies = await r.json();

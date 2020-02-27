@@ -3,19 +3,22 @@ import {uuid} from './uuid';
 import {FieldManager} from './FieldManager';
 import {withEvents} from './withEvents';
 import {withNetwork} from './withNetwork';
+import {withForm} from './withForm';
 import {fileToB64} from './fileToB64';
 import {withAuth} from './withAuth';
 import {currentSession} from './currentSession';
-
+import request from './request';
 export {
   currentSession,
   validators,
+  request,
   uuid,
   FieldManager,
   withNetwork,
   withEvents,
   withAuth,
   fileToB64,
+  withForm,
 };
 export default {
   validators,
@@ -23,5 +26,7 @@ export default {
     withNetwork,
     withEvents,
     withAuth,
+    withForm,
   },
+  request,
 };

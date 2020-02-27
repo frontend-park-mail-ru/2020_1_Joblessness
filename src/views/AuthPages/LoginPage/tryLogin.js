@@ -1,9 +1,9 @@
-import {requestSignIn} from '../../../ulils/postRequest';
+import {request} from '../../../ulils';
 import {currentSession} from '../../../ulils';
 import {Navigator} from '../../../Navigator';
 
 export const tryLogin = (data) => {
-  requestSignIn(data.userName, data.password)
+  request.login(data.userName, data.password)
       .then( async (r) => {
         if (r.status === 201) {
           try {

@@ -1,8 +1,7 @@
 import './style.sass';
 import {Page} from '../../Page.js';
 import template from './pug/index.pug';
-import {withNetwork} from '../../ulils';
-import {GET_HEADERS} from '../../ulils/postRequest';
+import {request, withNetwork} from '../../ulils';
 import {Navigator} from '../../Navigator';
 
 /**
@@ -25,7 +24,7 @@ const getVacancyId = () => {
 };
 VacancyPage = withNetwork(
     () => `http://91.210.170.6:8000/api/vacancies/${getVacancyId()}`,
-    () => GET_HEADERS, VacancyPage,
+    () => request.GET_HEADERS, VacancyPage,
     'vacancy', {
       name: 'Описание работы',
       description: 'Описание самой лучшой вакансии на планете',
