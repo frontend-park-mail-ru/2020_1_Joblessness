@@ -5,7 +5,7 @@ import {CreateSummaryPage} from './CreateSummaryPage';
 import {UserPage} from './UserPage';
 import {LoginPage} from './AuthPages/LoginPage';
 import {EmployerSignupPage} from './AuthPages/EmployerSignupPage';
-import {EmployeeSignupPage} from './AuthPages/EmployeeSignupPage';
+import {EmployeeSignUpPage} from './AuthPages/EmployeeSignupPage';
 import {Header} from './Header';
 import {Footer} from './Footer';
 import {IndexPage} from './IndexPage';
@@ -20,7 +20,7 @@ export {
   UserPage,
   LoginPage,
   EmployerSignupPage,
-  EmployeeSignupPage,
+  EmployeeSignUpPage,
   Header,
   Footer,
   IndexPage,
@@ -35,7 +35,7 @@ export default {
   UserPage,
   LoginPage,
   EmployerSignupPage,
-  EmployeeSignupPage,
+  EmployeeSignUpPage,
   Header,
   Footer,
   IndexPage,

@@ -1,9 +1,7 @@
+import '../style.sass';
 import {Page} from '../../../Page';
 import template from './pug/index.pug';
-import '../style.css';
-import {withForm} from '../../../ulils/withForm';
-import {uuid} from '../../../ulils';
-import {isEmail, isPhoneNumber, isSlavicName} from '../../../ulils/validators';
+import {uuid, withForm, validators} from '../../../ulils';
 
 /**
  * Employer signup page
@@ -30,27 +28,26 @@ EmployerSignupPage = withForm(EmployerSignupPage,
       city: {
         id: uuid(),
         required: true,
-
       },
       firstName: {
         id: uuid(),
         required: true,
-        validator: isSlavicName,
+        validator: validators.isSlavicName,
       },
       lastName: {
         id: uuid(),
         required: true,
-        validator: isSlavicName,
+        validator: validators.isSlavicName,
       },
       phone: {
         id: uuid(),
         required: true,
-        validator: isPhoneNumber,
+        validator: validators.isPhoneNumber,
       },
       email: {
         id: uuid(),
         required: true,
-        validator: isEmail,
+        validator: validators.isEmail,
       },
       companyType: {
         id: uuid(),
@@ -64,8 +61,8 @@ EmployerSignupPage = withForm(EmployerSignupPage,
     {
       id: uuid(),
     },
-    (a, b) => {
-      console.log(a, b);
+    (e, page) => {
+      console.log(e, page);
     },
     (a, b) => {
       console.log('fail');

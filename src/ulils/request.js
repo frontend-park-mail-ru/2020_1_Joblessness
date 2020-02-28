@@ -30,7 +30,7 @@ export const PUT_HEADERS = {
   },
 };
 
-export const getRequest = (url, headers = {}) => (
+export const get = (url, headers = {}) => (
   new Promise((resolve, reject) => {
     fetch('http://91.210.170.6:8000' + url, {
       ...GET_HEADERS,
@@ -40,7 +40,7 @@ export const getRequest = (url, headers = {}) => (
   )
 );
 
-export const postRequest = (url, body, headers = {}) => (
+export const post = (url, body, headers = {}) => (
   new Promise((resolve, reject) => {
     fetch('http://91.210.170.6:8000' + url, {
       ...POST_HEADERS,
@@ -51,7 +51,7 @@ export const postRequest = (url, body, headers = {}) => (
   )
 );
 
-export const putRequest = (url, body, headers = {}) => (
+export const put = (url, body, headers = {}) => (
   new Promise((resolve, reject) => {
     fetch('http://91.210.170.6:8000' + url, {
       ...PUT_HEADERS,
@@ -63,12 +63,22 @@ export const putRequest = (url, body, headers = {}) => (
 );
 
 
-export const requestSignIn = (login, password) => (
+export const login = (login, password) => (
   new Promise((resolve, reject) => {
-    postRequest('/api/users/login', {
+    post('/api/users/login', {
       login, password,
     }).then(resolve)
         .catch(reject);
   },
   )
 );
+
+export default {
+  GET_HEADERS,
+  PUT_HEADERS,
+  POST_HEADERS,
+  get,
+  post,
+  put,
+  login,
+};

@@ -30,7 +30,7 @@ const isMonthId = (n) => 0 <= parseInt(n) && parseInt(n) <= 11;
 const isDay = (n) => 0 <= parseInt(n) && parseInt(n) <= 31;
 // 1900 - нынешний год
 const isYear = (n) =>
-  1900 <= parseInt(n) && parseInt(n) <= new Date().getFullYear();
+  1900 <= parseInt(n) && parseInt(n) <= new Date().getFullYear() - 18;
 // https://stackoverflow.com/questions/19605150/regex-for-password-mu
 // st-contain-at-least-eight-characters-at-least-one-number-a
 // Minimum eight characters, at least one letter and one number:
