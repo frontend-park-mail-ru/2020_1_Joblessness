@@ -25,30 +25,29 @@ const prepareUrl = () =>
 
 const prepareRequestBody = () => request.GET_HEADERS;
 
-export const appendNetwork = Wrappee => withNetwork(
-  prepareUrl, prepareRequestBody, Wrappee,
-  'summary', defaultSummary,
-  async (r) => {
-    if (r.status === 404) {
-      Navigator.showPage('404');
-    }
-    try {
-      const j = await r.json();
+export const appendNetwork = (Wrappee) => withNetwork(
+    prepareUrl, prepareRequestBody, Wrappee,
+    'summary', defaultSummary,
+    async (r) => {
+      if (r.status === 404) {
+        Navigator.showPage('404');
+      }
+      try {
+        const j = await r.json();
 
-      return {
-        firstName: j['first-name'],
-        lastName: j['last-name'],
-        phone: j['phone-number'],
-        email: j.email,
-        birthDate: j['birth-date'],
-        sex: j['gender'],
-        experience: j.experience,
-        education: j.education,
-      };
-
-    } catch (e) {
-      console.log(e);
-      return {};
-    }
-  },
+        return {
+          firstName: j['first-name'],
+          lastName: j['last-name'],
+          phone: j['phone-number'],
+          email: j.email,
+          birthDate: j['birth-date'],
+          sex: j['gender'],
+          experience: j.experience,
+          education: j.education,
+        };
+      } catch (e) {
+        console.log(e);
+        return {};
+      }
+    },
 );

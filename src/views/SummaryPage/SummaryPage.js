@@ -1,7 +1,7 @@
 import './style.sass';
 import {Page} from '../../Page.js';
 import template from './pug/index.pug';
-import {appendNetwork} from '../VacancyList/appendNetwork';
+import {appendNetwork} from './appendNetwork';
 
 /**
  * summary page
