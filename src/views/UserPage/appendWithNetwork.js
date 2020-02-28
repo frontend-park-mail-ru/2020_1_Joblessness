@@ -19,18 +19,18 @@ const parseResponse = async (r) => {
     const sumRaw = await sumRes.json();
     const sum =
       sumRaw
-          .filter(((s) => s.author === parseInt(getUserId()))
-              .map((s) => ({
-                firstName: s['first-name'],
-                lastName: s['last-name'],
-                phone: s['phone-number'],
-                email: s.email,
-                birthDate: s['birth-date'],
-                sex: s['gender'],
-                experience: s.experience,
-                education: s.education,
-                id: s.id,
-              })));
+          .filter(((s) => parseInt(s.author) === parseInt(getUserId())))
+          .map((s) => ({
+            firstName: s['first-name'],
+            lastName: s['last-name'],
+            phone: s['phone-number'],
+            email: s.email,
+            birthDate: s['birth-date'],
+            sex: s['gender'],
+            experience: s.experience,
+            education: s.education,
+            id: s.id,
+          }));
 
     return {
       user: {
