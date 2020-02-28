@@ -1,17 +1,24 @@
-import {postRequest} from '../../ulils/postRequest';
+import {currentSession, request} from '../../ulils';
 import {Navigator} from '../../Navigator';
 
 export const createSummary = (s) => {
-  postRequest(`/api/summaries`, {
-    'author': (window.userId || 0).toString(),
+  let education = s.higherEducation ?
+    'Высшее образование: ' + s.higherEducation + '. ' :
+    '';
+  education += s.secondaryEducation ?
+    'Среднее образование: '+ s.secondaryEducation + '.' :
+    '';
+  console.log(s);
+  request.post(`/api/summaries`, {
+    'author': (currentSession.user.id).toString(),
     'first-name': s.firstName,
     'last-name': s.lastName,
     'phone-number': s.phone,
     'email': s.email,
-    'birth-date': `${s.birthDay}/${s.birthMonth + 1}/${s.birthYear}`,
+    'birth-date': `${s.birthDay}/${Number(s.birthMonth) + 1}/${s.birthYear}`,
     'gender': s.sex,
     'experience': s.experience,
-    'education': s.education,
+    'education': education,
   }).then(async (r) => {
     if ( r.status === 201 ) {
       try {

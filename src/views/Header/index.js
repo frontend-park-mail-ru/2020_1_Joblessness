@@ -1,34 +1,14 @@
+import './style.sass';
 import {Page} from '../../Page';
 import authHeader from './pug/auth_header.pug';
 import unAuthHeader from './pug/unauth_header.pug';
-import './style.sass';
 import {withAuth} from '../../ulils';
-import {Navigator} from '../../Navigator';
-import {postRequest} from '../../ulils/postRequest';
+import {appendEvents} from './appendEvents';
 
 /**
  * auth header
  */
 class AuthHeader extends Page {
-  #signOut;
-  /**
-   * init evennt for sign out
-   * @param {any} args
-   */
-  constructor(args) {
-    super(args);
-    this.#signOut = () => {
-      postRequest('/api/users/logout', {}).then((r) => {
-        window.userId = null;
-        window.isAuthenticated = false;
-        Navigator.updateAllPages();
-      });
-    };
-  };
-  componentDidMount = () => {
-    document.getElementById('sign-out')
-        .addEventListener('click', this.#signOut);
-  };
   /**
    * @return {string} - page to render
    */
@@ -38,7 +18,7 @@ class AuthHeader extends Page {
     });
   }
 }
-
+AuthHeader = appendEvents(AuthHeader);
 /**
  * unauth header
  */

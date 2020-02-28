@@ -2,13 +2,14 @@
 import '@babel/polyfill';
 import {Navigator} from './Navigator.js';
 import {loginOnReload} from './ulils/loginOnReload';
+import './style.sass';
 import {
   CreateSummaryPage,
   CreateVacancyPage,
   UserPage,
   LoginPage,
   EmployerSignupPage,
-  EmployeeSignupPage,
+  EmployeeSignUpPage,
   IndexPage,
   Footer,
   VacancyPage,
@@ -43,7 +44,7 @@ class App {
       'summaries/*': new SummaryPage('#root'),
       'index': new IndexPage('#root'),
       'login': new LoginPage('#root'),
-      'signup/employee': new EmployeeSignupPage('#root'),
+      'signup/employee': new EmployeeSignUpPage('#root'),
       'signup/employer': new EmployerSignupPage('#root'),
       '404': new NotFoundPage('#root'),
       '_header': header,

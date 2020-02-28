@@ -1,8 +1,8 @@
-import {postRequest} from '../../ulils/postRequest';
+import {request} from '../../ulils';
 import {Navigator} from '../../Navigator';
 
 export const createVacancy = (v) => {
-  postRequest('/api/vacancies', {
+  request.post('/api/vacancies', {
     'name': v.vacancyName,
     'description': v.description,
     'skills': v.mainSkills,

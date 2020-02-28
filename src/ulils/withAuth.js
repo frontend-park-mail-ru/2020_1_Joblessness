@@ -1,4 +1,5 @@
 import {Page} from '../Page';
+import {currentSession} from './index';
 
 /**
  * Auth wrapper
@@ -35,7 +36,7 @@ export const withAuth = (WcUnAuth, WcAuth) => {
      *
      */
     requestRender() {
-      const page = window.isAuthenticated ? this.#authenticated :
+      const page = currentSession.isAuthenticated ? this.#authenticated :
         this.#unauthenticated;
       if (typeof page.render !== 'function') {
         throw new Error(`
@@ -64,7 +65,7 @@ export const withAuth = (WcUnAuth, WcAuth) => {
      * @return {string}
      */
     render() {
-      return window.isAuthenticated ?
+      return currentSession.isAuthenticated ?
         this.#authenticated.render() :
         this.#unauthenticated.render();
     }

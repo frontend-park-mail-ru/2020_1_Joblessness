@@ -6,26 +6,15 @@ module.exports = {
   // entry: 'src/index.js',
   // mode: 'development',
   output: {
-    path: path.join(__dirname, 'dev/'),
-    publicPath: '',
-    filename: 'bundle.js'
+    filename: 'bundle.js',
+    publicPath: '/',
+    path: path.resolve(__dirname, 'dev')
   },
   devServer: {
-    hot: true,
-    compress: true,
-    contentBase: path.join(__dirname, 'dev'),
     port: 8080,
-    after: function (app, server, compiler) {
-      app.get('*.js*', function (req, res) {
-        res.sendFile('dev/bundle.js')
-      });
-      app.get('*.css*', function (req, res) {
-        res.sendFile(path.join(__dirname, 'dev/style.css'))
-      });
-      app.get('*', function (req, res) {
-        res.sendFile(path.join(__dirname, 'dev/index.html'))
-      });
-    },
+    contentBase: path.join(__dirname, 'dev/'),
+    historyApiFallback: true,
+
   },
   module: {
     rules: [
