@@ -10,7 +10,7 @@ export const createSummary = (s) => {
     '';
   console.log(s);
   request.post(`/api/summaries`, {
-    'author': (currentSession.user.id).toString(),
+    'author': currentSession.user.id,
     'first-name': s.firstName,
     'last-name': s.lastName,
     'phone-number': s.phone,
