@@ -3,6 +3,7 @@ import {Page} from '../../Page.js';
 import template from './pug/index.pug';
 import {appendNetwork} from './appendNetwork';
 import {uuid, withEvents} from '../../ulils';
+import {print} from './print';
 
 /**
  * summary page
@@ -24,7 +25,7 @@ SummaryPage = withEvents(SummaryPage, 'events', {
     eventName: 'click',
     event: print,
   }
-})
+});
 export {
   SummaryPage,
 };
