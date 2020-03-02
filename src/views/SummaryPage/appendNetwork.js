@@ -1,5 +1,6 @@
 import {request, withNetwork} from '../../ulils';
 import {Navigator} from '../../Navigator';
+import {DOMEN} from '../../ulils/request';
 
 const getSummaryId = () => {
   const name = location.pathname;
@@ -21,7 +22,7 @@ const defaultSummary = {
 };
 
 const prepareUrl = () =>
-  `http://91.210.170.6:8000/api/summaries/${getSummaryId()}`;
+  `${DOMEN}/api/summaries/${getSummaryId()}`;
 
 const prepareRequestBody = () => request.GET_HEADERS;
 

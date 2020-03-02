@@ -1,5 +1,6 @@
 import {request, withNetwork} from '../../ulils';
 import {Navigator} from '../../Navigator';
+import {DOMEN} from '../../ulils/request';
 
 const getVacancyId = () => {
   const name = location.pathname;
@@ -19,7 +20,7 @@ const defaultVacancy = {
 };
 
 const prepareUrl = () =>
-  `http://91.210.170.6:8000/api/vacancies/${getVacancyId()}`;
+  `${DOMEN}/api/vacancies/${getVacancyId()}`;
 
 const prepareRequestBody = () => request.GET_HEADERS;
 

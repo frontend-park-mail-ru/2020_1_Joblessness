@@ -2,6 +2,7 @@
 import {currentSession, request, withNetwork} from '../../ulils';
 import defaultUser from './userDefault';
 import {Navigator} from '../../Navigator';
+import {DOMEN} from '../../ulils/request';
 
 const prepareRequestBody = (page) => request.GET_HEADERS;
 
@@ -63,7 +64,7 @@ const getUserId = () => {
   return currentSession.user.id || 1;
 };
 
-const prepareUrl = () => `http://91.210.170.6:8000/api/user/${getUserId()}`;
+const prepareUrl = () => `${DOMEN}/api/user/${getUserId()}`;
 
 export const appendWithNetwork = (Wrappee) => withNetwork(
     prepareUrl, prepareRequestBody, Wrappee,

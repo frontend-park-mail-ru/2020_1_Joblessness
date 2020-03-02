@@ -1,3 +1,5 @@
+export const DOMEN = 'http://localhost:8001';
+
 export const GET_HEADERS = {
   credentials: 'include',
   mode: 'cors',
@@ -5,7 +7,7 @@ export const GET_HEADERS = {
   method: 'GET',
   headers: {
     'Content-Type': 'application/json',
-    'Access-Control-Allow-Origin': '*',
+    'Access-Control-Allow-Origin': DOMEN,
   },
 };
 export const POST_HEADERS = {
@@ -15,7 +17,7 @@ export const POST_HEADERS = {
   method: 'POST',
   headers: {
     'Content-Type': 'application/json',
-    'Access-Control-Allow-Origin': '*',
+    'Access-Control-Allow-Origin': DOMEN,
   },
 };
 
@@ -26,13 +28,13 @@ export const PUT_HEADERS = {
   method: 'PUT',
   headers: {
     'Content-Type': 'application/json',
-    'Access-Control-Allow-Origin': '*',
+    'Access-Control-Allow-Origin': DOMEN,
   },
 };
 
 export const get = (url, headers = {}) => (
   new Promise((resolve, reject) => {
-    fetch('http://91.210.170.6:8000' + url, {
+    fetch(DOMEN + url, {
       ...GET_HEADERS,
       ...headers,
     }).then(resolve).catch(reject);
@@ -42,7 +44,7 @@ export const get = (url, headers = {}) => (
 
 export const post = (url, body, headers = {}) => (
   new Promise((resolve, reject) => {
-    fetch('http://91.210.170.6:8000' + url, {
+    fetch(DOMEN + url, {
       ...POST_HEADERS,
       ...headers,
       body: JSON.stringify(body),
@@ -53,7 +55,7 @@ export const post = (url, body, headers = {}) => (
 
 export const put = (url, body, headers = {}) => (
   new Promise((resolve, reject) => {
-    fetch('http://91.210.170.6:8000' + url, {
+    fetch(DOMEN + url, {
       ...PUT_HEADERS,
       ...headers,
       body: JSON.stringify(body),

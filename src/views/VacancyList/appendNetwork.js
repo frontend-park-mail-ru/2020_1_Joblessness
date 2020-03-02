@@ -1,4 +1,5 @@
 import {request, withNetwork} from '../../ulils';
+import {DOMEN} from '../../ulils/request';
 
 const prepareRequestBody = () => request.GET_HEADERS;
 
@@ -23,6 +24,6 @@ const parseResponse = async (r) => {
 };
 
 export const appendNetwork = (Wrappee) =>
-  withNetwork('http://91.210.170.6:8000/api/vacancies', prepareRequestBody,
+  withNetwork(`${DOMEN}/api/vacancies`, prepareRequestBody,
       Wrappee, 'vacancies', [],
       parseResponse);

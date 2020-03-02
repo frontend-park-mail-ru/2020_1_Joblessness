@@ -4,6 +4,7 @@ import {Navigator} from '../../../Navigator';
 export const tryLogin = (data) => {
   request.login(data.userName, data.password)
       .then( async (r) => {
+        console.log(r);
         if (r.status === 201) {
           try {
             const user = await r.json();
