@@ -58,20 +58,20 @@ class Navigator {
     if (this.#routes[path]) {
       const page = this.#routes[path];// check static paths
       if (page) {
-        window.history.replaceState({}, '', '/' + path);
+        window.history.pushState({}, '', '/' + path);
         this.hideAll(page.container);
         this.#routes[path]?.requestRender();
       }
     } else {
       for (const r of Object.keys(this.#dynamicRoutes)) {
         if (new RegExp(r).test(path)) {
-          window.history.replaceState({}, '', '/' + path);
+          window.history.pushState({}, '', '/' + path);
           this.hideAll(this.#dynamicRoutes[r].container);
           this.#dynamicRoutes[r]?.requestRender();
           return;
         }
       }
-      window.history.replaceState({}, '', '/404');
+      window.history.pushState({}, '', '/404');
       this.hideAll();
       this.#routes['404']?.requestRender();
     }
@@ -81,6 +81,28 @@ class Navigator {
    * Обработка нажатий на все ссылки с целью перехода на другую страницу
    */
   addNavEvents() {
+    window.onpopstate = (e) => {
+      console.log(window.location.pathname);
+      const path = window.location.pathname.replace('/', '');
+      // Hide all pages
+      if (this.#routes[path]) {
+        const page = this.#routes[path];// check static paths
+        if (page) {
+          this.hideAll(page.container);
+          this.#routes[path]?.requestRender();
+        }
+      } else {
+        for (const r of Object.keys(this.#dynamicRoutes)) {
+          if (new RegExp(r).test(path)) {
+            this.hideAll(this.#dynamicRoutes[r].container);
+            this.#dynamicRoutes[r]?.requestRender();
+            return;
+          }
+        }
+        this.hideAll();
+        this.#routes['404']?.requestRender();
+      }
+    };
     document.body.addEventListener('click', (e) => {
       const {target} = e;
       if (target instanceof HTMLAnchorElement) {
