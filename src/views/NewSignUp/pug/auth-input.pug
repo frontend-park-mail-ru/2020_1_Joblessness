@@ -1,0 +1,10 @@
+mixin input-field-auth
+    div.input-field-auth-holder(id=attributes.id)
+        input.fancy-input(
+            autofocus!=attributes.autofocus
+            type=attributes.type || "text"
+            placeholder=attributes.placeholder
+            value=attributes.value)
+        block
+        div.input-field-auth-holder--line
+        div.form-input-err

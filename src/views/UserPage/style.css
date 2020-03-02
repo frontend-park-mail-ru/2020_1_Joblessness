@@ -32,7 +32,7 @@
   display: flex;
 }
 .user-name .tag {
-  color: #787878;
+  color: #454545;
   background: none;
 }
 
@@ -68,7 +68,7 @@
 }
 
 .settings-button {
-  background: #787878;
+  background: #454545;
   border-radius: 5px;
   padding: 0 8px 0 8px;
   color: white;
@@ -106,7 +106,7 @@
 }
 #user-page-modal .apply-changes {
   margin-top: 10px;
-  background: #787878;
+  background: #454545;
   border-radius: 5px;
   padding: 0 8px 0 8px;
   color: white;

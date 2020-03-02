@@ -29,7 +29,7 @@ export class Page {
         // get dom or use provided one
       const dom = isString(container) ? document.querySelector(container) :
                         isDomElement(container) ? container: null;
-      if (!selector || !dom) {
+      if (!selector) {
         throw new Error(`
             Expected id or DOM element with id or body as container. 
             Received ${container}`,
@@ -78,7 +78,7 @@ export class Page {
         this.dom.id = domName; // @TODO should replace with id?
         // все страницы по умолчанию скрыты
         this.dom.hidden = true;
-        this.#container.dom.appendChild(this.dom);
+        // this.#container.dom.appendChild(this.dom);
       }
       return this.dom;
     }
@@ -97,6 +97,14 @@ export class Page {
      * Показать страницу
      */
     showPage() {
+
+      this.#container.dom = document.querySelector(this.#container.selector);
+      if(!this.#container.dom) {
+        throw new Error(`
+          Unable to find dom with selector ${this.#container.selector}
+          `)
+      }
+      this.#container.dom.appendChild(this.dom);
       const toShow = this.render();
 
       if (!toShow) {

@@ -1,0 +1,12 @@
+include ../../../templates/pug/link
+include ./auth-input
+div.signup-holder
+    div.signup-holder.width-60
+        div.signup-holder--header
+            h1 Tag позволяет другим быстрее находить Вас
+        div.signup-holder--tag
+            b @
+            +input-field-auth(placeholder="tag" autofocus=true)
+        div.next-button
+            +link(href="fifth-step").black-link
+                h1 Далее

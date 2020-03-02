@@ -1,0 +1,11 @@
+include ../../../templates/pug/link
+include ./auth-input
+div.signup-holder
+    div.signup-holder.width-60
+        div.signup-holder--header
+            h1 Создайте учетную запись, чтобы легко управлять вашими резюме и откликами работодателей
+        +input-field-auth(placeholder="Телефон или email" autofocus=true)
+        +input-field-auth(placeholder="Пароль" type="password")
+        div.next-button
+            +link(href="third-step").black-link
+                h1 Далее

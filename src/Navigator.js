@@ -1,53 +1,61 @@
-'use strict';
-
 /**
  * Navigator
  * Осуществляет переключение между страницами
  * На вход получает объект routes,
  * в котором ключем является data-page элемента,
  * а значением - название конструктора страницы, находящейся в BUS
+ * [{
+ *   path: string
+ *   element: Page
+ *   parent: string
+ *   childRoutes: {
+ *      path: string
+ *      parent: string
+ *      childRootes: {
+ *        ...
+ *      }
+ *   }]
+ *   or {[path]: Page}
+ * }
  */
 class Navigator {
   #routes;
-  #dynamicRoutes;
 
   /**
    * Переключает страницы
    * @param {object} routes - allowed pages and 404 page
    */
-  constructor(routes = {}) {
+  constructor(routes = []) {
     this.addNavEvents();
     if (typeof routes !== 'object' || routes === null) {
       throw new Error(`
             Expected object as field routes. Received ${routes}!`);
     }
-    this.#routes = {};
-    this.#dynamicRoutes = {};
+    this.#routes = [];
     this.addRoutes(routes);
   }
 
-  /**
-   * hide all pages appended to container
-   * @param {string}container
-   */
-  hideAll(container) {
-    // Parse based on type of container
-    const allRoutes = {
-      ...this.#routes,
-      ...this.#dynamicRoutes,
-    };
-    if (!container) {
-      Object
-          .keys(allRoutes)
-          .forEach((p) => p[0] !== '_' && allRoutes[p].hidePage());
-    } else {
-      Object
-          .keys(allRoutes)
-          .filter((p) => allRoutes[p].container === container)
-          .forEach((p) => allRoutes[p].hidePage());
+  hideAll(routes) {
+    if(routes) {
+      for(let route of routes) {
+        route.element.hidePage();
+        this.hideAll(route.children)
+      }
     }
   }
 
+  showChildren(children, path) {
+    if(!children)
+      return;
+    for (let route of children) {
+      if (route.path.comp.test(path)) {
+        this.hideAll(children);
+        route.element.requestRender();
+        this.showChildren(route.childRoutes, path.replace(route.path.raw, ''));
+        break;
+      }
+    }
+  }
   /**
    * Open requested page in navigator
    * @public
@@ -55,79 +63,89 @@ class Navigator {
    */
   showPage(path) {
     // Hide all pages
-    if (this.#routes[path]) {
-      const page = this.#routes[path];// check static paths
-      if (page) {
-        window.history.pushState({}, '', '/' + path);
-        this.hideAll(page.container);
-        this.#routes[path]?.requestRender();
-      }
-    } else {
-      for (const r of Object.keys(this.#dynamicRoutes)) {
-        if (new RegExp(r).test(path)) {
+    console.log(path);
+    for (let route of this.#routes) {
+      if (route.path.comp.test(path)) {
+        this.hideAll(this.#routes);
+        route.element.requestRender();
+        if(path[0] === '/') {
+          window.history.pushState({}, '', path);
+        } else {
           window.history.pushState({}, '', '/' + path);
-          this.hideAll(this.#dynamicRoutes[r].container);
-          this.#dynamicRoutes[r]?.requestRender();
-          return;
         }
+        this.showChildren(route.childRoutes, path.replace(route.path.raw, ''));
+        break;
       }
-      window.history.pushState({}, '', '/404');
-      this.hideAll();
-      this.#routes['404']?.requestRender();
     }
-  };
+  }
 
   /**
    * Обработка нажатий на все ссылки с целью перехода на другую страницу
    */
   addNavEvents() {
     window.onpopstate = (e) => {
-      console.log(window.location.pathname);
-      const path = window.location.pathname.replace('/', '');
+      const pathname = window.location.pathname.replace('/', '');
       // Hide all pages
-      if (this.#routes[path]) {
-        const page = this.#routes[path];// check static paths
-        if (page) {
-          this.hideAll(page.container);
-          this.#routes[path]?.requestRender();
-        }
+      let path = '';
+      if(pathname[0] === '/') {
+        path = pathname.substring(1);
       } else {
-        for (const r of Object.keys(this.#dynamicRoutes)) {
-          if (new RegExp(r).test(path)) {
-            this.hideAll(this.#dynamicRoutes[r].container);
-            this.#dynamicRoutes[r]?.requestRender();
-            return;
-          }
+        path = pathname;
+      }
+      console.log(path)
+      for (let route of this.#routes) {
+        if (route.path.comp.test(path)) {
+          this.hideAll(this.#routes);
+          route.element.requestRender();
+          this.showChildren(route.childRoutes, path.replace(route.path.raw, ''));
+          break;
         }
-        this.hideAll();
-        this.#routes['404']?.requestRender();
       }
     };
-    document.body.addEventListener('click', (e) => {
-      const {target} = e;
-      if (target instanceof HTMLAnchorElement) {
-        e.preventDefault();
-        this.showPage(target.dataset.page);
+    window.linkGo = (e) => {
+      if(e[0] === '/') {
+        this.showPage(e);
       }
-    });
+      else {
+        const loc = window.location.pathname.split('/');
+        if(loc[loc.length - 1].length === 0) {
+          loc.pop();
+        }
+        loc.pop();
+        const l = loc.join('/');
+        this.showPage(l.substr(1) + '/' + e)
+      }
+    };
   }
 
   /**
    *
    */
   updateAllPages() {
-    const allRoutes = {
-      ...this.#dynamicRoutes,
-      ...this.#routes,
-    };
-    Object
-        .keys(allRoutes)
-        .forEach((k) => {
-          if (!allRoutes[k].isHidden()) {
-            allRoutes[k].requestRender();
+    this.#routes
+      .forEach(r => {
+          if (r.isHidden()) {
+            r.requestRender();
           }
-        // !this.routes[k].isHidden() && this.routes[k].requestRender();
-        });
+        }
+      );
+  }
+
+  parseObjectRoute(route) {
+    if( route ) {
+      const {path, element = null, parent = null, childRoutes = []} = route;
+
+      return {
+        element,
+        path: {
+          comp: new RegExp(path),
+          raw: path,
+        },
+        parent,
+        childRoutes: childRoutes.map(c => this.parseObjectRoute(c)).filter(c => c)
+      };
+    }
+    return null
   }
 
   /**
@@ -135,12 +153,9 @@ class Navigator {
    * @param {object} routes
    */
   addRoutes(routes) {
-    const isDynamic = /[?*]/;
-    for (const route of Object.keys(routes)) {
-      if (isDynamic.test(route)) {
-        this.#dynamicRoutes[route] = routes[route];
-      } else {
-        this.#routes[route] = routes[route];
+    for (const route of routes) {
+      if (route instanceof Object) {
+        this.#routes.push(this.parseObjectRoute(route));
       }
     }
   }

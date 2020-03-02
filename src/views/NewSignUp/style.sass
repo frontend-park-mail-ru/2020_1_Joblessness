@@ -1,0 +1,28 @@
+@import "../../CONSTANTS"
+.triangle-icon
+  height: 2em
+  width: 2em
+  margin: 3px
+  background-repeat: no-repeat
+  background-image: url("./triangle.svg")
+  transform: rotate(90deg)
+  transition: .1s
+
+.start-button
+  display: flex
+  background: rgba(255,255,255, 1)
+  text-align: center
+  border-radius: 10px
+  transition: .2s
+  width: 100%
+  align-items: center
+  justify-content: center
+  user-select: none
+  a
+    padding: 7px
+  &:hover
+    background: rgba(255,255,255, 1)
+    transform: scale(1.01,1.01)
+  &:active
+    background: rgba(255,255,255, 1)
+    transform: scale(0.99,0.99)

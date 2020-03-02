@@ -11,6 +11,7 @@ import {Footer} from './Footer';
 import {IndexPage} from './IndexPage';
 import {SummaryPage} from './SummaryPage';
 import {NotFoundPage} from './NotFoundPage';
+import {NewSignUp} from './NewSignUp';
 
 export {
   VacancyListPage,
@@ -26,8 +27,10 @@ export {
   IndexPage,
   SummaryPage,
   NotFoundPage,
+  NewSignUp,
 };
 export default {
+  NewSignUp,
   VacancyListPage,
   CreateVacancyPage,
   VacancyPage,
