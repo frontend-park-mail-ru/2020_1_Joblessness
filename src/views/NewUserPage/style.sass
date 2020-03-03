@@ -45,7 +45,7 @@
     color: $GRAY
     background: none
 
-
+$FADING: rgba(255,255,255,.5)
 .sections-holder
   width: 100%
   height: 50px
@@ -55,10 +55,12 @@
   justify-content: stretch
   align-items: stretch
   .selected
-    background: rgba(255,255,255, .2)
+    background: $FADING
+    color: rgba(0,0,0,.7) !important
   .sections-holder--item
     text-align: center
     flex: 1
+    color: rgba(0,0,0,.4)
     display: flex
     justify-content: center
     align-items: center
@@ -74,7 +76,7 @@
     flex: 1
     display: flex
     justify-content: center
-    background: rgba(255,255,255,.2)
+    background: $FADING
 
 
 .summaries-list

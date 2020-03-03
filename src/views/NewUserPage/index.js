@@ -8,7 +8,7 @@ import {SummariesSubPage} from './summaries';
 import {FavouriteSubPage} from './favourite';
 import {StatisticsSubPage} from './statistics';
 import {Navigator} from '../../Navigator';
-
+import {changeAvatar} from './changeAvatar';
 const CONTAINER = '#__user-sections';
 const UserSubRoutes = [
   {
@@ -38,7 +38,6 @@ class UserPage extends Page {
     return template(this.props)
   }
   componentDidMount() {
-    console.log(1);
     updateLinks();
   }
 }
@@ -83,6 +82,11 @@ UserPage = withEvents(UserPage, 'events',
         const path = window.location.pathname.replace(/\D+$/g, '');
         Navigator.showPage(path + '/')
       }
+    },
+    changeAvatar: {
+      id: uuid(),
+      eventName: 'change',
+      event: changeAvatar
     }
   }
 );

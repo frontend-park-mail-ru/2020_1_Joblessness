@@ -2,7 +2,7 @@ include bio
 include sections
 
 div.user-page
-    +bio(locals.userData.user)
+    +bio(locals.userData.user)(avatarId=locals.events.changeAvatar.id)
     +sections
         +sections-item(name="Статистика" id=locals.events.showStatistics.id)
         +sections-item(name="Резюме" id=locals.events.showSummaries.id)

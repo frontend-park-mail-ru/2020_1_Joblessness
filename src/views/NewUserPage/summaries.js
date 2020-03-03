@@ -32,7 +32,6 @@ const parseResponse = async (r) => {
 class SummariesSubPage extends Page {
 
   render() {
-    console.log(this.props)
     return template(this.props);
   }
 }

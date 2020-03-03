@@ -2,8 +2,11 @@ import {uuid} from './ulils';
 import {isDomElement, isBody, isString, hasId} from './ulils/validators';
 
 const isEqual = (o1, o2) => {
-  if (typeof o1 === 'string' || typeof o1 === 'function' || typeof o1 === 'number' || o1 === null) {
+  if (typeof o1 === 'string' || typeof o1 === 'function' || typeof o1 === 'number' || o1 === null || o1 === undefined) {
     return o1 === o2
+  }
+  if (typeof o2 === 'string' || typeof o2 === 'function' || typeof o2 === 'number' || o2 === null || o2 === undefined) {
+    return o2 === o1
   }
   if (o1 instanceof Array) {
     return o1.toString() === o2.toString()
