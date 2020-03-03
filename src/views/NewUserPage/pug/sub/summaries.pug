@@ -1,0 +1,17 @@
+mixin summary(s)
+    div.summary-holder
+        div.summary-holder--body
+            h1 Резюме
+            p Имя: #{s.firstName}
+            p Фамилия: #{s.lastName}
+            p Телефон: #{s.phone}
+            p Email: #{s.email}
+            p Дата рождения: #{s.birthDate}
+            p пол: #{s.sex}
+            p Опыт работы: #{s.experience}
+            p Образование: #{s.education}
+            block
+
+div.summaries-list
+    each sum in locals.summaries
+        +summary(sum)

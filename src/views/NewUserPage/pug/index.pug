@@ -1,0 +1,12 @@
+include bio
+include sections
+
+div.user-page
+    +bio(locals.userData.user)
+    +sections
+        +sections-item(name="Статистика" id=locals.events.showStatistics.id)
+        +sections-item(name="Резюме" id=locals.events.showSummaries.id)
+        +sections-item(name="Избранное" id=locals.events.showFavourite.id)
+        +sections-item(name="Личные данные" id=locals.events.showSettings.id)
+    div.user-section-holder
+        div.user-section-holder--body#__user-sections

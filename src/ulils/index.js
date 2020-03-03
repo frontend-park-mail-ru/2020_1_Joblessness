@@ -6,6 +6,7 @@ import {withNetwork} from './withNetwork';
 import {withForm} from './withForm';
 import {fileToB64} from './fileToB64';
 import {withAuth} from './withAuth';
+import {withChainedPages} from './withChainedPages';
 import {currentSession} from './currentSession';
 import request from './request';
 export {
@@ -16,6 +17,7 @@ export {
   FieldManager,
   withNetwork,
   withEvents,
+  withChainedPages,
   withAuth,
   fileToB64,
   withForm,
@@ -25,8 +27,9 @@ export default {
   wrappers: {
     withNetwork,
     withEvents,
-    withAuth,
+    withAuth,//@TODO remove
     withForm,
+    withChainedPages,
   },
   request,
 };

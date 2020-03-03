@@ -1,6 +1,6 @@
-import {Navigator} from '../../Navigator';
+import {Navigator} from '../Navigator';
 
-const withChainedPages = (Wrappee, pages, updateProps = null) => {
+export const withChainedPages = (Wrappee, pages, updateProps = null, root = '') => {
 
   return class extends Wrappee {
 
@@ -9,12 +9,12 @@ const withChainedPages = (Wrappee, pages, updateProps = null) => {
       const requestNext = (path, args) => {
         // console.log(e);
         // ++this.props.currentStep;
-        Navigator.showPage(path)
+        Navigator.showPage(root + path)
       };
       const requestPrevious = (path, args) => {
         // console.log(e);
         // --this.props.currentStep;
-        Navigator.showPage(path)
+        Navigator.showPage(root + path)
       };
 
       pages.forEach(p => {
@@ -24,7 +24,6 @@ const withChainedPages = (Wrappee, pages, updateProps = null) => {
           (...a) => requestPrevious(p.prev, ...a);
       });
 
-      console.log(pages)
     }
 
     componentWillUpdate = () => {
@@ -34,8 +33,3 @@ const withChainedPages = (Wrappee, pages, updateProps = null) => {
     }
   }
 };
-
-
-export {
-  withChainedPages,
-}

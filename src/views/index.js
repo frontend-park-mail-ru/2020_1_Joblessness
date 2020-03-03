@@ -2,7 +2,7 @@ import {CreateVacancyPage} from './CreateVacancyPage';
 import {VacancyListPage} from './VacancyList';
 import {VacancyPage} from './VacancyPage';
 import {CreateSummaryPage} from './CreateSummaryPage';
-import {UserPage} from './UserPage';
+import {UserPage, UserSubRoutes} from './NewUserPage';
 import {LoginPage} from './AuthPages/LoginPage';
 import {EmployerSignupPage} from './AuthPages/EmployerSignupPage';
 import {EmployeeSignUpPage} from './AuthPages/EmployeeSignupPage';
@@ -14,6 +14,7 @@ import {NotFoundPage} from './NotFoundPage';
 import {NewSignUp} from './NewSignUp';
 
 export {
+  UserSubRoutes,
   VacancyListPage,
   CreateVacancyPage,
   VacancyPage,

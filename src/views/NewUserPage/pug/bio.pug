@@ -1,0 +1,6 @@
+include avarar
+include name
+mixin bio(user)
+    div(class="bio-section")
+        +avatar(src=user.avatar)
+        +name(user.firstname, user.lastname, user.tag)

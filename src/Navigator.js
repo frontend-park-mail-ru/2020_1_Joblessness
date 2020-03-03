@@ -63,10 +63,8 @@ class Navigator {
    */
   showPage(path) {
     // Hide all pages
-    console.log(path);
     for (let route of this.#routes) {
       const isAppropriate = route.path.exact ? route.path === path : route.path.comp.test(path);
-      console.log(route)
       if (isAppropriate) {
         // this.hideAll(this.#routes);
         if(path[0] === '/') {
@@ -94,7 +92,6 @@ class Navigator {
       } else {
         path = pathname;
       }
-      console.log(path);
       for (let route of this.#routes) {
         if (route.path.comp.test(path)) {
           route.element.requestRender();

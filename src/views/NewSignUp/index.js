@@ -2,8 +2,7 @@ import './style.sass'
 import './auth-elements.sass'
 import {Page} from '../../Page';
 import template from './pug/index.pug'
-import {Navigator} from '../../Navigator';
-import {withChainedPages} from './ChainedPages';
+import {withChainedPages} from '../../ulils';
 import {FirstStep} from './first-step';
 import {SecondStep} from './second-step';
 import {ThirdStep} from './third-step';
@@ -19,11 +18,13 @@ class NewSignUp extends Page {
     return template(this.props);
   }
 }
+//@TODO refactor
 const FirstStepI = new FirstStep('#_signup_steps');
 const SecondStepI = new SecondStep('#_signup_steps');
 const ThirdStepI = new ThirdStep('#_signup_steps');
 const ForthStepI = new ForthStep('#_signup_steps');
 const FifthStepI = new FifthStep('#_signup_steps');
+
 NewSignUp = withChainedPages(NewSignUp, [
   {
     next: 'signup/start',

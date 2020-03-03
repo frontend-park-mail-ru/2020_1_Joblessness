@@ -11,6 +11,7 @@ import {
   EmployeeSignUpPage,
   IndexPage,
   Footer,
+  UserSubRoutes,
   VacancyPage,
   Header,
   NotFoundPage,
@@ -44,14 +45,6 @@ class App {
     const NewSignUpInstance = new NewSignUp('#root');
     const routes = [
       {
-        path: 'summaries/create',
-        element: new CreateSummaryPage('#root'),
-      },
-      {
-        path: 'summaries/*',
-        element: new SummaryPage('#root'),
-      },
-      {
         path: 'vacancies/create',
         element: new CreateVacancyPage('#root'),
       },
@@ -64,8 +57,17 @@ class App {
         element: new VacancyPage('#root'),
       },
       {
-        path: 'users/*',
+        path: 'users',
         element: new UserPage('#root'),
+        childRoutes: UserSubRoutes,
+      },
+      {
+        path: 'summaries/create',
+        element: new CreateSummaryPage('#root'),
+      },
+      {
+        path: 'summaries/*',
+        element: new SummaryPage('#root'),
       },
       {
         path: 'login',
@@ -127,7 +129,7 @@ class App {
   }
 }
 const createApp = async () => {
-  await loginOnReload();
+  // await loginOnReload();
   new App();
 };
 createApp();
