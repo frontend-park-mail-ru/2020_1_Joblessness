@@ -1,3 +1,19 @@
 include ../../../templates/pug/link
-div
-    div#_signup_steps
+
+mixin steps-counter
+    div.steps-counter
+        div.step-counter--counter 1
+        div.step-counter--line
+        div.step-counter--counter 2
+        div.step-counter--line
+        div.step-counter--counter 3
+        div.step-counter--line
+        div.step-counter--counter 4
+        div.step-counter--line
+        div.step-counter--counter 5
+        div.step-counter--line
+        div.step-counter--counter
+div.auth-holder
+    if locals.currentStep > 1 && locals.currentStep < 5
+        +steps-counter
+    div.signup-holder.sigup-holder--steps#_signup_steps

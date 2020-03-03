@@ -6,8 +6,6 @@ import {uuid, withEvents, withForm} from '../../ulils';
 
 class FirstStep extends Page {
 
-  parent = 'signup/employee';
-
   render() {
     return template(this.props);
   }

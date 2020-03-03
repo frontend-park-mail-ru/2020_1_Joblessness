@@ -1,11 +1,10 @@
 include ../../../templates/pug/link
 include ./auth-input
 div.signup-holder
-    div.signup-holder.width-60
+    div.signup-holder.width-60.margin-right-20
         div.signup-holder--header
             h1 Укажите свои данные, чтобы работадателю было проще вас найти
-        +input-field-auth(placeholder="Имя" autofocus=true)
+        +input-field-auth(placeholder="Имя" autofocus)
         +input-field-auth(placeholder="Фамилия")
-        div.next-button
-            +link(href="forth-step").black-link
+        div.next-button(id=locals.events.submit.id)
                 h1 Далее

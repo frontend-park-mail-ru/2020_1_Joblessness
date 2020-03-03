@@ -1,8 +1,8 @@
 @import "../../CONSTANTS"
 .signup-holder
   display: flex
-  height: 100vh
-  width: 100vw
+  width: 100%
+  height: 100%
   flex-direction: column
   justify-content: center
   align-items: center
@@ -15,9 +15,17 @@
   display: flex
   font-size: 2em
   align-items: baseline
+
+.sigup-holder--steps
+  flex: 1
+  flex-grow: 3
 .gradient-background
   //background-image: linear-gradient(to right, #f83600 0%, #f9d423 100%)
   @include BACKGROUND_GRADIENT
+.margin-right-20
+  margin-right: 20%
+.no-indent
+  text-indent: 0 !important
 .width-60
   @media only screen and (max-width: 850px)
     width: 100%

@@ -1,6 +1,8 @@
 mixin input-field-auth
     div.input-field-auth-holder(id=attributes.id)
         input.fancy-input(
+            class=attributes.class
+            style=attributes.style
             autofocus!=attributes.autofocus
             type=attributes.type || "text"
             placeholder=attributes.placeholder

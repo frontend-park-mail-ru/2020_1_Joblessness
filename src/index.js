@@ -72,27 +72,33 @@ class App {
         element: new LoginPage('#root'),
       },
       {
-        path: 'signup/employee',
+        path: 'signup',
         element:  new NewSignUp('#root'),
         childRoutes: [
           {
-            path: '/first-step',
+            path: '',
+            exact: true,
             element: FirstStepI,
           },
           {
-            path: 'second-step',
+            path: '/',
+            exact: true,
+            element: FirstStepI,
+          },
+          {
+            path: 'start',
             element: SecondStepI,
           },
           {
-            path: 'third-step',
+            path: 'name',
             element: ThirdStepI,
           },
           {
-            path: 'forth-step',
+            path: 'tag',
             element: ForthStepI,
           },
           {
-            path: 'fifth-step',
+            path: 'next',
             element: FifthStepI,
           }
         ]
@@ -109,8 +115,6 @@ class App {
         path: '404',
         element: new NotFoundPage('#root'),
       }
-      // '_header': header,
-      // '_footer': footer,
     ];
 
     Navigator.addRoutes(routes);

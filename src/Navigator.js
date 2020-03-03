@@ -48,8 +48,8 @@ class Navigator {
     if(!children)
       return;
     for (let route of children) {
-      if (route.path.comp.test(path)) {
-        this.hideAll(children);
+      const isAppropriate = route.path.exact ? route.path.raw === path : route.path.comp.test(path);
+      if (isAppropriate) {
         route.element.requestRender();
         this.showChildren(route.childRoutes, path.replace(route.path.raw, ''));
         break;
@@ -65,14 +65,16 @@ class Navigator {
     // Hide all pages
     console.log(path);
     for (let route of this.#routes) {
-      if (route.path.comp.test(path)) {
-        this.hideAll(this.#routes);
-        route.element.requestRender();
+      const isAppropriate = route.path.exact ? route.path === path : route.path.comp.test(path);
+      console.log(route)
+      if (isAppropriate) {
+        // this.hideAll(this.#routes);
         if(path[0] === '/') {
           window.history.pushState({}, '', path);
         } else {
           window.history.pushState({}, '', '/' + path);
         }
+        route.element.requestRender();
         this.showChildren(route.childRoutes, path.replace(route.path.raw, ''));
         break;
       }
@@ -92,10 +94,9 @@ class Navigator {
       } else {
         path = pathname;
       }
-      console.log(path)
+      console.log(path);
       for (let route of this.#routes) {
         if (route.path.comp.test(path)) {
-          this.hideAll(this.#routes);
           route.element.requestRender();
           this.showChildren(route.childRoutes, path.replace(route.path.raw, ''));
           break;
@@ -133,16 +134,20 @@ class Navigator {
 
   parseObjectRoute(route) {
     if( route ) {
-      const {path, element = null, parent = null, childRoutes = []} = route;
+      const {path, exact = false,
+        element = null, parent = null, childRoutes = []} = route;
 
       return {
         element,
         path: {
           comp: new RegExp(path),
           raw: path,
+          exact: exact,
         },
         parent,
-        childRoutes: childRoutes.map(c => this.parseObjectRoute(c)).filter(c => c)
+        childRoutes: childRoutes
+          .map(c => this.parseObjectRoute(c))
+          .filter(c => c)
       };
     }
     return null
@@ -155,7 +160,17 @@ class Navigator {
   addRoutes(routes) {
     for (const route of routes) {
       if (route instanceof Object) {
-        this.#routes.push(this.parseObjectRoute(route));
+        const routeToInsert = this.parseObjectRoute(route);
+        for(let route of this.#routes) {
+          if(route.path.raw === routeToInsert.path.raw) {
+            route.childRoutes = [
+              ...route.childRoutes,
+              ...routeToInsert.childRoutes,
+            ];
+            return;
+          }
+        }
+        this.#routes.push(routeToInsert);
       }
     }
   }
