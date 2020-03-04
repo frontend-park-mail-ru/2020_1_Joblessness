@@ -30,7 +30,7 @@ class NewSignUp extends Page {
 
 const AuthSubRoutes = [
   {
-    path: '^$|/',
+    path: '^$|^/{1}$',
     next: 'signup/start',
     prev: 'signup/',
     element: new FirstStep('#_signup_steps'),

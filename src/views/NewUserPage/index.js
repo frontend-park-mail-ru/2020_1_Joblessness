@@ -112,7 +112,7 @@ UserPage = withEvents(UserPage, 'events',
         id: statisticsId,
         eventName: 'click',
         event: (e, page, id) => {
-          showSubPage('/');
+          showSubPage('');
         },
       },
       changeAvatar: {

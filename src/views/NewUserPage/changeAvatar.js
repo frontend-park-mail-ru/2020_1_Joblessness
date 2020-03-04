@@ -4,7 +4,7 @@ export const changeAvatar = async (e, page) => {
   const data = new FormData();
   data.append('file', e.target.files[0]);
   // @TODO refactor
-  fetch(`http://localhost:8001/api/users/${currentSession.user.id}/avatar`, {
+  fetch(`http://91.210.170.6:8000/api/users/${currentSession.user.id}/avatar`, {
     method: 'POST',
     body: data,
   }).then(async () => {
