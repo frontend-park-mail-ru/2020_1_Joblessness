@@ -1,7 +1,18 @@
 import './style.sass'
 import {Page} from '../../Page';
 import template from './pug/sub/summaries.pug'
-import {request, withNetwork} from '../../ulils';
+import {currentSession, request, withNetwork} from '../../ulils';
+
+const getUserId = () => {
+  const name = location.pathname;
+
+  if (name.startsWith('/users/')) {
+    return name
+        .replace( /\D+/g, '') ||
+      currentSession.user.id || 1;
+  }
+  return currentSession.user.id || 1;
+};
 
 const parseResponse = async (r) => {
 
@@ -9,8 +20,7 @@ const parseResponse = async (r) => {
     const sumRaw = await r.json();
     const sum =
       sumRaw
-        //@TODO normal get
-        // .filter(((s) => parseInt(s.author) === parseInt(getUserId())))
+        .filter(((s) => parseInt(s.author) === parseInt(getUserId())))
         .map((s) => ({
           firstName: s['first-name'],
           lastName: s['last-name'],

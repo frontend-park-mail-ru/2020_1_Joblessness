@@ -57,6 +57,7 @@ NewSignUp = withChainedPages(NewSignUp, [
   switch (step[step.length - 1]) {
     case '':
     case 'signup':
+    case 'employer':
     case 'next':
       page.props.currentStep = 1; break;
     default:

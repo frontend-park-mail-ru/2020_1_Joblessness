@@ -4,7 +4,7 @@ div.signup-holder
     div.signup-holder.width-60.margin-right-20
         div.signup-holder--header
             h1 Укажите свои данные, чтобы работадателю было проще вас найти
-        +input-field-auth(placeholder="Имя" autofocus)
-        +input-field-auth(placeholder="Фамилия")
-        div.next-button(id=locals.events.submit.id)
+        +input-field-auth(placeholder="Имя" autofocus id=locals.inputFields.firstName.id)
+        +input-field-auth(placeholder="Фамилия" id=locals.inputFields.lastName.id)
+        div.next-button(id=locals.inputFields.submitField.id)
                 h1 Далее

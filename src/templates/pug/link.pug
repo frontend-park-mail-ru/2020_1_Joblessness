@@ -2,7 +2,7 @@ mixin link
     a(href="javascript:;"
         data-page=attributes.href
         onclick="linkGo(\"" + attributes.href + "\")"
-        class!=attributes.class
-        style!=attributes.style
-        id!=attributes.id)
+        class=attributes.class
+        style=attributes.style
+        id=attributes.id)
         block

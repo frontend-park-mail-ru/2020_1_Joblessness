@@ -24,6 +24,7 @@ import {
   FifthStepI,
   ForthStepI,
 } from './views/NewSignUp'
+import {RootElement} from './RootElement';
 
 /**
  * App
@@ -36,14 +37,20 @@ class App {
     console.log('Application was created');
 
     const header = new Header('#holder');
-    const domBox = document.createElement('div');
-    domBox.id = 'root';
-    document.querySelector('#holder').appendChild(domBox);
 
     const footer = new Footer('#holder');
 
-    const NewSignUpInstance = new NewSignUp('#root');
     const routes = [
+      {
+        path: "any",
+        element: new RootElement('#holder'),
+        childRoutes: [
+          {
+            path: "any",
+            element: new Header('#nav-elements')
+          },
+        ]
+      },
       {
         path: 'vacancies/create',
         element: new CreateVacancyPage('#root'),
@@ -51,10 +58,13 @@ class App {
       {
         path: 'vacancies',
         element: new VacancyListPage('#root'),
-      },
-      {
-        path: 'vacancies/*',
-        element: new VacancyPage('#root'),
+        childRoutes: [
+          {
+            path: 'vacancies/*',
+            //@TODO fix vacancy page
+            element: new VacancyPage('#root'),
+          },
+        ]
       },
       {
         path: 'users',
@@ -102,16 +112,16 @@ class App {
           {
             path: 'next',
             element: FifthStepI,
-          }
+          },
+          {
+            path: 'employer',
+            element: new EmployerSignupPage('#_signup_steps'),
+          },
         ]
       },
       {
         path: 'index',
         element: new IndexPage('#root'),
-      },
-      {
-        path: 'signup/employer',
-        element: new EmployerSignupPage('#root'),
       },
       {
         path: '404',
@@ -121,15 +131,16 @@ class App {
 
     Navigator.addRoutes(routes);
 
-    // header.requestRender();// show Footer
     // footer.requestRender();// show Header
     // open current location
     const loc = window.location.pathname.replace('/', '');
-    Navigator.showPage( loc ? loc : 'signup/employee');
+    Navigator.showPage( loc ? loc : 'signup/');
+    // header.requestRender();// show Footer
+    //@TODO root as Page component
   }
 }
 const createApp = async () => {
-  // await loginOnReload();
+  await loginOnReload();
   new App();
 };
 createApp();

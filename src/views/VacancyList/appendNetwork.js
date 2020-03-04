@@ -23,6 +23,6 @@ const parseResponse = async (r) => {
 };
 
 export const appendNetwork = (Wrappee) =>
-  withNetwork('http://91.210.170.6:8000/api/vacancies', prepareRequestBody,
+  withNetwork('/api/vacancies', prepareRequestBody,
       Wrappee, 'vacancies', [],
       parseResponse);

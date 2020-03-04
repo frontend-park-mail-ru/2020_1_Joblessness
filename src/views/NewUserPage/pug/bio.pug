@@ -2,5 +2,5 @@ include avarar
 include name
 mixin bio(user)
     div(class="bio-section")
-        +avatar(id=attributes.avatarId)
+        +avatar(src=user.avatar id=attributes.avatarId)
         +name(user.firstname, user.lastname, user.tag)

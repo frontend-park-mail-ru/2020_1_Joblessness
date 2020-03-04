@@ -1,4 +1,4 @@
 mixin avatar()
     div.user-avatar
-        div.user-avatar--body(style="background-image: url(http://localhost:8001/api/users/1/avatar)")
+        div.user-avatar--body(style="background-image: url(" + attributes.src + ")")
             input(type="file" accept="image/*,.svg" class="pick-avatar" id=attributes.id )

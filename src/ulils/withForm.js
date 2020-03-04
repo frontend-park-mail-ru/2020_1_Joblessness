@@ -180,9 +180,9 @@ export const withForm = (WrappedComponent, inputFields, submitField,
             acc[v.field] = v.value;
             return acc;
           }, {});
-          onValid && onValid(arg);
+          onValid && onValid(arg, this);
         } else {
-          onInvalid && onInvalid();
+          onInvalid && onInvalid(this);
         }
       });
     }

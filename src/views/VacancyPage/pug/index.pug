@@ -1,4 +1,5 @@
 include vacancy
+include ../../../templates/pug/link
 div.vacancy-holder
     +vacancy(
         name=locals.vacancy.name
@@ -7,4 +8,4 @@ div.vacancy-holder
         salary=locals.vacancy.salary
         address=locals.vacancy.address
         phone=locals.vacancy.phone)
-            a(href="#" data-page="vacancies") К списку вакансий
+            +link(href="/vacancies") К списку вакансий

@@ -1,4 +1,5 @@
 include ../../VacancyPage/pug/vacancy
+include ../../../templates/pug/link
 div.vacancy-list
     each vac in locals.vacancies
         +vacancy(
@@ -9,6 +10,6 @@ div.vacancy-list
             address=vac.address
             phone=vac.phone
         )
-            a(href="#" data-page="vacancies/"+vac.id)
+            +link(href="/vacancies/"+vac.id)
                 |Перейти на страницу вакансии
     div.show-more(id=locals.events.showMore.id)

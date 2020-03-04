@@ -48,11 +48,18 @@ class Navigator {
     if(!children)
       return;
     for (let route of children) {
-      const isAppropriate = route.path.exact ? route.path.raw === path : route.path.comp.test(path);
-      if (isAppropriate) {
+
+      if(route.path.raw === "any") {
         route.element.requestRender();
         this.showChildren(route.childRoutes, path.replace(route.path.raw, ''));
-        break;
+        if(route.path.raw !== "any") break;
+        continue
+      }
+      const isAppropriate = route.path.exact ? route.path.raw === path : route.path.comp.test(path);
+      if (isAppropriate || route.path.raw === "any") {
+        route.element.requestRender();
+        this.showChildren(route.childRoutes, path.replace(route.path.raw, ''));
+        if(route.path.raw !== "any") break;
       }
     }
   }
@@ -65,7 +72,7 @@ class Navigator {
     // Hide all pages
     for (let route of this.#routes) {
       const isAppropriate = route.path.exact ? route.path === path : route.path.comp.test(path);
-      if (isAppropriate) {
+      if (isAppropriate || route.path.raw === "any") {
         // this.hideAll(this.#routes);
         if(path[0] === '/') {
           window.history.pushState({}, '', path);
@@ -74,7 +81,7 @@ class Navigator {
         }
         route.element.requestRender();
         this.showChildren(route.childRoutes, path.replace(route.path.raw, ''));
-        break;
+        if(route.path.raw !== "any") break;
       }
     }
   }
@@ -120,13 +127,7 @@ class Navigator {
    *
    */
   updateAllPages() {
-    this.#routes
-      .forEach(r => {
-          if (r.isHidden()) {
-            r.requestRender();
-          }
-        }
-      );
+    this.showPage(window.location.pathname)
   }
 
   parseObjectRoute(route) {

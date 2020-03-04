@@ -1,5 +1,11 @@
 import './style.sass'
-import {withChainedPages, withEvents, withNetwork, uuid} from '../../ulils';
+import {
+  withChainedPages,
+  withEvents,
+  withNetwork,
+  uuid,
+  currentSession
+} from '../../ulils';
 import template from './pug/index.pug'
 import {Page} from '../../Page';
 import {appendWithNetwork} from './appendWithNetwork';
@@ -9,6 +15,7 @@ import {FavouriteSubPage} from './favourite';
 import {StatisticsSubPage} from './statistics';
 import {Navigator} from '../../Navigator';
 import {changeAvatar} from './changeAvatar';
+
 const CONTAINER = '#__user-sections';
 const UserSubRoutes = [
   {
@@ -37,6 +44,7 @@ class UserPage extends Page {
   render() {
     return template(this.props)
   }
+
   componentDidMount() {
     updateLinks();
   }
@@ -55,8 +63,17 @@ UserPage = withEvents(UserPage, 'events',
       id: settings_id,
       eventName: 'click',
       event: (e, page, id) => {
+        //@TODO refactor
         const path = window.location.pathname.replace(/\D+$/g, '');
-        Navigator.showPage(path + '/settings')
+        if (!path) {
+          if (window.location.pathname.endsWith('users/')) {
+            Navigator.showPage(window.location.pathname  + currentSession.user.id + '/settings')
+          } else {
+            Navigator.showPage(window.location.pathname + '/' + currentSession.user.id + '/settings')
+          }
+        } else {
+          Navigator.showPage(path + '/settings')
+        }
       }
     },
     showSummaries: {
@@ -64,7 +81,15 @@ UserPage = withEvents(UserPage, 'events',
       eventName: 'click',
       event: (e, page, id) => {
         const path = window.location.pathname.replace(/\D+$/g, '');
-        Navigator.showPage(path + '/summaries')
+        if (!path) {
+          if (window.location.pathname.endsWith('users/')) {
+            Navigator.showPage(window.location.pathname  + currentSession.user.id + '/summaries')
+          } else {
+            Navigator.showPage(window.location.pathname  + '/' + currentSession.user.id + '/summaries')
+          }
+        } else {
+          Navigator.showPage(path + '/summaries')
+        }
       }
     },
     showFavourite: {
@@ -72,7 +97,15 @@ UserPage = withEvents(UserPage, 'events',
       eventName: 'click',
       event: (e, page, id) => {
         const path = window.location.pathname.replace(/\D+$/g, '');
-        Navigator.showPage(path + '/favourites')
+        if (!path) {
+          if (window.location.pathname.endsWith('users/')) {
+            Navigator.showPage(window.location.pathname  + currentSession.user.id + '/favourites')
+          } else {
+            Navigator.showPage(window.location.pathname + '/' + currentSession.user.id + '/favourites')
+          }
+        } else {
+          Navigator.showPage(path + '/favourites')
+        }
       }
     },
     showStatistics: {
@@ -80,7 +113,15 @@ UserPage = withEvents(UserPage, 'events',
       eventName: 'click',
       event: (e, page, id) => {
         const path = window.location.pathname.replace(/\D+$/g, '');
-        Navigator.showPage(path + '/')
+        if (!path) {
+          if (window.location.pathname.endsWith('users/')) {
+            Navigator.showPage(window.location.pathname + currentSession.user.id + '/')
+          } else {
+            Navigator.showPage(window.location.pathname + '/' + currentSession.user.id + '/')
+          }
+        } else {
+          Navigator.showPage(path + '/')
+        }
       }
     },
     changeAvatar: {
@@ -92,25 +133,25 @@ UserPage = withEvents(UserPage, 'events',
 );
 
 const updateLinks = () => {
-    const section = window.location.pathname.split('/');
-    const list = document.querySelectorAll('.selected');
-    for( let l of list) {
-      l.classList.remove('selected')
-    }
-    switch (section[section.length - 1]) {
-      case '' :
-        document.getElementById(statistics_id)?.classList.add('selected');
-        break;
-      case 'settings' :
-        document.getElementById(settings_id)?.classList.add('selected');
-        break;
-      case 'summaries' :
-        document.getElementById(summaries_id)?.classList.add('selected');
-        break;
-      case 'favourites' :
-        document.getElementById(favourites_id)?.classList.add('selected');
-        break;
-    }
+  const section = window.location.pathname.split('/');
+  const list = document.querySelectorAll('.selected');
+  for (let l of list) {
+    l.classList.remove('selected')
+  }
+  switch (section[section.length - 1]) {
+    case '' :
+      document.getElementById(statistics_id)?.classList.add('selected');
+      break;
+    case 'settings' :
+      document.getElementById(settings_id)?.classList.add('selected');
+      break;
+    case 'summaries' :
+      document.getElementById(summaries_id)?.classList.add('selected');
+      break;
+    case 'favourites' :
+      document.getElementById(favourites_id)?.classList.add('selected');
+      break;
+  }
 };
 
 UserPage = withChainedPages(UserPage, UserSubRoutes, updateLinks, 'users/');

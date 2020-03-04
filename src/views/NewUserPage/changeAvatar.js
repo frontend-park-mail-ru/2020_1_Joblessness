@@ -5,7 +5,7 @@ export const changeAvatar = async (e, page) => {
   const data = new FormData();
   data.append('file', e.target.files[0]);
 
-  fetch('http://localhost:8001/api/users/1/avatar', {
+  fetch(`http://localhost:8001/api/users/${currentSession.user.id}/avatar`, {
     method: 'POST',
     body: data,
   }).then(async () => {
