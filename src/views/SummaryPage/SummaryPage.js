@@ -24,7 +24,7 @@ SummaryPage = withEvents(SummaryPage, 'events', {
     id: uuid(),
     eventName: 'click',
     event: print,
-  }
+  },
 });
 export {
   SummaryPage,

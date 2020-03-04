@@ -1,10 +1,9 @@
-import {currentSession, fileToB64, request} from '../../ulils';
+import {currentSession, fileToB64} from '../../ulils';
 
 export const changeAvatar = async (e, page) => {
-
   const data = new FormData();
   data.append('file', e.target.files[0]);
-
+  // @TODO refactor
   fetch(`http://localhost:8001/api/users/${currentSession.user.id}/avatar`, {
     method: 'POST',
     body: data,

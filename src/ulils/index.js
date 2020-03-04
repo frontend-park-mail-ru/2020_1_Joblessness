@@ -27,7 +27,7 @@ export default {
   wrappers: {
     withNetwork,
     withEvents,
-    withAuth,//@TODO remove
+    withAuth, // @TODO remove
     withForm,
     withChainedPages,
   },

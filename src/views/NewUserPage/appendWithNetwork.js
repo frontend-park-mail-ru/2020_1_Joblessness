@@ -57,7 +57,7 @@ const getUserId = () => {
 
   if (name.startsWith('/users/')) {
     return name
-      .replace( /\D+/g, '') ||
+        .replace( /\D+/g, '') ||
       currentSession.user.id || 1;
   }
   return currentSession.user.id || 1;

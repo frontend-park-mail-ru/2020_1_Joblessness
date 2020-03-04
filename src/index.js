@@ -8,22 +8,16 @@ import {
   UserPage,
   LoginPage,
   EmployerSignupPage,
-  EmployeeSignUpPage,
   IndexPage,
-  Footer,
   UserSubRoutes,
   VacancyPage,
   Header,
   NotFoundPage,
-  VacancyListPage, SummaryPage, NewSignUp,
+  VacancyListPage,
+  SummaryPage,
+  NewSignUp,
+  AuthSubRoutes,
 } from './views';
-import {
-  FirstStepI,
-  SecondStepI,
-  ThirdStepI,
-  FifthStepI,
-  ForthStepI,
-} from './views/NewSignUp'
 import {RootElement} from './RootElement';
 
 /**
@@ -36,20 +30,16 @@ class App {
   constructor() {
     console.log('Application was created');
 
-    const header = new Header('#holder');
-
-    const footer = new Footer('#holder');
-
     const routes = [
       {
-        path: "any",
+        path: 'any',
         element: new RootElement('#holder'),
         childRoutes: [
           {
-            path: "any",
-            element: new Header('#nav-elements')
+            path: 'any',
+            element: new Header('#nav-elements'),
           },
-        ]
+        ],
       },
       {
         path: 'vacancies/create',
@@ -61,10 +51,10 @@ class App {
         childRoutes: [
           {
             path: 'vacancies/*',
-            //@TODO fix vacancy page
+            // @TODO fix vacancy page
             element: new VacancyPage('#root'),
           },
-        ]
+        ],
       },
       {
         path: 'users',
@@ -85,39 +75,14 @@ class App {
       },
       {
         path: 'signup',
-        element:  new NewSignUp('#root'),
+        element: new NewSignUp('#root'),
         childRoutes: [
-          {
-            path: '',
-            exact: true,
-            element: FirstStepI,
-          },
-          {
-            path: '/',
-            exact: true,
-            element: FirstStepI,
-          },
-          {
-            path: 'start',
-            element: SecondStepI,
-          },
-          {
-            path: 'name',
-            element: ThirdStepI,
-          },
-          {
-            path: 'tag',
-            element: ForthStepI,
-          },
-          {
-            path: 'next',
-            element: FifthStepI,
-          },
+          ...AuthSubRoutes,
           {
             path: 'employer',
             element: new EmployerSignupPage('#_signup_steps'),
           },
-        ]
+        ],
       },
       {
         path: 'index',
@@ -126,17 +91,13 @@ class App {
       {
         path: '404',
         element: new NotFoundPage('#root'),
-      }
+      },
     ];
 
     Navigator.addRoutes(routes);
 
-    // footer.requestRender();// show Header
-    // open current location
     const loc = window.location.pathname.replace('/', '');
     Navigator.showPage( loc ? loc : 'signup/');
-    // header.requestRender();// show Footer
-    //@TODO root as Page component
   }
 }
 const createApp = async () => {

@@ -1,12 +1,11 @@
-import './style.sass'
+import './style.sass';
 import {
   withChainedPages,
   withEvents,
-  withNetwork,
   uuid,
-  currentSession
+  currentSession,
 } from '../../ulils';
-import template from './pug/index.pug'
+import template from './pug/index.pug';
 import {Page} from '../../Page';
 import {appendWithNetwork} from './appendWithNetwork';
 import {SettingsSubPage} from './settings';
@@ -40,116 +39,108 @@ const UserSubRoutes = [
   },
 ];
 
+/**
+ * User Page component
+ * Has subpages
+ * settings
+ * summaries
+ * statistics
+ * favourite
+ */
 class UserPage extends Page {
+  /**
+   * returns container for subpages
+   * @return{string}
+   */
   render() {
-    return template(this.props)
+    return template(this.props);
   }
 
+  /**
+   * select desired link on reload
+   */
   componentDidMount() {
     updateLinks();
   }
 }
 
 UserPage = appendWithNetwork(UserPage);
-const settings_id = uuid();
-const summaries_id = uuid();
-const favourites_id = uuid();
-const statistics_id = uuid();
+const settingsId = uuid();
+const summariesId = uuid();
+const favouritesId = uuid();
+const statisticsId = uuid();
 
 
-UserPage = withEvents(UserPage, 'events',
-  {
-    showSettings: {
-      id: settings_id,
-      eventName: 'click',
-      event: (e, page, id) => {
-        //@TODO refactor
-        const path = window.location.pathname.replace(/\D+$/g, '');
-        if (!path) {
-          if (window.location.pathname.endsWith('users/')) {
-            Navigator.showPage(window.location.pathname  + currentSession.user.id + '/settings')
-          } else {
-            Navigator.showPage(window.location.pathname + '/' + currentSession.user.id + '/settings')
-          }
-        } else {
-          Navigator.showPage(path + '/settings')
-        }
-      }
-    },
-    showSummaries: {
-      id: summaries_id,
-      eventName: 'click',
-      event: (e, page, id) => {
-        const path = window.location.pathname.replace(/\D+$/g, '');
-        if (!path) {
-          if (window.location.pathname.endsWith('users/')) {
-            Navigator.showPage(window.location.pathname  + currentSession.user.id + '/summaries')
-          } else {
-            Navigator.showPage(window.location.pathname  + '/' + currentSession.user.id + '/summaries')
-          }
-        } else {
-          Navigator.showPage(path + '/summaries')
-        }
-      }
-    },
-    showFavourite: {
-      id: favourites_id,
-      eventName: 'click',
-      event: (e, page, id) => {
-        const path = window.location.pathname.replace(/\D+$/g, '');
-        if (!path) {
-          if (window.location.pathname.endsWith('users/')) {
-            Navigator.showPage(window.location.pathname  + currentSession.user.id + '/favourites')
-          } else {
-            Navigator.showPage(window.location.pathname + '/' + currentSession.user.id + '/favourites')
-          }
-        } else {
-          Navigator.showPage(path + '/favourites')
-        }
-      }
-    },
-    showStatistics: {
-      id: statistics_id,
-      eventName: 'click',
-      event: (e, page, id) => {
-        const path = window.location.pathname.replace(/\D+$/g, '');
-        if (!path) {
-          if (window.location.pathname.endsWith('users/')) {
-            Navigator.showPage(window.location.pathname + currentSession.user.id + '/')
-          } else {
-            Navigator.showPage(window.location.pathname + '/' + currentSession.user.id + '/')
-          }
-        } else {
-          Navigator.showPage(path + '/')
-        }
-      }
-    },
-    changeAvatar: {
-      id: uuid(),
-      eventName: 'change',
-      event: changeAvatar
+const showSubPage = (name) => {
+  const path = window.location.pathname.replace(/\D+$/g, '');
+  if (!path) {
+    if (window.location.pathname.endsWith('users/')) {
+      Navigator.showPage(
+          window.location.pathname + currentSession.user.id + `/${name}`);
+    } else {
+      Navigator.showPage(
+          window.location.pathname + '/' + currentSession.user.id + `/${name}`);
     }
+  } else {
+    Navigator.showPage(path + `/${name}`);
   }
+};
+UserPage = withEvents(UserPage, 'events',
+    {
+      showSettings: {
+        id: settingsId,
+        eventName: 'click',
+        event: (e, page, id) => {
+          showSubPage('settings');
+        },
+      },
+      showSummaries: {
+        id: summariesId,
+        eventName: 'click',
+        event: (e, page, id) => {
+          showSubPage('summaries');
+        },
+      },
+      showFavourite: {
+        id: favouritesId,
+        eventName: 'click',
+        event: (e, page, id) => {
+          showSubPage('favourites');
+        },
+      },
+      showStatistics: {
+        id: statisticsId,
+        eventName: 'click',
+        event: (e, page, id) => {
+          showSubPage('/');
+        },
+      },
+      changeAvatar: {
+        id: uuid(),
+        eventName: 'change',
+        event: changeAvatar,
+      },
+    },
 );
 
 const updateLinks = () => {
   const section = window.location.pathname.split('/');
   const list = document.querySelectorAll('.selected');
-  for (let l of list) {
-    l.classList.remove('selected')
+  for (const l of list) {
+    l.classList.remove('selected');
   }
   switch (section[section.length - 1]) {
-    case '' :
-      document.getElementById(statistics_id)?.classList.add('selected');
+    case '':
+      document.getElementById(statisticsId)?.classList.add('selected');
       break;
-    case 'settings' :
-      document.getElementById(settings_id)?.classList.add('selected');
+    case 'settings':
+      document.getElementById(settingsId)?.classList.add('selected');
       break;
-    case 'summaries' :
-      document.getElementById(summaries_id)?.classList.add('selected');
+    case 'summaries':
+      document.getElementById(summariesId)?.classList.add('selected');
       break;
-    case 'favourites' :
-      document.getElementById(favourites_id)?.classList.add('selected');
+    case 'favourites':
+      document.getElementById(favouritesId)?.classList.add('selected');
       break;
   }
 };
@@ -158,4 +149,4 @@ UserPage = withChainedPages(UserPage, UserSubRoutes, updateLinks, 'users/');
 export {
   UserPage,
   UserSubRoutes,
-}
+};

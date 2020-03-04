@@ -1,6 +1,6 @@
 import {validateFunction, validateString} from './validators';
 import {Navigator} from '../Navigator';
-import {request} from '../ulils'
+import {request} from '../ulils';
 /**
  * sends request on server before rendering and updates component after
  * response is received
@@ -47,12 +47,12 @@ const withNetwork = (url, prepareRequestBody = async () => ({}),
             if ( res !== null ) {
               this.props[propName] = res;
               if (!this.isHidden()) {
-                Navigator.showPage(location.pathname)
+                Navigator.showPage(location.pathname);
               }
             }
           })
           .catch(console.err);
-      super.componentWillMount && super.componentWillMount()
+      super.componentWillMount && super.componentWillMount();
     }
   };
 };

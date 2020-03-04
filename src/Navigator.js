@@ -3,20 +3,6 @@
  * Осуществляет переключение между страницами
  * На вход получает объект routes,
  * в котором ключем является data-page элемента,
- * а значением - название конструктора страницы, находящейся в BUS
- * [{
- *   path: string
- *   element: Page
- *   parent: string
- *   childRoutes: {
- *      path: string
- *      parent: string
- *      childRootes: {
- *        ...
- *      }
- *   }]
- *   or {[path]: Page}
- * }
  */
 class Navigator {
   #routes;
@@ -35,31 +21,48 @@ class Navigator {
     this.addRoutes(routes);
   }
 
+  /**
+   * hides all pages
+   * @param {[{path:string, required: bool, element: Page}]}routes
+   */
   hideAll(routes) {
-    if(routes) {
-      for(let route of routes) {
+    if (routes) {
+      for (const route of routes) {
         route.element.hidePage();
-        this.hideAll(route.children)
+        this.hideAll(route.children);
       }
     }
   }
 
+  /**
+   * shows children that match path
+   * @param {[{path:string, required: bool, element: Page}]}children
+   * @param {string}path
+   */
   showChildren(children, path) {
-    if(!children)
+    if (!children) {
       return;
-    for (let route of children) {
+    }
+    for (const route of children) {
+      if (route.path.raw === 'any') {
+        route.element.requestRender();
 
-      if(route.path.raw === "any") {
-        route.element.requestRender();
         this.showChildren(route.childRoutes, path.replace(route.path.raw, ''));
-        if(route.path.raw !== "any") break;
-        continue
+        if (route.path.raw !== 'any') break;
+
+        continue;
       }
-      const isAppropriate = route.path.exact ? route.path.raw === path : route.path.comp.test(path);
-      if (isAppropriate || route.path.raw === "any") {
+
+      const isAppropriate = route.path.exact ?
+        route.path.raw === path : route.path.comp.test(path);
+
+      if (isAppropriate || route.path.raw === 'any') {
         route.element.requestRender();
-        this.showChildren(route.childRoutes, path.replace(route.path.raw, ''));
-        if(route.path.raw !== "any") break;
+
+        this.showChildren(
+            route.childRoutes, path.replace(route.path.raw, ''));
+
+        if (route.path.raw !== 'any') break;
       }
     }
   }
@@ -70,18 +73,21 @@ class Navigator {
    */
   showPage(path) {
     // Hide all pages
-    for (let route of this.#routes) {
-      const isAppropriate = route.path.exact ? route.path === path : route.path.comp.test(path);
-      if (isAppropriate || route.path.raw === "any") {
-        // this.hideAll(this.#routes);
-        if(path[0] === '/') {
+    for (const route of this.#routes) {
+      const isAppropriate = route.path.exact ?
+        route.path === path : route.path.comp.test(path);
+
+      if (isAppropriate || route.path.raw === 'any') {
+        if (path[0] === '/') {
           window.history.pushState({}, '', path);
         } else {
           window.history.pushState({}, '', '/' + path);
         }
         route.element.requestRender();
-        this.showChildren(route.childRoutes, path.replace(route.path.raw, ''));
-        if(route.path.raw !== "any") break;
+
+        this.showChildren(
+            route.childRoutes, path.replace(route.path.raw, ''));
+        if (route.path.raw !== 'any') break;
       }
     }
   }
@@ -91,34 +97,35 @@ class Navigator {
    */
   addNavEvents() {
     window.onpopstate = (e) => {
-      const pathname = window.location.pathname.replace('/', '');
+      const pathname =
+        window.location.pathname.replace('/', '');
       // Hide all pages
       let path = '';
-      if(pathname[0] === '/') {
+      if (pathname[0] === '/') {
         path = pathname.substring(1);
       } else {
         path = pathname;
       }
-      for (let route of this.#routes) {
+      for (const route of this.#routes) {
         if (route.path.comp.test(path)) {
           route.element.requestRender();
-          this.showChildren(route.childRoutes, path.replace(route.path.raw, ''));
+          this.showChildren(
+              route.childRoutes, path.replace(route.path.raw, ''));
           break;
         }
       }
     };
     window.linkGo = (e) => {
-      if(e[0] === '/') {
+      if (e[0] === '/') {
         this.showPage(e);
-      }
-      else {
+      } else {
         const loc = window.location.pathname.split('/');
-        if(loc[loc.length - 1].length === 0) {
+        if (loc[loc.length - 1].length === 0) {
           loc.pop();
         }
         loc.pop();
         const l = loc.join('/');
-        this.showPage(l.substr(1) + '/' + e)
+        this.showPage(l.substr(1) + '/' + e);
       }
     };
   }
@@ -127,11 +134,17 @@ class Navigator {
    *
    */
   updateAllPages() {
-    this.showPage(window.location.pathname)
+    this.showPage(window.location.pathname);
   }
 
+  /**
+   *
+   * @param {any}route
+   * @return {{path: {comp: *, exact: *, raw: *},
+   * parent: *, childRoutes: *, element: *}|null}
+   */
   parseObjectRoute(route) {
-    if( route ) {
+    if ( route ) {
       const {path, exact = false,
         element = null, parent = null, childRoutes = []} = route;
 
@@ -144,11 +157,11 @@ class Navigator {
         },
         parent,
         childRoutes: childRoutes
-          .map(c => this.parseObjectRoute(c))
-          .filter(c => c)
+            .map((c) => this.parseObjectRoute(c))
+            .filter((c) => c),
       };
     }
-    return null
+    return null;
   }
 
   /**
@@ -159,8 +172,8 @@ class Navigator {
     for (const route of routes) {
       if (route instanceof Object) {
         const routeToInsert = this.parseObjectRoute(route);
-        for(let route of this.#routes) {
-          if(route.path.raw === routeToInsert.path.raw) {
+        for (const route of this.#routes) {
+          if (route.path.raw === routeToInsert.path.raw) {
             route.childRoutes = [
               ...route.childRoutes,
               ...routeToInsert.childRoutes,

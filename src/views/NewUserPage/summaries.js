@@ -1,6 +1,6 @@
-import './style.sass'
+import './style.sass';
 import {Page} from '../../Page';
-import template from './pug/sub/summaries.pug'
+import template from './pug/sub/summaries.pug';
 import {currentSession, request, withNetwork} from '../../ulils';
 
 const getUserId = () => {
@@ -15,38 +15,44 @@ const getUserId = () => {
 };
 
 const parseResponse = async (r) => {
-
   try {
     const sumRaw = await r.json();
     const sum =
       sumRaw
-        .filter(((s) => parseInt(s.author) === parseInt(getUserId())))
-        .map((s) => ({
-          firstName: s['first-name'],
-          lastName: s['last-name'],
-          phone: s['phone-number'],
-          email: s.email,
-          birthDate: s['birth-date'],
-          sex: s['gender'],
-          experience: s.experience,
-          education: s.education,
-          id: s.id,
-        }));
+          .filter(((s) => parseInt(s.author) === parseInt(getUserId())))
+          .map((s) => ({
+            firstName: s['first-name'],
+            lastName: s['last-name'],
+            phone: s['phone-number'],
+            email: s.email,
+            birthDate: s['birth-date'],
+            sex: s['gender'],
+            experience: s.experience,
+            education: s.education,
+            id: s.id,
+          }));
 
-    return sum
+    return sum;
   } catch (e) {
-    return []
+    return [];
   }
 };
 
+/**
+ * Subpage for user summaries
+ */
 class SummariesSubPage extends Page {
-
+  /**
+   * returns summary page
+   * @return {string}
+   */
   render() {
     return template(this.props);
   }
 }
+
 SummariesSubPage = withNetwork(
-  '/api/summaries', () =>request.GET_HEADERS, SummariesSubPage, 'summaries',
-  [], parseResponse
+    '/api/summaries', () =>request.GET_HEADERS, SummariesSubPage, 'summaries',
+    [], parseResponse,
 );
 export {SummariesSubPage};

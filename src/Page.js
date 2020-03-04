@@ -2,20 +2,24 @@ import {uuid} from './ulils';
 import {isDomElement, isBody, isString, hasId} from './ulils/validators';
 
 const isEqual = (o1, o2) => {
-  if (typeof o1 === 'string' || typeof o1 === 'function' || typeof o1 === 'number' || o1 === null || o1 === undefined) {
-    return o1 === o2
+  if (typeof o1 === 'string' || typeof o1 === 'function' ||
+    typeof o1 === 'number' || o1 === null || o1 === undefined) {
+    return o1 === o2;
   }
-  if (typeof o2 === 'string' || typeof o2 === 'function' || typeof o2 === 'number' || o2 === null || o2 === undefined) {
-    return o2 === o1
+  if (typeof o2 === 'string' || typeof o2 === 'function' ||
+    typeof o2 === 'number' || o2 === null || o2 === undefined) {
+    return o2 === o1;
   }
   if (o1 instanceof Array) {
-    return o1.toString() === o2.toString()
+    return o1.toString() === o2.toString();
   }
-  if (!isEqual(Object.keys(o1), Object.keys(o2)))
+  if (!isEqual(Object.keys(o1), Object.keys(o2))) {
     return false;
-  for (let o of Object.keys(o1)) {
-    if (!isEqual(o1[o], o2[o]))
+  }
+  for (const o of Object.keys(o1)) {
+    if (!isEqual(o1[o], o2[o])) {
       return false;
+    }
   }
   return true;
 };
@@ -73,20 +77,12 @@ export class Page {
     return this.#container.selector;
   }
 
-  requestUpdate() {
-    if (isEqual(this.#prevProps, this.props)) {
-      //do nothing
-    } else {
-      this.showPage()
-    }
-  }
-
   /**
    * check if component is hidden
    * @return {boolean}
    */
   isHidden() {
-    return this.#container?.dom?.hidden || !this.#container?.dom?.innerHTML
+    return this.#container?.dom?.hidden || !this.#container?.dom?.innerHTML;
   }
 
   /**
@@ -128,12 +124,11 @@ export class Page {
    * Показать страницу
    */
   showPage() {
-
     this.#container.dom = document.querySelector(this.#container.selector);
     if (!this.#container.dom) {
       throw new Error(`
           Unable to find dom with selector ${this.#container.selector}
-          `)
+          `);
     }
     this.componentWillUpdate && this.componentWillUpdate();
     const toShow = this.render();
@@ -145,9 +140,9 @@ export class Page {
     }
     if (this.#prevRender !== toShow ||
       this.#prevContainerDom !== this.#container.dom ||
-      !isEqual(this.#prevProps, this.props)
-      ||this.#container.dom.currentChild !== this) {
-      this.#container.dom.currentChild = this
+      !isEqual(this.#prevProps, this.props)||
+      this.#container.dom.currentChild !== this) {
+      this.#container.dom.currentChild = this;
       this.componentWillMount && this.componentWillMount();
 
       this.#container.dom.hidden = false;

@@ -20,7 +20,6 @@
  * Example presented in UserPage component
  */
 export const withEvents = (WrappedComponent, propName, events) => {
-
   if ( WrappedComponent && !WrappedComponent.isPageComponent ) {
     throw new Error(`
         WrappedComponent in withEvents function must inherit from Page
@@ -54,7 +53,7 @@ export const withEvents = (WrappedComponent, propName, events) => {
           await events[e].event(ev, this, events[e].id);
         });
       });
-      super.componentDidMount && super.componentDidMount()
+      super.componentDidMount && super.componentDidMount();
     }
   };
 };
