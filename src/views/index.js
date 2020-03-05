@@ -1,7 +1,7 @@
 import {CreateVacancyPage} from './CreateVacancyPage';
 import {VacancyListPage} from './VacancyList';
 import {VacancyPage} from './VacancyPage';
-import {CreateSummaryPage} from './CreateSummaryPage';
+import {CreateSummaryPage} from './NewCreateSummaryPage';
 import {UserPage, UserSubRoutes} from './NewUserPage';
 import {LoginPage} from './AuthPages/LoginPage';
 import {EmployerSignupPage} from './AuthPages/EmployerSignupPage';

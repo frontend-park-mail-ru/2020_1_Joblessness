@@ -19,6 +19,7 @@ import {
   AuthSubRoutes,
 } from './views';
 import {RootElement} from './RootElement';
+import {CreateSummaryRoutes} from './views/NewCreateSummaryPage/CreateSummaryPage';
 
 /**
  * App
@@ -64,6 +65,7 @@ class App {
       {
         path: 'summaries/create',
         element: new CreateSummaryPage('#root'),
+        childRoutes: CreateSummaryRoutes
       },
       {
         path: 'summaries/*',
