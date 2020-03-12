@@ -1,6 +1,6 @@
-import './show-experience.sass'
-import {Page} from '../../Page';
-import template from './pug/showExperience.pug'
+import './style.sass'
+import {Page} from '../../../Page';
+import template from './index.pug';
 
 class ShowExperiencePage extends Page {
   render() {

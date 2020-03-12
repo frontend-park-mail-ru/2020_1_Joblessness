@@ -1,6 +1,6 @@
-import './add-education.sass'
-import {Page} from '../../Page';
-import template from './pug/addEducation.pug';
+import './style.sass'
+import {Page} from '../../../Page';
+import template from './index.pug';
 class AddEducation extends Page {
   render() {
     return template(this.props);

@@ -16,10 +16,10 @@ import {
   VacancyListPage,
   SummaryPage,
   NewSignUp,
+  CreateSummaryRoutes,
   AuthSubRoutes,
 } from './views';
 import {RootElement} from './RootElement';
-import {CreateSummaryRoutes} from './views/NewCreateSummaryPage/CreateSummaryPage';
 
 /**
  * App

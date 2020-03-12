@@ -77,10 +77,13 @@ class Navigator {
       const isAppropriate = route.path.exact ?
         route.path.raw === path : (route.path.comp.test(path));
       if (isAppropriate || route.path.raw === 'any') {
-        if (path[0] === '/') {
-          window.history.pushState({}, '', path);
-        } else {
-          window.history.pushState({}, '', '/' + path);
+        // if(window.history.state)
+        if(window.location.pathname !== path) {
+          if (path[0] === '/') {
+            window.history.pushState({}, '', path);
+          } else {
+            window.history.pushState({}, '', '/' + path);
+          }
         }
         route.element.requestRender();
 

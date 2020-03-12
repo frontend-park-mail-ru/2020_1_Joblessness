@@ -14,7 +14,7 @@ class CreateVacancyPage extends Page {
   }
 }
 // Form validation and request
-CreateVacancyPage = appendForm(CreateVacancyPage);
+// CreateVacancyPage = appendForm(CreateVacancyPage);
 
 export {
   CreateVacancyPage,

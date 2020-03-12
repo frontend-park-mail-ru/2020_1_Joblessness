@@ -1,6 +1,6 @@
-import './person-info.sass'
-import {Page} from '../../Page';
-import template from './pug/personInfo.pug';
+import './style.sass'
+import {Page} from '../../../Page';
+import template from './index.pug';
 
 class PersonInfo extends Page {
   render() {

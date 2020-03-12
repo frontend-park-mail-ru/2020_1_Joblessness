@@ -172,6 +172,27 @@ export const withForm = (WrappedComponent, inputFields, submitField,
        * Adds submit event
        */
     addSubmit = () => {
+      const fields = Object.entries(inputFields);
+      for(let i = 0; i < fields.length - 1; i++ ) {
+        const el = document.getElementById(fields[i][1].id);
+        if(el.firstElementChild.nodeName === "INPUT") {
+          el.addEventListener('keypress', (e) => {
+            if(e.key === 'Enter') {
+              const next = document.getElementById(fields[i + 1][1].id)
+              next.firstElementChild.focus()
+            }
+          });
+        }
+      }
+      const lastEl = document.getElementById(fields[fields.length - 1][1].id);
+      if(lastEl.firstElementChild.nodeName === "INPUT") {
+        lastEl.addEventListener('keypress', (e) => {
+          if (e.key === 'Enter') {
+            const next = document.getElementById(submitField.id);
+            next.click();
+          }
+        })
+      }
       document.getElementById(submitField.id).addEventListener('click', (e) => {
         e.preventDefault();
         const inputData = this.validate();

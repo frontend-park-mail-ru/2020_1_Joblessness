@@ -1,0 +1,81 @@
+@import "../../../CONSTANTS"
+
+.vertical
+  flex-direction: column
+  align-items: stretch !important
+  justify-content: center
+  .field-line
+    margin: 0
+.field-holder
+  display: flex
+  white-space: nowrap
+  justify-content: stretch
+  align-items: baseline
+  h2
+    font-weight: 400
+
+.string-field
+  display: flex
+  flex-direction: column
+  width: 100%
+  flex: 1
+
+.string-field--input
+  border: none
+  height: 32px
+  width: 100%
+  font-size: 32px
+  outline: none
+  text-indent: 10px
+  padding-right: 10px
+
+.field-line
+  margin: 0 10px 0 10px
+  height: 5px
+  border-radius: 5px
+  @include BACKGROUND_GRADIENT
+  background-attachment: fixed
+
+.text-field
+  display: flex
+  flex-direction: column
+  flex: 1
+
+.text-field--input
+  resize: vertical
+  border: none
+  min-height: 32px
+  height: 32px
+  font-size: 24px
+  outline: none
+  max-height: 256px //8*32
+
+
+.company-name
+  input
+    font-size: 2em
+    padding: 0
+    margin: 0
+    font-weight: 400
+
+.company-role
+  input
+    font-size: 1.5em
+    padding: 0
+    margin: 0
+    font-weight: 400
+    color: $GRAY
+.company-experience
+  input
+    font-size: 1.25em
+    font-weight: 400
+    padding: 0
+    margin: 0
+    b
+      font-weight: 600
+
+.responsibilities
+  display: flex
+  margin: 5px 0 5px 0
+  padding: 0
+  textarea

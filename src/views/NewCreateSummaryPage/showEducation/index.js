@@ -1,6 +1,6 @@
-import './show-education.sass'
-import {Page} from '../../Page';
-import template from './pug/showEducation.pug'
+import './style.sass'
+import {Page} from '../../../Page';
+import template from './index.pug';
 
 class ShowEducationPage extends Page {
   render() {
