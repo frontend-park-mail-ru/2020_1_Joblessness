@@ -1,12 +1,29 @@
 include ../../../templates/pug/forms
-.resume-form
-    header
-        h1 Ваше резюме
-    main
-        section.sub-form
+section.create-summary-holder
+    div.create-summary-holder--body
+        section
             div#create_summary_person_info
+        section
+            h1 Опыт работы
+            div#create_summary_add_experience
+            div#create_summary_show_experience
+        section
+            h1 Образование
             div#create_summary_add_education
             div#create_summary_show_education
-    footer
-        br
-        button.button.resume-form__button-submit Сохранить и опубликовать
+        section
+            h1 Требования к вакансии
+            div#create_summary_expectations
+                //зарплата, должность, сфера,
+        section
+            div#create_summary_additional_info
+                //о себе, ключевые слова
+        section
+            div#create_summary_languages
+                //Языки, которыми владеете
+        section
+            //права(категория), наличие автомобиля, график работы, переезд, занятость
+
+        footer
+            br
+            button.button.resume-form__button-submit Сохранить и опубликовать

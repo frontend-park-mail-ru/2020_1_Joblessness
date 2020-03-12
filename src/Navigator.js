@@ -75,8 +75,7 @@ class Navigator {
     // Hide all pages
     for (const route of this.#routes) {
       const isAppropriate = route.path.exact ?
-        route.path === path : route.path.comp.test(path);
-
+        route.path.raw === path : (route.path.comp.test(path));
       if (isAppropriate || route.path.raw === 'any') {
         if (path[0] === '/') {
           window.history.pushState({}, '', path);

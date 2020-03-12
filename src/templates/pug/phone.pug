@@ -1,0 +1,9 @@
+mixin phone(number)
+    -let last2 = number.toString().slice(-2)
+    -let prelast2 = number.toString().slice(-4, -2)
+    -let second3 = number.toString().slice(-7, -4)
+    -let first3 = number.toString().slice(-10, -7)
+    -let reg = number.toString().slice(-13, -10)
+    div.phone
+        h3
+            |#{reg}(#{first3})#{second3}-#{prelast2}-#{last2}

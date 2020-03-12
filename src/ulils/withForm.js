@@ -134,13 +134,13 @@ export const withForm = (WrappedComponent, inputFields, submitField,
       const {required, id, validator = (s) => s.length,
         warnMessage = '', inputValidator} = inputFields[key];
       const inputBlock = document.getElementById(id);
+      if (inputBlock === null) {
+        throw new Error(`
+                  Input block with id ${id} was not found at key ${key}!
+                  Check if it exists.
+                  `);
+      }
       if (!inputValidator) {
-        if (inputBlock === null) {
-          throw new Error(`
-                    Input block with id ${id} was not found at key ${key}!
-                    Check if it exists.
-                    `);
-        }
         return this.validateInput(inputBlock, required,
             validator, warnMessage, key, inputFields[key]);
       } else {
@@ -180,9 +180,9 @@ export const withForm = (WrappedComponent, inputFields, submitField,
             acc[v.field] = v.value;
             return acc;
           }, {});
-          onValid && onValid(arg, this);
+          onValid && onValid(arg, this, e);
         } else {
-          onInvalid && onInvalid(this);
+          onInvalid && onInvalid(this, e);
         }
       });
     }

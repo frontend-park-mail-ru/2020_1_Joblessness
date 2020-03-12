@@ -1,3 +1,4 @@
+import './show-education.sass'
 import {Page} from '../../Page';
 import template from './pug/showEducation.pug'
 

@@ -1,1 +1,14 @@
-div add education
+mixin summary-input-field
+    div.form-input-wrapper(id=attributes.id)
+        input.form-input(type=attributes.type || "text" placeholder=attributes.placeholder value=attributes.value)
+        block
+        div.form-input-err
+
+mixin add-education
+    div.create-summary-section
+        div.create-summary-section--body
+            +summary-input-field(placeholder="Место обучения")
+            +summary-input-field(placeholder="Специальность")
+            +summary-input-field(placeholder="Год окончания обучения")
+            button добавить
+div

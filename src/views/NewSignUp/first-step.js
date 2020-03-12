@@ -22,7 +22,8 @@ FirstStep = withEvents(FirstStep, 'events',
         id: uuid(),
         eventName: 'click',
         event: (e, page) => {
-          page.props.requestNext(e);
+          // console.log(e)
+          page.props.requestNext();
         },
       },
     });

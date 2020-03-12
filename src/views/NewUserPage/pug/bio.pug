@@ -1,5 +1,5 @@
-include avarar
-include name
+include ../../../templates/pug/avatar
+include ../../../templates/pug/name
 mixin bio(user)
     div(class="bio-section")
         +avatar(src=user.avatar id=attributes.avatarId)

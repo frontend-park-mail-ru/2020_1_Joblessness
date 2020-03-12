@@ -1,3 +1,4 @@
+import './add-education.sass'
 import {Page} from '../../Page';
 import template from './pug/addEducation.pug';
 class AddEducation extends Page {

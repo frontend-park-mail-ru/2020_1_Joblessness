@@ -1,0 +1,8 @@
+mixin birth
+    -let month = ['января', 'февраля', 'марта', 'апреля',
+    -             'мая', 'июня', 'июля', 'августа', 'сентября',
+    -             'октября', 'ноября', 'декабря'][attributes.month - 1]
+    -let day = attributes.day
+    -let year = attributes.year
+    div.birth
+        h3 #{day} #{month} #{year}

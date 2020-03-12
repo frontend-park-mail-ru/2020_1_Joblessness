@@ -24,18 +24,31 @@ export const withChainedPages = (Wrappee, pages,
     constructor(props) {
       super(props);
 
-      const requestNext = (path, args) => {
+      const requestNext = (page, pageElem, path, args) => {
+        page.beforeNext && page.beforeNext(pageElem, ...args);
         Navigator.showPage(root + path);
+        page.afterNext && page.afterNext(pageElem, ...args);
       };
-      const requestPrevious = (path, args) => {
+      const requestPrevious = (page, pageElem, path, args) => {
+        page.beforePrevious && page.beforePrevious(pageElem, ...args);
         Navigator.showPage(root + path);
+        page.afterPrevious && page.afterPrevious(pageElem, ...args);
       };
 
       pages.forEach((p) => {
         p.element.props.requestNext =
-          (...a) => requestNext(p.next, ...a);
+          (...a) => {
+            console.log(p.path)
+            const nextPath = p.innerNext ? p.innerNext : p.next;
+            const nextPage = pages.find(p => p.innerPath === nextPath) ?? p;
+            requestNext(p, nextPage?.element, p.next, a);
+          };
         p.element.props.requesPrevious =
-          (...a) => requestPrevious(p.prev, ...a);
+          (...a) => {
+            const prevPath = p.innerPrev ? p.innerPrev : p.prev;
+            const nextPage = pages.find(p => p.innerPath === prevPath) ?? p;
+            requestNext(p, nextPage?.element, p.next, a);
+          };
       });
     }
 

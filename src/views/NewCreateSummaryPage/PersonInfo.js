@@ -1,3 +1,4 @@
+import './person-info.sass'
 import {Page} from '../../Page';
 import template from './pug/personInfo.pug';
 

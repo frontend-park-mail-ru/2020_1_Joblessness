@@ -1,4 +1,4 @@
-import {CreateVacancyPage} from './CreateVacancyPage';
+import {CreateVacancyPage} from './NewCreateVacancyPage';
 import {VacancyListPage} from './VacancyList';
 import {VacancyPage} from './VacancyPage';
 import {CreateSummaryPage} from './NewCreateSummaryPage';
