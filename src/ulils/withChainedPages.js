@@ -1,4 +1,5 @@
 import {Navigator} from '../Navigator';
+import {PersonInfo} from '../views/NewCreateSummaryPage/personInfo';
 
 /**
  * Allows to quickly navigate between child pages
@@ -12,7 +13,7 @@ import {Navigator} from '../Navigator';
  * @return {Page}
  */
 export const withChainedPages = (Wrappee, pages,
-    updateProps = null, root = '') => {
+    updateProps = null, root = '',) => {
   /**
    * Wrapped page component
    */
@@ -24,6 +25,12 @@ export const withChainedPages = (Wrappee, pages,
     constructor(props) {
       super(props);
 
+      this._appendRequestNextAndPrevious();
+      this.props.insertSubPage = (page) => {
+        pages.push(page);
+      };
+    }
+    _appendRequestNextAndPrevious = () => {
       const requestNext = (page, pageElem, path, args) => {
         page.beforeNext && page.beforeNext(pageElem, ...args);
         Navigator.showPage(root + path);
@@ -34,11 +41,9 @@ export const withChainedPages = (Wrappee, pages,
         Navigator.showPage(root + path);
         page.afterPrevious && page.afterPrevious(pageElem, ...args);
       };
-
       pages.forEach((p) => {
         p.element.props.requestNext =
           (...a) => {
-            console.log(p.path)
             const nextPath = p.innerNext ? p.innerNext : p.next;
             const nextPage = pages.find(p => p.innerPath === nextPath) ?? p;
             requestNext(p, nextPage?.element, p.next, a);
@@ -50,8 +55,7 @@ export const withChainedPages = (Wrappee, pages,
             requestNext(p, nextPage?.element, p.next, a);
           };
       });
-    }
-
+    };
     componentWillUpdate = () => {
       updateProps && updateProps(this);
 

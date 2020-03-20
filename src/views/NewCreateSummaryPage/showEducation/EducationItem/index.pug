@@ -1,0 +1,19 @@
+mixin institution(name)
+    div.institutions
+        h2 #{name}
+        block
+mixin speciality(name)
+    div.speciality
+        h2 #{name}
+        block
+mixin graduated(year)
+    div.graduated
+        h2 #{year}&nbsp
+        block
+
+mixin education
+    div.create-summary-section
+        div.create-summary-section--body
+            +institution(attributes.institution)
+            +speciality(attributes.speciality)
+            +graduated(attributes.graduated)

@@ -33,11 +33,13 @@ class App {
 
     const routes = [
       {
-        path: 'any',
+        path: 'root',
+        alwaysOn: true,
         element: new RootElement('#holder'),
         childRoutes: [
           {
-            path: 'any',
+            path: 'header',
+            alwaysOn: true,
             element: new Header('#nav-elements'),
           },
         ],
@@ -95,7 +97,6 @@ class App {
         element: new NotFoundPage('#root'),
       },
     ];
-
     Navigator.addRoutes(routes);
 
     const loc = window.location.pathname.replace('/', '');

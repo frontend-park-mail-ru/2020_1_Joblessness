@@ -38,9 +38,9 @@ export class Page {
   #prevProps;
   #prevContainerDom;
   props = {};
-  componentDidMount = null;
-  componentWillMount = null;
-  componentWillUpdate = null;
+  componentDidMount() {}
+  componentWillMount() {}
+  componentWillUpdate() {}
   /**
    * Конструктор рендерит страницу
    * @param {HTMLAnchorElement|string} container - контейнер,

@@ -7,6 +7,21 @@ class AddExperiencePage extends Page {
   render() {
     return template(this.props)
   }
+  componentDidMount() {
+    console.log('did mount');
+    this.props.requestNext({
+      companyName: 'Mail',
+      role: 'впавап',
+      experience: ['2000','2020'],
+      responsibilities: 'пить, петь, есть'
+    });
+    this.props.requestNext({
+      companyName: 'Maisfl',
+      role: 'впавап',
+      experience: ['2000','2020'],
+      responsibilities: 'пить, петь, есть'
+    });
+  }
 }
 AddExperiencePage = withForm(AddExperiencePage, {
     companyName: {
@@ -20,16 +35,10 @@ AddExperiencePage = withForm(AddExperiencePage, {
     experienceFrom: {
       id: uuid(),
       required: true,
-      // inputValidator: () => {
-      //
-      // }
     },
     experienceTo: {
       id: uuid(),
       required: true,
-      // inputValidator: () => {
-      //
-      // }
     },
     responsibilities: {
       id: uuid(),
@@ -38,13 +47,8 @@ AddExperiencePage = withForm(AddExperiencePage, {
   }, {
     id: uuid(),
   },
-//   companyName: "a"
-// role: "a"
-// experienceFrom: "1"
-// experienceTo: "2"
-// responsibilities: "1"
   (e, page) => {
-    console.log(e, page)
+    console.log(e, page);
     page.props.requestNext({
       companyName: e.companyName,
       role: e.role,

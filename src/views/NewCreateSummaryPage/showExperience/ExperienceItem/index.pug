@@ -1,0 +1,36 @@
+include ../../../../templates/pug/avatar
+mixin company-name(companyName)
+    div.company-name
+        h2 #{companyName}
+
+mixin company-role(companyRole)
+    div.company-role
+        h2 #{companyRole}
+
+mixin company-experience(exp)
+    div.company-experience
+        h2 с&nbsp
+            b #{exp[0]}
+            | &nbspпо&nbsp
+            b #{exp[1] || 'нынешнее время'}
+mixin responsibilities(resps)
+    div.responsibilities
+        - let respList = resps.split(",").map( s => s.trim() )
+        each r in respList
+            p #{r}
+mixin show-experience
+    div.show-experience-item
+        div.show-experience-item--avatar
+            +avatar
+        div.show-experience-item--info
+            +company-name(attributes.companyName)
+            +company-role(attributes.role)
+            +company-experience(attributes.experience)
+            +responsibilities(attributes.responsibilities)
+
++show-experience(
+    companyName=locals.exp.companyName
+    role=locals.exp.role
+    experience=locals.exp.experience
+    responsibilities=locals.exp.responsibilities
+)

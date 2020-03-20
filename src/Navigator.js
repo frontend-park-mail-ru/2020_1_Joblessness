@@ -11,14 +11,9 @@ class Navigator {
    * Переключает страницы
    * @param {object} routes - allowed pages and 404 page
    */
-  constructor(routes = []) {
+  constructor() {
     this.addNavEvents();
-    if (typeof routes !== 'object' || routes === null) {
-      throw new Error(`
-            Expected object as field routes. Received ${routes}!`);
-    }
     this.#routes = [];
-    this.addRoutes(routes);
   }
 
   /**
@@ -44,11 +39,11 @@ class Navigator {
       return;
     }
     for (const route of children) {
-      if (route.path.raw === 'any') {
+      if (route.path.raw === 'any' || route.path.alwaysOn) {
         route.element.requestRender();
 
         this.showChildren(route.childRoutes, path.replace(route.path.raw, ''));
-        if (route.path.raw !== 'any') break;
+        if (route.path.raw !== 'any' && !route.path.alwaysOn) break;
 
         continue;
       }
@@ -56,13 +51,13 @@ class Navigator {
       const isAppropriate = route.path.exact ?
         route.path.raw === path : route.path.comp.test(path);
 
-      if (isAppropriate || route.path.raw === 'any') {
+      if (isAppropriate || route.path.raw === 'any'|| route.path.alwaysOn) {
         route.element.requestRender();
 
         this.showChildren(
             route.childRoutes, path.replace(route.path.raw, ''));
 
-        if (route.path.raw !== 'any') break;
+        if (route.path.raw !== 'any' && !route.path.alwaysOn) break;
       }
     }
   }
@@ -76,8 +71,7 @@ class Navigator {
     for (const route of this.#routes) {
       const isAppropriate = route.path.exact ?
         route.path.raw === path : (route.path.comp.test(path));
-      if (isAppropriate || route.path.raw === 'any') {
-        // if(window.history.state)
+      if (isAppropriate || route.path.raw === 'any' || route.path.alwaysOn) {
         if(window.location.pathname !== path) {
           if (path[0] === '/') {
             window.history.pushState({}, '', path);
@@ -89,7 +83,7 @@ class Navigator {
 
         this.showChildren(
             route.childRoutes, path.replace(route.path.raw, ''));
-        if (route.path.raw !== 'any') break;
+        if (route.path.raw !== 'any' && !route.path.alwaysOn) break;
       }
     }
   }
@@ -138,16 +132,9 @@ class Navigator {
   updateAllPages() {
     this.showPage(window.location.pathname);
   }
-
-  /**
-   *
-   * @param {any}route
-   * @return {{path: {comp: *, exact: *, raw: *},
-   * parent: *, childRoutes: *, element: *}|null}
-   */
-  parseObjectRoute(route) {
+  _parseObjectRoute = (route) => {
     if ( route ) {
-      const {path, exact = false,
+      const {path, exact = false, alwaysOn = false,
         element = null, parent = null, childRoutes = []} = route;
 
       return {
@@ -155,37 +142,126 @@ class Navigator {
         path: {
           comp: new RegExp(path),
           raw: path,
-          exact: exact,
+          exact,
+          alwaysOn,
         },
         parent,
         childRoutes: childRoutes
-            .map((c) => this.parseObjectRoute(c))
-            .filter((c) => c),
+          .map((c) => this._parseObjectRoute(c))
+          .filter((c) => c),
       };
     }
     return null;
+  }
+  /**
+   *
+   * @param {any}route
+   * @return {{path: {comp: *, exact: *, raw: *},
+   * parent: *, childRoutes: *, element: *}|null}
+   */
+  parseObjectRoute(route) {
+
+    // const parsedRoutes = route.map(this._parseObjectRoute);
+    if( route instanceof Array) {
+      const parsed = route.map(this._parseObjectRoute);
+      return parsed;
+    }
+    return this._parseObjectRoute(route)
   }
 
   /**
    * add new routes to this.routes
    * @param {object} routes
    */
-  addRoutes(routes) {
-    for (const route of routes) {
-      if (route instanceof Object) {
-        const routeToInsert = this.parseObjectRoute(route);
-        for (const route of this.#routes) {
-          if (route.path.raw === routeToInsert.path.raw) {
-            route.childRoutes = [
-              ...route.childRoutes,
-              ...routeToInsert.childRoutes,
-            ];
+  _addRoutes(root, route) {
+    if(!(route instanceof Array)) {
+      if(!(root instanceof Array)) {
+        if (root.childRoutes.length === 0) {
+          root.childRoutes.push(route);
+        } else {
+          this._addRoutes(root.childRoutes, route.childRoutes)
+        }
+        return;
+      }
+      if(!(root instanceof Array)) {
+        for(let newRoute of route ) {
+          if (root.path.raw === newRoute.path.raw) {
+            this._addRoutes(root.childRoutes, newRoute.childRoutes);
+            // root.push(route);
             return;
+          } else {
+            console.log('something wrong')
           }
         }
-        this.#routes.push(routeToInsert);
+        return;
       }
     }
+    for(let newRoute of route) {
+      let wasFound = false;
+      for(let currentRoot of root) {
+        if(newRoute.path.raw === currentRoot.path.raw) {
+          this._addRoutes(currentRoot.childRoutes, newRoute.childRoutes);
+          wasFound = true;
+          break
+        }
+      }
+      if(!wasFound) {
+        root.push(newRoute);
+      }
+    }
+  }
+  _removeRoutes(root, route, parent) {
+    if(!(route instanceof Array)) {
+      if(!(root instanceof Array)) {
+        if (root.childRoutes.length === 0) {
+          if(!route.childRoutes) {
+            console.log(parent, root)
+            parent.childRoutes = parent.childRoutes.filter(c => c === root)
+          }
+        } else {
+          this._removeRoutes(root.childRoutes, route.childRoutes, root)
+        }
+        return;
+      }
+      if(!(root instanceof Array)) {
+        for(let newRoute of route ) {
+          if (root.path.raw === newRoute.path.raw) {
+            this._removeRoutes(root.childRoutes, newRoute.childRoutes, root);
+            return;
+          } else {
+            console.log('something wrong')
+          }
+        }
+        return;
+      }
+    }
+    for(let newRoute of route) {
+      for(let currentRoot of root) {
+
+        if(newRoute.path.raw === currentRoot.path.raw) {
+          console.log('new route', newRoute)
+          console.log('current root', currentRoot)
+          if(newRoute.childRoutes.length === 0) {
+            parent.childRoutes = parent.childRoutes.filter(
+              r => r !== currentRoot);
+            return;
+          }
+          this._removeRoutes(currentRoot.childRoutes, newRoute.childRoutes, currentRoot);
+          return;
+        }
+      }
+      this._removeRoutes(root, newRoute.childRoutes, parent);
+    }
+  }
+
+  addRoutes(routes) {
+    const r = this.parseObjectRoute(routes);
+    this._addRoutes(this.#routes, r);
+  }
+  removeRoutes(routes) {
+    const r = this.parseObjectRoute(routes);
+    this._removeRoutes(this.#routes, r, null);
+    console.log(this.#routes[4].childRoutes[2].childRoutes)
   }
 }
 

@@ -1,12 +1,12 @@
 import './style.sass';
 import {Page} from '../../Page.js';
 import template from './pug/index.pug';
-import {withChainedPages} from '../../ulils';
+import {uuid, withChainedPages} from '../../ulils';
 import {AddEducation} from './addEducation';
 import {ShowEducationPage} from './ShowEducation';
 import {PersonInfo} from './personInfo';
 import {ShowExperiencePage} from './showExperience';
-import {AddExperiencePage} from './addExperience';
+import {AddExperienceRoute} from './addExperience/AddExperienceRoute';
 
 /**
  * summary creation forms
@@ -21,34 +21,26 @@ class CreateSummaryPage extends Page {
 }
 const CreateSummaryRoutes = [
   {
-    path: 'any',
+    path: 'info',
     next: '',
+    alwaysOn: true,
     element: new PersonInfo('#create_summary_person_info')
   },
   {
-    path: 'any',
+    path: 'addEducation',
     next: '',
     innerNext: 'showEducation',
+    alwaysOn: true,
     innerPath: 'addEducation',
     element: new AddEducation('#create_summary_add_education'),
   },
+  AddExperienceRoute,
   {
-    path: 'any',
+    path: 'showEducation',
     next: '',
+    alwaysOn: true,
     innerPath: 'showEducation',
     element: new ShowEducationPage('#create_summary_show_education'),
-  },
-  {
-    path: 'any',
-    next: '',
-    innerNext: 'showExperience',
-    innerPath: 'addExperience',
-    beforeNext: (page, exp) => {
-      if(!page.props.expList)
-        page.props.expList = [];
-      page.props.expList.push(exp);
-    },
-    element: new AddExperiencePage('#create_summary_add_experience')
   },
   {
     path: 'any',
@@ -58,7 +50,7 @@ const CreateSummaryRoutes = [
   },
 ];
 CreateSummaryPage = withChainedPages(CreateSummaryPage,
-  CreateSummaryRoutes, null, '/summaries/create/');
+  CreateSummaryRoutes, null, '/summaries/create/',);
 export {
   CreateSummaryPage,
   CreateSummaryRoutes,

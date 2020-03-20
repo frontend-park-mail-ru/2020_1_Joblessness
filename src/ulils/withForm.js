@@ -64,7 +64,8 @@ export const withForm = (WrappedComponent, inputFields, submitField,
     /**
        * append button after rendering
        */
-    componentDidMount = () => {
+    componentDidMount() {
+      super.componentDidMount && super.componentDidMount();
       this.addSubmit();
     };
 
