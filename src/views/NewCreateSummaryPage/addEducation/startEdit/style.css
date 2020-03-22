@@ -1,6 +1,7 @@
 @import url("https://fonts.googleapis.com/css?family=Istok+Web&display=swap");
 .start-adding {
   width: 100%;
+  cursor: pointer;
   height: 80px;
   display: flex;
   justify-content: center;
