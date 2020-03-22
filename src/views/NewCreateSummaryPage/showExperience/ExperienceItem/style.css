@@ -118,4 +118,8 @@
   transition-duration: 0.2s;
 }
 
+.placing {
+  transition: 0.5s;
+}
+
 /*# sourceMappingURL=style.css.map */

@@ -17,7 +17,7 @@ mixin education
     +graduated(attributes.graduated)
 
 +education(
-    institution="МГТУ им. Н. Э. Баумана"
-    speciality="Техническая физика"
-    graduated="2022"
-    type="Высшее")
+    institution=locals.edu.institution
+    speciality=locals.edu.speciality
+    graduated=locals.edu.graduated
+    type=locals.edu.type)

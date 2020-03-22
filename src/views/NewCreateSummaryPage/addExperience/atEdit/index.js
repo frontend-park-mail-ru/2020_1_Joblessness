@@ -84,6 +84,7 @@ AtEditPage = withForm(AtEditPage, {
   start.classList.remove('hidden');
   at.classList.remove('shown');
   at.classList.add('hidden');
+
   page.props.requestNext(exp);
 },
 );

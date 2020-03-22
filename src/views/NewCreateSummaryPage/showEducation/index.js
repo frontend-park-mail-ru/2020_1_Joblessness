@@ -39,7 +39,7 @@ const addEvents = (page, elem, id) => {
 const addRemoveEvent = (page, elem, id, elemToRemove) => {
   const removeEvent = () => {
     elem?.removeEventListener('click', removeEvent);
-    page.props.expList = page.props.expList.filter((e) => e.id !== id);
+    page.props.eduList = page.props.eduList.filter((e) => e.id !== id);
 
     elemToRemove.classList.add('removing');
     setTimeout(() => elemToRemove.remove(), 500);

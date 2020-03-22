@@ -27,7 +27,7 @@ StartEditPage = withForm(StartEditPage, {}, {id: uuid()},
       start.classList.remove('will-remove');
     }, 200);
     at.classList.remove('hidden');
-    page.props.requestNext();
+    // page.props.requestNext();
   },
 );
 export {

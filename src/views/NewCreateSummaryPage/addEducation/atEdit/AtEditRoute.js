@@ -5,17 +5,17 @@ import EducationItem from '../../showEducation/EducationItem';
 
 let newRouteId = uuid();
 
-const beforeNext = (page, exp) => {
+const beforeNext = (page, edu) => {
   newRouteId = uuid();
-  exp.id = newRouteId;
-  if (!page.props.expList) {
-    page.props.expList = [];
+  edu.id = newRouteId;
+  if (!page.props.eduList) {
+    page.props.eduList = [];
   }
-  page.props.expList.push(exp);
+  page.props.eduList.push(edu);
 };
-const afterNext = (page, exp) => {
+const afterNext = (page, edu) => {
   const newPage = new EducationItem(`#${newRouteId}`);
-  newPage.props.exp = exp;
+  newPage.props.edu = edu;
   const newRoute = {
     path: newRouteId,
     alwaysOn: true,
@@ -43,7 +43,7 @@ export const AtEditRoute = {
   path: 'any',
   useInner: true,
   innerNext: 'showEducation',
-  prev: 'startEdit',
+  prev: 'startEditEdu',
   beforeNext: (page, exp) => {
     beforeNext(page, exp);
   },

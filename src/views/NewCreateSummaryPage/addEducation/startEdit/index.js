@@ -30,7 +30,7 @@ StartEditPage = withForm(StartEditPage, {}, {id: uuid()},
     }, 200);
 
     at.classList.remove('hidden');
-    page.props.requestNext();
+    // page.props.requestNext();
   },
 );
 export {

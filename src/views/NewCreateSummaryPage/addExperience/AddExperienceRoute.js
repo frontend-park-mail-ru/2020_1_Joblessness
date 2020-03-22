@@ -1,6 +1,3 @@
-import {uuid} from '../../../ulils';
-import ExperienceItem from '../showExperience/ExperienceItem';
-import {Navigator} from '../../../Navigator';
 import {AddExperiencePage} from '../addExperience';
 import {AtEditRoute} from './atEdit/AtEditRoute';
 import {StartEditRoute} from './startEdit/StartEditRoute';
