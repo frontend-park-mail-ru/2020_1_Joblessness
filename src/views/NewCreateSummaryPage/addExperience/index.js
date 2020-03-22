@@ -1,62 +1,29 @@
-import './style.sass'
+import './style.sass';
 import {Page} from '../../../Page';
-import template from './index.pug'
-import {uuid, withForm} from '../../../ulils';
+import template from './index.pug';
+import {uuid, withChainedPages, withForm} from '../../../ulils';
+import {AtEditRoute} from './atEdit/AtEditRoute';
+import {StartEditRoute} from './startEdit/StartEditRoute';
 
+/**
+ * Add experience subpage
+ */
 class AddExperiencePage extends Page {
+  /**
+   * @return{string}
+   */
   render() {
-    return template(this.props)
-  }
-  componentDidMount() {
-    console.log('did mount');
-    this.props.requestNext({
-      companyName: 'Mail',
-      role: 'впавап',
-      experience: ['2000','2020'],
-      responsibilities: 'пить, петь, есть'
-    });
-    this.props.requestNext({
-      companyName: 'Maisfl',
-      role: 'впавап',
-      experience: ['2000','2020'],
-      responsibilities: 'пить, петь, есть'
-    });
+    return template(this.props);
   }
 }
-AddExperiencePage = withForm(AddExperiencePage, {
-    companyName: {
-      id: uuid(),
-      required: true,
-    },
-    role: {
-      id: uuid(),
-      required: true,
-    },
-    experienceFrom: {
-      id: uuid(),
-      required: true,
-    },
-    experienceTo: {
-      id: uuid(),
-      required: true,
-    },
-    responsibilities: {
-      id: uuid(),
-      required: true,
-    }
-  }, {
-    id: uuid(),
-  },
-  (e, page) => {
-    console.log(e, page);
-    page.props.requestNext({
-      companyName: e.companyName,
-      role: e.role,
-      experience: [e.experienceFrom, e.experienceTo],
-      responsibilities: e.responsibilities,
-    });
-  },
+
+AddExperiencePage = withChainedPages(AddExperiencePage, [
+    StartEditRoute,
+    AtEditRoute,
+  ],
+  null,
+  '/summaries/create/',
 );
 export {
-  AddExperiencePage
-}
+  AddExperiencePage,
+};

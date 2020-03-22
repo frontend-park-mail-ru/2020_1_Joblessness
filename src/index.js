@@ -67,7 +67,7 @@ class App {
       {
         path: 'summaries/create',
         element: new CreateSummaryPage('#root'),
-        childRoutes: CreateSummaryRoutes
+        childRoutes: CreateSummaryRoutes,
       },
       {
         path: 'summaries/*',

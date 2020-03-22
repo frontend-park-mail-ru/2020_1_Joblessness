@@ -38,8 +38,18 @@ export class Page {
   #prevProps;
   #prevContainerDom;
   props = {};
+
+  /**
+   * default event to overwrite
+   */
   componentDidMount() {}
+  /**
+   * default event to overwrite
+   */
   componentWillMount() {}
+  /**
+   * default event to overwrite
+   */
   componentWillUpdate() {}
   /**
    * Конструктор рендерит страницу
@@ -138,6 +148,7 @@ export class Page {
               Render function must return string.
               Setting innerHTML is not supported anymore!`);
     }
+
     if (this.#prevRender !== toShow ||
       this.#prevContainerDom !== this.#container.dom ||
       !isEqual(this.#prevProps, this.props)||

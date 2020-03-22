@@ -12,8 +12,12 @@ mixin graduated(year)
         block
 
 mixin education
-    div.create-summary-section
-        div.create-summary-section--body
-            +institution(attributes.institution)
-            +speciality(attributes.speciality)
-            +graduated(attributes.graduated)
+    +institution(attributes.institution)
+    +speciality(attributes.speciality)
+    +graduated(attributes.graduated)
+
++education(
+    institution="МГТУ им. Н. Э. Баумана"
+    speciality="Техническая физика"
+    graduated="2022"
+    type="Высшее")

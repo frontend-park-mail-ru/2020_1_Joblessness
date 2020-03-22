@@ -1,5 +1,4 @@
 import {Navigator} from '../Navigator';
-import {PersonInfo} from '../views/NewCreateSummaryPage/personInfo';
 
 /**
  * Allows to quickly navigate between child pages
@@ -13,7 +12,7 @@ import {PersonInfo} from '../views/NewCreateSummaryPage/personInfo';
  * @return {Page}
  */
 export const withChainedPages = (Wrappee, pages,
-    updateProps = null, root = '',) => {
+    updateProps = null, root = '') => {
   /**
    * Wrapped page component
    */
@@ -33,26 +32,26 @@ export const withChainedPages = (Wrappee, pages,
     _appendRequestNextAndPrevious = () => {
       const requestNext = (page, pageElem, path, args) => {
         page.beforeNext && page.beforeNext(pageElem, ...args);
-        Navigator.showPage(root + path);
+        Navigator.showPage(root + path, !page.useInner);
         page.afterNext && page.afterNext(pageElem, ...args);
       };
       const requestPrevious = (page, pageElem, path, args) => {
         page.beforePrevious && page.beforePrevious(pageElem, ...args);
-        Navigator.showPage(root + path);
+        Navigator.showPage(root + path, !page.useInner);
         page.afterPrevious && page.afterPrevious(pageElem, ...args);
       };
       pages.forEach((p) => {
         p.element.props.requestNext =
           (...a) => {
             const nextPath = p.innerNext ? p.innerNext : p.next;
-            const nextPage = pages.find(p => p.innerPath === nextPath) ?? p;
+            const nextPage = pages.find((p) => p.innerPath === nextPath) ?? p;
             requestNext(p, nextPage?.element, p.next, a);
           };
-        p.element.props.requesPrevious =
+        p.element.props.requestPrevious =
           (...a) => {
             const prevPath = p.innerPrev ? p.innerPrev : p.prev;
-            const nextPage = pages.find(p => p.innerPath === prevPath) ?? p;
-            requestNext(p, nextPage?.element, p.next, a);
+            const nextPage = pages.find((p) => p.innerPath === prevPath) ?? p;
+            requestPrevious(p, nextPage?.element, p.next, a);
           };
       });
     };

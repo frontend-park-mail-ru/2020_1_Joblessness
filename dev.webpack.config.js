@@ -71,8 +71,5 @@ module.exports = {
     ]
   },
   plugins: [
-    // new HtmlWebpackPlugin({
-    //   filename: "__index.html"
-    // })
   ]
 };

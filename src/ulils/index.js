@@ -7,10 +7,12 @@ import {withForm} from './withForm';
 import {fileToB64} from './fileToB64';
 import {withAuth} from './withAuth';
 import {withChainedPages} from './withChainedPages';
+import {createLocalStore} from './createLocalStore';
 import {currentSession} from './currentSession';
 import request from './request';
 export {
   currentSession,
+  createLocalStore,
   validators,
   request,
   uuid,
@@ -30,6 +32,7 @@ export default {
     withAuth, // @TODO remove
     withForm,
     withChainedPages,
+    createLocalStore,
   },
   request,
 };

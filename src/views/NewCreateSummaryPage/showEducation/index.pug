@@ -1,29 +1,13 @@
-mixin institution(name)
-    div.institutions
-        h2 #{name}
-        block
-mixin speciality(name)
-    div.speciality
-        h2 #{name}
-        block
-mixin graduated(year)
-    div.graduated
-        h2 #{year}&nbsp
-        block
-
-mixin education
-    div.create-summary-section
-        div.create-summary-section--body
-            +institution(attributes.institution)
-            +speciality(attributes.speciality)
-            +graduated(attributes.graduated)
-
-+education(
-    institution="МГТУ им. Н. Э. Баумана"
-    speciality="Техническая физика"
-    graduated="2022"
-    type="Высшее")
-+education(
-    institution="Лицей №1580 при МГТУ им. Н. Э. Баумана"
-    graduated="2018"
-    type="Общее среднее")
+mixin edu-holder
+    div.create-summary-section.h160
+        div.create-summary-section--body(id=attributes.id)
+        div.options
+            div.remove-button &#xd7
+            div.edit-button &#9998
+            div.move-up &#9650
+            div.move-down &#9660
+if locals.eduList
+    each edu in locals.eduList
+        +edu-holder(id=edu.id)
+else
+    div Нет образования

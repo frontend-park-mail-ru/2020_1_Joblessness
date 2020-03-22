@@ -1,7 +1,7 @@
 import './style.sass';
 import {Page} from '../../Page.js';
 import template from './pug/index.pug';
-import {appendForm} from './appendForm';
+// import {appendForm} from './appendForm';
 /**
  * Vacancy creation page
  */

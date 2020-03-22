@@ -5,7 +5,6 @@ import {Page} from './Page';
  */
 class RootElement extends Page {
   /**
-   *
    * @return {string}
    */
   render() {

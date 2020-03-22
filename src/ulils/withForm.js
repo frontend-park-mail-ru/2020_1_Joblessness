@@ -44,9 +44,9 @@ export const withForm = (WrappedComponent, inputFields, submitField,
 
   return class extends WrappedComponent {
     /**
-       * call default constructor and set element's props
-       * @param {any} args
-       */
+     * call default constructor and set element's props
+     * @param {any} args
+     */
     constructor(args) {
       super(args);
       this.props[propName] = {
@@ -62,18 +62,54 @@ export const withForm = (WrappedComponent, inputFields, submitField,
     }
 
     /**
-       * append button after rendering
-       */
+     * append button after rendering
+     */
     componentDidMount() {
       super.componentDidMount && super.componentDidMount();
-      this.addSubmit();
+
+      if (Object.keys(inputFields).length > 0) {
+        const fields = Object.entries(inputFields);
+        for (let i = 0; i < fields.length - 1; i++) {
+          const el = document.getElementById(fields[i][1].id);
+          if (el.firstElementChild.nodeName === 'INPUT') {
+            el.addEventListener('keypress', (e) => {
+              if (e.key === 'Enter') {
+                const next = document.getElementById(fields[i + 1][1].id);
+                next.firstElementChild.focus();
+              }
+            });
+          }
+        }
+        const lastEl = document.getElementById(fields[fields.length - 1][1].id);
+        if (lastEl.firstElementChild.nodeName === 'INPUT') {
+          lastEl.addEventListener('keypress', (e) => {
+            if (e.key === 'Enter') {
+              const next = document.getElementById(submitField.id);
+              next.click();
+            }
+          });
+        }
+      }
+      document.getElementById(submitField.id).addEventListener('click', (e) => {
+        e.preventDefault();
+        const inputData = this.validate();
+        if (inputData) {
+          const arg = inputData.reduce((acc, v) => {
+            acc[v.field] = v.value;
+            return acc;
+          }, {});
+          onValid && onValid(arg, this, e, submitField.id);
+        } else {
+          onInvalid && onInvalid(this, e, submitField.id);
+        }
+      });
     };
 
     /**
-       * default warning
-       * @param {HTMLAnchorElement} inputBlock
-       * @param {string} warnMessage
-       */
+     * default warning
+     * @param {HTMLAnchorElement} inputBlock
+     * @param {string} warnMessage
+     */
     showWarning = (inputBlock, warnMessage) => {
       const warnBlock = inputBlock.lastElementChild;
       warnBlock.textContent = warnMessage || 'Обязательное поле';
@@ -83,8 +119,8 @@ export const withForm = (WrappedComponent, inputFields, submitField,
           }, 10000,
       );
       /**
-           * remove warning on click or after 10 sec
-           */
+       * remove warning on click or after 10 sec
+       */
       const removeWarn = () => {
         clearTimeout(tid);
         warnBlock.textContent = '';
@@ -94,14 +130,14 @@ export const withForm = (WrappedComponent, inputFields, submitField,
     };
 
     /**
-       * default input validator
-       * @param {HTMLAnchorElement} inputBlock
-       * @param {bool} required - if field is required
-       * @param {function} validator - validate field data
-       * @param {string} warnMessage message on warn
-       * @param {string} key field name in inputFields object
-       * @return {{field: *, value: *}|boolean}
-       */
+     * default input validator
+     * @param {HTMLAnchorElement} inputBlock
+     * @param {bool} required - if field is required
+     * @param {function} validator - validate field data
+     * @param {string} warnMessage message on warn
+     * @param {string} key field name in inputFields object
+     * @return {{field: *, value: *}|boolean}
+     */
     validateInput = (inputBlock, required, validator, warnMessage, key) => {
       const inputText = inputBlock.firstElementChild?.value;
       if (validateString(inputText)) {
@@ -127,13 +163,15 @@ export const withForm = (WrappedComponent, inputFields, submitField,
     };
 
     /**
-       * expected first child is input and last is warn field
-       * @param {string} key - field name
-       * @return {{field: *, value: *}|boolean}
-       */
+     * expected first child is input and last is warn field
+     * @param {string} key - field name
+     * @return {{field: *, value: *}|boolean}
+     */
     validateInputById = (key) => {
-      const {required, id, validator = (s) => s.length,
-        warnMessage = '', inputValidator} = inputFields[key];
+      const {
+        required, id, validator = (s) => s.length,
+        warnMessage = '', inputValidator,
+      } = inputFields[key];
       const inputBlock = document.getElementById(id);
       if (inputBlock === null) {
         throw new Error(`
@@ -151,63 +189,23 @@ export const withForm = (WrappedComponent, inputFields, submitField,
     };
 
     /**
-       * validates form
-       * @return {[{field: *, value: *}]|[boolean]}
-       */
+     * validates form
+     * @return {[{field: *, value: *}]|[boolean]}
+     */
     validate = () => {
       let requiredLength = 0;
       const validInputs =
-          Object
-              .keys(inputFields)
-              .map(this.validateInputById)
-              .filter((e) => {
-                if (e && inputFields[e.field].required) {
-                  ++requiredLength;
-                }
-                return e;
-              });
+        Object
+            .keys(inputFields)
+            .map(this.validateInputById)
+            .filter((e) => {
+              if (e && inputFields[e.field].required) {
+                ++requiredLength;
+              }
+              return e;
+            });
       return requiredLength >= this.__expectedLength ? validInputs : null;
     };
-
-    /**
-       * Adds submit event
-       */
-    addSubmit = () => {
-      const fields = Object.entries(inputFields);
-      for(let i = 0; i < fields.length - 1; i++ ) {
-        const el = document.getElementById(fields[i][1].id);
-        if(el.firstElementChild.nodeName === "INPUT") {
-          el.addEventListener('keypress', (e) => {
-            if(e.key === 'Enter') {
-              const next = document.getElementById(fields[i + 1][1].id)
-              next.firstElementChild.focus()
-            }
-          });
-        }
-      }
-      const lastEl = document.getElementById(fields[fields.length - 1][1].id);
-      if(lastEl.firstElementChild.nodeName === "INPUT") {
-        lastEl.addEventListener('keypress', (e) => {
-          if (e.key === 'Enter') {
-            const next = document.getElementById(submitField.id);
-            next.click();
-          }
-        })
-      }
-      document.getElementById(submitField.id).addEventListener('click', (e) => {
-        e.preventDefault();
-        const inputData = this.validate();
-        if (inputData) {
-          const arg = inputData.reduce((acc, v) => {
-            acc[v.field] = v.value;
-            return acc;
-          }, {});
-          onValid && onValid(arg, this, e);
-        } else {
-          onInvalid && onInvalid(this, e);
-        }
-      });
-    }
   };
 };
 
