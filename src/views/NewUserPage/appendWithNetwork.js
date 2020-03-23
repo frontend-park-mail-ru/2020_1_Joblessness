@@ -63,7 +63,7 @@ const getUserId = () => {
   return currentSession.user.id || 1;
 };
 
-const prepareUrl = () => `/api/user/${getUserId()}`;
+const prepareUrl = () => `/api/users/${getUserId()}`;
 
 export const appendWithNetwork = (Wrappee) => withNetwork(
     prepareUrl, prepareRequestBody, Wrappee,

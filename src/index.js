@@ -96,6 +96,7 @@ class App {
         path: '404',
         element: new NotFoundPage('#root'),
       },
+
     ];
     Navigator.addRoutes(routes);
 

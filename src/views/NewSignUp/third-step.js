@@ -33,7 +33,7 @@ ThirdStep = withForm(ThirdStep, {
   id: uuid(),
 },
 (form, page) => {
-  request.post(`/api/user/${currentSession.user.id}`, {
+  request.post(`/api/users/${currentSession.user.id}`, {
     'first-name': form.firstName,
     'last-name': form.lastName,
   })
