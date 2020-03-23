@@ -16,19 +16,19 @@ class StartEditPage extends Page {
 }
 
 StartEditPage = withForm(StartEditPage, {}, {id: uuid()},
-  (arg, page, e, id) => {
-    const start = document.getElementById('add_experience_start_edit');
-    const at = document.getElementById('add_experience_at_edit');
-    start.classList.remove('shown');
-    start.classList.add('will-remove');
-    at.classList.add('shown');
-    setTimeout(()=> {
-      start.classList.add('hidden');
-      start.classList.remove('will-remove');
-    }, 200);
-    at.classList.remove('hidden');
+    (arg, page, e, id) => {
+      const start = document.getElementById('add_experience_start_edit');
+      const at = document.getElementById('add_experience_at_edit');
+      start.classList.remove('shown');
+      start.classList.add('will-remove');
+      at.classList.add('shown');
+      setTimeout(()=> {
+        start.classList.add('hidden');
+        start.classList.remove('will-remove');
+      }, 200);
+      at.classList.remove('hidden');
     // page.props.requestNext();
-  },
+    },
 );
 export {
   StartEditPage,

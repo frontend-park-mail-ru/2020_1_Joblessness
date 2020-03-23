@@ -23,7 +23,7 @@ class ShowEducationPage extends Page {
     super.componentDidMount?.();
     this.props.eduList
       ?.forEach( (e) => addEvents(this,
-        document.getElementById(e.id).parentNode, e.id));
+          document.getElementById(e.id).parentNode, e.id));
   }
 }
 const addEvents = (page, elem, id) => {
@@ -32,8 +32,8 @@ const addEvents = (page, elem, id) => {
   const moveUp = elem.getElementsByClassName('move-up')[0];
 
   addRemoveEvent(page, remove, id, elem);
-  moveDownEvent(page, moveDown, id, 'eduList');
-  moveUpEvent(page, moveUp, id, 'eduList');
+  moveDownEvent(page, moveDown, id, 'eduList', 'education');
+  moveUpEvent(page, moveUp, id, 'eduList', 'education');
 };
 
 const addRemoveEvent = (page, elem, id, elemToRemove) => {
@@ -62,7 +62,7 @@ const showEducationRoutes = [];
 ShowEducationPage = withLocalStore(ShowEducationPage);
 
 ShowEducationPage = withChainedPages(ShowEducationPage, showEducationRoutes,
-  null, '/summaries/create/showEducation/');
+    null, '/summaries/create/showEducation/');
 export {
   ShowEducationPage,
 };

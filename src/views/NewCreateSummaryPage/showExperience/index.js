@@ -34,8 +34,8 @@ const addEvents = (page, elem, id) => {
   const moveUp = elem.getElementsByClassName('move-up')[0];
 
   addRemoveEvent(page, remove, id, elem);
-  moveDownEvent(page, moveDown, id, 'expList');
-  moveUpEvent(page, moveUp, id, 'expList');
+  moveDownEvent(page, moveDown, id, 'expList', 'experience');
+  moveUpEvent(page, moveUp, id, 'expList', 'experience');
 };
 
 const addRemoveEvent = (page, elem, id, elemToRemove) => {
