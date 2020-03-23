@@ -24,22 +24,25 @@ CreateSummaryPage = withForm(CreateSummaryPage, {}, {
 },
 (e, page) => {
   const state = page.props.getStore();
-  request.post('/api/summaries', {
+  const body = {
     keywords: '',
-    eduacation: state.education.map( (e) => ({
+    educations: state.education.map( (e) => ({
       institution: e.institution,
       speciality: e.speciality,
       graduated: '01/01/' + e.graduated,
       type: e.type,
     })),
-    experience: state.experience.map( (e) => ({
+    experiences: state.experience.map( (e) => ({
       'company_name': e.companyName,
       'role': e.role,
       'responsibilities': e.responsibilities,
       'start': e.experience[0],
       'stop': e.experience[1],
     })),
-  });
+  };
+  console.log(body);
+  request.post('/api/summaries', body).then(console.log)
+      .catch(console.log);
 },
 );
 
