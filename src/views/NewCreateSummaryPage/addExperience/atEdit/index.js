@@ -14,25 +14,6 @@ class AtEditPage extends Page {
   render() {
     return template(this.props);
   }
-
-  // /**
-  //  * for testing purposes
-  //  * //@TODO get rid of this
-  //  */
-  // componentDidMount() {
-  //   this.props.requestNext({
-  //     companyName: 'Mail',
-  //     role: 'впавап',
-  //     experience: ['2000', '2020'],
-  //     responsibilities: 'пить, петь, есть',
-  //   });
-  //   this.props.requestNext({
-  //     companyName: 'Maisfl',
-  //     role: 'впавап',
-  //     experience: ['2000', '2020'],
-  //     responsibilities: 'пить, петь, есть',
-  //   });
-  // }
 }
 AtEditPage = withLocalStore(AtEditPage);
 
@@ -62,7 +43,7 @@ AtEditPage = withForm(AtEditPage, {
   id: uuid(),
 },
 (e, page) => {
-  console.log(e, page);
+
   const exp = {
     companyName: e.companyName,
     role: e.role,

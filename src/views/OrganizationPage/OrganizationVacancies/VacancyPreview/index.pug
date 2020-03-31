@@ -1,0 +1,6 @@
+include ../../../../templates/pug/link
+div.vacancy-holder--body
+    div.chosen-holder(id=locals.vacancy.chosen.id)
+    h1 #{locals.vacancy.vacancyName}
+    h2 #{locals.vacancy.salaryFrom} - #{locals.vacancy.salaryTo} &#8381
+    +link Откликнуться

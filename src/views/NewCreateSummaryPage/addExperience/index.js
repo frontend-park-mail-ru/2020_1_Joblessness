@@ -1,9 +1,9 @@
 import './style.sass';
 import {Page} from '../../../Page';
 import template from './index.pug';
-import {withChainedPages} from '../../../ulils';
-import {AtEditRoute} from './atEdit/AtEditRoute';
-import {StartEditRoute} from './startEdit/StartEditRoute';
+// import {withChainedPages} from '../../../ulils';
+// import {AtEditRoute} from './atEdit/AtEditRoute';
+// import {StartEditRoute} from './startEdit/StartEditRoute';
 
 /**
  * Add experience subpage
@@ -17,13 +17,13 @@ class AddExperiencePage extends Page {
   }
 }
 
-AddExperiencePage = withChainedPages(AddExperiencePage, [
-  StartEditRoute,
-  AtEditRoute,
-],
-null,
-'/summaries/create/',
-);
+// AddExperiencePage = withChainedPages(AddExperiencePage, [
+//   StartEditRoute,
+//   AtEditRoute,
+// ],
+// null,
+// '/summaries/create/',
+// );
 export {
   AddExperiencePage,
 };

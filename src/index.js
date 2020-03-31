@@ -19,6 +19,7 @@ import {
   CreateSummaryRoutes,
   AuthSubRoutes,
 } from './views';
+import ORGANIZATIONS_ROUTES from './views/OrganizationPage/routes'
 import {RootElement} from './RootElement';
 
 /**
@@ -44,6 +45,7 @@ class App {
           },
         ],
       },
+      ...ORGANIZATIONS_ROUTES,
       {
         path: 'vacancies/create',
         element: new CreateVacancyPage('#root'),
@@ -96,7 +98,6 @@ class App {
         path: '404',
         element: new NotFoundPage('#root'),
       },
-
     ];
     Navigator.addRoutes(routes);
 
@@ -105,7 +106,7 @@ class App {
   }
 }
 const createApp = async () => {
-  await loginOnReload();
+  // await loginOnReload();
   new App();
 };
 createApp();

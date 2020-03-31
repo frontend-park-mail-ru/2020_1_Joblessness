@@ -7,7 +7,6 @@
   justify-content: center;
   align-items: center;
 }
-
 .start-adding--button {
   display: flex;
   justify-content: center;
@@ -36,23 +35,23 @@
   opacity: 0;
   font-size: 0;
 }
-.start-adding--button:hover {
+.start-adding:hover .start-adding--button {
   width: 100%;
   border-radius: 10px;
   height: 100%;
   transform: scale(1.58);
   background-image: linear-gradient(to right, #0acffe 0%, #495aff 100%);
 }
-.start-adding--button:hover h2 {
+.start-adding:hover .start-adding--button h2 {
   font-size: 1.5em;
   opacity: 1;
 }
-.start-adding--button:hover h1 {
+.start-adding:hover .start-adding--button h1 {
   transition: 0s;
   font-size: 0;
   opacity: 0;
 }
-.start-adding--button:hover:active h2 {
+.start-adding:hover .start-adding--button:active h2 {
   font-size: 1.4em;
 }
 

@@ -1,0 +1,138 @@
+@import "../CONSTANTS"
+.page-holder
+  width: 100%
+  min-height: 100vh
+  margin-top: 20px
+  align-items: center
+  display: flex
+  flex-direction: column
+  h1
+    font-size: 32px
+    padding: 0
+    margin: 20px 0 0 0
+  &--body
+    display: flex
+    flex-direction: column
+    justify-content: stretch
+    align-items: stretch
+    height: 100%
+    width: 80%
+
+.page-solid-section
+  display: flex
+  z-index: 2
+  justify-content: center
+  align-items: center
+  height: 230px
+  width: 100%
+  overflow: hidden
+  @include SECTION_SHADOW
+  &--body
+    display: flex
+    justify-content: center
+    flex-direction: column
+    align-items: center
+
+.page-section
+  margin-top: 20px
+  display: flex
+  width: 100%
+  border-radius: 10px
+  background: white
+  overflow: hidden
+  padding: 20px 0 20px 0
+  @include SECTION_SHADOW
+  &--body
+    width: 100%
+    height: 100%
+    display: flex
+    justify-content: stretch
+    flex-direction: column
+    align-items: stretch
+
+.flex-row
+  display: flex
+  flex-direction: row
+.cover
+  display: flex
+  width: 100%
+  justify-content: center
+.gradient-background
+  @include BACKGROUND_GRADIENT
+  background-attachment: fixed
+
+.light-background
+  background: rgba(255,255,255, 0.5)
+
+.hidden
+  display: none
+
+.removing
+  transition: .5s
+  height: 0
+  padding: 0
+  margin: 0
+  transform: scale(0,0)
+  transition-timing-function: ease-in-out
+
+.placing
+  transition: .5s
+  transform: scale(1,1)
+
+.no-padding
+  padding: 0
+.add-icon
+  width: 60px
+  height: 60px
+  border-radius: 50%
+  @include SECTION_SHADOW
+
+.width90
+  width: 90%
+.width100
+  width: 100%
+.flex-1
+  flex: 1
+.flex-2
+  flex: 2
+.flex-3
+  flex: 3
+.flex-4
+  flex: 4
+.flex-5
+  flex: 5
+.flex-6
+  flex: 6
+.flex-7
+  flex: 7
+.flex-8
+  flex: 8
+.flex-9
+  flex: 9
+
+.justify-end
+  justify-content: flex-end
+
+.options-holder
+  flex: 1
+  display: flex
+  justify-content: center
+  align-items: center
+  .options
+    padding: 3px
+    margin: 20px
+    border-radius: 18px
+    align-self: center
+
+[contenteditable]
+  outline: none
+  &:focus
+    background: rgba(255,255,255, .2)
+
+.options
+  cursor: pointer
+.reload-button
+  a
+    color: black
+    &:visited
+      color: black

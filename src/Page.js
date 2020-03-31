@@ -123,11 +123,13 @@ export class Page {
   /**
    * Возвращает строку с содержимым страницы.
    * @WARNING не использовать напрямую. Использовать requestRender
+   * @return {string}
    */
   render() {
     throw new Error(`
         Method render must be overwritten!
         `);
+    return '';
   };
 
   /**
@@ -143,7 +145,7 @@ export class Page {
     this.componentWillUpdate && this.componentWillUpdate();
     const toShow = this.render();
 
-    if (!toShow) {
+    if (!toShow && toShow !== '' ) {
       console.error(`
               Render function must return string.
               Setting innerHTML is not supported anymore!`);

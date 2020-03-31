@@ -4,12 +4,15 @@
 class CurrentSession {
   #userId;
   #isAuthenticated;
-
+  #events;
   /**
    * init default value
    */
   constructor() {
     this.#userId = 0;
+    this.#events = {
+      change: []
+    };
     this.#isAuthenticated = false;
   }
   /**
@@ -25,6 +28,7 @@ class CurrentSession {
       }
       this.#userId = parseInt(id);
       this.#isAuthenticated = true;
+      this.onChange();
     } else if (typeof id === 'number') {
       if (isNaN(id)) {
         throw new Error(`
@@ -32,9 +36,11 @@ class CurrentSession {
       }
       this.#userId = Math.floor(id);
       this.#isAuthenticated = true;
+      this.onChange();
     } else if (id === null) {
       this.#userId = 0;
       this.#isAuthenticated = false;
+      this.onChange();
     } else {
       throw new Error(`
       Expected string or number as ID.
@@ -66,6 +72,19 @@ class CurrentSession {
    */
   get isAuthenticated() {
     return this.#isAuthenticated;
+  }
+
+  onChange() {
+    this.#events['change'].forEach(e => ({
+      isAuthenticated: this.#isAuthenticated,
+      userId: this.#userId
+    }))
+  }
+  addEventListener(eventName, event) {
+    this.#events[eventName]?.push();
+  }
+  removeEventListener(eventName, event) {
+    this.#events[eventName] = this.#events[eventName].map( e => e !== event);
   }
 }
 

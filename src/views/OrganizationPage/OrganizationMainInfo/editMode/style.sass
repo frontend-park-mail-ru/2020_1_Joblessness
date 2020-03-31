@@ -1,0 +1,33 @@
+@import "../../../../CONSTANTS"
+.edit-mode
+  &--add
+    margin: 15px 0 15px 10vw
+    width: auto
+    background: white
+    overflow: hidden
+    border-radius: 10px
+    @include SECTION_SHADOW
+
+.paragraph-holder
+  display: flex
+  height: 130px
+  &.removing
+    height: 0
+  .options-holder
+    flex: 11
+    transition: opacity .2s
+    opacity: 0
+  &:hover
+    .paragraph-holder--text
+      background: rgba(255,255,255,.1)
+    .options-holder
+      opacity: 1
+  &--text
+    flex: 89
+    width: 100%
+
+.paragraph-holder.moving-down
+  transform: translateY(130px)
+
+.paragraph-holder.moving-top
+  transform: translateY(-130px)

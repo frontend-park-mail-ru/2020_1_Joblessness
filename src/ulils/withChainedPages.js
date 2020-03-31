@@ -25,9 +25,7 @@ export const withChainedPages = (Wrappee, pages,
       super(props);
 
       this._appendRequestNextAndPrevious();
-      this.props.insertSubPage = (page) => {
-        pages.push(page);
-      };
+
     }
     _appendRequestNextAndPrevious = () => {
       const requestNext = (page, pageElem, path, args) => {
@@ -41,6 +39,9 @@ export const withChainedPages = (Wrappee, pages,
         page.afterPrevious && page.afterPrevious(pageElem, ...args);
       };
       pages.forEach((p) => {
+        p.element.props.insertSubPage = (page) => {
+          pages.push(page);
+        };
         p.element.props.requestNext =
           (...a) => {
             const nextPath = p.innerNext ? p.innerNext : p.next;
@@ -52,6 +53,35 @@ export const withChainedPages = (Wrappee, pages,
             const prevPath = p.innerPrev ? p.innerPrev : p.prev;
             const nextPage = pages.find((p) => p.innerPath === prevPath) ?? p;
             requestPrevious(p, nextPage?.element, p.next, a);
+          };
+      });
+
+
+
+      const requestNextNoUpdate = (page, pageElem, path, args) => {
+        page.beforeNext && page.beforeNext(pageElem, ...args);
+        page.afterNext && page.afterNext(pageElem, ...args);
+      };
+      const requestPreviousNoUpdate = (page, pageElem, path, args) => {
+        page.beforePrevious && page.beforePrevious(pageElem, ...args);
+        page.afterPrevious && page.afterPrevious(pageElem, ...args);
+      };
+
+      pages.forEach((p) => {
+        p.element.props.insertSubPage = (page) => {
+          pages.push(page);
+        };
+        p.element.props.requestNextNoUpdate =
+          (...a) => {
+            const nextPath = p.innerNext ? p.innerNext : p.next;
+            const nextPage = pages.find((p) => p.innerPath === nextPath) ?? p;
+            requestNextNoUpdate(p, nextPage?.element, p.next, a);
+          };
+        p.element.props.requestPreviousNoUpdate =
+          (...a) => {
+            const prevPath = p.innerPrev ? p.innerPrev : p.prev;
+            const nextPage = pages.find((p) => p.innerPath === prevPath) ?? p;
+            requestPreviousNoUpdate(p, nextPage?.element, p.next, a);
           };
       });
     };
