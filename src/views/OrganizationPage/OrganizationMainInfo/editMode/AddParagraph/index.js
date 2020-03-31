@@ -13,25 +13,35 @@ class AddParagraph extends Page {
   componentDidMount() {
     super.componentDidMount();
     const parent = document.querySelector(this.container);
-    const addButton = parent.querySelector('.start-adding');
-    addButton.addEventListener('click', () => {
-      const newItem = {
-        id: uuid(),
-        classList: ['paragraph'],
-        text: '',
-      };
+    if(parent) {
+      parent.classList.add('placing-start');
+      setTimeout(() => {
+        parent.classList.remove('placing-start');
+        parent.classList.add('placing-o');
+        setTimeout(() => {
+          parent.classList.remove('placing-o');
+        }, 500)
+      }, 1);
+      const addButton = parent.querySelector('.start-adding');
+      addButton.addEventListener('click', () => {
+        const newItem = {
+          id: uuid(),
+          classList: ['paragraph'],
+          text: '',
+        };
 
-      this.props.setStore(
-        (s) => ({
-          raw: [
-            ...s.raw,
-            newItem,
-          ],
-        }),
-      );
+        this.props.setStore(
+          (s) => ({
+            raw: [
+              ...s.raw,
+              newItem,
+            ],
+          }),
+        );
 
-      this.props.requestNextNoUpdate(newItem);
-    })
+        this.props.requestNextNoUpdate(newItem);
+      })
+    }
   }
 }
 

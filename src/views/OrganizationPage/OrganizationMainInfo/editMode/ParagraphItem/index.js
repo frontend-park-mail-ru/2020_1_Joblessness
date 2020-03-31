@@ -16,16 +16,19 @@ class ParagraphItem extends Page {
     const parent = document.querySelector(this.container);
     const el = parent.firstChild;
     console.log(this._prevLen, this.props.getStore().raw.length);
-    if (!this._prevLen || this._prevLen === this.props.getStore().raw.length) {
+    if (!this._prevLen || this._prevLen >= this.props.getStore().raw.length) {
       const e = parent.parentNode;
-      e.classList.add('placing');
+      e?.classList.add('placing-start');
       setTimeout(
-        () => e.classList.remove('placing'), 500,
+        () => {
+          e?.classList.add('placing');
+          setTimeout(() => {
+            e?.classList.remove('placing-start');
+            e?.classList.remove('placing');
+          }, 500)
+        }, 0,
       );
-      e.classList.add('removing');
-      setTimeout(
-        () => e.classList.remove('removing'), 1,
-      );
+
       this._prevLen = this.props.getStore().raw.length;
     }
 

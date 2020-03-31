@@ -29,7 +29,9 @@ const SubRoutes = [
         Navigator.addRoutes(constructSubRoutes(EditModeRoutes));
 
       } else if (mode === 'PREVIEW') {
-        console.log('preview');
+        const holders = document.getElementsByClassName('paragraph-holder');
+        Array.from(holders).forEach(h => h.classList.add('removing'));
+        document.getElementById('organizations_main_info_edit_mode_add_paragraph')?.classList.add('removing-o');
         Navigator.removeRoutes(
           constructSubRoutes([
             {
@@ -37,32 +39,36 @@ const SubRoutes = [
             },
           ])
         );
-        if(status === 'SUBMIT') {
-          //@TODO send request
-          rootPage.props.setStore(s => ({
-            preview : [...s.raw],
-          }))
-        }
-        if(status === 'DECLINE') {
-          rootPage.props.setStore(s => ({
-            raw : [...s.preview],
-          }))
-        }
-        Navigator.addRoutes(
+        setTimeout(() => {
 
-          constructSubRoutes([
-            {
-              path: 'previewMode/',
-              alwaysOn: true,
-              element: PreviewPage,
-            },
-          ])
-        )
+          if(status === 'SUBMIT') {
+            //@TODO send request
+            rootPage.props.setStore(s => ({
+              preview : [...s.raw],
+            }))
+          }
+          if(status === 'DECLINE') {
+            rootPage.props.setStore(s => ({
+              raw : [...s.preview],
+            }))
+          }
+          Navigator.addRoutes(
+
+            constructSubRoutes([
+              {
+                path: 'previewMode/',
+                alwaysOn: true,
+                element: PreviewPage,
+              },
+            ])
+          )
+          Navigator.updateAllPages()
+        }, 500)
       }
     }
   }
 ];
-console.log(SubRoutes)
+
 const constructSubRoutes = (subRoutes) => constructParentRoutes(
   [
     {
