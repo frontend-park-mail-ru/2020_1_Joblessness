@@ -480,6 +480,47 @@ class RequestManager {
                 }).catch(reject);
         },);
     }
+
+    /**
+     * @example
+     * /api/search?type="person"&since=2&desc=true&request=awdwada
+     * @result
+     * persons [{
+     *    id uint64
+     *    first_name "string"
+     *    last_name "string"
+     *    tag "string"
+     *    avatar "string"
+     * }]
+     * organizations [{
+     *    id uint64
+     *    name "string"
+     *    tag "string"
+     *    avatar "string"
+     * }]
+     * vacancies [{
+     *    organization {
+     *        id uint64
+     *        name "string"
+     *    }
+     *    id uint64
+     *    name "string"
+     *    keywords "string"
+     * }]
+     */
+    trySearch (form) {
+        return new Promise((resolve, reject) => {
+            request
+                .get('/api/search', form)
+                .then((r) => {
+                    if (r.status === 200) {
+                        resolve(r);
+                    } else {
+                        reject(r);
+                    }
+                }).catch(reject);
+        },);
+    }
 }
 
 const requestManager = new RequestManager();
