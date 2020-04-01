@@ -3,12 +3,11 @@ export const moveDownEvent = (page, elem, id, fieldName, storeName) => {
     const list = page.props.getStore()[storeName];
     for (let i = 0; i < list.length - 1; i++) {
       if (list[i].id === id) {
-
         const el1 = document.getElementById(
-          list[i + 1].id).parentNode;
+            list[i + 1].id).parentNode;
 
         const el2 = document.getElementById(
-          list[i].id).parentNode;
+            list[i].id).parentNode;
 
         page.props.setStore((s) => {
           const temp = s[storeName].find((e) => e.id === id);
@@ -22,11 +21,11 @@ export const moveDownEvent = (page, elem, id, fieldName, storeName) => {
         el2.classList.add('moving-down');
 
         setTimeout(
-          () => {
-            el1.parentNode.insertBefore(el1, el2);
-            el1.classList.remove('moving-top');
-            el2.classList.remove('moving-down');
-          }, 200,
+            () => {
+              el1.parentNode.insertBefore(el1, el2);
+              el1.classList.remove('moving-top');
+              el2.classList.remove('moving-down');
+            }, 200,
         );
         return;
       }
@@ -44,11 +43,10 @@ export const moveUpEvent = (page, elem, id, fieldName, storeName) => {
 
     for (let i = 1; i < list.length; i++) {
       if (list[i].id === id) {
-
         const el1 = document.getElementById(
-          list[i].id).parentNode;
+            list[i].id).parentNode;
         const el2 = document.getElementById(
-          list[i - 1].id).parentNode;
+            list[i - 1].id).parentNode;
 
         page.props.setStore((s) => {
           const temp = s[storeName].find((e) => e.id === id);
@@ -62,11 +60,11 @@ export const moveUpEvent = (page, elem, id, fieldName, storeName) => {
         el2.classList.add('moving-down');
 
         setTimeout(
-          () => {
-            el1.parentNode.insertBefore(el1, el2);
-            el1.classList.remove('moving-top');
-            el2.classList.remove('moving-down');
-          }, 200,
+            () => {
+              el1.parentNode.insertBefore(el1, el2);
+              el1.classList.remove('moving-top');
+              el2.classList.remove('moving-down');
+            }, 200,
         );
         return;
       }

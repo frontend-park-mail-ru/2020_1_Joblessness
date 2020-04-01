@@ -1,5 +1,5 @@
 import {EditInfo} from './index';
-import {RootPath, FullRoot, constructSubRoutes, SubRoutes } from './subRoutes'
+import {RootPath, FullRoot, constructSubRoutes, SubRoutes} from './subRoutes';
 const Routes = [
   {
     path: RootPath,
@@ -16,6 +16,6 @@ export {
   FullRoot,
   constructSubRoutes,
   SubRoutes,
-}
+};
 
-export default Routes
+export default Routes;

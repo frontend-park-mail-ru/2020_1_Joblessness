@@ -1,6 +1,6 @@
 import {Page} from '../../../../Page';
-import template from './index.pug'
-import './style.sass'
+import template from './index.pug';
+import './style.sass';
 import {addHideAnimation} from '../addAnimations';
 
 /**
@@ -9,10 +9,10 @@ import {addHideAnimation} from '../addAnimations';
 class CreateVacancyButton extends Page {
   /**
    *
-   * @returns {string}
+   * @return {string}
    */
   render() {
-    return template(this.props)
+    return template(this.props);
   }
   /**
    *
@@ -34,5 +34,5 @@ class CreateVacancyButton extends Page {
 }
 
 export {
-  CreateVacancyButton
-}
+  CreateVacancyButton,
+};

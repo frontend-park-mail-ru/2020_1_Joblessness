@@ -12,7 +12,6 @@ class OrganizationVacanciesPage extends Page {
   render() {
     return template(this.props);
   }
-
 }
 
 export {

@@ -44,7 +44,7 @@ class Navigator {
         try {
           route.element.requestRender();
         } catch (e) {
-          console.error(`no parent node found on ${route.path.raw}`)
+          console.error(`no parent node found on ${route.path.raw}`);
         }
         this.showChildren(route.childRoutes, path.replace(route.path.raw, ''));
         if (route.path.raw !== 'any' && !route.path.alwaysOn) break;
@@ -59,7 +59,7 @@ class Navigator {
         try {
           route.element.requestRender();
         } catch (e) {
-          console.error(`no parent node found on ${route.path.raw}`)
+          console.error(`no parent node found on ${route.path.raw}`);
         }
 
         this.showChildren(
@@ -91,7 +91,7 @@ class Navigator {
         try {
           route.element.requestRender();
         } catch (e) {
-          console.error(`no parent node found on ${route.path.raw}`)
+          console.error(`no parent node found on ${route.path.raw}`);
         }
 
         this.showChildren(
@@ -236,7 +236,7 @@ class Navigator {
       if (!(root instanceof Array)) {
         if (root.childRoutes.length === 0) {
           if (!route.childRoutes) {
-            //@TODO check if c === root or c !== root
+            // @TODO check if c === root or c !== root
             parent.childRoutes = parent.childRoutes.filter((c) => c !== root);
           }
         } else {
@@ -287,7 +287,7 @@ class Navigator {
   removeRoutes(routes) {
     const r = this.parseObjectRoute(routes);
     this._removeRoutes(this.#routes, r, null);
-    console.log(this.#routes[1].childRoutes[1].childRoutes)
+    console.log(this.#routes[1].childRoutes[1].childRoutes);
   }
 }
 

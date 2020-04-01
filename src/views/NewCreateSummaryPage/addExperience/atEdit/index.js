@@ -43,7 +43,6 @@ AtEditPage = withForm(AtEditPage, {
   id: uuid(),
 },
 (e, page) => {
-
   const exp = {
     companyName: e.companyName,
     role: e.role,

@@ -1,6 +1,6 @@
 import template from './index.pug';
 import './style.sass';
-import '../../../sharableStyle.sass'
+import '../../../sharableStyle.sass';
 import {Page} from '../../../../Page';
 
 /**

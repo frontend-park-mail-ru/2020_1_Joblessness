@@ -4,7 +4,7 @@
  * @return {Page}
  */
 export const createLocalStore = (store,
-                                 useLocalStorage = false, key = '', initFromLocalStore = false) => (
+    useLocalStorage = false, key = '', initFromLocalStore = false) => (
   (WrappedComponent) => {
     return class extends WrappedComponent {
       #storeId;
@@ -14,9 +14,9 @@ export const createLocalStore = (store,
        */
       constructor(props) {
         super(props);
-        if(initFromLocalStore && key !== '') {
+        if (initFromLocalStore && key !== '') {
           const newStore = window.localStorage.getItem(key);
-          if(newStore) {
+          if (newStore) {
             store = JSON.parse(newStore);
           }
         }
@@ -24,15 +24,17 @@ export const createLocalStore = (store,
         this.props.setStore = (s, cb) => {
           if (typeof s === 'object') {
             store = {...store, ...s};
-            if(useLocalStorage)
+            if (useLocalStorage) {
               window.localStorage.setItem(key, JSON.stringify(store));
+            }
             cb?.();
             return;
           }
           if (typeof s === 'function') {
             store = {...store, ...s({...store})};
-            if(useLocalStorage)
+            if (useLocalStorage) {
               window.localStorage.setItem(key, JSON.stringify(store));
+            }
             cb?.();
             return;
           }

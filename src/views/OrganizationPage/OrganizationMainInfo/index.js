@@ -8,7 +8,6 @@ import {RootPath, SubRoutes} from './subRoutes';
  * Info subpage
  */
 class OrganizationMainInfoPage extends Page {
-
   /**
    * @return{string}
    */
@@ -18,7 +17,7 @@ class OrganizationMainInfoPage extends Page {
 }
 
 OrganizationMainInfoPage = withChainedPages(OrganizationMainInfoPage,
-  SubRoutes, null, RootPath);
+    SubRoutes, null, RootPath);
 export {
   OrganizationMainInfoPage,
 };

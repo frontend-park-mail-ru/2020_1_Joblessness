@@ -1,5 +1,5 @@
 import {constructSubRoutes as constructParentRoutes,
-        RootPath as parentRootPath} from '../subRoutes';
+  RootPath as parentRootPath} from '../subRoutes';
 import {AddParagraph} from './AddParagraph';
 import {Navigator} from '../../../../Navigator';
 
@@ -15,25 +15,26 @@ const SubRoutes = [
     innerNext: 'editMode',
     innerPath: 'addParagraph',
     beforeNext: (rootPage, info) => {
-      if(!rootPage.props.info)
+      if (!rootPage.props.info) {
         rootPage.props.info = [];
+      }
 
       rootPage.props.info.push(info);
 
-      Navigator.updateAllPages()
-    }
-  }
+      Navigator.updateAllPages();
+    },
+  },
 ];
 
 const constructSubRoutes = (subRoutes) => constructParentRoutes(
-  [
-    {
-      path: RootPath,
-      childRoutes: [
-        ...subRoutes,
-      ],
-    },
-  ]
+    [
+      {
+        path: RootPath,
+        childRoutes: [
+          ...subRoutes,
+        ],
+      },
+    ],
 );
 
 

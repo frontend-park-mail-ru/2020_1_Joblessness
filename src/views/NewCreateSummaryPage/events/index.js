@@ -6,7 +6,7 @@ export const moveDownEvent = (page, elem, id, fieldName, storeName) => {
         page.props[fieldName][i] = page.props[fieldName][i + 1];
         page.props[fieldName][i + 1] = temp;
         page.props.setStore((s) => {
-          console.log(s)
+          console.log(s);
           const temp = s[storeName].find((e) => e.id === id);
           const ind = s[storeName].indexOf(temp);
           s[storeName][ind] = s[storeName][ind + 1];

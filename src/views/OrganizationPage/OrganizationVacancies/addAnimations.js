@@ -7,22 +7,21 @@ const playMountAnimation = (dom) => {
     dom.style.transform='';
   }, 0);
   setTimeout(
-    () => dom.classList.remove('placing'), 500,
+      () => dom.classList.remove('placing'), 500,
   );
 };
 
 const addHideAnimation = (page, smooth) => {
   let timerId;
   const hideEvent = (e, showSmooth) => {
-
     if (timerId) {
       clearTimeout(timerId);
-      timerId = null
+      timerId = null;
     }
     if (parent.classList.contains('placing') ||
         parent.classList.contains('removing')) {
       timerId = setTimeout(() => hideEvent(null, true), 50);
-      return
+      return;
     }
 
     const {x, width} = parent.getBoundingClientRect();
@@ -31,10 +30,10 @@ const addHideAnimation = (page, smooth) => {
     let trans = 'center';
     if (x <= sX) {
       val = (x - sX + width) / width;
-      trans = 'right center'
+      trans = 'right center';
     } else if (x + width >= sX + sWidth) {
       val = (sWidth - x + sX) / width;
-      trans = 'left center'
+      trans = 'left center';
     }
     val = val >= 0 ? val : 0;
     val = val <= 1 ? val : 1;
@@ -49,7 +48,6 @@ const addHideAnimation = (page, smooth) => {
     parent.firstChild.style.transform = `scale(${val}, ${val})`;
     parent.firstChild.style.transformOrigin = trans;
     parent.firstChild.style.opacity = val;
-
   };
 
   const parent = document.querySelector(page.container);
@@ -58,10 +56,10 @@ const addHideAnimation = (page, smooth) => {
   page.dom.removeEventListener('scroll', hideEvent);
   const holder = parent.parentNode;
   holder.parentNode.addEventListener('scroll', hideEvent);
-  hideEvent(null, smooth)
+  hideEvent(null, smooth);
 };
 
 export {
   playMountAnimation,
   addHideAnimation,
-}
+};

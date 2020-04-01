@@ -6,7 +6,7 @@ const Routes = [
     path: RootPath + '*',
     element: new OrganizationPage('#root'),
     childRoutes: SubRoutes,
-  }
+  },
 ];
 
 export {
@@ -16,4 +16,4 @@ export {
   constructSubRoutes,
 };
 
-export default Routes
+export default Routes;

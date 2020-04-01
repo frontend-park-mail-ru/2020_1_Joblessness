@@ -11,7 +11,7 @@ class CurrentSession {
   constructor() {
     this.#userId = 0;
     this.#events = {
-      change: []
+      change: [],
     };
     this.#isAuthenticated = false;
   }
@@ -75,16 +75,16 @@ class CurrentSession {
   }
 
   onChange() {
-    this.#events['change'].forEach(e => ({
+    this.#events['change'].forEach((e) => ({
       isAuthenticated: this.#isAuthenticated,
-      userId: this.#userId
-    }))
+      userId: this.#userId,
+    }));
   }
   addEventListener(eventName, event) {
     this.#events[eventName]?.push();
   }
   removeEventListener(eventName, event) {
-    this.#events[eventName] = this.#events[eventName].map( e => e !== event);
+    this.#events[eventName] = this.#events[eventName].map( (e) => e !== event);
   }
 }
 

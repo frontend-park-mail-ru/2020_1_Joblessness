@@ -1,5 +1,5 @@
 import {OrganizationMainInfoPage} from './index';
-import {RootPath, constructSubRoutes, SubRoutes } from './subRoutes'
+import {RootPath, constructSubRoutes, SubRoutes} from './subRoutes';
 const Routes = [
   {
     path: RootPath,
@@ -14,6 +14,6 @@ export {
   RootPath,
   constructSubRoutes,
   SubRoutes,
-}
+};
 
-export default Routes
+export default Routes;

@@ -11,10 +11,10 @@ const ROUTES = [
       {
         path: 'any',
         alwaysOn: true,
-        element: new CreateVacancyButton('#create-vacancy-holder')
-      }
-    ]
+        element: new CreateVacancyButton('#create-vacancy-holder'),
+      },
+    ],
   },
 ];
 
-export default ROUTES
+export default ROUTES;

@@ -1,6 +1,6 @@
 import {Page} from '../../../../Page';
-import template from './index.pug'
-import './style.sass'
+import template from './index.pug';
+import './style.sass';
 import withLocalStore from '../localStore';
 class PreviewInfo extends Page {
   /**
@@ -8,12 +8,12 @@ class PreviewInfo extends Page {
    */
   render() {
     return template({
-      info: this.props.getStore().preview
-    })
+      info: this.props.getStore().preview,
+    });
   }
 }
 
-PreviewInfo = withLocalStore(PreviewInfo)
+PreviewInfo = withLocalStore(PreviewInfo);
 export {
-  PreviewInfo
-}
+  PreviewInfo,
+};

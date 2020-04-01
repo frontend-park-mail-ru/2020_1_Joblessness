@@ -24,34 +24,34 @@ class LoadManager extends Page {
     super.componentDidMount?.();
     let c = 0;
     const i = setInterval(
-      () => {
-        if(c === 1)
-          clearInterval(i);
-        c++;
-        for(let i = 0; i < 4; i++)
-        this.props.requestNextNoUpdate({
+        () => {
+          if (c === 1) {
+            clearInterval(i);
+          }
+          c++;
+          for (let i = 0; i < 4; i++) {
+            this.props.requestNextNoUpdate({
+              vacancyName: 'Frontend разработчик',
+              salaryFrom: 70000,
+              salaryTo: 90000,
+            }, false);
+          }
+          this.props.requestNext({
             vacancyName: 'Frontend разработчик',
             salaryFrom: 70000,
             salaryTo: 90000,
-        }, false);
-        this.props.requestNext({
-          vacancyName: 'Frontend разработчик',
-          salaryFrom: 70000,
-          salaryTo: 90000,
-        }, true);
-      }, 520
-    )
-
+          }, true);
+        }, 520,
+    );
   }
 }
 
 
 const beforeNext = (page, vac) => {
-
   vac.id = uuid();
   vac.chosen = {
     id: uuid(),
-  }
+  };
   if (!page.props.vacancies) {
     page.props.vacancies = [];
   }
@@ -68,24 +68,23 @@ const afterNext = (page, vac, needUpdate) => {
     childRoutes: [{
       path: vac.chosen.id,
       alwaysOn: true,
-      element: new ChosenButton(`#${vac.chosen.id}`)
-    }]
+      element: new ChosenButton(`#${vac.chosen.id}`),
+    }],
   };
   page.props.insertSubPage(newRoute);
 
   Navigator.addRoutes(
-    constructSubRoutes([
-      {
-        path: 'orgVacancies',
-        childRoutes: [
-          newRoute,
-        ],
-      },
-    ]),
+      constructSubRoutes([
+        {
+          path: 'orgVacancies',
+          childRoutes: [
+            newRoute,
+          ],
+        },
+      ]),
   );
   needUpdate && Navigator.updateAllPages();
 };
-
 
 
 const LoadManagerRoutes = [
@@ -106,4 +105,4 @@ export {
   LoadManagerRoutes,
 };
 
-export default LoadManagerRoutes
+export default LoadManagerRoutes;

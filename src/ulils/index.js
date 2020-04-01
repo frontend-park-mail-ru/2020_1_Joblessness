@@ -1,6 +1,7 @@
 import validators from './validators';
 import {uuid} from './uuid';
 import {FieldManager} from './FieldManager';
+import {requestManager} from './requestManager';
 import {withEvents} from './withEvents';
 import {withNetwork} from './withNetwork';
 import {withForm} from './withForm';

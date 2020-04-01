@@ -1,7 +1,7 @@
 import {createLocalStore} from '../../../ulils';
 
 const withLocalStore = createLocalStore({
-  preview : '',
+  preview: '',
   raw: [],
 }, true, 'organizations', true);
 

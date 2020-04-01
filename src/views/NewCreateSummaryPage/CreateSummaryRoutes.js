@@ -1,5 +1,5 @@
 import {AddEducationPage} from './addEducation';
-import {ShowEducationPage} from './ShowEducation';
+import {ShowEducationPage} from './showEducation';
 import {PersonInfo} from './personInfo';
 import {ShowExperiencePage} from './showExperience';
 import {AddExperienceRoute} from './addExperience/AddExperienceRoute';

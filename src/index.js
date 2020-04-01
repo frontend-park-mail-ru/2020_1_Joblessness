@@ -19,7 +19,7 @@ import {
   CreateSummaryRoutes,
   AuthSubRoutes,
 } from './views';
-import ORGANIZATIONS_ROUTES from './views/OrganizationPage/routes'
+import ORGANIZATIONS_ROUTES from './views/OrganizationPage/routes';
 import {RootElement} from './RootElement';
 
 /**

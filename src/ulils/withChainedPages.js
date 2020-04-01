@@ -25,7 +25,6 @@ export const withChainedPages = (Wrappee, pages,
       super(props);
 
       this._appendRequestNextAndPrevious();
-
     }
     _appendRequestNextAndPrevious = () => {
       const requestNext = (page, pageElem, path, args) => {
@@ -55,7 +54,6 @@ export const withChainedPages = (Wrappee, pages,
             requestPrevious(p, nextPage?.element, p.next, a);
           };
       });
-
 
 
       const requestNextNoUpdate = (page, pageElem, path, args) => {
