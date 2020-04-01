@@ -307,6 +307,179 @@ class RequestManager {
                 }).catch(reject);
         },);
     }
+
+    /**
+     * @example
+     * {
+     *    name* "string"
+     *    description "string"
+     *    salary_from int
+     *    salary_to int
+     *    with_tax bool
+     *    responsibilities "string"
+     *    conditions "string"
+     *    keywords "string"
+     * }
+     */
+    tryCreateVacancy (form) {
+        return new Promise((resolve, reject) => {
+            request
+                .post('/api/vacancies', form)
+                .then((r) => {
+                    if (r.status === 201) {
+                        resolve(r);
+                    } else {
+                        reject(r);
+                    }
+                }).catch(reject);
+        },);
+    }
+
+    /**
+     * @example
+     * {
+     *    organization {
+     *          ID uint64
+     *          Tag "string"
+     *          Email "string"
+     *          Phone "string"
+     *          Avatar "string"
+     *          Name "string"
+     *          Site "string"
+     *    }
+     *    id uint64
+     *    name* "string"
+     *    description "string"
+     *    salary_from int
+     *    salary_to int
+     *    with_tax bool
+     *    responsibilities "string"
+     *    conditions "string"
+     *    keywords "string"
+     * }
+     */
+    tryGetVacancy (form, slug) {
+        return new Promise((resolve, reject) => {
+            request
+                .get('/api/vacancies/' + slug, form)
+                .then((r) => {
+                    if (r.status === 200) {
+                        resolve(r);
+                    } else {
+                        reject(r);
+                    }
+                }).catch(reject);
+        },);
+    }
+
+    /**
+     * @example
+     * [{
+     *    organization {
+     *          ID uint64
+     *          Tag "string"
+     *          Email "string"
+     *          Phone "string"
+     *          Avatar "string"
+     *          Name "string"
+     *          Site "string"
+     *    }
+     *    id uint64
+     *    name* "string"
+     *    description "string"
+     *    salary_from int
+     *    salary_to int
+     *    with_tax bool
+     *    responsibilities "string"
+     *    conditions "string"
+     *    keywords "string"
+     * }]
+     */
+    tryGetVacancies (form) {
+        return new Promise((resolve, reject) => {
+            request
+                .get('/api/vacancies', form)
+                .then((r) => {
+                    if (r.status === 200) {
+                        resolve(r);
+                    } else {
+                        reject(r);
+                    }
+                }).catch(reject);
+        },);
+    }
+
+    /**
+     * @example
+     * {
+     *    name "string"
+     *    description "string"
+     *    salary_from int
+     *    salary_to int
+     *    with_tax bool
+     *    responsibilities "string"
+     *    conditions "string"
+     *    keywords "string"
+     * }
+     */
+    tryChangeVacancy (form, slug) {
+        return new Promise((resolve, reject) => {
+            request
+                .put('/api/vacancies/' + slug, form)
+                .then((r) => {
+                    if (r.status === 200) {
+                        resolve(r);
+                    } else {
+                        reject(r);
+                    }
+                }).catch(reject);
+        },);
+    }
+
+    /**
+     * @example
+     * Тело запроса пустое
+     */
+    tryDeleteVacancy (form, slug) {
+        return new Promise((resolve, reject) => {
+            request
+                .delete('/api/vacancies/' + slug, form)
+                .then((r) => {
+                    if (r.status === 200) {
+                        resolve(r);
+                    } else {
+                        reject(r);
+                    }
+                }).catch(reject);
+        },);
+    }
+
+    /**
+     * @example
+     * Тело запроса пустое
+     * @result
+     * [{
+     *    id uint64
+     *    name "string"
+     *    salary_from int
+     *    salary_to int
+     *    with_tax bool
+     *    keywords "string"
+     * }]
+     */
+    tryGetOrgVacancies (form, slug) {
+        return new Promise((resolve, reject) => {
+            request
+                .get('/api/organizations/' + slug + '/vacancies', form)
+                .then((r) => {
+                    if (r.status === 200) {
+                        resolve(r);
+                    } else {
+                        reject(r);
+                    }
+                }).catch(reject);
+        },);
+    }
 }
 
 const requestManager = new RequestManager();
