@@ -10,6 +10,7 @@ import {withAuth} from './withAuth';
 import {withChainedPages} from './withChainedPages';
 import {createLocalStore} from './createLocalStore';
 import {currentSession} from './currentSession';
+import {withModes} from './withModes';
 import request from './request';
 export {
   currentSession,
@@ -24,12 +25,14 @@ export {
   withAuth,
   fileToB64,
   withForm,
+  withModes,
 };
 export default {
   validators,
   wrappers: {
     withNetwork,
     withEvents,
+    withModes,
     withAuth, // @TODO remove
     withForm,
     withChainedPages,

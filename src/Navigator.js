@@ -44,7 +44,7 @@ class Navigator {
         try {
           route.element.requestRender();
         } catch (e) {
-          console.error(`no parent node found on ${route.path.raw}`);
+          console.error(e)
         }
         this.showChildren(route.childRoutes, path.replace(route.path.raw, ''));
         if (route.path.raw !== 'any' && !route.path.alwaysOn) break;
@@ -59,7 +59,7 @@ class Navigator {
         try {
           route.element.requestRender();
         } catch (e) {
-          console.error(`no parent node found on ${route.path.raw}`);
+          console.error(e)
         }
 
         this.showChildren(
@@ -91,7 +91,7 @@ class Navigator {
         try {
           route.element.requestRender();
         } catch (e) {
-          console.error(`no parent node found on ${route.path.raw}`);
+          console.error(e)
         }
 
         this.showChildren(
@@ -287,7 +287,6 @@ class Navigator {
   removeRoutes(routes) {
     const r = this.parseObjectRoute(routes);
     this._removeRoutes(this.#routes, r, null);
-    console.log(this.#routes[1].childRoutes[1].childRoutes);
   }
 }
 

@@ -19,7 +19,8 @@ import {
   CreateSummaryRoutes,
   AuthSubRoutes,
 } from './views';
-import ORGANIZATIONS_ROUTES from './views/OrganizationPage/routes';
+import ORGANIZATIONS_ROUTES from './views/OrganizationPage/routes'
+import CREATE_VACANCY_ROUTES from './views/NewCreateVacancyPage/routes'
 import {RootElement} from './RootElement';
 
 /**
@@ -46,10 +47,7 @@ class App {
         ],
       },
       ...ORGANIZATIONS_ROUTES,
-      {
-        path: 'vacancies/create',
-        element: new CreateVacancyPage('#root'),
-      },
+      ...CREATE_VACANCY_ROUTES,
       {
         path: 'vacancies',
         element: new VacancyListPage('#root'),
