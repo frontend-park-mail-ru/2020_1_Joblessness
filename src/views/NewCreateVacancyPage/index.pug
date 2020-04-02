@@ -1,0 +1,28 @@
+mixin section-title
+    div.section-title.cover(class=attributes.class)
+        block
+
+section.page-holder
+    section.page-solid-section.width80.rad10#vacancy_org_info
+    +section-title.width80
+        h1 Обязанности
+    section.page-section.width80.mrg0.pad-b0
+        div.page-holder--body.flex-row.width100#vacancy_responsibilities
+    +section-title.width80
+        h1 Требования
+    section.page-section.width80.mrg0
+        div.page-holder--body.flex-row.width100#vacancy_requirements
+    +section-title.width80
+        h1 Условия
+    section.page-section.width80.mrg0
+        div.page-holder--body.flex-row.width100#vacancy_conditions
+    +section-title.width80
+        h1 Ключевые навыки
+    section.page-section.width80.mrg0
+        div.page-holder--body.flex-row.width100#vacancy_mainskills
+    //+section-title.width80
+    //    h1 Ключевые слова
+    //section.page-section.width80.mrg0
+    //    div.page-holder--body.flex-row.width100#vacancy_keywords
+    section
+        button.button.resume-form__button-submit Сохранить и опубликовать
