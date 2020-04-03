@@ -11,10 +11,8 @@ import {Footer} from './Footer';
 import {IndexPage} from './IndexPage';
 import {SummaryPage} from './SummaryPage';
 import {NotFoundPage} from './NotFoundPage';
-import {NewSignUp, AuthSubRoutes} from './NewSignUp';
 
 export {
-  AuthSubRoutes,
   UserSubRoutes,
   VacancyListPage,
   CreateVacancyPage,
@@ -30,11 +28,8 @@ export {
   IndexPage,
   SummaryPage,
   NotFoundPage,
-  NewSignUp,
 };
 export default {
-  AuthSubRoutes,
-  NewSignUp,
   VacancyListPage,
   CreateVacancyPage,
   CreateSummaryRoutes,

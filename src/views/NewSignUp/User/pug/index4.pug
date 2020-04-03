@@ -1,4 +1,4 @@
-include ../../../templates/pug/link
+include ../../../../templates/pug/link
 include ./auth-input
 div.signup-holder
     div.signup-holder.width-60.margin-right-20
@@ -6,6 +6,6 @@ div.signup-holder
             h1 Tag позволяет другим быстрее находить Вас
         div.signup-holder--tag
             b @
-            +input-field-auth.no-indent(placeholder="tag" autofocus=true)
-        div.next-button(id=locals.events.submit.id)
+            +input-field-auth.no-indent(placeholder="tag" autofocus=true id=locals.inputFields.tag.id)
+        div.next-button(id=locals.inputFields.submitField.id)
             h1 Далее

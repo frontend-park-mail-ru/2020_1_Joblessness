@@ -26,6 +26,7 @@ export {
   fileToB64,
   withForm,
   withModes,
+  requestManager,
 };
 export default {
   validators,
@@ -38,5 +39,6 @@ export default {
     withChainedPages,
     createLocalStore,
   },
+  requestManager,
   request,
 };

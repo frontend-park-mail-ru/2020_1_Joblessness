@@ -1,10 +1,10 @@
-include ../../../templates/pug/link
+include ../../../../templates/pug/link
 include ./auth-input
 div.signup-holder
     div.signup-holder.width-60.margin-right-20
         div.signup-holder--header
             h1 Создайте учетную запись или войдите в существующую, чтобы легко управлять вашими резюме и откликами работодателей
-        +input-field-auth(placeholder="Телефон или email" autofocus=true id=locals.inputFields.login.id)
+        +input-field-auth(placeholder="Имя пользователя" autofocus=true id=locals.inputFields.login.id)
         +input-field-auth(placeholder="Пароль" type="password" id=locals.inputFields.password.id)
         div.next-button(id=locals.inputFields.submitField.id)
             h1 Далее

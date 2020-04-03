@@ -57,7 +57,9 @@ to the pattern present inside the char class.
 And the number of matched chars must be from 0 to 19.
  */
 const isLogin = (login) =>
-  /^(?=.*[A-Za-z0-9]$)[A-Za-z][A-Za-z\d.-]{5,19}$/.test(login);
+  /^(?=.*[A-Za-z0-9]$)[A-Za-z][A-Za-z\d.-_]{5,19}$/.test(login);
+
+const isUrl = (url) => /^(?:http(s)?:\/\/)?[\w.-]+(?:\.[\w\.-]+)+[\w\-\._~:/?#[\]@!\$&'\(\)\*\+,;=.]+$/.test(url);
 export default {
   validateString,
   validateFunction,
@@ -74,6 +76,7 @@ export default {
   isBody,
   isLogin,
   isFunction,
+  isUrl,
 };
 
 export {
@@ -92,4 +95,5 @@ export {
   isBody,
   isFunction,
   isLogin,
+  isUrl,
 };

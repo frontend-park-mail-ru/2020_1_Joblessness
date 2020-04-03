@@ -21,6 +21,7 @@ import {
 } from './views';
 import ORGANIZATIONS_ROUTES from './views/OrganizationPage/routes'
 import CREATE_VACANCY_ROUTES from './views/NewCreateVacancyPage/routes'
+import SIGNUP_ROUTES from './views/NewSignUp/routes'
 import {RootElement} from './RootElement';
 
 /**
@@ -46,6 +47,7 @@ class App {
           },
         ],
       },
+      ...SIGNUP_ROUTES,
       ...ORGANIZATIONS_ROUTES,
       ...CREATE_VACANCY_ROUTES,
       {
@@ -77,17 +79,17 @@ class App {
         path: 'login',
         element: new LoginPage('#root'),
       },
-      {
-        path: 'signup',
-        element: new NewSignUp('#root'),
-        childRoutes: [
-          ...AuthSubRoutes,
-          {
-            path: 'employer',
-            element: new EmployerSignupPage('#_signup_steps'),
-          },
-        ],
-      },
+      // {
+      //   path: 'signup',
+      //   element: new NewSignUp('#root'),
+      //   childRoutes: [
+      //     ...AuthSubRoutes,
+      //     {
+      //       path: 'employer',
+      //       element: new EmployerSignupPage('#_signup_steps'),
+      //     },
+      //   ],
+      // },
       {
         path: 'index',
         element: new IndexPage('#root'),
@@ -104,7 +106,7 @@ class App {
   }
 }
 const createApp = async () => {
-  // await loginOnReload();
+  await loginOnReload();
   new App();
 };
 createApp();
