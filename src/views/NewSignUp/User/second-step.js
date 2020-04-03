@@ -1,10 +1,10 @@
 import './style.sass';
 import './auth-elements.sass';
-import {Page} from '../../Page';
+import {Page} from '../../../Page';
 import template from './pug/index2.pug';
-import {uuid, currentSession, withForm, request} from '../../ulils';
-import {isLogin, isPassword} from '../../ulils/validators';
-import {Navigator} from '../../Navigator';
+import {uuid, currentSession, withForm, request} from '../../../ulils';
+import {isLogin, isPassword} from '../../../ulils/validators';
+import {Navigator} from '../../../Navigator';
 
 /**
  * sign in or sign up subpage
@@ -23,14 +23,13 @@ SecondStep = withForm(SecondStep, {
     id: uuid(),
     required: true,
     validator: isLogin,
-    warnMessage: 'На данный момент поддерживается только логин. ' +
-        '/^(?=.*[A-Za-z0-9]$)[A-Za-z][A-Za-z\\d.-]{5,19}$/',
+    warnMessage: 'Имя пользователя состоит из латинских букв и цифр, а также "_" и "." Длина логина не менее 6.'
   },
   password: {
     id: uuid(),
     required: true,
     validator: isPassword,
-    warnMessage: '/^(?=.*[A-Za-z])(?=.*\\d)[A-Za-z\\d]{8,}$/',
+    warnMessage: 'Пароль состоит из латинских букв и цифр, длина не менее 8. Должен содержать хотя бы 1 цифру и Заглавную букву.',
   },
 },
 {
@@ -52,8 +51,8 @@ SecondStep = withForm(SecondStep, {
           (e) => {
             trySignUp({
               ...form,
-              'first-name': 'Безымянный',
-              'last-name': 'Пользователь',
+              'firstName': 'Безымянный',
+              'lastName': 'Пользователь',
             })
                 .then(async (r) => {
                   trySignIn(form)

@@ -1,8 +1,8 @@
 import './style.sass';
 import './auth-elements.sass';
-import {Page} from '../../Page';
+import {Page} from '../../../Page';
 import template from './pug/index1.pug';
-import {uuid, withEvents} from '../../ulils';
+import {uuid, withEvents} from '../../../ulils';
 
 /**
  * Fancy page

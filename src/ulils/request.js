@@ -1,4 +1,4 @@
-const DOMAIN = 'http://91.210.170.6:8000';
+const DOMAIN = 'http://5.23.54.85';
 // 'http://localhost:8001';
 export const GET_HEADERS = {
   credentials: 'include',

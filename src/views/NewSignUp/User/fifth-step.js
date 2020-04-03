@@ -1,13 +1,13 @@
 import './style.sass';
 import './auth-elements.sass';
-import {Page} from '../../Page';
-import template from './pug/index4.pug';
-import {uuid, withEvents, withForm} from '../../ulils';
+import {Page} from '../../../Page';
+import template from './pug/index5.pug';
+import {uuid, withEvents, withForm} from '../../../ulils';
 
 /**
- * Choose tag subpage
+ * Prompt subpage
  */
-class ForthStep extends Page {
+class FifthStep extends Page {
   /**
    * @return{string}
    */
@@ -15,14 +15,15 @@ class ForthStep extends Page {
     return template(this.props);
   }
 }
-ForthStep= withForm(ForthStep, {},
+
+FifthStep = withForm(FifthStep, {},
     {},
     () => {
     },
     () => {
 
     });
-ForthStep = withEvents(ForthStep, 'events',
+FifthStep = withEvents(FifthStep, 'events',
     {
       submit: {
         id: uuid(),
@@ -33,4 +34,4 @@ ForthStep = withEvents(ForthStep, 'events',
       },
     });
 
-export {ForthStep};
+export {FifthStep};
