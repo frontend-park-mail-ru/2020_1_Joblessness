@@ -5,7 +5,7 @@ import {
   requestManager,
   withNetwork
 } from '../../ulils';
-import defaultUser from './userDefault';
+import defaultOrganization from './defaultOrganization';
 import {Navigator} from '../../Navigator';
 
 const prepareRequestBody = (page) => request.GET_HEADERS;
@@ -59,7 +59,7 @@ const parseResponse = async (r) => {
 const getUserId = () => {
   const name = location.pathname;
 
-  if (name.startsWith('/users/')) {
+  if (name.startsWith('/organizations/')) {
     return name
         .replace( /\D+/g, '') ||
       currentSession.user.id || 1;
@@ -67,8 +67,8 @@ const getUserId = () => {
   return currentSession.user.id || 1;
 };
 
-const prepareUrl = () => `/api/users/${getUserId()}`;
+const prepareUrl = () => `/api/organizations/${getUserId()}`;
 
 export const appendWithNetwork = (Wrappee) => withNetwork(
-    prepareUrl, prepareRequestBody, Wrappee,
-    'userData', defaultUser, parseResponse);
+  prepareUrl, prepareRequestBody, Wrappee,
+  'userData', defaultOrganization, parseResponse);
