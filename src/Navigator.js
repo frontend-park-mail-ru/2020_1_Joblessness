@@ -44,7 +44,7 @@ class Navigator {
         try {
           route.element.requestRender();
         } catch (e) {
-          console.error(e)
+          console.error(e);
         }
         this.showChildren(route.childRoutes, path.replace(route.path.raw, ''));
         if (route.path.raw !== 'any' && !route.path.alwaysOn) break;
@@ -59,7 +59,7 @@ class Navigator {
         try {
           route.element.requestRender();
         } catch (e) {
-          console.error(e)
+          console.error(e);
         }
 
         this.showChildren(
@@ -91,7 +91,7 @@ class Navigator {
         try {
           route.element.requestRender();
         } catch (e) {
-          console.error(e)
+          console.error(e);
         }
 
         this.showChildren(

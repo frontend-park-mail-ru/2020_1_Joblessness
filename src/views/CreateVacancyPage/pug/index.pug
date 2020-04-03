@@ -1,0 +1,60 @@
+include ../../../templates/pug/forms
+
+.vacancy-form
+    header
+        h1 Новая вакансия
+    main
+        section.sub-form
+            h3 Основная информация
+            +triple-field(placeholder="Название вакансии")
+                +input-field(placeholder="Название вакансии" id=locals.vacancyName.id)
+            +triple-field(placeholder="Описание")
+                +input-field(placeholder="Описание" id=locals.description.id)
+            +triple-field(placeholder="Основные навыки")
+                +input-field(placeholder="Основные навыки" id=locals.mainSkills.id)
+            +triple-field(placeholder="Предположительный уровень дохода")
+                div.input-inner-col
+                    div.input-inner
+                        +input-field(placeholder="от" id=locals.expectedIncomeFrom.id)
+                        +input-field(placeholder="до" id=locals.expectedIncomeTo.id)
+                        select.form-input-select(id=locals.expectedIncomeCurrency.id)
+                            option(value="rub") руб.
+                            option(value="eur") EUR
+                            option(value="usd") USD
+                    div.input-inner
+                        label
+                        input.input-radio.vacancy-form__salary-type(
+                            name=locals.withTax.id type="radio"
+                            value="before-taxes")
+                        |                   До выплаты налогов&nbsp;
+                        label
+                        input.input-radio.vacancy-form__salary-type(
+                            name=locals.withTax.id checked=1 type="radio"
+                            value="after-taxes")
+                        |                                    На руки
+        section.sub-form
+        h3 Место работы
+        +triple-field(placeholder="Вакансия в городе")
+            +input-field(placeholder="Вакансия в городе" id=locals.cityName.id)
+        +triple-field(placeholder="Адрес офиса")
+            +input-field(placeholder="Адрес офиса" id=locals.officeAddress.id)
+                input.input-checkbox.vacancy-form__invisible-address(type="checkbox" id=locals.showAddress.id)
+                |                                                 Не показывать адрес
+        section.sub-form
+
+        h3 Контактные данные
+        +triple-field(placeholder="Менеджер вакансии")
+            +input-field(placeholder="Менеджер вакансии" id=locals.vacancyManager.id)
+                input.input-checkbox.vacancy-form__notificate-by-email(type="checkbox" id=locals.notify.id)
+                |                                       Уведомлять о вакансиях по почте
+        +triple-field(placeholder="Контактная информация")
+            +input-field(placeholder="Контактная информация")
+                input.input-checkbox.vacancy-form__invisible-contacts(type="checkbox" id=locals.showInVacancy.id)
+                |                                             Не показывать в вакансии
+        +triple-field(placeholder="Email")
+            +input-field(placeholder="Email" id=locals.email.id)
+        +triple-field(placeholder="Телефон")
+            +input-field(placeholder="Телефон" id=locals.phone.id)
+        +triple-field(placeholder="Комментарий")
+            +input-field(placeholder="Комментарий" id=locals.comment.id)
+    button.button.vacancy-page__button-submit(id=locals.submitField.id) Разместить

@@ -18,9 +18,9 @@ export const createLocalStore = (store,
         super(props);
 
         const keyToUse = typeof key === 'function' ? key() : key;
-        if(initFromLocalStore && keyToUse !== '') {
+        if (initFromLocalStore && keyToUse !== '') {
           const newStore = window.localStorage.getItem(keyToUse);
-          if(newStore) {
+          if (newStore) {
             store = JSON.parse(newStore);
           }
         }
@@ -29,15 +29,17 @@ export const createLocalStore = (store,
           const keyToUse = typeof key === 'function' ? key() : key;
           if (typeof s === 'object') {
             store = {...store, ...s};
-            if(useLocalStorage)
+            if (useLocalStorage) {
               window.localStorage.setItem(keyToUse, JSON.stringify(store));
+            }
             cb?.();
             return;
           }
           if (typeof s === 'function') {
             store = {...store, ...s({...store})};
-            if(useLocalStorage)
+            if (useLocalStorage) {
               window.localStorage.setItem(keyToUse, JSON.stringify(store));
+            }
             cb?.();
             return;
           }

@@ -1,5 +1,5 @@
 import {OrganizationInfo} from '../OrganizationPage/OrganizationInfo';
-import ResponsibilitiesRoutes from './responsibilities/routes'
+import ResponsibilitiesRoutes from './responsibilities/routes';
 import RequirementsRoutes from './requirements/routes';
 import ConditionsRoutes from './conditions/routes';
 import MainSkillsRoutes from './mainskills/routes';
