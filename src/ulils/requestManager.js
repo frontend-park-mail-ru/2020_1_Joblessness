@@ -521,6 +521,51 @@ class RequestManager {
                 }).catch(reject);
         },);
     }
+
+    /**
+     [{
+    "id": 0,
+    "keywords": "string",
+        "author": {
+          "id": 0,
+          "name": "string",
+          "gender": "string",
+          "birthday": "2020-04-03T18:51:23.179Z"
+        },
+        "educations": [
+          {
+            "id": 0,
+            "institution": "string",
+            "speciality": "string",
+            "graduated": "2020-04-03T18:51:23.179Z",
+            "type": "string"
+          }
+        ],
+        "experiences": [
+          {
+            "id": 0,
+            "company_name": "string",
+            "role": "string",
+            "responsibilities": "string",
+            "start": "2020-04-03T18:51:23.179Z",
+            "stop": "2020-04-03T18:51:23.179Z"
+          }
+        ]
+    }]
+     */
+    tryGetUserSummaries (form, slug) {
+        return new Promise((resolve, reject) => {
+            request
+                .get('/users/' + slug + '/summaries', form)
+                .then((r) => {
+                    if (r.status === 200) {
+                        resolve(r);
+                    } else {
+                        reject(r);
+                    }
+                }).catch(reject);
+        },);
+    }
 }
 
 const requestManager = new RequestManager();
