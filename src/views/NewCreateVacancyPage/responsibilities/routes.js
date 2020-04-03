@@ -5,7 +5,7 @@ import {Parent} from './Parent';
 import {Preview} from './Preview';
 import {Edit} from './Edit';
 import {AddItem} from './AddItem';
-import {ModeManager} from './ModeManager'
+import {ModeManager} from './ModeManager';
 import {Item} from './Item';
 
 const ResponsibilitiesRoutes = createEditor({
@@ -20,14 +20,14 @@ const ResponsibilitiesRoutes = createEditor({
   SUBMIT_REDUCER: (s) => ({
     responsibilities: {
       ...s.responsibilities,
-      preview: [...s.responsibilities.raw]
-    }
+      preview: [...s.responsibilities.raw],
+    },
   }),
   DECLINE_REDUCER: (s) => ({
     responsibilities: {
       ...s.responsibilities,
-      raw: [...s.responsibilities.preview]
-    }
+      raw: [...s.responsibilities.preview],
+    },
   }),
   EXTRACT_REDUCER: (s) => {
     return s.responsibilities;
@@ -38,30 +38,26 @@ const ResponsibilitiesRoutes = createEditor({
         ...store,
         ...sub,
       },
-    }
+    };
   },
   INSERT_REDUCER: (item) => (s) => ({
     responsibilities: {
       ...s.responsibilities,
-      raw: [...s.responsibilities.raw, item]
-    }
+      raw: [...s.responsibilities.raw, item],
+    },
   }),
   ROOT: 'responsibilities/',
   EDITOR_HOLDER_SELECTOR: '#vacancy_responsibilities',
   ROOT_TEMPLATE: (childRoutes = []) => [
     {
       path: 'vacancies/create/*',
-      childRoutes
-    }
+      childRoutes,
+    },
   ],
 });
 
 
-export default ResponsibilitiesRoutes
-
-
-
-
+export default ResponsibilitiesRoutes;
 
 
 //

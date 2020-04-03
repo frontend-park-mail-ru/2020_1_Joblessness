@@ -6,7 +6,6 @@ import template from './index.pug';
  * Info subpage
  */
 class Parent extends Page {
-
   /**
    * @return{string}
    */

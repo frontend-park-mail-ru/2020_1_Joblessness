@@ -161,7 +161,7 @@ class RequestManager {
     tryChangePerson (form) {
         return new Promise((resolve, reject) => {
             request
-                .put('/api/users/' + currentSession.user.userId, form)
+                .put('/api/users/' + currentSession.user.id, form)
                 .then((r) => {
                     if (r.status === 204) {
                         resolve(r);
@@ -215,7 +215,7 @@ class RequestManager {
     tryChangeOrg (form) {
         return new Promise((resolve, reject) => {
             request
-                .put('/api/organizations/' + currentSession.user.userId, form)
+                .put('/api/organizations/' + currentSession.user.id, form)
                 .then((r) => {
                     if (r.status === 204) {
                         resolve(r);

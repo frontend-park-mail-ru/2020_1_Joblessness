@@ -24,14 +24,14 @@ const MainInfoRoutes = createEditor({
   SUBMIT_REDUCER: (s) => ({
     mainInfo: {
       ...s.mainInfo,
-      preview: [...s.mainInfo.raw]
-    }
+      preview: [...s.mainInfo.raw],
+    },
   }),
   DECLINE_REDUCER: (s) => ({
     mainInfo: {
       ...s.mainInfo,
-      raw: [...s.mainInfo.preview]
-    }
+      raw: [...s.mainInfo.preview],
+    },
   }),
   EXTRACT_REDUCER: (s) => {
     return s.mainInfo;
@@ -42,21 +42,21 @@ const MainInfoRoutes = createEditor({
         ...store,
         ...sub,
       },
-    }
+    };
   },
   INSERT_REDUCER: (item) => (s) => ({
     mainInfo: {
       ...s.mainInfo,
-      raw: [...s.mainInfo.raw, item]
-    }
+      raw: [...s.mainInfo.raw, item],
+    },
   }),
   ROOT: 'orgMainInfo/',
   EDITOR_HOLDER_SELECTOR: '#organization_org_main_info',
   ROOT_TEMPLATE: (childRoutes = []) => [
     {
       path: 'organizations/*',
-      childRoutes
-    }
+      childRoutes,
+    },
   ],
 });
 

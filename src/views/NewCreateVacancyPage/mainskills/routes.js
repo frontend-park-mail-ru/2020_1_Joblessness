@@ -5,7 +5,7 @@ import {Parent} from './Parent';
 import {Preview} from './Preview';
 import {Edit} from './Edit';
 import {AddItem} from './AddItem';
-import {ModeManager} from './ModeManager'
+import {ModeManager} from './ModeManager';
 import {Item} from './Item';
 
 const MainSkillsRoutes = createEditor({
@@ -20,14 +20,14 @@ const MainSkillsRoutes = createEditor({
   SUBMIT_REDUCER: (s) => ({
     mainSkills: {
       ...s.mainSkills,
-      preview: [...s.mainSkills.raw]
-    }
+      preview: [...s.mainSkills.raw],
+    },
   }),
   DECLINE_REDUCER: (s) => ({
     mainSkills: {
       ...s.mainSkills,
-      raw: [...s.mainSkills.preview]
-    }
+      raw: [...s.mainSkills.preview],
+    },
   }),
   EXTRACT_REDUCER: (s) => {
     return s.mainSkills;
@@ -38,23 +38,23 @@ const MainSkillsRoutes = createEditor({
         ...store,
         ...sub,
       },
-    }
+    };
   },
   INSERT_REDUCER: (item) => (s) => ({
     mainSkills: {
       ...s.mainSkills,
-      raw: [...s.mainSkills.raw, item]
-    }
+      raw: [...s.mainSkills.raw, item],
+    },
   }),
   ROOT: 'mainSkills/',
   EDITOR_HOLDER_SELECTOR: '#vacancy_mainskills',
   ROOT_TEMPLATE: (childRoutes = []) => [
     {
       path: 'vacancies/create/*',
-      childRoutes
-    }
+      childRoutes,
+    },
   ],
 });
 
 
-export default MainSkillsRoutes
+export default MainSkillsRoutes;

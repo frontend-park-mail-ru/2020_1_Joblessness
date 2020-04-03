@@ -1,6 +1,6 @@
 import {Page} from '../../../../Page';
-import template from './index.pug'
-import './style.sass'
+import template from './index.pug';
+import './style.sass';
 
 class Preview extends Page {
   /**
@@ -8,11 +8,11 @@ class Preview extends Page {
    */
   render() {
     return template({
-      info: this.props.getStore().mainSkills.preview
-    })
+      info: this.props.getStore().mainSkills.preview,
+    });
   }
 }
 
 export {
-  Preview
-}
+  Preview,
+};

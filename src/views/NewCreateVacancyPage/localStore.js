@@ -3,7 +3,7 @@ import {currentSession} from '../../ulils';
 
 const withLocalStore = createLocalStore({
   responsibilities: {
-    preview : [],
+    preview: [],
     raw: [],
   },
   requirements: {
@@ -21,7 +21,7 @@ const withLocalStore = createLocalStore({
   keywords: {
     preview: [],
     raw: [],
-  }
+  },
 }, true, () => `vacancies/${currentSession.user.userId || 0}`, true);
 
 export default withLocalStore;
