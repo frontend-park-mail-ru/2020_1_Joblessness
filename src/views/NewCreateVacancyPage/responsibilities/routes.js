@@ -50,7 +50,7 @@ const ResponsibilitiesRoutes = createEditor({
   EDITOR_HOLDER_SELECTOR: '#vacancy_responsibilities',
   ROOT_TEMPLATE: (childRoutes = []) => [
     {
-      path: 'vacancies/create/*',
+      path: 'vacancies/*',
       childRoutes,
     },
   ],

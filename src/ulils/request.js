@@ -21,6 +21,17 @@ export const POST_HEADERS = {
   },
 };
 
+export const DELETE_HEADERS = {
+  credentials: 'include',
+  mode: 'cors',
+  redirect: 'follow',
+  method: 'DELETE',
+  headers: {
+    'Content-Type': 'application/json',
+    'Access-Control-Allow-Origin': '*',
+  },
+};
+
 export const PUT_HEADERS = {
   credentials: 'include',
   mode: 'cors',
@@ -74,6 +85,16 @@ export const login = (login, password) => (
   },
   )
 );
+export const DELETE = (url, body, headers = {}) => (
+  new Promise((resolve, reject) => {
+      fetch(DOMAIN + url, {
+        ...DELETE_HEADERS,
+        ...headers,
+        body: JSON.stringify(body),
+      }).then(resolve).catch(reject);
+    },
+  )
+);
 
 export default {
   GET_HEADERS,
@@ -82,5 +103,6 @@ export default {
   get,
   post,
   put,
+  DELETE,
   login,
 };

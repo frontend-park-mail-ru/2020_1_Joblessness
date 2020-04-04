@@ -4,6 +4,7 @@ import withLocalStore from '../localStore';
 import {currentSession, fileToB64, uuid} from '../../../ulils';
 import {DOMAIN} from '../../../ulils/request';
 import {Navigator} from '../../../Navigator';
+import {withAuthManager} from '../../../ulils/AuthManager';
 
 /**
  * Organization info subpage
@@ -34,8 +35,7 @@ class OrganizationInfo extends Page {
       const data = new FormData();
 
       data.append('file', e.target.files[0]);
-      // @TODO refactor
-      fetch(`${DOMAIN}/api/organizations/${currentSession.user.id}/avatar`, {
+      fetch(`${DOMAIN}/api/users/${currentSession.user.id}/avatar`, {
         method: 'POST',
         body: data,
       }).then(async () => {
@@ -53,8 +53,12 @@ class OrganizationInfo extends Page {
   }
 }
 
+const OrganizationInfoNoStore = OrganizationInfo;
+
 OrganizationInfo = withLocalStore(OrganizationInfo);
+
 
 export {
   OrganizationInfo,
+  OrganizationInfoNoStore
 };

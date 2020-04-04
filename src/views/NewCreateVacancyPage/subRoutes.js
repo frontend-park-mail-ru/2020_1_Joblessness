@@ -1,10 +1,12 @@
-import {OrganizationInfo} from './OrganizationInfo';
+import {OrganizationInfoNoStore} from '../OrganizationPage/OrganizationInfo';
 import ResponsibilitiesRoutes from './responsibilities/routes';
 import RequirementsRoutes from './requirements/routes';
 import ConditionsRoutes from './conditions/routes';
-import MainSkillsRoutes from './mainskills/routes';
-const RootPath = 'vacancies/create/';
+// import MainSkillsRoutes from './mainskills/routes';
+import withLocalStore from './localStore';
+const RootPath = 'vacancies/';
 
+const OrganizationInfo = withLocalStore(OrganizationInfoNoStore);
 const SubRoutes = [
   {
     path: 'vacInfo',
@@ -14,7 +16,7 @@ const SubRoutes = [
   ...ResponsibilitiesRoutes,
   ...RequirementsRoutes,
   ...ConditionsRoutes,
-  ...MainSkillsRoutes,
+  // ...MainSkillsRoutes,
 ];
 
 const constructSubRoutes = (subRoutes) => [

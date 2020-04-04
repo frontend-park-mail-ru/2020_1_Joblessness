@@ -2,11 +2,11 @@ mixin section-title
     div.section-title.cover(class=attributes.class)
         block
 
-section.page-holder
+section.page-holder.pad-t20.pad-b20
     section.page-solid-section.width80.rad10#vacancy_org_info
     +section-title.width80
         h1 Обязанности
-    section.page-section.width80.mrg0.pad-b0
+    section.page-section.width80.mrg0
         div.page-holder--body.flex-row.width100#vacancy_responsibilities
     +section-title.width80
         h1 Требования
@@ -17,12 +17,9 @@ section.page-holder
     section.page-section.width80.mrg0
         div.page-holder--body.flex-row.width100#vacancy_conditions
     +section-title.width80
-        h1 Ключевые навыки
-    section.page-section.width80.mrg0
-        div.page-holder--body.flex-row.width100#vacancy_mainskills
-    //+section-title.width80
-    //    h1 Ключевые слова
+    //    h1 Ключевые навыки
     //section.page-section.width80.mrg0
-    //    div.page-holder--body.flex-row.width100#vacancy_keywords
-    section
-        button.button.resume-form__button-submit Сохранить и опубликовать
+    //    div.page-holder--body.flex-row.width100#vacancy_mainskills
+    if(locals.buttonText)
+        section.page-section.width80.gradient-background.create-button#create_vacancy_button
+            div #{locals.buttonText}

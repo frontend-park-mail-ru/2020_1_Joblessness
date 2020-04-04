@@ -2,6 +2,14 @@ import {createLocalStore} from '../../ulils';
 import {currentSession} from '../../ulils';
 
 const withLocalStore = createLocalStore({
+  organization: {
+    avatar: '',
+    id: 0,
+    name: '',
+    phone: '',
+    location: '',
+    tag: '',
+  },
   responsibilities: {
     preview: [],
     raw: [],
@@ -14,15 +22,15 @@ const withLocalStore = createLocalStore({
     preview: [],
     raw: [],
   },
-  mainSkills: {
-    preview: [],
-    raw: [],
-  },
+  // mainSkills: {
+  //   preview: [],
+  //   raw: [],
+  // },
   keywords: {
     preview: [],
     raw: [],
   },
-}, true, () => `vacancies/${currentSession.user.userId || 0}`, true);
+}, true, () => `vacancies/${currentSession.user.id}`, true);
 
 export default withLocalStore;
 export {

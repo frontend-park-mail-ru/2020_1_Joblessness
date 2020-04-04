@@ -1,6 +1,5 @@
 include ../../../../templates/pug/link
 
--console.log(locals.user.role === 'ORGANIZATION', locals.user.id, locals.currentId)
 if(locals.user.role === 'ORGANIZATION' && locals.user.id === locals.currentId)
     div.options
         if locals.mode === 'PREVIEW'

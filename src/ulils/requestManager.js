@@ -358,10 +358,10 @@ class RequestManager {
      *    keywords "string"
      * }
      */
-    tryGetVacancy (form, slug) {
+    tryGetVacancy (slug) {
         return new Promise((resolve, reject) => {
             request
-                .get('/api/vacancies/' + slug, form)
+                .get('/api/vacancies/' + slug, {})
                 .then((r) => {
                     if (r.status === 200) {
                         resolve(r);
@@ -440,10 +440,10 @@ class RequestManager {
      * @example
      * Тело запроса пустое
      */
-    tryDeleteVacancy (form, slug) {
+    tryDeleteVacancy (slug) {
         return new Promise((resolve, reject) => {
             request
-                .delete('/api/vacancies/' + slug, form)
+                .DELETE('/api/vacancies/' + slug, {})
                 .then((r) => {
                     if (r.status === 200) {
                         resolve(r);
