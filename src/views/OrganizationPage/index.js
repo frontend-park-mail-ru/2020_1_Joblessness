@@ -32,6 +32,7 @@ class OrganizationPage extends Page {
       requestManager.tryGetOrg(orgId)
         .then( async (r) => {
           const res = await r.json();
+          console.log(res)
           this.props.setStore(s => ({
             organization: {
               tag: '',
