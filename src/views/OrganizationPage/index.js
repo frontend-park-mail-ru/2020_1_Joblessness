@@ -7,6 +7,7 @@ import {SubRoutes, RootPath} from './routes';
 import withLocalStore from './localStore';
 import {getOrgId} from './getOrgInfo';
 import {Navigator} from '../../Navigator';
+import {withAuthManager} from '../../ulils/AuthManager';
 
 /**
  *
@@ -43,6 +44,7 @@ class OrganizationPage extends Page {
     }
   }
 }
+OrganizationPage = withAuthManager(OrganizationPage);
 OrganizationPage = withLocalStore(OrganizationPage);
 OrganizationPage = withChainedPages(OrganizationPage, SubRoutes,
     null, RootPath);

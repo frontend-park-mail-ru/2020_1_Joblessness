@@ -1,8 +1,7 @@
 import {currentSession} from './currentSession';
 import {Navigator} from '../Navigator';
+import {uuid} from './uuid';
 
-const updateEvent = ()=> Navigator.updateAllPages;
-currentSession.addEventListener('change', updateEvent);
 const withAuthManager = (Wrapee) => {
   return class extends Wrapee {
 
@@ -11,10 +10,10 @@ const withAuthManager = (Wrapee) => {
       this.props.user = currentSession.user;
       const onChange = () => {
         this.props.user = currentSession.user;
+        this.props.random = uuid();
+        Navigator.updateAllPages();
       };
-      currentSession.removeEventListener('change', updateEvent);
       currentSession.addEventListener('change', onChange);
-      currentSession.addEventListener('change', updateEvent);
     }
 
   }

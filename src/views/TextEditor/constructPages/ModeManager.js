@@ -5,16 +5,31 @@ import {
   PREVIEW,
   SUBMIT
 } from '../../../CONSTANTS';
-import {withModes} from '../../../ulils';
+import {requestManager, withModes} from '../../../ulils';
 
 const initEditModeEvent = (page) => (e) => {
   page.props.requestNextNoUpdate(page, EDIT);
   page.setMode(EDIT)
 };
 
-const initApplyEvent = (page) => e => {
-  page.props.requestNextNoUpdate(page, PREVIEW, SUBMIT);
-  page.setMode(PREVIEW)
+const initApplyEvent = (props) => (page) => e => {
+  if(props.onApply) {
+    props.onApply(props, page).then(
+      () => {
+        page.props.requestNextNoUpdate(page, PREVIEW, SUBMIT);
+        page.setMode(PREVIEW)
+      }
+    ).catch(
+      () => {
+        alert('Неудалось обновить данные. Попробуйте еще раз.');
+        page.props.requestNextNoUpdate(page, PREVIEW);
+        page.setMode(PREVIEW)
+      }
+    )
+  } else {
+    page.props.requestNextNoUpdate(page, PREVIEW, SUBMIT);
+    page.setMode(PREVIEW)
+  }
 };
 const initCancelEvent = (page) => e => {
   page.props.requestNextNoUpdate(page, PREVIEW, DECLINE);
@@ -31,7 +46,7 @@ export const modeManager = (Wrapee, props) => {
         initOn: [PREVIEW],
       },
       {
-        event: initApplyEvent,
+        event: initApplyEvent(props),
         selector: '.apply-button',
         initOn: [EDIT]
       },
