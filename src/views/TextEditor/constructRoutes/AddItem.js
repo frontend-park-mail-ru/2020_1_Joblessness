@@ -10,7 +10,6 @@ export const addItem = (AddItem, props) => (childRoutes = []) => [
     innerNext: 'editMode',
     innerPath: 'addParagraph',
     beforeNext: (page, info) => {
-      console.log(page)
       if (!page.props.info) {
         page.props.info = [];
       }

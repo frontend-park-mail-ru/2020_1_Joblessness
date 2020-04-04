@@ -14,9 +14,10 @@ export const createLocalStore = (store,
        * append store to object
        * @param {any} props
        */
+      #initial;
       constructor(props) {
         super(props);
-
+        this.#initial = {...store};
         const keyToUse = typeof key === 'function' ? key() : key;
         if (initFromLocalStore && keyToUse !== '') {
           const newStore = window.localStorage.getItem(keyToUse);
@@ -25,6 +26,15 @@ export const createLocalStore = (store,
           }
         }
         this.props.getStore = () => store;
+        this.props.reloadStore = () => {
+          const keyToUse = typeof key === 'function' ? key() : key;
+          const newStore = window.localStorage.getItem(keyToUse);
+          if (newStore) {
+            store = JSON.parse(newStore);
+          } else {
+            store = {...this.#initial};
+          }
+        }
         this.props.setStore = (s, cb) => {
           const keyToUse = typeof key === 'function' ? key() : key;
           if (typeof s === 'object') {

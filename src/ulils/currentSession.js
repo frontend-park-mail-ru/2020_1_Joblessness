@@ -101,7 +101,7 @@ class CurrentSession {
 }
 
 const currentSession = new CurrentSession();
-
+window.currentSession = currentSession
 export {
   currentSession,
 };

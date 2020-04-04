@@ -2,6 +2,9 @@ import {Page} from '../../../../Page';
 import template from './index.pug';
 import './style.sass';
 import {addHideAnimation} from '../addAnimations';
+import withLocalStore from '../../localStore';
+import {getOrgId} from '../../getOrgInfo';
+import {ORGANIZATION} from '../../../../CONSTANTS';
 
 /**
  *
@@ -19,6 +22,10 @@ class CreateVacancyButton extends Page {
    */
   componentDidMount() {
     super.componentDidMount();
+    if( currentSession.user.role !== ORGANIZATION || currentSession.user.id !== this.props.getStore().organization.id) {
+      document.querySelector(this.container).style.display = 'none';
+      return
+    }
     const parent = document.querySelector(this.container);
     if (!this._wasMount) {
       this._wasMount = true;
@@ -32,6 +39,8 @@ class CreateVacancyButton extends Page {
     }
   }
 }
+
+CreateVacancyButton = withLocalStore(CreateVacancyButton);
 
 export {
   CreateVacancyButton,

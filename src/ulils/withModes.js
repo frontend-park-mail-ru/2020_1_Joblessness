@@ -22,6 +22,12 @@ export const withModes = (Wrappee, initModeEvents = [],
 
       this.props.mode = this.#currentMode;
       this.props.permissions = this.#currentPermissions;
+      this.props.setMode = (mode) => {
+        this.#currentMode = mode;
+
+        this.props.mode = this.#currentMode;
+        this.props.permissions = this.#currentPermissions;
+      };
     }
 
     setMode(mode) {
@@ -42,7 +48,7 @@ export const withModes = (Wrappee, initModeEvents = [],
             ~initOn.indexOf(this.#currentPermissions)) {
             const parent = document.querySelector(this.container);
             const elem = parent.querySelector(selector);
-            elem.addEventListener(eventName, event)
+            elem?.addEventListener(eventName, event)
           }
         }
       );

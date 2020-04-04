@@ -1,9 +1,10 @@
 import {Page} from '../../../Page';
-import {uuid} from '../../../ulils';
+import {currentSession, requestManager, uuid} from '../../../ulils';
 import {VacancyPreview} from './VacancyPreview';
 import {ChosenButton} from '../ChosenButton';
 import {Navigator} from '../../../Navigator';
 import {constructSubRoutes} from '../subRoutes';
+import {getOrgId} from '../getOrgInfo';
 
 /**
  * Performs loading vacancies
@@ -22,27 +23,32 @@ class LoadManager extends Page {
    */
   componentDidMount() {
     super.componentDidMount?.();
-    let c = 0;
-    const i = setInterval(
-        () => {
-          if (c === 1) {
-            clearInterval(i);
-          }
-          c++;
-          for (let i = 0; i < 4; i++) {
+
+    requestManager.tryGetOrgVacancies(getOrgId())
+      .then(async r => {
+        const list = await r.json();
+        console.log(list)
+        if(list.length > 0) {
+          const last = list.pop();
+
+          for(let item of list) {
             this.props.requestNextNoUpdate({
-              vacancyName: 'Frontend разработчик',
-              salaryFrom: 70000,
-              salaryTo: 90000,
+              vacancyName: item.name,
+              salaryFrom: item['salary_from'],
+              salaryTo: item['salary_to'],
+              id: item.id,
             }, false);
           }
-          this.props.requestNext({
-            vacancyName: 'Frontend разработчик',
-            salaryFrom: 70000,
-            salaryTo: 90000,
+
+          this.props.requestNextNoUpdate({
+            vacancyName: last.name,
+            salaryFrom: last['salary_from'],
+            salaryTo: last['salary_to'],
+            id: last.id,
           }, true);
-        }, 520,
-    );
+        }
+      })
+      .catch(console.log)
   }
 }
 

@@ -1,5 +1,5 @@
 mixin avatar()
-    div.user-avatar
+    div.user-avatar(class=attributes.noSelect ? '': 'with-select')
         if attributes.src
             div.user-avatar--body(style="background-image: url(" + attributes.src + ")")
                 if(!attributes.noSelect)

@@ -186,10 +186,10 @@ class RequestManager {
      *      site "string"
      *      about "string"
      */
-    tryGetOrg (form, slug) {
+    tryGetOrg (slug) {
         return new Promise((resolve, reject) => {
             request
-                .get('/api/organizations/' + slug, form)
+                .get('/api/organizations/' + slug, {})
                 .then((r) => {
                     if (r.status === 200) {
                         resolve(r);
@@ -467,10 +467,10 @@ class RequestManager {
      *    keywords "string"
      * }]
      */
-    tryGetOrgVacancies (form, slug) {
+    tryGetOrgVacancies (slug) {
         return new Promise((resolve, reject) => {
             request
-                .get('/api/organizations/' + slug + '/vacancies', form)
+                .get('/api/organizations/' + slug + '/vacancies', {})
                 .then((r) => {
                     if (r.status === 200) {
                         resolve(r);

@@ -39,7 +39,7 @@ const MainInfoRoutes = createEditor({
   REPLACE_REDUCER: (store, sub) => {
     return {
       mainInfo: {
-        ...store,
+        ...store.mainInfo,
         ...sub,
       },
     };

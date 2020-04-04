@@ -133,8 +133,7 @@ const clickEvent = page => (e) => {
       console.log(e)
       alert('Похоже, сервер недоступен')
     })
-  //@TODO request and add subPages
-}
+};
 
 const setTypeEvent = (page, type) => (e) => {
   Array.from(document.querySelectorAll('.selected'))

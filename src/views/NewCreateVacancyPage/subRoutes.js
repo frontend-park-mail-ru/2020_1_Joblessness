@@ -1,4 +1,4 @@
-import {OrganizationInfo} from '../OrganizationPage/OrganizationInfo';
+import {OrganizationInfo} from './OrganizationInfo';
 import ResponsibilitiesRoutes from './responsibilities/routes';
 import RequirementsRoutes from './requirements/routes';
 import ConditionsRoutes from './conditions/routes';
