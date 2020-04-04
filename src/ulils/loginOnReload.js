@@ -10,10 +10,9 @@ export const loginOnReload = () => {
         if (r.status === 201) {
           try {
             const user = await r.json();
-            currentSession.session = user.id;
+            currentSession.session = user;
             Navigator.updateAllPages();
           } catch (e) {
-          // Empty body provided (probably)
             console.log(e);
           }
         }
