@@ -16,7 +16,7 @@ class OrganizationPage extends Page {
     return template(this.props);
   }
 }
-OrganizationPage = appendWithNetwork(OrganizationPage);
+// OrganizationPage = appendWithNetwork(OrganizationPage);
 OrganizationPage = withChainedPages(OrganizationPage, SubRoutes,
     null, RootPath);
 export {
