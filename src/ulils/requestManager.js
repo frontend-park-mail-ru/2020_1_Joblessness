@@ -569,15 +569,57 @@ class RequestManager {
 
     /**
      * {
-          vacancyId uint64 json:"vacancy_id"
-          accepted bool json:"accepted,omitempty"
-          denied bool json:"denied,omitempty"
+          summaryId uint64
        }
      */
     trySendSummary (form, slug) {
         return new Promise((resolve, reject) => {
             request
-                .get('/summaries/' + slug + '/response', form)
+                .post('/vacancies/' + slug + '/response', form)
+                .then((r) => {
+                    if (r.status === 200) {
+                        resolve(r);
+                    } else {
+                        reject(r);
+                    }
+                }).catch(reject);
+        },);
+    }
+
+    /**
+     * {
+          vacancyId uint64
+          accepted bool
+          denied bool
+       }
+     */
+    tryResponseSummary (form, slug) {
+        return new Promise((resolve, reject) => {
+            request
+                .put('/summaries/' + slug + '/response', form)
+                .then((r) => {
+                    if (r.status === 200) {
+                        resolve(r);
+                    } else {
+                        reject(r);
+                    }
+                }).catch(reject);
+        },);
+    }
+
+    /**
+     *  [{
+          userID uint64
+          tag string
+          vacancyID uint64
+          summaryID uint64
+          keywords  string
+        }]
+     */
+    tryGetOrgSummaries (form, slug) {
+        return new Promise((resolve, reject) => {
+            request
+                .get('/organizations/' + slug + '/summaries', form)
                 .then((r) => {
                     if (r.status === 200) {
                         resolve(r);
