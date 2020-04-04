@@ -27,7 +27,6 @@ class LoadManager extends Page {
     requestManager.tryGetOrgVacancies(getOrgId())
       .then(async r => {
         const list = await r.json();
-        console.log(list)
         if(list.length > 0) {
           const last = list.pop();
 

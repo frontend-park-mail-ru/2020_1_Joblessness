@@ -61,7 +61,9 @@ const addRemoveEvent = (page, elem, id, elemToRemove, props) => {
   const removeEvent = () => {
     elem?.removeEventListener('click', removeEvent);
     elemToRemove.classList.add('removing');
-
+    if(!elemToRemove?.lastElementChild?.firstChild?.innerHTML) {
+      elemToRemove.classList.add('removing-empty')
+    }
     setTimeout(() => elemToRemove.remove(), 500);
     page.props.setStore(s => {
       const subStore = props.EXTRACT_REDUCER(s);

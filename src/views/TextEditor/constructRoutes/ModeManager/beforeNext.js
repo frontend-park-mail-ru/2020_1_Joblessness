@@ -3,7 +3,12 @@ import {Navigator} from '../../../../Navigator';
 
 const PLAY_REMOVE_ANIMATION = (props) => {
   const holders = document.getElementsByClassName('paragraph-holder');
-  Array.from(holders).forEach(h => h.classList.add('removing'));
+  Array.from(holders).forEach(h => {
+    if(!h?.lastElementChild?.firstChild?.innerHTML) {
+      h.classList.add('removing-empty')
+    }
+    h.classList.add('removing')
+  });
   document.getElementById(props.ADD_PARAGRAPH_ID)
     ?.classList.add('removing-o');
 };

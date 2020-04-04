@@ -4,7 +4,6 @@ import {Navigator} from '../Navigator';
 const updateEvent = ()=> Navigator.updateAllPages;
 currentSession.addEventListener('change', updateEvent);
 const withAuthManager = (Wrapee) => {
-  console.log(Wrapee);
   return class extends Wrapee {
 
     constructor(props) {

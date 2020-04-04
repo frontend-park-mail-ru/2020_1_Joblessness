@@ -23,8 +23,8 @@ const createEditor = ({Parent, Preview, Edit, AddItem, Item, ModeManager, withLo
 
   const editPage = constructPages.edit(Edit, addItemRoutes, props); // Done
   const editRoutesTemplate = constructRoutes.edit(editPage, props); // Done
-  const editRoutes = [...editRoutesTemplate(), ...addItemRoutes]; // Done
-
+  // const editRoutes = [...editRoutesTemplate(), ...addItemRoutes]; // Done
+  const editRoutes = editRoutesTemplate(addItemRoutes); // Done
   const modeManagerPage = constructPages.modeManager(ModeManager, props);
   const modeManagerRoutesTemplate = constructRoutes.modeManager(modeManagerPage, props);
   const modeManagerRoutes = modeManagerRoutesTemplate();
@@ -45,7 +45,7 @@ const createEditor = ({Parent, Preview, Edit, AddItem, Item, ModeManager, withLo
   const PREVIEW_MODE_ROOT = props.ROOT_TEMPLATE(parentRoutesTemplate([
     ...previewRoutesTemplate(),
   ]));
-  const EDIT_MODE_ROOT = props.ROOT_TEMPLATE(parentRoutesTemplate(editRoutes));
+  const EDIT_MODE_ROOT = props.ROOT_TEMPLATE(parentRoutesTemplate(editRoutesTemplate()));
   const EDIT_MODE_ROUTE = props.ROOT_TEMPLATE(parentRoutesTemplate(editRoutes));
   props.PREVIEW_MODE_ROUTE = PREVIEW_MODE_ROUTE;
   props.PREVIEW_MODE_ROOT = PREVIEW_MODE_ROOT;
