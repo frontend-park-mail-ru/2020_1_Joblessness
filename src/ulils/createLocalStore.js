@@ -32,7 +32,7 @@ export const createLocalStore = (store,
             if (useLocalStorage) {
               window.localStorage.setItem(keyToUse, JSON.stringify(store));
             }
-            cb?.();
+            cb?.(store);
             return;
           }
           if (typeof s === 'function') {
@@ -40,7 +40,7 @@ export const createLocalStore = (store,
             if (useLocalStorage) {
               window.localStorage.setItem(keyToUse, JSON.stringify(store));
             }
-            cb?.();
+            cb?.(store);
             return;
           }
           throw new Error(`

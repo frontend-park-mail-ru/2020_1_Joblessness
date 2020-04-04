@@ -40,7 +40,11 @@ FirstStep = withForm(FirstStep, {
       .then(async (r) => {
         try {
           const user = await r.json();
-          currentSession.session = user.id;
+          console.log(user);
+          currentSession.session = {
+            ...user,
+            role: user.role.toUpperCase(),
+          };
           Navigator.showPage('/index');
         } catch (e) {
           console.log(e);
@@ -58,7 +62,11 @@ FirstStep = withForm(FirstStep, {
                 .then(async (r) => {
                   try {
                     const user = await r.json();
-                    currentSession.session = user.id;
+                    console.log(user);
+                    currentSession.session = {
+                      ...user,
+                      role: user.role.toUpperCase(),
+                    };
                     page.props.requestNext();
                   } catch (e) {
                     console.log(e);

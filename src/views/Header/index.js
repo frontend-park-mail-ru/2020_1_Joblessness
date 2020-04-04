@@ -1,38 +1,40 @@
 import './style.sass';
 import {Page} from '../../Page';
-import authHeader from './pug/auth_header.pug';
-import unAuthHeader from './pug/unauth_header.pug';
-import {withAuth} from '../../ulils';
-import {appendEvents} from './appendEvents';
+import template from './pug/header.pug'
+import {ORGANIZATION, PERSON, UNAUTHORISED} from '../../CONSTANTS';
+import {currentSession, requestManager} from '../../ulils';
+import {Navigator} from '../../Navigator';
+import {withAuthManager} from '../../ulils/AuthManager';
 
 /**
  * auth header
  */
-class AuthHeader extends Page {
+class Header extends Page {
   /**
    * @return {string} - page to render
    */
   render() {
-    return authHeader({
-      userId: window.userId || '',
-    });
+    return template(this.props);
   }
-}
-AuthHeader = appendEvents(AuthHeader);
-/**
- * unauth header
- */
-class UnAuthHeader extends Page {
-  /**
-   * @return {string} - page to render
-   */
-  render() {
-    return unAuthHeader();
+  componentDidMount() {
+    super.componentDidMount();
+    const signOut = () => {
+      requestManager.tryLogout({})
+        .then(() => {
+          document.getElementById('sign-out')?.removeEventListener('click', signOut)
+          currentSession.session = null;
+          Navigator.showPage('/')
+        })
+        .catch(() => {
+          currentSession.session = null;
+          Navigator.showPage('/')
+        })
+    }
+    document.getElementById('sign-out')?.addEventListener('click', signOut);
   }
 }
 
-const Header = withAuth(UnAuthHeader, AuthHeader);
-
+Header = withAuthManager(Header);
 export {
   Header,
 };

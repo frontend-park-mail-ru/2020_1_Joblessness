@@ -33,7 +33,7 @@ ThirdStep= withForm(ThirdStep, {
     id: uuid(),
   },
   (form, page) => {
-    requestManager.tryChangePerson(form)
+    requestManager.tryChangeOrg(form)
       .then(
         () => page.props.requestNext(form)
       )

@@ -2,7 +2,9 @@ mixin avatar()
     div.user-avatar
         if attributes.src
             div.user-avatar--body(style="background-image: url(" + attributes.src + ")")
-                input(type="file" accept="image/*,.svg" class="pick-avatar" id=attributes.id )
+                if(!attributes.noSelect)
+                    input(type="file" accept="image/*,.svg" class="pick-avatar" id=attributes.id )
         else
             div.user-avatar--body(style="background : white")
-                input(type="file" accept="image/*,.svg" class="pick-avatar" id=attributes.id )
+                if(!attributes.noSelect)
+                    input(type="file" accept="image/*,.svg" class="pick-avatar" id=attributes.id )

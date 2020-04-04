@@ -4,24 +4,19 @@ import {Navigator} from './Navigator.js';
 import {loginOnReload} from './ulils/loginOnReload';
 import {
   CreateSummaryPage,
-  CreateVacancyPage,
   UserPage,
-  LoginPage,
-  EmployerSignupPage,
-  IndexPage,
   UserSubRoutes,
   VacancyPage,
   Header,
   NotFoundPage,
   VacancyListPage,
   SummaryPage,
-  NewSignUp,
   CreateSummaryRoutes,
-  AuthSubRoutes,
 } from './views';
 import ORGANIZATIONS_ROUTES from './views/OrganizationPage/routes'
 import CREATE_VACANCY_ROUTES from './views/NewCreateVacancyPage/routes'
 import SIGNUP_ROUTES from './views/NewSignUp/routes'
+import SEARCH_ROUTES from './views/SearchPage/routes'
 import {RootElement} from './RootElement';
 
 /**
@@ -47,6 +42,7 @@ class App {
           },
         ],
       },
+      ...SEARCH_ROUTES,
       ...SIGNUP_ROUTES,
       ...ORGANIZATIONS_ROUTES,
       ...CREATE_VACANCY_ROUTES,
@@ -76,25 +72,6 @@ class App {
         element: new SummaryPage('#root'),
       },
       {
-        path: 'login',
-        element: new LoginPage('#root'),
-      },
-      // {
-      //   path: 'signup',
-      //   element: new NewSignUp('#root'),
-      //   childRoutes: [
-      //     ...AuthSubRoutes,
-      //     {
-      //       path: 'employer',
-      //       element: new EmployerSignupPage('#_signup_steps'),
-      //     },
-      //   ],
-      // },
-      {
-        path: 'index',
-        element: new IndexPage('#root'),
-      },
-      {
         path: '404',
         element: new NotFoundPage('#root'),
       },
@@ -102,7 +79,7 @@ class App {
     Navigator.addRoutes(routes);
 
     const loc = window.location.pathname.replace('/', '');
-    Navigator.showPage( loc ? loc : 'signup/');
+    Navigator.showPage(loc, true, true);
   }
 }
 const createApp = async () => {

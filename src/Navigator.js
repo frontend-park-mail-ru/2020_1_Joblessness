@@ -75,17 +75,18 @@ class Navigator {
    * @param {string} path
    * @param {boolean} updateLocation
    */
-  showPage(path, updateLocation = true) {
+  showPage(path, updateLocation = true, useOldSearch = false) {
     // Hide all pages
     for (const route of this.#routes) {
       const isAppropriate = route.path.exact ?
         route.path.raw === path : (route.path.comp.test(path));
       if (isAppropriate || route.path.raw === 'any' || route.path.alwaysOn) {
         if (window.location.pathname !== path && updateLocation) {
+          const newPath = path + ( useOldSearch ? window.location.search : '');
           if (path[0] === '/') {
-            window.history.pushState({}, '', path);
+            window.history.pushState({}, '', newPath);
           } else {
-            window.history.pushState({}, '', '/' + path);
+            window.history.pushState({}, '', '/' + newPath);
           }
         }
         try {

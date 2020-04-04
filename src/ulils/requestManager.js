@@ -47,10 +47,10 @@ class RequestManager {
      * @example
      * Тело запроса пустое
      */
-    tryLogout (form) {
+    tryLogout () {
         return new Promise((resolve, reject) => {
             request
-                .post('/api/users/logout', form)
+                .post('/api/users/logout', {})
                 .then((r) => {
                     if (r.status === 201) {
                         resolve(r);
@@ -483,7 +483,7 @@ class RequestManager {
 
     /**
      * @example
-     * /api/search?type="person"&since=2&desc=true&request=awdwada
+     * /api/search?type=person&since=2&desc=true&request=awdwada
      * @result
      * persons [{
      *    id uint64
@@ -508,10 +508,10 @@ class RequestManager {
      *    keywords "string"
      * }]
      */
-    trySearch (form) {
+    trySearch ({type = "", since = "0", desc = "true", requestBody = ""}) {
         return new Promise((resolve, reject) => {
             request
-                .get('/api/search', form)
+                .get(`/api/search?type=${type}&since=${since}&desc=${desc}&request=${requestBody}`, {})
                 .then((r) => {
                     if (r.status === 200) {
                         resolve(r);

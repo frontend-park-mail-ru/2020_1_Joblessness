@@ -75,8 +75,8 @@ export class Page {
     this.#prevProps = null;
     this.#container = {selector, dom};
     this.#pageId = uuid(); // to identify page
-    this.dom = this._createDomBox(this.#pageId); // to store children
-    this.dom.id = this.#pageId;
+    // this.dom = this._createDomBox(this.#pageId); // to store children
+    // this.dom.id = this.#pageId;
   }
 
   /**
