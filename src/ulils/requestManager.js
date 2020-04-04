@@ -566,6 +566,27 @@ class RequestManager {
                 }).catch(reject);
         },);
     }
+
+    /**
+     * {
+          vacancyId uint64 json:"vacancy_id"
+          accepted bool json:"accepted,omitempty"
+          denied bool json:"denied,omitempty"
+       }
+     */
+    trySendSummary (form, slug) {
+        return new Promise((resolve, reject) => {
+            request
+                .get('/summaries/' + slug + '/response', form)
+                .then((r) => {
+                    if (r.status === 200) {
+                        resolve(r);
+                    } else {
+                        reject(r);
+                    }
+                }).catch(reject);
+        },);
+    }
 }
 
 const requestManager = new RequestManager();
