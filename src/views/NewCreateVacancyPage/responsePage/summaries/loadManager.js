@@ -33,7 +33,7 @@ class LoadManager extends Page {
             this.props.requestNextNoUpdate(item, false);
           }
 
-          this.props.requestNextNoUpdate(item, true);
+          this.props.requestNextNoUpdate(last, true);
         }
       })
   }
