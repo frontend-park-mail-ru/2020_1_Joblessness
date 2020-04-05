@@ -9,16 +9,16 @@ import {isCreationPage} from '../../../NewCreateVacancyPage/isCreationPage';
 import {ORGANIZATION, PERSON} from '../../../../CONSTANTS';
 
 const GENDERS = [
-  { meaning: '&#9794; Мужчина', value :0},
-  { meaning: '&#9792; Женщина', value :1},
-  { meaning: '&#9893; Женщина в теле мужчины', value : 2},
-  { meaning: '&#9890; Мужчина в теле мужчины', value : 3},
-  { meaning: '&#9891; Женщина в теле женщины', value : 4},
-  { meaning: '&#9892; Мужчина в теле женщины', value : 5},
-  { meaning: '&#9894; Несколько мужчин', value : 6},
-  { meaning: '&#9895; Мужчина и женщина', value : 7},
-  { meaning: '&#9896; Женщина в теле мужчины', value : 8},
-  { meaning: '&#9791; Все выше перечисленное', value : 9},
+  { meaning: '&#9794; Мужчина', value :"0"},
+  { meaning: '&#9792; Женщина', value :"1"},
+  { meaning: '&#9893; Женщина в теле мужчины', value : "2"},
+  { meaning: '&#9890; Мужчина в теле мужчины', value : "3"},
+  { meaning: '&#9891; Женщина в теле женщины', value : "4"},
+  { meaning: '&#9892; Мужчина в теле женщины', value : "5"},
+  { meaning: '&#9894; Несколько мужчин', value : "6"},
+  { meaning: '&#9895; Мужчина и женщина', value : "7"},
+  { meaning: '&#9896; Женщина в теле мужчины', value : "8"},
+  { meaning: '&#9791; Все выше перечисленное', value : "9"},
 ]
 class AboutPage extends Page {
   render() {
@@ -53,7 +53,7 @@ AboutPage = withForm(AboutPage,
       id: uuid(),
       validator: validators.isDay,
       warnMessage: 'DD',
-      defaultValue: (page) => new Date(page.props.getStore().user.birthday).getDay(),
+      defaultValue: (page) => new Date(page.props.getStore().user.birthday).getDate(),
     },
     month: {
       id: uuid(),
@@ -80,14 +80,17 @@ AboutPage = withForm(AboutPage,
       delete form.gender;
     if (form.day && form.year && form.month) {
       const oldBirth = new Date(user.birthday);
-      if (oldBirth.getDay() === form.day &&
-        oldBirth.getMonth() === form.month - 1 &&
-        oldBirth.getFullYear() === form.year) {
+      const newBirth = new Date(Number(form.year), Number(form.month) - 1, Number(form.day) );
+      if (
+        oldBirth.getFullYear() === newBirth.getFullYear() &&
+        oldBirth.getMonth() === newBirth.getMonth() &&
+        oldBirth.getDate() === newBirth.getDate()
+      ) {
         delete form.day;
         delete form.year;
         delete form.month;
       } else {
-        form.birthday = new Date(`${form.month - 1}/${form.day}/${form.year}`).toISOString();
+        form.birthday = newBirth.toISOString();
         delete form.day;
         delete form.year;
         delete form.month;

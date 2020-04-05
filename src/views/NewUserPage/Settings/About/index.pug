@@ -11,7 +11,7 @@ include ../shared
             div
                 select(id=locals.inputFields.gender.id disabled=!locals.canChange)
                     each g in locals.GENDERS
-                        option(value=g.value selected=g === locals.user.gender) !{g.meaning}
+                        option(value=g.value selected=Number(g.value) === Number(locals.user.gender)) !{g.meaning}
                 div.input-field-auth-holder--line
     div.birth-tag
         h2 Дата рождения
