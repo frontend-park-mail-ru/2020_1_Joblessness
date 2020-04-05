@@ -59,9 +59,10 @@ const beforeNext = (page, vac) => {
     page.props.vacancies = [];
     return;
   }
-  vac.id = uuid();
+  vac.innerId = uuid();
   vac.chosen = {
-    id: uuid(),
+    id: vac.id,
+    innerId: uuid(),
   };
   if (!page.props.vacancies) {
     page.props.vacancies = [];
@@ -76,17 +77,17 @@ const afterNext = (page, vac, needUpdate) => {
     return;
   }
 
-  const newPage = new VacancyPreview(`#${vac.id}`);
+  const newPage = new VacancyPreview(`#${vac.innerId}`);
   newPage.props.vacancy = vac;
   const newRoute = {
-    path: vac.id,
+    path: vac.innerId,
     alwaysOn: true,
     next: '',
     element: newPage,
     childRoutes: [{
-      path: vac.chosen.id,
+      path: vac.chosen.innerId,
       alwaysOn: true,
-      element: new ChosenButton(`#${vac.chosen.id}`),
+      element: new ChosenButton(`#${vac.chosen.innerId}`),
     }],
   };
   page.props.insertSubPage(newRoute);

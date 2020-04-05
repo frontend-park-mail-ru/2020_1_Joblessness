@@ -2,6 +2,7 @@ include ../../../templates/pug/avatar
 include ../../../templates/pug/phone
 include ../../../templates/pug/companyName
 include ../../../templates/pug/link
+
 div.search-item.cover
     if(locals.type === 'person')
         +link(href="/users/" + locals.item.id).search-item--link.cover
@@ -28,6 +29,12 @@ div.search-item.cover
             +avatar(src=locals.item.organization.avatar noSelect)
             div.person--info
                 +company-name(locals.item.name, '#' + locals.item.organization.tag)
-                h2 #{locals.item['salary_from']} - #{locals.item['salary_to']} &#8381;
+                div.person--info--location
+                    if locals.item.salaryFrom
+                        h2 от #{locals.item.salaryFrom}&nbsp
+                    if locals.item.salaryTo
+                        h2 до #{locals.item.salaryTo}&nbsp
+                    if locals.item.salaryFrom || locals.item.salaryTo
+                        h2 &#8381;
                 if(locals.item.phone)
                     +phone(locals.item.phone)

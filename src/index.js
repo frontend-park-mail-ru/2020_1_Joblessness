@@ -6,10 +6,8 @@ import {
   CreateSummaryPage,
   UserPage,
   UserSubRoutes,
-  VacancyPage,
   Header,
   NotFoundPage,
-  VacancyListPage,
   SummaryPage,
   CreateSummaryRoutes,
 } from './views';
@@ -46,17 +44,6 @@ class App {
       ...SIGNUP_ROUTES,
       ...ORGANIZATIONS_ROUTES,
       ...CREATE_VACANCY_ROUTES,
-      {
-        path: 'vacancies',
-        element: new VacancyListPage('#root'),
-        childRoutes: [
-          {
-            path: 'vacancies/*',
-            // @TODO fix vacancy page
-            element: new VacancyPage('#root'),
-          },
-        ],
-      },
       {
         path: 'users',
         element: new UserPage('#root'),

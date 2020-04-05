@@ -1,6 +1,4 @@
 import {CreateVacancyPage} from './NewCreateVacancyPage';
-import {VacancyListPage} from './VacancyList';
-import {VacancyPage} from './VacancyPage';
 import {CreateSummaryPage, CreateSummaryRoutes} from './NewCreateSummaryPage';
 import {UserPage, UserSubRoutes} from './NewUserPage';
 import {Header} from './Header';
@@ -10,9 +8,7 @@ import {NotFoundPage} from './NotFoundPage';
 
 export {
   UserSubRoutes,
-  VacancyListPage,
   CreateVacancyPage,
-  VacancyPage,
   CreateSummaryPage,
   UserPage,
   CreateSummaryRoutes,
@@ -22,10 +18,8 @@ export {
   NotFoundPage,
 };
 export default {
-  VacancyListPage,
   CreateVacancyPage,
   CreateSummaryRoutes,
-  VacancyPage,
   CreateSummaryPage,
   UserPage,
   Header,

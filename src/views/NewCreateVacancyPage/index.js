@@ -104,9 +104,9 @@ const addButtonEvents = (page) => {
       requestManager.tryCreateVacancy({
         name: uuid(),
         description: '',
-        'salary_from': 0.00,
-        'salary_to': 10000.00,
-        'with_tax': false,
+        salaryFrom: 0.00,
+        salaryTo: 10000.00,
+        withTax: false,
         responsibilities: JSON.stringify(vac.responsibilities),
         conditions: JSON.stringify(vac.conditions),
         keywords: JSON.stringify(vac.keywords),

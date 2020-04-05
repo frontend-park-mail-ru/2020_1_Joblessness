@@ -1,6 +1,5 @@
-//@TODO only if company is authenticated
-if true
-    div.vacancy-holder.create-vacancy#create-vacancy-holder
+
+div.create-vacancy.vacancy-holder#create-vacancy-holder
 if locals.vacancies
     each vac in locals.vacancies
-        div.vacancy-holder(id=vac.id)
+        div.vacancy-holder(id=vac.innerId)

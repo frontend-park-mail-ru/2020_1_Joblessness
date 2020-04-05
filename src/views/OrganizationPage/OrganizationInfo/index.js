@@ -20,7 +20,6 @@ class OrganizationInfo extends Page {
   }
 
   render() {
-    console.log(this.props.getStore().organization)
     return template({
       itemId: this.#elemId,
       info: this.props.getStore().organization,

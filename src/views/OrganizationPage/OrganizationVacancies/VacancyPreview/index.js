@@ -12,6 +12,7 @@ class VacancyPreview extends Page {
    * @return {string}
    */
   render() {
+    console.log(this.props)
     return template(this.props);
   }
 
