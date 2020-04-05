@@ -3,6 +3,7 @@ mixin input-field-settings
         input.fancy-input.no-indent(
             class=attributes.class
             style=attributes.style
+            readonly!=attributes.readonly
             autofocus!=attributes.autofocus
             type=attributes.type || "text"
             placeholder=attributes.placeholder
@@ -24,7 +25,7 @@ mixin settings-item(name)
         div.settings-holder-item--header
             h2 #{name}
         div.settings-holder-item--input
-            +input-field-settings
+            +input-field-settings(readonly!=attributes.readonly)
 
 
 div.settings-list

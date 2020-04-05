@@ -4,6 +4,7 @@ mixin input-field-settings
             class=attributes.class
             style=attributes.style
             autofocus!=attributes.autofocus
+            readonly!=attributes.readonly
             type=attributes.type || "text"
             placeholder=attributes.placeholder
             value=attributes.value)
@@ -23,4 +24,4 @@ mixin settings-item(name)
         div.settings-holder-item--header
             h2 #{name}
         div.settings-holder-item--input
-            +input-field-settings(id=attributes.id)
+            +input-field-settings(id=attributes.id readonly=attributes.readonly)

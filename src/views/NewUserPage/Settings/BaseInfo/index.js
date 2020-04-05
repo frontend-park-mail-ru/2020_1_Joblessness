@@ -3,11 +3,26 @@ import template from './index.pug';
 import withLocalStore from '../../localStore';
 import {requestManager, uuid, validators, withForm} from '../../../../ulils';
 import {Navigator} from '../../../../Navigator';
+import {getUserId} from '../../getUserId';
+import {PERSON} from '../../../../CONSTANTS';
 
 class BaseInfoPage extends Page {
 
   render() {
-    return template(this.props);
+    const canChange = currentSession.user.id === Number(getUserId()) &&
+      currentSession.user.role === PERSON;
+    return template({
+      ...this.props,
+      canChange,
+    });
+  }
+
+  componentDidMount() {
+    super.componentDidMount();
+    const e = document.getElementById(this.props.inputFields.submitField.id);
+
+    if(e)
+      e.hidden = currentSession.user.id !== Number(getUserId())
   }
 }
 

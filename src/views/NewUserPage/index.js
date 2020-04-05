@@ -10,6 +10,7 @@ import {Navigator} from '../../Navigator';
 import {RootPath, SubRoutes} from './subRoutes';
 import {getUserId} from './getUserId';
 import withLocalStore from './localStore';
+import {withAuthManager} from '../../ulils/AuthManager';
 
 /**
  * User Page component
@@ -80,6 +81,7 @@ const loadPersonSummaries = async (page) => {
     console.log(e);
   }
 };
+UserPage = withAuthManager(UserPage)
 UserPage = withLocalStore(UserPage);
 UserPage = withChainedPages(UserPage, SubRoutes, null, RootPath);
 export {
