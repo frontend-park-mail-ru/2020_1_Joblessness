@@ -14,7 +14,7 @@ import {getVacId} from './getVacId';
  */
 class CreateVacancyPage extends Page {
   #prevVac;
-  #forceUpdate;
+  #needUpdate;
   /**
    * @return {string} - page to render
    */
@@ -39,15 +39,17 @@ class CreateVacancyPage extends Page {
   componentDidMount() {
     const vacId = getVacId() || 'create';
     super.componentDidMount();
-    if (this.#prevVac !== vacId || this.#forceUpdate) {
+    addButtonEvents(this);
+    if(this.#needUpdate) {
+      this.#needUpdate = false;
+      return;
+    }
+    if(this.#prevVac !== vacId ) {
       this.#prevVac = vacId;
-      this.#forceUpdate = false;
-      this.props.reloadStore();
-      this.props.random = uuid();
+      this.props.resetStore();
       Navigator.updateAllPages();
       return;
     }
-    addButtonEvents(this);
     if (/\/vacancies\/create/.test(location.pathname) &&
       currentSession.user.role === ORGANIZATION) {
       console.log('org create vac');
@@ -56,13 +58,13 @@ class CreateVacancyPage extends Page {
         .then(async (r) => {
           const res = await r.json();
 
-          this.props.reloadStore();
           this.props.setStore(s => ({
             organization: {
               tag: '',
               ...res
             },
           }));
+          this.#needUpdate = true;
           Navigator.updateAllPages();
         })
         .catch(console.log)
@@ -93,7 +95,7 @@ class CreateVacancyPage extends Page {
             },
             ...vac,
           }));
-          this.#forceUpdate = true;
+          this.props.random = uuid();
           Navigator.updateAllPages();
         })
         .catch(r => {
@@ -129,31 +131,13 @@ const addButtonEvents = (page) => {
         async (r) => {
           try {
             const res = await r.json();
-            this.props.setStore({
-              responsibilities: {
-                preview: [],
-                raw: [],
-              },
-              mainInfo: {
-                name: '',
-                description: '',
-                salaryFrom: 0,
-                salaryTo: 0,
-              },
-              conditions: {
-                preview: [],
-                raw: [],
-              },
-              keywords: {
-                preview: [],
-                raw: [],
-              },
-            });
-            setTimeout(() => {
-              localStorage.removeItem(`vacancies/create`);
-            }, 100);
+            localStorage.removeItem(`vacancies/create`);
+            page.props.resetStore();
+            console.log({...page.props.getStore().responsibilities})
+            console.log(JSON.parse(localStorage.getItem('vacancies/create')));
             Navigator.showPage(`/vacancies/${res.id}`);
           } catch (e) {
+            console.log(e)
             Navigator.showPage(`/organizations/${getOrgId()}`);
           }
         }

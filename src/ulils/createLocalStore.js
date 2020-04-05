@@ -26,13 +26,16 @@ export const createLocalStore = (store,
           }
         }
         this.props.getStore = () => store;
+        this.props.resetStore = () => {
+          store = deepCopy(this.#initial);
+        };
         this.props.reloadStore = () => {
           const keyToUse = typeof key === 'function' ? key() : key;
           const newStore = window.localStorage.getItem(keyToUse);
           if (newStore) {
             store = JSON.parse(newStore);
           } else {
-            store = {...this.#initial};
+            store = deepCopy(this.#initial);
           }
         }
         this.props.setStore = (s, cb) => {
