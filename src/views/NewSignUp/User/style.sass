@@ -131,14 +131,18 @@
   justify-content: center
   align-items: center
   text-align: center
-
   @include SECTION_SHADOW
   border-radius: 10px
   @include BACKGROUND_GRADIENT
   background-attachment: fixed
-  color: white
+  h1
+    color: white !important
   padding: 10px
-
+  transition: .2s
+  &:hover
+    transform: scale(1.01)
+  &:active
+    transform: scale(.99)
 .auth-back-link
   margin-top: 30px
   font-size: 1.25em
@@ -156,3 +160,5 @@
     transform: scale(1)
 
 .signup-start
+  .black-link
+    font-size: 1.25em

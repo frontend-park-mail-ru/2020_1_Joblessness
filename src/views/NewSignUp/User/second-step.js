@@ -80,7 +80,6 @@ SecondStep = withForm(SecondStep, {
                             'Повторите попытку позднее'),
                       );
                 })
-                .catch(console.log)
                 .catch((r) =>
                   alert('Пользователь уже существует или неверный пароль'));
           },

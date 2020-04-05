@@ -3,6 +3,8 @@ import template from './index.pug';
 import './style.sass';
 import {addHideAnimation, playMountAnimation} from '../addAnimations';
 import {requestManager, uuid} from '../../../../../ulils';
+import {getVacId} from '../../../getVacId';
+import {Navigator} from '../../../../../Navigator';
 
 /**
  *
@@ -50,7 +52,15 @@ const initResponseEvent = (page, id) => {
   const button = document.getElementById(id);
 
   button?.addEventListener('click', () => {
-    //@TODO создать отклик
+    requestManager
+      .trySendSummary(getVacId(), page.props.summary.id)
+      .then(async r => {
+        alert('резюме успешно отправлено');
+        Navigator.showPage(`/vacancies/${getVacId()}`)
+      }).catch(r => {
+      alert('Не удалось оставить отклик');
+      Navigator.showPage(`/vacancies/${getVacId()}`)
+    })
   })
 };
 export {

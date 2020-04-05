@@ -273,10 +273,12 @@ class RequestManager {
             summaryId uint64
          }
      */
-    trySendSummary (form, slug) {
+    trySendSummary (vacId, sumId) {
       return new Promise((resolve, reject) => {
         request
-          .post('/vacancies/' + slug + '/response', form)
+          .post('/vacancies/' + vacId + '/response', {
+            summaryId: sumId,
+          })
           .then((r) => {
             if (r.status === 200) {
               resolve(r);
