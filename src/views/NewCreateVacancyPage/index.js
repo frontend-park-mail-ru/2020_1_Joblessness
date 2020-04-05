@@ -38,7 +38,6 @@ class CreateVacancyPage extends Page {
 
   componentDidMount() {
     const vacId = getVacId() || 'create';
-    console.log(vacId);
     super.componentDidMount();
     if (this.#prevVac !== vacId || this.#forceUpdate) {
       this.#prevVac = vacId;
@@ -70,8 +69,7 @@ class CreateVacancyPage extends Page {
 
     } else if (/\/vacancies\/create/.test(location.pathname)) {
       // Navigator.showPage('404');
-    }
-    if (currentSession.user.role !== ORGANIZATION) {
+    } else {
       //@TODO try to load existing vacancy
       requestManager.tryGetVacancy(getVacId())
         .then(async r => {
