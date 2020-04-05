@@ -18,21 +18,21 @@ ContactsPage = withForm(ContactsPage,
       id: uuid(),
       validator: validators.isEmail,
       warnMessage: 'Например username@example.com',
-      defaultValue: (page) => page.getStore().user.email ?? '',
+      defaultValue: (page) => page.props.getStore().user.email ?? '',
     },
     phone: {
       id: uuid(),
-      validators: validators.isPhoneNumber,
+      validator: validators.isPhoneNumber,
       warnMessage: 'Например +7(912)345-67-89 или +79123456789',
-      defaultValue: (page) => page.getStore().user.phone ?? '',
+      defaultValue: (page) => page.props.getStore().user.phone ?? '',
     }
   },
   {
     id: uuid(),
   },
   (form, page) => {
-  const user = page.props.getStore();
-
+  const user = page.props.getStore().user;
+  form.phone = form.phone.replace(/[+\-()]/g, '');
   if(!form.email)
     delete form.email;
   if(!form.phone)
@@ -42,7 +42,8 @@ ContactsPage = withForm(ContactsPage,
     delete form.email;
   if(form.phone === user.phone)
     delete form.phone;
-
+  if(!form.phone && !form.email)
+    return;
   requestManager
     .tryChangePerson(form)
     .then(r => {
