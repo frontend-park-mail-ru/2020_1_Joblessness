@@ -8,7 +8,6 @@ import {Navigator} from '../../Navigator';
 import withLocalStore from './localStore';
 import {ORGANIZATION, UNAUTHORISED} from '../../CONSTANTS';
 import {getVacId} from './getVacId';
-import {get} from '../../ulils/request';
 /**
  * Vacancy creation page
  */
@@ -105,21 +104,13 @@ const addButtonEvents = (page) => {
     const but = document.getElementById('create_vacancy_button');
     but.addEventListener('click', () => {
       const vac = page.props.getStore();
-      console.log({
-        name: uuid(),
-        description: '',
-        salaryFrom: 0.00,
-        salaryTo: 10000.00,
-        withTax: false,
-        responsibilities: JSON.stringify(vac.responsibilities),
-        conditions: JSON.stringify(vac.conditions),
-        keywords: JSON.stringify(vac.keywords),
-      })
+      if(!vac.mainInfo.name || !(vac.mainInfo.salaryTo && vac.mainInfo.salaryFrom)) {
+        alert('Не все поля заполнены');
+        return;
+      }
       requestManager.tryCreateVacancy({
         name: uuid(),
-        description: '',
-        salaryFrom: 0.00,
-        salaryTo: 10000.00,
+        ...vac.mainInfo,
         withTax: false,
         responsibilities: JSON.stringify(vac.responsibilities),
         conditions: JSON.stringify(vac.conditions),
@@ -132,6 +123,12 @@ const addButtonEvents = (page) => {
               responsibilities: {
                 preview: [],
                 raw: [],
+              },
+              mainInfo: {
+                name: '',
+                description: '',
+                salaryFrom: 0,
+                salaryTo: 0,
               },
               conditions: {
                 preview: [],

@@ -4,15 +4,19 @@ import RequirementsRoutes from './keywords/routes';
 import ConditionsRoutes from './conditions/routes';
 // import MainSkillsRoutes from './mainskills/routes';
 import withLocalStore from './localStore';
+import {MainInfo} from './mainInfo';
 const RootPath = 'vacancies/';
-import RESPONSE_ROUTES from './responsePage/routes'
 const OrganizationInfo = withLocalStore(OrganizationInfoNoStore);
 const SubRoutes = [
-  ...RESPONSE_ROUTES,
   {
     path: 'vacInfo',
     alwaysOn: true,
     element: new OrganizationInfo('#vacancy_org_info'),
+  },
+  {
+    path: 'mainInfo',
+    alwaysOn: true,
+    element: new MainInfo('#vacancy_main_info')
   },
   ...ResponsibilitiesRoutes,
   ...RequirementsRoutes,

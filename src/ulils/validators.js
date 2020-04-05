@@ -59,6 +59,7 @@ And the number of matched chars must be from 0 to 19.
 const isLogin = (login) =>
   /^(?=.*[A-Za-z0-9]$)[A-Za-z][A-Za-z\d.-_]{5,19}$/.test(login);
 
+const isMoney = (money) => !isNaN(money) && money !== '';
 const isUrl = (url) => /^(?:http(s)?:\/\/)?[\w.-]+(?:\.[\w\.-]+)+[\w\-\._~:/?#[\]@!\$&'\(\)\*\+,;=.]+$/.test(url);
 export default {
   validateString,
@@ -74,6 +75,7 @@ export default {
   hasId,
   isString,
   isBody,
+  isMoney,
   isLogin,
   isFunction,
   isUrl,
@@ -93,6 +95,7 @@ export {
   hasId,
   isString,
   isBody,
+  isMoney,
   isFunction,
   isLogin,
   isUrl,

@@ -1,13 +1,11 @@
 import {Page} from '../../../../Page';
 import {currentSession, requestManager, uuid} from '../../../../ulils';
-import {VacancyPreview} from './SummaryPreview';
+import {SummaryPreview} from './SummaryPreview';
 import {Navigator} from '../../../../Navigator';
-import {constructSubRoutes} from '../../subRoutes';
-import {CreateVacancyButton} from './CreateSummaryButton';
 import ROUTES, {constructRoute, DEF_ROUTES} from './routes';
 
 /**
- * Performs loading vacancies
+ * Performs loading summaries
  */
 class LoadManager extends Page {
   /**
@@ -32,20 +30,10 @@ class LoadManager extends Page {
         if (list.length > 0) {
           const last = list.pop();
           for (let item of list) {
-            this.props.requestNextNoUpdate({
-              vacancyName: item.name,
-              salaryFrom: item['salary_from'],
-              salaryTo: item['salary_to'],
-              id: item.id,
-            }, false);
+            this.props.requestNextNoUpdate(item, false);
           }
 
-          this.props.requestNextNoUpdate({
-            vacancyName: last.name,
-            salaryFrom: last['salary_from'],
-            salaryTo: last['salary_to'],
-            id: last.id,
-          }, true);
+          this.props.requestNextNoUpdate(item, true);
         }
       })
   }
@@ -54,7 +42,7 @@ class LoadManager extends Page {
 
 const beforeNext = (page, vac) => {
   if (!vac) {
-    page.props.vacancies = [];
+    page.props.summaries = [];
     return;
   }
   vac.innerId = uuid();
@@ -62,10 +50,10 @@ const beforeNext = (page, vac) => {
     id: vac.id,
     innerId: uuid(),
   };
-  if (!page.props.vacancies) {
-    page.props.vacancies = [];
+  if (!page.props.summaries) {
+    page.props.summaries = [];
   }
-  page.props.vacancies.push(vac);
+  page.props.summaries.push(vac);
 };
 const afterNext = (page, vac, needUpdate) => {
 
@@ -75,41 +63,26 @@ const afterNext = (page, vac, needUpdate) => {
     return;
   }
 
-  const newPage = new VacancyPreview(`#${vac.innerId}`);
-  newPage.props.vacancy = vac;
+  const newPage = new SummaryPreview(`#${vac.innerId}`);
+  newPage.props.summary = vac;
   const newRoute = {
     path: vac.innerId,
     alwaysOn: true,
     next: '',
     element: newPage,
-    childRoutes: [{
-      path: vac.chosen.innerId,
-      alwaysOn: true,
-      element: new ChosenButton(`#${vac.chosen.innerId}`),
-    }],
   };
   page.props.insertSubPage(newRoute);
-
-  Navigator.addRoutes(
-    constructSubRoutes([
-      {
-        path: 'orgVacancies',
-        childRoutes: [
-          newRoute,
-        ],
-      },
-    ]),
-  );
+  Navigator.addRoutes(constructRoute([newRoute]));
   needUpdate && Navigator.updateAllPages();
 };
 
 
 const LoadManagerRoutes = [
   {
-    element: new LoadManager('#organization_vacancy_load_manager'),
+    element: new LoadManager('#response_load_manager'),
     path: 'orgLoadManager',
     alwaysOn: true,
-    innerNext: 'orgVacancies',
+    innerNext: 'summaries',
     innerPath: 'orgLoadManager',
     useInner: true,
     beforeNext,

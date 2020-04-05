@@ -8,7 +8,6 @@ import {
   UserSubRoutes,
   Header,
   NotFoundPage,
-  SummaryPage,
   CreateSummaryRoutes,
 } from './views';
 import ORGANIZATIONS_ROUTES from './views/OrganizationPage/routes'
@@ -53,10 +52,6 @@ class App {
         path: 'summaries/create',
         element: new CreateSummaryPage('#root'),
         childRoutes: CreateSummaryRoutes,
-      },
-      {
-        path: 'summaries/*',
-        element: new SummaryPage('#root'),
       },
       {
         path: '404',

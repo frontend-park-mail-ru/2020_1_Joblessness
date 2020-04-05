@@ -1,5 +1,5 @@
 
 div.create-vacancy.vacancy-holder#create-vacancy-holder
-if locals.vacancies
-    each vac in locals.vacancies
-        div.vacancy-holder(id=vac.innerId)
+if locals.summaries
+    each vac in locals.summaries
+        div.summary-item-holder(id=vac.innerId)

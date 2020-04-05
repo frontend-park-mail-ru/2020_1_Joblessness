@@ -1,19 +1,28 @@
-import {Page} from '../../../../Page';
+import {Page} from '../../../../../Page';
 import template from './index.pug';
 import './style.sass';
 import {addHideAnimation, playMountAnimation} from '../addAnimations';
+import {requestManager, uuid} from '../../../../../ulils';
 
 /**
  *
  */
-class VacancyPreview extends Page {
+class SummaryPreview extends Page {
   /**
    *
    * @return {string}
    */
+  #selectId;
+
+  constructor(props) {
+    super(props);
+    this.#selectId = uuid();
+  }
   render() {
-    console.log(this.props)
-    return template(this.props);
+    return template({
+      ...this.props,
+      selectId: this.#selectId
+    });
   }
 
   /**
@@ -21,6 +30,7 @@ class VacancyPreview extends Page {
    */
   componentDidMount() {
     super.componentDidMount();
+    initResponseEvent(this, this.#selectId);
     const parent = document.querySelector(this.container);
     if (!this._wasMount) {
       this._wasMount = true;
@@ -36,6 +46,13 @@ class VacancyPreview extends Page {
   }
 }
 
+const initResponseEvent = (page, id) => {
+  const button = document.getElementById(id);
+
+  button?.addEventListener('click', () => {
+    //@TODO создать отклик
+  })
+};
 export {
-  VacancyPreview,
+  SummaryPreview,
 };

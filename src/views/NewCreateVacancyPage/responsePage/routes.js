@@ -1,12 +1,14 @@
 import {ResponsePage} from './index';
 import SubRoutes from './summaries/routes'
+import LoadManagerRoutes from './summaries/loadManager';
 
 const Routes = [
   {
-    path: 'response',
-    element: new ResponsePage('#vacancy_responce'),
+    path: 'vacancies\/(\\d+)\/response',
+    element: new ResponsePage('#root'),
     childRoutes: [
-      ...SubRoutes
+      ...SubRoutes,
+      ...LoadManagerRoutes,
     ]
   },
 ];

@@ -595,7 +595,7 @@ class RequestManager {
     tryGetUserSummaries (slug) {
         return new Promise((resolve, reject) => {
             request
-                .get('/users/' + slug + '/summaries', {})
+                .get('/api/users/' + slug + '/summaries', {})
                 .then((r) => {
                     if (r.status === 200) {
                         resolve(r);

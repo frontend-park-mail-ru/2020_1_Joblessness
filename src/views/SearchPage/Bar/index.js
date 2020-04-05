@@ -18,13 +18,14 @@ function getDocHeight() {
     D.body.clientHeight, D.documentElement.clientHeight
   );
 }
+
 const loadOnScroll = (page) => {
   const ev = e => {
-    if(!document.querySelector('#search_bar')) {
+    if (!document.querySelector('#search_bar')) {
       document.removeEventListener('scroll', ev);
       return;
     }
-    if(window.scrollY + window.innerHeight >= getDocHeight()) {
+    if (window.scrollY + window.innerHeight >= getDocHeight()) {
       page.props.setStore(s => ({
         bar: {
           ...s.bar,
@@ -39,10 +40,19 @@ const loadOnScroll = (page) => {
       requestManager.trySearch(page.props.getStore().bar.preview)
         .then(async r => {
           const res = await r.json();
-          const persons = res.persons?.map(p => ({...p, innerId: uuid()})) ?? [];
-          const vacancies = res.vacancies?.map(p => ({...p, innerId: uuid()})) ?? [];
-          const organizations = res.organizations?.map(p => ({...p, innerId: uuid()})) ?? [];
-          if(persons.length + vacancies.length + organizations.length === 0) {
+          const persons = res.persons?.map(p => ({
+            ...p,
+            innerId: uuid()
+          })) ?? [];
+          const vacancies = res.vacancies?.map(p => ({
+            ...p,
+            innerId: uuid()
+          })) ?? [];
+          const organizations = res.organizations?.map(p => ({
+            ...p,
+            innerId: uuid()
+          })) ?? [];
+          if (persons.length + vacancies.length + organizations.length === 0) {
             page.props.setStore(s => ({
               bar: {
                 ...s.bar,
@@ -64,14 +74,15 @@ const loadOnScroll = (page) => {
           page.props.requestNextNoUpdate()
         })
         .catch(e => {
-          console.log(e)
+          console.log(e);
           alert('Похоже, сервер недоступен')
         })
     }
     // if(e.scrollTop >= e)
-  }
+  };
   return ev;
-}
+};
+
 /**
  * https://stackoverflow.com/a/5448635
  */
@@ -83,10 +94,10 @@ function getSearchParameters() {
 /**
  *
  */
-function transformToAssocArray( prmstr ) {
+function transformToAssocArray(prmstr) {
   var params = {};
   var prmarr = prmstr.split("&");
-  for ( var i = 0; i < prmarr.length; i++) {
+  for (var i = 0; i < prmarr.length; i++) {
     var tmparr = prmarr[i].split("=");
     params[tmparr[0]] = tmparr[1];
   }
@@ -103,7 +114,7 @@ const searchEvent = page => (e) => {
       }
     }
   }))
-}
+};
 
 const clickEvent = page => (e) => {
   page.props.setStore(s => ({
@@ -118,8 +129,14 @@ const clickEvent = page => (e) => {
     .then(async r => {
       const res = await r.json();
       const persons = res.persons?.map(p => ({...p, innerId: uuid()})) ?? [];
-      const vacancies = res.vacancies?.map(p => ({...p, innerId: uuid()})) ?? [];
-      const organizations = res.organizations?.map(p => ({...p, innerId: uuid()})) ?? [];
+      const vacancies = res.vacancies?.map(p => ({
+        ...p,
+        innerId: uuid()
+      })) ?? [];
+      const organizations = res.organizations?.map(p => ({
+        ...p,
+        innerId: uuid()
+      })) ?? [];
       page.props.setStore({
         search: {
           persons,
@@ -130,7 +147,7 @@ const clickEvent = page => (e) => {
       page.props.requestNextNoUpdate()
     })
     .catch(e => {
-      console.log(e)
+      console.log(e);
       alert('Похоже, сервер недоступен')
     })
 };
@@ -150,14 +167,17 @@ const setTypeEvent = (page, type) => (e) => {
   }));
   page.doSearch(e);
 };
+
 class Bar extends Page {
   #wasMounted;
+
   constructor(props) {
-    super(props)
+    super(props);
     this.props.searchId = uuid();
     this.props.clickId = uuid();
     this.props.typeId = uuid();
   }
+
   render() {
     return template(this.props);
   }
@@ -168,56 +188,53 @@ class Bar extends Page {
     document.addEventListener('scroll', loadOnScroll(this));
     const search = document.getElementById(this.props.searchId);
     const click = document.getElementById(this.props.clickId);
-    const type = document.getElementById(this.props.typeId);
+    const typeEl = document.getElementById(this.props.typeId);
 
-    const all = type.querySelector('.all');
-    const users = type.querySelector('.users');
-    const orgs = type.querySelector('.orgs');
-    const vacs = type.querySelector('.vacs');
+    const all = typeEl.querySelector('.all');
+    const users = typeEl.querySelector('.users');
+    const orgs = typeEl.querySelector('.orgs');
+    const vacs = typeEl.querySelector('.vacs');
 
     search.addEventListener('input', searchEvent(this));
     const findEvent = clickEvent(this);
     this.doSearch = findEvent;
     search.addEventListener('keypress', (e) => {
-      if(e.key === 'Enter') {
+      if (e.key === 'Enter') {
         findEvent(e);
       }
     });
-    click.addEventListener('click', findEvent)
+    click.addEventListener('click', findEvent);
     all.addEventListener('click', setTypeEvent(this, ''));
     users.addEventListener('click', setTypeEvent(this, 'person'));
     orgs.addEventListener('click', setTypeEvent(this, 'organization'));
     vacs.addEventListener('click', setTypeEvent(this, 'vacancy'));
 
-    if(!this.#wasMounted) {
-      this.#wasMounted = true;
-      const {type, request, since, desc} = getSearchParameters();
+    const {type, request, since, desc} = getSearchParameters();
 
-      if(!type && !request && !since && !desc)
-        return;
+    if (!type && !request && !since && !desc)
+      return;
 
-      search.firstChild.firstChild.value = request;
-      this.props.setStore(s => ({
-        bar: {
-          ...s.bar,
-          raw: {
-            type: type ? type : s.bar.raw.type,
-            since: 0,
-            desc: desc ? desc :s.bar.raw.desc,
-            requestBody: request ? request: s.bar.raw.requestBody,
-          }
+    search.firstChild.firstChild.value = request;
+    this.props.setStore(s => ({
+      bar: {
+        ...s.bar,
+        raw: {
+          type: type ? type : s.bar.raw.type,
+          since: 0,
+          desc: desc ? desc : s.bar.raw.desc,
+          requestBody: request ? request : s.bar.raw.requestBody,
         }
-      }));
-      if(type === '')
-        all.classList.add('selected');
-      else if(type === 'person')
-        users.classList.add('selected');
-      else if(type === 'organization')
-        orgs.classList.add('selected');
-      else if(type === 'vacancy')
-        vacs.classList.add('selected');
-      findEvent(null);
-    }
+      }
+    }));
+    if (type === '')
+      all.classList.add('selected');
+    else if (type === 'person')
+      users.classList.add('selected');
+    else if (type === 'organization')
+      orgs.classList.add('selected');
+    else if (type === 'vacancy')
+      vacs.classList.add('selected');
+    findEvent(null);
   }
 }
 

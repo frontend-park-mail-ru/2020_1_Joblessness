@@ -21,21 +21,16 @@ const ROUTES = [
 ];
 export const constructRoute = (childRoutes = []) => [
   {
-    path: 'vacancies/*',
+    path: 'vacancies\/(\\d+)\/response',
     childRoutes: [
       {
-        path: 'response',
-        childRoutes: [
-          {
-            path: 'summaries',
-            innerPath: 'summaries',
-            alwaysOn: true,
-            element: ROOT_ELEMENT,
-            childRoutes,
-          },
-        ]
+        path: 'summaries',
+        innerPath: 'summaries',
+        alwaysOn: true,
+        element: ROOT_ELEMENT,
+        childRoutes,
       }
     ]
   }
-]
+];
 export default ROUTES;

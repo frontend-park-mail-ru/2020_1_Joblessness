@@ -20,10 +20,12 @@ const withLocalStore = createLocalStore({
     preview: [],
     raw: [],
   },
-  // mainSkills: {
-  //   preview: [],
-  //   raw: [],
-  // },
+  mainInfo: {
+    name: '',
+    description: '',
+    salaryFrom: 0,
+    salaryTo: 0,
+  },
   keywords: {
     preview: [],
     raw: [],

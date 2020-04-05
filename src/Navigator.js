@@ -128,7 +128,8 @@ class Navigator {
     window.linkGo = (e) => {
       e = e.replace(/&amp;amp;/g, '&');
       if(e[0] === '?') {
-        this.showPage('/', true, true)
+        this.showPage(e);
+        this.updateAllPages()
       }
       if (e[0] === '/') {
         this.showPage(e);
