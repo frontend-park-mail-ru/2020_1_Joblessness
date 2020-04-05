@@ -5,7 +5,8 @@ import {ChosenButton} from '../ChosenButton';
 import {Navigator} from '../../../Navigator';
 import {constructSubRoutes} from '../subRoutes';
 import {getOrgId} from '../getOrgInfo';
-
+import {CreateVacancyButton} from './CreateVacancyButton';
+import ROUTES, {constructRoute, DEF_ROUTES} from './routes';
 /**
  * Performs loading vacancies
  */
@@ -27,6 +28,7 @@ class LoadManager extends Page {
     requestManager.tryGetOrgVacancies(getOrgId())
       .then(async r => {
         const list = await r.json();
+        this.props.requestNextNoUpdate(null);
         if(list.length > 0) {
           const last = list.pop();
 
@@ -53,6 +55,10 @@ class LoadManager extends Page {
 
 
 const beforeNext = (page, vac) => {
+  if(!vac) {
+    page.props.vacancies = [];
+    return;
+  }
   vac.id = uuid();
   vac.chosen = {
     id: uuid(),
@@ -63,6 +69,13 @@ const beforeNext = (page, vac) => {
   page.props.vacancies.push(vac);
 };
 const afterNext = (page, vac, needUpdate) => {
+
+  if(!vac) {
+    Navigator.removeRoutes(constructRoute());
+    Navigator.addRoutes(constructRoute(DEF_ROUTES));
+    return;
+  }
+
   const newPage = new VacancyPreview(`#${vac.id}`);
   newPage.props.vacancy = vac;
   const newRoute = {

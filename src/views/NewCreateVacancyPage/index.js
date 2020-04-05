@@ -38,8 +38,9 @@ class CreateVacancyPage extends Page {
     const orgId = getOrgId();
     if(/\/vacancies\/create/.test(location.pathname) &&
       currentSession.user.role === ORGANIZATION) {
-
+      console.log('org create vac')
       if(this.#prevOrg !== orgId) {
+        console.log('this.#prevOrg !== orgId')
         this.#prevOrg = orgId;
         this.props.reloadStore();
         this.props.random = uuid();
@@ -47,34 +48,38 @@ class CreateVacancyPage extends Page {
         requestManager.tryGetOrg(orgId)
           .then( async (r) => {
             const res = await r.json();
+
             this.props.reloadStore();
             this.props.setStore(s => ({
               organization: {
                 tag: '',
                 ...res
-              }
+              },
             }));
             Navigator.updateAllPages();
           })
           .catch(console.log)
       }
     } else if(/\/vacancies\/create/.test(location.pathname)) {
-      Navigator.showPage('404');
+      // Navigator.showPage('404');
     }
     if(currentSession.user.role !== ORGANIZATION) {
-      //@TODO try to load existing summary
+      //@TODO try to load existing vacancy
       requestManager.tryGetVacancy(getVacId())
         .then(async r => {
-          const res = await r.json()
+          const res = await r.json();
+          const vac = {
+            responsibilities: JSON.parse(res.responsibilities.replace(/&#34;/g, '"')),
+            conditions: JSON.parse(res.conditions.replace(/&#34;/g, '"')),
+            keywords: JSON.parse(res.keywords.replace(/&#34;/g, '"')),
+          };
           this.props.setStore(s => ({
             organization: res.organization,
-            responsibilities: res.responsibilities,
             requirements: {
               preview: [],
               raw: [],
             },
-            conditions: res.conditions,
-            keywords: res.keywords,
+            ...vac,
           }))
         })
         .catch(r => {
@@ -82,7 +87,7 @@ class CreateVacancyPage extends Page {
             // Navigator.showPage('404');
           }
           console.log(r)
-          alert('Невозможно соединиться с сервером');
+          // alert('Невозможно соединиться с сервером');
           // Navigator.showPage('/');
         })
     }
@@ -95,12 +100,12 @@ const addButtonEvents = (page) => {
     const but = document.getElementById('create_vacancy_button');
     but.addEventListener('click', () => {
       const vac = page.props.getStore();
-
+      console.log('vac', vac);
       requestManager.tryCreateVacancy({
         name: uuid(),
         description: '',
-        'salary_from': 0,
-        'salary_to': 10000,
+        'salary_from': 0.00,
+        'salary_to': 10000.00,
         'with_tax': false,
         responsibilities: JSON.stringify(vac.responsibilities),
         conditions: JSON.stringify(vac.conditions),
@@ -108,8 +113,10 @@ const addButtonEvents = (page) => {
       }).then(
         async (r) => {
           try {
-            const res = await r.json()
-            Navigator.showPage(`/vacancies/${r.id}`);
+            console.log('r', r);
+            const res = await r.json();
+            console.log('res', res);
+            Navigator.showPage(`/vacancies/${res.id}`);
           } catch (e) {
             Navigator.showPage(`/organizations/${getOrgId()}`);
           }
@@ -121,7 +128,7 @@ const addButtonEvents = (page) => {
     })
   }
   else if(currentSession.user.role === ORGANIZATION &&
-    this.props.getStore().organization.id === currentSession.user.id) {
+    page.props.getStore().organization.id === currentSession.user.id) {
 
     const but = document.getElementById('create_vacancy_button');
     but?.addEventListener('click', () => {
@@ -135,7 +142,7 @@ const addButtonEvents = (page) => {
         })
     })
   } else if(currentSession.user.role === ORGANIZATION &&
-    this.props.getStore().organization.id !== currentSession.user.id) {
+    page.props.getStore().organization.id !== currentSession.user.id) {
     // Do nothing
   } else {
     //@TODO создать отклик

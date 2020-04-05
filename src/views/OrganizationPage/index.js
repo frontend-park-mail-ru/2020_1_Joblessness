@@ -32,11 +32,18 @@ class OrganizationPage extends Page {
       requestManager.tryGetOrg(orgId)
         .then( async (r) => {
           const res = await r.json();
-          console.log(res)
+          if(!res.about) {
+            res.about = ''
+          }
+          const mainInfoStr = res.about.replace(/&#34;/g, '"');
           this.props.setStore(s => ({
             organization: {
               tag: '',
-              ...res
+              ...res,
+            },
+            mainInfo: mainInfoStr ? JSON.parse(mainInfoStr) : {
+              raw: [],
+              preview: [],
             }
           }));
           Navigator.updateAllPages();

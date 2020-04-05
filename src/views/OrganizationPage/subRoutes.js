@@ -60,10 +60,17 @@ const MainInfoRoutes = createEditor({
       },
     ],
     onApply: (props, page) => new Promise((resolve, reject) => {
+      const about = page.props.getStore().mainInfo;
+      about.preview = about.raw;
       requestManager.tryChangeOrg({
-        about: JSON.stringify(page.props.getStore().mainInfo)
-      }).then(resolve)
-        .catch(reject)
+        about: JSON.stringify(about)
+      }).then((r) => {
+        console.log(r); resolve(r)
+      })
+        .catch((r) => {
+          console.log(r);
+          reject(r);
+        })
     }),
   }
 );

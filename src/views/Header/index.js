@@ -1,7 +1,6 @@
 import './style.sass';
 import {Page} from '../../Page';
 import template from './pug/header.pug'
-import {ORGANIZATION, PERSON, UNAUTHORISED} from '../../CONSTANTS';
 import {currentSession, requestManager} from '../../ulils';
 import {Navigator} from '../../Navigator';
 import {withAuthManager} from '../../ulils/AuthManager';

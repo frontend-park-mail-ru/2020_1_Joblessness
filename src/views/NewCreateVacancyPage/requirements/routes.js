@@ -7,6 +7,7 @@ import {Edit} from './Edit';
 import {AddItem} from './AddItem';
 import {ModeManager} from './ModeManager';
 import {Item} from './Item';
+import {requestManager} from '../../../ulils';
 
 const RequirementsRoutes = createEditor({
   Parent,
@@ -54,6 +55,16 @@ const RequirementsRoutes = createEditor({
       childRoutes,
     },
   ],
+  onApply: (props, page) => new Promise((resolve, reject) => {
+    if(isCreationPage()) {
+      const responsibilities = page.props.getStore().responsibilities;
+      requestManager.tryChangeOrg({
+        responsibilities: JSON.stringify(responsibilities)
+      })
+        .then(resolve)
+        .catch(reject)
+    }
+  })
 });
 
 

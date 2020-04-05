@@ -10,7 +10,10 @@ export const loginOnReload = () => {
       if (r.status === 201) {
         try {
           const user = await r.json();
-          currentSession.session = user;
+          currentSession.session = {
+            ...user,
+            role : user.role.toUpperCase(),
+          };
         } catch (e) {
           console.log(e);
         }

@@ -4,7 +4,6 @@ import withLocalStore from '../localStore';
 import {currentSession, fileToB64, uuid} from '../../../ulils';
 import {DOMAIN} from '../../../ulils/request';
 import {Navigator} from '../../../Navigator';
-import {withAuthManager} from '../../../ulils/AuthManager';
 
 /**
  * Organization info subpage
@@ -21,6 +20,7 @@ class OrganizationInfo extends Page {
   }
 
   render() {
+    console.log(this.props.getStore().organization)
     return template({
       itemId: this.#elemId,
       info: this.props.getStore().organization,
