@@ -1,6 +1,6 @@
 import {AddEducationPage} from './addEducation';
 import {ShowEducationPage} from './showEducation';
-import {PersonInfo} from './personInfo';
+import {UserInfo} from '../NewUserPage/UserInfo';
 import {ShowExperiencePage} from './showExperience';
 import {AddExperienceRoute} from './addExperience/AddExperienceRoute';
 import {AddEducationRoute} from './addEducation/AddEducationRoute';
@@ -10,7 +10,7 @@ const CreateSummaryRoutes = [
     path: 'info',
     next: '',
     alwaysOn: true,
-    element: new PersonInfo('#create_summary_person_info'),
+    element: new UserInfo('#create_summary_person_info'),
   },
   {
     path: 'addEducation',

@@ -21,6 +21,7 @@ class SummaryPreview extends Page {
     this.#selectId = uuid();
   }
   render() {
+    console.log(this.props);
     return template({
       ...this.props,
       selectId: this.#selectId

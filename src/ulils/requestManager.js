@@ -276,7 +276,7 @@ class RequestManager {
     trySendSummary (vacId, sumId) {
       return new Promise((resolve, reject) => {
         request
-          .post('/vacancies/' + vacId + '/response', {
+          .post('/api/vacancies/' + vacId + '/response', {
             summaryId: sumId,
           })
           .then((r) => {
@@ -607,6 +607,59 @@ class RequestManager {
                 }).catch(reject);
         },);
     }
+
+  /**
+   * @example
+     {
+    "id": 0,
+    "keywords": "string",
+    "educations": [
+      {
+        "id": 0,
+        "institution": "string",
+        "speciality": "string",
+        "graduated": "2020-04-05T15:20:21.720Z",
+        "type": "string"
+      }
+    ],
+    "experiences": [
+      {
+        "id": 0,
+        "companyName": "string",
+        "role": "string",
+        "responsibilities": "string",
+        "start": "2020-04-05T15:20:21.720Z",
+        "stop": "2020-04-05T15:20:21.720Z"
+      }
+    ]
+  }
+   */
+  tryCreateSummary (form) {
+    return new Promise((resolve, reject) => {
+      request
+        .post('/api/summaries', form)
+        .then((r) => {
+          if (r.status === 201 || r.status === 200 ) {
+            resolve(r);
+          } else {
+            reject(r);
+          }
+        }).catch(reject);
+    },);
+  }
+  tryDeleteSummary (id) {
+    return new Promise((resolve, reject) => {
+      request
+        .DELETE(`/api/summaries/${id}`, {})
+        .then((r) => {
+          if (r.status === 204) {
+            resolve(r);
+          } else {
+            reject(r);
+          }
+        }).catch(reject);
+    },);
+  }
 }
 
 const requestManager = new RequestManager();

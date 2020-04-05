@@ -1,5 +1,5 @@
 import {UserInfo} from './UserInfo';
-import {SettingsSubPage} from './settings';
+import SETTINGS_ROUTES from './Settings/routes'
 import {SummariesSubPage} from './Summaries';
 import {FavouriteSubPage} from './favourite';
 import {StatisticsSubPage} from './statistics';
@@ -10,11 +10,7 @@ const RootPath = 'users/';
 const CONTAINER = '#users_current_section';
 
 const UserSubRoutes = [
-  {
-    path: 'settings',
-    next: '/settings',
-    element: new SettingsSubPage(CONTAINER),
-  },
+  ...SETTINGS_ROUTES,
   {
     path: 'summaries',
     next: '/summaries',
