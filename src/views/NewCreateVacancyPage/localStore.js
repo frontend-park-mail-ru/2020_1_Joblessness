@@ -30,7 +30,7 @@ const withLocalStore = createLocalStore({
     preview: [],
     raw: [],
   },
-}, true, () => `vacancies/${isCreationPage ? 'create' : getVacId()}`, true);
+}, true, () => `vacancies/${isCreationPage() ? 'create' : getVacId()}`, true);
 
 export default withLocalStore;
 export {

@@ -8,23 +8,25 @@ import {Navigator} from '../../Navigator';
 import withLocalStore from './localStore';
 import {ORGANIZATION, UNAUTHORISED} from '../../CONSTANTS';
 import {getVacId} from './getVacId';
+
 /**
  * Vacancy creation page
  */
 class CreateVacancyPage extends Page {
-  #prevOrg
+  #prevVac;
+  #forceUpdate;
   /**
    * @return {string} - page to render
    */
   render() {
     let buttonText = 'Откликнуться на вакансию';
-    if(/\/vacancies\/create/.test(location.pathname) &&
-      currentSession.user.role === ORGANIZATION )
+    if (/\/vacancies\/create/.test(location.pathname) &&
+      currentSession.user.role === ORGANIZATION)
       buttonText = 'Сохранить и опубликовать';
-    else if(currentSession.user.role === ORGANIZATION &&
-        this.props.getStore().organization.id === currentSession.user.id)
+    else if (currentSession.user.role === ORGANIZATION &&
+      this.props.getStore().organization.id === currentSession.user.id)
       buttonText = 'Удалить вакансию';
-    else if(currentSession.user.role === ORGANIZATION &&
+    else if (currentSession.user.role === ORGANIZATION &&
       this.props.getStore().organization.id !== currentSession.user.id)
       buttonText = '';
     return template({
@@ -33,47 +35,54 @@ class CreateVacancyPage extends Page {
     });
   }
 
-  componentWillMount() {
-    super.componentWillMount();
-    this.props.reloadStore();
-  }
 
   componentDidMount() {
+    const vacId = getVacId() || 'create';
+    console.log(vacId);
     super.componentDidMount();
+    if (this.#prevVac !== vacId || this.#forceUpdate) {
+      this.#prevVac = vacId;
+      this.#forceUpdate = false;
+      this.props.reloadStore();
+      this.props.random = uuid();
+      Navigator.updateAllPages();
+      return;
+    }
     addButtonEvents(this);
-    const orgId = getOrgId();
-    if(/\/vacancies\/create/.test(location.pathname) &&
+    if (/\/vacancies\/create/.test(location.pathname) &&
       currentSession.user.role === ORGANIZATION) {
-      console.log('org create vac')
-      if(this.#prevOrg !== orgId) {
-        console.log('this.#prevOrg !== orgId')
-        this.#prevOrg = orgId;
-        this.props.random = uuid();
-        Navigator.updateAllPages();
-        requestManager.tryGetOrg(orgId)
-          .then( async (r) => {
-            const res = await r.json();
+      console.log('org create vac');
+      const orgId = getOrgId();
+      requestManager.tryGetOrg(orgId)
+        .then(async (r) => {
+          const res = await r.json();
 
-            this.props.reloadStore();
-            this.props.setStore(s => ({
-              organization: {
-                tag: '',
-                ...res
-              },
-            }));
-            Navigator.updateAllPages();
-          })
-          .catch(console.log)
-      }
-    } else if(/\/vacancies\/create/.test(location.pathname)) {
+          this.props.reloadStore();
+          this.props.setStore(s => ({
+            organization: {
+              tag: '',
+              ...res
+            },
+          }));
+          Navigator.updateAllPages();
+        })
+        .catch(console.log)
+
+    } else if (/\/vacancies\/create/.test(location.pathname)) {
       // Navigator.showPage('404');
     }
-    if(currentSession.user.role !== ORGANIZATION) {
+    if (currentSession.user.role !== ORGANIZATION) {
       //@TODO try to load existing vacancy
       requestManager.tryGetVacancy(getVacId())
         .then(async r => {
           const res = await r.json();
           const vac = {
+            mainInfo: {
+              name: res.name || '',
+              description: res.description || '',
+              salaryFrom: res.salaryFrom || '',
+              salaryTo: res.salaryTo || '',
+            },
             responsibilities: JSON.parse(res.responsibilities.replace(/&#34;/g, '"')),
             conditions: JSON.parse(res.conditions.replace(/&#34;/g, '"')),
             keywords: JSON.parse(res.keywords.replace(/&#34;/g, '"')),
@@ -85,10 +94,12 @@ class CreateVacancyPage extends Page {
               raw: [],
             },
             ...vac,
-          }))
+          }));
+          this.#forceUpdate = true;
+          Navigator.updateAllPages();
         })
         .catch(r => {
-          if(r.status === 404) {
+          if (r.status === 404) {
             Navigator.showPage('404');
           }
           console.log(r)
@@ -98,13 +109,14 @@ class CreateVacancyPage extends Page {
     }
   }
 }
+
 const addButtonEvents = (page) => {
-  if(/\/vacancies\/create/.test(location.pathname) &&
-    currentSession.user.role === ORGANIZATION ) {
+  if (/\/vacancies\/create/.test(location.pathname) &&
+    currentSession.user.role === ORGANIZATION) {
     const but = document.getElementById('create_vacancy_button');
     but.addEventListener('click', () => {
       const vac = page.props.getStore();
-      if(!vac.mainInfo.name || !(vac.mainInfo.salaryTo && vac.mainInfo.salaryFrom)) {
+      if (!vac.mainInfo.name || !(vac.mainInfo.salaryTo && vac.mainInfo.salaryFrom)) {
         alert('Не все поля заполнены');
         return;
       }
@@ -152,8 +164,7 @@ const addButtonEvents = (page) => {
         console.log(r)
       })
     })
-  }
-  else if(currentSession.user.role === ORGANIZATION &&
+  } else if (currentSession.user.role === ORGANIZATION &&
     page.props.getStore().organization.id === currentSession.user.id) {
 
     const but = document.getElementById('create_vacancy_button');
@@ -164,25 +175,25 @@ const addButtonEvents = (page) => {
           Navigator.showPage(`/organizations/${getOrgId()}`);
         })
         .catch((e) => {
-          console.log(e)
+          console.log(e);
           alert('Невозможно удалить вакансию')
         })
     })
-  } else if(currentSession.user.role === ORGANIZATION &&
+  } else if (currentSession.user.role === ORGANIZATION &&
     page.props.getStore().organization.id !== currentSession.user.id) {
     // Do nothing
   } else {
     //@TODO создать отклик
     const but = document.getElementById('create_vacancy_button');
     but.addEventListener('click', () => {
-      if(currentSession.user.role === UNAUTHORISED) {
+      if (currentSession.user.role === UNAUTHORISED) {
         Navigator.showPage('/signup/start');
         return;
       }
       Navigator.showPage(`/vacancies/${getVacId()}/response`)
     })
   }
-}
+};
 CreateVacancyPage = withLocalStore(CreateVacancyPage);
 CreateVacancyPage = withAuthManager(CreateVacancyPage);
 export {
