@@ -1,5 +1,7 @@
 import {createLocalStore} from '../../ulils';
 import {currentSession} from '../../ulils';
+import {isCreationPage} from './isCreationPage';
+import {getVacId} from './getVacId';
 
 const withLocalStore = createLocalStore({
   organization: {
@@ -11,10 +13,6 @@ const withLocalStore = createLocalStore({
     tag: '',
   },
   responsibilities: {
-    preview: [],
-    raw: [],
-  },
-  requirements: {
     preview: [],
     raw: [],
   },
@@ -30,7 +28,7 @@ const withLocalStore = createLocalStore({
     preview: [],
     raw: [],
   },
-}, true, () => `vacancies/${currentSession.user.id}`, true);
+}, true, () => `vacancies/${isCreationPage ? 'create' : getVacId()}`, true);
 
 export default withLocalStore;
 export {

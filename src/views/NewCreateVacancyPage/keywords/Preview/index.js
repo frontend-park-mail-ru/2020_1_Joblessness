@@ -8,7 +8,7 @@ class Preview extends Page {
    */
   render() {
     return template({
-      info: this.props.getStore().requirements.preview,
+      info: this.props.getStore().keywords.preview,
     });
   }
 }

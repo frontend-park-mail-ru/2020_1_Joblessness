@@ -19,8 +19,6 @@ const REMOVING_ANIMATION_DURATION = 500;
 
 export const createBeforeNext = (props) => (rootPage, page, mode, status) => {
   if (mode === EDIT) {
-    console.log(props.PREVIEW_MODE_ROOT, props.EDIT_MODE_ROUTE);
-    console.log(props.PREVIEW_MODE_ROOT)
     Navigator.removeRoutes(props.PREVIEW_MODE_ROOT);
     Navigator.addRoutes(props.EDIT_MODE_ROUTE);
     // Navigator.updateAllPages();

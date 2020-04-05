@@ -7,6 +7,9 @@ import {Edit} from './Edit';
 import {AddItem} from './AddItem';
 import {ModeManager} from './ModeManager';
 import {Item} from './Item';
+import {requestManager} from '../../../ulils';
+import {isCreationPage} from '../isCreationPage';
+import {getVacId} from '../getVacId';
 
 const MainSkillsRoutes = createEditor({
   Parent,
@@ -35,7 +38,7 @@ const MainSkillsRoutes = createEditor({
   REPLACE_REDUCER: (store, sub) => {
     return {
       mainSkills: {
-        ...store,
+        ...store.mainSkills,
         ...sub,
       },
     };
@@ -54,6 +57,19 @@ const MainSkillsRoutes = createEditor({
       childRoutes,
     },
   ],
+  onApply: (props, page) => new Promise((resolve, reject) => {
+    if(!isCreationPage()) {
+      const mainSkills = page.props.getStore().mainSkills;
+      mainSkills.preview = mainSkills.raw;
+      requestManager.tryChangeVacancy({
+        mainSkills: JSON.stringify(mainSkills)
+      }, getVacId())
+        .then(resolve)
+        .catch(reject)
+    } else {
+      resolve()
+    }
+  })
 });
 
 

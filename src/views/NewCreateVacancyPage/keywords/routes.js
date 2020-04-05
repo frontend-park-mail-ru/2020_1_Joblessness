@@ -8,6 +8,8 @@ import {AddItem} from './AddItem';
 import {ModeManager} from './ModeManager';
 import {Item} from './Item';
 import {requestManager} from '../../../ulils';
+import {isCreationPage} from '../isCreationPage';
+import {getVacId} from '../getVacId';
 
 const RequirementsRoutes = createEditor({
   Parent,
@@ -19,36 +21,36 @@ const RequirementsRoutes = createEditor({
   withLocalStore,
 }, {
   SUBMIT_REDUCER: (s) => ({
-    requirements: {
-      ...s.requirements,
-      preview: [...s.requirements.raw],
+    keywords: {
+      ...s.keywords,
+      preview: [...s.keywords.raw],
     },
   }),
   DECLINE_REDUCER: (s) => ({
-    requirements: {
-      ...s.requirements,
-      raw: [...s.requirements.preview],
+    keywords: {
+      ...s.keywords,
+      raw: [...s.keywords.preview],
     },
   }),
   EXTRACT_REDUCER: (s) => {
-    return s.requirements;
+    return s.keywords;
   },
   REPLACE_REDUCER: (store, sub) => {
     return {
-      requirements: {
-        ...store,
+      keywords: {
+        ...store.keywords,
         ...sub,
       },
     };
   },
   INSERT_REDUCER: (item) => (s) => ({
-    requirements: {
-      ...s.requirements,
-      raw: [...s.requirements.raw, item],
+    keywords: {
+      ...s.keywords,
+      raw: [...s.keywords.raw, item],
     },
   }),
-  ROOT: 'requirements/',
-  EDITOR_HOLDER_SELECTOR: '#vacancy_requirements',
+  ROOT: 'keywords/',
+  EDITOR_HOLDER_SELECTOR: '#vacancy_keywords',
   ROOT_TEMPLATE: (childRoutes = []) => [
     {
       path: 'vacancies/*',
@@ -56,13 +58,17 @@ const RequirementsRoutes = createEditor({
     },
   ],
   onApply: (props, page) => new Promise((resolve, reject) => {
-    if(isCreationPage()) {
-      const responsibilities = page.props.getStore().responsibilities;
-      requestManager.tryChangeOrg({
-        responsibilities: JSON.stringify(responsibilities)
-      })
+    console.log(page.props.getStore())
+    if(!isCreationPage()) {
+      const keywords = page.props.getStore().keywords;
+      keywords.preview = keywords.raw
+      requestManager.tryChangeVacancy({
+        keywords: JSON.stringify(keywords)
+      }, getVacId())
         .then(resolve)
         .catch(reject)
+    } else {
+      resolve()
     }
   })
 });

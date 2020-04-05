@@ -70,9 +70,6 @@ const addRemoveEvent = (page, elem, id, elemToRemove, props) => {
       subStore.raw = subStore.raw.filter(r => r.id !== id);
       return props.REPLACE_REDUCER(s, subStore);
     })
-    // page.props.setStore(s => ({
-    //   raw: s.raw.filter(r => r.id !== id)
-    // }));
 
     Navigator.removeRoutes(props.constructEditRoutes([{
       path: id,

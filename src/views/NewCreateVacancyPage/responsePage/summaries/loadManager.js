@@ -1,12 +1,11 @@
-import {Page} from '../../../Page';
-import {currentSession, requestManager, uuid} from '../../../ulils';
-import {VacancyPreview} from './VacancyPreview';
-import {ChosenButton} from '../ChosenButton';
-import {Navigator} from '../../../Navigator';
-import {constructSubRoutes} from '../subRoutes';
-import {getOrgId} from '../getOrgInfo';
-import {CreateVacancyButton} from './CreateVacancyButton';
+import {Page} from '../../../../Page';
+import {currentSession, requestManager, uuid} from '../../../../ulils';
+import {VacancyPreview} from './SummaryPreview';
+import {Navigator} from '../../../../Navigator';
+import {constructSubRoutes} from '../../subRoutes';
+import {CreateVacancyButton} from './CreateSummaryButton';
 import ROUTES, {constructRoute, DEF_ROUTES} from './routes';
+
 /**
  * Performs loading vacancies
  */
@@ -25,37 +24,36 @@ class LoadManager extends Page {
   componentDidMount() {
     super.componentDidMount?.();
 
-    requestManager.tryGetOrgVacancies(getOrgId())
+    requestManager
+      .tryGetUserSummaries(currentSession.user.id)
       .then(async r => {
         const list = await r.json();
         this.props.requestNextNoUpdate(null);
-        if(list.length > 0) {
+        if (list.length > 0) {
           const last = list.pop();
-
-          for(let item of list) {
+          for (let item of list) {
             this.props.requestNextNoUpdate({
               vacancyName: item.name,
-              salaryFrom: item.salaryFrom,
-              salaryTo: item.salaryTo,
+              salaryFrom: item['salary_from'],
+              salaryTo: item['salary_to'],
               id: item.id,
             }, false);
           }
 
           this.props.requestNextNoUpdate({
             vacancyName: last.name,
-            salaryFrom: last.salaryFrom,
-            salaryTo: last.salaryTo,
+            salaryFrom: last['salary_from'],
+            salaryTo: last['salary_to'],
             id: last.id,
           }, true);
         }
       })
-      .catch(console.log)
   }
 }
 
 
 const beforeNext = (page, vac) => {
-  if(!vac) {
+  if (!vac) {
     page.props.vacancies = [];
     return;
   }
@@ -71,7 +69,7 @@ const beforeNext = (page, vac) => {
 };
 const afterNext = (page, vac, needUpdate) => {
 
-  if(!vac) {
+  if (!vac) {
     Navigator.removeRoutes(constructRoute());
     Navigator.addRoutes(constructRoute(DEF_ROUTES));
     return;
@@ -93,14 +91,14 @@ const afterNext = (page, vac, needUpdate) => {
   page.props.insertSubPage(newRoute);
 
   Navigator.addRoutes(
-      constructSubRoutes([
-        {
-          path: 'orgVacancies',
-          childRoutes: [
-            newRoute,
-          ],
-        },
-      ]),
+    constructSubRoutes([
+      {
+        path: 'orgVacancies',
+        childRoutes: [
+          newRoute,
+        ],
+      },
+    ]),
   );
   needUpdate && Navigator.updateAllPages();
 };

@@ -13,6 +13,9 @@ const isEqual = (o1, o2) => {
   if (o1 instanceof Array) {
     return o1.toString() === o2.toString();
   }
+  if(o1 === o2) {
+    return true;
+  }
   if (!isEqual(Object.keys(o1), Object.keys(o2))) {
     return false;
   }

@@ -4,7 +4,7 @@ import './style.sass';
 
 class Edit extends Page {
   render() {
-    return template({editorProps: this.props.editorProps, info: this.props.getStore().requirements.raw});
+    return template({editorProps: this.props.editorProps, info: this.props.getStore().keywords.raw});
   }
 }
 

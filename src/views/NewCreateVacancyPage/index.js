@@ -6,8 +6,9 @@ import {getOrgId} from '../OrganizationPage/getOrgInfo';
 import {requestManager, uuid} from '../../ulils';
 import {Navigator} from '../../Navigator';
 import withLocalStore from './localStore';
-import {ORGANIZATION} from '../../CONSTANTS';
+import {ORGANIZATION, UNAUTHORISED} from '../../CONSTANTS';
 import {getVacId} from './getVacId';
+import {get} from '../../ulils/request';
 /**
  * Vacancy creation page
  */
@@ -33,8 +34,14 @@ class CreateVacancyPage extends Page {
     });
   }
 
+  componentWillMount() {
+    super.componentWillMount();
+    this.props.reloadStore();
+  }
+
   componentDidMount() {
     super.componentDidMount();
+    addButtonEvents(this);
     const orgId = getOrgId();
     if(/\/vacancies\/create/.test(location.pathname) &&
       currentSession.user.role === ORGANIZATION) {
@@ -42,7 +49,6 @@ class CreateVacancyPage extends Page {
       if(this.#prevOrg !== orgId) {
         console.log('this.#prevOrg !== orgId')
         this.#prevOrg = orgId;
-        this.props.reloadStore();
         this.props.random = uuid();
         Navigator.updateAllPages();
         requestManager.tryGetOrg(orgId)
@@ -84,14 +90,13 @@ class CreateVacancyPage extends Page {
         })
         .catch(r => {
           if(r.status === 404) {
-            // Navigator.showPage('404');
+            Navigator.showPage('404');
           }
           console.log(r)
           // alert('Невозможно соединиться с сервером');
           // Navigator.showPage('/');
         })
     }
-    addButtonEvents(this)
   }
 }
 const addButtonEvents = (page) => {
@@ -100,7 +105,16 @@ const addButtonEvents = (page) => {
     const but = document.getElementById('create_vacancy_button');
     but.addEventListener('click', () => {
       const vac = page.props.getStore();
-      console.log('vac', vac);
+      console.log({
+        name: uuid(),
+        description: '',
+        salaryFrom: 0.00,
+        salaryTo: 10000.00,
+        withTax: false,
+        responsibilities: JSON.stringify(vac.responsibilities),
+        conditions: JSON.stringify(vac.conditions),
+        keywords: JSON.stringify(vac.keywords),
+      })
       requestManager.tryCreateVacancy({
         name: uuid(),
         description: '',
@@ -113,9 +127,24 @@ const addButtonEvents = (page) => {
       }).then(
         async (r) => {
           try {
-            console.log('r', r);
             const res = await r.json();
-            console.log('res', res);
+            this.props.setStore({
+              responsibilities: {
+                preview: [],
+                raw: [],
+              },
+              conditions: {
+                preview: [],
+                raw: [],
+              },
+              keywords: {
+                preview: [],
+                raw: [],
+              },
+            });
+            setTimeout(() => {
+              localStorage.removeItem(`vacancies/create`);
+            }, 100);
             Navigator.showPage(`/vacancies/${res.id}`);
           } catch (e) {
             Navigator.showPage(`/organizations/${getOrgId()}`);
@@ -134,6 +163,7 @@ const addButtonEvents = (page) => {
     but?.addEventListener('click', () => {
       requestManager.tryDeleteVacancy(getVacId())
         .then(() => {
+          localStorage.removeItem(`vacancies/${getVacId()}`);
           Navigator.showPage(`/organizations/${getOrgId()}`);
         })
         .catch((e) => {
@@ -148,8 +178,11 @@ const addButtonEvents = (page) => {
     //@TODO создать отклик
     const but = document.getElementById('create_vacancy_button');
     but.addEventListener('click', () => {
-      console.log('res')
-      // requestManager.try
+      if(currentSession.user.role === UNAUTHORISED) {
+        Navigator.showPage('/signup/start');
+        return;
+      }
+      Navigator.showPage(`/vacancies/${getVacId()}/response`)
     })
   }
 }

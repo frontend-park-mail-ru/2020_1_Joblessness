@@ -7,6 +7,9 @@ import {Edit} from './Edit';
 import {AddItem} from './AddItem';
 import {ModeManager} from './ModeManager';
 import {Item} from './Item';
+import {requestManager} from '../../../ulils';
+import {isCreationPage} from '../isCreationPage';
+import {getVacId} from '../getVacId';
 
 const ConditionsRoutes = createEditor({
   Parent,
@@ -35,7 +38,7 @@ const ConditionsRoutes = createEditor({
   REPLACE_REDUCER: (store, sub) => {
     return {
       conditions: {
-        ...store,
+        ...store.conditions,
         ...sub,
       },
     };
@@ -54,6 +57,19 @@ const ConditionsRoutes = createEditor({
       childRoutes,
     },
   ],
+  onApply: (props, page) => new Promise((resolve, reject) => {
+    if(!isCreationPage()) {
+      const conditions = page.props.getStore().conditions;
+      conditions.preview = conditions.raw;
+      requestManager.tryChangeVacancy({
+        conditions: JSON.stringify(conditions)
+      }, getVacId())
+        .then(resolve)
+        .catch(reject)
+    } else {
+      resolve()
+    }
+  })
 });
 
 

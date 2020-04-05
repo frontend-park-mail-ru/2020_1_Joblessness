@@ -269,13 +269,52 @@ class RequestManager {
     }
 
     /**
+     * {
+            summaryId uint64
+         }
+     */
+    trySendSummary (form, slug) {
+      return new Promise((resolve, reject) => {
+        request
+          .post('/vacancies/' + slug + '/response', form)
+          .then((r) => {
+            if (r.status === 200) {
+              resolve(r);
+            } else {
+              reject(r);
+            }
+          }).catch(reject);
+      },);
+    }
+
+    /**
+     * {
+            vacancyId uint64
+            accepted bool
+            denied bool
+         }
+     */
+    tryResponseSummary (form, slug) {
+      return new Promise((resolve, reject) => {
+        request
+          .put('/summaries/' + slug + '/response', form)
+          .then((r) => {
+            if (r.status === 200) {
+              resolve(r);
+            } else {
+              reject(r);
+            }
+          }).catch(reject);
+      },);
+    }
+    /**
      * @example
      * Тело запроса пустое
      */
-    trySetLike (form, slug) {
+    trySetLike (slug) {
         return new Promise((resolve, reject) => {
             request
-                .post('/api/users/' + slug + '/like', form)
+                .post('/api/users/' + slug + '/like', {})
                 .then((r) => {
                     if (r.status === 200) {
                         resolve(r);
@@ -445,7 +484,7 @@ class RequestManager {
             request
                 .DELETE('/api/vacancies/' + slug, {})
                 .then((r) => {
-                    if (r.status === 200) {
+                    if (r.status === 200 || r.status === 204) {
                         resolve(r);
                     } else {
                         reject(r);
@@ -553,10 +592,10 @@ class RequestManager {
         ]
     }]
      */
-    tryGetUserSummaries (form, slug) {
+    tryGetUserSummaries (slug) {
         return new Promise((resolve, reject) => {
             request
-                .get('/users/' + slug + '/summaries', form)
+                .get('/users/' + slug + '/summaries', {})
                 .then((r) => {
                     if (r.status === 200) {
                         resolve(r);

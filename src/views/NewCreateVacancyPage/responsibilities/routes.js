@@ -9,6 +9,7 @@ import {ModeManager} from './ModeManager';
 import {Item} from './Item';
 import {requestManager} from '../../../ulils';
 import {isCreationPage} from '../isCreationPage';
+import {getVacId} from '../getVacId';
 
 const ResponsibilitiesRoutes = createEditor({
   Parent,
@@ -37,7 +38,7 @@ const ResponsibilitiesRoutes = createEditor({
   REPLACE_REDUCER: (store, sub) => {
     return {
       responsibilities: {
-        ...store,
+        ...store.responsibilities,
         ...sub,
       },
     };
@@ -57,13 +58,17 @@ const ResponsibilitiesRoutes = createEditor({
     },
   ],
   onApply: (props, page) => new Promise((resolve, reject) => {
-    if(isCreationPage()) {
+
+    if(!isCreationPage()) {
       const responsibilities = page.props.getStore().responsibilities;
-      requestManager.tryChangeOrg({
+      responsibilities.preview = responsibilities.raw
+      requestManager.tryChangeVacancy({
         responsibilities: JSON.stringify(responsibilities)
-      })
+      }, getVacId())
         .then(resolve)
         .catch(reject)
+    } else {
+      resolve()
     }
   })
 });
