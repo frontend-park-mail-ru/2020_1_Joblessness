@@ -2,7 +2,6 @@ import './style.sass';
 import './auth-elements.sass';
 import {Page} from '../../../Page';
 import template from './pug/index1.pug';
-import {uuid, withEvents} from '../../../ulils';
 
 /**
  * Fancy page
@@ -16,15 +15,4 @@ class FirstStep extends Page {
   }
 }
 
-FirstStep = withEvents(FirstStep, 'events',
-    {
-      submit: {
-        id: uuid(),
-        eventName: 'click',
-        event: (e, page) => {
-          // console.log(e)
-          page.props.requestNext();
-        },
-      },
-    });
 export {FirstStep};

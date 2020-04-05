@@ -1,5 +1,3 @@
-import './style.sass';
-import './auth-elements.sass';
 import {Page} from '../../../Page';
 import template from './pug/index2.pug';
 import {

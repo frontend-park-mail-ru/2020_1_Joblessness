@@ -1,17 +1,23 @@
 include ../../../../templates/pug/link
 
 mixin steps-counter
-    div.steps-counter
-        div.step-counter--counter 1
+    div.step-counter
+        div.step-counter--counter.locked
+            +link(href='/organizations/signup')
+                div.cover.light-background Привет!
         div.step-counter--line
-        div.step-counter--counter 2
+        div.step-counter--counter.locked
+            +link(href='/organizations/signup/name')
+                div.cover.light-background Название
         div.step-counter--line
-        div.step-counter--counter 3
+        div.step-counter--counter.locked
+            +link(href='/organizations/signup/tag')
+                div.cover.light-background Тег
         div.step-counter--line
-        div.step-counter--counter 4
-        div.step-counter--line
-        div.step-counter--counter
+        div.step-counter--counter.locked
+            +link(href='/organizations/signup/next')
+                div.cover.light-background Успех
+
 div.auth-holder
-    if locals.currentStep > 1 && locals.currentStep < 5
-        +steps-counter
+    +steps-counter
     div.signup-holder.sigup-holder--steps#org_signup_holder

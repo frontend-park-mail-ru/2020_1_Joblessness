@@ -1,5 +1,3 @@
-import './style.sass';
-import './auth-elements.sass';
 import {Page} from '../../../Page';
 import template from './pug/index1.pug';
 import {uuid, currentSession, withForm, request, requestManager} from '../../../ulils';
