@@ -131,10 +131,10 @@ class RequestManager {
      *      gender "string"
      *      birthday "2006-01-02T15:04:05.999999999Z"
      */
-    tryGetPerson (form, slug) {
+    tryGetPerson (slug) {
         return new Promise((resolve, reject) => {
             request
-                .get('/api/users/' + slug, form)
+                .get('/api/users/' + slug ,{})
                 .then((r) => {
                     if (r.status === 200) {
                         resolve(r);

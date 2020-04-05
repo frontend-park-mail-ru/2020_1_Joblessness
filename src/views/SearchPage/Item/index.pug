@@ -1,6 +1,7 @@
 include ../../../templates/pug/avatar
 include ../../../templates/pug/phone
 include ../../../templates/pug/companyName
+include ../../../templates/pug/userTag
 include ../../../templates/pug/link
 
 div.search-item.cover
@@ -8,7 +9,7 @@ div.search-item.cover
         +link(href="/users/" + locals.item.id).search-item--link.cover
             +avatar(src=locals.item.avatar noSelect)
             div.person--info
-                +company-name(locals.item.name, '@' + locals.item.tag)
+                +user-tag(locals.item.name, locals.item.tag)
                 if(locals.item.phone)
                     +phone(locals.item.phone)
                 if(locals.item.location)
@@ -18,7 +19,7 @@ div.search-item.cover
         +link(href="/organizations/" + locals.item.id).search-item--link.cover
             +avatar(src=locals.item.avatar noSelect)
             div.person--info
-                +company-name(locals.item.name, '#' + locals.item.tag)
+                +company-name(locals.item.name, locals.item.tag)
                 if(locals.item.phone)
                     +phone(88001234567)
                 if(locals.item.location)
@@ -28,7 +29,7 @@ div.search-item.cover
         +link(href="/vacancies/" + locals.item.id).search-item--link.cover
             +avatar(src=locals.item.organization.avatar noSelect)
             div.person--info
-                +company-name(locals.item.name, '#' + locals.item.organization.tag)
+                +company-name(locals.item.name, locals.item.organization.tag)
                 div.person--info--location
                     if locals.item.salaryFrom
                         h2 от #{locals.item.salaryFrom}&nbsp

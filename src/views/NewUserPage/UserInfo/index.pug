@@ -1,5 +1,5 @@
 include ../../../templates/pug/avatar
-include ../../../templates/pug/companyName
+include ../../../templates/pug/name
 include ../../../templates/pug/birth
 include ../../../templates/pug/phone
 
@@ -10,7 +10,7 @@ div.page-solid-section.bio-section
         else
             +avatar(src=locals.info.avatar id=locals.itemId noSelect)
     div.person--info
-        +company-name(locals.info.name, locals.info.tag)
+        +name(locals.info.firstName, locals.info.lastName, locals.info.tag)
         if(locals.info.phone)
             +phone(locals.info.phone)
         if(locals.info.location)

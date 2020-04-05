@@ -42,6 +42,7 @@ export const withEvents = (WrappedComponent, propName, events) => {
      * overwrites componentDidMount Method!
      */
     componentDidMount = () => {
+      super.componentDidMount && super.componentDidMount();
       Object.keys(events).map((e) => {
         const dom = document.getElementById(events[e].id);
         if (!dom) {
@@ -53,7 +54,6 @@ export const withEvents = (WrappedComponent, propName, events) => {
           await events[e].event(ev, this, events[e].id);
         });
       });
-      super.componentDidMount && super.componentDidMount();
     }
   };
 };
