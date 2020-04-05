@@ -629,6 +629,23 @@ class RequestManager {
                 }).catch(reject);
         },);
     }
+
+    /**
+     *
+     */
+    tryDeleteSummary (form, slug) {
+        return new Promise((resolve, reject) => {
+            request
+                .get('/summaries/' + slug, form)
+                .then((r) => {
+                    if (r.status === 204) {
+                        resolve(r);
+                    } else {
+                        reject(r);
+                    }
+                }).catch(reject);
+        },);
+    }
 }
 
 const requestManager = new RequestManager();
