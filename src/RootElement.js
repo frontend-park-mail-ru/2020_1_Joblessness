@@ -8,7 +8,7 @@ class RootElement extends Page {
    * @return {string}
    */
   render() {
-    return `<div id="nav-elements"></div><div id="root"></div>`;
+    return `<div id="nav-elements"></div><div id="root"></div><div class='responses-holder' id="responses-page"></div>`;
   }
 }
 

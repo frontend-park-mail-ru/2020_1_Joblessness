@@ -13,8 +13,6 @@ import {getVacId} from './getVacId';
  * Vacancy creation page
  */
 class CreateVacancyPage extends Page {
-  #prevVac;
-  #needUpdate;
   /**
    * @return {string} - page to render
    */
@@ -37,20 +35,14 @@ class CreateVacancyPage extends Page {
   }
 
 
+  componentWillUpdate() {
+    super.componentWillUpdate();
+    this.props.reloadStore();
+  }
+
   componentDidMount() {
-    const vacId = getVacId() || 'create';
     super.componentDidMount();
     addButtonEvents(this);
-    // if (this.#needUpdate) {
-    //   this.#needUpdate = false;
-    //   return;
-    // }
-    // if (this.#prevVac !== vacId ) {
-    //   this.#prevVac = vacId;
-    //   this.props.resetStore();
-    //   Navigator.updateAllPages();
-    //   return;
-    // }
     if (/\/vacancies\/create/.test(location.pathname) &&
       currentSession.user.role === ORGANIZATION) {
       console.log('org create vac');
@@ -65,7 +57,6 @@ class CreateVacancyPage extends Page {
                 ...res,
               },
             }));
-            this.#needUpdate = true;
             Navigator.updateAllPages();
           })
           .catch(console.log);
@@ -132,9 +123,6 @@ const addButtonEvents = (page) => {
             try {
               const res = await r.json();
               localStorage.removeItem(`vacancies/create`);
-              page.props.resetStore();
-              console.log({...page.props.getStore().responsibilities});
-              console.log(JSON.parse(localStorage.getItem('vacancies/create')));
               Navigator.showPage(`/vacancies/${res.id}`);
             } catch (e) {
               console.log(e);

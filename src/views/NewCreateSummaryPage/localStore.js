@@ -4,18 +4,9 @@ const withLocalStore = createLocalStore({
   name: '',
   salaryFrom: '',
   salaryTo: '',
-  experience: {
-    raw: [],
-    preview: [],
-  },
-  education: {
-    raw: [],
-    preview: [],
-  },
-  keywords: {
-    raw: '',
-    preview: '',
-  },
+  experience: [],
+  education: [],
+  keywords: [],
 }, true, () => `summaries/${getSumId() ?? 'create'}`, true);
 
 export const getSumId = () => {

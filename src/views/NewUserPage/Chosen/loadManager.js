@@ -22,23 +22,15 @@ class LoadManager extends Page {
    *
    */
   componentDidMount() {
-    super.componentDidMount?.();
-    document
-      ?.addEventListener('scroll', loadOnScroll(this));
+    super.componentDidMount();
+    // document
+    //   ?.addEventListener('scroll', loadOnScroll(this));
     if(!this._was) {
       requestManager
         .tryGetUserFavorites(getUserId())
         .then(async (r) => {
           const list = await r.json();
-          this.props.requestNextNoUpdate(null);
-          if (list.length > 0) {
-            const last = list.pop();
-            for (const item of list) {
-              this.props.requestNextNoUpdate(item, false);
-            }
-
-            this.props.requestNextNoUpdate(last, true);
-          }
+          this.props.requestNextNoUpdate(list);
         })
         .catch(r => this._was = false);
       this._was = true
@@ -48,37 +40,48 @@ class LoadManager extends Page {
 }
 
 
-const beforeNext = (page, vac) => {
-  if (!vac) {
-    page.props.chosen = [];
-    return;
-  }
-  vac.innerId = uuid();
-
-  if (!page.props.chosen) {
-    page.props.chosen = [];
-  }
-  page.props.chosen.push(vac);
+const beforeNext = (page, list) => {
+  list.forEach( i => i.innerId = uuid());
+  page.props.chosen = list;
+  Navigator.updateAllPages();
 };
-const afterNext = (page, vac, needUpdate) => {
-  if (!vac) {
-    Navigator.removeRoutes(constructRoute());
-    Navigator.addRoutes(constructRoute());
-    return;
-  }
+const afterNext = async (page, list, needUpdate) => {
 
-  const newPage = new ChosenPreview(`#${vac.innerId}`);
-  newPage.props.chosen = vac;
-  newPage.props.num = page.props.chosen.length
-  const newRoute = {
-    path: vac.innerId,
-    alwaysOn: true,
-    next: '',
-    element: newPage,
-  };
-  page.props.insertSubPage(newRoute);
-  Navigator.addRoutes(constructRoute([newRoute]));
-  needUpdate && Navigator.updateAllPages();
+  Navigator.removeRoutes(constructRoute());
+  Navigator.addRoutes(constructRoute());
+  for(let vac of list) {
+
+    const newPage = new ChosenPreview(`#${vac.innerId}`);
+    newPage.props.chosen = vac;
+    if(vac.isPerson) {
+      const r = await requestManager.tryGetPerson(vac.id);
+      const pers = await r.json();
+      newPage.props.person = pers;
+      const newRoute = {
+        path: vac.innerId,
+        alwaysOn: true,
+        next: '',
+        element: newPage,
+      };
+      page.props.insertSubPage(newRoute);
+      Navigator.addRoutes(constructRoute([newRoute]));
+    } else {
+      const r = await requestManager.tryGetOrg(vac.id);
+
+      const org = await r.json();
+      newPage.props.organization = org;
+      const newRoute = {
+        path: vac.innerId,
+        alwaysOn: true,
+        next: '',
+        element: newPage,
+      };
+      page.props.insertSubPage(newRoute);
+      Navigator.addRoutes(constructRoute([newRoute]));
+    }
+  }
+  Navigator.updateAllPages();
+
 };
 
 

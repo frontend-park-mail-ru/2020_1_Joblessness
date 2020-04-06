@@ -8,7 +8,7 @@ export const constructRoute = (childRoutes = []) => [
     path: 'users/*',
     childRoutes: [
       {
-        path: 'chosen',
+        path: '/*favourites',
         innerPath: 'chosen',
         element: ROOT_ELEMENT,
         childRoutes: [
@@ -25,7 +25,7 @@ export const ROOT_ELEMENT = new ChosenPage(CONTAINER);
 
 const Routes = [
   {
-    path: 'favourites',
+    path: '/*favourites',
     element: ROOT_ELEMENT,
     childRoutes: [
       ...SubRoutes,

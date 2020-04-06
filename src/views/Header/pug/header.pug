@@ -9,7 +9,7 @@ div.header-container.search-bar-container
         div.header-group
             +search-bar-link(href="?type=vacancy\&since=0\&desc=true\&request=") Вакансии
             +search-bar-link(href="/summaries/create") Создать резюме
-            +search-bar-link(href="/users/" + locals.user.id) Страница Пользователя
+            +search-bar-link(href="/users/" + locals.user.id + '/') Страница Пользователя
     else if(locals.user.role === 'ORGANIZATION')
         div.header-group
             +search-bar-link(id="sign-out") Выйти
@@ -18,7 +18,7 @@ div.header-container.search-bar-container
         div.header-group
             +search-bar-link(href="?type=person\&since=0\&desc=true\&request=") Соискатели
             +search-bar-link(href="/vacancies/create") Разместить вакансию
-            +search-bar-link(href="/organizations/" + locals.user.id) Страница Организации
+            +search-bar-link(href="/organizations/" + locals.user.id+ '/') Страница Организации
     else
         div.header-group
             +search-bar-link(href='?type=vacancy\&since=0\&desc=true\&request=') Вакансии

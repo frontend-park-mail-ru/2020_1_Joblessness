@@ -1,7 +1,7 @@
 import template from './index.pug';
 import './style.sass';
 import {Page} from '../../../../Page';
-import {uuid} from '../../../../ulils';
+import {requestManager, uuid} from '../../../../ulils';
 import {playMountAnimation} from '../../../OrganizationPage/OrganizationVacancies/addAnimations';
 
 /**
@@ -19,6 +19,7 @@ class ChosenPreview extends Page {
     this.#selectId = uuid();
   }
   render() {
+    console.log(this.props);
     return template({
       ...this.props,
       selectId: this.#selectId,

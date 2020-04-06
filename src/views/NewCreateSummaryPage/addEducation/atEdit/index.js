@@ -1,7 +1,7 @@
 import './style.sass';
 import {Page} from '../../../../Page';
 import template from './index.pug';
-import {uuid, withForm} from '../../../../ulils';
+import {uuid, validators, withForm} from '../../../../ulils';
 import withLocalStore from '../../localStore';
 
 /**
@@ -23,16 +23,22 @@ AtEditPage = withForm(AtEditPage, {
   institution: {
     id: uuid(),
     eventName: 'click',
+    validator: s => s.length,
+    warnMessage: 'Укажите учебное заведение, в котором обучались (обучаетесь)',
     required: true,
   },
   speciality: {
     id: uuid(),
     eventName: 'click',
+    validator: s => s.length,
+    warnMessage: 'Укажите специальность, на которой обучались (обучаетесь)',
     required: true,
   },
   graduated: {
     id: uuid(),
     eventName: 'click',
+    validator: s => validators.isYear,
+    warnMessage: 'Укажите (предполагаемый) год окончания обучения',
     required: true,
   },
   type: {

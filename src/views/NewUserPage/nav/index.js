@@ -3,6 +3,7 @@ import template from './index.pug';
 import {uuid} from '../../../ulils';
 import {withEvents} from '../../../ulils';
 import {Navigator} from '../../../Navigator';
+import {getUserId} from '../getUserId';
 
 /**
  *
@@ -18,6 +19,11 @@ class NavPage extends Page {
    * select desired link on reload
    */
   componentDidMount() {
+    super.componentDidMount();
+    updateLinks();
+  }
+  componentWillUpdate() {
+    super.componentWillUpdate();
     updateLinks();
   }
 }
@@ -29,18 +35,7 @@ const statisticsId = uuid();
 
 
 const showSubPage = (name) => {
-  const path = window.location.pathname.replace(/\D+$/g, '');
-  if (!path) {
-    if (window.location.pathname.endsWith('users/')) {
-      Navigator.showPage(
-          window.location.pathname + currentSession.user.id + `/${name}`);
-    } else {
-      Navigator.showPage(
-          window.location.pathname + '/' + currentSession.user.id + `/${name}`);
-    }
-  } else {
-    Navigator.showPage(path + `/${name}`);
-  }
+  Navigator.showPage(`/users/${getUserId()}/${name}`);
 };
 
 NavPage = withEvents(NavPage, 'events',

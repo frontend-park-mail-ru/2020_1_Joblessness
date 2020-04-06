@@ -1,7 +1,7 @@
 import './style.sass';
 import {Page} from '../../../../Page';
 import template from './index.pug';
-import {uuid, withForm} from '../../../../ulils';
+import {uuid, validators, withForm} from '../../../../ulils';
 import withLocalStore from '../../localStore';
 
 /**
@@ -21,23 +21,32 @@ AtEditPage = withLocalStore(AtEditPage);
 AtEditPage = withForm(AtEditPage, {
   companyName: {
     id: uuid(),
+    validator: s => s.length,
+    warnMessage: 'Укажите компанию, в которой работали',
     required: true,
   },
   role: {
     id: uuid(),
     required: true,
+    validator: s => s.length,
+    warnMessage: 'Укажите занимаемую должность',
   },
   experienceFrom: {
     id: uuid(),
     required: true,
+    validator: validators.isYear,
+    warnMessage: 'Год начала работы',
   },
   experienceTo: {
     id: uuid(),
     required: true,
+    validator: validators.isYear,
+    warnMessage: 'Год завершения работы',
   },
   responsibilities: {
     id: uuid(),
     required: true,
+    warnMessage: 'Перечислите Ваши обязанности'
   },
 }, {
   id: uuid(),

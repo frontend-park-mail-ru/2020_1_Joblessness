@@ -2,7 +2,7 @@ import {Page} from '../../Page';
 import template from './index.pug';
 import './style.sass';
 import {requestManager, uuid} from '../../ulils';
-import {PERSON, ORGANIZATION} from '../../CONSTANTS';
+import {PERSON, ORGANIZATION, UNAUTHORISED} from '../../CONSTANTS';
 import {currentSession} from '../../ulils';
 import {getOrgId} from '../OrganizationPage/getOrgInfo';
 import {getUserId} from '../NewUserPage/getUserId';
@@ -24,12 +24,31 @@ class ChosenButton extends Page {
       elemId: this.#elemId,
     });
   }
+
+  componentWillUpdate() {
+    super.componentWillUpdate();
+    if (this.#prevElem) {
+      this.#prevElem.removeEventListener('click', this.#prevEvent);
+    }
+    if(currentSession.user.role === UNAUTHORISED ||
+      (!isOrgPage() && !isUserPage()) ||
+      currentSession.user.id === getCurrentId()) {
+      const holder = document.querySelector(this.container);
+      holder.style.display = 'none';
+    } else {
+      this.#prevElem = document.getElementById(this.#elemId);
+      this.#prevEvent = toggleEvent(this);
+      this.#prevElem?.addEventListener('click', this.#prevEvent);
+      return;
+    }
+  }
+
   componentDidMount() {
     super.componentDidMount();
     if (this.#prevElem) {
       this.#prevElem.removeEventListener('click', this.#prevEvent);
     }
-    if((!isOrgPage() && !isUserPage()) || currentSession.user.id === getCurrentId()) {
+    if(currentSession.user.role === UNAUTHORISED || (!isOrgPage() && !isUserPage()) || currentSession.user.id === getCurrentId()) {
       const holder = document.querySelector(this.container);
       holder.style.display = 'none';
     } else {

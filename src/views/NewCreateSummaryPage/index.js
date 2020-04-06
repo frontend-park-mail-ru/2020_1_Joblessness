@@ -12,6 +12,11 @@ class CreateSummaryPage extends Page {
   /**
    * @return {string} - page to render
    */
+  componentWillUpdate() {
+    super.componentWillUpdate();
+    this.props.reloadStore();
+  }
+
   render() {
     return template(this.props);
   }
@@ -29,11 +34,11 @@ CreateSummaryPage = withForm(CreateSummaryPage, {}, {
     educations: state.education.map( (e) => ({
       institution: e.institution,
       speciality: e.speciality,
-      graduated: '01/01/' + e.graduated,
+      graduated: new Date(e.graduated).toISOString(),
       type: e.type,
     })),
     experiences: state.experience.map( (e) => ({
-      'company_name': e.companyName,
+      'companyName': e.companyName,
       'role': e.role,
       'responsibilities': e.responsibilities,
       'start': e.experience[0],

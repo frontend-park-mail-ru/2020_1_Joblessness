@@ -4,17 +4,19 @@ import SUMMARIES_ROUTES from './Summaries/routes';
 import CHOSEN_ROUTES from './Chosen/routes'
 import {StatisticsSubPage} from './statistics';
 import {NavPage} from './nav';
+import {ChosenButtonRoutes} from '../ChosenButton';
 
 const RootPath = 'users/';
 
 const CONTAINER = '#users_current_section';
 
 const UserSubRoutes = [
+  ...ChosenButtonRoutes,
   ...SETTINGS_ROUTES,
   ...SUMMARIES_ROUTES,
   ...CHOSEN_ROUTES,
   {
-    path: '^$|^/{1}$',
+    path: '/*',
     next: '/',
     element: new StatisticsSubPage(CONTAINER),
   },

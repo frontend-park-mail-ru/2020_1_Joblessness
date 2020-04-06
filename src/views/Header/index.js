@@ -13,7 +13,9 @@ class Header extends Page {
    * @return {string} - page to render
    */
   render() {
-    return template(this.props);
+    return template({
+      user: currentSession.user
+    });
   }
   componentDidMount() {
     super.componentDidMount();

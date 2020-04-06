@@ -6,6 +6,13 @@
   height: 100px;
   transition: 0.2s;
 }
+.user-summary-preview .user-name {
+  align-items: baseline;
+}
+.user-summary-preview .user-avatar {
+  transform: scale(0.5);
+  transform-origin: top center;
+}
 .user-summary-preview:hover {
   transform: scale(1.005);
 }

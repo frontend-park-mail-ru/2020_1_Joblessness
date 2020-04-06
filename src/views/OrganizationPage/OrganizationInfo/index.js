@@ -19,6 +19,11 @@ class OrganizationInfo extends Page {
     this.#elemId = uuid();
   }
 
+  componentWillUpdate() {
+    super.componentWillUpdate();
+    this.props.reloadStore();
+  }
+
   render() {
     return template({
       itemId: this.#elemId,

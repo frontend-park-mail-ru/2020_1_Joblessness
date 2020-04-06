@@ -138,7 +138,7 @@ export class Page {
   /**
    * Показать страницу
    */
-  showPage() {
+  showPage(force) {
     this.#container.dom = document.querySelector(this.#container.selector);
     if (!this.#container.dom) {
       throw new Error(`
@@ -154,7 +154,7 @@ export class Page {
               Setting innerHTML is not supported anymore!`);
     }
 
-    if (this.#prevRender !== toShow ||
+    if (force || this.#prevRender !== toShow ||
       this.#prevContainerDom !== this.#container.dom ||
       !isEqual(this.#prevProps, this.props)||
       this.#container.dom.currentChild !== this) {
@@ -177,7 +177,7 @@ export class Page {
    * Отрисовывает страницу, вызывает события (если имеются)
    * componentWillMount и componentDidMount
    */
-  requestRender() {
+  requestRender(force) {
     if (typeof this.render !== 'function') {
       throw new Error(`
             Method render is reserved by Page Component and
@@ -185,6 +185,6 @@ export class Page {
             value of type string!`);
     }
 
-    this.showPage();
+    this.showPage(force);
   }
 }
