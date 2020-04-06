@@ -1,0 +1,11 @@
+include ../../../../templates/pug/link
+div.vacancy-holder--body
+    h1 #{locals.vacancy.vacancyName}
+    div.person--info--location
+        if locals.vacancy.salaryFrom
+            h2 от #{locals.vacancy.salaryFrom}&nbsp
+        if locals.vacancy.salaryTo
+            h2 до #{locals.vacancy.salaryTo}&nbsp
+        if locals.vacancy.salaryFrom || locals.vacancy.salaryTo
+            h2 &#8381;
+    +link(href="/vacancies/" + locals.vacancy.id) Посмотреть

@@ -1,0 +1,82 @@
+@import url("https://fonts.googleapis.com/css?family=Istok+Web&display=swap");
+.triangle-icon {
+  height: 2em;
+  width: 2em;
+  margin: 3px;
+  background-repeat: no-repeat;
+  transform: rotate(90deg);
+  transition: 0.1s;
+}
+
+.start-button {
+  display: flex;
+  background: white;
+  text-align: center;
+  border-radius: 10px;
+  transition: 0.2s;
+  width: 100%;
+  align-items: center;
+  justify-content: center;
+  user-select: none;
+}
+.start-button a {
+  padding: 7px;
+}
+.start-button:hover {
+  background: white;
+  transform: scale(1.01, 1.01);
+}
+.start-button:active {
+  background: white;
+  transform: scale(0.99, 0.99);
+}
+
+.width80 {
+  width: 80%;
+}
+
+.auth-holder {
+  display: flex;
+  justify-content: stretch;
+  width: 100vw;
+  height: 100vh;
+  align-items: stretch;
+}
+
+.steps-counter {
+  width: 20%;
+  display: flex;
+  background: white;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+}
+
+.step-counter--line {
+  z-index: 2;
+  height: 50px;
+  width: 10px;
+  background: black;
+  margin: -5px 0 -5px 0;
+}
+
+.step-counter--counter {
+  z-index: 3;
+  width: 50px;
+  height: 50px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: 50%;
+  background-image: linear-gradient(to right, #0acffe 0%, #495aff 100%);
+  background-size: 200px 200px;
+}
+.step-counter--counter:first-child {
+  border-radius: 25% 75% 70% 30%/32% 30% 70% 68%;
+}
+.step-counter--counter:last-child {
+  border-radius: 7px;
+  width: 70px;
+}
+
+/*# sourceMappingURL=style.css.map */

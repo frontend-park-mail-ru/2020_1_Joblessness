@@ -1,0 +1,41 @@
+mixin input-field-settings
+    div.input-field-auth-holder.settings-input(id=attributes.id)
+        input.fancy-input.no-indent(
+            class=attributes.class
+            style=attributes.style
+            readonly!=attributes.readonly
+            autofocus!=attributes.autofocus
+            type=attributes.type || "text"
+            placeholder=attributes.placeholder
+            value=attributes.value)
+        block
+        div.input-field-auth-holder--line
+        div.form-input-err
+
+mixin settings-block
+    div.settings-holder
+        div.settings-holder--title
+            h1 #{attributes.title}
+        div.settings-holder--holder
+            div.settings-holder--body
+                block
+
+mixin settings-item(name)
+    div.settings-holder-item
+        div.settings-holder-item--header
+            h2 #{name}
+        div.settings-holder-item--input
+            +input-field-settings(readonly!=attributes.readonly)
+
+
+div.settings-list
+    +settings-block(title='Базовая информация')
+        +settings-item("Имя")
+        +settings-item("Фамилия")
+    +settings-block(title='Место жительства')
+        +settings-item("Страна")
+        +settings-item("Город")
+        +settings-item("Станция метро")
+    +settings-block(title='Контактная информация')
+        +settings-item("Телефон")
+        +settings-item("Email")

@@ -25,7 +25,6 @@ export const withEvents = (WrappedComponent, propName, events) => {
         WrappedComponent in withEvents function must inherit from Page
         `);
   }
-
   /**
    * wrapper
    */
@@ -34,8 +33,8 @@ export const withEvents = (WrappedComponent, propName, events) => {
      * set props
      * @param {any}args
      */
-    constructor(...args) {
-      super(...args);
+    constructor(args) {
+      super(args);
       this.props[propName] = events;
     }
 
@@ -52,7 +51,7 @@ export const withEvents = (WrappedComponent, propName, events) => {
                     You must have forgotten to add it to the page`);
         }
         dom.addEventListener(events[e].eventName, async (ev) => {
-          await events[e].event(ev, this);
+          await events[e].event(ev, this, events[e].id);
         });
       });
     }

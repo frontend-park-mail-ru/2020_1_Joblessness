@@ -1,0 +1,20 @@
+mixin summary-preview
+    div.page-section
+mixin organization-preview
+    div.page-section
+mixin vacancy-preview
+    div.page-section
+
+div.display-holder.cover
+    if(locals.organizations && locals.organizations.length)
+        h1 Организации
+        each org in locals.organizations
+            div.page-section(id=org.innerId)
+    if(locals.persons && locals.persons.length)
+        h1 Пользователи
+        each per in locals.persons
+            div.page-section(id=per.innerId)
+    if(locals.vacancies && locals.vacancies.length)
+        h1 Вакансии
+        each vac in locals.vacancies
+            div.page-section(id=vac.innerId)

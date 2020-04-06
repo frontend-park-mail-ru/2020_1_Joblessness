@@ -10,12 +10,14 @@ export const loginOnReload = () => {
         if (r.status === 201) {
           try {
             const user = await r.json();
-            currentSession.session = user.id;
-            Navigator.updateAllPages();
+            currentSession.session = {
+              ...user,
+              role: user.role.toUpperCase(),
+            };
           } catch (e) {
-          // Empty body provided (probably)
             console.log(e);
           }
         }
-      }).catch(console.log);
+      })
+      .catch(() => {});
 };

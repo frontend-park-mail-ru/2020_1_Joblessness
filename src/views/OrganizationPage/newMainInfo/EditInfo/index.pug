@@ -1,0 +1,12 @@
+include ../../../../templates/pug/link
+section.edit-mode
+    if locals.info
+        each item in locals.info
+            div.paragraph-holder
+                div.options-holder
+                    div.options
+                        div.remove-button &#xd7
+                        div.move-up &#9650
+                        div.move-down &#9660
+                div.paragraph-holder--text(id=item.id)
+    div.edit-mode--add(id=locals.editorProps.ADD_PARAGRAPH_ID)

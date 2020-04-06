@@ -1,3 +1,5 @@
+export const DOMAIN = 'http://5.23.54.85';
+// 'http://localhost:8001';
 export const GET_HEADERS = {
   credentials: 'include',
   mode: 'cors',
@@ -19,6 +21,17 @@ export const POST_HEADERS = {
   },
 };
 
+export const DELETE_HEADERS = {
+  credentials: 'include',
+  mode: 'cors',
+  redirect: 'follow',
+  method: 'DELETE',
+  headers: {
+    'Content-Type': 'application/json',
+    'Access-Control-Allow-Origin': '*',
+  },
+};
+
 export const PUT_HEADERS = {
   credentials: 'include',
   mode: 'cors',
@@ -32,7 +45,7 @@ export const PUT_HEADERS = {
 
 export const get = (url, headers = {}) => (
   new Promise((resolve, reject) => {
-    fetch('http://91.210.170.6:8000' + url, {
+    fetch(DOMAIN + url, {
       ...GET_HEADERS,
       ...headers,
     }).then(resolve).catch(reject);
@@ -42,7 +55,7 @@ export const get = (url, headers = {}) => (
 
 export const post = (url, body, headers = {}) => (
   new Promise((resolve, reject) => {
-    fetch('http://91.210.170.6:8000' + url, {
+    fetch(DOMAIN + url, {
       ...POST_HEADERS,
       ...headers,
       body: JSON.stringify(body),
@@ -53,7 +66,7 @@ export const post = (url, body, headers = {}) => (
 
 export const put = (url, body, headers = {}) => (
   new Promise((resolve, reject) => {
-    fetch('http://91.210.170.6:8000' + url, {
+    fetch(DOMAIN + url, {
       ...PUT_HEADERS,
       ...headers,
       body: JSON.stringify(body),
@@ -72,6 +85,16 @@ export const login = (login, password) => (
   },
   )
 );
+export const DELETE = (url, body, headers = {}) => (
+  new Promise((resolve, reject) => {
+    fetch(DOMAIN + url, {
+      ...DELETE_HEADERS,
+      ...headers,
+      body: JSON.stringify(body),
+    }).then(resolve).catch(reject);
+  },
+  )
+);
 
 export default {
   GET_HEADERS,
@@ -80,5 +103,6 @@ export default {
   get,
   post,
   put,
+  DELETE,
   login,
 };

@@ -1,0 +1,6 @@
+include ../shared
+
++settings-block(title='Контактная информация')
+    +settings-item("Email")(readonly=!locals.canChange id=locals.inputFields.email.id)
+    +settings-item("Телефон")(readonly=!locals.canChange id=locals.inputFields.phone.id)
+    div.submit-button(id=locals.inputFields.submitField.id) Сохранить

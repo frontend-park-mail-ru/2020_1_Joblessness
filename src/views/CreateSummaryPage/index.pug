@@ -1,0 +1,28 @@
+mixin section-title
+    div.section-title.cover(class=attributes.class)
+        block
+
+section.page-holder.pad-t20.pad-b20
+    section.page-solid-section.width80.rad10#summary_info
+    +section-title.width80
+        h1 Основная информация
+    section.page-section.width80.mrg0
+        div.page-holder--body.flex-row.width100.vacancy-main-info#summary_main_info
+    +section-title.width80
+        h1 Опыт работы
+    section.page-section.width80.mrg0
+        div.page-holder--body.flex-row.width100#summary_experience
+    +section-title.width80
+        h1 Образование
+    section.page-section.width80.mrg0
+        div.page-holder--body.flex-row.width100#summary_education
+    +section-title.width80
+    //    h1 Ключевые слова
+    //section.page-section.width80.mrg0
+    //    div.page-holder--body.flex-row.width100#vacancy_keywords
+    //    h1 Ключевые навыки
+    //section.page-section.width80.mrg0
+    //    div.page-holder--body.flex-row.width100#vacancy_mainskills
+
+    section.page-section.width80.gradient-background.create-button#create_summary_button
+        div Создать резюме

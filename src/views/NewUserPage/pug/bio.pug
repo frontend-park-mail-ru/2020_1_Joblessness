@@ -1,0 +1,6 @@
+include ../../../templates/pug/avatar
+include ../../../templates/pug/name
+mixin bio(user)
+    div(class="bio-section")
+        +avatar(src=user.avatar id=attributes.avatarId)
+        +name(user.firstname, user.lastname, user.tag)

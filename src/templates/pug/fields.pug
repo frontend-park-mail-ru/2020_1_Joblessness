@@ -1,0 +1,16 @@
+mixin string-field
+    div.string-field
+        input.string-field--input(
+            id=attributes.id
+            readonly!=attributes.readonly
+            type=attributes.type || "text"
+            placeholder=attributes.placeholder
+            value=attributes.value)
+        block
+        div.string-field--error
+
+mixin field-holder
+    div.field-holder(class=attributes.class)
+        block
+mixin field-name(name)
+    h2 #{name}

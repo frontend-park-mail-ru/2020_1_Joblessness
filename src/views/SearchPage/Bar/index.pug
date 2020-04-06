@@ -1,0 +1,21 @@
+mixin input-field-search
+    div.input-field-auth-holder.search-bar--field(id=attributes.id)
+        input.fancy-input(
+            class=attributes.class
+            style=attributes.style
+            autofocus!=attributes.autofocus
+            type=attributes.type || "text"
+            placeholder=attributes.placeholder
+            value=attributes.value)
+        block
+        div.input-field-auth-holder--line
+        div.form-input-err
+
+div.search-bar(id=locals.searchId)
+    +input-field-search(placeholder="Работа в Москве" autofocus)
+    div.search-bar--search(id=locals.clickId) &#8981;
+div.search-bar--type(id=locals.typeId)
+        div.all все
+        div.users пользователи
+        div.orgs организации
+        div.vacs вакансии

@@ -1,9 +1,10 @@
+include ../../../templates/pug/link
 mixin search-bar-link
     div.header-link-wrapper
-        a.search-bar-link(href="#" data-page=attributes.href id=attributes.id)
+        +link(href=attributes.href id=attributes.id)
             block
 
 mixin header-link
     div.header-link-wrapper
-        a.header-link(href="#" data-page=attributes.href)
+        +link(href=attributes.href id=attributes.id)
             block

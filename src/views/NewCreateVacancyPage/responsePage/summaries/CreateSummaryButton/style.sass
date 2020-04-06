@@ -1,0 +1,41 @@
+@import "../../../../../CONSTANTS"
+.vacancy-holder--body
+  overflow: hidden
+  .start-adding
+    width: 100%
+    height: 100%
+    &--button
+      width: 100px
+      height: 100px
+      border-radius: 50%
+      @include WHITE_GRADIENT
+      transition: .4s ease-in-out
+      h1
+        font-size: 80px
+        font-weight: 200
+        color: transparent
+        @include BACKGROUND_GRADIENT
+        -webkit-background-clip: text
+        opacity: 1
+      h2
+        color: white
+        opacity: 0
+        font-size: 0
+  &:hover
+    .start-adding
+      &--button
+        width: 100%
+        border-radius: 10px
+        height: 100%
+        transform: scale(1.58)
+        h2
+          font-size: 1.5em
+          opacity: 1
+        h1
+          transition: 0s
+          font-size: 0
+          opacity: 0
+        &:active
+          h2
+            font-size: 1.4em
+        @include BACKGROUND_GRADIENT

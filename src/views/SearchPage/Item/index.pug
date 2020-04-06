@@ -1,0 +1,41 @@
+include ../../../templates/pug/avatar
+include ../../../templates/pug/phone
+include ../../../templates/pug/companyName
+include ../../../templates/pug/name
+include ../../../templates/pug/link
+
+div.search-item.cover
+    if(locals.type === 'person')
+        +link(href="/users/" + locals.item.id).search-item--link.cover
+            +avatar(src=locals.item.avatar noSelect)
+            div.person--info
+                +name(locals.item.firstName, locals.item.lastName, locals.item.tag)
+                if(locals.item.phone)
+                    +phone(locals.item.phone)
+                if(locals.item.location)
+                    div.person--info--location
+                        h2 #{locals.item.location}
+    else if(locals.type === 'organization')
+        +link(href="/organizations/" + locals.item.id).search-item--link.cover
+            +avatar(src=locals.item.avatar noSelect)
+            div.person--info
+                +company-name(locals.item.name, locals.item.tag)
+                if(locals.item.phone)
+                    +phone(88001234567)
+                if(locals.item.location)
+                    div.person--info--location
+                        h2 #{locals.item.location}
+    else if(locals.type === 'vacancy')
+        +link(href="/vacancies/" + locals.item.id).search-item--link.cover
+            +avatar(src=locals.item.organization.avatar noSelect)
+            div.person--info
+                +company-name(locals.item.name, locals.item.organization.tag)
+                div.person--info--location
+                    if locals.item.salaryFrom
+                        h2 от #{locals.item.salaryFrom}&nbsp
+                    if locals.item.salaryTo
+                        h2 до #{locals.item.salaryTo}&nbsp
+                    if locals.item.salaryFrom || locals.item.salaryTo
+                        h2 &#8381;
+                if(locals.item.phone)
+                    +phone(locals.item.phone)

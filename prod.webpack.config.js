@@ -16,15 +16,15 @@ module.exports = {
         test: /\.pug$/,
         use: "pug-loader"
       },
-      {
-        enforce: 'pre',
-        test: /\.js$/,
-        exclude: /node_modules/,
-        loader: 'eslint-loader',
-        options: {
-          fix: true,
-        },
-      },
+      // {
+      //   enforce: 'pre',
+      //   test: /\.js$/,
+      //   exclude: /node_modules/,
+      //   loader: 'eslint-loader',
+      //   options: {
+      //     fix: true,
+      //   },
+      // },
       {
         test: /\.js$/,
         exclude: /node_modules/,

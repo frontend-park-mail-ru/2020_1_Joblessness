@@ -1,0 +1,7 @@
+include ../../../templates/pug/link
+div.responser-item--body
+    +link(href="/vacancies/" + locals.item.vacancyId) Показавать вакансию
+    +link(href="/summaries/" + locals.item.summaryId) Показавать резюме
+    +link(href='/users/' + locals.item['user_id']) Открыть страницу пользователя
+    div(id=locals.acceptId) Принять
+    div(id=locals.declineId) Отклонить

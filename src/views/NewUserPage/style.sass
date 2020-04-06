@@ -1,0 +1,232 @@
+@import "../../CONSTANTS"
+
+.user-page
+  display: flex
+  width: 100%
+  height: 100%
+  flex-direction: column
+  min-height: 100vh
+
+.bio-section
+  display: flex
+  z-index: 2
+  justify-content: center
+  align-items: center
+  height: 230px
+  width: 100%
+  @include SECTION_SHADOW
+
+
+.user-avatar
+  border-radius: 50%
+  width: 170px
+  height: 170px
+  display: flex
+  justify-content: center
+  align-items: center
+  background-size: 350px 350px
+  overflow: hidden
+  @include BACKGROUND_GRADIENT
+
+  .pick-avatar
+    display: block
+    width: 100%
+    height: 100%
+    opacity: 0
+
+  .user-avatar--body
+    background-size: cover
+    width: 150px
+    height: 150px
+    border-radius: 50%
+    background-repeat: no-repeat
+    transition: filter .2s
+
+.with-select
+  input
+    cursor: pointer
+  &:hover
+    filter: brightness(.9)
+    &:before
+      opacity: 0.5
+      width: 150px
+      height: 150px
+
+  &:before
+    border-radius: 50%
+    position: absolute
+    transition: .15s
+    content: '\2315'
+    width: 0
+    height: 0
+    opacity: 0
+    align-items: center
+    justify-content: center
+    font-size: 10em
+    display: flex
+.user-name
+  padding: 20px
+  display: flex
+
+  .tag
+    color: $GRAY
+    background: none
+
+$FADING: rgba(255, 255, 255, .5)
+.sections-holder
+  width: 100%
+  height: 50px
+  display: flex
+  background-attachment: fixed
+  @include BACKGROUND_GRADIENT
+  justify-content: stretch
+  align-items: stretch
+
+  .selected
+    background: $FADING
+    color: rgba(0, 0, 0, .7) !important
+
+  .sections-holder--item
+    text-align: center
+    flex: 1
+    color: rgba(0, 0, 0, .4)
+    display: flex
+    justify-content: center
+    align-items: center
+
+    h2
+      font-weight: 200
+
+
+.user-section-holder
+  @include BACKGROUND_GRADIENT
+  flex: 1
+  display: flex
+
+  .user-section-holder--body
+    flex: 1
+    display: flex
+    justify-content: center
+    background: $FADING
+
+
+.summaries-list
+  display: flex
+  flex-direction: column
+  width: 80%
+
+.summary-holder
+  display: flex
+  justify-content: stretch
+  align-items: stretch
+  margin-top: 10vh
+  margin-bottom: 10vh
+  height: 80vh
+  background: white
+  border-radius: 10px
+  border: none
+  @include SECTION_SHADOW
+
+.summary-holder--body
+  flex: 1
+  display: flex
+  padding: 30px
+  flex-direction: column
+
+
+.settings-list
+  display: flex
+  flex-direction: column
+  width: 80%
+  padding-bottom: 10vh
+
+.settings-holder
+  display: flex
+  justify-content: stretch
+  align-items: stretch
+  flex-direction: column
+  margin-bottom: 20px
+
+  h1
+    text-indent: 10px
+//.settings-holder--title
+
+.settings-holder--holder
+  display: flex
+  flex: 1
+  justify-content: stretch
+  align-items: stretch
+  background: white
+  border-radius: 10px
+  border: none
+  @include SECTION_SHADOW
+
+.settings-holder--body
+  flex-direction: column
+  flex: 1
+  display: flex
+  padding: 30px 30px 60px
+  justify-content: stretch
+  align-items: stretch
+
+.settings-holder-item
+  display: flex
+  flex: 1
+  justify-content: space-between
+  align-items: baseline
+
+.settings-holder-item--header
+  text-align: right
+  margin-right: 20px
+  flex: 1
+  flex-grow: 2
+
+.settings-holder-item--input
+  width: 400px
+  flex: 1
+  flex-grow: 5
+
+.sex-container
+  &--body
+    display: flex
+    flex: 1
+    align-items: baseline
+  select
+    &:disabled
+      color: black
+    display: block
+    font-size: 1.5em
+    font-family: sans-serif
+    padding: .6em 1.4em .5em .8em
+    width: 100%
+    max-width: 100%
+    margin: 0
+    border: none
+    box-shadow: none
+    border-radius: 0
+    appearance: none
+    background-color: #fff
+    background-position: right .7em top 50%, 0 0
+    background-size: .65em auto, 100%
+    &:focus
+      outline: none
+      border: none
+      box-shadow: none
+.birth-container
+  display: flex
+  justify-content: space-between
+  .settings-input
+    margin: 0 20px 0 20px
+    &:first-child
+      margin-left: 0
+    &:last-child
+      margin-right: 0
+.birth-tag
+  h2
+    text-align: left
+    margin: 10px 0 0 0
+    &:first-child
+      margin-left: 0
+
+.about-submit
+  margin-top: 3px
