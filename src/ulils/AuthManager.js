@@ -4,7 +4,6 @@ import {uuid} from './uuid';
 
 const withAuthManager = (Wrapee) => {
   return class extends Wrapee {
-
     constructor(props) {
       super(props);
       this.props.user = currentSession.user;
@@ -15,9 +14,8 @@ const withAuthManager = (Wrapee) => {
       };
       currentSession.addEventListener('change', onChange);
     }
-
-  }
-}
+  };
+};
 export {
-  withAuthManager
-}
+  withAuthManager,
+};

@@ -3,9 +3,9 @@ import constructRoutes from './constructRoutes';
 import {createEditorProps} from './EDITOR_PROPS';
 import createWithLocalStoreDefault from './localStore';
 
-//@TODO сделать работу со store более гибкой
+// @TODO сделать работу со store более гибкой
 
-//@TODO create default store
+// @TODO create default store
 
 const createEditor = ({Parent, Preview, Edit, AddItem, Item, ModeManager, withLocalStore = createWithLocalStoreDefault()}, props) => {
   props = createEditorProps(props);
@@ -17,7 +17,7 @@ const createEditor = ({Parent, Preview, Edit, AddItem, Item, ModeManager, withLo
   const previewRoutesTemplate = constructRoutes.preview(previewPage, props); // Done
   const previewRoutes = previewRoutesTemplate(); // Done
 
-  const addItemPage = constructPages.addItem(AddItem, props); //Done
+  const addItemPage = constructPages.addItem(AddItem, props); // Done
   const addItemRoutesTemplate = constructRoutes.addItem(addItemPage, props); // Done
   const addItemRoutes = addItemRoutesTemplate(); // Done
 
@@ -53,13 +53,13 @@ const createEditor = ({Parent, Preview, Edit, AddItem, Item, ModeManager, withLo
   props.EDIT_MODE_ROUTE = EDIT_MODE_ROUTE;
   props.constructEditRoutes = (childRoutes) => props.ROOT_TEMPLATE(parentRoutesTemplate([...editRoutesTemplate(childRoutes)]));
   props.constructEditRoutes = (childRoutes) => props.ROOT_TEMPLATE(parentRoutesTemplate(
-    editRoutesTemplate(childRoutes),
-    addItemRoutes,
-  ))
+      editRoutesTemplate(childRoutes),
+      addItemRoutes,
+  ));
   return parentRoutes;
 };
 
 
 export {
   createEditor,
-}
+};

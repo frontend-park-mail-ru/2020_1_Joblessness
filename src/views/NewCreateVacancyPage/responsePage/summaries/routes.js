@@ -29,8 +29,8 @@ export const constructRoute = (childRoutes = []) => [
         alwaysOn: true,
         element: ROOT_ELEMENT,
         childRoutes,
-      }
-    ]
-  }
+      },
+    ],
+  },
 ];
 export default ROUTES;

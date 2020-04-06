@@ -19,5 +19,5 @@ export const addItem = (AddItem, props) => (childRoutes = []) => [
       Navigator.updateAllPages();
     },
     childRoutes,
-  }
+  },
 ];

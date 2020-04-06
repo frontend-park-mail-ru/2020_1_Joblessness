@@ -21,7 +21,6 @@ import {withAuthManager} from '../../ulils/AuthManager';
  * favourite
  */
 class UserPage extends Page {
-  
   #prevUser
   /**
    * returns container for subpages
@@ -32,12 +31,11 @@ class UserPage extends Page {
   }
 
   /**
-   * 
+   *
    */
   componentDidMount() {
-
     const userId = getUserId();
-    if(this.#prevUser !== userId) {
+    if (this.#prevUser !== userId) {
       this.#prevUser = userId;
       this.props.reloadStore();
       this.props.random = uuid();
@@ -56,7 +54,7 @@ const loadPersonInfo = async (page) => {
     const user = await res.json();
 
     page.props.setStore({
-      user: {...user}
+      user: {...user},
     });
     page.props.random = uuid();
     Navigator.updateAllPages();
@@ -81,7 +79,7 @@ const loadPersonSummaries = async (page) => {
     console.log(e);
   }
 };
-UserPage = withAuthManager(UserPage)
+UserPage = withAuthManager(UserPage);
 UserPage = withLocalStore(UserPage);
 UserPage = withChainedPages(UserPage, SubRoutes, null, RootPath);
 export {

@@ -12,7 +12,7 @@ import {validators} from './index';
  * @return {Page}
  */
 export const withForm = (WrappedComponent, inputFields, submitField,
-                         onValid, onInvalid = null, propName = 'inputFields') => {
+    onValid, onInvalid = null, propName = 'inputFields') => {
   if (!WrappedComponent.isPageComponent) {
     throw new Error(`
         Expected Page component as WrappedComponent at withForm!
@@ -56,10 +56,10 @@ export const withForm = (WrappedComponent, inputFields, submitField,
       };
       // get number of required fields
       this.__expectedLength = Object
-        .keys(inputFields)
-        .map((k) => inputFields[k].required)
-        .filter((e) => e)
-        .length;
+          .keys(inputFields)
+          .map((k) => inputFields[k].required)
+          .filter((e) => e)
+          .length;
     }
 
     /**
@@ -72,7 +72,7 @@ export const withForm = (WrappedComponent, inputFields, submitField,
         const fields = Object.entries(inputFields);
         for (let i = 0; i < fields.length - 1; i++) {
           const el = document.getElementById(fields[i][1].id);
-          if(fields[i][1].defaultValue) {
+          if (fields[i][1].defaultValue) {
             el.firstElementChild.value =
               validators.isFunction(fields[i][1].defaultValue) ?
               fields[i][1].defaultValue(this) : fields[i][1].defaultValue;
@@ -97,7 +97,7 @@ export const withForm = (WrappedComponent, inputFields, submitField,
           }
         }
         const lastEl = document.getElementById(fields[fields.length - 1][1].id);
-        if(fields[fields.length - 1][1].defaultValue) {
+        if (fields[fields.length - 1][1].defaultValue) {
           lastEl.firstElementChild.value =
             validators.isFunction(fields[fields.length - 1][1].defaultValue) ?
               fields[fields.length - 1][1].defaultValue(this) : fields[fields.length - 1][1].defaultValue;
@@ -147,9 +147,9 @@ export const withForm = (WrappedComponent, inputFields, submitField,
       const warnBlock = inputBlock.lastElementChild;
       warnBlock.textContent = warnMessage || 'Обязательное поле';
       const tid = setTimeout(
-        () => {
-          warnBlock.textContent = '';
-        }, 10000,
+          () => {
+            warnBlock.textContent = '';
+          }, 10000,
       );
       /**
        * remove warning on click or after 10 sec
@@ -214,10 +214,10 @@ export const withForm = (WrappedComponent, inputFields, submitField,
       }
       if (!inputValidator) {
         return this.validateInput(inputBlock, required,
-          validator, warnMessage, key, inputFields[key]);
+            validator, warnMessage, key, inputFields[key]);
       } else {
         return inputValidator(inputBlock, required,
-          validator, warnMessage, key, inputFields[key]);
+            validator, warnMessage, key, inputFields[key]);
       }
     };
 
@@ -229,14 +229,14 @@ export const withForm = (WrappedComponent, inputFields, submitField,
       let requiredLength = 0;
       const validInputs =
         Object
-          .keys(inputFields)
-          .map(this.validateInputById)
-          .filter((e) => {
-            if (e && inputFields[e.field].required) {
-              ++requiredLength;
-            }
-            return e;
-          });
+            .keys(inputFields)
+            .map(this.validateInputById)
+            .filter((e) => {
+              if (e && inputFields[e.field].required) {
+                ++requiredLength;
+              }
+              return e;
+            });
       return requiredLength >= this.__expectedLength ? validInputs : null;
     };
   };
@@ -253,10 +253,10 @@ export const withForm = (WrappedComponent, inputFields, submitField,
  * @return {{field: *, value: *}|boolean|{field: *, value: null}}
  */
 export const validateRadio = (radios, required,
-                              validator, warnMessage, key, inputField) => {
+    validator, warnMessage, key, inputField) => {
   const v =
     document
-      .querySelector(`input[name="${inputField.id}"]:checked`);
+        .querySelector(`input[name="${inputField.id}"]:checked`);
   if (v && required && !v.value) {
     return false;
   }
@@ -281,7 +281,7 @@ export const validateRadio = (radios, required,
  * @return {{field: *, value: *}|boolean}
  */
 export const validateCheckBox = (inputBlock, required,
-                                 validator, warnMessage, key) => {
+    validator, warnMessage, key) => {
   const checkbox = inputBlock;
   if (required && !checkbox?.checked) {
     return false;
@@ -301,7 +301,7 @@ export const validateCheckBox = (inputBlock, required,
  * @return {{field: string, value: string}}
  */
 export const validateSelect = (inputBlock, required,
-                               validator, warnMessage, key) => {
+    validator, warnMessage, key) => {
   return {
     field: key,
     value: inputBlock.value,

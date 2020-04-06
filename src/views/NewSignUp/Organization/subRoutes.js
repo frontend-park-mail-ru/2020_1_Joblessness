@@ -36,4 +36,4 @@ const SubRoutes = [
   },
 ];
 
-export default SubRoutes
+export default SubRoutes;

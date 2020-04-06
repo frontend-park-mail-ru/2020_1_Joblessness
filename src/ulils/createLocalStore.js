@@ -37,7 +37,7 @@ export const createLocalStore = (store,
           } else {
             store = deepCopy(this.#initial);
           }
-        }
+        };
         this.props.setStore = (s, cb) => {
           const keyToUse = typeof key === 'function' ? key() : key;
           if (typeof s === 'object') {
@@ -67,25 +67,25 @@ export const createLocalStore = (store,
 );
 
 function deepCopy(obj) {
-  if(typeof obj !== 'object' || obj === null) {
+  if (typeof obj !== 'object' || obj === null) {
     return obj;
   }
 
-  if(obj instanceof Date) {
+  if (obj instanceof Date) {
     return new Date(obj.getTime());
   }
 
-  if(obj instanceof Array) {
+  if (obj instanceof Array) {
     return obj.reduce((arr, item, i) => {
       arr[i] = deepCopy(item);
       return arr;
     }, []);
   }
 
-  if(obj instanceof Object) {
+  if (obj instanceof Object) {
     return Object.keys(obj).reduce((newObj, key) => {
       newObj[key] = deepCopy(obj[key]);
       return newObj;
-    }, {})
+    }, {});
   }
 }

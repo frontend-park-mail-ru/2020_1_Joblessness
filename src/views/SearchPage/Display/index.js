@@ -1,14 +1,14 @@
 import {Page} from '../../../Page';
-import template from './index.pug'
-import './style.sass'
+import template from './index.pug';
+import './style.sass';
 import {withLocalStore} from '../withLocalStore';
 class Display extends Page {
   render() {
-    return template(this.props.getStore().search)
+    return template(this.props.getStore().search);
   }
 }
 
-Display = withLocalStore(Display)
+Display = withLocalStore(Display);
 export {
-  Display
-}
+  Display,
+};

@@ -3,4 +3,4 @@ export const preview = (Wrapee, props) => {
   const wrapee = new Wrapee(props.CURRENT_MODE_SELECTOR);
   wrapee.props.editorProps = props;
   return wrapee;
-}
+};

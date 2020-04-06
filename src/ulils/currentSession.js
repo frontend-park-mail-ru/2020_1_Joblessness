@@ -76,7 +76,7 @@ class CurrentSession {
    * @return {{userId: *}|null}
    */
   get user() {
-    return {...this.#user}
+    return {...this.#user};
   }
 
 
@@ -89,7 +89,7 @@ class CurrentSession {
   }
 
   onChange() {
-    console.log(this.#events)
+    console.log(this.#events);
     this.#events['change'].forEach((e) => (e?.({...this.#user})));
   }
   addEventListener(eventName, event) {
@@ -101,7 +101,7 @@ class CurrentSession {
 }
 
 const currentSession = new CurrentSession();
-window.currentSession = currentSession
+window.currentSession = currentSession;
 export {
   currentSession,
 };

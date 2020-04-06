@@ -8,7 +8,7 @@ const withLocalStore = createLocalStore({
 
 export const getSumId = () => {
   const name = location.pathname;
-  return name.replace(/\D+/g, '')
+  return name.replace(/\D+/g, '');
 };
 export default withLocalStore;
 export {

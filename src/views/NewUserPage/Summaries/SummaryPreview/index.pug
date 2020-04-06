@@ -1,0 +1,7 @@
+include ../../../../templates/pug/link
+
++link(href="/summaries/" + locals.summary.id).user-summary-preview
+    div.number-symbol
+        h2 №
+        h1 #{locals.num}
+        h3 #{locals.summary.name || 'Название отсутствует'}

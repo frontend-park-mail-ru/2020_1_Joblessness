@@ -5,7 +5,7 @@ import {
   currentSession,
   uuid,
   withForm,
-  validators, requestManager
+  validators, requestManager,
 } from '../../../ulils';
 
 /**
@@ -20,30 +20,30 @@ class SecondStep extends Page {
   }
 }
 SecondStep = withForm(SecondStep, {
-    name: {
-      id: uuid(),
-      required: true,
-      validator: (s) => s.length,
-      warnMessage: 'Название компании не может быть пустой строкой',
-    },
-    site: {
-      id: uuid(),
-      validator: validators.isUrl,
-      warnMessage: 'Укажите сайт компании или оставьте поле пустым',
-    },
-  },
-  {
+  name: {
     id: uuid(),
+    required: true,
+    validator: (s) => s.length,
+    warnMessage: 'Название компании не может быть пустой строкой',
   },
-  (form, page) => {
-    requestManager.tryChangeOrg(form)
+  site: {
+    id: uuid(),
+    validator: validators.isUrl,
+    warnMessage: 'Укажите сайт компании или оставьте поле пустым',
+  },
+},
+{
+  id: uuid(),
+},
+(form, page) => {
+  requestManager.tryChangeOrg(form)
       .then( (r) => {
         page.props.requestNext();
       })
       .catch( (r) => {
         console.log(r);
       });
-  },
+},
 );
 
 export {SecondStep};

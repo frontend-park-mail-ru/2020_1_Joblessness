@@ -54,8 +54,8 @@ const addHideAnimation = (page, smooth) => {
   window.removeEventListener('resize', hideEvent);
   window.addEventListener('resize', hideEvent);
   page.dom?.removeEventListener('scroll', hideEvent);
-  if(!parent) {
-    return
+  if (!parent) {
+    return;
   }
   const holder = parent.parentNode;
   holder.parentNode?.addEventListener('scroll', hideEvent);

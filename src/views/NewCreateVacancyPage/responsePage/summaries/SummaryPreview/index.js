@@ -24,7 +24,7 @@ class SummaryPreview extends Page {
     console.log(this.props);
     return template({
       ...this.props,
-      selectId: this.#selectId
+      selectId: this.#selectId,
     });
   }
 
@@ -54,15 +54,15 @@ const initResponseEvent = (page, id) => {
 
   button?.addEventListener('click', () => {
     requestManager
-      .trySendSummary(getVacId(), page.props.summary.id)
-      .then(async r => {
-        alert('резюме успешно отправлено');
-        Navigator.showPage(`/vacancies/${getVacId()}`)
-      }).catch(r => {
-      alert('Не удалось оставить отклик');
-      Navigator.showPage(`/vacancies/${getVacId()}`)
-    })
-  })
+        .trySendSummary(getVacId(), page.props.summary.id)
+        .then(async (r) => {
+          alert('резюме успешно отправлено');
+          Navigator.showPage(`/vacancies/${getVacId()}`);
+        }).catch((r) => {
+          alert('Не удалось оставить отклик');
+          Navigator.showPage(`/vacancies/${getVacId()}`);
+        });
+  });
 };
 export {
   SummaryPreview,

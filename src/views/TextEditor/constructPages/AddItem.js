@@ -5,8 +5,8 @@ export const addItem = (Wrapee, props) => {
   Wrapee = withAdd(Wrapee, props);
   const wrapee = new Wrapee(props.ADD_PARAGRAPH_SELECTOR);
   wrapee.props.editorProps = props;
-  return wrapee
-}
+  return wrapee;
+};
 
 const withAdd = (Wrapee, props) => {
   return class extends Wrapee {
@@ -20,7 +20,7 @@ const withAdd = (Wrapee, props) => {
           parent.classList.add('placing-o');
           setTimeout(() => {
             parent.classList.remove('placing-o');
-          }, 500)
+          }, 500);
         }, 1);
         const addButton = parent.querySelector('.start-adding');
         addButton.addEventListener('click', () => {
@@ -32,8 +32,8 @@ const withAdd = (Wrapee, props) => {
           this.props.setStore(props.INSERT_REDUCER(newItem));
 
           this.props.requestNextNoUpdate(newItem);
-        })
+        });
       }
     }
-  }
+  };
 };

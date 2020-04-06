@@ -10,20 +10,20 @@ const constructSubRoutes = (childRoutes = []) => [
   {
     path: '^$|^/{1}$|index|index/',
     childRoutes,
-  }
+  },
 ];
 
 const DisplayPage = new Display('#search_display');
 const constructDisplaySubRoutes = (childRoutes = []) => constructSubRoutes(
-  [
-    {
-      path: 'display',
-      alwaysOn: true,
-      innerPath: 'display',
-      element: DisplayPage,
-      childRoutes,
-    }
-  ]
+    [
+      {
+        path: 'display',
+        alwaysOn: true,
+        innerPath: 'display',
+        element: DisplayPage,
+        childRoutes,
+      },
+    ],
 );
 const SubRoutes = [
   {
@@ -37,8 +37,8 @@ const SubRoutes = [
       const {persons, organizations, vacancies} = page.props.getStore().search;
       Navigator.removeRoutes(constructDisplaySubRoutes());
       Navigator.addRoutes(constructDisplaySubRoutes());
-      for(let p of persons) {
-        if(!p.element) {
+      for (const p of persons) {
+        if (!p.element) {
           const childItem = new Item(`#${p.innerId}`);
           p.element = childItem;
           childItem.props.type = 'person';
@@ -48,11 +48,11 @@ const SubRoutes = [
           path: p.innerId,
           alwaysOn: true,
           element: p.element,
-        }]))
+        }]));
       }
 
-      for(let p of vacancies) {
-        if(!p.element) {
+      for (const p of vacancies) {
+        if (!p.element) {
           const childItem = new Item(`#${p.innerId}`);
           p.element = childItem;
           childItem.props.type = 'vacancy';
@@ -62,11 +62,11 @@ const SubRoutes = [
           path: p.innerId,
           alwaysOn: true,
           element: p.element,
-        }]))
+        }]));
       }
 
-      for(let p of organizations) {
-        if(!p.element) {
+      for (const p of organizations) {
+        if (!p.element) {
           const childItem = new Item(`#${p.innerId}`);
           p.element = childItem;
           childItem.props.type = 'organization';
@@ -76,18 +76,18 @@ const SubRoutes = [
           path: p.innerId,
           alwaysOn: true,
           element: p.element,
-        }]))
+        }]));
       }
       Navigator.updateAllPages();
-    }
+    },
   },
   {
     path: 'display',
     alwaysOn: true,
     innerPath: 'display',
     element: new Display('#search_display'),
-  }
+  },
 ];
 
 
-export default SubRoutes
+export default SubRoutes;

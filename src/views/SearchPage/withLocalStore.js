@@ -3,14 +3,14 @@ import {createLocalStore} from '../../ulils';
 const withLocalStore = createLocalStore({
   bar: {
     preview: {
-      type: "",
-      requestBody: "",
+      type: '',
+      requestBody: '',
       since: 0,
       desc: true,
     },
     raw: {
-      type: "",
-      requestBody: "",
+      type: '',
+      requestBody: '',
       since: 0,
       desc: true,
     },
@@ -19,9 +19,9 @@ const withLocalStore = createLocalStore({
     persons: [],
     organizations: [],
     vacancies: [],
-  }
+  },
 });
 
 export {
-  withLocalStore
-}
+  withLocalStore,
+};

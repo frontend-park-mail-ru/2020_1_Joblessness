@@ -6,18 +6,18 @@ import {currentSession, request} from './index';
  */
 export const loginOnReload = () => {
   request.post('/api/users/check', {})
-    .then(async (r) => {
-      if (r.status === 201) {
-        try {
-          const user = await r.json();
-          currentSession.session = {
-            ...user,
-            role : user.role.toUpperCase(),
-          };
-        } catch (e) {
-          console.log(e);
+      .then(async (r) => {
+        if (r.status === 201) {
+          try {
+            const user = await r.json();
+            currentSession.session = {
+              ...user,
+              role: user.role.toUpperCase(),
+            };
+          } catch (e) {
+            console.log(e);
+          }
         }
-      }
-    })
-    .catch(() => {})
+      })
+      .catch(() => {});
 };

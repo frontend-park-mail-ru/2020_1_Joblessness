@@ -11,13 +11,13 @@ export default {
   item,
   modeManager,
   preview,
-  parent
-}
+  parent,
+};
 export {
   addItem,
   edit,
   item,
   modeManager,
   preview,
-  parent
-}
+  parent,
+};

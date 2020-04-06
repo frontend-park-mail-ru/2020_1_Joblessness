@@ -6,7 +6,6 @@ import {DECLINE, PREVIEW} from '../../../../CONSTANTS';
 
 class ModeManager extends Page {
   render() {
-
     return template({
       ...this.props,
       currentId: Number(getOrgId()),
@@ -14,7 +13,7 @@ class ModeManager extends Page {
   }
   componentWillMount() {
     super.componentWillMount();
-    if( Number(getOrgId()) !== this.props.user.id && this.props.mode !== PREVIEW) {
+    if ( Number(getOrgId()) !== this.props.user.id && this.props.mode !== PREVIEW) {
       this.props.setMode(PREVIEW);
       this.props.requestNextNoUpdate(this, PREVIEW, DECLINE);
     }

@@ -23,7 +23,7 @@ SecondStep = withForm(SecondStep, {
     id: uuid(),
     required: true,
     validator: isLogin,
-    warnMessage: 'Имя пользователя состоит из латинских букв и цифр, а также "_" и "." Длина логина не менее 6.'
+    warnMessage: 'Имя пользователя состоит из латинских букв и цифр, а также "_" и "." Длина логина не менее 6.',
   },
   password: {
     id: uuid(),

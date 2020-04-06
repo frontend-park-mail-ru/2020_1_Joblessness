@@ -1,0 +1,5 @@
+if locals.chosen && locals.chosen.length
+    each ch in locals.chosen
+        div(id=ch.innerId).page-section.width80.mrg20
+else
+    h1.empty-message Пора ставить лайки

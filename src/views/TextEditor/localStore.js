@@ -5,7 +5,7 @@ const createWithLocalStoreDefault = () => {
     preview: '',
     raw: [],
   });
-}
+};
 
 export default createWithLocalStoreDefault;
 export {

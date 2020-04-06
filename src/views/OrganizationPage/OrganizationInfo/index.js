@@ -23,7 +23,7 @@ class OrganizationInfo extends Page {
     return template({
       itemId: this.#elemId,
       info: this.props.getStore().organization,
-      currentId: currentSession.user.id
+      currentId: currentSession.user.id,
     });
   }
 
@@ -39,16 +39,15 @@ class OrganizationInfo extends Page {
         body: data,
       }).then(async () => {
         const b64 = await fileToB64(e.target.files[0]);
-        this.props.setStore(s => ({
+        this.props.setStore((s) => ({
           organization: {
             ...s.organization,
             avatar: b64,
-          }
+          },
         }));
         Navigator.updateAllPages();
       }).catch(() => alert('Невозможно изменить аватар'));
-    })
-
+    });
   }
 }
 
@@ -59,5 +58,5 @@ OrganizationInfo = withLocalStore(OrganizationInfo);
 
 export {
   OrganizationInfo,
-  OrganizationInfoNoStore
+  OrganizationInfoNoStore,
 };

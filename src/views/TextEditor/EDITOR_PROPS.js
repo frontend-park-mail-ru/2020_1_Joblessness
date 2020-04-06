@@ -1,13 +1,13 @@
 import {uuid} from '../../ulils';
 
 export const createEditorProps = ({ROOT, EDITOR_HOLDER_SELECTOR, ROOT_TEMPLATE, ...rest}) => {
-  if(!ROOT) {
+  if (!ROOT) {
     throw new Error('No ROOT specified');
   }
-  if(!ROOT_TEMPLATE) {
+  if (!ROOT_TEMPLATE) {
     throw new Error('No ROOT_TEMPLATE specified');
   }
-  if(!EDITOR_HOLDER_SELECTOR) {
+  if (!EDITOR_HOLDER_SELECTOR) {
     throw new Error('No EDITOR_HOLDER_SELECTOR specified');
   }
 
@@ -16,10 +16,10 @@ export const createEditorProps = ({ROOT, EDITOR_HOLDER_SELECTOR, ROOT_TEMPLATE, 
   const ADD_PARAGRAPH_ID = uuid();
 
   const SUBMIT_REDUCER = (s) => ({
-    preview: [...s.raw]
+    preview: [...s.raw],
   });
   const DECLINE_REDUCER = (s) => ({
-    raw: [...s.preview]
+    raw: [...s.preview],
   });
 
   const MODE_MANAGER_SELECTOR = `#${MODE_MANAGER_ID}`;
@@ -41,6 +41,5 @@ export const createEditorProps = ({ROOT, EDITOR_HOLDER_SELECTOR, ROOT_TEMPLATE, 
     ROOT,
 
     ...rest,
-  }
-
+  };
 };

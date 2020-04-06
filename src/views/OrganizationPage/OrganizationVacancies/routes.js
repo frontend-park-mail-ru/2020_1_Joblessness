@@ -30,7 +30,7 @@ export const constructRoute = (childRoutes = []) => [
         element: ROOT_ELEMENT,
         childRoutes,
       },
-    ]
-  }
-]
+    ],
+  },
+];
 export default ROUTES;

@@ -22,9 +22,9 @@ class CreateVacancyButton extends Page {
    */
   componentDidMount() {
     super.componentDidMount();
-    if( currentSession.user.role !== ORGANIZATION || currentSession.user.id !== this.props.getStore().organization.id) {
+    if ( currentSession.user.role !== ORGANIZATION || currentSession.user.id !== this.props.getStore().organization.id) {
       document.querySelector(this.container).style.display = 'none';
-      return
+      return;
     }
     const parent = document.querySelector(this.container);
     if (!this._wasMount) {

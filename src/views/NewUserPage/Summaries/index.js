@@ -1,17 +1,18 @@
 import {Page} from '../../../Page';
-import template from './index.pug'
+import template from './index.pug';
 import withLocalStore from '../localStore';
-
-class SummariesSubPage extends Page {
-
+import './style.sass'
+import {withChainedPages} from '../../../ulils';
+import {SubRoutes} from './SubRoutes';
+class SummariesPage extends Page {
   render() {
     return template(this.props);
   }
-
 }
 
-SummariesSubPage = withLocalStore(SummariesSubPage);
+SummariesPage = withLocalStore(SummariesPage);
 
+SummariesPage = withChainedPages(SummariesPage, SubRoutes, null, '');
 export {
-  SummariesSubPage
-}
+  SummariesPage,
+};

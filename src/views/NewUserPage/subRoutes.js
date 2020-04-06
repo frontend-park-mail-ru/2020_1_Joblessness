@@ -1,7 +1,7 @@
 import {UserInfo} from './UserInfo';
-import SETTINGS_ROUTES from './Settings/routes'
-import {SummariesSubPage} from './Summaries';
-import {FavouriteSubPage} from './favourite';
+import SETTINGS_ROUTES from './Settings/routes';
+import SUMMARIES_ROUTES from './Summaries/routes';
+import CHOSEN_ROUTES from './Chosen/routes'
 import {StatisticsSubPage} from './statistics';
 import {NavPage} from './nav';
 
@@ -11,16 +11,8 @@ const CONTAINER = '#users_current_section';
 
 const UserSubRoutes = [
   ...SETTINGS_ROUTES,
-  {
-    path: 'summaries',
-    next: '/summaries',
-    element: new SummariesSubPage(CONTAINER),
-  },
-  {
-    path: '/favourite',
-    next: '/favourite',
-    element: new FavouriteSubPage(CONTAINER),
-  },
+  ...SUMMARIES_ROUTES,
+  ...CHOSEN_ROUTES,
   {
     path: '/',
     next: '/',
@@ -37,7 +29,7 @@ const SubRoutes = [
   {
     path: 'nav',
     alwaysOn: true,
-    element: new NavPage('#users_nav')
+    element: new NavPage('#users_nav'),
   },
   ...UserSubRoutes,
   // ...MainInfoRoutes,

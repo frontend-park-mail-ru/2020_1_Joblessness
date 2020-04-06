@@ -17,24 +17,24 @@ class FirstStep extends Page {
 }
 
 FirstStep = withForm(FirstStep, {
-    login: {
-      id: uuid(),
-      required: true,
-      validator: isLogin,
-      warnMessage: 'Имя пользователя состоит из латинских букв и цифр, а также "_" и "." Длина логина не менее 6.'
-    },
-    password: {
-      id: uuid(),
-      required: true,
-      validator: isPassword,
-      warnMessage: 'Пароль состоит из латинских букв и цифр, длина не менее 8. Должен содержать хотя бы 1 цифру и Заглавную букву.',
-    },
-  },
-  {
+  login: {
     id: uuid(),
+    required: true,
+    validator: isLogin,
+    warnMessage: 'Имя пользователя состоит из латинских букв и цифр, а также "_" и "." Длина логина не менее 6.',
   },
-  (form, page) => {
-    requestManager.trySignIn(form)
+  password: {
+    id: uuid(),
+    required: true,
+    validator: isPassword,
+    warnMessage: 'Пароль состоит из латинских букв и цифр, длина не менее 8. Должен содержать хотя бы 1 цифру и Заглавную букву.',
+  },
+},
+{
+  id: uuid(),
+},
+(form, page) => {
+  requestManager.trySignIn(form)
       .then(async (r) => {
         try {
           const user = await r.json();
@@ -50,38 +50,38 @@ FirstStep = withForm(FirstStep, {
         }
       })
       .catch(
-        (e) => {
-          requestManager.tryRegisterOrg({
-            ...form,
-            'name': 'Безымянная Компания',
-          })
-            .then(async (r) => {
-              requestManager.trySignIn(form)
-                .then(async (r) => {
-                  try {
-                    const user = await r.json();
-                    console.log(user);
-                    currentSession.session = {
-                      ...user,
-                      role: user.role.toUpperCase(),
-                    };
-                    page.props.requestNext();
-                  } catch (e) {
-                    console.log(e);
-                    alert('Внутренняя ошибка. ' +
-                      'Повторите попытку позднее');
-                  }
-                })
-                .catch(
-                  (r) => alert('Внутренняя ошибка. ' +
-                    'Повторите попытку позднее'),
-                );
+          (e) => {
+            requestManager.tryRegisterOrg({
+              ...form,
+              'name': 'Безымянная Компания',
             })
-            .catch(console.log)
-            .catch((r) =>
-              alert('Пользователь уже существует или неверный пароль'));
-        },
+                .then(async (r) => {
+                  requestManager.trySignIn(form)
+                      .then(async (r) => {
+                        try {
+                          const user = await r.json();
+                          console.log(user);
+                          currentSession.session = {
+                            ...user,
+                            role: user.role.toUpperCase(),
+                          };
+                          page.props.requestNext();
+                        } catch (e) {
+                          console.log(e);
+                          alert('Внутренняя ошибка. ' +
+                      'Повторите попытку позднее');
+                        }
+                      })
+                      .catch(
+                          (r) => alert('Внутренняя ошибка. ' +
+                    'Повторите попытку позднее'),
+                      );
+                })
+                .catch(console.log)
+                .catch((r) =>
+                  alert('Пользователь уже существует или неверный пароль'));
+          },
       );
-  },
+},
 );
 export {FirstStep};
