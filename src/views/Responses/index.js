@@ -5,6 +5,8 @@ import {Routes} from './Container/routes';
 import {Navigator} from '../../Navigator';
 import {constructRoute, ROOT_ELEMENT} from './routes';
 import {uuid} from '../../ulils';
+import {withAuthManager} from '../../ulils/AuthManager';
+import {ORGANIZATION} from '../../CONSTANTS';
 
 class ResponsesPage extends Page {
   #lastUrl
@@ -12,27 +14,18 @@ class ResponsesPage extends Page {
     return template(this.props);
   }
 
-  componentWillUpdate() {
-    super.componentWillUpdate();
-    if(this.#lastUrl && this.#lastUrl !== window.location.pathname) {
-      // setTimeout(() =>document.querySelector('#responses_close').click(), 100)
-      // document.querySelector(this.container).classList.remove('shown');
-      // document.getElementById('holder').style.overflow='';
-      // document.getElementById('holder').style.height = '';
-      // Navigator.removeRoutes(constructRoute());
-      // this.hidePage();
-      // setTimeout(() => displayEvent(document.querySelector(this.container)), 500)
-    }
-    if(!this.#lastUrl)
-      this.#lastUrl = window.location.pathname;
-  }
 
   componentDidMount() {
-    displayEvent(document.querySelector(this.container))
-    document.querySelector(this.container).click();
+    if(currentSession.user.role === ORGANIZATION) {
+      document.querySelector(this.container).hidden = false;
+      displayEvent(document.querySelector(this.container))
+    } else {
+      document.querySelector(this.container).hidden = true;
+    }
   }
 }
 
+ResponsesPage = withAuthManager(ResponsesPage);
 const displayEvent = (p) => {
   const e = (r) => {
     r.stopPropagation();

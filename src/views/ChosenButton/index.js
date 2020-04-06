@@ -31,6 +31,7 @@ class ChosenButton extends Page {
       this.#prevElem.removeEventListener('click', this.#prevEvent);
     }
     if(currentSession.user.role === UNAUTHORISED ||
+      currentSession.user.role === ORGANIZATION ||
       (!isOrgPage() && !isUserPage()) ||
       currentSession.user.id === getCurrentId()) {
       const holder = document.querySelector(this.container);
