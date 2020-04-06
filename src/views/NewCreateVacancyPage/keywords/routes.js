@@ -58,19 +58,19 @@ const RequirementsRoutes = createEditor({
     },
   ],
   onApply: (props, page) => new Promise((resolve, reject) => {
-    console.log(page.props.getStore())
-    if(!isCreationPage()) {
+    console.log(page.props.getStore());
+    if (!isCreationPage()) {
       const keywords = page.props.getStore().keywords;
-      keywords.preview = keywords.raw
+      keywords.preview = keywords.raw;
       requestManager.tryChangeVacancy({
-        keywords: JSON.stringify(keywords)
+        keywords: JSON.stringify(keywords),
       }, getVacId())
-        .then(resolve)
-        .catch(reject)
+          .then(resolve)
+          .catch(reject);
     } else {
-      resolve()
+      resolve();
     }
-  })
+  }),
 });
 
 

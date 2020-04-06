@@ -2,7 +2,7 @@ import {Page} from '../../../../Page';
 import {currentSession, requestManager, uuid} from '../../../../ulils';
 import {SummaryPreview} from './SummaryPreview';
 import {Navigator} from '../../../../Navigator';
-import ROUTES, {constructRoute, DEF_ROUTES} from './routes';
+import {constructRoute, DEF_ROUTES} from './routes';
 
 /**
  * Performs loading summaries
@@ -23,19 +23,19 @@ class LoadManager extends Page {
     super.componentDidMount?.();
 
     requestManager
-      .tryGetUserSummaries(currentSession.user.id)
-      .then(async r => {
-        const list = await r.json();
-        this.props.requestNextNoUpdate(null);
-        if (list.length > 0) {
-          const last = list.pop();
-          for (let item of list) {
-            this.props.requestNextNoUpdate(item, false);
-          }
+        .tryGetUserSummaries(currentSession.user.id)
+        .then(async (r) => {
+          const list = await r.json();
+          this.props.requestNextNoUpdate(null);
+          if (list.length > 0) {
+            const last = list.pop();
+            for (const item of list) {
+              this.props.requestNextNoUpdate(item, false);
+            }
 
-          this.props.requestNextNoUpdate(last, true);
-        }
-      })
+            this.props.requestNextNoUpdate(last, true);
+          }
+        });
   }
 }
 
@@ -56,7 +56,6 @@ const beforeNext = (page, vac) => {
   page.props.summaries.push(vac);
 };
 const afterNext = (page, vac, needUpdate) => {
-
   if (!vac) {
     Navigator.removeRoutes(constructRoute());
     Navigator.addRoutes(constructRoute(DEF_ROUTES));

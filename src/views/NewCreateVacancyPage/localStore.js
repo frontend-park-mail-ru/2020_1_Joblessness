@@ -1,5 +1,4 @@
 import {createLocalStore} from '../../ulils';
-import {currentSession} from '../../ulils';
 import {isCreationPage} from './isCreationPage';
 import {getVacId} from './getVacId';
 

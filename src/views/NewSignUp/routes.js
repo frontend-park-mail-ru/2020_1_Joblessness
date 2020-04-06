@@ -1,7 +1,7 @@
 import UserSignUpSubRoutes from './User/subRoutes';
 import OrgSignUpSubRoutes from './Organization/subRoutes';
 import {NewSignUp} from './User';
-import {NewSignUp as NewOrgSignUp} from './Organization'
+import {NewSignUp as NewOrgSignUp} from './Organization';
 const Routes = [
   {
     path: 'organizations/signup',
@@ -17,6 +17,6 @@ const Routes = [
       ...UserSignUpSubRoutes,
     ],
   },
-]
+];
 
-export default Routes
+export default Routes;

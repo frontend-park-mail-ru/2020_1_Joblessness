@@ -87,12 +87,12 @@ export const login = (login, password) => (
 );
 export const DELETE = (url, body, headers = {}) => (
   new Promise((resolve, reject) => {
-      fetch(DOMAIN + url, {
-        ...DELETE_HEADERS,
-        ...headers,
-        body: JSON.stringify(body),
-      }).then(resolve).catch(reject);
-    },
+    fetch(DOMAIN + url, {
+      ...DELETE_HEADERS,
+      ...headers,
+      body: JSON.stringify(body),
+    }).then(resolve).catch(reject);
+  },
   )
 );
 

@@ -58,18 +58,18 @@ const ConditionsRoutes = createEditor({
     },
   ],
   onApply: (props, page) => new Promise((resolve, reject) => {
-    if(!isCreationPage()) {
+    if (!isCreationPage()) {
       const conditions = page.props.getStore().conditions;
       conditions.preview = conditions.raw;
       requestManager.tryChangeVacancy({
-        conditions: JSON.stringify(conditions)
+        conditions: JSON.stringify(conditions),
       }, getVacId())
-        .then(resolve)
-        .catch(reject)
+          .then(resolve)
+          .catch(reject);
     } else {
-      resolve()
+      resolve();
     }
-  })
+  }),
 });
 
 

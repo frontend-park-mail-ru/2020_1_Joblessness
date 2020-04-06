@@ -22,57 +22,57 @@ const MainInfoRoutes = createEditor({
   ModeManager: ModeManager,
   withLocalStore: withLocalStore,
 }, {
-    SUBMIT_REDUCER: (s) => ({
-      mainInfo: {
-        ...s.mainInfo,
-        preview: [...s.mainInfo.raw],
-      },
-    }),
-    DECLINE_REDUCER: (s) => ({
-      mainInfo: {
-        ...s.mainInfo,
-        raw: [...s.mainInfo.preview],
-      },
-    }),
-    EXTRACT_REDUCER: (s) => {
-      return s.mainInfo;
+  SUBMIT_REDUCER: (s) => ({
+    mainInfo: {
+      ...s.mainInfo,
+      preview: [...s.mainInfo.raw],
     },
-    REPLACE_REDUCER: (store, sub) => {
-      return {
-        mainInfo: {
-          ...store.mainInfo,
-          ...sub,
-        },
-      };
+  }),
+  DECLINE_REDUCER: (s) => ({
+    mainInfo: {
+      ...s.mainInfo,
+      raw: [...s.mainInfo.preview],
     },
-    INSERT_REDUCER: (item) => (s) => ({
+  }),
+  EXTRACT_REDUCER: (s) => {
+    return s.mainInfo;
+  },
+  REPLACE_REDUCER: (store, sub) => {
+    return {
       mainInfo: {
-        ...s.mainInfo,
-        raw: [...s.mainInfo.raw, item],
+        ...store.mainInfo,
+        ...sub,
       },
-    }),
-    ROOT: 'orgMainInfo/',
-    EDITOR_HOLDER_SELECTOR: '#organization_org_main_info',
-    ROOT_TEMPLATE: (childRoutes = []) => [
-      {
-        path: 'organizations/*',
-        childRoutes,
-      },
-    ],
-    onApply: (props, page) => new Promise((resolve, reject) => {
-      const about = page.props.getStore().mainInfo;
-      about.preview = about.raw;
-      requestManager.tryChangeOrg({
-        about: JSON.stringify(about)
-      }).then((r) => {
-        console.log(r); resolve(r)
-      })
+    };
+  },
+  INSERT_REDUCER: (item) => (s) => ({
+    mainInfo: {
+      ...s.mainInfo,
+      raw: [...s.mainInfo.raw, item],
+    },
+  }),
+  ROOT: 'orgMainInfo/',
+  EDITOR_HOLDER_SELECTOR: '#organization_org_main_info',
+  ROOT_TEMPLATE: (childRoutes = []) => [
+    {
+      path: 'organizations/*',
+      childRoutes,
+    },
+  ],
+  onApply: (props, page) => new Promise((resolve, reject) => {
+    const about = page.props.getStore().mainInfo;
+    about.preview = about.raw;
+    requestManager.tryChangeOrg({
+      about: JSON.stringify(about),
+    }).then((r) => {
+      console.log(r); resolve(r);
+    })
         .catch((r) => {
           console.log(r);
           reject(r);
-        })
-    }),
-  }
+        });
+  }),
+},
 );
 
 const SubRoutes = [

@@ -1,67 +1,67 @@
-import {currentSession, request} from './index'
+import {currentSession, request} from './index';
 /**
  * Выполняет запросы к api
  * @class
  */
 class RequestManager {
-    /**
+  /**
      * @example
      * {
      *     login* "login",
      *     password* "psw",
      * }
      */
-    trySignIn (form) {
-        return new Promise((resolve, reject) => {
-            request
-                .post('/api/users/login', form)
-                .then((r) => {
-                    if (r.status === 201) {
-                        resolve(r);
-                    } else {
-                        reject(r);
-                    }
-                }).catch(reject);
-        },);
-    }
+  trySignIn(form) {
+    return new Promise((resolve, reject) => {
+      request
+          .post('/api/users/login', form)
+          .then((r) => {
+            if (r.status === 201) {
+              resolve(r);
+            } else {
+              reject(r);
+            }
+          }).catch(reject);
+    });
+  }
 
-    /**
+  /**
      * @example
      * Тело запроса пустое
      */
-    tryCheckIn (form) {
-        return new Promise((resolve, reject) => {
-            request
-                .post('/api/users/check', form)
-                .then((r) => {
-                    if (r.status === 201) {
-                        resolve(r);
-                    } else {
-                        reject(r);
-                    }
-                }).catch(reject);
-        },);
-    }
+  tryCheckIn(form) {
+    return new Promise((resolve, reject) => {
+      request
+          .post('/api/users/check', form)
+          .then((r) => {
+            if (r.status === 201) {
+              resolve(r);
+            } else {
+              reject(r);
+            }
+          }).catch(reject);
+    });
+  }
 
-    /**
+  /**
      * @example
      * Тело запроса пустое
      */
-    tryLogout () {
-        return new Promise((resolve, reject) => {
-            request
-                .post('/api/users/logout', {})
-                .then((r) => {
-                    if (r.status === 201) {
-                        resolve(r);
-                    } else {
-                        reject(r);
-                    }
-                }).catch(reject);
-        },);
-    }
+  tryLogout() {
+    return new Promise((resolve, reject) => {
+      request
+          .post('/api/users/logout', {})
+          .then((r) => {
+            if (r.status === 201) {
+              resolve(r);
+            } else {
+              reject(r);
+            }
+          }).catch(reject);
+    });
+  }
 
-    /**
+  /**
      * @example
      * {
      *      login* "string"
@@ -75,21 +75,21 @@ class RequestManager {
      *      birthday "2006-01-02T15:04:05.999999999Z"
      * }
      */
-    tryRegisterPerson (form) {
-        return new Promise((resolve, reject) => {
-            request
-                .post('/api/users', form)
-                .then((r) => {
-                    if (r.status === 201) {
-                        resolve(r);
-                    } else {
-                        reject(r);
-                    }
-                }).catch(reject);
-        },);
-    }
+  tryRegisterPerson(form) {
+    return new Promise((resolve, reject) => {
+      request
+          .post('/api/users', form)
+          .then((r) => {
+            if (r.status === 201) {
+              resolve(r);
+            } else {
+              reject(r);
+            }
+          }).catch(reject);
+    });
+  }
 
-    /**
+  /**
      * @example
      * {
      *      login* "string"
@@ -102,21 +102,21 @@ class RequestManager {
 	 *      site "string"
      * }
      */
-    tryRegisterOrg (form) {
-        return new Promise((resolve, reject) => {
-            request
-                .post('/api/organizations', form)
-                .then((r) => {
-                    if (r.status === 201) {
-                        resolve(r);
-                    } else {
-                        reject(r);
-                    }
-                }).catch(reject);
-        },);
-    }
+  tryRegisterOrg(form) {
+    return new Promise((resolve, reject) => {
+      request
+          .post('/api/organizations', form)
+          .then((r) => {
+            if (r.status === 201) {
+              resolve(r);
+            } else {
+              reject(r);
+            }
+          }).catch(reject);
+    });
+  }
 
-    /**
+  /**
      * @example
      * Тело запроса пустое
      * @result
@@ -131,21 +131,21 @@ class RequestManager {
      *      gender "string"
      *      birthday "2006-01-02T15:04:05.999999999Z"
      */
-    tryGetPerson (slug) {
-        return new Promise((resolve, reject) => {
-            request
-                .get('/api/users/' + slug ,{})
-                .then((r) => {
-                    if (r.status === 200) {
-                        resolve(r);
-                    } else {
-                        reject(r);
-                    }
-                }).catch(reject);
-        },);
-    }
+  tryGetPerson(slug) {
+    return new Promise((resolve, reject) => {
+      request
+          .get('/api/users/' + slug, {})
+          .then((r) => {
+            if (r.status === 200) {
+              resolve(r);
+            } else {
+              reject(r);
+            }
+          }).catch(reject);
+    });
+  }
 
-    /**
+  /**
      * @example
      * {
      *      password "string"
@@ -158,21 +158,21 @@ class RequestManager {
      *      birthday "2006-01-02T15:04:05.999999999Z"
      * }
      */
-    tryChangePerson (form) {
-        return new Promise((resolve, reject) => {
-            request
-                .put('/api/users/' + currentSession.user.id, form)
-                .then((r) => {
-                    if (r.status === 204) {
-                        resolve(r);
-                    } else {
-                        reject(r);
-                    }
-                }).catch(reject);
-        },);
-    }
+  tryChangePerson(form) {
+    return new Promise((resolve, reject) => {
+      request
+          .put('/api/users/' + currentSession.user.id, form)
+          .then((r) => {
+            if (r.status === 204) {
+              resolve(r);
+            } else {
+              reject(r);
+            }
+          }).catch(reject);
+    });
+  }
 
-    /**
+  /**
      * @example
      * Тело запроса пустое
      * @result
@@ -186,21 +186,21 @@ class RequestManager {
      *      site "string"
      *      about "string"
      */
-    tryGetOrg (slug) {
-        return new Promise((resolve, reject) => {
-            request
-                .get('/api/organizations/' + slug, {})
-                .then((r) => {
-                    if (r.status === 200) {
-                        resolve(r);
-                    } else {
-                        reject(r);
-                    }
-                }).catch(reject);
-        },);
-    }
+  tryGetOrg(slug) {
+    return new Promise((resolve, reject) => {
+      request
+          .get('/api/organizations/' + slug, {})
+          .then((r) => {
+            if (r.status === 200) {
+              resolve(r);
+            } else {
+              reject(r);
+            }
+          }).catch(reject);
+    });
+  }
 
-    /**
+  /**
      * @example
      * {
      *      password "string"
@@ -212,21 +212,21 @@ class RequestManager {
      *      site "string"
      * }
      */
-    tryChangeOrg (form) {
-        return new Promise((resolve, reject) => {
-            request
-                .put('/api/organizations/' + currentSession.user.id, form)
-                .then((r) => {
-                    if (r.status === 204) {
-                        resolve(r);
-                    } else {
-                        reject(r);
-                    }
-                }).catch(reject);
-        },);
-    }
+  tryChangeOrg(form) {
+    return new Promise((resolve, reject) => {
+      request
+          .put('/api/organizations/' + currentSession.user.id, form)
+          .then((r) => {
+            if (r.status === 204) {
+              resolve(r);
+            } else {
+              reject(r);
+            }
+          }).catch(reject);
+    });
+  }
 
-    /**
+  /**
      * @example
      * Тело запроса пустое
      * @result
@@ -236,46 +236,46 @@ class RequestManager {
      *      site "string"
      * }]
      */
-    tryGetOrgs (form) {
-        return new Promise((resolve, reject) => {
-            request
-                .get('/api/organizations', form)
-                .then((r) => {
-                    if (r.status === 200) {
-                        resolve(r);
-                    } else {
-                        reject(r);
-                    }
-                }).catch(reject);
-        },);
-    }
+  tryGetOrgs(form) {
+    return new Promise((resolve, reject) => {
+      request
+          .get('/api/organizations', form)
+          .then((r) => {
+            if (r.status === 200) {
+              resolve(r);
+            } else {
+              reject(r);
+            }
+          }).catch(reject);
+    });
+  }
 
-    /**
+  /**
      * @example
      * multipart/form-data
      */
-    trySetAvatar (form, slug) {
-        return new Promise((resolve, reject) => {
-            request
-                .post('/api/users/' + slug + '/avatar', form)
-                .then((r) => {
-                    if (r.status === 201) {
-                        resolve(r);
-                    } else {
-                        reject(r);
-                    }
-                }).catch(reject);
-        },);
-    }
+  trySetAvatar(form, slug) {
+    return new Promise((resolve, reject) => {
+      request
+          .post('/api/users/' + slug + '/avatar', form)
+          .then((r) => {
+            if (r.status === 201) {
+              resolve(r);
+            } else {
+              reject(r);
+            }
+          }).catch(reject);
+    });
+  }
 
-    /**
+  /**
      * {
             summaryId uint64
          }
      */
-    trySendSummary (vacId, sumId) {
-      return new Promise((resolve, reject) => {
-        request
+  trySendSummary(vacId, sumId) {
+    return new Promise((resolve, reject) => {
+      request
           .post('/api/vacancies/' + vacId + '/response', {
             summaryId: sumId,
           })
@@ -286,19 +286,19 @@ class RequestManager {
               reject(r);
             }
           }).catch(reject);
-      },);
-    }
+    });
+  }
 
-    /**
+  /**
      * {
             vacancyId uint64
             accepted bool
             denied bool
          }
      */
-    tryResponseSummary (form, slug) {
-      return new Promise((resolve, reject) => {
-        request
+  tryResponseSummary(form, slug) {
+    return new Promise((resolve, reject) => {
+      request
           .put('/summaries/' + slug + '/response', form)
           .then((r) => {
             if (r.status === 200) {
@@ -307,27 +307,27 @@ class RequestManager {
               reject(r);
             }
           }).catch(reject);
-      },);
-    }
-    /**
+    });
+  }
+  /**
      * @example
      * Тело запроса пустое
      */
-    trySetLike (slug) {
-        return new Promise((resolve, reject) => {
-            request
-                .post('/api/users/' + slug + '/like', {})
-                .then((r) => {
-                    if (r.status === 200) {
-                        resolve(r);
-                    } else {
-                        reject(r);
-                    }
-                }).catch(reject);
-        },);
-    }
+  trySetLike(slug) {
+    return new Promise((resolve, reject) => {
+      request
+          .post('/api/users/' + slug + '/like', {})
+          .then((r) => {
+            if (r.status === 200) {
+              resolve(r);
+            } else {
+              reject(r);
+            }
+          }).catch(reject);
+    });
+  }
 
-    /**
+  /**
      * @example
      * [{
      *      id uint64
@@ -335,21 +335,21 @@ class RequestManager {
      *      is_person bool
      * }]
      */
-    tryGetUserFavorites (form, slug) {
-        return new Promise((resolve, reject) => {
-            request
-                .get('/api/users/' + slug + '/favorite', form)
-                .then((r) => {
-                    if (r.status === 200) {
-                        resolve(r);
-                    } else {
-                        reject(r);
-                    }
-                }).catch(reject);
-        },);
-    }
+  tryGetUserFavorites(form, slug) {
+    return new Promise((resolve, reject) => {
+      request
+          .get('/api/users/' + slug + '/favorite', form)
+          .then((r) => {
+            if (r.status === 200) {
+              resolve(r);
+            } else {
+              reject(r);
+            }
+          }).catch(reject);
+    });
+  }
 
-    /**
+  /**
      * @example
      * {
      *    name* "string"
@@ -362,21 +362,21 @@ class RequestManager {
      *    keywords "string"
      * }
      */
-    tryCreateVacancy (form) {
-        return new Promise((resolve, reject) => {
-            request
-                .post('/api/vacancies', form)
-                .then((r) => {
-                    if (r.status === 201) {
-                        resolve(r);
-                    } else {
-                        reject(r);
-                    }
-                }).catch(reject);
-        },);
-    }
+  tryCreateVacancy(form) {
+    return new Promise((resolve, reject) => {
+      request
+          .post('/api/vacancies', form)
+          .then((r) => {
+            if (r.status === 201) {
+              resolve(r);
+            } else {
+              reject(r);
+            }
+          }).catch(reject);
+    });
+  }
 
-    /**
+  /**
      * @example
      * {
      *    organization {
@@ -399,21 +399,21 @@ class RequestManager {
      *    keywords "string"
      * }
      */
-    tryGetVacancy (slug) {
-        return new Promise((resolve, reject) => {
-            request
-                .get('/api/vacancies/' + slug, {})
-                .then((r) => {
-                    if (r.status === 200) {
-                        resolve(r);
-                    } else {
-                        reject(r);
-                    }
-                }).catch(reject);
-        },);
-    }
+  tryGetVacancy(slug) {
+    return new Promise((resolve, reject) => {
+      request
+          .get('/api/vacancies/' + slug, {})
+          .then((r) => {
+            if (r.status === 200) {
+              resolve(r);
+            } else {
+              reject(r);
+            }
+          }).catch(reject);
+    });
+  }
 
-    /**
+  /**
      * @example
      * [{
      *    organization {
@@ -436,21 +436,21 @@ class RequestManager {
      *    keywords "string"
      * }]
      */
-    tryGetVacancies (form) {
-        return new Promise((resolve, reject) => {
-            request
-                .get('/api/vacancies', form)
-                .then((r) => {
-                    if (r.status === 200) {
-                        resolve(r);
-                    } else {
-                        reject(r);
-                    }
-                }).catch(reject);
-        },);
-    }
+  tryGetVacancies(form) {
+    return new Promise((resolve, reject) => {
+      request
+          .get('/api/vacancies', form)
+          .then((r) => {
+            if (r.status === 200) {
+              resolve(r);
+            } else {
+              reject(r);
+            }
+          }).catch(reject);
+    });
+  }
 
-    /**
+  /**
      * @example
      * {
      *    name "string"
@@ -463,39 +463,39 @@ class RequestManager {
      *    keywords "string"
      * }
      */
-    tryChangeVacancy (form, slug) {
-        return new Promise((resolve, reject) => {
-            request
-                .put('/api/vacancies/' + slug, form)
-                .then((r) => {
-                    if (r.status === 200) {
-                        resolve(r);
-                    } else {
-                        reject(r);
-                    }
-                }).catch(reject);
-        },);
-    }
+  tryChangeVacancy(form, slug) {
+    return new Promise((resolve, reject) => {
+      request
+          .put('/api/vacancies/' + slug, form)
+          .then((r) => {
+            if (r.status === 200) {
+              resolve(r);
+            } else {
+              reject(r);
+            }
+          }).catch(reject);
+    });
+  }
 
-    /**
+  /**
      * @example
      * Тело запроса пустое
      */
-    tryDeleteVacancy (slug) {
-        return new Promise((resolve, reject) => {
-            request
-                .DELETE('/api/vacancies/' + slug, {})
-                .then((r) => {
-                    if (r.status === 200 || r.status === 204) {
-                        resolve(r);
-                    } else {
-                        reject(r);
-                    }
-                }).catch(reject);
-        },);
-    }
+  tryDeleteVacancy(slug) {
+    return new Promise((resolve, reject) => {
+      request
+          .DELETE('/api/vacancies/' + slug, {})
+          .then((r) => {
+            if (r.status === 200 || r.status === 204) {
+              resolve(r);
+            } else {
+              reject(r);
+            }
+          }).catch(reject);
+    });
+  }
 
-    /**
+  /**
      * @example
      * Тело запроса пустое
      * @result
@@ -508,21 +508,21 @@ class RequestManager {
      *    keywords "string"
      * }]
      */
-    tryGetOrgVacancies (slug) {
-        return new Promise((resolve, reject) => {
-            request
-                .get('/api/organizations/' + slug + '/vacancies', {})
-                .then((r) => {
-                    if (r.status === 200) {
-                        resolve(r);
-                    } else {
-                        reject(r);
-                    }
-                }).catch(reject);
-        },);
-    }
+  tryGetOrgVacancies(slug) {
+    return new Promise((resolve, reject) => {
+      request
+          .get('/api/organizations/' + slug + '/vacancies', {})
+          .then((r) => {
+            if (r.status === 200) {
+              resolve(r);
+            } else {
+              reject(r);
+            }
+          }).catch(reject);
+    });
+  }
 
-    /**
+  /**
      * @example
      * /api/search?type=person&since=2&desc=true&request=awdwada
      * @result
@@ -549,21 +549,21 @@ class RequestManager {
      *    keywords "string"
      * }]
      */
-    trySearch ({type = "", since = "0", desc = "true", requestBody = ""}) {
-        return new Promise((resolve, reject) => {
-            request
-                .get(`/api/search?type=${type}&since=${since}&desc=${desc}&request=${requestBody}`, {})
-                .then((r) => {
-                    if (r.status === 200) {
-                        resolve(r);
-                    } else {
-                        reject(r);
-                    }
-                }).catch(reject);
-        },);
-    }
+  trySearch({type = '', since = '0', desc = 'true', requestBody = ''}) {
+    return new Promise((resolve, reject) => {
+      request
+          .get(`/api/search?type=${type}&since=${since}&desc=${desc}&request=${requestBody}`, {})
+          .then((r) => {
+            if (r.status === 200) {
+              resolve(r);
+            } else {
+              reject(r);
+            }
+          }).catch(reject);
+    });
+  }
 
-    /**
+  /**
      [{
     "id": 0,
     "keywords": "string",
@@ -594,19 +594,19 @@ class RequestManager {
         ]
     }]
      */
-    tryGetUserSummaries (slug) {
-        return new Promise((resolve, reject) => {
-            request
-                .get('/api/users/' + slug + '/summaries', {})
-                .then((r) => {
-                    if (r.status === 200) {
-                        resolve(r);
-                    } else {
-                        reject(r);
-                    }
-                }).catch(reject);
-        },);
-    }
+  tryGetUserSummaries(slug) {
+    return new Promise((resolve, reject) => {
+      request
+          .get('/api/users/' + slug + '/summaries', {})
+          .then((r) => {
+            if (r.status === 200) {
+              resolve(r);
+            } else {
+              reject(r);
+            }
+          }).catch(reject);
+    });
+  }
 
   /**
    * @example
@@ -634,36 +634,36 @@ class RequestManager {
     ]
   }
    */
-  tryCreateSummary (form) {
+  tryCreateSummary(form) {
     return new Promise((resolve, reject) => {
       request
-        .post('/api/summaries', form)
-        .then((r) => {
-          if (r.status === 201 || r.status === 200 ) {
-            resolve(r);
-          } else {
-            reject(r);
-          }
-        }).catch(reject);
-    },);
+          .post('/api/summaries', form)
+          .then((r) => {
+            if (r.status === 201 || r.status === 200 ) {
+              resolve(r);
+            } else {
+              reject(r);
+            }
+          }).catch(reject);
+    });
   }
-  tryDeleteSummary (id) {
+  tryDeleteSummary(id) {
     return new Promise((resolve, reject) => {
       request
-        .DELETE(`/api/summaries/${id}`, {})
-        .then((r) => {
-          if (r.status === 204) {
-            resolve(r);
-          } else {
-            reject(r);
-          }
-        }).catch(reject);
-    },);
+          .DELETE(`/api/summaries/${id}`, {})
+          .then((r) => {
+            if (r.status === 204) {
+              resolve(r);
+            } else {
+              reject(r);
+            }
+          }).catch(reject);
+    });
   }
 }
 
 const requestManager = new RequestManager();
 
 export {
-    requestManager,
+  requestManager,
 };

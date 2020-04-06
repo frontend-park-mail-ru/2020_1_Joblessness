@@ -40,7 +40,8 @@ class CurrentSession {
       }
       if (![UNAUTHORISED, PERSON, ORGANIZATION].contains(role)) {
         throw new Error(`
-        Expected one of UNAUTHORISED, PERSON, ORGANIZATION as role. Received ${role};
+        Expected one of UNAUTHORISED, PERSON, ORGANIZATION as role. 
+        Received ${role};
         `);
       }
       this.#user = {
@@ -76,7 +77,7 @@ class CurrentSession {
    * @return {{userId: *}|null}
    */
   get user() {
-    return {...this.#user}
+    return {...this.#user};
   }
 
 
@@ -89,19 +90,20 @@ class CurrentSession {
   }
 
   onChange() {
-    console.log(this.#events)
+    console.log(this.#events);
     this.#events['change'].forEach((e) => (e?.({...this.#user})));
   }
   addEventListener(eventName, event) {
     this.#events[eventName]?.push(event);
   }
   removeEventListener(eventName, event) {
-    this.#events[eventName] = this.#events[eventName].filter( (e) => e !== event);
+    this.#events[eventName] = this.#events[eventName].
+        filter( (e) => e !== event);
   }
 }
 
 const currentSession = new CurrentSession();
-window.currentSession = currentSession
+window.currentSession = currentSession;
 export {
   currentSession,
 };

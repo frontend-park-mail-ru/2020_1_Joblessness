@@ -3,11 +3,9 @@ import './auth-elements.sass';
 import {Page} from '../../../Page';
 import template from './pug/index3.pug';
 import {
-  request,
-  currentSession,
   uuid,
   withForm,
-  requestManager
+  requestManager,
 } from '../../../ulils';
 
 /**
@@ -23,32 +21,32 @@ class ThirdStep extends Page {
 }
 
 ThirdStep = withForm(ThirdStep,
-  {
-    firstName: {
-      id: uuid(),
-      required: true,
-      validator: (s) => s.length,
-      warnMessage: 'Имя не может быть пустой строкой',
+    {
+      firstName: {
+        id: uuid(),
+        required: true,
+        validator: (s) => s.length,
+        warnMessage: 'Имя не может быть пустой строкой',
+      },
+      lastName: {
+        id: uuid(),
+        required: true,
+        validator: (s) => s.length,
+        warnMessage: 'Фамилия - тоже',
+      },
     },
-    lastName: {
+    {
       id: uuid(),
-      required: true,
-      validator: (s) => s.length,
-      warnMessage: 'Фамилия - тоже',
     },
-  },
-  {
-    id: uuid(),
-  },
-  (form, page) => {
-    requestManager.tryChangePerson(form)
-      .then((r) => {
-        page.props.requestNext();
-      })
-      .catch((r) => {
-        console.log(r);
-      });
-  },
+    (form, page) => {
+      requestManager.tryChangePerson(form)
+          .then((r) => {
+            page.props.requestNext();
+          })
+          .catch((r) => {
+            console.log(r);
+          });
+    },
 );
 
 export {ThirdStep};

@@ -25,7 +25,7 @@ class NewSignUp extends Page {
   componentWillUpdate() {
     super.componentWillUpdate();
     const step = window.location.pathname.split('/');
-    if(step[step.length - 1] === '') {
+    if (step[step.length - 1] === '') {
       step.pop();
     }
     switch (step[step.length - 1]) {
@@ -49,25 +49,25 @@ class NewSignUp extends Page {
     }
 
     setTimeout(
-      () => {
-        const stepsHolder = document.querySelector('.step-counter');
-        const elems = document.querySelectorAll('.step-counter--counter.current');
-        if(elems.length) {
-          Array.from(elems).forEach(
-            e => e.classList.remove('current')
-          )
-        }
+        () => {
+          const stepsHolder = document.querySelector('.step-counter');
+          const elems = document.querySelectorAll(
+              '.step-counter--counter.current');
+          if (elems.length) {
+            Array.from(elems).forEach(
+                (e) => e.classList.remove('current'),
+            );
+          }
         stepsHolder
           ?.childNodes[this.currentStep * 2]
-          ?.classList.add('current')
-        for(let c = 0; c <= this.currentStep; c++) {
+          ?.classList.add('current');
+        for (let c = 0; c <= this.currentStep; c++) {
           stepsHolder
             ?.childNodes[c * 2]
-            ?.classList.remove('locked')
+            ?.classList.remove('locked');
         }
-      }, 20)
+        }, 20);
   }
-
 }
 
 NewSignUp = withChainedPages(NewSignUp, SubRoutes);

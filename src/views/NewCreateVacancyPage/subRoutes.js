@@ -16,7 +16,7 @@ const SubRoutes = [
   {
     path: 'mainInfo',
     alwaysOn: true,
-    element: new MainInfo('#vacancy_main_info')
+    element: new MainInfo('#vacancy_main_info'),
   },
   ...ResponsibilitiesRoutes,
   ...RequirementsRoutes,

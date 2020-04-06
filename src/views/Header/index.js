@@ -1,6 +1,6 @@
 import './style.sass';
 import {Page} from '../../Page';
-import template from './pug/header.pug'
+import template from './pug/header.pug';
 import {currentSession, requestManager} from '../../ulils';
 import {Navigator} from '../../Navigator';
 import {withAuthManager} from '../../ulils/AuthManager';
@@ -19,16 +19,17 @@ class Header extends Page {
     super.componentDidMount();
     const signOut = () => {
       requestManager.tryLogout({})
-        .then(() => {
-          document.getElementById('sign-out')?.removeEventListener('click', signOut)
+          .then(() => {
+          document.getElementById('sign-out')
+              ?.removeEventListener('click', signOut);
           currentSession.session = null;
-          Navigator.showPage('/')
-        })
-        .catch(() => {
-          currentSession.session = null;
-          Navigator.showPage('/')
-        })
-    }
+          Navigator.showPage('/');
+          })
+          .catch(() => {
+            currentSession.session = null;
+            Navigator.showPage('/');
+          });
+    };
     document.getElementById('sign-out')?.addEventListener('click', signOut);
   }
 }

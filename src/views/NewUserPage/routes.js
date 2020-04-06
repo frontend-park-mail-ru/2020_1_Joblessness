@@ -7,7 +7,7 @@ const Routes = [
     element: new UserPage('#root'),
     childRoutes: [
       ...SubRoutes,
-    ]
+    ],
   },
 ];
 

@@ -8,11 +8,11 @@ import {
   NotFoundPage,
   CreateSummaryRoutes,
 } from './views';
-import ORGANIZATIONS_ROUTES from './views/OrganizationPage/routes'
-import CREATE_VACANCY_ROUTES from './views/NewCreateVacancyPage/routes'
-import USER_ROUTES from './views/NewUserPage/routes'
-import SIGNUP_ROUTES from './views/NewSignUp/routes'
-import SEARCH_ROUTES from './views/SearchPage/routes'
+import ORGANIZATIONS_ROUTES from './views/OrganizationPage/routes';
+import CREATE_VACANCY_ROUTES from './views/NewCreateVacancyPage/routes';
+import USER_ROUTES from './views/NewUserPage/routes';
+import SIGNUP_ROUTES from './views/NewSignUp/routes';
+import SEARCH_ROUTES from './views/SearchPage/routes';
 import {RootElement} from './RootElement';
 
 /**

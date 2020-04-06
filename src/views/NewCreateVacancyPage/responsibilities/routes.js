@@ -58,19 +58,18 @@ const ResponsibilitiesRoutes = createEditor({
     },
   ],
   onApply: (props, page) => new Promise((resolve, reject) => {
-
-    if(!isCreationPage()) {
+    if (!isCreationPage()) {
       const responsibilities = page.props.getStore().responsibilities;
-      responsibilities.preview = responsibilities.raw
+      responsibilities.preview = responsibilities.raw;
       requestManager.tryChangeVacancy({
-        responsibilities: JSON.stringify(responsibilities)
+        responsibilities: JSON.stringify(responsibilities),
       }, getVacId())
-        .then(resolve)
-        .catch(reject)
+          .then(resolve)
+          .catch(reject);
     } else {
-      resolve()
+      resolve();
     }
-  })
+  }),
 });
 
 

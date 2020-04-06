@@ -62,7 +62,7 @@ const isLogin = (login) =>
 const isMoney = (money) => !isNaN(money) && money !== '';
 const isUrl = (url) => /^(?:http(s)?:\/\/)?[\w.-]+(?:\.[\w\.-]+)+[\w\-\._~:/?#[\]@!\$&'\(\)\*\+,;=.]+$/.test(url);
 
-const isName = name => /^[a-zA-Zа-яА-ЯёЁ]+(([',. -][a-zA-Zа-яА-ЯёЁ])?[a-zA-Zа-яА-ЯёЁ]*)*$/.test(name);
+const isName = (name) => /^[a-zA-Zа-яА-ЯёЁ]+(([',. -][a-zA-Zа-яА-ЯёЁ])?[a-zA-Zа-яА-ЯёЁ]*)*$/.test(name);
 export default {
   validateString,
   validateFunction,

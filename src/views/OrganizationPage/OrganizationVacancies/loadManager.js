@@ -1,12 +1,11 @@
 import {Page} from '../../../Page';
-import {currentSession, requestManager, uuid} from '../../../ulils';
+import {requestManager, uuid} from '../../../ulils';
 import {VacancyPreview} from './VacancyPreview';
 import {ChosenButton} from '../ChosenButton';
 import {Navigator} from '../../../Navigator';
 import {constructSubRoutes} from '../subRoutes';
 import {getOrgId} from '../getOrgInfo';
-import {CreateVacancyButton} from './CreateVacancyButton';
-import ROUTES, {constructRoute, DEF_ROUTES} from './routes';
+import {constructRoute, DEF_ROUTES} from './routes';
 /**
  * Performs loading vacancies
  */
@@ -26,36 +25,36 @@ class LoadManager extends Page {
     super.componentDidMount?.();
 
     requestManager.tryGetOrgVacancies(getOrgId())
-      .then(async r => {
-        const list = await r.json();
-        this.props.requestNextNoUpdate(null);
-        if(list.length > 0) {
-          const last = list.pop();
+        .then(async (r) => {
+          const list = await r.json();
+          this.props.requestNextNoUpdate(null);
+          if (list.length > 0) {
+            const last = list.pop();
 
-          for(let item of list) {
+            for (const item of list) {
+              this.props.requestNextNoUpdate({
+                vacancyName: item.name,
+                salaryFrom: item.salaryFrom,
+                salaryTo: item.salaryTo,
+                id: item.id,
+              }, false);
+            }
+
             this.props.requestNextNoUpdate({
-              vacancyName: item.name,
-              salaryFrom: item.salaryFrom,
-              salaryTo: item.salaryTo,
-              id: item.id,
-            }, false);
+              vacancyName: last.name,
+              salaryFrom: last.salaryFrom,
+              salaryTo: last.salaryTo,
+              id: last.id,
+            }, true);
           }
-
-          this.props.requestNextNoUpdate({
-            vacancyName: last.name,
-            salaryFrom: last.salaryFrom,
-            salaryTo: last.salaryTo,
-            id: last.id,
-          }, true);
-        }
-      })
-      .catch(console.log)
+        })
+        .catch(console.log);
   }
 }
 
 
 const beforeNext = (page, vac) => {
-  if(!vac) {
+  if (!vac) {
     page.props.vacancies = [];
     return;
   }
@@ -70,8 +69,7 @@ const beforeNext = (page, vac) => {
   page.props.vacancies.push(vac);
 };
 const afterNext = (page, vac, needUpdate) => {
-
-  if(!vac) {
+  if (!vac) {
     Navigator.removeRoutes(constructRoute());
     Navigator.addRoutes(constructRoute(DEF_ROUTES));
     return;

@@ -1,5 +1,5 @@
 import {Page} from '../../../Page';
-import template from './index.pug'
+import template from './index.pug';
 import {uuid} from '../../../ulils';
 import {withEvents} from '../../../ulils';
 import {Navigator} from '../../../Navigator';
@@ -7,8 +7,7 @@ import {Navigator} from '../../../Navigator';
 /**
  *
  */
-class NavPage extends Page{
-
+class NavPage extends Page {
   /**
    *
    */
@@ -34,10 +33,10 @@ const showSubPage = (name) => {
   if (!path) {
     if (window.location.pathname.endsWith('users/')) {
       Navigator.showPage(
-        window.location.pathname + currentSession.user.id + `/${name}`);
+          window.location.pathname + currentSession.user.id + `/${name}`);
     } else {
       Navigator.showPage(
-        window.location.pathname + '/' + currentSession.user.id + `/${name}`);
+          window.location.pathname + '/' + currentSession.user.id + `/${name}`);
     }
   } else {
     Navigator.showPage(path + `/${name}`);
@@ -45,40 +44,40 @@ const showSubPage = (name) => {
 };
 
 NavPage = withEvents(NavPage, 'events',
-  {
-    showSettings: {
-      id: settingsId,
-      eventName: 'click',
-      event: (e, page, id) => {
-        page.props.random = uuid();
-        showSubPage('settings');
+    {
+      showSettings: {
+        id: settingsId,
+        eventName: 'click',
+        event: (e, page, id) => {
+          page.props.random = uuid();
+          showSubPage('settings');
+        },
+      },
+      showSummaries: {
+        id: summariesId,
+        eventName: 'click',
+        event: (e, page, id) => {
+          page.props.random = uuid();
+          showSubPage('summaries');
+        },
+      },
+      showFavourite: {
+        id: favouritesId,
+        eventName: 'click',
+        event: (e, page, id) => {
+          page.props.random = uuid();
+          showSubPage('favourites');
+        },
+      },
+      showStatistics: {
+        id: statisticsId,
+        eventName: 'click',
+        event: (e, page, id) => {
+          page.props.random = uuid();
+          showSubPage('');
+        },
       },
     },
-    showSummaries: {
-      id: summariesId,
-      eventName: 'click',
-      event: (e, page, id) => {
-        page.props.random = uuid();
-        showSubPage('summaries');
-      },
-    },
-    showFavourite: {
-      id: favouritesId,
-      eventName: 'click',
-      event: (e, page, id) => {
-        page.props.random = uuid();
-        showSubPage('favourites');
-      },
-    },
-    showStatistics: {
-      id: statisticsId,
-      eventName: 'click',
-      event: (e, page, id) => {
-        page.props.random = uuid();
-        showSubPage('');
-      },
-    },
-  },
 );
 
 const updateLinks = () => {
@@ -104,5 +103,5 @@ const updateLinks = () => {
 };
 
 export {
-  NavPage
-}
+  NavPage,
+};

@@ -1,8 +1,8 @@
 import {Page} from '../../../Page';
 import template from './index.pug';
-import './style.sass'
+import './style.sass';
 import {
-  playMountAnimation
+  playMountAnimation,
 } from '../../OrganizationPage/OrganizationVacancies/addAnimations';
 
 class Item extends Page {
@@ -17,7 +17,7 @@ class Item extends Page {
       this._wasMount = true;
       playMountAnimation(parent);
     } else {
-      if(parent) {
+      if (parent) {
         parent.style.transitionDuration = '0';
         // parent.firstChild.style.transform = this._rot;
         // parent.firstChild.style.opacity = this._val;
@@ -25,7 +25,6 @@ class Item extends Page {
       }
     }
   }
-
 }
 
-export default Item
+export default Item;

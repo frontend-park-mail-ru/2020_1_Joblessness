@@ -11,8 +11,8 @@ export default {
   item,
   modeManager,
   preview,
-  parent
-}
+  parent,
+};
 
 export {
   addItem,
@@ -20,5 +20,5 @@ export {
   item,
   modeManager,
   preview,
-  parent
-}
+  parent,
+};

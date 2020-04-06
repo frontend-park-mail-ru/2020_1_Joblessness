@@ -6,8 +6,7 @@ import {
   requestManager,
   uuid,
   validators,
-  withEvents,
-  withForm
+  withForm,
 } from '../../../ulils';
 
 /**
@@ -22,23 +21,24 @@ class ForthStep extends Page {
   }
 }
 ForthStep= withForm(ForthStep, {
-    tag: {
-      id: uuid(),
-      required: true,
-      validator: validators.isLogin,
-      warnMessage: 'Tag состоит из минимум 6 символов, в том числе из цифр, латинских букв, а также символов _ и .',
-    }
+  tag: {
+    id: uuid(),
+    required: true,
+    validator: validators.isLogin,
+    warnMessage: 'Tag состоит из минимум 6 символов, ' +
+        'в том числе из цифр, латинских букв, а также символов _ и .',
   },
-  {
-      id: uuid(),
-  },
-  (form, page) => {
-    requestManager.tryChangePerson(form)
+},
+{
+  id: uuid(),
+},
+(form, page) => {
+  requestManager.tryChangePerson(form)
       .then(
-        () => page.props.requestNext(form)
+          () => page.props.requestNext(form),
       )
       .catch(() => alert('Тег уже существует'));
-  },
+},
 );
 
 export {ForthStep};

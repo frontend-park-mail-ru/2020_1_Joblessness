@@ -21,14 +21,15 @@ class CreateVacancyPage extends Page {
   render() {
     let buttonText = 'Откликнуться на вакансию';
     if (/\/vacancies\/create/.test(location.pathname) &&
-      currentSession.user.role === ORGANIZATION)
+      currentSession.user.role === ORGANIZATION) {
       buttonText = 'Сохранить и опубликовать';
-    else if (currentSession.user.role === ORGANIZATION &&
-      this.props.getStore().organization.id === currentSession.user.id)
+    } else if (currentSession.user.role === ORGANIZATION &&
+      this.props.getStore().organization.id === currentSession.user.id) {
       buttonText = 'Удалить вакансию';
-    else if (currentSession.user.role === ORGANIZATION &&
-      this.props.getStore().organization.id !== currentSession.user.id)
+    } else if (currentSession.user.role === ORGANIZATION &&
+      this.props.getStore().organization.id !== currentSession.user.id) {
       buttonText = '';
+    }
     return template({
       ...this.props.inputFields,
       buttonText,
@@ -40,11 +41,11 @@ class CreateVacancyPage extends Page {
     const vacId = getVacId() || 'create';
     super.componentDidMount();
     addButtonEvents(this);
-    if(this.#needUpdate) {
+    if (this.#needUpdate) {
       this.#needUpdate = false;
       return;
     }
-    if(this.#prevVac !== vacId ) {
+    if (this.#prevVac !== vacId ) {
       this.#prevVac = vacId;
       this.props.resetStore();
       Navigator.updateAllPages();
@@ -55,57 +56,57 @@ class CreateVacancyPage extends Page {
       console.log('org create vac');
       const orgId = getOrgId();
       requestManager.tryGetOrg(orgId)
-        .then(async (r) => {
-          const res = await r.json();
+          .then(async (r) => {
+            const res = await r.json();
 
-          this.props.setStore(s => ({
-            organization: {
-              tag: '',
-              ...res
-            },
-          }));
-          this.#needUpdate = true;
-          Navigator.updateAllPages();
-        })
-        .catch(console.log)
-
+            this.props.setStore((s) => ({
+              organization: {
+                tag: '',
+                ...res,
+              },
+            }));
+            this.#needUpdate = true;
+            Navigator.updateAllPages();
+          })
+          .catch(console.log);
     } else if (/\/vacancies\/create/.test(location.pathname)) {
       // Navigator.showPage('404');
     } else {
-      //@TODO try to load existing vacancy
+      // @TODO try to load existing vacancy
       requestManager.tryGetVacancy(getVacId())
-        .then(async r => {
-          const res = await r.json();
-          const vac = {
-            mainInfo: {
-              name: res.name || '',
-              description: res.description || '',
-              salaryFrom: res.salaryFrom || '',
-              salaryTo: res.salaryTo || '',
-            },
-            responsibilities: JSON.parse(res.responsibilities.replace(/&#34;/g, '"')),
-            conditions: JSON.parse(res.conditions.replace(/&#34;/g, '"')),
-            keywords: JSON.parse(res.keywords.replace(/&#34;/g, '"')),
-          };
-          this.props.setStore(s => ({
-            organization: res.organization,
-            requirements: {
-              preview: [],
-              raw: [],
-            },
-            ...vac,
-          }));
-          this.props.random = uuid();
-          Navigator.updateAllPages();
-        })
-        .catch(r => {
-          if (r.status === 404) {
-            Navigator.showPage('404');
-          }
-          console.log(r)
+          .then(async (r) => {
+            const res = await r.json();
+            const vac = {
+              mainInfo: {
+                name: res.name || '',
+                description: res.description || '',
+                salaryFrom: res.salaryFrom || '',
+                salaryTo: res.salaryTo || '',
+              },
+              responsibilities: JSON
+                  .parse(res.responsibilities.replace(/&#34;/g, '"')),
+              conditions: JSON.parse(res.conditions.replace(/&#34;/g, '"')),
+              keywords: JSON.parse(res.keywords.replace(/&#34;/g, '"')),
+            };
+            this.props.setStore((s) => ({
+              organization: res.organization,
+              requirements: {
+                preview: [],
+                raw: [],
+              },
+              ...vac,
+            }));
+            this.props.random = uuid();
+            Navigator.updateAllPages();
+          })
+          .catch((r) => {
+            if (r.status === 404) {
+              Navigator.showPage('404');
+            }
+            console.log(r);
           // alert('Невозможно соединиться с сервером');
           // Navigator.showPage('/');
-        })
+          });
     }
   }
 }
@@ -116,7 +117,8 @@ const addButtonEvents = (page) => {
     const but = document.getElementById('create_vacancy_button');
     but.addEventListener('click', () => {
       const vac = page.props.getStore();
-      if (!vac.mainInfo.name || !(vac.mainInfo.salaryTo && vac.mainInfo.salaryFrom)) {
+      if (!vac.mainInfo.name ||
+          !(vac.mainInfo.salaryTo && vac.mainInfo.salaryFrom)) {
         alert('Не все поля заполнены');
         return;
       }
@@ -128,52 +130,51 @@ const addButtonEvents = (page) => {
         conditions: JSON.stringify(vac.conditions),
         keywords: JSON.stringify(vac.keywords),
       }).then(
-        async (r) => {
-          try {
-            const res = await r.json();
-            localStorage.removeItem(`vacancies/create`);
-            page.props.resetStore();
-            console.log({...page.props.getStore().responsibilities})
-            console.log(JSON.parse(localStorage.getItem('vacancies/create')));
-            Navigator.showPage(`/vacancies/${res.id}`);
-          } catch (e) {
-            console.log(e)
-            Navigator.showPage(`/organizations/${getOrgId()}`);
-          }
-        }
+          async (r) => {
+            try {
+              const res = await r.json();
+              localStorage.removeItem(`vacancies/create`);
+              page.props.resetStore();
+              console.log({...page.props.getStore().responsibilities});
+              console.log(JSON.parse(localStorage.getItem('vacancies/create')));
+              Navigator.showPage(`/vacancies/${res.id}`);
+            } catch (e) {
+              console.log(e);
+              Navigator.showPage(`/organizations/${getOrgId()}`);
+            }
+          },
       ).catch((r) => {
         alert('Невозможно создать вакансию');
-        console.log(r)
-      })
-    })
+        console.log(r);
+      });
+    });
   } else if (currentSession.user.role === ORGANIZATION &&
     page.props.getStore().organization.id === currentSession.user.id) {
-
     const but = document.getElementById('create_vacancy_button');
     but?.addEventListener('click', () => {
       requestManager.tryDeleteVacancy(getVacId())
-        .then(() => {
-          localStorage.removeItem(`vacancies/${getVacId()}`);
-          Navigator.showPage(`/organizations/${getOrgId()}`);
-        })
-        .catch((e) => {
-          console.log(e);
-          alert('Невозможно удалить вакансию')
-        })
-    })
+          .then(() => {
+            localStorage.removeItem(`vacancies/${getVacId()}`);
+            Navigator.showPage(`/organizations/${getOrgId()}`);
+          })
+          .catch((e) => {
+            console.log(e);
+            alert('Невозможно удалить вакансию');
+          });
+    });
   } else if (currentSession.user.role === ORGANIZATION &&
     page.props.getStore().organization.id !== currentSession.user.id) {
     // Do nothing
   } else {
-    //@TODO создать отклик
+    // @TODO создать отклик
     const but = document.getElementById('create_vacancy_button');
     but.addEventListener('click', () => {
       if (currentSession.user.role === UNAUTHORISED) {
         Navigator.showPage('/signup/start');
         return;
       }
-      Navigator.showPage(`/vacancies/${getVacId()}/response`)
-    })
+      Navigator.showPage(`/vacancies/${getVacId()}/response`);
+    });
   }
 };
 CreateVacancyPage = withLocalStore(CreateVacancyPage);

@@ -1,5 +1,5 @@
 import {ResponsePage} from './index';
-import SubRoutes from './summaries/routes'
+import SubRoutes from './summaries/routes';
 import LoadManagerRoutes from './summaries/loadManager';
 
 const Routes = [
@@ -9,8 +9,8 @@ const Routes = [
     childRoutes: [
       ...SubRoutes,
       ...LoadManagerRoutes,
-    ]
+    ],
   },
 ];
 
-export default Routes
+export default Routes;

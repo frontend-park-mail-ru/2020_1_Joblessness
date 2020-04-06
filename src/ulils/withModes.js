@@ -1,9 +1,8 @@
 import {Navigator} from '../Navigator';
 
 export const withModes = (Wrappee, initModeEvents = [],
-                   defaultMode = PREVIEW, defaultPermissions = UNAUTHORISED) => {
+    defaultMode = PREVIEW, defaultPermissions = UNAUTHORISED) => {
   return class extends Wrappee {
-
     #currentMode;
     #currentPermissions;
     #modeEvents;
@@ -15,9 +14,9 @@ export const withModes = (Wrappee, initModeEvents = [],
       this.#currentPermissions = defaultPermissions;
 
       this.#modeEvents = initModeEvents.map(({event, ...rest}) => ({
-          event: event(this),
-          ...rest
-        })
+        event: event(this),
+        ...rest,
+      }),
       );
 
       this.props.mode = this.#currentMode;
@@ -42,17 +41,16 @@ export const withModes = (Wrappee, initModeEvents = [],
       super.componentDidMount();
 
       this.#modeEvents.map(
-        ({eventName = 'click', event, selector, initOn = []}) => {
-          if(initOn.length === 0 ||
+          ({eventName = 'click', event, selector, initOn = []}) => {
+            if (initOn.length === 0 ||
             ~initOn.indexOf(this.#currentMode) ||
             ~initOn.indexOf(this.#currentPermissions)) {
-            const parent = document.querySelector(this.container);
-            const elem = parent.querySelector(selector);
-            elem?.addEventListener(eventName, event)
-          }
-        }
+              const parent = document.querySelector(this.container);
+              const elem = parent.querySelector(selector);
+            elem?.addEventListener(eventName, event);
+            }
+          },
       );
-
     }
-  }
+  };
 };

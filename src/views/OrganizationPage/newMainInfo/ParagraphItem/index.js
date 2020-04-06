@@ -5,7 +5,8 @@ import template from './index.pug';
 class ParagraphItem extends Page {
   render() {
     return template({
-      info: this.props.getStore().mainInfo.raw.filter((r) => r.id === this.props.info.id)[0],
+      info: this.props.getStore()
+          .mainInfo.raw.filter((r) => r.id === this.props.info.id)[0],
     });
   }
 

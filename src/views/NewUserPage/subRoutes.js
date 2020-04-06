@@ -1,5 +1,5 @@
 import {UserInfo} from './UserInfo';
-import SETTINGS_ROUTES from './Settings/routes'
+import SETTINGS_ROUTES from './Settings/routes';
 import {SummariesSubPage} from './Summaries';
 import {FavouriteSubPage} from './favourite';
 import {StatisticsSubPage} from './statistics';
@@ -37,7 +37,7 @@ const SubRoutes = [
   {
     path: 'nav',
     alwaysOn: true,
-    element: new NavPage('#users_nav')
+    element: new NavPage('#users_nav'),
   },
   ...UserSubRoutes,
   // ...MainInfoRoutes,

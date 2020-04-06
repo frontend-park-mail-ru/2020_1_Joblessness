@@ -20,66 +20,72 @@ class ContactsPage extends Page {
     super.componentDidMount();
     const e = document.getElementById(this.props.inputFields.submitField.id);
 
-    if(e)
-      e.hidden = currentSession.user.id !== Number(getUserId())
+    if (e) {
+      e.hidden = currentSession.user.id !== Number(getUserId());
+    }
   }
 }
 
 ContactsPage = withLocalStore(ContactsPage);
 
 ContactsPage = withForm(ContactsPage,
-  {
-    email: {
-      id: uuid(),
-      validator: validators.isEmail,
-      warnMessage: 'Например username@example.com',
-      defaultValue: (page) => page.props.getStore().user.email ?? '',
+    {
+      email: {
+        id: uuid(),
+        validator: validators.isEmail,
+        warnMessage: 'Например username@example.com',
+        defaultValue: (page) => page.props.getStore().user.email ?? '',
+      },
+      phone: {
+        id: uuid(),
+        validator: validators.isPhoneNumber,
+        warnMessage: 'Например +7(912)345-67-89 или +79123456789',
+        defaultValue: (page) => page.props.getStore().user.phone ?? '',
+      },
     },
-    phone: {
+    {
       id: uuid(),
-      validator: validators.isPhoneNumber,
-      warnMessage: 'Например +7(912)345-67-89 или +79123456789',
-      defaultValue: (page) => page.props.getStore().user.phone ?? '',
-    }
-  },
-  {
-    id: uuid(),
-  },
-  (form, page) => {
-  const user = page.props.getStore().user;
-  form.phone = form.phone.replace(/[\-()]/g, '');
-  if(!form.email)
-    delete form.email;
-  if(!form.phone)
-    delete form.phone;
-
-  if(form.email === user.email)
-    delete form.email;
-  if(form.phone === user.phone)
-    delete form.phone;
-  if(!form.phone && !form.email)
-    return;
-  requestManager
-    .tryChangePerson(form)
-    .then(r => {
-      if(form.email && form.phone) {
-        alert('Телефон и email изменены');
-      } else if(form.email) {
-        alert('email измененен');
-      } else {
-        alert('Телефон изменен');
+    },
+    (form, page) => {
+      const user = page.props.getStore().user;
+      form.phone = form.phone.replace(/[\-()]/g, '');
+      if (!form.email) {
+        delete form.email;
       }
-      page.props.setStore(s => ({
-        user: {
-          ...s.user,
-          ...form,
-        }
-      }));
-      Navigator.updateAllPages();
-    })
-  }
+      if (!form.phone) {
+        delete form.phone;
+      }
+
+      if (form.email === user.email) {
+        delete form.email;
+      }
+      if (form.phone === user.phone) {
+        delete form.phone;
+      }
+      if (!form.phone && !form.email) {
+        return;
+      }
+      requestManager
+          .tryChangePerson(form)
+          .then((r) => {
+            if (form.email && form.phone) {
+              alert('Телефон и email изменены');
+            } else if (form.email) {
+              alert('email измененен');
+            } else {
+              alert('Телефон изменен');
+            }
+            page.props.setStore((s) => ({
+              user: {
+                ...s.user,
+                ...form,
+              },
+            }));
+            Navigator.updateAllPages();
+          });
+    },
 );
 
 export {
-  ContactsPage
-}
+  ContactsPage,
+};

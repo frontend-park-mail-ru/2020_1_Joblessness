@@ -1,1 +1,2 @@
-export const isCreationPage = () => /\/vacancies\/create/.test(location.pathname);
+export const isCreationPage = () => /\/vacancies\/create/
+    .test(location.pathname);

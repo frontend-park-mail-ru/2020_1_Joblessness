@@ -2,7 +2,8 @@ import {OrganizationVacanciesPage} from './index';
 import {CreateVacancyButton} from './CreateVacancyButton';
 
 
-const ROOT_ELEMENT = new OrganizationVacanciesPage('#organization_org_vacancies');
+const ROOT_ELEMENT = new OrganizationVacanciesPage(
+    '#organization_org_vacancies');
 export const DEF_ROUTES = [{
   path: 'any',
   alwaysOn: true,
@@ -30,7 +31,7 @@ export const constructRoute = (childRoutes = []) => [
         element: ROOT_ELEMENT,
         childRoutes,
       },
-    ]
-  }
-]
+    ],
+  },
+];
 export default ROUTES;
