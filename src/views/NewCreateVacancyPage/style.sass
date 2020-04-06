@@ -1,0 +1,60 @@
+@import "../../CONSTANTS"
+.vacancy-form
+  padding: 2%
+  border-radius: 15px
+  margin: auto
+  min-width: 600px
+  max-width: 1200px
+
+.section-three-elements
+  display: grid
+  grid-template-columns: 1fr 2fr 1fr
+  grid-column-gap: 2%
+  grid-auto-columns: minmax(min-content, max-content)
+
+.input-name
+  display: flex
+  align-items: center
+  text-align: left
+
+.input
+  margin-top: 1px
+  text-align: left
+  width: 100%
+
+.inputs-wrapper
+  margin-top: 1px
+  text-align: left
+
+.inputs-wrapper__filling
+  grid-column-start: 2
+  grid-column-end: 3
+  display: block
+
+.input-description
+  text-align: left
+  color: dimgray
+
+.input-description:hover
+  color: black
+
+.payment
+  display: flex
+
+.create-button
+  cursor: pointer
+  justify-content: center
+  align-items: center
+  font-size: 1.75em
+  font-weight: 600
+  color: white
+  transition: .2s
+  background-size: 200%
+  background-position: 0 0
+  user-select: none
+  margin-bottom: 20px
+  &:hover
+    transform: scale(1.01)
+    transform-origin: center
+  &:active
+    transform: scale(.99)

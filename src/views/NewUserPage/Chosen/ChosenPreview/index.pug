@@ -1,0 +1,12 @@
+include ../../../../templates/pug/link
+include ../../../../templates/pug/avatar
+include ../../../../templates/pug/name
+include ../../../../templates/pug/companyName
+-const root = locals.chosen.isPerson ? '/users/' : '/organizations/'
++link(href=root + locals.chosen.id).user-summary-preview
+    if locals.chosen.isPerson
+        +avatar(src=locals.person.avatar)
+        +name(locals.person.firstName, locals.person.lastName, locals.person.tag)
+    else
+        +avatar(src=locals.organization.avatar)
+        +company-name(locals.organization.name, locals.organization.tag)

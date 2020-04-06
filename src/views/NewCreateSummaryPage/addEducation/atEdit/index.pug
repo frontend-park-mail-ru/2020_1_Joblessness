@@ -1,0 +1,41 @@
+include ../../../../templates/pug/forms
+mixin string-field
+    div.string-field(id=attributes.id)
+        input.string-field--input(type=attributes.type || "text" placeholder=attributes.placeholder value=
+        attributes.value)
+        block
+        div.string-field--error
+
+mixin string-area
+    div.text-field(id=attributes.id)
+        textarea.text-field--input(type=attributes.type || "text" placeholder=attributes.placeholder value=
+        attributes.value)
+        block
+        div.text-field--error
+
+mixin field-holder
+    div.field-holder(class=attributes.class)
+        block
+mixin field-name(name)
+    h2 #{name}
+
+mixin form
+    +field-holder.company-name
+        +field-name("Учебное заведение")
+        +string-field(id=locals.inputFields.institution.id)
+            div.field-line
+    +field-holder.company-role
+        +field-name("Специальность")
+        +string-field(id=locals.inputFields.speciality.id)
+            div.field-line
+    +field-holder.company-experience
+        +field-name("Год окончания")
+        +string-field(id=locals.inputFields.graduated.id)
+            div.field-line
+    +field-holder.company-experience
+        +field-name("Тип")
+        +string-field(id=locals.inputFields.type.id)
+            div.field-line
+    div.submit-button(id=locals.inputFields.submitField.id) Добавить
+
++form

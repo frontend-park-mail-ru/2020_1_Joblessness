@@ -1,0 +1,19 @@
+@import url("https://fonts.googleapis.com/css?family=Istok+Web&display=swap");
+.vacancy-list {
+  display: flex;
+  padding: 20px 0 20px 0;
+  width: 100%;
+  justify-content: flex-start;
+}
+.vacancy-list--holder {
+  overflow-x: scroll;
+  padding-left: 20px;
+  overflow-y: hidden;
+}
+.vacancy-list--body {
+  display: flex;
+  margin-right: 20px;
+  flex-direction: row;
+}
+
+/*# sourceMappingURL=style.css.map */

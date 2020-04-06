@@ -1,0 +1,7 @@
+mixin sections
+    div.sections-holder(class=attributes.class id=attributes.id)
+        block
+
+mixin sections-item
+    div.sections-holder--item(class=attributes.class id=attributes.id)
+        h2 #{attributes.name}

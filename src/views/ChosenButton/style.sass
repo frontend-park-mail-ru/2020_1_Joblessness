@@ -1,0 +1,30 @@
+@import "../../CONSTANTS"
+.chosen-holder
+  align-self: flex-end
+  position: absolute
+  display: flex
+  justify-content: center
+  align-items: center
+  width: 50px
+  height: 50px
+  z-index: 10
+  background: white
+  @include SECTION_SHADOW
+  border-radius: 50%
+  right: 20px
+  top: 100px
+  cursor: pointer
+  &--body
+    font-size: 1.5em
+    @include BACKGROUND_GRADIENT
+    -webkit-background-clip: text
+    background-attachment: fixed
+    -webkit-text-fill-color: transparent
+    transition: .2s
+  &--body.not-chosen
+    filter: grayscale(1)
+    &:hover
+      filter: grayscale(.5)
+      font-size: 2em
+    &:active
+      filter: grayscale(0)

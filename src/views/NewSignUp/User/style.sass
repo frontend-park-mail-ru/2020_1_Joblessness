@@ -1,0 +1,164 @@
+@import "../../../CONSTANTS"
+.triangle-icon
+  height: 2em
+  width: 2em
+  margin: 3px
+  background-repeat: no-repeat
+  transform: rotate(90deg)
+  transition: .1s
+
+.start-button
+  display: flex
+  background: rgba(255, 255, 255, 1)
+  text-align: center
+  border-radius: 10px
+  transition: .2s
+  width: 100%
+  align-items: center
+  justify-content: center
+  user-select: none
+
+  a
+    padding: 7px
+
+  &:hover
+    background: rgba(255, 255, 255, 1)
+    transform: scale(1.01, 1.01)
+
+  &:active
+    background: rgba(255, 255, 255, 1)
+    transform: scale(0.99, 0.99)
+
+.width80
+  width: 80%
+
+.auth-holder
+  display: flex
+  justify-content: stretch
+  width: 100vw
+  height: 100vh
+  align-items: stretch
+.signup-holder
+  z-index: 10
+  background: white
+.step-counter
+  width: 250px
+  display: flex
+  background: white
+  justify-content: center
+  align-items: center
+  flex-direction: column
+
+  &--line
+    z-index: 2
+    height: 50px
+    width: 10px
+    background: black
+    opacity: .2
+    margin: -5px 0 -5px 0
+
+    &:first-child
+      margin: -20px 0 -5px 0
+
+
+  &--counter
+    opacity: 1
+    z-index: 3
+    width: 80px
+    height: 80px
+    color: $GRAY
+    display: flex
+    justify-content: stretch
+    overflow: hidden
+    align-items: stretch
+    border-radius: 50%
+
+    a
+      opacity: 1
+      z-index: 3
+      flex: 1
+      color: $GRAY
+      display: flex
+      justify-content: stretch
+      overflow: hidden
+      align-items: stretch
+    @include BACKGROUND_GRADIENT
+    background-size: 200px 200px
+    //background-attachment: fixed
+    .light-background
+      display: flex
+      justify-content: center
+      align-items: center
+    transition: .5s
+
+    &:first-child
+      transform: scale(1.2)
+      border-radius: 25% 75% 70% 30% / 32% 30% 70% 68%
+
+    &:last-child
+      border-radius: 7px
+      width: 100px
+
+    &.current
+      font-size: 1em
+      transition-timing-function: cubic-bezier(.68, -0.33, 0, 1.64)
+      font-weight: 600
+      color: black
+      border-radius: 40%
+      transform: scale(1.4)
+
+      &:last-child
+        border-radius: 10px
+
+      .light-background
+        background: rgba(255, 255, 255, 0)
+
+.locked
+  overflow: hidden
+
+  &::before
+    position: absolute
+    content: ''
+    backdrop-filter: grayscale(1)
+    background: transparent
+    display: block
+    width: 100px
+    height: 100px
+    z-index: 10
+
+.hello-link
+  display: flex
+  justify-content: center
+  align-items: center
+  text-align: center
+  @include SECTION_SHADOW
+  border-radius: 10px
+  @include BACKGROUND_GRADIENT
+  background-attachment: fixed
+  h1
+    color: white !important
+  padding: 10px
+  transition: .2s
+  &:hover
+    transform: scale(1.01)
+  &:active
+    transform: scale(.99)
+.auth-back-link
+  margin-top: 30px
+  font-size: 1.25em
+  color: $GRAY
+  border-radius: 5px
+  padding: 5px
+  @include BACKGROUND_GRADIENT
+  background-attachment: fixed
+  opacity: .4
+  transition: .3s
+  &:hover
+    transform: scale(1.1)
+    opacity: 1
+  &:active
+    transform: scale(1)
+
+.signup-start
+  .black-link
+    font-size: 1.25em

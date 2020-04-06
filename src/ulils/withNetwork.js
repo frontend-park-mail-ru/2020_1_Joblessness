@@ -1,5 +1,6 @@
 import {validateFunction, validateString} from './validators';
-
+import {Navigator} from '../Navigator';
+import {request} from '../ulils';
 /**
  * sends request on server before rendering and updates component after
  * response is received
@@ -39,18 +40,19 @@ const withNetwork = (url, prepareRequestBody = async () => ({}),
     componentWillMount = async () => {
       const realUrl = typeof url === 'function' ? await url() : url;
       // console.log('will!!');
-      fetch(realUrl, prepareRequestBody(this))
+      const headers = await prepareRequestBody(this);
+      request.get(realUrl, headers)
           .then(async (r) => {
             const res = await parseResponse(r);
             if ( res !== null ) {
               this.props[propName] = res;
               if (!this.isHidden()) {
-                super.showPage();
-                this.componentDidMount && this.componentDidMount();
+                Navigator.showPage(location.pathname);
               }
             }
           })
           .catch(console.err);
+      super.componentWillMount && super.componentWillMount();
     }
   };
 };

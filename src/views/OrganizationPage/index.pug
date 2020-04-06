@@ -1,0 +1,22 @@
+mixin section-title
+    section.cover.gradient-background
+        div.cover.light-background
+            div.page-holder--body.width80
+                block
+div#chosen_button.chosen-holder
+section.page-holder
+    section.page-solid-section#organization_org_info
+    +section-title
+        section
+            h1 Информация об организации
+    section.cover.gradient-background
+        div.cover.light-background.justify-end
+            div.page-holder--body.flex-row.width100#organization_org_main_info
+
+    +section-title
+        section
+            h1 Список доступных вакансий
+    div.page-solid-section.vacancy-list
+        div.vacancy-list--holder
+            div.vacancy-list--body#organization_org_vacancies
+        div.hidden#organization_vacancy_load_manager

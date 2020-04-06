@@ -1,0 +1,13 @@
+mixin exp-holder
+    div.create-summary-section.h160
+        div.create-summary-section--body(id=attributes.id)
+        div.options
+            div.remove-button &#xd7
+            div.edit-button &#9998
+            div.move-up &#9650
+            div.move-down &#9660
+if locals.expList
+    each sum in locals.expList
+        +exp-holder(id=sum.id)
+else
+    div Нет опыта работы

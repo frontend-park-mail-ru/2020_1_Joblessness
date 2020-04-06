@@ -30,7 +30,7 @@ const isMonthId = (n) => 0 <= parseInt(n) && parseInt(n) <= 11;
 const isDay = (n) => 0 <= parseInt(n) && parseInt(n) <= 31;
 // 1900 - нынешний год
 const isYear = (n) =>
-  1900 <= parseInt(n) && parseInt(n) <= new Date().getFullYear() - 18;
+  1900 <= parseInt(n) && parseInt(n) <= new Date().getFullYear();
 // https://stackoverflow.com/questions/19605150/regex-for-password-mu
 // st-contain-at-least-eight-characters-at-least-one-number-a
 // Minimum eight characters, at least one letter and one number:
@@ -57,7 +57,12 @@ to the pattern present inside the char class.
 And the number of matched chars must be from 0 to 19.
  */
 const isLogin = (login) =>
-  /^(?=.*[A-Za-z0-9]$)[A-Za-z][A-Za-z\d.-]{5,19}$/.test(login);
+  /^(?=.*[A-Za-z0-9]$)[A-Za-z][A-Za-z\d.-_]{5,19}$/.test(login);
+
+const isMoney = (money) => !isNaN(money) && money !== '';
+const isUrl = (url) => /^(?:http(s)?:\/\/)?[\w.-]+(?:\.[\w\.-]+)+[\w\-\._~:/?#[\]@!\$&'\(\)\*\+,;=.]+$/.test(url);
+
+const isName = (name) => /^[a-zA-Zа-яА-ЯёЁ]+(([',. -][a-zA-Zа-яА-ЯёЁ])?[a-zA-Zа-яА-ЯёЁ]*)*$/.test(name);
 export default {
   validateString,
   validateFunction,
@@ -72,8 +77,11 @@ export default {
   hasId,
   isString,
   isBody,
+  isMoney,
   isLogin,
   isFunction,
+  isName,
+  isUrl,
 };
 
 export {
@@ -88,8 +96,11 @@ export {
   isEmail,
   isDomElement,
   hasId,
+  isName,
   isString,
   isBody,
+  isMoney,
   isFunction,
   isLogin,
+  isUrl,
 };

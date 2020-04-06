@@ -1,0 +1,10 @@
+mixin avatar()
+    div.user-avatar(class=attributes.noSelect ? '': 'with-select')
+        if attributes.src
+            div.user-avatar--body(style="background-image: url(" + attributes.src + ")")
+                if(!attributes.noSelect)
+                    input(type="file" accept="image/*,.svg" class="pick-avatar" id=attributes.id )
+        else
+            div.user-avatar--body(style="background : white")
+                if(!attributes.noSelect)
+                    input(type="file" accept="image/*,.svg" class="pick-avatar" id=attributes.id )

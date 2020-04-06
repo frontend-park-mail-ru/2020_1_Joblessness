@@ -1,0 +1,4 @@
+include ../../../../../templates/pug/link
+div.summary-item-holder--body
+    div.chose-summary(id=locals.selectId) Выбрать
+    +link(href="/summaries/" + locals.summary.id).summary-item-holder--link Посмотреть

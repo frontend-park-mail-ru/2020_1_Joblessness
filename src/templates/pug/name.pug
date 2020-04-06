@@ -1,0 +1,6 @@
+mixin name(firstName, lastName, tag)
+    div.user-name
+        h1 #{(firstName)||""}&nbsp
+        h1 #{(lastName)||""}&nbsp
+        if tag
+            h1.tag @#{tag}&nbsp

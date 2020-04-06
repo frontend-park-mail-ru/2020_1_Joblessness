@@ -1,22 +1,21 @@
-'use strict';
 import '@babel/polyfill';
+import './style.sass';
 import {Navigator} from './Navigator.js';
 import {loginOnReload} from './ulils/loginOnReload';
-import './style.sass';
 import {
   CreateSummaryPage,
-  CreateVacancyPage,
-  UserPage,
-  LoginPage,
-  EmployerSignupPage,
-  EmployeeSignUpPage,
-  IndexPage,
-  Footer,
-  VacancyPage,
   Header,
   NotFoundPage,
-  VacancyListPage, SummaryPage,
+  CreateSummaryRoutes,
 } from './views';
+import ORGANIZATIONS_ROUTES from './views/OrganizationPage/routes';
+import CREATE_VACANCY_ROUTES from './views/NewCreateVacancyPage/routes';
+import CREATE_SUMMARY_ROUTES from './views/CreateSummaryPage/routes';
+import USER_ROUTES from './views/NewUserPage/routes';
+import SIGNUP_ROUTES from './views/NewSignUp/routes';
+import SEARCH_ROUTES from './views/SearchPage/routes';
+import RESPONSES_ROUTES from './views/Responses/routes';
+import {RootElement} from './RootElement';
 
 /**
  * App
@@ -28,40 +27,45 @@ class App {
   constructor() {
     console.log('Application was created');
 
-    const header = new Header('#holder');
-    const domBox = document.createElement('div');
-    domBox.id = 'root';
-    document.querySelector('#holder').appendChild(domBox);
-
-    const footer = new Footer('#holder');
-
-    const routes = {
-      'summaries/create': new CreateSummaryPage('#root'),
-      'vacancies/create': new CreateVacancyPage('#root'),
-      'vacancies': new VacancyListPage('#root'),
-      'users/*': new UserPage('#root'),
-      'vacancies/*': new VacancyPage('#root'),
-      'summaries/*': new SummaryPage('#root'),
-      'index': new IndexPage('#root'),
-      'login': new LoginPage('#root'),
-      'signup/employee': new EmployeeSignUpPage('#root'),
-      'signup/employer': new EmployerSignupPage('#root'),
-      '404': new NotFoundPage('#root'),
-      '_header': header,
-      '_footer': footer,
-    };
-
+    const routes = [
+      {
+        path: 'root',
+        alwaysOn: true,
+        element: new RootElement('#holder'),
+        childRoutes: [
+          {
+            path: 'header',
+            alwaysOn: true,
+            element: new Header('#nav-elements'),
+          },
+        ],
+      },
+      ...RESPONSES_ROUTES,
+      ...SEARCH_ROUTES,
+      ...SIGNUP_ROUTES,
+      ...USER_ROUTES,
+      ...ORGANIZATIONS_ROUTES,
+      ...CREATE_SUMMARY_ROUTES,
+      ...CREATE_VACANCY_ROUTES,
+      // {
+      //   path: 'summaries/create',
+      //   element: new CreateSummaryPage('#root'),
+      //   childRoutes: CreateSummaryRoutes,
+      // },
+      {
+        path: '404',
+        element: new NotFoundPage('#root'),
+      },
+    ];
     Navigator.addRoutes(routes);
 
-    header.requestRender();// show Footer
-    footer.requestRender();// show Header
-    // open current location
     const loc = window.location.pathname.replace('/', '');
-    Navigator.showPage( loc ? loc : 'index');
+    Navigator.showPage(loc, true, true);
   }
 }
 const createApp = async () => {
   await loginOnReload();
+  // currentSession.session = {id: 2, role: 'PERSON'}
   new App();
 };
 createApp();
