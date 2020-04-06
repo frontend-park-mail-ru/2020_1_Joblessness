@@ -10,6 +10,7 @@ import {AddParagraph} from './newMainInfo/AddParagraph';
 import {ParagraphItem} from './newMainInfo/ParagraphItem';
 import withLocalStore from './localStore';
 import {requestManager} from '../../ulils';
+import {ChosenButtonRoutes} from '../ChosenButton';
 
 const RootPath = 'organizations/';
 
@@ -76,6 +77,7 @@ const MainInfoRoutes = createEditor({
 );
 
 const SubRoutes = [
+  ...ChosenButtonRoutes,
   {
     path: 'orgInfo',
     alwaysOn: true,

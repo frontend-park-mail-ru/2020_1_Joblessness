@@ -14,7 +14,7 @@ const UserSubRoutes = [
   ...SUMMARIES_ROUTES,
   ...CHOSEN_ROUTES,
   {
-    path: '/',
+    path: '^$|^/{1}$',
     next: '/',
     element: new StatisticsSubPage(CONTAINER),
   },

@@ -1,11 +1,9 @@
 import {Page} from '../../../Page';
 import {currentSession, requestManager, uuid} from '../../../ulils';
 import {VacancyPreview} from './VacancyPreview';
-import {ChosenButton} from '../ChosenButton';
 import {Navigator} from '../../../Navigator';
 import {constructSubRoutes} from '../subRoutes';
 import {getOrgId} from '../getOrgInfo';
-import {CreateVacancyButton} from './CreateVacancyButton';
 import ROUTES, {constructRoute, DEF_ROUTES} from './routes';
 /**
  * Performs loading vacancies
@@ -83,11 +81,6 @@ const afterNext = (page, vac, needUpdate) => {
     alwaysOn: true,
     next: '',
     element: newPage,
-    childRoutes: [{
-      path: vac.chosen.innerId,
-      alwaysOn: true,
-      element: new ChosenButton(`#${vac.chosen.innerId}`),
-    }],
   };
   page.props.insertSubPage(newRoute);
 

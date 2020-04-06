@@ -41,16 +41,16 @@ class CreateVacancyPage extends Page {
     const vacId = getVacId() || 'create';
     super.componentDidMount();
     addButtonEvents(this);
-    if (this.#needUpdate) {
-      this.#needUpdate = false;
-      return;
-    }
-    if (this.#prevVac !== vacId ) {
-      this.#prevVac = vacId;
-      this.props.resetStore();
-      Navigator.updateAllPages();
-      return;
-    }
+    // if (this.#needUpdate) {
+    //   this.#needUpdate = false;
+    //   return;
+    // }
+    // if (this.#prevVac !== vacId ) {
+    //   this.#prevVac = vacId;
+    //   this.props.resetStore();
+    //   Navigator.updateAllPages();
+    //   return;
+    // }
     if (/\/vacancies\/create/.test(location.pathname) &&
       currentSession.user.role === ORGANIZATION) {
       console.log('org create vac');
@@ -95,8 +95,8 @@ class CreateVacancyPage extends Page {
               },
               ...vac,
             }));
-            this.props.random = uuid();
-            Navigator.updateAllPages();
+            // this.props.random = uuid();
+            // Navigator.updateAllPages();
           })
           .catch((r) => {
             if (r.status === 404) {

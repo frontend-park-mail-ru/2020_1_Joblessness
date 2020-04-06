@@ -64,7 +64,7 @@ class NewSignUp extends Page {
   }
 }
 
-NewSignUp = withChainedPages(NewSignUp, SubRoutes);
+NewSignUp = withChainedPages(NewSignUp, SubRoutes, null, '/organizations/signup/');
 
 export {
   NewSignUp,

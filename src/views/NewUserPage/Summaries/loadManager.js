@@ -39,7 +39,8 @@ class LoadManager extends Page {
 
             this.props.requestNextNoUpdate(last, true);
           }
-        });
+        })
+        .catch(r => this._was = false);
       this._was = true
     }
 
@@ -141,6 +142,7 @@ const loadOnScroll = (page) => {
         lastlen = startLen;
         inProgress = false;
       } catch (e) {
+        pageNumber--;
         inProgress = false
       }
     }

@@ -338,7 +338,7 @@ class RequestManager {
   tryGetUserFavorites(slug, page = 0) {
     return new Promise((resolve, reject) => {
       request
-          .get(`/api/users/'${slug}/favorite?page=${page}`, {})
+          .get(`/api/users/${slug}/favorite?page=${page}`, {})
           .then((r) => {
             if (r.status === 200) {
               resolve(r);
