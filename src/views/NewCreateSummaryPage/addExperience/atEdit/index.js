@@ -21,14 +21,14 @@ AtEditPage = withLocalStore(AtEditPage);
 AtEditPage = withForm(AtEditPage, {
   companyName: {
     id: uuid(),
-    validator: s => s.length,
+    validator: (s) => s.length,
     warnMessage: 'Укажите компанию, в которой работали',
     required: true,
   },
   role: {
     id: uuid(),
     required: true,
-    validator: s => s.length,
+    validator: (s) => s.length,
     warnMessage: 'Укажите занимаемую должность',
   },
   experienceFrom: {
@@ -46,7 +46,7 @@ AtEditPage = withForm(AtEditPage, {
   responsibilities: {
     id: uuid(),
     required: true,
-    warnMessage: 'Перечислите Ваши обязанности'
+    warnMessage: 'Перечислите Ваши обязанности',
   },
 }, {
   id: uuid(),

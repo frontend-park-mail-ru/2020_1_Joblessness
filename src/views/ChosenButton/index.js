@@ -9,7 +9,7 @@ import {getUserId} from '../NewUserPage/getUserId';
 
 const isOrgPage = () => /organizations/.test(window.location.pathname);
 const isUserPage = () => /users/.test(window.location.pathname);
-const getCurrentId = () => Number(window.location.pathname.replace(/\D/g,''));
+const getCurrentId = () => Number(window.location.pathname.replace(/\D/g, ''));
 class ChosenButton extends Page {
   #elemId;
   #prevElem;
@@ -30,7 +30,7 @@ class ChosenButton extends Page {
     if (this.#prevElem) {
       this.#prevElem.removeEventListener('click', this.#prevEvent);
     }
-    if(currentSession.user.role === UNAUTHORISED ||
+    if (currentSession.user.role === UNAUTHORISED ||
       currentSession.user.role === ORGANIZATION ||
       (!isOrgPage() && !isUserPage()) ||
       currentSession.user.id === getCurrentId()) {
@@ -49,7 +49,7 @@ class ChosenButton extends Page {
     if (this.#prevElem) {
       this.#prevElem.removeEventListener('click', this.#prevEvent);
     }
-    if(currentSession.user.role === UNAUTHORISED || (!isOrgPage() && !isUserPage()) || currentSession.user.id === getCurrentId()) {
+    if (currentSession.user.role === UNAUTHORISED || (!isOrgPage() && !isUserPage()) || currentSession.user.id === getCurrentId()) {
       const holder = document.querySelector(this.container);
       holder.style.display = 'none';
     } else {
@@ -64,10 +64,10 @@ class ChosenButton extends Page {
 const toggleEvent = (page) => async (e) => {
   const likedId = isOrgPage() ? getOrgId() :
     isUserPage() ? getUserId() : null;
-  if(likedId) {
+  if (likedId) {
     try {
       const res = await requestManager.trySetLike(likedId);
-      console.log(res)
+      console.log(res);
     } catch (e) {
       console.log(e);
     }
@@ -80,10 +80,10 @@ const ChosenButtonRoutes = [
     element: new ChosenButton('#chosen_button'),
     path: 'chosen',
     alwaysOn: true,
-  }
+  },
 ];
 
 export {
   ChosenButton,
-  ChosenButtonRoutes
+  ChosenButtonRoutes,
 };

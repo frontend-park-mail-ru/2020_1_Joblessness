@@ -1,9 +1,8 @@
 import {Page} from '../../../Page';
-import template from './index.pug'
-import './style.sass'
+import template from './index.pug';
+import './style.sass';
 
 class ContainerPage extends Page {
-
   render() {
     return template(this.props);
   }
@@ -11,4 +10,4 @@ class ContainerPage extends Page {
 
 export {
   ContainerPage,
-}
+};

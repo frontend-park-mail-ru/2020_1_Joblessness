@@ -15,4 +15,4 @@ const SubRoutes = [
 ];
 export {
   SubRoutes,
-}
+};

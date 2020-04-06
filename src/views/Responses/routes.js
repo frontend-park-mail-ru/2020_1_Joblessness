@@ -19,8 +19,8 @@ export const constructRoute = (childRoutes = []) => [
         alwaysOn: true,
         element: CONTAINER_ELEMENT,
         childRoutes,
-      }
-    ]
+      },
+    ],
   },
 ];
 
@@ -31,5 +31,5 @@ export default constructRoute([
     alwaysOn: true,
     element: CONTAINER_ELEMENT,
     // childRoutes: Routes,
-  }
+  },
 ]);

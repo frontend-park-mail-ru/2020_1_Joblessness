@@ -25,35 +25,32 @@ class LoadManager extends Page {
     super.componentDidMount();
     // document
     //   ?.addEventListener('scroll', loadOnScroll(this));
-    if(!this._was) {
+    if (!this._was) {
       requestManager
-        .tryGetUserFavorites(getUserId())
-        .then(async (r) => {
-          const list = await r.json();
-          this.props.requestNextNoUpdate(list);
-        })
-        .catch(r => this._was = false);
-      this._was = true
+          .tryGetUserFavorites(getUserId())
+          .then(async (r) => {
+            const list = await r.json();
+            this.props.requestNextNoUpdate(list);
+          })
+          .catch((r) => this._was = false);
+      this._was = true;
     }
-
   }
 }
 
 
 const beforeNext = (page, list) => {
-  list.forEach( i => i.innerId = uuid());
+  list.forEach( (i) => i.innerId = uuid());
   page.props.chosen = list;
   Navigator.updateAllPages();
 };
 const afterNext = async (page, list, needUpdate) => {
-
   Navigator.removeRoutes(constructRoute());
   Navigator.addRoutes(constructRoute());
-  for(let vac of list) {
-
+  for (const vac of list) {
     const newPage = new ChosenPreview(`#${vac.innerId}`);
     newPage.props.chosen = vac;
-    if(vac.isPerson) {
+    if (vac.isPerson) {
       const r = await requestManager.tryGetPerson(vac.id);
       const pers = await r.json();
       newPage.props.person = pers;
@@ -81,7 +78,6 @@ const afterNext = async (page, list, needUpdate) => {
     }
   }
   Navigator.updateAllPages();
-
 };
 
 
@@ -110,13 +106,15 @@ let pageNumber = 1;
 let lastEv;
 let lastlen;
 let inProgress = false;
-const PAG_SIZE = 10
+const PAG_SIZE = 10;
 const loadOnScroll = (page) => {
-  if (lastEv)
+  if (lastEv) {
     document.removeEventListener('scroll', lastEv);
+  }
   const ev = async (e) => {
-    if(inProgress)
+    if (inProgress) {
       return;
+    }
     if (!document.querySelector('#chosen_list_load_manager')) {
       document.removeEventListener('scroll', ev);
       return;
@@ -128,22 +126,24 @@ const loadOnScroll = (page) => {
         const chos = await r.json();
         const startLen = chos.length;
         if (chos.length > lastlen) {
-          while (chos.length > lastlen + 1)
+          while (chos.length > lastlen + 1) {
             page.props.requestNextNoUpdate(chos.shift(), false);
+          }
           page.props.requestNextNoUpdate(chos.shift(), true);
         } else {
           if (chos.length !== PAG_SIZE && lastlen !== PAG_SIZE) {
             return;
           }
-          while (chos.length > 1)
+          while (chos.length > 1) {
             page.props.requestNextNoUpdate(chos.shift(), false);
+          }
           page.props.requestNextNoUpdate(chos.shift(), true);
         }
         lastlen = startLen;
         inProgress = false;
       } catch (e) {
         pageNumber--;
-        inProgress = false
+        inProgress = false;
       }
     }
   };

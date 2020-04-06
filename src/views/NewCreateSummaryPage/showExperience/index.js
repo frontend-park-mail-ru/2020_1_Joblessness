@@ -42,7 +42,9 @@ const addRemoveEvent = (page, elem, id, elemToRemove) => {
   const removeEvent = () => {
     elem?.removeEventListener('click', removeEvent);
     page.props.expList = page.props.expList.filter((e) => e.id !== id);
-
+    page.props.setStore((s) => ({
+      experience: s.experience.filter((s) => s.id !== id),
+    }));
     elemToRemove.classList.add('removing');
     setTimeout(() => elemToRemove.remove(), 500);
     Navigator.removeRoutes([{

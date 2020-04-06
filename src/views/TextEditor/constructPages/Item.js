@@ -6,6 +6,11 @@ export const item = (Wrapee, props) => {
 
 const withEditAndLoad = (Wrapee, props) => {
   return class extends Wrapee {
+    componentWillUpdate() {
+      super.componentWillUpdate();
+
+      props.CUSTOM_LISTENERS && props.CUSTOM_LISTENERS.init(this, props);
+    }
     componentDidMount() {
       super.componentDidMount();
       const parent = document.querySelector(this.container);
@@ -25,23 +30,26 @@ const withEditAndLoad = (Wrapee, props) => {
 
         this._prevLen = props.EXTRACT_REDUCER(this.props.getStore()).raw.length;
       }
-
-      el.addEventListener('input', (e) => {
-        const text = e.target.innerHTML;
-        this.props.setStore((s) => {
-          const subStore = props.EXTRACT_REDUCER(this.props.getStore());
-          subStore.raw = subStore.raw.map((r) => {
-            if (r.id !== this.props.info.id) {
-              return r;
-            }
-            return {
-              ...r,
-              text,
-            };
+      if (props.CUSTOM_LISTENERS) {
+        props.CUSTOM_LISTENERS.set(this, props);
+      } else {
+        el.addEventListener('input', (e) => {
+          const text = e.target.innerHTML;
+          this.props.setStore((s) => {
+            const subStore = props.EXTRACT_REDUCER(this.props.getStore());
+            subStore.raw = subStore.raw.map((r) => {
+              if (r.id !== this.props.info.id) {
+                return r;
+              }
+              return {
+                ...r,
+                text,
+              };
+            });
+            return props.REPLACE_REDUCER(s, subStore);
           });
-          return props.REPLACE_REDUCER(s, subStore);
         });
-      });
+      }
     }
   };
 };

@@ -1,7 +1,7 @@
 import {
   DECLINE,
   EDIT,
-  ORGANIZATION,
+  ORGANIZATION, PERSON,
   PREVIEW,
   SUBMIT,
 } from '../../../CONSTANTS';
@@ -56,7 +56,7 @@ export const modeManager = (Wrapee, props) => {
           initOn: [EDIT],
         },
       ],
-      PREVIEW, ORGANIZATION);
+      PREVIEW, PERSON);
 
   const wrapee = new Wrapee(props.MODE_MANAGER_SELECTOR);
   wrapee.props.editorProps = props;

@@ -1,10 +1,9 @@
 import {Page} from '../../../Page';
-import './style.sass'
-import template from './index.pug'
+import './style.sass';
+import template from './index.pug';
 import withLocalStore from '../localStore';
 
 class Display extends Page {
-
   componentWillUpdate() {
     super.componentWillUpdate();
     this.props.needUpdate = true;
@@ -13,12 +12,12 @@ class Display extends Page {
   render() {
     return template({
       ...this.props,
-      items: this.props.getStore().responses
+      items: this.props.getStore().responses,
     });
   }
 }
 
 Display = withLocalStore(Display);
 export {
-  Display
-}
+  Display,
+};

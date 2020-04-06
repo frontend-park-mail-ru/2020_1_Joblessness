@@ -1,5 +1,5 @@
 import {Page} from '../../../../Page';
-import template from './index.pug'
+import template from './index.pug';
 import withLocalStore from '../../localStore';
 
 /**
@@ -16,5 +16,5 @@ class SummariesListPage extends Page {
 SummariesListPage = withLocalStore(SummariesListPage);
 
 export {
-  SummariesListPage
-}
+  SummariesListPage,
+};

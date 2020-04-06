@@ -15,14 +15,14 @@ class RequestManager {
   trySignIn(form) {
     return new Promise((resolve, reject) => {
       request
-        .post('/api/users/login', form)
-        .then((r) => {
-          if (r.status === 201) {
-            resolve(r);
-          } else {
-            reject(r);
-          }
-        }).catch(reject);
+          .post('/api/users/login', form)
+          .then((r) => {
+            if (r.status === 201) {
+              resolve(r);
+            } else {
+              reject(r);
+            }
+          }).catch(reject);
     });
   }
 
@@ -33,14 +33,14 @@ class RequestManager {
   tryCheckIn(form) {
     return new Promise((resolve, reject) => {
       request
-        .post('/api/users/check', form)
-        .then((r) => {
-          if (r.status === 201) {
-            resolve(r);
-          } else {
-            reject(r);
-          }
-        }).catch(reject);
+          .post('/api/users/check', form)
+          .then((r) => {
+            if (r.status === 201) {
+              resolve(r);
+            } else {
+              reject(r);
+            }
+          }).catch(reject);
     });
   }
 
@@ -51,14 +51,14 @@ class RequestManager {
   tryLogout() {
     return new Promise((resolve, reject) => {
       request
-        .post('/api/users/logout', {})
-        .then((r) => {
-          if (r.status === 201) {
-            resolve(r);
-          } else {
-            reject(r);
-          }
-        }).catch(reject);
+          .post('/api/users/logout', {})
+          .then((r) => {
+            if (r.status === 201) {
+              resolve(r);
+            } else {
+              reject(r);
+            }
+          }).catch(reject);
     });
   }
 
@@ -79,14 +79,14 @@ class RequestManager {
   tryRegisterPerson(form) {
     return new Promise((resolve, reject) => {
       request
-        .post('/api/users', form)
-        .then((r) => {
-          if (r.status === 201) {
-            resolve(r);
-          } else {
-            reject(r);
-          }
-        }).catch(reject);
+          .post('/api/users', form)
+          .then((r) => {
+            if (r.status === 201) {
+              resolve(r);
+            } else {
+              reject(r);
+            }
+          }).catch(reject);
     });
   }
 
@@ -106,14 +106,14 @@ class RequestManager {
   tryRegisterOrg(form) {
     return new Promise((resolve, reject) => {
       request
-        .post('/api/organizations', form)
-        .then((r) => {
-          if (r.status === 201) {
-            resolve(r);
-          } else {
-            reject(r);
-          }
-        }).catch(reject);
+          .post('/api/organizations', form)
+          .then((r) => {
+            if (r.status === 201) {
+              resolve(r);
+            } else {
+              reject(r);
+            }
+          }).catch(reject);
     });
   }
 
@@ -135,14 +135,14 @@ class RequestManager {
   tryGetPerson(slug) {
     return new Promise((resolve, reject) => {
       request
-        .get('/api/users/' + slug, {})
-        .then((r) => {
-          if (r.status === 200) {
-            resolve(r);
-          } else {
-            reject(r);
-          }
-        }).catch(reject);
+          .get('/api/users/' + slug, {})
+          .then((r) => {
+            if (r.status === 200) {
+              resolve(r);
+            } else {
+              reject(r);
+            }
+          }).catch(reject);
     });
   }
 
@@ -162,14 +162,14 @@ class RequestManager {
   tryChangePerson(form) {
     return new Promise((resolve, reject) => {
       request
-        .put('/api/users/' + currentSession.user.id, form)
-        .then((r) => {
-          if (r.status === 204) {
-            resolve(r);
-          } else {
-            reject(r);
-          }
-        }).catch(reject);
+          .put('/api/users/' + currentSession.user.id, form)
+          .then((r) => {
+            if (r.status === 204) {
+              resolve(r);
+            } else {
+              reject(r);
+            }
+          }).catch(reject);
     });
   }
 
@@ -190,14 +190,14 @@ class RequestManager {
   tryGetOrg(slug) {
     return new Promise((resolve, reject) => {
       request
-        .get('/api/organizations/' + slug, {})
-        .then((r) => {
-          if (r.status === 200) {
-            resolve(r);
-          } else {
-            reject(r);
-          }
-        }).catch(reject);
+          .get('/api/organizations/' + slug, {})
+          .then((r) => {
+            if (r.status === 200) {
+              resolve(r);
+            } else {
+              reject(r);
+            }
+          }).catch(reject);
     });
   }
 
@@ -216,14 +216,14 @@ class RequestManager {
   tryChangeOrg(form) {
     return new Promise((resolve, reject) => {
       request
-        .put('/api/organizations/' + currentSession.user.id, form)
-        .then((r) => {
-          if (r.status === 204) {
-            resolve(r);
-          } else {
-            reject(r);
-          }
-        }).catch(reject);
+          .put('/api/organizations/' + currentSession.user.id, form)
+          .then((r) => {
+            if (r.status === 204) {
+              resolve(r);
+            } else {
+              reject(r);
+            }
+          }).catch(reject);
     });
   }
 
@@ -240,14 +240,14 @@ class RequestManager {
   tryGetOrgs(form) {
     return new Promise((resolve, reject) => {
       request
-        .get('/api/organizations', form)
-        .then((r) => {
-          if (r.status === 200) {
-            resolve(r);
-          } else {
-            reject(r);
-          }
-        }).catch(reject);
+          .get('/api/organizations', form)
+          .then((r) => {
+            if (r.status === 200) {
+              resolve(r);
+            } else {
+              reject(r);
+            }
+          }).catch(reject);
     });
   }
 
@@ -258,14 +258,14 @@ class RequestManager {
   trySetAvatar(form, slug) {
     return new Promise((resolve, reject) => {
       request
-        .post('/api/users/' + slug + '/avatar', form)
-        .then((r) => {
-          if (r.status === 201) {
-            resolve(r);
-          } else {
-            reject(r);
-          }
-        }).catch(reject);
+          .post('/api/users/' + slug + '/avatar', form)
+          .then((r) => {
+            if (r.status === 201) {
+              resolve(r);
+            } else {
+              reject(r);
+            }
+          }).catch(reject);
     });
   }
 
@@ -277,16 +277,16 @@ class RequestManager {
   trySendSummary(vacId, sumId) {
     return new Promise((resolve, reject) => {
       request
-        .post('/api/vacancies/' + vacId + '/response', {
-          summaryId: sumId,
-        })
-        .then((r) => {
-          if (r.status === 200) {
-            resolve(r);
-          } else {
-            reject(r);
-          }
-        }).catch(reject);
+          .post('/api/vacancies/' + vacId + '/response', {
+            summaryId: sumId,
+          })
+          .then((r) => {
+            if (r.status === 200) {
+              resolve(r);
+            } else {
+              reject(r);
+            }
+          }).catch(reject);
     });
   }
 
@@ -300,14 +300,14 @@ class RequestManager {
   tryResponseSummary(slug, form) {
     return new Promise((resolve, reject) => {
       request
-        .put('/summaries/' + slug + '/response', form)
-        .then((r) => {
-          if (r.status === 200) {
-            resolve(r);
-          } else {
-            reject(r);
-          }
-        }).catch(reject);
+          .put('/api/summaries/' + slug + '/response', form)
+          .then((r) => {
+            if (r.status === 200) {
+              resolve(r);
+            } else {
+              reject(r);
+            }
+          }).catch(reject);
     });
   }
 
@@ -321,14 +321,14 @@ class RequestManager {
   tryGetOrgResponses(slug) {
     return new Promise((resolve, reject) => {
       request
-        .get(`/api/organizations/${slug}/response`, {})
-        .then((r) => {
-          if (r.status === 200) {
-            resolve(r);
-          } else {
-            reject(r);
-          }
-        }).catch(reject);
+          .get(`/api/organizations/${slug}/response`, {})
+          .then((r) => {
+            if (r.status === 200) {
+              resolve(r);
+            } else {
+              reject(r);
+            }
+          }).catch(reject);
     });
   }
 
@@ -339,14 +339,14 @@ class RequestManager {
   trySetLike(slug) {
     return new Promise((resolve, reject) => {
       request
-        .post('/api/users/' + slug + '/like', {})
-        .then((r) => {
-          if (r.status === 200) {
-            resolve(r);
-          } else {
-            reject(r);
-          }
-        }).catch(reject);
+          .post('/api/users/' + slug + '/like', {})
+          .then((r) => {
+            if (r.status === 200) {
+              resolve(r);
+            } else {
+              reject(r);
+            }
+          }).catch(reject);
     });
   }
 
@@ -361,14 +361,14 @@ class RequestManager {
   tryGetUserFavorites(slug, page = 0) {
     return new Promise((resolve, reject) => {
       request
-        .get(`/api/users/${slug}/favorite?page=${page}`, {})
-        .then((r) => {
-          if (r.status === 200) {
-            resolve(r);
-          } else {
-            reject(r);
-          }
-        }).catch(reject);
+          .get(`/api/users/${slug}/favorite?page=${page}`, {})
+          .then((r) => {
+            if (r.status === 200) {
+              resolve(r);
+            } else {
+              reject(r);
+            }
+          }).catch(reject);
     });
   }
 
@@ -388,14 +388,14 @@ class RequestManager {
   tryCreateVacancy(form) {
     return new Promise((resolve, reject) => {
       request
-        .post('/api/vacancies', form)
-        .then((r) => {
-          if (r.status === 201) {
-            resolve(r);
-          } else {
-            reject(r);
-          }
-        }).catch(reject);
+          .post('/api/vacancies', form)
+          .then((r) => {
+            if (r.status === 201) {
+              resolve(r);
+            } else {
+              reject(r);
+            }
+          }).catch(reject);
     });
   }
 
@@ -425,14 +425,14 @@ class RequestManager {
   tryGetVacancy(slug) {
     return new Promise((resolve, reject) => {
       request
-        .get('/api/vacancies/' + slug, {})
-        .then((r) => {
-          if (r.status === 200) {
-            resolve(r);
-          } else {
-            reject(r);
-          }
-        }).catch(reject);
+          .get('/api/vacancies/' + slug, {})
+          .then((r) => {
+            if (r.status === 200) {
+              resolve(r);
+            } else {
+              reject(r);
+            }
+          }).catch(reject);
     });
   }
 
@@ -462,14 +462,14 @@ class RequestManager {
   tryGetVacancies(form) {
     return new Promise((resolve, reject) => {
       request
-        .get('/api/vacancies', form)
-        .then((r) => {
-          if (r.status === 200) {
-            resolve(r);
-          } else {
-            reject(r);
-          }
-        }).catch(reject);
+          .get('/api/vacancies', form)
+          .then((r) => {
+            if (r.status === 200) {
+              resolve(r);
+            } else {
+              reject(r);
+            }
+          }).catch(reject);
     });
   }
 
@@ -489,16 +489,17 @@ class RequestManager {
   tryChangeVacancy(form, slug) {
     return new Promise((resolve, reject) => {
       request
-        .put('/api/vacancies/' + slug, form)
-        .then((r) => {
-          if (r.status === 200) {
-            resolve(r);
-          } else {
-            reject(r);
-          }
-        }).catch(reject);
+          .put('/api/vacancies/' + slug, form)
+          .then((r) => {
+            if (r.status === 200) {
+              resolve(r);
+            } else {
+              reject(r);
+            }
+          }).catch(reject);
     });
   }
+
 
   /**
    * @example
@@ -507,14 +508,14 @@ class RequestManager {
   tryDeleteVacancy(slug) {
     return new Promise((resolve, reject) => {
       request
-        .DELETE('/api/vacancies/' + slug, {})
-        .then((r) => {
-          if (r.status === 200 || r.status === 204) {
-            resolve(r);
-          } else {
-            reject(r);
-          }
-        }).catch(reject);
+          .DELETE('/api/vacancies/' + slug, {})
+          .then((r) => {
+            if (r.status === 200 || r.status === 204) {
+              resolve(r);
+            } else {
+              reject(r);
+            }
+          }).catch(reject);
     });
   }
 
@@ -534,14 +535,14 @@ class RequestManager {
   tryGetOrgVacancies(slug) {
     return new Promise((resolve, reject) => {
       request
-        .get('/api/organizations/' + slug + '/vacancies', {})
-        .then((r) => {
-          if (r.status === 200) {
-            resolve(r);
-          } else {
-            reject(r);
-          }
-        }).catch(reject);
+          .get('/api/organizations/' + slug + '/vacancies', {})
+          .then((r) => {
+            if (r.status === 200) {
+              resolve(r);
+            } else {
+              reject(r);
+            }
+          }).catch(reject);
     });
   }
 
@@ -575,14 +576,14 @@ class RequestManager {
   trySearch({type = '', since = '0', desc = 'true', requestBody = ''}) {
     return new Promise((resolve, reject) => {
       request
-        .get(`/api/search?type=${type}&since=${since}&desc=${desc}&request=${requestBody}`, {})
-        .then((r) => {
-          if (r.status === 200) {
-            resolve(r);
-          } else {
-            reject(r);
-          }
-        }).catch(reject);
+          .get(`/api/search?type=${type}&since=${since}&desc=${desc}&request=${requestBody}`, {})
+          .then((r) => {
+            if (r.status === 200) {
+              resolve(r);
+            } else {
+              reject(r);
+            }
+          }).catch(reject);
     });
   }
 
@@ -620,14 +621,14 @@ class RequestManager {
   tryGetUserSummaries(slug, page) {
     return new Promise((resolve, reject) => {
       request
-        .get(`/api/users/${slug}/summaries?page=${page || 0}`, {})
-        .then((r) => {
-          if (r.status === 200) {
-            resolve(r);
-          } else {
-            reject(r);
-          }
-        }).catch(reject);
+          .get(`/api/users/${slug}/summaries?page=${page || 0}`, {})
+          .then((r) => {
+            if (r.status === 200) {
+              resolve(r);
+            } else {
+              reject(r);
+            }
+          }).catch(reject);
     });
   }
 
@@ -660,28 +661,28 @@ class RequestManager {
   tryCreateSummary(form) {
     return new Promise((resolve, reject) => {
       request
-        .post('/api/summaries', form)
-        .then((r) => {
-          if (r.status === 201 || r.status === 200) {
-            resolve(r);
-          } else {
-            reject(r);
-          }
-        }).catch(reject);
+          .post('/api/summaries', form)
+          .then((r) => {
+            if (r.status === 201 || r.status === 200) {
+              resolve(r);
+            } else {
+              reject(r);
+            }
+          }).catch(reject);
     });
   }
 
   tryDeleteSummary(id) {
     return new Promise((resolve, reject) => {
       request
-        .DELETE(`/api/summaries/${id}`, {})
-        .then((r) => {
-          if (r.status === 204) {
-            resolve(r);
-          } else {
-            reject(r);
-          }
-        }).catch(reject);
+          .DELETE(`/api/summaries/${id}`, {})
+          .then((r) => {
+            if (r.status === 204) {
+              resolve(r);
+            } else {
+              reject(r);
+            }
+          }).catch(reject);
     });
   }
 }

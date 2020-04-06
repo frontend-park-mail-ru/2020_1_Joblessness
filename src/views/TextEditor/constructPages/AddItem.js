@@ -24,14 +24,22 @@ const withAdd = (Wrapee, props) => {
         }, 1);
         const addButton = parent.querySelector('.start-adding');
         addButton.addEventListener('click', () => {
-          const newItem = {
-            id: uuid(),
-            classList: ['paragraph'],
-            text: '',
-          };
-          this.props.setStore(props.INSERT_REDUCER(newItem));
+          if (props.CUSTOM_LISTENERS) {
+            const newItem = props.CUSTOM_LISTENERS.initItem(this, props);
 
-          this.props.requestNextNoUpdate(newItem);
+            this.props.setStore(props.INSERT_REDUCER(newItem));
+
+            this.props.requestNextNoUpdate(newItem);
+          } else {
+            const newItem = {
+              id: uuid(),
+              classList: ['paragraph'],
+              text: '',
+            };
+            this.props.setStore(props.INSERT_REDUCER(newItem));
+
+            this.props.requestNextNoUpdate(newItem);
+          }
         });
       }
     }

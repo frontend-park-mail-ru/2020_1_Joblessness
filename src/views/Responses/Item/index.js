@@ -1,6 +1,6 @@
 import {Page} from '../../../Page';
-import './style.sass'
-import template from './index.pug'
+import './style.sass';
+import template from './index.pug';
 import {requestManager, uuid} from '../../../ulils';
 
 class Item extends Page {
@@ -17,7 +17,6 @@ class Item extends Page {
       acceptId: this.#accept,
       declineId: this.#decline,
     });
-
   }
   componentDidMount() {
     super.componentDidMount();
@@ -28,31 +27,31 @@ class Item extends Page {
 
 const acceptEvent = (page, id) => {
   document.querySelector(`#${id}`).addEventListener('click',
-    () => {
-    requestManager.tryResponseSummary(page.props.item.summaryId, {
-      vacancyId: page.props.item.vacancyId,
-      accepted: true,
-      denied: false,
-    }).then(
-      () => alert('Резюме одобрено')
-    ).catch(() => alert('Ошибка при одобрении. Повторите позднее.'))
-    })
-}
+      () => {
+        requestManager.tryResponseSummary(page.props.item.summaryId, {
+          vacancyId: page.props.item.vacancyId,
+          accepted: true,
+          denied: false,
+        }).then(
+            () => alert('Резюме одобрено'),
+        ).catch(() => alert('Ошибка при одобрении. Повторите позднее.'));
+      });
+};
 
 const declineEvent = (page, id) => {
   document.querySelector(`#${id}`).addEventListener('click',
-    () => {
-      requestManager.tryResponseSummary(page.props.item.summaryId, {
-        vacancyId: page.props.item.vacancyId,
-        accepted: false,
-        denied: true,
-      }).then(
-        () => {
-          alert('Резюме отклонено')
-        }
-      ).catch(() => alert('Ошибка при отклонении. Повторите позднее.'))
-    })
-}
+      () => {
+        requestManager.tryResponseSummary(page.props.item.summaryId, {
+          vacancyId: page.props.item.vacancyId,
+          accepted: false,
+          denied: true,
+        }).then(
+            () => {
+              alert('Резюме отклонено');
+            },
+        ).catch(() => alert('Ошибка при отклонении. Повторите позднее.'));
+      });
+};
 export {
-  Item
-}
+  Item,
+};

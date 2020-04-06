@@ -1,7 +1,7 @@
 import {createLocalStore} from '../../ulils';
 
 const withLocalStore = createLocalStore({
-  responses: []
+  responses: [],
 }, true, () => `responses/${currentSession.user.id}`, true);
 export default withLocalStore;
 

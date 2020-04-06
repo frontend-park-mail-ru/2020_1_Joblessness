@@ -1,6 +1,6 @@
 import {Page} from '../../Page';
-import template from './index.pug'
-import './style.sass'
+import template from './index.pug';
+import './style.sass';
 import {Routes} from './Container/routes';
 import {Navigator} from '../../Navigator';
 import {constructRoute, ROOT_ELEMENT} from './routes';
@@ -16,9 +16,9 @@ class ResponsesPage extends Page {
 
 
   componentDidMount() {
-    if(currentSession.user.role === ORGANIZATION) {
+    if (currentSession.user.role === ORGANIZATION) {
       document.querySelector(this.container).hidden = false;
-      displayEvent(document.querySelector(this.container))
+      displayEvent(document.querySelector(this.container));
     } else {
       document.querySelector(this.container).hidden = true;
     }
@@ -39,7 +39,7 @@ const displayEvent = (p) => {
     Navigator.updateAllPages();
   };
   p.addEventListener('click', e);
-}
+};
 
 const closeEvent = (p, h, scroll) => {
   const e = (x) => {
@@ -53,9 +53,9 @@ const closeEvent = (p, h, scroll) => {
     Navigator.removeRoutes(constructRoute());
     Navigator.updateAllPages();
     displayEvent(h);
-  }
+  };
   p.addEventListener('click', e);
 };
 export {
-  ResponsesPage
-}
+  ResponsesPage,
+};

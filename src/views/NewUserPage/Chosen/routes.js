@@ -1,5 +1,5 @@
 import {ChosenPage} from './index';
-import { SubRoutes} from './SubRoutes';
+import {SubRoutes} from './SubRoutes';
 
 const CONTAINER = '#users_current_section';
 
@@ -15,8 +15,8 @@ export const constructRoute = (childRoutes = []) => [
           {
             ...SubRoutes[0],
             childRoutes,
-          }
-        ]
+          },
+        ],
       },
     ],
   },
@@ -30,7 +30,7 @@ const Routes = [
     childRoutes: [
       ...SubRoutes,
     ],
-  }
+  },
 ];
 
 export default Routes;

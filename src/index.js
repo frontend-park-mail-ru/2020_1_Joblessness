@@ -10,6 +10,7 @@ import {
 } from './views';
 import ORGANIZATIONS_ROUTES from './views/OrganizationPage/routes';
 import CREATE_VACANCY_ROUTES from './views/NewCreateVacancyPage/routes';
+import CREATE_SUMMARY_ROUTES from './views/CreateSummaryPage/routes';
 import USER_ROUTES from './views/NewUserPage/routes';
 import SIGNUP_ROUTES from './views/NewSignUp/routes';
 import SEARCH_ROUTES from './views/SearchPage/routes';
@@ -42,14 +43,15 @@ class App {
       ...RESPONSES_ROUTES,
       ...SEARCH_ROUTES,
       ...SIGNUP_ROUTES,
-      ...ORGANIZATIONS_ROUTES,
-      ...CREATE_VACANCY_ROUTES,
       ...USER_ROUTES,
-      {
-        path: 'summaries/create',
-        element: new CreateSummaryPage('#root'),
-        childRoutes: CreateSummaryRoutes,
-      },
+      ...ORGANIZATIONS_ROUTES,
+      ...CREATE_SUMMARY_ROUTES,
+      ...CREATE_VACANCY_ROUTES,
+      // {
+      //   path: 'summaries/create',
+      //   element: new CreateSummaryPage('#root'),
+      //   childRoutes: CreateSummaryRoutes,
+      // },
       {
         path: '404',
         element: new NotFoundPage('#root'),
@@ -63,7 +65,7 @@ class App {
 }
 const createApp = async () => {
   await loginOnReload();
-  // currentSession.session = {id: 3, role: 'ORGANIZATION'}
+  // currentSession.session = {id: 2, role: 'PERSON'}
   new App();
 };
 createApp();

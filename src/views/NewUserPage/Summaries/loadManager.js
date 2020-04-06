@@ -25,25 +25,24 @@ class LoadManager extends Page {
     super.componentDidMount?.();
     document
       ?.addEventListener('scroll', loadOnScroll(this));
-    if(!this._was) {
+    if (!this._was) {
       requestManager
-        .tryGetUserSummaries(getUserId())
-        .then(async (r) => {
-          const list = await r.json();
-          this.props.requestNextNoUpdate(null);
-          if (list.length > 0) {
-            const last = list.pop();
-            for (const item of list) {
-              this.props.requestNextNoUpdate(item, false);
+          .tryGetUserSummaries(getUserId())
+          .then(async (r) => {
+            const list = await r.json();
+            this.props.requestNextNoUpdate(null);
+            if (list.length > 0) {
+              const last = list.pop();
+              for (const item of list) {
+                this.props.requestNextNoUpdate(item, false);
+              }
+
+              this.props.requestNextNoUpdate(last, true);
             }
-
-            this.props.requestNextNoUpdate(last, true);
-          }
-        })
-        .catch(r => this._was = false);
-      this._was = true
+          })
+          .catch((r) => this._was = false);
+      this._was = true;
     }
-
   }
 }
 
@@ -72,7 +71,7 @@ const afterNext = (page, vac, needUpdate) => {
 
   const newPage = new SummaryPreview(`#${vac.innerId}`);
   newPage.props.summary = vac;
-  newPage.props.num = page.props.summaries.length
+  newPage.props.num = page.props.summaries.length;
   const newRoute = {
     path: vac.innerId,
     alwaysOn: true,
@@ -110,13 +109,15 @@ let pageNumber = 1;
 let lastEv;
 let lastlen;
 let inProgress = false;
-const PAG_SIZE = 10
+const PAG_SIZE = 10;
 const loadOnScroll = (page) => {
-  if (lastEv)
+  if (lastEv) {
     document.removeEventListener('scroll', lastEv);
+  }
   const ev = async (e) => {
-    if(inProgress)
+    if (inProgress) {
       return;
+    }
     if (!document.querySelector('#summaries_list_load_manager')) {
       document.removeEventListener('scroll', ev);
       return;
@@ -128,22 +129,24 @@ const loadOnScroll = (page) => {
         const sums = await r.json();
         const startLen = sums.length;
         if (sums.length > lastlen) {
-          while (sums.length > lastlen + 1)
+          while (sums.length > lastlen + 1) {
             page.props.requestNextNoUpdate(sums.shift(), false);
+          }
           page.props.requestNextNoUpdate(sums.shift(), true);
         } else {
           if (sums.length !== PAG_SIZE && lastlen !== PAG_SIZE) {
             return;
           }
-          while (sums.length > 1)
+          while (sums.length > 1) {
             page.props.requestNextNoUpdate(sums.shift(), false);
+          }
           page.props.requestNextNoUpdate(sums.shift(), true);
         }
         lastlen = startLen;
         inProgress = false;
       } catch (e) {
         pageNumber--;
-        inProgress = false
+        inProgress = false;
       }
     }
   };

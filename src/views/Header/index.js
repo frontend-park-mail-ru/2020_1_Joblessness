@@ -14,7 +14,7 @@ class Header extends Page {
    */
   render() {
     return template({
-      user: currentSession.user
+      user: currentSession.user,
     });
   }
   componentDidMount() {

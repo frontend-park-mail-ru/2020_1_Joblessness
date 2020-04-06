@@ -1,7 +1,7 @@
 import {Page} from '../../../Page';
 import template from './index.pug';
 import withLocalStore from '../localStore';
-import './style.sass'
+import './style.sass';
 import {withChainedPages} from '../../../ulils';
 import {SubRoutes} from './SubRoutes';
 class SummariesPage extends Page {

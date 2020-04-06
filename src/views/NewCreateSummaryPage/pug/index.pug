@@ -2,14 +2,14 @@ include ../../../templates/pug/forms
 section.create-summary-holder
     div.create-summary-holder--body
         section.page-solid-section.width100.rad10#create_summary_person_info
-        section
+        section.flex-col
             h1 Опыт работы
             div.flex#create_summary_add_experience
-            div.flex#create_summary_show_experience
+            div.flex.summary--section#create_summary_show_experience
         section
             h1 Образование
             div.flex#create_summary_add_education
-            div.flex#create_summary_show_education
+            div.flex.summary--section#create_summary_show_education
         section
             h1 Требования к вакансии
             div#create_summary_expectations

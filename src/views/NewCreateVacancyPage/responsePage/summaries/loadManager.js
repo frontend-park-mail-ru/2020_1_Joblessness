@@ -22,8 +22,9 @@ class LoadManager extends Page {
    */
   componentDidMount() {
     super.componentDidMount?.();
-    if(!this.#lastPage)
+    if (!this.#lastPage) {
       this.#lastPage = 0;
+    }
 
     requestManager
         .tryGetUserSummaries(currentSession.user.id)

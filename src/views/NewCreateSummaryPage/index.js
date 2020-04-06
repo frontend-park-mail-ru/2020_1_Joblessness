@@ -29,6 +29,7 @@ CreateSummaryPage = withForm(CreateSummaryPage, {}, {
 },
 (e, page) => {
   const state = page.props.getStore();
+  console.log(page.props.getStore());
   const body = {
     keywords: '',
     educations: state.education.map( (e) => ({
@@ -38,11 +39,11 @@ CreateSummaryPage = withForm(CreateSummaryPage, {}, {
       type: e.type,
     })),
     experiences: state.experience.map( (e) => ({
-      'companyName': e.companyName,
-      'role': e.role,
-      'responsibilities': e.responsibilities,
-      'start': e.experience[0],
-      'stop': e.experience[1],
+      companyName: e.companyName,
+      role: e.role,
+      responsibilities: e.responsibilities,
+      start: new Date(e.experience[0]).toISOString(),
+      stop: new Date(e.experience[1]).toISOString(),
     })),
   };
   console.log(body);

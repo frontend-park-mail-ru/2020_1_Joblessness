@@ -7,33 +7,38 @@ import createWithLocalStoreDefault from './localStore';
 
 // @TODO create default store
 
-const createEditor = ({Parent, Preview, Edit, AddItem, Item, ModeManager, withLocalStore = createWithLocalStoreDefault()}, props) => {
+const createEditor = ({Parent, Preview, Edit,
+  AddItem, Item, ModeManager,
+  withLocalStore = createWithLocalStoreDefault()},
+props) => {
   props = createEditorProps(props);
   props.withLocalStore = withLocalStore;
   const ItemPage = constructPages.item(Item, props);
   props.Item = ItemPage;
 
-  const previewPage = constructPages.preview(Preview, props); // Done
-  const previewRoutesTemplate = constructRoutes.preview(previewPage, props); // Done
-  const previewRoutes = previewRoutesTemplate(); // Done
+  const previewPage = constructPages.preview(Preview, props);
+  const previewRoutesTemplate = constructRoutes.preview(previewPage, props);
+  const previewRoutes = previewRoutesTemplate();
 
-  const addItemPage = constructPages.addItem(AddItem, props); // Done
-  const addItemRoutesTemplate = constructRoutes.addItem(addItemPage, props); // Done
-  const addItemRoutes = addItemRoutesTemplate(); // Done
+  const addItemPage = constructPages.addItem(AddItem, props);
+  const addItemRoutesTemplate = constructRoutes.addItem(addItemPage, props);
+  const addItemRoutes = addItemRoutesTemplate();
 
-  const editPage = constructPages.edit(Edit, addItemRoutes, props); // Done
-  const editRoutesTemplate = constructRoutes.edit(editPage, props); // Done
-  // const editRoutes = [...editRoutesTemplate(), ...addItemRoutes]; // Done
-  const editRoutes = editRoutesTemplate(addItemRoutes); // Done
+  const editPage = constructPages.edit(Edit, addItemRoutes, props);
+  const editRoutesTemplate = constructRoutes.edit(editPage, props);
+
+  const editRoutes = editRoutesTemplate(addItemRoutes);
   const modeManagerPage = constructPages.modeManager(ModeManager, props);
-  const modeManagerRoutesTemplate = constructRoutes.modeManager(modeManagerPage, props);
+  const modeManagerRoutesTemplate =
+    constructRoutes.modeManager(modeManagerPage, props);
+
   const modeManagerRoutes = modeManagerRoutesTemplate();
 
   const parentPage = constructPages.parent(Parent, [
     ...previewRoutes,
     ...modeManagerRoutes,
   ], props);
-  const parentRoutesTemplate = constructRoutes.parent(parentPage, props); // done
+  const parentRoutesTemplate = constructRoutes.parent(parentPage, props);
   const parentRoutes = parentRoutesTemplate([
     ...previewRoutes,
     ...modeManagerRoutes,

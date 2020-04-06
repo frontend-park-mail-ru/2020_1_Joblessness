@@ -14,7 +14,7 @@ import {ChosenButtonRoutes} from '../ChosenButton';
 
 const RootPath = 'organizations/';
 
-const MainInfoRoutes = createEditor({
+const mainInfoRoutes = createEditor({
   Parent: OrganizationMainInfoPage,
   Preview: PreviewInfo,
   Edit: EditInfo,
@@ -83,7 +83,7 @@ const SubRoutes = [
     alwaysOn: true,
     element: new OrganizationInfo('#organization_org_info'),
   },
-  ...MainInfoRoutes,
+  ...mainInfoRoutes,
   ...VacanciesRoutes,
   ...LoadManagerRoutes,
 ];

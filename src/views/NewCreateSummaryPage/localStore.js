@@ -1,6 +1,9 @@
 import {createLocalStore} from '../../ulils';
 
 const withLocalStore = createLocalStore({
+  person: {
+
+  },
   name: '',
   salaryFrom: '',
   salaryTo: '',
