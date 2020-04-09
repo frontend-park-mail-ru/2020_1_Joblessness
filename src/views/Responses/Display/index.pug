@@ -1,3 +1,19 @@
+include ../../../templates/pug/link
+include ../../../templates/pug/avatar
 if locals.items && locals.items.length
     each item in locals.items
-        div(id=item.innerId).responser-item Item Holder
+        div(id=item.innerId).responses-item
+
+//div.responses-item
+//    div.responses-item--body
+//        div.response-person-holder
+//            +link(href='/users/').user-avatar-link.black-link
+//                +avatar(noSelect=true)
+//                h1 Балицкий Михаил
+//            div.buttons
+//                +link(href="/vacancies/").black-link В
+//                +link(href="/summaries/").black-link Р
+//        div.flex-1
+//        div.menu
+//            div(id=locals.declineId).decline Отклонить
+//            div(id=locals.acceptId).accept Принять

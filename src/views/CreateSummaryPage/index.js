@@ -115,6 +115,7 @@ const initCreateEvent = (page) => {
           const res = await r.json();
           console.log(res);
           alert('Резюме усепшно создано');
+          this.props.resetStore();
           Navigator.showPage(`/summaries/${res.id}`);
         }
       )
@@ -133,8 +134,8 @@ const loadUser = (page) => {
           ...user,
         },
       }));
-      page.props.random = uuid();
-      Navigator.updateAllPages();
+      // page.props.random = uuid();
+      // Navigator.updateAllPages();
     })
     .catch(console.log);
 };

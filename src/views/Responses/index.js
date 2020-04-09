@@ -9,7 +9,7 @@ import {withAuthManager} from '../../ulils/AuthManager';
 import {ORGANIZATION} from '../../CONSTANTS';
 
 class ResponsesPage extends Page {
-  #lastUrl
+  #lastUrl;
   render() {
     return template(this.props);
   }
@@ -19,6 +19,8 @@ class ResponsesPage extends Page {
     if (currentSession.user.role === ORGANIZATION) {
       document.querySelector(this.container).hidden = false;
       displayEvent(document.querySelector(this.container));
+      // setTimeout(() =>
+      // document.querySelector(this.container).click(), 100)
     } else {
       document.querySelector(this.container).hidden = true;
     }

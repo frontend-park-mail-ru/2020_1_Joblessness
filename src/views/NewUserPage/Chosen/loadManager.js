@@ -17,7 +17,9 @@ class LoadManager extends Page {
   render() {
     return '';
   }
+  ComponentWillUpdate() {
 
+  }
   /**
    *
    */

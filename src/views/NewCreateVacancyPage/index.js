@@ -157,7 +157,7 @@ const initCreateEvent = page => {
           .then(async(r) => {
             const res = await r.json();
             alert('Вакансия успешно создана');
-            Navigator.showPage(`/vacancies/${res}`);
+            Navigator.showPage(`/vacancies/${res.id}`);
           })
           .catch(() => {
             alert('Невозможно создать резюме. Повторите позднее')

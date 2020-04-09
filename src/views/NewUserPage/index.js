@@ -29,21 +29,27 @@ class UserPage extends Page {
   render() {
     return template(this.props);
   }
+  componentWillUpdate() {
+    super.componentWillUpdate();
+    if (this.#prevUser !== getUserId()) {
+      this.#prevUser = getUserId();
+      loadPersonInfo(this);
+      loadPersonSummaries(this);
+      this.props.random = uuid();
+    }
+  }
 
   /**
    *
    */
   componentDidMount() {
-    const userId = getUserId();
-    if (this.#prevUser !== userId) {
-      this.#prevUser = userId;
-      this.props.reloadStore();
-      this.props.random = uuid();
-      Navigator.updateAllPages();
-
-      loadPersonInfo(this);
-      loadPersonSummaries(this);
-    }
+    super.componentDidMount();
+    // const userId = getUserId();
+    // if (this.#prevUser !== userId) {
+    //   this.#prevUser = userId;
+    //   loadPersonInfo(this);
+    //   loadPersonSummaries(this);
+    // }
   }
 }
 
