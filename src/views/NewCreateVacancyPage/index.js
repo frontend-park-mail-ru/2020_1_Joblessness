@@ -2,12 +2,13 @@ import './style.sass';
 import {Page} from '../../Page.js';
 import template from './index.pug';
 import {withAuthManager} from '../../ulils/AuthManager';
-import {getOrgId} from '../OrganizationPage/getOrgInfo';
 import {requestManager, uuid} from '../../ulils';
 import {Navigator} from '../../Navigator';
 import withLocalStore from './localStore';
-import {ORGANIZATION, UNAUTHORISED} from '../../CONSTANTS';
+import {ORGANIZATION, PERSON} from '../../CONSTANTS';
 import {getVacId} from './getVacId';
+import {isCreationPage} from '../CreateSummaryPage/Education/routes';
+import {getSumId} from '../CreateSummaryPage/localStore';
 
 /**
  * Vacancy creation page
@@ -16,153 +17,167 @@ class CreateVacancyPage extends Page {
   /**
    * @return {string} - page to render
    */
+  #submitText;
+
   render() {
-    let buttonText = 'Откликнуться на вакансию';
-    if (/\/vacancies\/create/.test(location.pathname) &&
-      currentSession.user.role === ORGANIZATION) {
-      buttonText = 'Сохранить и опубликовать';
-    } else if (currentSession.user.role === ORGANIZATION &&
-      this.props.getStore().organization.id === currentSession.user.id) {
-      buttonText = 'Удалить вакансию';
-    } else if (currentSession.user.role === ORGANIZATION &&
-      this.props.getStore().organization.id !== currentSession.user.id) {
-      buttonText = '';
-    }
     return template({
       ...this.props.inputFields,
-      buttonText,
+      submitText: this.#submitText,
     });
   }
 
 
   componentWillUpdate() {
     super.componentWillUpdate();
-    this.props.reloadStore();
+    if (!isCreationPage())
+      loadVacancy(this);
+    else
+      this.props.reloadStore();
+
+    if (isCreationPage()) {
+      if (currentSession.user.role === ORGANIZATION) {
+        this.#submitText = 'Создать вакансию'
+      } else {
+        this.#submitText = ''
+      }
+    } else {
+      if (currentSession.user.id === this.props.getStore().organization.id) {
+        this.#submitText = 'Удалить вакансию'
+      } else {
+        if (currentSession.user.role !== ORGANIZATION) {
+          this.#submitText = 'Откликнуться на вакансию'
+        } else {
+          this.#submitText = ''
+        }
+      }
+    }
   }
 
   componentDidMount() {
     super.componentDidMount();
-    addButtonEvents(this);
-    if (/\/vacancies\/create/.test(location.pathname) &&
-      currentSession.user.role === ORGANIZATION) {
-      console.log('org create vac');
-      const orgId = getOrgId();
-      requestManager.tryGetOrg(orgId)
-          .then(async (r) => {
-            const res = await r.json();
-
-            this.props.setStore((s) => ({
-              organization: {
-                tag: '',
-                ...res,
-              },
-            }));
-            Navigator.updateAllPages();
-          })
-          .catch(console.log);
-    } else if (/\/vacancies\/create/.test(location.pathname)) {
-      // Navigator.showPage('404');
+    if (isCreationPage()) {
+      if (currentSession.user.role === ORGANIZATION) {
+        initCreateEvent(this);
+      } else {
+        // alert('Авторизируйтесь как организация');
+        // setTimeout(() => Navigator.showPage('/'), 100);
+      }
     } else {
-      // @TODO try to load existing vacancy
-      requestManager.tryGetVacancy(getVacId())
-          .then(async (r) => {
-            const res = await r.json();
-            const vac = {
-              mainInfo: {
-                name: res.name || '',
-                description: res.description || '',
-                salaryFrom: res.salaryFrom || '',
-                salaryTo: res.salaryTo || '',
-              },
-              responsibilities: JSON.parse(res.responsibilities.replace(/&#34;/g, '"')),
-              conditions: JSON.parse(res.conditions.replace(/&#34;/g, '"')),
-              keywords: JSON.parse(res.keywords.replace(/&#34;/g, '"')),
-            };
-            this.props.setStore((s) => ({
-              organization: res.organization,
-              requirements: {
-                preview: [],
-                raw: [],
-              },
-              ...vac,
-            }));
-            // this.props.random = uuid();
-            // Navigator.updateAllPages();
-          })
-          .catch((r) => {
-            if (r.status === 404) {
-              Navigator.showPage('404');
-            }
-            console.log(r);
-          // alert('Невозможно соединиться с сервером');
-          // Navigator.showPage('/');
-          });
+        if (currentSession.user.id === this.props.getStore().organization.id) {
+          initDeleteEvent(this);
+        } else {
+          if(currentSession.user.role === PERSON) {
+            initResponseEvent(this);
+          } else {
+            initSignUpEvent(this);
+          }
+        }
     }
   }
 }
-
-const addButtonEvents = (page) => {
-  if (/\/vacancies\/create/.test(location.pathname) &&
-    currentSession.user.role === ORGANIZATION) {
-    const but = document.getElementById('create_vacancy_button');
-    but.addEventListener('click', () => {
-      const vac = page.props.getStore();
-      if (!vac.mainInfo.name || !(vac.mainInfo.salaryTo && vac.mainInfo.salaryFrom)) {
-        alert('Не все поля заполнены');
-        return;
-      }
-      requestManager.tryCreateVacancy({
-        name: uuid(),
-        ...vac.mainInfo,
-        withTax: false,
-        responsibilities: JSON.stringify(vac.responsibilities),
-        conditions: JSON.stringify(vac.conditions),
-        keywords: JSON.stringify(vac.keywords),
-      }).then(
-          async (r) => {
-            try {
-              const res = await r.json();
-              localStorage.removeItem(`vacancies/create`);
-              Navigator.showPage(`/vacancies/${res.id}`);
-            } catch (e) {
-              console.log(e);
-              Navigator.showPage(`/organizations/${getOrgId()}`);
-            }
-          },
-      ).catch((r) => {
-        alert('Невозможно создать вакансию');
-        console.log(r);
-      });
-    });
-  } else if (currentSession.user.role === ORGANIZATION &&
-    page.props.getStore().organization.id === currentSession.user.id) {
-    const but = document.getElementById('create_vacancy_button');
-    but?.addEventListener('click', () => {
-      requestManager.tryDeleteVacancy(getVacId())
-          .then(() => {
-            localStorage.removeItem(`vacancies/${getVacId()}`);
-            Navigator.showPage(`/organizations/${getOrgId()}`);
-          })
-          .catch((e) => {
-            console.log(e);
-            alert('Невозможно удалить вакансию');
-          });
-    });
-  } else if (currentSession.user.role === ORGANIZATION &&
-    page.props.getStore().organization.id !== currentSession.user.id) {
-    // Do nothing
-  } else {
-    // @TODO создать отклик
-    const but = document.getElementById('create_vacancy_button');
-    but.addEventListener('click', () => {
-      if (currentSession.user.role === UNAUTHORISED) {
-        Navigator.showPage('/signup/start');
-        return;
-      }
-      Navigator.showPage(`/vacancies/${getVacId()}/response`);
-    });
+let lastLoaded;
+const loadVacancy = page => {
+  if (lastLoaded === getVacId()) {
+    return;
   }
+  lastLoaded = getVacId();
+  requestManager
+    .tryGetVacancy(getVacId())
+    .then(async r => {
+      const vac = await r.json();
+      console.log(vac);
+      const responsibilities = JSON.parse(vac.responsibilities.replace(/&#34;/g, '"'));
+      const conditions = JSON.parse(vac.conditions.replace(/&#34;/g, '"'));
+      const mainInfo = {
+        name: vac.name || '',
+        description: vac.description || '',
+        salaryFrom: vac.salaryFrom || '',
+        salaryTo: vac.salaryTo || '',
+      }
+      page.props.setStore({
+        organization: vac.organization,
+        mainInfo: {
+          raw: mainInfo,
+          preview: mainInfo,
+        },
+        responsibilities: {
+          raw: responsibilities,
+          preview: responsibilities,
+        },
+        conditions: {
+          raw: conditions,
+          preview: conditions,
+        }
+      }, () => {
+        page.props.random = uuid();
+        Navigator.updateAllPages();
+      })
+      console.log(page.props.getStore())
+    })
 };
+
+const initSignUpEvent = (page) => {
+  document
+    .getElementById('create_vacancy_button')
+    ?.addEventListener(
+      'click',
+      () => {
+        Navigator.showPage('/signup')
+      }
+    )
+}
+const initResponseEvent = (page) => {
+  document
+    .getElementById('create_vacancy_button')
+    ?.addEventListener(
+      'click',
+      () => {
+        Navigator.showPage(`/vacancies/${getVacId()}/response`);
+      }
+    )
+}
+const initCreateEvent = page => {
+  document
+    .getElementById('create_vacancy_button')
+    ?.addEventListener(
+      'click',
+      e => {
+        const state = page.props.getStore();
+        const body = {
+          name: state.mainInfo.preview.name,
+          description: state.mainInfo.description,
+          salaryFrom: Number(state.mainInfo.preview.salaryFrom),
+          salaryTo: Number(state.mainInfo.preview.salaryTo),
+          responsibilities: JSON.stringify(state.responsibilities.preview),
+          conditions: JSON.stringify(state.conditions.preview),
+        };
+
+        requestManager
+          .tryCreateVacancy(body)
+          .then(async(r) => {
+            const res = await r.json();
+            alert('Вакансия успешно создана');
+            Navigator.showPage(`/vacancies/${res}`);
+          })
+          .catch(() => {
+            alert('Невозможно создать резюме. Повторите позднее')
+          })
+      }
+    )
+};
+const initDeleteEvent = page => {
+  document
+    .getElementById('create_vacancy_button')
+    ?.addEventListener('click', (e) => {
+      requestManager
+        .tryDeleteVacancy(getVacId())
+        .then(() => {
+          alert('Вакансия успешно удалена');
+          Navigator.showPage(`/organizations/${currentSession.user.id}`)
+        })
+    })
+};
+
 CreateVacancyPage = withLocalStore(CreateVacancyPage);
 CreateVacancyPage = withAuthManager(CreateVacancyPage);
 export {

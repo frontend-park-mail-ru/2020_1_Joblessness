@@ -17,12 +17,7 @@ section.page-holder.pad-t20.pad-b20
     section.page-section.width80.mrg0
         div.page-holder--body.flex-row.width100#vacancy_conditions
     +section-title.width80
-        h1 Ключевые слова
-    section.page-section.width80.mrg0
-        div.page-holder--body.flex-row.width100#vacancy_keywords
-    //    h1 Ключевые навыки
-    //section.page-section.width80.mrg0
-    //    div.page-holder--body.flex-row.width100#vacancy_mainskills
-    if(locals.buttonText)
+
+    if(locals.submitText)
         section.page-section.width80.gradient-background.create-button#create_vacancy_button
-            div #{locals.buttonText}
+            div #{locals.submitText}

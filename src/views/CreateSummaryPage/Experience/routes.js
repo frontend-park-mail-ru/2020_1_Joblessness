@@ -65,6 +65,13 @@ const Routes = createEditor({
       experienceFrom: '',
       experienceTo: '',
       responsibilities: '',
+      correct: {
+        companyName: false,
+        role: false,
+        experienceFrom: false,
+        experienceTo: false,
+        responsibilities: false,
+      },
     }),
     init: (page, props) => {
       const fields = {
@@ -73,13 +80,6 @@ const Routes = createEditor({
         experienceFrom: uuid(),
         experienceTo: uuid(),
         responsibilities: uuid(),
-        correct: {
-          companyName: false,
-          role: false,
-          experienceFrom: false,
-          experienceTo: false,
-          responsibilities: false,
-        },
       };
       page.props.fields = fields;
     },

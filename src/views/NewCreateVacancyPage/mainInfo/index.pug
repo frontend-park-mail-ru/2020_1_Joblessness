@@ -1,35 +1,22 @@
 include ../../../templates/pug/forms
-mixin string-field
-    div.string-field(id=attributes.id)
-        input.string-field--input(
-            readonly!=attributes.readonly
-            type=attributes.type || "text"
-            placeholder=attributes.placeholder
-            value=attributes.value)
-        block
-        div.string-field--error
+include ../../../templates/pug/fields
 
-mixin field-holder
-    div.field-holder(class=attributes.class)
-        block
-mixin field-name(name)
-    h2 #{name}
 mixin form(sum)
     +field-holder.company-name
         +field-name("Название")
-        +string-field(readonly=attributes.readonly id=sum.name.id)
+        +string-field(readonly=attributes.readonly id=sum.name)
             div.field-line
     +field-holder.company-role
         +field-name("Описание")
-        +string-field(readonly=attributes.readonly id=sum.description.id)
+        +string-field(readonly=attributes.readonly id=sum.description)
             div.field-line
     +field-holder.company-experience
         +field-name("Зарплата от")
-        +string-field(readonly=attributes.readonly id=sum.salaryFrom.id)
+        +string-field(readonly=attributes.readonly id=sum.salaryFrom)
             div.field-line
         +field-name("до")
-        +string-field(readonly=attributes.readonly id=sum.salaryTo.id)
+        +string-field(readonly=attributes.readonly id=sum.salaryTo)
             div.field-line
         | &#8381;
-    div.submit-button(id=sum.submitField.id hidden = !!attributes.readonly) Применить
-+form(locals.inputFields)(readonly=!locals.canChange)
+
++form(locals.fields)(readonly=!locals.canEdit)

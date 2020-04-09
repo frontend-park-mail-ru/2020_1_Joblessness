@@ -2,12 +2,7 @@ import '@babel/polyfill';
 import './style.sass';
 import {Navigator} from './Navigator.js';
 import {loginOnReload} from './ulils/loginOnReload';
-import {
-  CreateSummaryPage,
-  Header,
-  NotFoundPage,
-  CreateSummaryRoutes,
-} from './views';
+import {Header, NotFoundPage} from './views';
 import ORGANIZATIONS_ROUTES from './views/OrganizationPage/routes';
 import CREATE_VACANCY_ROUTES from './views/NewCreateVacancyPage/routes';
 import CREATE_SUMMARY_ROUTES from './views/CreateSummaryPage/routes';
@@ -16,7 +11,6 @@ import SIGNUP_ROUTES from './views/NewSignUp/routes';
 import SEARCH_ROUTES from './views/SearchPage/routes';
 import RESPONSES_ROUTES from './views/Responses/routes';
 import {RootElement} from './RootElement';
-
 /**
  * App
  */
@@ -47,11 +41,6 @@ class App {
       ...ORGANIZATIONS_ROUTES,
       ...CREATE_SUMMARY_ROUTES,
       ...CREATE_VACANCY_ROUTES,
-      // {
-      //   path: 'summaries/create',
-      //   element: new CreateSummaryPage('#root'),
-      //   childRoutes: CreateSummaryRoutes,
-      // },
       {
         path: '404',
         element: new NotFoundPage('#root'),
@@ -65,6 +54,7 @@ class App {
 }
 const createApp = async () => {
   await loginOnReload();
+  // currentSession.session = {id: 3, role : 'ORGANIZATION'};
   // currentSession.session = {id: 2, role: 'PERSON'}
   new App();
 };

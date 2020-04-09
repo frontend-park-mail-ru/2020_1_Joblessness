@@ -21,14 +21,18 @@ const withLocalStore = createLocalStore({
     raw: [],
   },
   mainInfo: {
-    name: '',
-    description: '',
-    salaryFrom: 0,
-    salaryTo: 0,
-  },
-  keywords: {
-    preview: [],
-    raw: [],
+    raw: {
+      name: '',
+      description: '',
+      salaryFrom: '',
+      salaryTo: '',
+    },
+    preview: {
+      name: '',
+      description: '',
+      salaryFrom: '',
+      salaryTo: '',
+    }
   },
 }, true, () => `vacancies/${isCreationPage() ? 'create' : getVacId()}`, true);
 

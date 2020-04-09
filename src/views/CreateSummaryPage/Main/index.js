@@ -60,7 +60,6 @@ const initValues = (page, fields) => {
   const salaryToField = document.querySelector(`#${fields.salaryTo}`);
 
   const {name, description, salaryFrom, salaryTo} = page.props.getStore().mainInfo.preview;
-
   nameField.value = name || '';
   descriptionField.value = description || '';
   salaryFromField.value = salaryFrom || '';
