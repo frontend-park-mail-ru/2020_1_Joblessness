@@ -7,7 +7,7 @@ import {Edit} from './Edit';
 import {AddItem} from './AddItem';
 import {ModeManager} from './ModeManager';
 import {Item} from './Item';
-import {requestManager, uuid} from '../../../ulils';
+import {requestManager, uuid, validators} from '../../../ulils';
 
 export const isCreationPage = () => /\/create/.test(location.pathname);
 
@@ -64,6 +64,12 @@ const Routes = createEditor({
       speciality: '',
       graduated: '',
       type: '',
+      correct: {
+        institution: false,
+        speciality: false,
+        graduated: false,
+        type: false,
+      }
     }),
     init: (page, props) => {
       const fields = {
@@ -123,13 +129,13 @@ const initEvents = (page, fields) => {
 
 
   updateEvent(page, 'institution', institutionField,
-      raiseWarn((s) => s.length >= 5 && s.length <= 15, '5-15 символов'));
-  updateEvent(page, 'role', specialityField,
-      raiseWarn((s) => s.length <= 30, 'До 30 символов'));
+      raiseWarn((s) => s.length <= 30, 'До 30 символов'), (s) => s.length <= 30);
+  updateEvent(page, 'speciality', specialityField,
+      raiseWarn((s) => s.length <= 30, 'До 30 символов'), (s) => s.length <= 30);
   updateEvent(page, 'graduated', graduatedField,
-      raiseWarn((v) => Number(v) > 0, 'Положительное число'));
+      raiseWarn(validators.isYear, 'Год YYYY'), validators.isYear);
   updateEvent(page, 'type', typeField,
-      raiseWarn((s) => s.length <= 10, 'До 10 символов'));
+      raiseWarn((s) => s.length <= 10, 'До 10 символов'), (s) => s.length <= 10);
 };
 
 const raiseWarn = (validator, msg) => (v, el) => {
@@ -140,7 +146,7 @@ const raiseWarn = (validator, msg) => (v, el) => {
   }
   return v;
 };
-const updateEvent = (page, fieldName, el, convert = (v) => v) => {
+const updateEvent = (page, fieldName, el, convert = (v) => v, validate = (v) => true) => {
   convert(el.value, el);
   const event = (e) => {
     const val = e.target.value;
@@ -152,10 +158,13 @@ const updateEvent = (page, fieldName, el, convert = (v) => v) => {
               if ( i.id !== page.props.info.id) {
                 return i;
               }
-              console.log();
               return {
                 ...i,
                 [fieldName]: convert(val, el),
+                correct: {
+                  ...i.correct,
+                  [fieldName]: validate(val),
+                }
               };
             }),
           },

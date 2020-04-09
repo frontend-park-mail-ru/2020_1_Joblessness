@@ -73,6 +73,13 @@ const Routes = createEditor({
         experienceFrom: uuid(),
         experienceTo: uuid(),
         responsibilities: uuid(),
+        correct: {
+          companyName: false,
+          role: false,
+          experienceFrom: false,
+          experienceTo: false,
+          responsibilities: false,
+        },
       };
       page.props.fields = fields;
     },
@@ -128,15 +135,15 @@ const initEvents = (page, fields) => {
 
 
   updateEvent(page, 'companyName', companyNameField,
-      raiseWarn((s) => s.length >= 5 && s.length <= 15, '5-15 символов'));
+      raiseWarn((s) => s.length >= 5 && s.length <= 15, '5-15 символов'), (s) => s.length >= 5 && s.length <= 15);
   updateEvent(page, 'role', roleField,
-      raiseWarn((s) => s.length <= 30, 'До 30 символов'));
+      raiseWarn((s) => s.length <= 30, 'До 30 символов'), (s) => s.length <= 30);
   updateEvent(page, 'experienceFrom', experienceFromField,
-      raiseWarn((v) => Number(v) > 0, 'Положительное число'));
+      raiseWarn((v) => Number(v) > 0, 'Положительное число'), (v) => Number(v) > 0);
   updateEvent(page, 'experienceTo', experienceToField,
-      raiseWarn((v) => Number(v) > 0, 'Положительное число'));
+      raiseWarn((v) => Number(v) > 0, 'Положительное число'), (v) => Number(v) > 0);
   updateEvent(page, 'responsibilities', responsibilitiesField,
-      raiseWarn((s) => /^[a-zA-Z0-9_ ]*$/.test(s), 'Ключевые слова через пробел'));
+      raiseWarn((s) => /^[a-zA-Z0-9а-яА-ЯёЁ_, ]*$/.test(s), 'Ключевые слова через запятую'), (s) => /^[a-zA-Z0-9а-яА-ЯёЁ_, ]*$/.test(s));
 };
 
 const raiseWarn = (validator, msg) => (v, el) => {
@@ -147,7 +154,7 @@ const raiseWarn = (validator, msg) => (v, el) => {
   }
   return v;
 };
-const updateEvent = (page, fieldName, el, convert = (v) => v) => {
+const updateEvent = (page, fieldName, el, convert = (v) => v, validate = (v) => true) => {
   convert(el.value, el);
   const event = (e) => {
     const val = e.target.value;
@@ -163,6 +170,10 @@ const updateEvent = (page, fieldName, el, convert = (v) => v) => {
               return {
                 ...i,
                 [fieldName]: convert(val, el),
+                correct: {
+                  ...i.correct,
+                  [fieldName] : validate(val),
+                }
               };
             }),
           },

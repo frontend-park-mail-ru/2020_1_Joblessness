@@ -36,14 +36,15 @@ class Main extends Page {
 
   componentDidMount() {
     super.componentDidMount();
-    initEvents(this, {
-      name: this.#nameId,
-      description: this.#descriptionId,
-      salaryFrom: this.#salaryFromId,
-      salaryTo: this.#salaryToId,
-    },
-    );
+
     initValues(this, {
+        name: this.#nameId,
+        description: this.#descriptionId,
+        salaryFrom: this.#salaryFromId,
+        salaryTo: this.#salaryToId,
+      },
+    );
+    initEvents(this, {
       name: this.#nameId,
       description: this.#descriptionId,
       salaryFrom: this.#salaryFromId,
@@ -58,11 +59,12 @@ const initValues = (page, fields) => {
   const salaryFromField = document.querySelector(`#${fields.salaryFrom}`);
   const salaryToField = document.querySelector(`#${fields.salaryTo}`);
 
-  const {name, description, salaryFrom, salaryTo} = page.props.getStore().mainInfo.raw;
-  nameField.value = name;
-  descriptionField.value = description;
-  salaryFromField.value = salaryFrom;
-  salaryToField.value = salaryTo;
+  const {name, description, salaryFrom, salaryTo} = page.props.getStore().mainInfo.preview;
+
+  nameField.value = name || '';
+  descriptionField.value = description || '';
+  salaryFromField.value = salaryFrom || '';
+  salaryToField.value = salaryTo || '';
 };
 const initEvents = (page, fields) => {
   const nameField = document.querySelector(`#${fields.name}`);
@@ -86,6 +88,7 @@ const raiseWarn = (validator, msg) => (v, el) => {
   } else {
     el.parentNode.lastChild.innerHTML = '';
   }
+  return v;
 };
 const updateEvent = (page, fieldName, el, convert = (v) => v) => {
   convert(el.value, el);
@@ -96,12 +99,12 @@ const updateEvent = (page, fieldName, el, convert = (v) => v) => {
         (s) => ({
           mainInfo: {
             ...s.mainInfo,
-            raw: {
-              ...s.mainInfo.raw,
+            preview: {
+              ...s.mainInfo.preview,
               [fieldName]: convert(val, el),
             },
           },
-        }),
+        }), console.log
     );
   };
   el.addEventListener('input', event);
