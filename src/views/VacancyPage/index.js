@@ -112,6 +112,11 @@ const loadVacancy = page => {
         Navigator.updateAllPages();
       })
     })
+    .catch(r => {
+      if(r.status === 404) {
+        Navigator.showPage('404');
+      }
+    })
 };
 const loadOrg = (page) => {
   requestManager

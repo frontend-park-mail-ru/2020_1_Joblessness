@@ -266,6 +266,11 @@ const loadSummary = (page) => {
         Navigator.updateAllPages();
       })
     })
+    .catch(r => {
+      if(r.status === 404) {
+        Navigator.showPage('404');
+      }
+    })
 };
 SummaryPage = withLocalStore(SummaryPage);
 SummaryPage = withAuthManager(SummaryPage);
