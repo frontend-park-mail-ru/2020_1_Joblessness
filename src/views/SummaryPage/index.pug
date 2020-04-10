@@ -2,6 +2,10 @@ mixin section-title
     div.section-title.cover(class=attributes.class)
         block
 
+if locals.id
+    a(href='/api/summaries/' + locals.id + '/print' target="_blank" ).print-summary#print_summary
+else
+    div.hidden#print_summary
 section.page-holder.pad-t20.pad-b20
     section.page-solid-section.width80.rad10.maxw800#summary_info
     +section-title.width80

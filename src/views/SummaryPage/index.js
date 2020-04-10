@@ -15,6 +15,7 @@ class SummaryPage extends Page {
   render() {
     return template({
       ...this.props,
+      id: getSumId(),
       submitText: this.#submitText,
     });
   }
