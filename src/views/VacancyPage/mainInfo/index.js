@@ -94,7 +94,6 @@ const updateEvent = (page, fieldName, el, convert = (v) => v) => {
   convert(el.value, el);
   const event = (e) => {
     const val = e.target.value;
-    console.log(val);
     page.props.setStore(
         (s) => ({
           mainInfo: {
@@ -104,7 +103,7 @@ const updateEvent = (page, fieldName, el, convert = (v) => v) => {
               [fieldName]: convert(val, el),
             },
           },
-        }), console.log
+        })
     );
   };
   el.addEventListener('input', event);
