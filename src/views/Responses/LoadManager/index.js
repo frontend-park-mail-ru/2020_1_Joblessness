@@ -15,7 +15,6 @@ class LoadManager extends Page {
 
   componentDidMount() {
     super.componentDidMount();
-    console.log(123);
     requestManager
         .tryGetOrgResponses(currentSession.user.id)
         .then(async (r) => {

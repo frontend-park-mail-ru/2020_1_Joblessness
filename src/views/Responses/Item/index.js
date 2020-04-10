@@ -17,7 +17,6 @@ class Item extends Page {
   }
 
   render() {
-    console.log(this.props);
     return template({
       ...this.props,
       acceptId: this.#accept,

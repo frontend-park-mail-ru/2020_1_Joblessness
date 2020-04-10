@@ -17,6 +17,9 @@ class LoadManager extends Page {
   render() {
     return '';
   }
+  componentWillUpdate() {
+    super.componentWillUpdate();
+  }
 
   /**
    *
@@ -25,7 +28,7 @@ class LoadManager extends Page {
     super.componentDidMount?.();
     document
       ?.addEventListener('scroll', loadOnScroll(this));
-    if (!this._was) {
+    if (this._was !== getUserId()) {
       requestManager
           .tryGetUserSummaries(getUserId())
           .then(async (r) => {
@@ -40,8 +43,8 @@ class LoadManager extends Page {
               this.props.requestNextNoUpdate(last, true);
             }
           })
-          .catch((r) => this._was = false);
-      this._was = true;
+          .catch((r) => this._was = null);
+      this._was = getUserId();
     }
   }
 }
@@ -66,6 +69,7 @@ const afterNext = (page, vac, needUpdate) => {
   if (!vac) {
     Navigator.removeRoutes(constructRoute());
     Navigator.addRoutes(constructRoute());
+    Navigator.updateAllPages();
     return;
   }
 

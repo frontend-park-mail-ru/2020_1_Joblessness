@@ -7,7 +7,7 @@ import {Navigator} from '../../Navigator';
 import withLocalStore from './localStore';
 import {ORGANIZATION, PERSON} from '../../CONSTANTS';
 import {getVacId} from './getVacId';
-import {isCreationPage} from '../CreateSummaryPage/Education/routes';
+import {isCreationPage} from '../SummaryPage/Education/routes';
 
 /**
  * Vacancy creation page
@@ -59,8 +59,8 @@ class CreateVacancyPage extends Page {
         loadOrg(this);
         initCreateEvent(this);
       } else {
-        // alert('Авторизируйтесь как организация');
-        // setTimeout(() => Navigator.showPage('/'), 100);
+        alert('Авторизируйтесь как организация');
+        setTimeout(() => Navigator.showPage('/'), 100);
       }
     } else {
         if (currentSession.user.id === this.props.getStore().organization.id) {
@@ -85,7 +85,6 @@ const loadVacancy = page => {
     .tryGetVacancy(getVacId())
     .then(async r => {
       const vac = await r.json();
-      console.log(vac);
       const responsibilities = JSON.parse(vac.responsibilities.replace(/&#34;/g, '"'));
       const conditions = JSON.parse(vac.conditions.replace(/&#34;/g, '"'));
       const mainInfo = {
@@ -112,7 +111,6 @@ const loadVacancy = page => {
         page.props.random = uuid();
         Navigator.updateAllPages();
       })
-      console.log(page.props.getStore())
     })
 };
 const loadOrg = (page) => {

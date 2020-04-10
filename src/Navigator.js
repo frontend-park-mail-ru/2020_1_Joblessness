@@ -83,7 +83,6 @@ class Navigator {
       if (isAppropriate || route.path.raw === 'any' || route.path.alwaysOn) {
         if (window.location.pathname !== path && updateLocation) {
           const newPath = path + ( useOldSearch ? window.location.search : '');
-          console.log(newPath)
           if (path[0] === '/') {
             window.history.pushState({}, '', newPath);
           } else {

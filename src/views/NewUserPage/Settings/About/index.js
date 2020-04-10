@@ -5,7 +5,7 @@ import {requestManager, uuid, validators, withForm} from '../../../../ulils';
 import {validateSelect} from '../../../../ulils/withForm';
 import {Navigator} from '../../../../Navigator';
 import {getUserId} from '../../getUserId';
-import {isCreationPage} from '../../../NewCreateVacancyPage/isCreationPage';
+import {isCreationPage} from '../../../VacancyPage/isCreationPage';
 import {ORGANIZATION, PERSON} from '../../../../CONSTANTS';
 
 const GENDERS = [

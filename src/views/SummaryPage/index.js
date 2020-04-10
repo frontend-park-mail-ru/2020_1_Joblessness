@@ -108,12 +108,10 @@ const initCreateEvent = (page) => {
           stop: new Date(e.experienceTo).toISOString(),
         })),
       };
-      console.log(body);
 
       request.post('/api/summaries', body).then(
         async (r) => {
           const res = await r.json();
-          console.log(res);
           alert('Резюме усепшно создано');
           page.props.setStore({
             mainInfo: {
@@ -186,20 +184,17 @@ const createKeyWords = (state) => {
 
 
 const validateState = (state) => {
-  console.log(state);
   if (isNaN(state.mainInfo.preview.salaryFrom))
     return false;
   if (isNaN(state.mainInfo.preview.salaryTo))
     return false;
   for (let edu of state.education.preview) {
     for (let c in edu.correct) {
-      console.log(edu.correct[c]);
       if (!edu.correct[c]) return false;
     }
   }
   for (let exp of state.experience.preview) {
     for (let c in exp.correct) {
-      console.log(exp.correct[c]);
       if (!exp.correct[c]) return false;
     }
   }
