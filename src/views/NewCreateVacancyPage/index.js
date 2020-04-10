@@ -8,7 +8,6 @@ import withLocalStore from './localStore';
 import {ORGANIZATION, PERSON} from '../../CONSTANTS';
 import {getVacId} from './getVacId';
 import {isCreationPage} from '../CreateSummaryPage/Education/routes';
-import {getSumId} from '../CreateSummaryPage/localStore';
 
 /**
  * Vacancy creation page
@@ -57,6 +56,7 @@ class CreateVacancyPage extends Page {
     super.componentDidMount();
     if (isCreationPage()) {
       if (currentSession.user.role === ORGANIZATION) {
+        loadOrg(this);
         initCreateEvent(this);
       } else {
         // alert('Авторизируйтесь как организация');
@@ -93,7 +93,7 @@ const loadVacancy = page => {
         description: vac.description || '',
         salaryFrom: vac.salaryFrom || '',
         salaryTo: vac.salaryTo || '',
-      }
+      };
       page.props.setStore({
         organization: vac.organization,
         mainInfo: {
@@ -115,7 +115,20 @@ const loadVacancy = page => {
       console.log(page.props.getStore())
     })
 };
+const loadOrg = (page) => {
+  requestManager
+    .tryGetOrg(currentSession.user.id)
+    .then(async r => {
+      const org = await r.json();
 
+      page.props.setStore({
+        organization: {
+          ...org,
+        }
+      });
+    })
+    .catch(console.log);
+};
 const initSignUpEvent = (page) => {
   document
     .getElementById('create_vacancy_button')
@@ -157,6 +170,30 @@ const initCreateEvent = page => {
           .then(async(r) => {
             const res = await r.json();
             alert('Вакансия успешно создана');
+            page.props.setStore({
+              responsibilities: {
+                preview: [],
+                raw: [],
+              },
+              conditions: {
+                preview: [],
+                raw: [],
+              },
+              mainInfo: {
+                raw: {
+                  name: '',
+                  description: '',
+                  salaryFrom: '',
+                  salaryTo: '',
+                },
+                preview: {
+                  name: '',
+                  description: '',
+                  salaryFrom: '',
+                  salaryTo: '',
+                }
+              },
+            });
             Navigator.showPage(`/vacancies/${res.id}`);
           })
           .catch(() => {

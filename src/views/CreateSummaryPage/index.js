@@ -115,7 +115,34 @@ const initCreateEvent = (page) => {
           const res = await r.json();
           console.log(res);
           alert('Резюме усепшно создано');
-          this.props.resetStore();
+          page.props.setStore({
+            mainInfo: {
+              raw: {
+                name: '',
+                description: '',
+                salaryFrom: '',
+                salaryTo: '',
+              },
+              preview: {
+                name: '',
+                description: '',
+                salaryFrom: '',
+                salaryTo: '',
+              },
+            },
+            experience: {
+              preview: [],
+              raw: [],
+            },
+            education: {
+              preview: [],
+              raw: [],
+            },
+            keywords: {
+              preview: [],
+              raw: [],
+            },
+          })
           Navigator.showPage(`/summaries/${res.id}`);
         }
       )
