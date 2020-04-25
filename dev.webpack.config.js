@@ -1,5 +1,5 @@
 const path = require('path');
-// const HtmlWebpackPlugin = require('html-webpack-plugin');
+const workboxPlugin = require('workbox-webpack-plugin');
 
 
 module.exports = {
@@ -71,5 +71,10 @@ module.exports = {
     ]
   },
   plugins: [
+    new workboxPlugin.GenerateSW({
+      swDest: 'src/service-worker.js',
+      clientsClaim: true,
+      skipWaiting: true,
+    })
   ]
 };

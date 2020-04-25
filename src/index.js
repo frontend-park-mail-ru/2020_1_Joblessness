@@ -11,7 +11,30 @@ import AUTHENTICATION_ROUTES from './views/Authentication/routes';
 import SEARCH_ROUTES from './views/SearchPage/routes';
 import ORGANIZATION_MENU_ROUTES from './views/OrganizationMenu/routes';
 import {RootElement} from './RootElement';
-import './styles/index.sass'
+import './styles/index.sass';
+
+/**
+ * Init function
+ */
+function init() {
+  console.log('In init');
+  if ('serviceWorker' in navigator) {
+    window.addEventListener('load', registerServiceWorker);
+  }
+}
+
+/**
+ * Register service-worker
+ */
+function registerServiceWorker() {
+  navigator.serviceWorker.register('src/service-worker.js')
+      .then((registration) => {
+        if (!registration.active) {
+          // Is not active
+        }
+        console.log('Service worker is active');
+      });
+}
 
 /**
  * App
@@ -61,3 +84,4 @@ const createApp = async () => {
   new App();
 };
 createApp();
+init();
