@@ -72,7 +72,7 @@ module.exports = {
   },
   plugins: [
     new workboxPlugin.GenerateSW({
-      swDest: 'src/service-worker.js',
+      swDest: 'sw.js',
       clientsClaim: true,
       skipWaiting: true,
     })

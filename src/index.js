@@ -14,12 +14,17 @@ import {RootElement} from './RootElement';
 import './styles/index.sass';
 
 /**
- * Init function
+ * Init
  */
 function init() {
-  console.log('In init');
   if ('serviceWorker' in navigator) {
-    window.addEventListener('load', registerServiceWorker);
+    window.addEventListener('load', () => {
+      navigator.serviceWorker.register('sw.js').then((registration) => {
+        console.log('Service worker registered: ', registration);
+      }).catch((registrationError) => {
+        console.log('Service worker not registered', registrationError);
+      });
+    });
   }
 }
 
