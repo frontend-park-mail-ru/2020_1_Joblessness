@@ -1,28 +1,11 @@
-include links
-
-div.header-container.search-bar-container
+include org
+include unauth
+include user
+div.header
     if(locals.user.role === 'PERSON')
-        div.header-group
-            +search-bar-link(id="sign-out") Выйти
-            +search-bar-link(href="/") Главная
-        div.header-fill
-        div.header-group
-            +search-bar-link(href="?type=vacancy\&since=0\&desc=true\&request=") Вакансии
-            +search-bar-link(href="/summaries/create") Создать резюме
-            +search-bar-link(href="/users/" + locals.user.id + '/') Страница Пользователя
+        +user
     else if(locals.user.role === 'ORGANIZATION')
-        div.header-group
-            +search-bar-link(id="sign-out") Выйти
-            +search-bar-link(href="/") Главная
-        div.header-fill
-        div.header-group
-            +search-bar-link(href="?type=person\&since=0\&desc=true\&request=") Соискатели
-            +search-bar-link(href="/vacancies/create") Разместить вакансию
-            +search-bar-link(href="/organizations/" + locals.user.id+ '/') Страница Организации
+        +organization
     else
-        div.header-group
-            +search-bar-link(href='?type=vacancy\&since=0\&desc=true\&request=') Вакансии
-            +search-bar-link(href="/") Главная
-        div.header-fill
-        div.header-group
-            +search-bar-link(href="/signup") Авторизация
+        +unauthenticated
+    div.header--icon &#9776; Меню

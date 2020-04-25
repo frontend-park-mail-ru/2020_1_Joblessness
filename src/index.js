@@ -6,11 +6,13 @@ import {Header, NotFoundPage} from './views';
 import ORGANIZATIONS_ROUTES from './views/OrganizationPage/routes';
 import CREATE_VACANCY_ROUTES from './views/VacancyPage/routes';
 import CREATE_SUMMARY_ROUTES from './views/SummaryPage/routes';
-import USER_ROUTES from './views/NewUserPage/routes';
-import SIGNUP_ROUTES from './views/NewSignUp/routes';
+import USER_ROUTES from './views/PersonPage/routes';
+import AUTHENTICATION_ROUTES from './views/Authentication/routes';
 import SEARCH_ROUTES from './views/SearchPage/routes';
-import RESPONSES_ROUTES from './views/Responses/routes';
+import ORGANIZATION_MENU_ROUTES from './views/OrganizationMenu/routes';
 import {RootElement} from './RootElement';
+import './styles/index.sass'
+
 /**
  * App
  */
@@ -34,9 +36,9 @@ class App {
           },
         ],
       },
-      ...RESPONSES_ROUTES,
+      ...ORGANIZATION_MENU_ROUTES,
       ...SEARCH_ROUTES,
-      ...SIGNUP_ROUTES,
+      ...AUTHENTICATION_ROUTES,
       ...USER_ROUTES,
       ...ORGANIZATIONS_ROUTES,
       ...CREATE_SUMMARY_ROUTES,
@@ -54,7 +56,7 @@ class App {
 }
 const createApp = async () => {
   await loginOnReload();
-  // currentSession.session = {id: 3, role : 'ORGANIZATION'};
+  // currentSession.session = {id: 7, role : 'ORGANIZATION'};
   // currentSession.session = {id: 2, role: 'PERSON'}
   new App();
 };

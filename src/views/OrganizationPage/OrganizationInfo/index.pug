@@ -1,21 +1,20 @@
 include ../../../templates/pug/avatar
-include ../../../templates/pug/companyName
-include ../../../templates/pug/birth
 include ../../../templates/pug/phone
 
-div.page-solid-section.bio-section
-    div.person-info-holder--avatar
-        if(locals.info.id === locals.currentId)
-            +avatar(src=locals.info.avatar id=locals.itemId)
-        else
-            +avatar(src=locals.info.avatar id=locals.itemId noSelect)
-    div.person--info
-        +company-name(locals.info.name, locals.info.tag)
-        if(locals.info.phone)
-            +phone(locals.info.phone)
-        if(locals.info.location)
-            div.person--info--location
-                h2 #{locals.info.location}
-        if(locals.info.site)
-            div.person--info--location
-                h2 #{locals.info.site}
+
+mixin name(name, tag)
+    div.name
+        span.name--name #{name || ""}&nbsp
+        if tag
+            span.name--tag @#{tag}&nbsp
+
+if(locals.info.id === locals.currentId)
+    +avatar(src=locals.info.avatar id=locals.itemId)
+else
+    +avatar(src=locals.info.avatar id=locals.itemId noSelect)
+div.section--solid--info
+    +name(locals.info.name, locals.info.tag)
+    if(locals.info.phone)
+        +phone(locals.info.phone)
+    if(locals.info.site)
+        span.site #{locals.info.site}

@@ -3,7 +3,7 @@ import template from './index.pug';
 import {withAuthManager} from '../../ulils/AuthManager';
 import withLocalStore, {getSumId} from './localStore';
 import {request, requestManager, uuid} from '../../ulils';
-import {getUserId} from '../NewUserPage/getUserId';
+import {getUserId} from '../PersonPage/getUserId';
 import {Navigator} from '../../Navigator';
 import {isCreationPage} from './Education/routes';
 import {PERSON} from '../../CONSTANTS';

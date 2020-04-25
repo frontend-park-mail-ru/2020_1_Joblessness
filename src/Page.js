@@ -164,6 +164,9 @@ export class Page {
       this.#container.dom.hidden = false;
       this.#container.dom.style.display = '';
       this.#container.dom.innerHTML = toShow;
+      if(this.#prevContainerDom && this.#prevContainerDom !== this.#container.dom) {
+        this.#prevContainerDom.innerHTML='';
+      }
 
       this.#prevRender = toShow;
       this.#prevContainerDom = this.#container.dom;

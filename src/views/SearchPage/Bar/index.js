@@ -116,7 +116,7 @@ const searchEvent = (page) => (e) => {
   }));
 };
 
-const clickEvent = (page) => (e) => {
+const clickEvent = (page) => () => {
   page.props.setStore((s) => ({
     bar: {
       ...s.bar,
@@ -211,10 +211,9 @@ class Bar extends Page {
 
     const {type, request, since, desc} = getSearchParameters();
 
-    if (!type && !request && !since && !desc) {
+    if (!(type && request && since && desc)) {
       return;
     }
-
     search.firstChild.firstChild.value = request;
     this.props.setStore((s) => ({
       bar: {
@@ -236,7 +235,7 @@ class Bar extends Page {
     } else if (type === 'vacancy') {
       vacs.classList.add('selected');
     }
-    findEvent(null);
+    findEvent();
   }
 }
 

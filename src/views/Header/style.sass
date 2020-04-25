@@ -1,44 +1,52 @@
 @import "../../CONSTANTS"
-.header-group
+.header
+  display: flex
+  width: 100%
+  flex-direction: column-reverse
+  justify-content: stretch
+  align-items: stretch
+  transition: .4s
+  @media(min-width: 800px)
+    flex-direction: row
+    .header--icon
+      max-height: 0
+      flex: 0
+    .header--item
+      flex: 1
+      max-height: 30px
+      @include BACKGROUND_GRADIENT
+      background-attachment: fixed
+      -webkit-background-clip: text
+      -webkit-text-fill-color: transparent
+      &:hover
+        background-size: cover
+  &--icon
+    flex: 1
+    transition: .1s
+    max-height: 30px
+    overflow: hidden
+    text-indent: 3px
+  &--item
+    flex: 0
+    color: black
+    max-height: 0
     display: flex
-
-
-.header-link-wrapper 
-    display: flex
-    height: 20px
-    justify-content: center
+    text-indent: 7px
     align-items: center
-    a
-        display: block
-        @include BACKGROUND_GRADIENT
-        background-attachment: fixed
-        -webkit-background-clip: text
-        -webkit-text-fill-color: transparent
-        flex: 1
-        vertical-align: center
-        width: 100%
-        height: 100%
-        padding: 0 20px 0 20px
-        justify-content: center
-        align-items: center
-        color: black
-        //mix-blend-mode: exclusion
-    &:first-child
-        margin-left: 0
-.header-fill 
-    margin-left: auto
-
-
-.search-bar-container
-    z-index: 100
-    position: absolute
-    width: 100%
-    display: flex
-    height: 20px
-    background: white
-    //@include BACKGROUND_GRADIENT
-
-
-.search-bar-link 
-    &:first-child
-        margin-left: 0
+    transition: .4s
+    overflow: hidden
+    &:hover
+      @include BACKGROUND_GRADIENT
+      background-size: 200px
+      background-attachment: fixed
+      -webkit-background-clip: text
+      -webkit-text-fill-color: transparent
+  &:hover
+    @media(max-width: 800px)
+      padding-bottom: 10px
+    .header--icon
+      transition-delay: .3s
+      flex: 0
+    .header--item
+      max-height: 30px
+      flex: 1

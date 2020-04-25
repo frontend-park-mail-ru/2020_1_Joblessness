@@ -1,0 +1,13 @@
+include ../../../templates/pug/avatar
+include ../../../templates/pug/phone
+
+mixin username(firstName, lastName, tag)
+    div.name
+        span.name--name #{(firstName) || ""} #{(lastName) || ""}&nbsp
+        if tag
+            span.name--tag @#{tag}&nbsp
+mixin user(item)
+    +avatar.small(src=item.avatar noSelect)
+    +username(item.firstName, item.lastName, item.tag)
+    if(item.phone)
+        +phone(item.phone)

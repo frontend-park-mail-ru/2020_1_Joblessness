@@ -1,10 +1,8 @@
 include ../../../templates/pug/link
 mixin search-bar-link
-    div.header-link-wrapper
-        +link(href=attributes.href id=attributes.id)
-            block
+    +link(href=attributes.href id=attributes.id).header-link-wrapper
+        block
 
 mixin header-link
-    div.header-link-wrapper
-        +link(href=attributes.href id=attributes.id)
-            block
+    +link(href=attributes.href id=attributes.id)
+        block

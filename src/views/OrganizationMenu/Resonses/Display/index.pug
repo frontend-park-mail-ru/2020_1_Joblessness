@@ -1,0 +1,6 @@
+include ../../../../templates/pug/link
+include ../../../../templates/pug/avatar
+
+if locals.items && locals.items.length
+    each item in locals.items
+        div(id=item.innerId).responses-item

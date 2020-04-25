@@ -1,4 +1,4 @@
-import {UserInfoNoStore} from '../../NewUserPage/UserInfo';
+import {UserInfoNoStore} from '../../PersonPage/UserInfo';
 import {withLocalStore} from '../localStore';
 
 const UserInfo = withLocalStore(UserInfoNoStore);

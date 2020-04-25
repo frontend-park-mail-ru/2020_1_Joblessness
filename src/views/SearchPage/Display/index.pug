@@ -1,3 +1,4 @@
+include ../../../templates/pug/link
 mixin summary-preview
     div.page-section
 mixin organization-preview
@@ -5,16 +6,16 @@ mixin organization-preview
 mixin vacancy-preview
     div.page-section
 
-div.display-holder.cover
+section.section--body
     if(locals.organizations && locals.organizations.length)
-        h1 Организации
+        span.section--title Организации
         each org in locals.organizations
-            div.page-section(id=org.innerId)
+            +link(href="/organizations/" + org.id id=org.innerId).section
     if(locals.persons && locals.persons.length)
-        h1 Пользователи
+        span.section--title Пользователи
         each per in locals.persons
-            div.page-section(id=per.innerId)
+            +link(href="/users/" + per.id id=per.innerId).section
     if(locals.vacancies && locals.vacancies.length)
-        h1 Вакансии
+        span.section--title Вакансии
         each vac in locals.vacancies
-            div.page-section(id=vac.innerId)
+            +link(href="/vacancies/" + vac.id id=vac.innerId).section

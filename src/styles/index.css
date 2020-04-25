@@ -1,0 +1,333 @@
+@charset "UTF-8";
+@import url("https://fonts.googleapis.com/css?family=Istok+Web&display=swap");
+@import url("https://fonts.googleapis.com/css?family=Istok+Web&display=swap");
+.page {
+  display: flex;
+  justify-content: stretch;
+  align-items: stretch;
+  flex-direction: column;
+  flex: 1;
+}
+.page--holder {
+  flex: 1;
+  min-height: 100vh;
+  align-items: center;
+  display: flex;
+  flex-direction: column;
+}
+.page--section {
+  flex: 1;
+  max-width: 100%;
+  align-items: center;
+  display: flex;
+  flex-direction: column;
+}
+.page--section--solid {
+  flex: 1;
+  justify-content: stretch;
+  align-items: stretch;
+  justify-self: stretch;
+  align-self: stretch;
+  display: flex;
+  flex-direction: column;
+}
+.page--body {
+  display: flex;
+  width: 100vw;
+  flex-direction: column;
+  justify-content: stretch;
+  align-items: stretch;
+}
+@media (min-width: 800px) and (max-width: 1000px) {
+  .page--body {
+    max-width: 800px;
+  }
+}
+@media (min-width: 1000px) {
+  .page--body {
+    max-width: 600px;
+  }
+}
+
+.section {
+  margin-top: 20px;
+  display: flex;
+  max-width: 800px;
+  border-radius: 10px;
+  background: white;
+  overflow: hidden;
+  padding: 20px 0 20px 0;
+  box-shadow: 0px 3px 13px 0px rgba(0, 0, 0, 0.5);
+}
+@media (max-width: 800px) {
+  .section {
+    box-shadow: none;
+    border-radius: 0;
+    margin: 0;
+    padding: 5px 0 5px 0;
+    border-bottom: 1px solid #FAFAFA;
+    background: rgba(255, 255, 255, 0.5);
+  }
+  .section:hover {
+    background: rgba(255, 255, 255, 0.7);
+  }
+}
+@media (min-width: 1000px) {
+  .section {
+    max-width: 600px;
+  }
+}
+.section--body {
+  display: flex;
+  flex: 1;
+  justify-content: stretch;
+  flex-direction: column;
+  align-items: stretch;
+}
+.section--title {
+  font-size: 1.5em;
+  font-weight: 600;
+  align-self: flex-start;
+  margin: 20px 0 0 0;
+}
+@media (max-width: 800px) {
+  .section--title {
+    margin: 10px 10px 10px 20px;
+  }
+}
+
+a.section {
+  color: black;
+  padding: 5px;
+}
+
+.section--solid {
+  padding: 30px 80px 20px 10px;
+  display: flex;
+  flex: 1;
+  z-index: 2;
+  justify-content: center;
+  align-items: center;
+  overflow: hidden;
+  box-shadow: 0px 3px 13px 0px rgba(0, 0, 0, 0.5);
+}
+@media (max-width: 800px) {
+  .section--solid {
+    flex-direction: column;
+    padding: 10px;
+  }
+}
+.section--solid .section--title {
+  padding: 0px 20px 20px 10px;
+  flex: 1;
+}
+.section--solid--body {
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  align-items: center;
+}
+
+.avatar {
+  border-radius: 50%;
+  min-width: 170px;
+  width: 170px;
+  height: 170px;
+  display: flex;
+  justify-content: stretch;
+  align-items: stretch;
+  background-size: 350px 350px;
+  overflow: hidden;
+  background-image: linear-gradient(to right, #0acffe 0%, #495aff 100%);
+}
+@media (max-width: 800px) {
+  .avatar {
+    min-width: 100px;
+    width: 100px;
+    height: 100px;
+  }
+}
+@media (max-width: 500px) {
+  .avatar {
+    min-width: 64px;
+    width: 64px;
+    height: 64px;
+  }
+}
+.avatar--body {
+  background-size: cover;
+  margin: 10px;
+  flex: 1;
+  border-radius: 50%;
+  background-repeat: no-repeat;
+  transition: filter 0.2s;
+}
+@media (max-width: 800px) {
+  .avatar--body {
+    margin: 5px;
+  }
+}
+@media (max-width: 500px) {
+  .avatar--body {
+    margin: 3px;
+  }
+}
+.avatar--select {
+  display: block;
+  width: 100%;
+  height: 100%;
+  opacity: 0;
+}
+.avatar--selectable {
+  transform-origin: center;
+}
+.avatar--selectable input {
+  cursor: pointer;
+}
+.avatar--selectable:hover {
+  filter: brightness(0.9);
+}
+.avatar--selectable:hover:before {
+  opacity: 0.5;
+}
+.avatar--selectable:before {
+  opacity: 0;
+  width: 170px;
+  height: 170px;
+  border-radius: 50%;
+  position: absolute;
+  transition: 0.15s;
+  content: "⌕";
+  font-size: 120px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+@media (max-width: 800px) {
+  .avatar--selectable:before {
+    font-size: 80px;
+    width: 100px;
+    height: 100px;
+  }
+}
+@media (max-width: 500px) {
+  .avatar--selectable:before {
+    width: 64px;
+    font-size: 60px;
+    height: 64px;
+  }
+}
+
+.avatar.small {
+  min-width: 64px;
+  width: 64px;
+  height: 64px;
+}
+@media (max-width: 800px) {
+  .avatar.small {
+    min-width: 50px;
+    width: 50px;
+    height: 50px;
+  }
+}
+@media (max-width: 500px) {
+  .avatar.small {
+    min-width: 32px;
+    width: 32px;
+    height: 32px;
+  }
+}
+.avatar.small .avatar--body {
+  margin: 3px;
+}
+@media (max-width: 800px) {
+  .avatar.small .avatar--body {
+    margin: 2px;
+  }
+}
+@media (max-width: 500px) {
+  .avatar.small .avatar--body {
+    margin: 2px;
+  }
+}
+.avatar.small .avatar--selectable:before {
+  width: 64px;
+  font-size: 60px;
+  height: 64px;
+}
+@media (max-width: 800px) {
+  .avatar.small .avatar--selectable:before {
+    width: 50px;
+    font-size: 45px;
+    height: 50px;
+  }
+}
+@media (max-width: 500px) {
+  .avatar.small .avatar--selectable:before {
+    width: 32px;
+    font-size: 30px;
+    height: 32px;
+  }
+}
+
+.name {
+  display: flex;
+  padding: 5px;
+  overflow: hidden;
+  white-space: nowrap;
+  align-self: center;
+  font-size: 1.5em;
+}
+.name--name {
+  text-overflow: ellipsis;
+  overflow: hidden;
+  white-space: nowrap;
+  text-transform: capitalize;
+}
+.name--tag {
+  text-overflow: ellipsis;
+  overflow: hidden;
+  white-space: nowrap;
+  text-transform: capitalize;
+}
+
+.salary {
+  display: flex;
+  text-overflow: ellipsis;
+  overflow: hidden;
+  white-space: nowrap;
+  align-self: center;
+  font-size: 1.5em;
+  padding: 0;
+}
+@media (max-width: 500px) {
+  .salary {
+    flex-direction: column;
+    font-size: 1em;
+    padding: 5px;
+  }
+}
+.salary--from {
+  text-overflow: ellipsis;
+  overflow: hidden;
+  white-space: nowrap;
+  text-transform: capitalize;
+}
+.salary--to {
+  text-overflow: ellipsis;
+  overflow: hidden;
+  white-space: nowrap;
+  text-transform: capitalize;
+}
+.salary--currency {
+  align-self: center;
+  font-size: 1.5em;
+}
+
+@media (max-width: 800px) {
+  body {
+    font-size: 0.7em;
+  }
+}
+
+/*# sourceMappingURL=index.css.map */

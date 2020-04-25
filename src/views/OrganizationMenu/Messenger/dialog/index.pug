@@ -1,0 +1,17 @@
+div.dialog--header
+    div.back#dialog_back &#8592;
+    div.name #{locals.currentPerson && locals.currentPerson.user}
+    div
+div.dialog--body
+    -for(let i = 1; i < locals.messages.length; i++)
+    -   if(locals.messages[i-1].toYou === locals.messages[i].toYou)
+    -   locals.messages[i].linked = true
+    -
+    -
+    -
+
+    each m in locals.messages
+        div.message(class=(m.toYou ? 'to' : 'from') + (m.linked ? ' linked' : '')) #{m.message}
+div.dialog--write
+    div.enter-msg#dialog_input(contentEditable=true placeholder='Напишите соискателю')
+    div.send-msg.hidden#dialog_send &#8680;

@@ -19,6 +19,9 @@ class Header extends Page {
   }
   componentDidMount() {
     super.componentDidMount();
+    document
+      .querySelector('.header--icon')
+      .addEventListener('mouseover', () => {});
     const signOut = () => {
       requestManager.tryLogout({})
           .then(() => {

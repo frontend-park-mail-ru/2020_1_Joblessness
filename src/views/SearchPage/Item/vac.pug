@@ -1,0 +1,24 @@
+include ../../../templates/pug/avatar
+include ../../../templates/pug/phone
+
+mixin salary(from, to)
+    div.salary
+        if from
+            span.salary--from от #{from}&nbsp
+        if to
+            span.salary--to до #{to}&nbsp
+    if from || to
+        span.salary--currency &#8381;
+
+mixin comp-name(companyName, tag)
+    div.name
+        div.name--name #{companyName || ""}&nbsp
+        if tag
+            div.name--tag &#35;#{tag}&nbsp
+
+mixin vacancy(item)
+    +avatar.small(src=item.organization.avatar noSelect)
+    +comp-name(item.name, item.tag)
+    +salary(item.salaryFrom, item.salaryTo)
+    if(item.phone)
+        +phone(item.phone)

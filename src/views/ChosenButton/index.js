@@ -5,7 +5,7 @@ import {requestManager, uuid} from '../../ulils';
 import {PERSON, ORGANIZATION, UNAUTHORISED} from '../../CONSTANTS';
 import {currentSession} from '../../ulils';
 import {getOrgId} from '../OrganizationPage/getOrgInfo';
-import {getUserId} from '../NewUserPage/getUserId';
+import {getUserId} from '../PersonPage/getUserId';
 
 const isOrgPage = () => /organizations/.test(window.location.pathname);
 const isUserPage = () => /users/.test(window.location.pathname);

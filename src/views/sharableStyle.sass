@@ -4,7 +4,6 @@
 .page-holder
   width: 100%
   min-height: 100vh
-  margin-top: 20px
   align-items: center
   display: flex
   flex-direction: column
@@ -37,6 +36,12 @@
     align-items: center
 
 .page-section
+  @media(max-width: 800px)
+    width: 100%
+    box-shadow: none
+    border-radius: 0
+    background: rgba(255,255,255,.5)
+
   margin-top: 20px
   display: flex
   width: 100%
@@ -115,6 +120,9 @@
   flex: 9
 .person--info--location
   flex-direction: column
+  h1, h2
+    font-weight: 100
+    margin: 0
   white-space: nowrap
 .justify-end
   justify-content: flex-end
@@ -178,3 +186,6 @@
 
 .pad-b20
   padding-bottom: 20px
+
+.light-grad
+  @include LIGHT_GRADIENT

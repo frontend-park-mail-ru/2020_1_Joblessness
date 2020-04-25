@@ -1,0 +1,387 @@
+@import url("https://fonts.googleapis.com/css?family=Istok+Web&display=swap");
+.h160 {
+  height: 160px;
+}
+
+.show-experience-item {
+  width: 100%;
+  font-size: 16px;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+}
+
+.show-experience-item--avatar {
+  display: flex;
+}
+.show-experience-item--avatar .user-avatar {
+  width: 100px;
+  height: 100px;
+}
+.show-experience-item--avatar .user-avatar .user-avatar--body {
+  width: 90px;
+  height: 90px;
+}
+
+.show-experience-item--info {
+  display: flex;
+  flex-direction: column;
+  padding-left: 20px;
+}
+
+.company-name h2 {
+  font-size: 2em;
+  padding: 0;
+  margin: 0;
+  font-weight: 300;
+}
+
+.company-role h2 {
+  font-size: 1.5em;
+  padding: 0;
+  margin: 0;
+  font-weight: 200;
+  color: #454545;
+}
+
+.company-experience h2 {
+  font-size: 1.25em;
+  font-weight: 200;
+  padding: 0;
+  margin: 0;
+}
+.company-experience h2 b {
+  font-weight: 600;
+}
+
+.responsibilities {
+  display: flex;
+  margin: 5px 0 5px 0;
+  padding: 0;
+}
+.responsibilities p {
+  padding: 3px;
+  background: #D1D1D1;
+  margin: 0 5px 0 5px;
+  border-radius: 5px;
+}
+
+.create-summary-section--body {
+  flex: 1;
+}
+
+.options {
+  width: 30px;
+  display: flex;
+  flex-direction: column;
+  border-radius: 10px;
+  align-items: center;
+  user-select: none;
+  background: #FAFAFA;
+  box-shadow: 0px 3px 13px 0px rgba(0, 0, 0, 0.5);
+}
+.options div {
+  flex: 1;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  font-size: 24px;
+  text-align: center;
+  opacity: 0.3;
+  transition: 0.2s;
+}
+.options div:hover {
+  opacity: 0.7;
+}
+.options div:active {
+  opacity: 0.8;
+  transform: scale(0.9, 0.9);
+  transform-origin: center;
+}
+
+.moving-top {
+  transform: translateY(-180px);
+  transition-duration: 0.2s;
+}
+
+.moving-down {
+  transform: translateY(180px);
+  transition-duration: 0.2s;
+}
+
+.education.moving-down {
+  transform: translateY(130px);
+}
+
+.education.moving-top {
+  transform: translateY(-130px);
+}
+
+.vertical {
+  flex-direction: column;
+  align-items: stretch !important;
+  justify-content: center;
+}
+.vertical .field-line {
+  margin: 0;
+}
+
+.field-holder {
+  display: flex;
+  white-space: nowrap;
+  justify-content: stretch;
+  align-items: baseline;
+}
+.field-holder h2 {
+  font-weight: 400;
+}
+
+.string-field {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  flex: 1;
+}
+
+.string-field--input {
+  border: none;
+  height: 32px;
+  width: 100%;
+  font-size: 32px;
+  outline: none;
+  text-indent: 10px;
+  padding-right: 10px;
+}
+
+.field-line {
+  margin: 0 10px 0 10px;
+  height: 5px;
+  border-radius: 5px;
+  background-image: linear-gradient(to right, #0acffe 0%, #495aff 100%);
+  background-attachment: fixed;
+}
+
+.text-field {
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+}
+
+.text-field--input {
+  resize: vertical;
+  border: none;
+  min-height: 32px;
+  height: 32px;
+  font-size: 24px;
+  outline: none;
+  max-height: 256px;
+}
+
+.company-name input {
+  font-size: 2em;
+  padding: 0;
+  margin: 0;
+  font-weight: 400;
+}
+
+.company-role input {
+  font-size: 1.5em;
+  padding: 0;
+  margin: 0;
+  font-weight: 400;
+  color: #454545;
+}
+
+.company-experience input {
+  font-size: 1.25em;
+  font-weight: 400;
+  padding: 0;
+  margin: 0;
+}
+.company-experience input b {
+  font-weight: 600;
+}
+
+.responsibilities {
+  display: flex;
+  margin: 5px 0 5px 0;
+  padding: 0;
+}
+
+.start-adding {
+  width: 100%;
+  height: 80px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.start-adding--button {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 70px;
+  height: 70px;
+  border-radius: 35px;
+  background-image: linear-gradient(to right, #fff 0%, #fff 100%);
+  transition: 0.4s ease-in-out;
+}
+.start-adding--button h1, .start-adding--button h2 {
+  transition: 0.8s;
+  padding: 0;
+  margin: 0;
+}
+.start-adding--button h1 {
+  font-size: 80px;
+  font-weight: 200;
+  color: transparent;
+  background-image: linear-gradient(to right, #0acffe 0%, #495aff 100%);
+  -webkit-background-clip: text;
+  opacity: 1;
+}
+.start-adding--button h2 {
+  color: white;
+  opacity: 0;
+  font-size: 0;
+}
+.start-adding--button:hover {
+  width: 100%;
+  border-radius: 10px;
+  height: 100%;
+  transform: scale(1.58);
+  background-image: linear-gradient(to right, #0acffe 0%, #495aff 100%);
+}
+.start-adding--button:hover h2 {
+  font-size: 1.5em;
+  opacity: 1;
+}
+.start-adding--button:hover h1 {
+  transition: 0s;
+  font-size: 0;
+  opacity: 0;
+}
+.start-adding--button:hover:active h2 {
+  font-size: 1.4em;
+}
+
+.will-remove {
+  background-attachment: fixed;
+  font-size: 0;
+  transform-origin: center;
+  height: 0;
+  opacity: 0;
+  transition: 0.2s;
+}
+.will-remove h1, .will-remove h2 {
+  transition: 0s;
+  font-size: 0;
+  color: transparent;
+  opacity: 0;
+}
+
+.vertical {
+  flex-direction: column;
+  align-items: stretch !important;
+  justify-content: center;
+}
+.vertical .field-line {
+  margin: 0;
+}
+
+.field-holder {
+  display: flex;
+  white-space: nowrap;
+  justify-content: stretch;
+  align-items: baseline;
+}
+.field-holder h2 {
+  font-weight: 400;
+}
+
+.string-field {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  flex: 1;
+}
+
+.string-field--input {
+  border: none;
+  height: 32px;
+  width: 100%;
+  font-size: 32px;
+  outline: none;
+  text-indent: 10px;
+  padding-right: 10px;
+}
+
+.field-line {
+  margin: 0 10px 0 10px;
+  height: 5px;
+  border-radius: 5px;
+  background-image: linear-gradient(to right, #0acffe 0%, #495aff 100%);
+  background-attachment: fixed;
+}
+
+.text-field {
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+}
+
+.text-field--input {
+  resize: vertical;
+  border: none;
+  min-height: 32px;
+  height: 32px;
+  font-size: 24px;
+  outline: none;
+  max-height: 256px;
+}
+
+.company-name input {
+  font-size: 2em;
+  padding: 0;
+  margin: 0;
+  font-weight: 400;
+}
+
+.company-role input {
+  font-size: 1.5em;
+  padding: 0;
+  margin: 0;
+  font-weight: 400;
+  color: #454545;
+}
+
+.company-experience input {
+  font-size: 1.25em;
+  font-weight: 400;
+  padding: 0;
+  margin: 0;
+}
+.company-experience input b {
+  font-weight: 600;
+}
+
+.responsibilities {
+  display: flex;
+  margin: 5px 0 5px 0;
+  padding: 0;
+}
+
+.submit-button {
+  width: 100%;
+  font-size: 32px;
+  text-align: right;
+  color: transparent;
+  cursor: pointer;
+  background-image: linear-gradient(to right, #0acffe 0%, #495aff 100%);
+  -webkit-background-clip: text;
+}
+.submit-button:hover {
+  transition: 0.2s;
+  color: rgba(0, 0, 0, 0.1);
+}
+
+/*# sourceMappingURL=legacy-sum.css.map */

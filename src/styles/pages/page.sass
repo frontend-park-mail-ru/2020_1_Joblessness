@@ -1,0 +1,37 @@
+.page
+  display: flex
+  justify-content: stretch
+  align-items: stretch
+  flex-direction: column
+  flex: 1
+  &--holder
+    flex: 1
+    min-height: 100vh
+    align-items: center
+    display: flex
+    flex-direction: column
+  &--section
+    flex: 1
+    max-width: 100%
+    align-items: center
+    display: flex
+    flex-direction: column
+
+  &--section--solid
+    flex: 1
+    justify-content: stretch
+    align-items: stretch
+    justify-self: stretch
+    align-self: stretch
+    display: flex
+    flex-direction: column
+  &--body
+    display: flex
+    width: 100vw
+    flex-direction: column
+    justify-content: stretch
+    align-items: stretch
+    @media(min-width: 800px) and (max-width: 1000px)
+      max-width: 800px
+    @media(min-width: 1000px)
+      max-width: 600px
