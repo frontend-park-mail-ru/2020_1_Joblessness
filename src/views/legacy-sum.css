@@ -158,7 +158,7 @@
   margin: 0 10px 0 10px;
   height: 5px;
   border-radius: 5px;
-  background-image: linear-gradient(to right, #0acffe 0%, #495aff 100%);
+  background-image: linear-gradient(to right, #0acffe 0%, #495aff 100%) !important;
   background-attachment: fixed;
 }
 
@@ -235,7 +235,7 @@
   font-size: 80px;
   font-weight: 200;
   color: transparent;
-  background-image: linear-gradient(to right, #0acffe 0%, #495aff 100%);
+  background-image: linear-gradient(to right, #0acffe 0%, #495aff 100%) !important;
   -webkit-background-clip: text;
   opacity: 1;
 }
@@ -249,7 +249,7 @@
   border-radius: 10px;
   height: 100%;
   transform: scale(1.58);
-  background-image: linear-gradient(to right, #0acffe 0%, #495aff 100%);
+  background-image: linear-gradient(to right, #0acffe 0%, #495aff 100%) !important;
 }
 .start-adding--button:hover h2 {
   font-size: 1.5em;
@@ -319,7 +319,7 @@
   margin: 0 10px 0 10px;
   height: 5px;
   border-radius: 5px;
-  background-image: linear-gradient(to right, #0acffe 0%, #495aff 100%);
+  background-image: linear-gradient(to right, #0acffe 0%, #495aff 100%) !important;
   background-attachment: fixed;
 }
 
@@ -376,7 +376,7 @@
   text-align: right;
   color: transparent;
   cursor: pointer;
-  background-image: linear-gradient(to right, #0acffe 0%, #495aff 100%);
+  background-image: linear-gradient(to right, #0acffe 0%, #495aff 100%) !important;
   -webkit-background-clip: text;
 }
 .submit-button:hover {

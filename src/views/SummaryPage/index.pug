@@ -2,8 +2,11 @@ if locals.id
     a(href='/api/summaries/' + locals.id + '/print' target="_blank" ).print-summary#print_summary
 else
     div.hidden#print_summary
+
 section.page--holder
-    section.section--solid#summary_info
+    div.page--body
+        div.section.maxw100vw
+            section.section--body.pad20#summary_info
     div.page--body
         h1.section--title Основная информация
         section.section

@@ -62,7 +62,7 @@
   justify-content: center;
   align-items: center;
   border-radius: 7px;
-  background-image: linear-gradient(to right, #0acffe 0%, #495aff 100%);
+  background-image: linear-gradient(to right, #0acffe 0%, #495aff 100%) !important;
   align-self: center;
   background-size: 200%;
   transition: 0.2s;

@@ -1,7 +1,17 @@
 @import "../../../CONSTANTS"
 .signup-holder
   display: flex
-  width: 100%
+  @media(max-width: 800px)
+    padding: 5%
+  @media(min-width: 800px) and (max-width: 1000px)
+    width: 600px
+  @media(min-width: 1000px)
+    margin-right: 250px
+    width: 600px
+    align-self: center
+    justify-self: center
+    flex: inherit
+  flex: 1
   height: 100%
   flex-direction: column
   justify-content: center
@@ -16,9 +26,6 @@
   font-size: 2em
   align-items: baseline
 
-.sigup-holder--steps
-  flex: 1
-  flex-grow: 3
 .gradient-background
   //background-image: linear-gradient(to right, #f83600 0%, #f9d423 100%)
   @include BACKGROUND_GRADIENT

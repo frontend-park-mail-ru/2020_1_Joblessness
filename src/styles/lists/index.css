@@ -1,0 +1,23 @@
+.list {
+  display: flex;
+  width: calc(100vw - 200px);
+  justify-content: flex-start;
+}
+@media (max-width: 800px) {
+  .list {
+    width: 100vw;
+  }
+}
+.list--holder {
+  overflow-x: scroll;
+  overflow-y: hidden;
+}
+.list--body {
+  display: flex;
+  flex-direction: row;
+}
+.list--separator {
+  padding: 15px;
+}
+
+/*# sourceMappingURL=index.css.map */

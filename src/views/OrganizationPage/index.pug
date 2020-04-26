@@ -5,16 +5,19 @@ mixin section-title
                 block
 div#chosen_button.chosen-holder
 section.page
-    div.page--section--solid
+
+    div.page--section--solid.maxw100vw
         section.section--solid#organization_org_info
-    div.page--seciton--solid.light-grad
+
+    div.page--seciton--solid.light-grad.maxw100vw
         div.section--solid
             span.section--title Информация об организации
             div.section--body#organization_org_main_info
 
-    div.page--seciton--solid
+    div.page--section--solid.maxw100vw
         div.section--solid
             span.section--title Список доступных вакансий
-            div.section--body
-                div.vacancy-list--body#organization_org_vacancies
-            div.hidden#organization_vacancy_load_manager
+            div.section--body.list
+                div.list--holder
+                    div.vacancy-list--body#organization_org_vacancies
+                div.hidden#organization_vacancy_load_manager

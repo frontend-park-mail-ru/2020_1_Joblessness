@@ -298,6 +298,10 @@ class Navigator {
 
 Navigator = new Navigator();
 
+window.onload = () => {
+  const loc = window.location.pathname.replace('/', '');
+  Navigator.showPage(loc);
+};
 export {
   Navigator,
 };

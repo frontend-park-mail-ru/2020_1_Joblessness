@@ -1,16 +1,14 @@
-@import "../../../CONSTANTS"
-.vacancy-list
+.list
   display: flex
-  padding: 20px 0 20px 0
   width: calc(100vw - 200px)
   @media(max-width: 800px)
     width: 100vw
   justify-content: flex-start
   &--holder
     overflow-x: scroll
-    padding-left: 20px
     overflow-y: hidden
   &--body
     display: flex
-    margin-right: 20px
     flex-direction: row
+  &--separator
+    padding: 15px

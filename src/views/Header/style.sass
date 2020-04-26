@@ -6,7 +6,10 @@
   justify-content: stretch
   align-items: stretch
   transition: .4s
+  @media(max-width: 800px)
+    min-height: 50px
   @media(min-width: 800px)
+    height: 30px
     flex-direction: row
     .header--icon
       max-height: 0
@@ -27,6 +30,7 @@
     overflow: hidden
     text-indent: 3px
   &--item
+    padding: 0
     flex: 0
     color: black
     max-height: 0
@@ -44,6 +48,9 @@
   &:hover
     @media(max-width: 800px)
       padding-bottom: 10px
+      .header--item
+        padding: 10px
+        max-height: 30px
     .header--icon
       transition-delay: .3s
       flex: 0

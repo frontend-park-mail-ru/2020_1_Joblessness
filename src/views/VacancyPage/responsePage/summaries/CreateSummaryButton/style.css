@@ -17,7 +17,7 @@
   font-size: 80px;
   font-weight: 200;
   color: transparent;
-  background-image: linear-gradient(to right, #0acffe 0%, #495aff 100%);
+  background-image: linear-gradient(to right, #0acffe 0%, #495aff 100%) !important;
   -webkit-background-clip: text;
   opacity: 1;
 }
@@ -31,7 +31,7 @@
   border-radius: 10px;
   height: 100%;
   transform: scale(1.58);
-  background-image: linear-gradient(to right, #0acffe 0%, #495aff 100%);
+  background-image: linear-gradient(to right, #0acffe 0%, #495aff 100%) !important;
 }
 .vacancy-holder--body:hover .start-adding--button h2 {
   font-size: 1.5em;

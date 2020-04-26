@@ -40,6 +40,7 @@ export class Page {
   #prevRender;
   #prevProps;
   #prevContainerDom;
+  #needUpdate;
   props = {};
 
   /**
@@ -78,8 +79,6 @@ export class Page {
     this.#prevProps = null;
     this.#container = {selector, dom};
     this.#pageId = uuid(); // to identify page
-    // this.dom = this._createDomBox(this.#pageId); // to store children
-    // this.dom.id = this.#pageId;
   }
 
   /**
@@ -97,32 +96,6 @@ export class Page {
   isHidden() {
     return this.#container?.dom?.hidden || !this.#container?.dom?.innerHTML;
   }
-
-  /**
-   * Спрятать страницу
-   */
-  hidePage() {
-    this.dom.style.display = 'none';
-    this.dom.innerHTML = '';
-    this.dom.hidden = true;
-  }
-
-  /**
-   * Создать блок страницы и поместить его в контейнер
-   * @param {string} domName - имя-класс создаваемого блока
-   * @return {HTMLDivElement}
-   */
-  _createDomBox(domName) {
-    if (!this.dom) {
-      this.dom = document.createElement('div');
-      this.dom.id = domName; // @TODO should replace with id?
-      // все страницы по умолчанию скрыты
-      this.dom.hidden = true;
-      // this.#container.dom.appendChild(this.dom);
-    }
-    return this.dom;
-  }
-
   /**
    * Возвращает строку с содержимым страницы.
    * @WARNING не использовать напрямую. Использовать requestRender
@@ -136,9 +109,15 @@ export class Page {
   };
 
   /**
+   *
+   */
+  getContainer() {
+    return this.#container?.dom
+  }
+  /**
    * Показать страницу
    */
-  showPage(force) {
+  showPage() {
     this.#container.dom = document.querySelector(this.#container.selector);
     if (!this.#container.dom) {
       throw new Error(`
@@ -154,10 +133,11 @@ export class Page {
               Setting innerHTML is not supported anymore!`);
     }
 
-    if (force || this.#prevRender !== toShow ||
+    if (this.#needUpdate || this.#prevRender !== toShow ||
       this.#prevContainerDom !== this.#container.dom ||
       !isEqual(this.#prevProps, this.props)||
       this.#container.dom.currentChild !== this) {
+      this.#needUpdate = false;
       this.#container.dom.currentChild = this;
       this.componentWillMount && this.componentWillMount();
 
@@ -177,10 +157,16 @@ export class Page {
   }
 
   /**
+   *
+   */
+  needUpdate() {
+    this.#needUpdate = true;
+  }
+  /**
    * Отрисовывает страницу, вызывает события (если имеются)
    * componentWillMount и componentDidMount
    */
-  requestRender(force) {
+  requestRender() {
     if (typeof this.render !== 'function') {
       throw new Error(`
             Method render is reserved by Page Component and
@@ -188,6 +174,6 @@ export class Page {
             value of type string!`);
     }
 
-    this.showPage(force);
+    this.showPage();
   }
 }

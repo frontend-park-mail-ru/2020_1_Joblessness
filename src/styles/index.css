@@ -116,9 +116,13 @@ a.section {
     flex-direction: column;
     padding: 10px;
   }
+  .section--solid .section--title {
+    max-width: 100% !important;
+  }
 }
 .section--solid .section--title {
-  padding: 0px 20px 20px 10px;
+  max-width: 200px;
+  margin: 10px;
   flex: 1;
 }
 .section--solid--body {
@@ -134,11 +138,12 @@ a.section {
   width: 170px;
   height: 170px;
   display: flex;
+  align-self: center;
   justify-content: stretch;
   align-items: stretch;
   background-size: 350px 350px;
   overflow: hidden;
-  background-image: linear-gradient(to right, #0acffe 0%, #495aff 100%);
+  background-image: linear-gradient(to right, #0acffe 0%, #495aff 100%) !important;
 }
 @media (max-width: 800px) {
   .avatar {
@@ -277,14 +282,17 @@ a.section {
   white-space: nowrap;
   align-self: center;
   font-size: 1.5em;
+  flex-wrap: wrap;
 }
 .name--name {
+  text-indent: 7px;
   text-overflow: ellipsis;
   overflow: hidden;
   white-space: nowrap;
   text-transform: capitalize;
 }
 .name--tag {
+  text-indent: 7px;
   text-overflow: ellipsis;
   overflow: hidden;
   white-space: nowrap;
@@ -322,6 +330,28 @@ a.section {
 .salary--currency {
   align-self: center;
   font-size: 1.5em;
+}
+
+.list {
+  display: flex;
+  width: calc(100vw - 200px);
+  justify-content: flex-start;
+}
+@media (max-width: 800px) {
+  .list {
+    width: 100vw;
+  }
+}
+.list--holder {
+  overflow-x: scroll;
+  overflow-y: hidden;
+}
+.list--body {
+  display: flex;
+  flex-direction: row;
+}
+.list--separator {
+  padding: 15px;
 }
 
 @media (max-width: 800px) {

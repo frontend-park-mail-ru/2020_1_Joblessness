@@ -2,7 +2,7 @@ import '@babel/polyfill';
 import './style.sass';
 import {Navigator} from './Navigator.js';
 import {loginOnReload} from './ulils/loginOnReload';
-import {Header, NotFoundPage} from './views';
+import {NotFoundPage} from './views/NotFoundPage';
 import ORGANIZATIONS_ROUTES from './views/OrganizationPage/routes';
 import CREATE_VACANCY_ROUTES from './views/VacancyPage/routes';
 import CREATE_SUMMARY_ROUTES from './views/SummaryPage/routes';
@@ -10,9 +10,11 @@ import USER_ROUTES from './views/PersonPage/routes';
 import AUTHENTICATION_ROUTES from './views/Authentication/routes';
 import SEARCH_ROUTES from './views/SearchPage/routes';
 import ORGANIZATION_MENU_ROUTES from './views/OrganizationMenu/routes';
-import {RootElement} from './RootElement';
+import ROOT_ROUTES from './views/RootElement'
+import ALERTS_ROUTES from './views/Alerts'
 import './styles/index.sass'
 
+import ws from './ws'
 /**
  * App
  */
@@ -21,21 +23,9 @@ class App {
    * Init everything
    */
   constructor() {
-    console.log('Application was created');
-
     const routes = [
-      {
-        path: 'root',
-        alwaysOn: true,
-        element: new RootElement('#holder'),
-        childRoutes: [
-          {
-            path: 'header',
-            alwaysOn: true,
-            element: new Header('#nav-elements'),
-          },
-        ],
-      },
+      ...ROOT_ROUTES,
+      ...ALERTS_ROUTES,
       ...ORGANIZATION_MENU_ROUTES,
       ...SEARCH_ROUTES,
       ...AUTHENTICATION_ROUTES,
@@ -49,15 +39,15 @@ class App {
       },
     ];
     Navigator.addRoutes(routes);
-
-    const loc = window.location.pathname.replace('/', '');
-    Navigator.showPage(loc, true, true);
+    Navigator.updateAllPages();
   }
 }
 const createApp = async () => {
   await loginOnReload();
+  ws();
   // currentSession.session = {id: 7, role : 'ORGANIZATION'};
-  // currentSession.session = {id: 2, role: 'PERSON'}
+  // currentSession.session = {id: 8, role: 'PERSON'};
   new App();
 };
+
 createApp();

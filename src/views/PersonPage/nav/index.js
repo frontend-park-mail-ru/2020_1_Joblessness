@@ -31,7 +31,7 @@ class NavPage extends Page {
 const settingsId = uuid();
 const summariesId = uuid();
 const favouritesId = uuid();
-const statisticsId = uuid();
+const recomendationsId = uuid();
 
 
 const showSubPage = (name) => {
@@ -65,7 +65,7 @@ NavPage = withEvents(NavPage, 'events',
         },
       },
       showStatistics: {
-        id: statisticsId,
+        id: recomendationsId,
         eventName: 'click',
         event: (e, page, id) => {
           page.props.random = uuid();
@@ -83,7 +83,7 @@ const updateLinks = () => {
   }
   switch (section[section.length - 1]) {
     case '':
-      document.getElementById(statisticsId)?.classList.add('selected');
+      document.getElementById(recomendationsId)?.classList.add('selected');
       break;
     case 'settings':
       document.getElementById(settingsId)?.classList.add('selected');

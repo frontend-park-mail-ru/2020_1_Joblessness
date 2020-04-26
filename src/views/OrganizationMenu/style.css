@@ -50,7 +50,7 @@
   content: "×";
 }
 .responses-holder.shown {
-  background-image: linear-gradient(to right, #0acffe 0%, #495aff 100%);
+  background-image: linear-gradient(to right, #0acffe 0%, #495aff 100%) !important;
 }
 .responses-holder.shown .responses-holder--container {
   display: flex;

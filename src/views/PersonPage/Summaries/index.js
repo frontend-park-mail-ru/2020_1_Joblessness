@@ -10,7 +10,11 @@ class SummariesPage extends Page {
   }
 }
 
-SummariesPage = withLocalStore(SummariesPage);
+SummariesPage = withLocalStore(SummariesPage, {
+  updateSummaries: (a, b,c) => {
+    console.log(a,b,c)
+  }
+});
 
 SummariesPage = withChainedPages(SummariesPage, SubRoutes, null, '');
 export {

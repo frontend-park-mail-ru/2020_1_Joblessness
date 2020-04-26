@@ -3,18 +3,16 @@ include ../../../templates/pug/phone
 
 
 mixin name(name, tag)
-    div.name
-        span.name--name #{name || ""}&nbsp
-        if tag
-            span.name--tag @#{tag}&nbsp
+    span.name--name #{name || ""}&nbsp
+    if tag
+        span.name--tag @#{tag}&nbsp
 
 if(locals.info.id === locals.currentId)
     +avatar(src=locals.info.avatar id=locals.itemId)
 else
     +avatar(src=locals.info.avatar id=locals.itemId noSelect)
-div.section--solid--info
-    +name(locals.info.name, locals.info.tag)
-    if(locals.info.phone)
-        +phone(locals.info.phone)
-    if(locals.info.site)
-        span.site #{locals.info.site}
++name(locals.info.name, locals.info.tag)
+if(locals.info.phone)
+    +phone(locals.info.phone)
+if(locals.info.site)
+    span.site #{locals.info.site}

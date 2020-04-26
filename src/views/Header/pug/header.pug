@@ -1,11 +1,10 @@
 include org
 include unauth
 include user
-div.header
-    if(locals.user.role === 'PERSON')
-        +user
-    else if(locals.user.role === 'ORGANIZATION')
-        +organization
-    else
-        +unauthenticated
-    div.header--icon &#9776; Меню
+if(locals.user.role === 'PERSON')
+    +user
+else if(locals.user.role === 'ORGANIZATION')
+    +organization
+else
+    +unauthenticated
+div.header--icon &#9776; Меню
