@@ -15,6 +15,7 @@ class Navigator {
   constructor() {
     this.addNavEvents();
     this.#routes = [];
+    window.routes = () => this.#routes
   }
 
   /**

@@ -32,19 +32,14 @@ const withItems = (Wrapee, props) => {
     }
 
     componentWillMount() {
-      if(this.#currentRoutes.length) {
-        Navigator.removeRoutes(
-          props.createFullRoute(props.listRoute(this.#currentRoutes))
-        );
-
-        for (let i = 0; i < this.#currentRoutes.length; i++)
-          delete this.#currentRoutes[i];
-      }
       super.componentWillMount();
+      if(this.#currentRoutes.length) {
+        Navigator.removeRoutes(props.createFullRoute(props.listRoute(this.#currentRoutes)));
+      }
     }
+
     componentDidMount() {
       super.componentDidMount();
-
       const newRoutes = this.props.items
         .map(i => ({
             path: i.innerId,
@@ -52,9 +47,8 @@ const withItems = (Wrapee, props) => {
             element: updateItem(new props.ListItem(`#${i.innerId}`), i),
           })
         );
-      Navigator.addRoutes(props.createFullRoute(props.listRoute(props.loadManagerRoute)));
       Navigator.addRoutes(props.createFullRoute(props.listRoute(newRoutes)));
-      this.#currentRoutes = newRoutes;
+      this.currentRoutes = [...newRoutes];
       Navigator.updateAllPages();
     }
   }
@@ -71,10 +65,9 @@ const createReducers = (props) => {
       const oldList = props.extractFromStore(oldState);
       const newList = props.extractFromStore(newState);
       if (!isEqSorted(oldList, newList) || oldList.length !== page.props.items.length) {
-        page.props.items = newList.map(i => ({...i,innerId : uuid()}));
+        page.props.items = newList.map(i => ({...i,innerId: uuid()}));
         page.needUpdate();
-        Navigator.updateAllPages();
       }
     }
   }
-}
+};
