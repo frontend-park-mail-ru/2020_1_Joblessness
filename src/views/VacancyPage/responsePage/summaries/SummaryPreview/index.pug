@@ -1,0 +1,21 @@
+include ../../../../../templates/pug/link
+div.summary-item-holder--body
+    +link(href="/summaries/" + locals.summary.id).summary-item-holder--link.black-link
+        h1.company-name #{locals.summary.name}
+    div.flex-1
+    div.person--info--location
+        if locals.summary.salaryFrom
+            div
+                p от&nbsp
+                h2 #{locals.summary.salaryFrom}
+                if !locals.summary.salaryTo
+                    p &#8381;
+                else
+                    |&nbsp
+        if locals.summary.salaryTo
+            div
+                p до&nbsp
+                h2 #{locals.summary.salaryTo}
+                p &#8381;
+    div.flex-1
+    div.chose-summary(id=locals.selectId) Выбрать

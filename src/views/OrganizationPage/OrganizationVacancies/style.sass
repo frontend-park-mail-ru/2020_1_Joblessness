@@ -2,7 +2,9 @@
 .vacancy-list
   display: flex
   padding: 20px 0 20px 0
-  width: 100%
+  width: calc(100vw - 200px)
+  @media(max-width: 800px)
+    width: 100vw
   justify-content: flex-start
   &--holder
     overflow-x: scroll

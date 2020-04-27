@@ -1,0 +1,25 @@
+.salary
+  display: flex
+  text-overflow: ellipsis
+  overflow: hidden
+  white-space: nowrap
+  align-self: center
+  font-size: 1.5em
+  padding: 0
+  @media (max-width: 500px)
+    flex-direction: column
+    font-size: 1em
+    padding: 5px
+  &--from
+    text-overflow: ellipsis
+    overflow: hidden
+    white-space: nowrap
+    text-transform: capitalize
+  &--to
+    text-overflow: ellipsis
+    overflow: hidden
+    white-space: nowrap
+    text-transform: capitalize
+  &--currency
+    align-self: center
+    font-size: 1.5em

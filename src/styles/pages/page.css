@@ -1,0 +1,27 @@
+.page--holder {
+  width: 100%;
+  min-height: 100vh;
+  align-items: center;
+  display: flex;
+  flex-direction: column;
+}
+.page--body {
+  display: flex;
+  flex-direction: column;
+  justify-content: stretch;
+  align-items: stretch;
+  height: 100%;
+  width: 80%;
+}
+@media (max-width: 800px) {
+  .page--body {
+    width: 100%;
+  }
+}
+@media (max-width: 1000px) {
+  .page--body {
+    width: 800px;
+  }
+}
+
+/*# sourceMappingURL=page.css.map */

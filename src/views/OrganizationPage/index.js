@@ -1,5 +1,4 @@
 import {Page} from '../../Page';
-import './style.sass';
 import template from './index.pug';
 import '../sharableStyle.sass';
 import {requestManager, uuid, withChainedPages} from '../../ulils';

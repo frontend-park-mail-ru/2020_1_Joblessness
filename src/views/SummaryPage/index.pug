@@ -1,0 +1,22 @@
+if locals.id
+    a(href='/api/summaries/' + locals.id + '/print' target="_blank" ).print-summary#print_summary
+else
+    div.hidden#print_summary
+
+section.page--holder
+    div.page--body
+        div.section.maxw100vw
+            section.section--body.pad20#summary_info
+    div.page--body
+        h1.section--title Основная информация
+        section.section
+            div.page-holder--body.flex-row.width100.vacancy-main-info#summary_main_info
+        h1.section--title Опыт работы
+        section.section
+            div.page-holder--body.flex-row.width100#summary_experience
+        h1.section--title Образование
+        section.section
+            div.page-holder--body.flex-row.width100#summary_education
+        if locals.submitText
+            section.page-section.gradient-background.create-button#create_summary_button
+                div #{locals.submitText}

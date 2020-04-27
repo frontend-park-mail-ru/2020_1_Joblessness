@@ -2,20 +2,49 @@ import '@babel/polyfill';
 import './style.sass';
 import {Navigator} from './Navigator.js';
 import {loginOnReload} from './ulils/loginOnReload';
-import {
-  CreateSummaryPage,
-  Header,
-  NotFoundPage,
-  CreateSummaryRoutes,
-} from './views';
+import {NotFoundPage} from './views/NotFoundPage';
 import ORGANIZATIONS_ROUTES from './views/OrganizationPage/routes';
-import CREATE_VACANCY_ROUTES from './views/NewCreateVacancyPage/routes';
-import CREATE_SUMMARY_ROUTES from './views/CreateSummaryPage/routes';
-import USER_ROUTES from './views/NewUserPage/routes';
-import SIGNUP_ROUTES from './views/NewSignUp/routes';
+import CREATE_VACANCY_ROUTES from './views/VacancyPage/routes';
+import CREATE_SUMMARY_ROUTES from './views/SummaryPage/routes';
+import USER_ROUTES from './views/PersonPage/routes';
+import AUTHENTICATION_ROUTES from './views/Authentication/routes';
 import SEARCH_ROUTES from './views/SearchPage/routes';
-import RESPONSES_ROUTES from './views/Responses/routes';
-import {RootElement} from './RootElement';
+import ORGANIZATION_MENU_ROUTES from './views/OrganizationMenu/routes';
+import ROOT_ROUTES from './views/RootElement'
+import ALERTS_ROUTES from './views/Alerts'
+import './styles/index.sass'
+import './views/legacy-sum.sass'
+import ws from './ws'
+import {request} from './ulils';
+
+
+/**
+ * Init
+ */
+const init = () => {
+  if ('serviceWorker' in navigator) {
+    window.addEventListener('load', () => {
+      navigator.serviceWorker.register('sw.js').then((registration) => {
+        console.log('Service worker registered: ', registration);
+      }).catch((registrationError) => {
+        console.log('Service worker not registered', registrationError);
+      });
+    });
+  }
+};
+
+/**
+ * Register service-worker
+ */
+const registerServiceWorker = () => {
+  navigator.serviceWorker.register('src/service-worker.js')
+    .then((registration) => {
+      if (!registration.active) {
+        // Is not active
+      }
+      console.log('Service worker is active');
+    });
+};
 
 /**
  * App
@@ -25,47 +54,32 @@ class App {
    * Init everything
    */
   constructor() {
-    console.log('Application was created');
-
     const routes = [
-      {
-        path: 'root',
-        alwaysOn: true,
-        element: new RootElement('#holder'),
-        childRoutes: [
-          {
-            path: 'header',
-            alwaysOn: true,
-            element: new Header('#nav-elements'),
-          },
-        ],
-      },
-      ...RESPONSES_ROUTES,
+      ...ROOT_ROUTES,
+      ...ALERTS_ROUTES,
+      ...ORGANIZATION_MENU_ROUTES,
       ...SEARCH_ROUTES,
-      ...SIGNUP_ROUTES,
+      ...AUTHENTICATION_ROUTES,
       ...USER_ROUTES,
       ...ORGANIZATIONS_ROUTES,
       ...CREATE_SUMMARY_ROUTES,
       ...CREATE_VACANCY_ROUTES,
-      // {
-      //   path: 'summaries/create',
-      //   element: new CreateSummaryPage('#root'),
-      //   childRoutes: CreateSummaryRoutes,
-      // },
       {
         path: '404',
         element: new NotFoundPage('#root'),
       },
     ];
     Navigator.addRoutes(routes);
-
-    const loc = window.location.pathname.replace('/', '');
-    Navigator.showPage(loc, true, true);
+    Navigator.updateAllPages();
   }
 }
 const createApp = async () => {
+  init();
   await loginOnReload();
-  // currentSession.session = {id: 2, role: 'PERSON'}
+  ws();
+  // currentSession.session = {id: 7, role : 'ORGANIZATION'};
+  // currentSession.session = {id: 2, role: 'PERSON'};
   new App();
 };
+
 createApp();

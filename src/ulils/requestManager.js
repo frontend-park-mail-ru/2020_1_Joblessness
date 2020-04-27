@@ -672,6 +672,20 @@ class RequestManager {
     });
   }
 
+  tryGetSummary(id) {
+    return new Promise((resolve, reject) => {
+      request
+        .get(`/api/summaries/${id}`, {})
+        .then((r) => {
+          if (r.status === 200) {
+            resolve(r);
+          } else {
+            reject(r);
+          }
+        }).catch(reject);
+    });
+  }
+
   tryDeleteSummary(id) {
     return new Promise((resolve, reject) => {
       request

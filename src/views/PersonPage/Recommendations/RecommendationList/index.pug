@@ -1,0 +1,6 @@
+if locals.items && locals.items.length
+    each r in locals.items
+        div(id=r.innerId)
+else
+    h1.empty-message Не все сразу
+div#recommendations_load_manager(hidden=true)

@@ -1,0 +1,25 @@
+include ../../../../templates/pug/forms
+include ../../../../templates/pug/fields
+
+mixin form(sum)
+    +field-holder.company-name
+        +field-name("Название компании")
+        +string-field(readonly=attributes.readonly id=sum.companyName)
+            div.field-line
+    +field-holder.company-role
+        +field-name("Должность")
+        +string-field(readonly=attributes.readonly id=sum.role)
+            div.field-line
+    +field-holder.company-experience
+        +field-name("Работали с")
+        +string-field(readonly=attributes.readonly id=sum.experienceFrom)
+            div.field-line
+        +field-name("по")
+        +string-field(readonly=attributes.readonly id=sum.experienceTo)
+            div.field-line
+    +field-holder.company-role
+        +field-name("Обязанности")
+        +string-field(readonly=attributes.readonly id=sum.responsibilities)
+             div.field-line
+
++form(locals.fields)

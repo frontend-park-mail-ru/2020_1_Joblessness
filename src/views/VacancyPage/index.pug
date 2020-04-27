@@ -1,0 +1,25 @@
+mixin section-title
+    div.section-title.cover(class=attributes.class)
+        block
+
+
+section.page--holder
+    div.page--body
+        div.section.maxw100vw
+            section.section--body.pad20#vacancy_org_info
+    div.page--body
+        span.section--title Основная информация
+        section.section
+            section.section--body.pad20#vacancy_main_info
+
+        span.section--title Обязанности
+        section.section
+            section.section--body.pad20#vacancy_responsibilities
+
+        span.section--title Условия
+        section.section
+            section.section--body.pad20.row#vacancy_conditions
+
+        if(locals.submitText)
+            section.section.gradient-background.create-button#create_vacancy_button
+                div #{locals.submitText}

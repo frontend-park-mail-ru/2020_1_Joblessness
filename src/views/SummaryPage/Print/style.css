@@ -1,0 +1,18 @@
+@import url("https://fonts.googleapis.com/css?family=Istok+Web&display=swap");
+.print-summary {
+  position: absolute;
+  right: 50px;
+  top: 50px;
+  width: 30px;
+  height: 30px;
+  border-radius: 50%;
+  background: white;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 20px;
+  color: black;
+  box-shadow: 0px 3px 13px 0px rgba(0, 0, 0, 0.5);
+}
+
+/*# sourceMappingURL=style.css.map */

@@ -89,7 +89,6 @@ class CurrentSession {
   }
 
   onChange() {
-    console.log(this.#events);
     this.#events['change'].forEach((e) => (e?.({...this.#user})));
   }
   addEventListener(eventName, event) {

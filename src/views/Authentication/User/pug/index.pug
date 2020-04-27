@@ -1,0 +1,28 @@
+include ../../../../templates/pug/link
+
+mixin steps-counter
+    div.step-counter
+        div.step-counter--counter.locked
+            +link(href='/signup')
+                div.cover.light-background Привет!
+        div.step-counter--line
+        div.step-counter--counter.locked
+            +link(href='/signup/start')
+                div.cover.light-background Логин
+        div.step-counter--line
+        div.step-counter--counter.locked
+            +link(href='/signup/name')
+                div.cover.light-background Имя
+        div.step-counter--line
+        div.step-counter--counter.locked
+            +link(href='/signup/tag')
+                div.cover.light-background Тег
+        div.step-counter--line
+        div.step-counter--counter.locked
+            +link(href='/signup/next')
+                div.cover.light-background Успех
+div.auth-holder
+    if locals.currentStep !== 0 && locals.currentStep !== 4
+        +steps-counter
+
+    div.signup-holder#_signup_steps

@@ -1,8 +1,9 @@
 @import "../CONSTANTS"
+.maxw800
+  max-width: 800px
 .page-holder
   width: 100%
   min-height: 100vh
-  margin-top: 20px
   align-items: center
   display: flex
   flex-direction: column
@@ -35,9 +36,16 @@
     align-items: center
 
 .page-section
+  @media(max-width: 800px)
+    width: 100%
+    box-shadow: none
+    border-radius: 0
+    background: rgba(255,255,255,.5)
+
   margin-top: 20px
   display: flex
   width: 100%
+  max-width: 800px
   border-radius: 10px
   background: white
   overflow: hidden
@@ -112,6 +120,9 @@
   flex: 9
 .person--info--location
   flex-direction: column
+  h1, h2
+    font-weight: 100
+    margin: 0
   white-space: nowrap
 .justify-end
   justify-content: flex-end
@@ -146,6 +157,7 @@
   margin: 0
 .section-title
   display: flex
+  max-width: 800px
   justify-content: flex-start
   text-align: left
 .flex
@@ -168,8 +180,33 @@
     overflow: hidden
   .paragraph-holder--text
     height: 0
+    overflow: hidden
   height: 0
   margin: 0
 
 .pad-b20
   padding-bottom: 20px
+
+.light-grad
+  @include LIGHT_GRADIENT
+
+.maxw100vw
+  max-width: 100vw
+.pad20
+  padding: 20px
+.row
+  flex-direction: row
+
+.paragraph--edit
+  height: 100%
+
+.paragraph
+  font-size: 1.25em
+  margin-bottom: 15px
+  word-break: break-word
+  display: flex
+  flex-direction: column
+
+.stretch
+  justify-content: stretch !important
+  align-items: stretch !important
