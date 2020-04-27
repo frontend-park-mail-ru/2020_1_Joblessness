@@ -44,7 +44,7 @@ NavPage = withEvents(NavPage, 'events',
         id: settingsId,
         eventName: 'click',
         event: (e, page, id) => {
-          page.props.random = uuid();
+          // page.props.random = uuid();
           showSubPage('settings');
         },
       },
@@ -52,7 +52,7 @@ NavPage = withEvents(NavPage, 'events',
         id: summariesId,
         eventName: 'click',
         event: (e, page, id) => {
-          page.props.random = uuid();
+          // page.props.random = uuid();
           showSubPage('summaries');
         },
       },
@@ -60,7 +60,7 @@ NavPage = withEvents(NavPage, 'events',
         id: favouritesId,
         eventName: 'click',
         event: (e, page, id) => {
-          page.props.random = uuid();
+          // page.props.random = uuid();
           showSubPage('favourites');
         },
       },
@@ -68,7 +68,7 @@ NavPage = withEvents(NavPage, 'events',
         id: recomendationsId,
         eventName: 'click',
         event: (e, page, id) => {
-          page.props.random = uuid();
+          // page.props.random = uuid();
           showSubPage('');
         },
       },

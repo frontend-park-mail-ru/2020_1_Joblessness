@@ -1,16 +1,19 @@
 import {SubRoutes, constructSubRoutes, RootPath} from './subRoutes';
 import {UserPage} from './index';
 
-const Routes = [
+
+export const CONTAINER = '#root';
+export const PERSON_PAGE_ELEMENT = new UserPage(CONTAINER);
+
+export const createRoute = (childRoutes = []) => [
   {
     path: RootPath + '*',
-    element: new UserPage('#root'),
-    childRoutes: [
-      ...SubRoutes,
-    ],
+    element: PERSON_PAGE_ELEMENT,
+    childRoutes,
   },
 ];
 
+const Routes = createRoute(SubRoutes);
 export {
   SubRoutes,
   RootPath,

@@ -38,16 +38,20 @@ const addHideAnimation = (page, smooth) => {
     val = val >= 0 ? val : 0;
     val = val <= 1 ? val : 1;
     if (showSmooth) {
-      parent.firstChild.style.transitionDuration = '.4s';
+      if(parent.firstChild)
+        parent.firstChild.style.transitionDuration = '.4s';
     } else {
-      parent.firstChild.style.transitionDuration = '';
+      if(parent.firstChild)
+        parent.firstChild.style.transitionDuration = '';
     }
     page._rot = `scale(${val}, ${val})`;
     page._val = val;
     page._trans = trans;
-    parent.firstChild.style.transform = `scale(${val}, ${val})`;
-    parent.firstChild.style.transformOrigin = trans;
-    parent.firstChild.style.opacity = val;
+    if(parent.firstChild) {
+      parent.firstChild.style.transform = `scale(${val}, ${val})`;
+      parent.firstChild.style.transformOrigin = trans;
+      parent.firstChild.style.opacity = val;
+    }
   };
 
   const parent = document.querySelector(page.container);

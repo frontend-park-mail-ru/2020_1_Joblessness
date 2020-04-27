@@ -17,7 +17,7 @@ export {
   RootElement,
 };
 
-export const CONTAINER = '#holder'
+export const CONTAINER = '#holder';
 export const ROOT_ELEMENT = new RootElement(CONTAINER);
 
 const Routes = [

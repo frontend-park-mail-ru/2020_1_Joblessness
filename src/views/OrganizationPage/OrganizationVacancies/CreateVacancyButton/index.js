@@ -1,6 +1,5 @@
 import {Page} from '../../../../Page';
 import template from './index.pug';
-import './style.sass';
 import {addHideAnimation} from '../addAnimations';
 import withLocalStore from '../../localStore';
 import {getOrgId} from '../../getOrgInfo';

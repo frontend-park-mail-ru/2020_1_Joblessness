@@ -1,10 +1,9 @@
 include ../../../../templates/pug/link
 include ./auth-input
-div.signup-holder
-    div.signup-holder.width-60.margin-right-20
-        div.signup-holder--header
-            h1 Укажите свои данные, чтобы соискателю было проще вас найти
-        +input-field-auth(placeholder="Название компании" autofocus id=locals.inputFields.name.id)
-        +input-field-auth(placeholder="Сайт компании" id=locals.inputFields.site.id)
-        div.next-button(id=locals.inputFields.submitField.id)
-            h1 Далее
+
+div.signup-holder--header
+    h1 Укажите свои данные, чтобы соискателю было проще вас найти
++input-field-auth(placeholder="Название компании" autofocus id=locals.inputFields.name.id)
++input-field-auth(placeholder="Сайт компании" id=locals.inputFields.site.id)
+div.next-button(id=locals.inputFields.submitField.id)
+    h1 Далее

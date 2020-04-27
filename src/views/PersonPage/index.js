@@ -4,10 +4,10 @@ import {
   uuid,
   requestManager,
 } from '../../ulils';
-import template from './pug/index.pug';
+import template from './index.pug';
 import {Page} from '../../Page';
 import {Navigator} from '../../Navigator';
-import {RootPath, SubRoutes} from './subRoutes';
+import {RootPath, ChainedRoutes} from './subRoutes';
 import {getUserId} from './getUserId';
 import withLocalStore from './localStore';
 import {withAuthManager} from '../../ulils/AuthManager';
@@ -21,7 +21,7 @@ import {withAuthManager} from '../../ulils/AuthManager';
  * favourite
  */
 class UserPage extends Page {
-  #prevUser
+  #prevUser;
   /**
    * returns container for subpages
    * @return{string}
@@ -87,7 +87,7 @@ const loadPersonSummaries = async (page) => {
 };
 UserPage = withAuthManager(UserPage);
 UserPage = withLocalStore(UserPage);
-UserPage = withChainedPages(UserPage, SubRoutes, null, RootPath);
+UserPage = withChainedPages(UserPage, ChainedRoutes, null, RootPath);
 export {
   UserPage,
 };

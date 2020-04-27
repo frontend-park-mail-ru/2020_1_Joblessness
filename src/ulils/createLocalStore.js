@@ -23,7 +23,7 @@ export const createLocalStore = (store,
           newReducers[r[0]] = (oldS, newS) => r[1](this, oldS, newS);
         }
         globalReducers = {...globalReducers, ...newReducers};
-        this.#initial = Object.assign({}, store);
+        this.#initial = clone(store);
         const keyToUse = typeof key === 'function' ? key() : key;
         if (initFromLocalStore && keyToUse !== '') {
           const newStore = window.localStorage.getItem(keyToUse);
@@ -33,7 +33,7 @@ export const createLocalStore = (store,
         }
         this.props.getStore = () => store;
         this.props.resetStore = () => {
-          store = Object.assign({}, this.#initial);
+          store = clone(this.#initial);
         };
         this.props.reloadStore = () => {
           const keyToUse = typeof key === 'function' ? key() : key;
@@ -41,14 +41,14 @@ export const createLocalStore = (store,
           if (newStore) {
             store = JSON.parse(newStore);
           } else {
-            store = Object.assign({}, this.#initial);
+            store = clone(this.#initial);
           }
         };
         this.props.setStore = (s, cb) => {
           const keyToUse = typeof key === 'function' ? key() : key;
           if (typeof s === 'object') {
-            const oldStore = Object.assign({}, store);
-            store = Object.assign({},{...store, ...s});
+            const oldStore = clone(store)
+            store = clone({...store, ...s});
             if (useLocalStorage) {
               window.localStorage.setItem(keyToUse, JSON.stringify(store));
             }
@@ -59,8 +59,8 @@ export const createLocalStore = (store,
             return;
           }
           if (typeof s === 'function') {
-            const oldStore = Object.assign({}, store);
-            store = Object.assign({}, {...store, ...s({...store})});
+            const oldStore = clone(store);
+            store = clone({...store, ...s({...store})});
             if (useLocalStorage) {
               window.localStorage.setItem(keyToUse, JSON.stringify(store));
             }
@@ -80,26 +80,10 @@ export const createLocalStore = (store,
   }
 );
 
-function deepCopy(obj) {
-  if (typeof obj !== 'object' || obj === null) {
-    return obj;
-  }
-
-  if (obj instanceof Date) {
-    return new Date(obj.getTime());
-  }
-
-  if (obj instanceof Array) {
-    return obj.reduce((arr, item, i) => {
-      arr[i] = deepCopy(item);
-      return arr;
-    }, []);
-  }
-
-  if (obj instanceof Object) {
-    return Object.keys(obj).reduce((newObj, key) => {
-      newObj[key] = deepCopy(obj[key]);
-      return newObj;
-    }, {});
+const clone = (obj) => {
+  try {
+    return JSON.parse(JSON.stringify(obj))
+  } catch (e) {
+    return {...obj};
   }
 }

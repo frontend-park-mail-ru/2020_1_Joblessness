@@ -34,6 +34,7 @@ const isEqual = (o1, o2) => {
  */
 export class Page {
   static isPageComponent = true;
+  isPageComponent = true;
   // #dom;
   #pageId;
   #container;

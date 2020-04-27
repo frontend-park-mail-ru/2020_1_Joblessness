@@ -57,13 +57,19 @@ class Navigator {
 
       if (isAppropriate || route.path.raw === 'any'|| route.path.alwaysOn) {
         try {
-          route.element.requestRender();
+          if(route.element.isPageComponent) {
+            route.element.requestRender();
+          } else {
+            document
+              .querySelector(route.element[0])
+              .innerHTML = route.element[1]()
+          }
         } catch (e) {
           console.error(e);
         }
 
         this.showChildren(
-            route.childRoutes, path.replace(route.path.raw, ''));
+          route.childRoutes, path.replace(route.path.raw, ''));
 
         if (route.path.raw !== 'any' && !route.path.alwaysOn) break;
       }
@@ -90,13 +96,19 @@ class Navigator {
           }
         }
         try {
-          route.element.requestRender();
+          if(route.element.isPageComponent) {
+            route.element.requestRender();
+          } else {
+            document
+              .querySelector(route.element[0])
+              .innerHTML = route.element[1]()
+          }
         } catch (e) {
           console.error(e);
         }
 
         this.showChildren(
-            route.childRoutes, path.replace(route.path.raw, ''));
+          route.childRoutes, path.replace(route.path.raw, ''));
         if (route.path.raw !== 'any' && !route.path.alwaysOn) break;
       }
     }
@@ -120,7 +132,7 @@ class Navigator {
         if (route.path.comp.test(path)) {
           route.element.requestRender();
           this.showChildren(
-              route.childRoutes, path.replace(route.path.raw, ''));
+            route.childRoutes, path.replace(route.path.raw, ''));
           break;
         }
       }
@@ -166,8 +178,8 @@ class Navigator {
         },
         parent,
         childRoutes: childRoutes
-            .map((c) => this._parseObjectRoute(c))
-            .filter((c) => c),
+          .map((c) => this._parseObjectRoute(c))
+          .filter((c) => c),
       };
     }
     return null;
@@ -267,11 +279,11 @@ class Navigator {
         if (newRoute.path.raw === currentRoot.path.raw) {
           if (newRoute.childRoutes.length === 0) {
             parent.childRoutes = parent.childRoutes.filter(
-                (r) => r !== currentRoot);
+              (r) => r !== currentRoot);
             return;
           }
           this._removeRoutes(currentRoot.childRoutes,
-              newRoute.childRoutes, currentRoot);
+            newRoute.childRoutes, currentRoot);
           return;
         }
       }

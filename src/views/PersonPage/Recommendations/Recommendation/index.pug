@@ -1,0 +1,17 @@
+div.section
+    div.section--body
+        div.name
+            div.name--name #{locals.info.name}
+            div.name--tag ##{locals.info.organization.tag}
+        if(locals.info.responsibilities && locals.info.responsibilities.length)
+            div.preview
+                span.preview--title Обязанности
+                div.preview--content
+                    each r in locals.info.responsibilities
+                        div !{r.text}
+        if(locals.info.conditions && locals.info.conditions.length)
+            div.preview
+                span.preview--title Условия
+                div.preview--content
+                    each r in locals.info.conditions
+                        div !{r.text}

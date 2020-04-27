@@ -12,6 +12,8 @@ const withLocalStore = createLocalStore({
     tag: '',
   },
   summaries: [],
+  recommendations: [],
+  chosen: [],
   mainInfo: {},
 }, true, () => `users/${getUserId()}`, true);
 

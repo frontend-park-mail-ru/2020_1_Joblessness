@@ -6,11 +6,11 @@
   justify-content: stretch;
   align-items: stretch;
   flex-direction: column;
+  min-height: 100vh;
   flex: 1;
 }
 .page--holder {
   flex: 1;
-  min-height: 100vh;
   align-items: center;
   display: flex;
   flex-direction: column;
@@ -23,7 +23,6 @@
   flex-direction: column;
 }
 .page--section--solid {
-  flex: 1;
   justify-content: stretch;
   align-items: stretch;
   justify-self: stretch;
@@ -104,7 +103,6 @@ a.section {
 .section--solid {
   padding: 30px 80px 20px 10px;
   display: flex;
-  flex: 1;
   z-index: 2;
   justify-content: center;
   align-items: center;

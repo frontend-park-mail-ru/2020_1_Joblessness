@@ -54,17 +54,17 @@ alert = (msg, type = 'error') => {
       alertItem,
     ]
   }));
-  const removeAlert = () => {
+
+  alertElement.props.hide = () => {
     Navigator.removeRoutes(constructRoute([newAlertRoute]));
-    alertElement.getContainer()?.classList.add(`removing-`);
+    ALERTS_ELEMENT.props.setStore(s => ({
+      alerts: s.alerts.filter(a => a.id !== newId)
+    }));
+    alertElement.getContainer()?.classList.add('removing-');
     setTimeout(() => {
       alertElement.getContainer()?.remove();
-      ALERTS_ELEMENT.props.setStore(s => ({
-        alerts: s.alerts.filter(a => a.id !== newId)
-      }));
-    }, 50000)
+    }, 500)
   };
-  alertElement.props.hide = removeAlert;
   Navigator.addRoutes(constructRoute([newAlertRoute]));
   Navigator.updateAllPages();
 }

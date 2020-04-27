@@ -1,0 +1,80 @@
+import {Navigator} from '../../../Navigator';
+import {uuid} from '../../../ulils';
+
+export const list = (Wrapee, props) => {
+  Wrapee = props.withLocalStore(Wrapee, createReducers(props));
+  Wrapee = withItems(Wrapee, props);
+  const wrapee = new Wrapee(props.listSelector);
+  wrapee.props.loadableList = props;
+  return wrapee;
+};
+
+const isEqSorted = (a, b) => {
+  if(a.length !== b.length) {
+    return false;
+  }
+  for (let i = 0; i < a.length; i++) {
+    if(a[i].id !== b[i].id) {
+      return false;
+    }
+  }
+  return true;
+};
+const withItems = (Wrapee, props) => {
+  return class extends Wrapee {
+
+    #currentRoutes;
+
+    constructor(props) {
+      super(props);
+      this.#currentRoutes = [];
+      this.props.items = [];
+    }
+
+    componentWillMount() {
+      if(this.#currentRoutes.length) {
+        Navigator.removeRoutes(
+          props.createFullRoute(props.listRoute(this.#currentRoutes))
+        );
+
+        for (let i = 0; i < this.#currentRoutes.length; i++)
+          delete this.#currentRoutes[i];
+      }
+      super.componentWillMount();
+    }
+    componentDidMount() {
+      super.componentDidMount();
+
+      const newRoutes = this.props.items
+        .map(i => ({
+            path: i.innerId,
+            alwaysOn: true,
+            element: updateItem(new props.ListItem(`#${i.innerId}`), i),
+          })
+        );
+      Navigator.addRoutes(props.createFullRoute(props.listRoute(props.loadManagerRoute)));
+      Navigator.addRoutes(props.createFullRoute(props.listRoute(newRoutes)));
+      this.#currentRoutes = newRoutes;
+      Navigator.updateAllPages();
+    }
+  }
+};
+
+const updateItem = (item, info) => {
+  item.props.info = info;
+  return item;
+}
+
+const createReducers = (props) => {
+  return   {
+    [props.reducerKey]: (page, oldState, newState) => {
+      const oldList = props.extractFromStore(oldState);
+      const newList = props.extractFromStore(newState);
+      if (!isEqSorted(oldList, newList) || oldList.length !== page.props.items.length) {
+        page.props.items = newList.map(i => ({...i,innerId : uuid()}));
+        page.needUpdate();
+        Navigator.updateAllPages();
+      }
+    }
+  }
+}

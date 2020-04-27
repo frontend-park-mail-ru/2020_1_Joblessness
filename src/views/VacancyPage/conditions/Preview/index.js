@@ -1,6 +1,5 @@
 import {Page} from '../../../../Page';
 import template from './index.pug';
-import './style.sass';
 
 class Preview extends Page {
   /**
