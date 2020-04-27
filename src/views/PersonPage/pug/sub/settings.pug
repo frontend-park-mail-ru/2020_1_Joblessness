@@ -13,12 +13,9 @@ mixin input-field-settings
         div.form-input-err
 
 mixin settings-block
-    div.settings-holder
-        div.settings-holder--title
-            h1 #{attributes.title}
-        div.settings-holder--holder
-            div.settings-holder--body
-                block
+    span.section--title #{attributes.title}
+    div.section
+            block
 
 mixin settings-item(name)
     div.settings-holder-item

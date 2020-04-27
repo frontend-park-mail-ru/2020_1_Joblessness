@@ -1,43 +1,5 @@
 @import "../../CONSTANTS"
 
-.user-page
-  display: flex
-  width: 100%
-  height: 100%
-  flex-direction: column
-  min-height: 100vh
-
-.bio-section
-  display: flex
-  z-index: 2
-  justify-content: center
-  align-items: center
-  height: 230px
-  width: 100%
-  @include SECTION_SHADOW
-
-.with-select
-  input
-    cursor: pointer
-  &:hover
-    filter: brightness(.9)
-    &:before
-      opacity: 0.5
-      width: 150px
-      height: 150px
-
-  &:before
-    border-radius: 50%
-    position: absolute
-    transition: .15s
-    content: '\2315'
-    width: 0
-    height: 0
-    opacity: 0
-    align-items: center
-    justify-content: center
-    font-size: 10em
-    display: flex
 .user-name
   padding: 20px
   display: flex
@@ -73,69 +35,6 @@ $FADING: rgba(255, 255, 255, .5)
       font-weight: 200
 
 
-.user-section-holder
-  @include BACKGROUND_GRADIENT
-  flex: 1
-  display: flex
-
-  .user-section-holder--body
-    flex: 1
-    display: flex
-    justify-content: center
-    background: $FADING
-
-
-.summaries-list
-  display: flex
-  flex-direction: column
-  width: 80%
-
-.summary-holder
-  display: flex
-  justify-content: stretch
-  align-items: stretch
-  margin-top: 10vh
-  margin-bottom: 10vh
-  height: 80vh
-  background: white
-  border-radius: 10px
-  border: none
-  @include SECTION_SHADOW
-
-.summary-holder--body
-  flex: 1
-  display: flex
-  padding: 30px
-  flex-direction: column
-
-
-.settings-list
-  display: flex
-  flex-direction: column
-  width: 80%
-  padding-bottom: 10vh
-
-.settings-holder
-  display: flex
-  justify-content: stretch
-  align-items: stretch
-  flex-direction: column
-  margin-bottom: 20px
-
-  h1
-    text-indent: 10px
-//.settings-holder--title
-
-.settings-holder--holder
-  display: flex
-  flex: 1
-  justify-content: stretch
-  align-items: stretch
-  background: white
-  border-radius: 10px
-  border: none
-  @include SECTION_SHADOW
-
 .settings-holder--body
   flex-direction: column
   flex: 1
@@ -157,7 +56,6 @@ $FADING: rgba(255, 255, 255, .5)
   flex-grow: 2
 
 .settings-holder-item--input
-  width: 400px
   flex: 1
   flex-grow: 5
 
@@ -180,13 +78,14 @@ $FADING: rgba(255, 255, 255, .5)
     box-shadow: none
     border-radius: 0
     appearance: none
-    background-color: #fff
+    background-color: transparent
     background-position: right .7em top 50%, 0 0
     background-size: .65em auto, 100%
     &:focus
       outline: none
       border: none
       box-shadow: none
+
 .birth-container
   display: flex
   justify-content: space-between

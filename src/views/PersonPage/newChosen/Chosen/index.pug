@@ -1,4 +1,13 @@
+include ../../../../templates/pug/link
 include ../../../../templates/pug/avatar
-div.section
-    div.section--body
-        -console.log(locals.info)
+include ../../../../templates/pug/name
+include ../../../../templates/pug/companyName
++link(href=(locals.info.isPerson ? '/users/' : '/organizations/') + locals.info.id + '/').black-link
+    div.section.pad20
+        div.section--body.row
+            if locals.info.isPerson
+                +avatar(src=locals.info.avatar noSelect).small
+                +name(locals.info.name, locals.info.surname, locals.info.tag)
+            else
+                +avatar(src=locals.info.avatar noSelect).small
+                +company-name(locals.info.name, locals.info.tag)

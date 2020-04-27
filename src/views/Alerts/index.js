@@ -63,7 +63,7 @@ alert = (msg, type = 'error') => {
     alertElement.getContainer()?.classList.add('removing-');
     setTimeout(() => {
       alertElement.getContainer()?.remove();
-    }, 500)
+    }, 2000)
   };
   Navigator.addRoutes(constructRoute([newAlertRoute]));
   Navigator.updateAllPages();

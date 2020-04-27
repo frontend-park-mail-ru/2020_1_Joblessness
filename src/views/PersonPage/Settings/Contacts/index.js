@@ -48,7 +48,7 @@ ContactsPage = withForm(ContactsPage,
     },
     (form, page) => {
       const user = page.props.getStore().user;
-      form.phone = form.phone.replace(/[\-()]/g, '');
+      form.phone = form.phone?.replace(/[\-()]/g, '');
       if (!form.email) {
         delete form.email;
       }

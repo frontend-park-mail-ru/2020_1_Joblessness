@@ -47,7 +47,8 @@ class SummaryPage extends Page {
 
     if (isCreationPage()) {
       if (currentSession.user.role === PERSON) {
-        loadUser(this);
+        if(this.props.getStore().user.id !== getUserId())
+          loadUser(this);
         initCreateEvent(this);
       } else {
         alert('Авторизируйтесь как соискатель');
@@ -160,10 +161,12 @@ const loadUser = (page) => {
           ...user,
         },
       }));
-      // page.props.random = uuid();
-      // Navigator.updateAllPages();
+      page.needUpdate();
+      Navigator.updateAllPages();
     })
-    .catch(console.log);
+    .catch(() => {
+      alert('Невозможно получить данные пользователя')
+    });
 };
 
 const createKeyWords = (state) => {
@@ -213,7 +216,6 @@ const loadSummary = (page) => {
     .tryGetSummary(getSumId())
     .then(async r => {
       const sum = await r.json();
-
       const mainInfo = {
         name: sum.name,
         description: sum.description,
@@ -235,7 +237,6 @@ const loadSummary = (page) => {
       })) ?? [];
       const experience = sum.experiences?.map(e => ({
         id: uuid(),
-        user: sum.author,
         companyName: e.companyName,
         role: e.role,
         experienceFrom: new Date(e.start).getFullYear(),
@@ -250,6 +251,7 @@ const loadSummary = (page) => {
         },
       })) ?? [];
       page.props.setStore(s => ({
+        user: sum.author,
         mainInfo: {
           preview: mainInfo,
           raw: mainInfo,

@@ -141,7 +141,7 @@ class Navigator {
     window.linkGo = (e) => {
       e = e.replace(/&amp;amp;/g, '&');
       if (e[0] === '?') {
-        this.showPage(e);
+        this.showPage(e, true, true);
         this.updateAllPages();
       }
       if (e[0] === '/') {

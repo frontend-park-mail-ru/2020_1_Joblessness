@@ -31,6 +31,7 @@
   flex-direction: column;
 }
 .page--body {
+  padding-bottom: 20px;
   display: flex;
   width: 100vw;
   flex-direction: column;
@@ -350,6 +351,20 @@ a.section {
 }
 .list--separator {
   padding: 15px;
+}
+
+.preview {
+  padding: 10px;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+}
+.preview--title {
+  font-size: 1.2em;
+  margin: 3px;
+}
+.preview--content {
+  margin-left: 10px;
 }
 
 @media (max-width: 800px) {

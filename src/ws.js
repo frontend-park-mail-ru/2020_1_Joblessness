@@ -3,6 +3,7 @@ const wsDomain = DOMAIN.replace('http://', 'ws://');
 export default () => {
   const ws = new WebSocket(`${wsDomain}/api/chat`);
   ws.onopen = (e) => {
+    ws.send('')
   };
   ws.onmessage = (...msg) => {
     try {
