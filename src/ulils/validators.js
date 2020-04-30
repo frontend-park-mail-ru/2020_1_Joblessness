@@ -57,7 +57,7 @@ to the pattern present inside the char class.
 And the number of matched chars must be from 0 to 19.
  */
 const isLogin = (login) =>
-  /^\w.{6,20}$/.test(login);
+  /^\w.{5,20}$/.test(login);
 
 const isMoney = (money) => !isNaN(money) && money !== '';
 const isUrl = (url) => /^(?:http(s)?:\/\/)?[\w.-]+(?:\.[\w\.-]+)+[\w\-\._~:/?#[\]@!\$&'\(\)\*\+,;=.]+$/.test(url);
