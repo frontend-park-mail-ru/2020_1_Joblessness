@@ -16,8 +16,12 @@ const initApplyEvent = (props) => (page) => (e) => {
   if (props.onApply) {
     props.onApply(props, page).then(
         () => {
-          page.props.requestNextNoUpdate(page, PREVIEW, SUBMIT);
-          page.setMode(PREVIEW);
+          if(false) {//@TODO add logic
+            alert('Не все поля заполнены')
+          } else {
+            page.props.requestNextNoUpdate(page, PREVIEW, SUBMIT);
+            page.setMode(PREVIEW);
+          }
         },
     ).catch(
         () => {

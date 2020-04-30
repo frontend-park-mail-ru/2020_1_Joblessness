@@ -210,11 +210,11 @@ class Bar extends Page {
 
     const {type, request, since, desc} = getSearchParameters();
 
-    // console.log({type, request, since, desc});
+    console.log({type, request, since, desc});
     if (!(type || request || since || desc)) {
       return;
     }
-    search.firstChild.firstChild.value = request;
+    search.firstChild.firstChild.value = request || '';
     this.props.setStore((s) => ({
       bar: {
         ...s.bar,

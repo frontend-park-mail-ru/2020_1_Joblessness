@@ -33,11 +33,10 @@ const withItems = (Wrapee, props) => {
 
     componentWillMount() {
       super.componentWillMount();
-      console.log(this.#currentRoutes);
+      console.log([...this.#currentRoutes]);
       if(this.#currentRoutes.length) {
-        Navigator.removeRoutes(props.createFullRoute(props.listRoute(this.#currentRoutes)));
-        // for(let i = 0; i < this.#currentRoutes.length; i++)
-        //   delete this.#currentRoutes[i];
+        for(let r of this.#currentRoutes)
+        Navigator.removeRoutes(props.createFullRoute(props.listRoute([r])));
       }
     }
 
@@ -70,6 +69,7 @@ const createReducers = (props) => {
       if (!isEqSorted(oldList, newList) || oldList.length !== page.props.items.length) {
         page.props.items = newList.map(i => ({...i,innerId: uuid()}));
         page.needUpdate();
+        Navigator.updateAllPages();
       }
     }
   }

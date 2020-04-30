@@ -1,7 +1,7 @@
 import {Page} from '../../Page';
 import template from './index.pug';
 import './style.sass';
-import {requestManager, uuid} from '../../ulils';
+import {request, requestManager, uuid} from '../../ulils';
 import {PERSON, ORGANIZATION, UNAUTHORISED} from '../../CONSTANTS';
 import {currentSession} from '../../ulils';
 import {getOrgId} from '../OrganizationPage/getOrgInfo';
@@ -41,6 +41,41 @@ class ChosenButton extends Page {
       this.#prevEvent = toggleEvent(this);
       this.#prevElem?.addEventListener('click', this.#prevEvent);
       return;
+    }
+  }
+
+  componentWillMount() {
+    super.componentWillMount();
+    if(isOrgPage()) {
+      requestManager
+        .tryCheckChosen(getOrgId())
+        .then(async (r) => {
+          const res = await r.json();
+          console.log(res, getOrgId());
+          if(res.like) {
+            this.#prevElem =
+              document
+                .getElementById(this.#elemId)
+                .classList
+                .remove('not-chosen')
+          }
+        })
+        .catch(() => {});
+    } else {
+      requestManager
+        .tryCheckChosen(getUserId())
+        .then(async (r) => {
+          const res = await r.json();
+          console.log(res, getUserId());
+          if(res.like) {
+            this.#prevElem =
+              document
+                .getElementById(this.#elemId)
+                .classList
+                .remove('not-chosen')
+          }
+        })
+        .catch(() => {});
     }
   }
 

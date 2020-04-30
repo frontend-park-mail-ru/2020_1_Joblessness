@@ -26,19 +26,20 @@ const withAdd = (Wrapee, props) => {
         addButton.addEventListener('click', () => {
           if (props.CUSTOM_LISTENERS) {
             const newItem = props.CUSTOM_LISTENERS.initItem(this, props);
-
-            this.props.setStore(props.INSERT_REDUCER(newItem));
-
-            this.props.requestNextNoUpdate(newItem);
+            if(props.EXTRACT_REDUCER(this.props.getStore()).raw.length < 5) {
+              this.props.setStore(props.INSERT_REDUCER(newItem));
+              this.props.requestNextNoUpdate(newItem);
+            }
           } else {
             const newItem = {
               id: uuid(),
               classList: ['paragraph'],
               text: '',
             };
-            this.props.setStore(props.INSERT_REDUCER(newItem));
-
-            this.props.requestNextNoUpdate(newItem);
+            if(props.EXTRACT_REDUCER(this.props.getStore()).raw.length < 5) {
+              this.props.setStore(props.INSERT_REDUCER(newItem));
+              this.props.requestNextNoUpdate(newItem);
+            }
           }
         });
       }
