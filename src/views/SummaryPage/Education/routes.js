@@ -49,6 +49,7 @@ const Routes = createEditor({
       raw: [...s.education.raw, item],
     },
   }),
+  MAX_SIZE: 5,
   ROOT: 'education/',
   EDITOR_HOLDER_SELECTOR: '#summary_education',
   ROOT_TEMPLATE: (childRoutes = []) => [

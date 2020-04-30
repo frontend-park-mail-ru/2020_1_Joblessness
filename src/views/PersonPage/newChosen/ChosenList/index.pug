@@ -1,7 +1,10 @@
 include ../../../../templates/pug/link
 if locals.items && locals.items.length
     each chosen in locals.items
-        +link(href='/' + chosen.id id=chosen.innerId).black-link
+        if chosen.isPerson
+            +link(href='/users/' + chosen.id id=chosen.innerId).black-link
+        else
+            +link(href='/organizations/' + chosen.id id=chosen.innerId).black-link
 else
     h1.empty-message Пора ставить лайки
 div(hidden=true)#chosen_load_manager

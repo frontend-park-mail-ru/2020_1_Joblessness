@@ -17,10 +17,11 @@
     .header--item
       flex: 1
       max-height: 30px
-      @include BACKGROUND_GRADIENT
-      background-attachment: fixed
-      -webkit-background-clip: text
-      -webkit-text-fill-color: transparent
+      //@include BACKGROUND_GRADIENT
+      //background-attachment: fixed
+      //-webkit-background-clip: text
+      //-webkit-text-fill-color: transparent
+      color: black
       &:hover
         background-size: cover
   &--icon
@@ -40,11 +41,12 @@
     transition: .4s
     overflow: hidden
     &:hover
-      @include BACKGROUND_GRADIENT
-      background-size: 200px
-      background-attachment: fixed
-      -webkit-background-clip: text
-      -webkit-text-fill-color: transparent
+      color: $GRAY
+      //@include BACKGROUND_GRADIENT
+      //background-size: 200px
+      //background-attachment: fixed
+      //-webkit-background-clip: text
+      //-webkit-text-fill-color: transparent
   &:hover
     @media(max-width: 800px)
       padding-bottom: 10px

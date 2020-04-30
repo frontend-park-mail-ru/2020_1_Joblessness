@@ -141,7 +141,7 @@ class Navigator {
     window.linkGo = (e) => {
       e = e.replace(/&amp;amp;/g, '&');
       if (e[0] === '?') {
-        this.showPage(e, true, true);
+        this.showPage(e);
         this.updateAllPages();
       }
       if (e[0] === '/') {
@@ -298,6 +298,7 @@ class Navigator {
   addRoutes(routes) {
     const r = this.parseObjectRoute(routes);
     this._addRoutes(this.#routes, r);
+    console.log(this.#routes[6].childRoutes[4].childRoutes)
   }
 
   /**

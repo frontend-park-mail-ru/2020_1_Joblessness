@@ -2,11 +2,6 @@ import {createLocalStore} from '../../ulils';
 
 const withLocalStore = createLocalStore({
   user: {
-    id: 2,
-    firstName: '',
-    lastName: '',
-    tag: '',
-    avatar: '',
   },
   mainInfo: {
     raw: {

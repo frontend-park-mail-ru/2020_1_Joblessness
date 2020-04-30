@@ -35,7 +35,7 @@ const isYear = (n) =>
 // st-contain-at-least-eight-characters-at-least-one-number-a
 // Minimum eight characters, at least one letter and one number:
 const isPassword = (password) =>
-  /^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{8,}$/.test(password);
+  /\w{8,30}/.test(password);
 // Удовлетворяет почти любому формату ввода телефона
 const isPhoneNumber = (phone) =>
   /^(\s*)?(\+)?([- _():=+]?\d[- _():=+]?){10,14}(\s*)?$/.test(phone);
@@ -57,7 +57,7 @@ to the pattern present inside the char class.
 And the number of matched chars must be from 0 to 19.
  */
 const isLogin = (login) =>
-  /^(?=.*[A-Za-z0-9]$)[A-Za-z][A-Za-z\d.-_]{5,19}$/.test(login);
+  /^\w.{6,20}$/.test(login);
 
 const isMoney = (money) => !isNaN(money) && money !== '';
 const isUrl = (url) => /^(?:http(s)?:\/\/)?[\w.-]+(?:\.[\w\.-]+)+[\w\-\._~:/?#[\]@!\$&'\(\)\*\+,;=.]+$/.test(url);

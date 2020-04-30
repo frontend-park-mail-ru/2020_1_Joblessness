@@ -7,6 +7,7 @@ mixin vacancy-preview
     div.page-section
 
 section.section--body
+    div#search_upper_items
     if(locals.organizations && locals.organizations.length)
         span.section--title Организации
         each org in locals.organizations
@@ -19,3 +20,4 @@ section.section--body
         span.section--title Вакансии
         each vac in locals.vacancies
             +link(href="/vacancies/" + vac.id id=vac.innerId).section
+    div#search_lower_items

@@ -24,6 +24,9 @@ ThirdStep= withForm(ThirdStep, {
     id: uuid(),
     required: true,
     validator: validators.isLogin,
+    update: (e,v) => {
+      return v.trim();
+    },
     warnMessage: 'Tag состоит из минимум 6 символов, в том числе из цифр, латинских букв, а также символов _ и .',
   },
 },

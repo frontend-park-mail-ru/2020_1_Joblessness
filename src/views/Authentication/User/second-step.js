@@ -5,6 +5,7 @@ import template from './pug/index2.pug';
 import {uuid, currentSession, withForm, request} from '../../../ulils';
 import {isLogin, isPassword} from '../../../ulils/validators';
 import {Navigator} from '../../../Navigator';
+import ws from '../../../ws';
 
 /**
  * sign in or sign up subpage
@@ -23,13 +24,19 @@ SecondStep = withForm(SecondStep, {
     id: uuid(),
     required: true,
     validator: isLogin,
-    warnMessage: 'Имя пользователя состоит из латинских букв и цифр, а также "_" и "." Длина логина не менее 6.',
+    update: (e,v) => {
+      return v.trim();
+    },
+    warnMessage: 'Имя пользователя состоит из латинских букв и цифр, а также "_" и "." Длина логина не менее 6 и не более 20',
   },
   password: {
     id: uuid(),
     required: true,
     validator: isPassword,
-    warnMessage: 'Пароль состоит из латинских букв и цифр, длина не менее 8. Должен содержать хотя бы 1 цифру и Заглавную букву.',
+    update: (e,v) => {
+      return v.trim();
+    },
+    warnMessage: 'Длина пароля от 8 до 30 символов. Состоит из цифр, латинских букв и симоволов "_", "."',
   },
 },
 {
@@ -45,6 +52,7 @@ SecondStep = withForm(SecondStep, {
             ...user,
             role: user.role.toUpperCase(),
           };
+          ws();
           Navigator.showPage('/index');
         } catch (e) {
           console.log(e);
@@ -68,6 +76,7 @@ SecondStep = withForm(SecondStep, {
                             ...user,
                             role: user.role.toUpperCase(),
                           };
+                          ws();
                           page.props.requestNext();
                         } catch (e) {
                           console.log(e);

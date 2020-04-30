@@ -29,6 +29,9 @@ SecondStep = withForm(SecondStep, {
   site: {
     id: uuid(),
     validator: validators.isUrl,
+    update: (e,v) => {
+      return v.trim();
+    },
     warnMessage: 'Укажите сайт компании или оставьте поле пустым',
   },
 },

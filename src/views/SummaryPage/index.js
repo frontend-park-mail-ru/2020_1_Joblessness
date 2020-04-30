@@ -6,7 +6,7 @@ import {request, requestManager, uuid} from '../../ulils';
 import {getUserId} from '../PersonPage/getUserId';
 import {Navigator} from '../../Navigator';
 import {isCreationPage} from './Education/routes';
-import {PERSON} from '../../CONSTANTS';
+import {ORGANIZATION, PERSON} from '../../CONSTANTS';
 
 
 class SummaryPage extends Page {
@@ -47,13 +47,14 @@ class SummaryPage extends Page {
 
     if (isCreationPage()) {
       if (currentSession.user.role === PERSON) {
-        if(this.props.getStore().user.id !== getUserId())
+        console.log(this.props.getStore().user)
+        if (currentSession.user.id !== this.props.getStore().user.id) {
           loadUser(this);
+        }
         initCreateEvent(this);
       } else {
         alert('Авторизируйтесь как соискатель');
         setTimeout(() => Navigator.showPage('/'), 100);
-
       }
     } else {
       if (currentSession.user.id === this.props.getStore().user.id) {
@@ -142,7 +143,7 @@ const initCreateEvent = (page) => {
               preview: [],
               raw: [],
             },
-          })
+          });
           Navigator.showPage(`/summaries/${res.id}`);
         }
       )
@@ -270,7 +271,7 @@ const loadSummary = (page) => {
       })
     })
     .catch(r => {
-      if(r.status === 404) {
+      if (r.status === 404) {
         Navigator.showPage('404');
       }
     })

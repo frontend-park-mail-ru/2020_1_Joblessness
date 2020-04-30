@@ -8,6 +8,7 @@ import {AddItem} from './AddItem';
 import {ModeManager} from './ModeManager';
 import {Item} from './Item';
 import {requestManager, uuid} from '../../../ulils';
+import {isYear} from '../../../ulils/validators';
 
 export const isCreationPage = () => /\/create/.test(location.pathname);
 
@@ -139,9 +140,9 @@ const initEvents = (page, fields) => {
   updateEvent(page, 'role', roleField,
       raiseWarn((s) => s.length <= 30, 'До 30 символов'), (s) => s.length <= 30);
   updateEvent(page, 'experienceFrom', experienceFromField,
-      raiseWarn((v) => Number(v) > 0, 'Положительное число'), (v) => Number(v) > 0);
+      raiseWarn(isYear, 'YYYY'), isYear);
   updateEvent(page, 'experienceTo', experienceToField,
-      raiseWarn((v) => Number(v) > 0, 'Положительное число'), (v) => Number(v) > 0);
+      raiseWarn(isYear, 'YYYY'), isYear);
   updateEvent(page, 'responsibilities', responsibilitiesField,
       raiseWarn((s) => /^[a-zA-Z0-9а-яА-ЯёЁ_, ]*$/.test(s), 'Ключевые слова через запятую'), (s) => /^[a-zA-Z0-9а-яА-ЯёЁ_, ]*$/.test(s));
 };

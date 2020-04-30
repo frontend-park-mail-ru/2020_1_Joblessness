@@ -210,7 +210,7 @@ class Bar extends Page {
 
     const {type, request, since, desc} = getSearchParameters();
 
-    console.log({type, request, since, desc});
+    // console.log({type, request, since, desc});
     if (!(type || request || since || desc)) {
       return;
     }

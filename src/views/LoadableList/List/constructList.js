@@ -33,8 +33,11 @@ const withItems = (Wrapee, props) => {
 
     componentWillMount() {
       super.componentWillMount();
+      console.log(this.#currentRoutes);
       if(this.#currentRoutes.length) {
         Navigator.removeRoutes(props.createFullRoute(props.listRoute(this.#currentRoutes)));
+        // for(let i = 0; i < this.#currentRoutes.length; i++)
+        //   delete this.#currentRoutes[i];
       }
     }
 
@@ -48,7 +51,7 @@ const withItems = (Wrapee, props) => {
           })
         );
       Navigator.addRoutes(props.createFullRoute(props.listRoute(newRoutes)));
-      this.currentRoutes = [...newRoutes];
+      this.#currentRoutes = [...newRoutes];
       Navigator.updateAllPages();
     }
   }
