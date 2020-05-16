@@ -13,7 +13,7 @@ Messenger = withLocalStore(Messenger, {
   updateMessenger: (page, oldS, newS) => {
     if(oldS.currentPage !== newS.currentPage &&
       newS.currentPage === 'messenger') {
-      page.props.random = uuid();
+      page.needUpdate()
     }
   }
 });

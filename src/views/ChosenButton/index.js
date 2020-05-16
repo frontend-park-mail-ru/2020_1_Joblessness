@@ -10,14 +10,18 @@ import {getUserId} from '../PersonPage/getUserId';
 const isOrgPage = () => /organizations/.test(window.location.pathname);
 const isUserPage = () => /users/.test(window.location.pathname);
 const getCurrentId = () => Number(window.location.pathname.replace(/\D/g, ''));
+
+
 class ChosenButton extends Page {
   #elemId;
   #prevElem;
-  #prevEvent
+  #prevEvent;
+
   constructor(props) {
     super(props);
     this.#elemId = uuid();
   }
+
   render() {
     return template({
       ...this.props,
@@ -36,64 +40,48 @@ class ChosenButton extends Page {
       currentSession.user.id === getCurrentId()) {
       const holder = document.querySelector(this.container);
       holder.style.display = 'none';
-    } else {
-      this.#prevElem = document.getElementById(this.#elemId);
-      this.#prevEvent = toggleEvent(this);
-      this.#prevElem?.addEventListener('click', this.#prevEvent);
-      return;
     }
   }
 
   componentWillMount() {
     super.componentWillMount();
-    if(isOrgPage()) {
-      requestManager
-        .tryCheckChosen(getOrgId())
-        .then(async (r) => {
-          const res = await r.json();
-          console.log(res, getOrgId());
-          if(res.like) {
-            this.#prevElem =
-              document
-                .getElementById(this.#elemId)
-                .classList
-                .remove('not-chosen')
-          }
-        })
-        .catch(() => {});
-    } else {
-      requestManager
-        .tryCheckChosen(getUserId())
-        .then(async (r) => {
-          const res = await r.json();
-          console.log(res, getUserId());
-          if(res.like) {
-            this.#prevElem =
-              document
-                .getElementById(this.#elemId)
-                .classList
-                .remove('not-chosen')
-          }
-        })
-        .catch(() => {});
-    }
+    const personId = isOrgPage() ? getOrgId() : isUserPage() ? getUserId() : null;
+    if (!personId || currentSession.user.role !== PERSON)
+      return;
+    requestManager
+      .tryCheckChosen(getOrgId())
+      .then(async (r) => {
+        const res = await r.json();
+        if (res.like) {
+          this.#prevElem =
+            document
+              .getElementById(this.#elemId)
+              .classList
+              .remove('not-chosen')
+        }
+      })
+      .catch(() => {
+      });
   }
 
   componentDidMount() {
     super.componentDidMount();
     if (this.#prevElem) {
-      this.#prevElem.removeEventListener('click', this.#prevEvent);
+      this.#prevElem.onclick = null //('click', this.#prevEvent);
     }
-    if (currentSession.user.role === UNAUTHORISED || (!isOrgPage() && !isUserPage()) || currentSession.user.id === getCurrentId()) {
+    if (currentSession.user.role === UNAUTHORISED ||
+      (!isOrgPage() && !isUserPage()) ||
+      currentSession.user.id === getCurrentId()) {
       const holder = document.querySelector(this.container);
       holder.style.display = 'none';
     } else {
       this.#prevElem = document.getElementById(this.#elemId);
       this.#prevEvent = toggleEvent(this);
-      this.#prevElem.addEventListener('click', this.#prevEvent);
-      return;
+      this.#prevElem.onclick = this.#prevEvent;// addEventListener('click', this.#prevEvent);
+
     }
   }
+
 }
 
 const toggleEvent = (page) => async (e) => {
@@ -102,9 +90,7 @@ const toggleEvent = (page) => async (e) => {
   if (likedId) {
     try {
       const res = await requestManager.trySetLike(likedId);
-      console.log(res);
     } catch (e) {
-      console.log(e);
     }
   }
   e.target.classList.toggle('not-chosen');

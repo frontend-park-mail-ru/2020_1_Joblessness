@@ -47,7 +47,6 @@ class SummaryPage extends Page {
 
     if (isCreationPage()) {
       if (currentSession.user.role === PERSON) {
-        console.log(this.props.getStore().user)
         if (currentSession.user.id !== this.props.getStore().user.id) {
           loadUser(this);
         }
@@ -87,8 +86,26 @@ const initCreateEvent = (page) => {
     .addEventListener('click', (e) => {
       const state = page.props.getStore();
 
-      if (!validateState(state)) {
-        alert('Не все поля верно заполнены');
+      let valid = true;
+      if (isNaN(state.mainInfo.preview.salaryFrom) || state.mainInfo.preview.salaryFrom === '') {
+        valid = false;
+        alert('Не верно указана минимальная заработная плата')
+      }
+      if (isNaN(state.mainInfo.preview.salaryTo) || state.mainInfo.preview.salaryTo === '') {
+        valid = false;
+        alert('Не верно указана максимальная заработная плата')
+      }
+      if (!state.mainInfo.preview.name.length > 25 || state.mainInfo.preview.name.length < 1) {
+        valid = false;
+        alert('Не верно указано название резюме');
+      }
+      const buttons = document.querySelectorAll('.edit-button');
+      if(buttons.length < 2) {
+        alert('Сохраните изменения перед созданием резюме');
+        valid = false;
+      }
+      // return true;
+      if (!valid || !validateState(state)) {
         return;
       }
       const body = {

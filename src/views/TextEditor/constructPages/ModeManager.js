@@ -16,18 +16,14 @@ const initApplyEvent = (props) => (page) => (e) => {
   if (props.onApply) {
     props.onApply(props, page).then(
         () => {
-          if(false) {//@TODO add logic
-            alert('Не все поля заполнены')
-          } else {
             page.props.requestNextNoUpdate(page, PREVIEW, SUBMIT);
             page.setMode(PREVIEW);
-          }
         },
     ).catch(
         () => {
-          alert('Неудалось обновить данные. Попробуйте еще раз.');
-          page.props.requestNextNoUpdate(page, PREVIEW);
-          page.setMode(PREVIEW);
+          // alert('Неудалось обновить данные. Попробуйте еще раз.');
+          // page.props.requestNextNoUpdate(page, PREVIEW);
+          // page.setMode(PREVIEW);
         },
     );
   } else {

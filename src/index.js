@@ -16,7 +16,6 @@ import METRICS_ROUTES from './views/Metrics'
 import './styles/index.sass'
 import './views/legacy-sum.sass'
 import ws from './ws'
-import {request} from './ulils';
 
 
 /**
@@ -79,8 +78,8 @@ const createApp = async () => {
   init();
   await loginOnReload();
   ws();
-  // currentSession.session = {id: 7, role : 'ORGANIZATION'};
-  // currentSession.session = {id: 2, role: 'PERSON'};
+  // currentSession.session = {id: 22, role : 'ORGANIZATION'};
+  currentSession.session = {id: 2, role: 'PERSON'};
   new App();
 };
 

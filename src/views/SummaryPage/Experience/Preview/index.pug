@@ -6,15 +6,14 @@ mixin company-name(companyName)
         h2 #{companyName}
 
 mixin company-role(companyRole)
-    div.company-role
-        h2 #{companyRole}
+    div.company-role #{companyRole}
 
 mixin company-experience(from, to)
     div.company-experience
-        h2 с&nbsp
-            b #{from}
-            | &nbspпо&nbsp
-            b #{to || 'нынешнее время'}
+        |с&nbsp
+        b #{from}
+        | &nbspпо&nbsp
+        b #{to || 'нынешнее время'}
 
 mixin responsibilities(resps)
     div.responsibilities
@@ -22,23 +21,11 @@ mixin responsibilities(resps)
         each r in respList
             p #{r}
 mixin form(sum)
-    +company-name(sum.companyName)
-    +company-role(sum.role)
-    +company-experience(sum.experienceFrom, sum.experienceTo)
-    +responsibilities(sum.responsibilities)
-    //+field-holder.company-name
-    //    +string-field(readonly=attributes.readonly value=sum.companyName)
-    //        div.field-line
-    //+field-holder.company-role
-    //    +string-field(readonly=attributes.readonly value=sum.role)
-    //        //div.field-line
-    //+field-holder.company-experience
-    //    +field-name("C " +sum.experienceFrom + " по " + sum.experienceTo)
-    //        //div.field-line
-    //+field-holder.company-role
-    //    +field-name("Обязанности")
-    //    +string-field(readonly=attributes.readonly value=sum.responsibilities)
-    //        div.field-line
+    div.experience
+        +company-name(sum.companyName)
+        +company-role(sum.role)
+        +company-experience(sum.experienceFrom, sum.experienceTo)
+        +responsibilities(sum.responsibilities)
 
 section.preview-mode
     each prev in locals.info

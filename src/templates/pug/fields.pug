@@ -1,6 +1,7 @@
 mixin string-field
     div.string-field
         input.string-field--input(
+            size=attributes.size
             id=attributes.id
             readonly!=attributes.readonly
             type=attributes.type || "text"

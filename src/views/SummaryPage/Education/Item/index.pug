@@ -2,21 +2,22 @@ include ../../../../templates/pug/forms
 include ../../../../templates/pug/fields
 
 mixin form(sum)
-    +field-holder.company-name
-        +field-name("Учебное заведение")
-        +string-field(readonly=attributes.readonly id=sum.institution)
+    +field-holder.company-name.flex-col
+        //+field-name("Учебное заведение")
+        +string-field(readonly=attributes.readonly id=sum.institution placeholder="Учебное заведение")
             div.field-line
-    +field-holder.company-role
-        +field-name("Специальность")
-        +string-field(readonly=attributes.readonly id=sum.speciality)
+    +field-holder.company-name.sub.flex-col
+        //+field-name("Специальность")
+        +string-field(readonly=attributes.readonly id=sum.speciality placeholder="Специальность")
             div.field-line
-    +field-holder.company-role
-        +field-name("Год окончания")
-        +string-field(readonly=attributes.readonly id=sum.graduated)
-            div.field-line
-    +field-holder.company-role
-        +field-name("Тип")
-        +string-field(readonly=attributes.readonly id=sum.type)
-            div.field-line
+    div.connected
+        +field-holder.company-role
+            +field-name("Год окончания")
+            +string-field(readonly=attributes.readonly id=sum.graduated size="4")
+                div.field-line
+        +field-holder.company-role
+            +field-name("Тип")
+            +string-field(readonly=attributes.readonly id=sum.type)
+                div.field-line
 
 +form(locals.fields)

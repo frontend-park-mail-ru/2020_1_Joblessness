@@ -1,7 +1,0 @@
-include ../../../../templates/pug/link
-if locals.items && locals.items.length
-    each sum in locals.items
-        +link(href='/summaries/'+ sum.id id=sum.innerId).black-link
-else
-    h1.empty-message Пусто =с
-div(hidden=true)#summaries_load_manager

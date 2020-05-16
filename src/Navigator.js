@@ -298,7 +298,6 @@ class Navigator {
   addRoutes(routes) {
     const r = this.parseObjectRoute(routes);
     this._addRoutes(this.#routes, r);
-    console.log(this.#routes[6].childRoutes[4].childRoutes)
   }
 
   /**

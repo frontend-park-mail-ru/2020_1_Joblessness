@@ -1,5 +1,7 @@
-if locals.summaries && locals.summaries.length
-    each sum in locals.summaries
-        div(id=sum.innerId).page-section.width80.mrg20
+include ../../../../templates/pug/link
+if locals.items && locals.items.length
+    each sum in locals.items
+        +link(href='/summaries/'+ sum.id id=sum.innerId).black-link
 else
     h1.empty-message Пусто =с
+div(hidden=true)#summaries_load_manager

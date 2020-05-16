@@ -1,0 +1,110 @@
+@import "../../CONSTANTS"
+.education
+  display: flex
+  margin-left: 76px
+  flex-direction: column
+  padding-bottom: 20px
+  .row
+    display: flex
+    flex-direction: row
+    *:not(:first-child)
+      margin-left: 7px
+  .type
+    color: $GRAY
+  .graduated
+    &::first-letter
+      text-transform: uppercase
+  .speciality
+    font-size: 1.25em
+    &::first-letter
+      text-transform: uppercase
+  .institution
+    font-size: 1.5em
+    &::first-letter
+      text-transform: uppercase
+  .connected
+    display: flex
+    flex-direction: column
+
+.paragraph-holder.ed.placing
+  transition: .3s
+  .paragraph-holder--text
+    transition: .3s
+    .string-field--input
+      transition: .3s
+    .field-line
+      transition: .3s
+    .company-role
+      h2
+        transition: .3s
+
+.paragraph-holder.ed.placing-start-state
+  padding-bottom: 20px
+  .paragraph-holder--text
+    padding-bottom: 0
+    margin: 0
+    border-radius: 0
+    box-shadow: none
+    .string-field--input
+      text-indent: 0
+      transition: 0s
+      height: auto
+      margin: 0
+      padding: 0
+    .field-line
+      flex: 0
+      transition: 0s
+    .company-name.sub
+      .string-field--input
+        font-size: 1.25em
+    .company-name
+      .string-field--input
+        font-size: 1.5em
+    .company-role
+      .string-field--input
+        font-size: 1em
+      h2
+        transition: 0s
+        font-size: 0
+  .connected
+    display: flex
+    *:last-child
+      text-indent: 7px
+  .pad20
+    padding: 0 !important
+
+.paragraph-holder.ed.removing
+  padding-bottom: 20px
+  .paragraph-holder--text
+    padding-bottom: 0
+    transition: .3s
+    margin: 0
+    border-radius: 0
+    box-shadow: none
+    .string-field--input
+      text-indent: 0
+      transition: .3s
+      height: auto
+      margin: 0
+      padding: 0
+    .field-line
+      flex: 0
+      transition: .3s
+    .company-name.sub
+      .string-field--input
+        font-size: 1.25em
+    .company-name
+      .string-field--input
+        font-size: 1.5em
+    .company-role
+      .string-field--input
+        font-size: 1em
+      h2
+        transition: .3s
+        font-size: 0
+  .connected
+    display: flex
+    *:last-child
+      text-indent: 7px
+  .pad20
+    padding: 0 !important

@@ -82,25 +82,28 @@ const Routes = createEditor({
       page.props.fields = fields;
     },
     set: (page, props) => {
-      console.log(page);
-      console.log(page.props.fields);
       initValues(page, page.props.fields);
       initEvents(page, page.props.fields);
     },
   },
+  ON_ITEM_LIMIT : () => {
+    alert('Можно указать не более 5 образований')
+  },
   onApply: (props, page) => new Promise((resolve, reject) => {
+    const edu = page.props.getStore().education.raw;
+    for( let e of edu) {
+      const {graduated, institution, speciality, type} = e.correct;
+      const isCorrect =  graduated && institution && speciality && type
+      if(!isCorrect) {
+        alert('Не все поля в образовании заполнены верно');
+        if(!graduated) alert('Проверьте поле "Год окончания"');
+        if(!institution) alert('Проверьте поле "Учебное заведение"');
+        if(!speciality) alert('Проверьте поле "Специальность"');
+        if(!type) alert('Проверьте поле "Тип"');
+        reject();
+      }
+    }
     resolve();
-    // if (!isCreationPage()) {
-    //   const experience = page.props.getStore().experience;
-    //   experience.preview = experience.raw;
-    //   requestManager.tryChangeVacancy({
-    //     experience: JSON.stringify(experience)
-    //   }, getVacId())
-    //     .then(resolve)
-    //     .catch(reject)
-    // } else {
-    //   resolve()
-    // }
   }),
 });
 
@@ -111,7 +114,6 @@ const initValues = (page, fields) => {
   const graduatedField = document.querySelector(`#${fields.graduated}`);
   const typeField = document.querySelector(`#${fields.type}`);
 
-  // console.log(page.props.item, page.props, page.props.getStore().experience.raw);
   const {institution, speciality, graduated, type} =
     page.props.getStore().education.raw.find((i) => i.id === page.props.info.id);
   //
@@ -134,9 +136,9 @@ const initEvents = (page, fields) => {
   updateEvent(page, 'speciality', specialityField,
       raiseWarn((s) => s.length <= 30, 'До 30 символов'), (s) => s.length <= 30);
   updateEvent(page, 'graduated', graduatedField,
-      raiseWarn(validators.isYear, 'Год YYYY'), validators.isYear);
+      raiseWarn(n => 1900 <= parseInt(n) && parseInt(n) <= new Date().getFullYear() + 10, 'Год YYYY'), n => 1900 <= parseInt(n) && parseInt(n) <= new Date().getFullYear() + 10);
   updateEvent(page, 'type', typeField,
-      raiseWarn((s) => s.length <= 10, 'До 10 символов'), (s) => s.length <= 10);
+      raiseWarn((s) => s.length <= 30, 'До 30 символов'), (s) => s.length <= 10);
 };
 
 const raiseWarn = (validator, msg) => (v, el) => {
@@ -171,7 +173,6 @@ const updateEvent = (page, fieldName, el, convert = (v) => v, validate = (v) => 
           },
         }),
     );
-    console.log(page.props.getStore());
   };
   el.addEventListener('input', event);
 };

@@ -3,8 +3,14 @@ include ./auth-input
 
 
 div.signup-holder--header
-    h1 Создайте учетную запись или войдите в существующую, чтобы легко управлять вашими резюме и откликами работодателей
+    div.hello-img
+    h1
+        b Создайте&nbsp
+        |учетную запись или
+        b &nbspвойдите&nbsp
+        |в существующую, чтобы легко управлять вашими резюме и откликами работодателей
 +input-field-auth(placeholder="Имя пользователя" autofocus=true id=locals.inputFields.login.id pattern="[1-9]{1,10}")
 +input-field-auth(placeholder="Пароль" type="password" id=locals.inputFields.password.id)
 div.next-button(id=locals.inputFields.submitField.id)
     h1 Далее
++link.pad20(href="/organizations/signup").black-link.underline Представитель компании?

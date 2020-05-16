@@ -17,7 +17,7 @@ class Alert extends Page {
       this.getContainer().classList.add('mounting');
       this.#timerId = setTimeout(() => {
         this.props.hide();
-      },  1000)
+      },  4000)
     }
   }
 }

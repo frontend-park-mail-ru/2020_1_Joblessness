@@ -26,9 +26,11 @@ const withAdd = (Wrapee, props) => {
         addButton.addEventListener('click', () => {
           if (props.CUSTOM_LISTENERS) {
             const newItem = props.CUSTOM_LISTENERS.initItem(this, props);
-            if(props.EXTRACT_REDUCER(this.props.getStore()).raw.length < 5) {
+            if(!props.MAX_SIZE || props.EXTRACT_REDUCER(this.props.getStore()).raw.length < props.MAX_SIZE) {
               this.props.setStore(props.INSERT_REDUCER(newItem));
               this.props.requestNextNoUpdate(newItem);
+            } else {
+              props.ON_ITEM_LIMIT?.()
             }
           } else {
             const newItem = {

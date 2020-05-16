@@ -50,6 +50,7 @@ const Routes = createEditor({
       raw: [...s.experience.raw, item],
     },
   }),
+  MAX_SIZE: 5,
   ROOT: 'experience/',
   EDITOR_HOLDER_SELECTOR: '#summary_experience',
   ROOT_TEMPLATE: (childRoutes = []) => [
@@ -85,25 +86,29 @@ const Routes = createEditor({
       page.props.fields = fields;
     },
     set: (page, props) => {
-      console.log(page);
-      console.log(page.props.fields);
       initValues(page, page.props.fields);
       initEvents(page, page.props.fields);
     },
   },
+  ON_ITEM_LIMIT : () => {
+    alert('Можно указать не более 5 мест работы')
+  },
   onApply: (props, page) => new Promise((resolve, reject) => {
+    const exp = page.props.getStore().experience.raw;
+    for( let e of exp) {
+      const {companyName, role, experienceFrom, experienceTo, responsibilities} = e.correct;
+      const isCorrect =  companyName && role && experienceFrom && experienceTo && responsibilities
+      if(!isCorrect) {
+        alert('Не все поля в опыте работы заполнены верно');
+        if(!companyName) alert('Проверьте поле "Название компании"');
+        if(!role) alert('Проверьте поле "Должность"');
+        if(!experienceFrom) alert('Проверьте поле "работали с"');
+        if(!experienceTo) alert('Проверьте поле "работали по"');
+        if(!responsibilities) alert('Проверьте поле "Обязанности"');
+        reject();
+      }
+    }
     resolve();
-    // if (!isCreationPage()) {
-    //   const experience = page.props.getStore().experience;
-    //   experience.preview = experience.raw;
-    //   requestManager.tryChangeVacancy({
-    //     experience: JSON.stringify(experience)
-    //   }, getVacId())
-    //     .then(resolve)
-    //     .catch(reject)
-    // } else {
-    //   resolve()
-    // }
   }),
 });
 
@@ -167,7 +172,6 @@ const updateEvent = (page, fieldName, el, convert = (v) => v, validate = (v) => 
               if ( i.id !== page.props.info.id) {
                 return i;
               }
-              console.log();
               return {
                 ...i,
                 [fieldName]: convert(val, el),

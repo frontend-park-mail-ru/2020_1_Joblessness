@@ -2,11 +2,11 @@ include ../../../../templates/pug/link
 section.edit-mode
     if locals.info
         each item in locals.info
-            div.paragraph-holder
+            div.paragraph-holder.ed
                 div.options-holder
                     div.options
                         div.remove-button &#xd7
                         div.move-up &#9650
                         div.move-down &#9660
-                div.paragraph-holder--text(id=item.id)
+                div.paragraph-holder--text.section.section--body.pad20(id=item.id)
     div.edit-mode--add.edit-mode-vac--add(id=locals.editorProps.ADD_PARAGRAPH_ID)

@@ -54,7 +54,7 @@ Dialogs = withLocalStore(Dialogs, {
   updateDialogs: (page, oldS, newS) => {
     if(oldS.messenger.currentPage !== newS.messenger.currentPage &&
       newS.messenger.currentPage === 'dialogs') {
-      page.props.random = uuid();
+      page.props.needUpdate()
     }
   }
 });

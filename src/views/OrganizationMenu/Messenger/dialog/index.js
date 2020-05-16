@@ -36,14 +36,22 @@ class Dialog extends Page {
         }
       }
     )
+    document.querySelector(`#dialog_send`).addEventListener('click', () => sendMessage(this))
+    document.querySelector('#dialog_input').addEventListener('keydown',
+      (e) => {
+      if(e.key === 'Enter' && e.metaKey)
+        sendMessage(this)
+      })
   }
 }
-
+const sendMessage = (m) => {
+  console.log(m.props.getStore())
+}
 Dialog = withLocalStore(Dialog, {
   updateDialog: (page, oldS, newS) => {
     if (oldS.messenger.currentPage !== newS.messenger.currentPage &&
       newS.messenger.currentPage === 'dialog') {
-      page.props.random = uuid();
+      page.props.needUpdate()
     }
   }
 });

@@ -1,20 +1,13 @@
 import {Page} from '../../../../Page';
 import template from './index.pug';
-import withLocalStore from '../../localStore';
 
-/**
- */
-class SummariesListPage extends Page {
-  /**
-   * @return{string}
-   */
+
+class Summaries extends Page {
   render() {
-    return template(this.props);
+    return template(this.props)
   }
 }
 
-SummariesListPage = withLocalStore(SummariesListPage);
-
 export {
-  SummariesListPage,
-};
+  Summaries
+}

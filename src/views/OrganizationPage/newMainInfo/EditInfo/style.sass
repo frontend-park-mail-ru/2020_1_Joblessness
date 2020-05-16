@@ -1,22 +1,25 @@
 @import "../../../../CONSTANTS"
 .edit-mode
   &--add
+    cursor: pointer
     max-height: 100px
     transition: .5s
+    margin-left: 76px
+    margin-top: 20px
     &.placing-start
       transition: 0s
-      margin: 0 0 0 10vw
+      margin: 0
       opacity: 0
       max-height: 0
     &.placing-o
-      margin: 15px 0 15px 10vw
+      //margin: 15px 0 15px 10vw
       opacity: 1
       max-height: 100px
     &.removing-o
       margin: 0 0 0 10vw
       opacity: 0
       max-height: 0
-    margin: 15px 0 15px 10vw
+    //margin: 15px 0 15px 10vw
     width: auto
     background: white
     overflow: hidden

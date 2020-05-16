@@ -62,6 +62,7 @@ const addRemoveEvent = (page, elem, id, elemToRemove, props) => {
   const removeEvent = () => {
     elem?.removeEventListener('click', removeEvent);
     elemToRemove.classList.add('removing');
+    elemToRemove.classList.add('removing-totally');
     if (!elemToRemove?.lastElementChild?.firstChild?.innerHTML) {
       elemToRemove.classList.add('removing-empty');
     }
