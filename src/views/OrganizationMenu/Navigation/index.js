@@ -16,7 +16,7 @@ class Navigation extends Page {
   componentDidMount() {
     super.componentDidMount();
     const currentPage = this.props.getStore().currentPage;
-    Navigator.addRoutes(getCurrentRoutes('messenger'));
+    Navigator.addRoutes(getCurrentRoutes('responses'));
     const parent = document.querySelector(this.container);
 
     const settings = parent.querySelector('.settings');
@@ -54,7 +54,7 @@ const getCurrentRoutes = (currentPage) => {
 };
 
 const openPage = (page, el,  elems, routesToAdd, routeName) => {
-  const event = () => {
+  const event = (e) => {
     Navigator.removeRoutes(constructRoute(RESPONSES_ROUTES));
     Navigator.removeRoutes(constructRoute(MESSENGER_ROUTES));
     Navigator.removeRoutes(constructRoute(SETTINGS_ROUTES));

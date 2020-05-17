@@ -20,3 +20,7 @@ Messenger = withLocalStore(Messenger, {
 export {
   Messenger
 }
+
+export const openDialog = (id) => {
+  console.log(id)
+}

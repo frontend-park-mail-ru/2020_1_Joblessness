@@ -58,8 +58,12 @@
   background-image: linear-gradient(to right, #0acffe 0%, #495aff 100%) !important;
 }
 .responses-item--body .menu .message {
+  justify-self: flex-start;
+  display: flex;
+  flex: 1;
+}
+.responses-item--body .menu .message .msg {
   cursor: pointer;
-  align-self: flex-start;
 }
 
 /*# sourceMappingURL=style.css.map */

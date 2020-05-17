@@ -717,6 +717,19 @@ class RequestManager {
         }).catch(reject);
     });
   }
+  tryGetDialogs() {
+    return new Promise((resolve, reject) => {
+      request
+        .get(`/api/chat/conversation`, {})
+        .then((r) => {
+          if (r.status === 200) {
+            resolve(r);
+          } else {
+            reject(r);
+          }
+        }).catch(reject);
+    });
+  }
 }
 
 const requestManager = new RequestManager();

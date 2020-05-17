@@ -1,2 +1,5 @@
-each d in locals.dialogs
-    div.dialog--item(id=d.elemId) #{d.user}
+if locals.dialogs && locals.dialogs.length
+    each d in locals.dialogs
+        div.dialog--item(id=d.elemId) #{d.user}
+else
+    div Здесь будут отображаться Ваши диалоги

@@ -5,6 +5,7 @@ import {requestManager, uuid} from '../../../../ulils';
 import {Navigator} from '../../../../Navigator';
 import {constructRoute} from '../../routes';
 import {AddItemRoutes} from '../../Container/routes';
+import {openDialog} from '../../Messenger';
 
 class Item extends Page {
   #accept;
@@ -36,7 +37,7 @@ class Item extends Page {
 const sendMessageEvent = (page, id) => {
   document.querySelector(`#${id}`).addEventListener('click',
     () => {
-      console.log(1)
+    openDialog(page.props.item['user_id'])
     }
   )
 };
