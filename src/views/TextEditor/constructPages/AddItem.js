@@ -38,9 +38,11 @@ const withAdd = (Wrapee, props) => {
               classList: ['paragraph'],
               text: '',
             };
-            if(props.EXTRACT_REDUCER(this.props.getStore()).raw.length < 5) {
+            if(!props.MAX_SIZE || props.EXTRACT_REDUCER(this.props.getStore()).raw.length < props.MAX_SIZE) {
               this.props.setStore(props.INSERT_REDUCER(newItem));
               this.props.requestNextNoUpdate(newItem);
+            } else {
+              props.ON_ITEM_LIMIT?.()
             }
           }
         });

@@ -3,10 +3,6 @@ import constructRoutes from './constructRoutes';
 import {createEditorProps} from './EDITOR_PROPS';
 import createWithLocalStoreDefault from './localStore';
 
-// @TODO сделать работу со store более гибкой
-
-// @TODO create default store
-
 const createEditor = ({Parent, Preview, Edit,
   AddItem, Item, ModeManager,
   withLocalStore = createWithLocalStoreDefault()},

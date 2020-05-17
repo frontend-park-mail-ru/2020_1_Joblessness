@@ -159,15 +159,44 @@ const initCreateEvent = page => {
       'click',
       e => {
         const state = page.props.getStore();
+        const raw = state.mainInfo.preview;
         const body = {
           name: state.mainInfo.preview.name,
-          description: state.mainInfo.description,
+          description: state.mainInfo.preview.description || '',
           salaryFrom: Number(state.mainInfo.preview.salaryFrom),
           salaryTo: Number(state.mainInfo.preview.salaryTo),
           responsibilities: JSON.stringify(state.responsibilities.preview),
           conditions: JSON.stringify(state.conditions.preview),
         };
-
+        let valid = true;
+        if(!body.name || body.name.length > 30) {
+          valid = false;
+          alert('Поле "Название" вакансии заполнено неверно')
+        }
+        if(body.description.length > 50) {
+          valid = false;
+          alert('Поле "Описание" вакансии заполнено неверно')
+        }
+        if(isNaN(body.salaryFrom) || !body.salaryFrom || body.salaryFrom > Number.MAX_SAFE_INTEGER) {
+          valid = false;
+          alert('Поле "Минимальная зарплата" заполнено неверно')
+        }
+        if(isNaN(body.salaryTo) || !body.salaryTo || body.salaryTo > Number.MAX_SAFE_INTEGER) {
+          valid = false;
+          alert('Поле "Максимальная зарплата" заполнено неверно')
+        }
+        if(body.salaryTo < body.salaryFrom) {
+          valid = false;
+          alert('Минимальная зарплата не может быть больше максимальной')
+        }
+        const buttons = document.querySelectorAll('.edit-button')
+        if(buttons.length < 2) {
+          valid = false;
+          alert('Сохраните изменения перед созданием вакансии')
+        }
+        if(!valid) {
+          return;
+        }
         requestManager
           .tryCreateVacancy(body)
           .then(async(r) => {
@@ -200,7 +229,7 @@ const initCreateEvent = page => {
             Navigator.showPage(`/vacancies/${res.id}`);
           })
           .catch(() => {
-            alert('Невозможно создать резюме. Повторите позднее')
+            alert('Невозможно создать вакансию. Повторите позднее')
           })
       }
     )

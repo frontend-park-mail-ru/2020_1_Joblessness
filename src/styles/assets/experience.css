@@ -1,0 +1,9 @@
+@import url("https://fonts.googleapis.com/css?family=Istok+Web&display=swap");
+.experience {
+  display: flex;
+  margin-left: 76px;
+  flex-direction: column;
+  padding-bottom: 20px;
+}
+
+/*# sourceMappingURL=experience.css.map */

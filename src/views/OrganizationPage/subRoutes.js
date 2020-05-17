@@ -52,6 +52,10 @@ const mainInfoRoutes = createEditor({
       raw: [...s.mainInfo.raw, item],
     },
   }),
+  MAX_SIZE: 5,
+  ON_ITEM_LIMIT : () => {
+    alert('Не более 5 параграфов')
+  },
   ROOT: 'orgMainInfo/',
   EDITOR_HOLDER_SELECTOR: '#organization_org_main_info',
   ROOT_TEMPLATE: (childRoutes = []) => [
@@ -69,6 +73,7 @@ const mainInfoRoutes = createEditor({
       console.log(r); resolve(r);
     })
         .catch((r) => {
+          alert('Не возможно сохранить изменения. Попробуйте позднее')
           console.log(r);
           reject(r);
         });

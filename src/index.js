@@ -78,8 +78,8 @@ const createApp = async () => {
   init();
   await loginOnReload();
   ws();
-  // currentSession.session = {id: 22, role : 'ORGANIZATION'};
-  currentSession.session = {id: 2, role: 'PERSON'};
+  currentSession.session = {id: 12, role : 'ORGANIZATION'};
+  // currentSession.session = {id: 2, role: 'PERSON'};
   new App();
 };
 

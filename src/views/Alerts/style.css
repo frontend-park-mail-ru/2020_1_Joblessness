@@ -44,5 +44,8 @@
     height: 30px;
   }
 }
+.hidden.alerts--item {
+  display: none;
+}
 
 /*# sourceMappingURL=style.css.map */

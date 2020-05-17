@@ -18,6 +18,7 @@ class LoadManager extends Page {
     requestManager
         .tryGetOrgResponses(currentSession.user.id)
         .then(async (r) => {
+          console.log(r)
           const list = await r.json();
           list.forEach((i) => i.innerId = uuid());
           this.props.setStore((s) =>({

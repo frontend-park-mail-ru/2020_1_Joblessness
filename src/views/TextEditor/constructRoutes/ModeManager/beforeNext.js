@@ -27,7 +27,6 @@ export const createBeforeNext = (props) => (rootPage, page, mode, status) => {
     Navigator.removeRoutes(props.EDIT_MODE_ROOT);
     setTimeout(() => {
       if (status === SUBMIT) {
-        // @TODO send request
         rootPage.props.setStore(props.SUBMIT_REDUCER);
       }
 

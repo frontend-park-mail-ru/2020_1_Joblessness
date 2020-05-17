@@ -57,5 +57,9 @@
   border-radius: 5px;
   background-image: linear-gradient(to right, #0acffe 0%, #495aff 100%) !important;
 }
+.responses-item--body .menu .message {
+  cursor: pointer;
+  align-self: flex-start;
+}
 
 /*# sourceMappingURL=style.css.map */

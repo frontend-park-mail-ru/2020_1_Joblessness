@@ -9,11 +9,12 @@ import {AddItemRoutes} from '../../Container/routes';
 class Item extends Page {
   #accept;
   #decline;
-
+  #sendMessage;
   constructor(props) {
     super(props);
     this.#accept = uuid();
     this.#decline = uuid();
+    this.#sendMessage = uuid();
   }
 
   render() {
@@ -21,6 +22,7 @@ class Item extends Page {
       ...this.props,
       acceptId: this.#accept,
       declineId: this.#decline,
+      sendMessageId: this.#sendMessage
     });
   }
 
@@ -28,9 +30,16 @@ class Item extends Page {
     super.componentDidMount();
     acceptEvent(this, this.#accept);
     declineEvent(this, this.#decline);
+    sendMessageEvent(this, this.#sendMessage)
   }
 }
-
+const sendMessageEvent = (page, id) => {
+  document.querySelector(`#${id}`).addEventListener('click',
+    () => {
+      console.log(1)
+    }
+  )
+};
 const acceptEvent = (page, id) => {
   document.querySelector(`#${id}`).addEventListener('click',
     () => {

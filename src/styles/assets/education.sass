@@ -4,6 +4,10 @@
   margin-left: 76px
   flex-direction: column
   padding-bottom: 20px
+  @media (max-width: 800px)
+    margin-left: 0
+    .options-holder
+      display: none
   .row
     display: flex
     flex-direction: row
@@ -25,7 +29,6 @@
   .connected
     display: flex
     flex-direction: column
-
 .paragraph-holder.ed.placing
   transition: .3s
   .paragraph-holder--text
