@@ -10,12 +10,12 @@ import {openDialog} from '../../Messenger';
 class Item extends Page {
   #accept;
   #decline;
-  #sendMessage;
+  #selectDate;
   constructor(props) {
     super(props);
     this.#accept = uuid();
     this.#decline = uuid();
-    this.#sendMessage = uuid();
+    this.#selectDate = uuid();
   }
 
   render() {
@@ -23,7 +23,7 @@ class Item extends Page {
       ...this.props,
       acceptId: this.#accept,
       declineId: this.#decline,
-      sendMessageId: this.#sendMessage
+      selectDateId: this.#selectDate
     });
   }
 
@@ -31,13 +31,23 @@ class Item extends Page {
     super.componentDidMount();
     acceptEvent(this, this.#accept);
     declineEvent(this, this.#decline);
-    sendMessageEvent(this, this.#sendMessage)
+    selectDateEvent(this, this.#selectDate);
   }
 }
-const sendMessageEvent = (page, id) => {
+
+export {
+  Item,
+};
+
+const selectDateEvent = (page, id) => {
   document.querySelector(`#${id}`).addEventListener('click',
     () => {
-    openDialog(page.props.item['user_id'])
+    const el = document.querySelector('#select_date');
+      el?.classList.remove('hidden');
+      el?.classList.remove('removing');
+      el?.classList.add('placing');
+      el?.setAttribute('summary', page.props.item.summaryId);
+      el?.setAttribute('vacancy', page.props.item.vacancyId);
     }
   )
 };
@@ -87,7 +97,4 @@ const declineEvent = (page, id) => {
         alert('Ошибка при отклонении. Повторите позднее.')
       });
     });
-};
-export {
-  Item,
 };

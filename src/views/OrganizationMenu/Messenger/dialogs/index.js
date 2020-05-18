@@ -1,6 +1,6 @@
 import {Page} from '../../../../Page';
 import withLocalStore from '../../localStore';
-import {requestManager, uuid} from '../../../../ulils';
+import {equals, requestManager, uuid} from '../../../../ulils';
 import template from './index.pug'
 import {Navigator} from '../../../../Navigator';
 import {constructRoute} from '../routes';
@@ -21,7 +21,7 @@ class Dialogs extends Page {
     }
     for(let d of this.props.dialogs) {
       const el = document.querySelector(`#${d.elemId}`);
-      el.addEventListener('click', () => {
+      el?.addEventListener('click', () => {
         Navigator.removeRoutes(constructRoute(DIALOGS_ROUTES));
         this.props.setStore(s => ({
           messenger: {
@@ -38,7 +38,10 @@ class Dialogs extends Page {
 
 Dialogs = withLocalStore(Dialogs, {
   updateDialogs: (page, oldS, newS) => {
-    if((oldS.messenger.currentPage !== newS.messenger.currentPage || oldS.messenger.dialogs !== newS.messenger.dialogs)&&
+    if(!equals(oldS.messenger.dialogs,newS.messenger.dialogs)) {
+      page.props.dialogs = newS.messenger.dialogs;
+    }
+    if(oldS.messenger.currentPage !== newS.messenger.currentPage&&
       newS.messenger.currentPage === 'dialogs') {
       page.props.needUpdate()
     }

@@ -7,7 +7,7 @@ import {constructRoute} from '../routes';
 import DIALOGS_ROUTES from '../dialogs/routes';
 import DIALOG_ROUTES from './routes';
 import './style.sass';
-
+import ws from '../../../../ws';
 class Dialog extends Page {
   render() {
     return template(this.props.getStore().messenger)
@@ -36,16 +36,27 @@ class Dialog extends Page {
         }
       }
     )
-    document.querySelector(`#dialog_send`).addEventListener('click', () => sendMessage(this))
+    document.querySelector(`#dialog_send`).addEventListener('click', () => {
+      const text = document.querySelector('#dialog_input').innerText;
+      sendMessage(this, text)
+    })
     document.querySelector('#dialog_input').addEventListener('keydown',
       (e) => {
+      const text = document.querySelector('#dialog_input').innerText;
       if(e.key === 'Enter' && e.metaKey)
-        sendMessage(this)
+        sendMessage(this, text)
       })
   }
 }
-const sendMessage = (m) => {
-  console.log(m.props.getStore())
+const sendMessage = (page, m) => {
+  console.log(page.props.getStore(), m)
+  ws.sendMessage({
+    message: m,
+    userOneId: currentSession.user.id,
+    userOne: 'name1',
+    userTwo: 'name2',
+    userTwoId: page.props.getStore().messenger.currentPerson.id
+  })
 }
 Dialog = withLocalStore(Dialog, {
   updateDialog: (page, oldS, newS) => {

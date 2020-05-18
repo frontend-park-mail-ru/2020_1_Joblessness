@@ -16,7 +16,7 @@ class Navigation extends Page {
   componentDidMount() {
     super.componentDidMount();
     const currentPage = this.props.getStore().currentPage;
-    Navigator.addRoutes(getCurrentRoutes('responses'));
+    Navigator.addRoutes(getCurrentRoutes(currentPage));
     const parent = document.querySelector(this.container);
 
     const settings = parent.querySelector('.settings');

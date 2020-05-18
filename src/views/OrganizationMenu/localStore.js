@@ -4,8 +4,8 @@ const withLocalStore = createLocalStore({
   responses: [],
   currentPage: 'responses',
   messenger: {
-    messages: [
-    ]
+    dialogs: [],
+    messages: []
   }
 }, true, () => `responses/${currentSession.user.id}`, true);
 export default withLocalStore;

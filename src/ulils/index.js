@@ -10,9 +10,11 @@ import {withChainedPages} from './withChainedPages';
 import {createLocalStore} from './createLocalStore';
 import {currentSession} from './currentSession';
 import {withModes} from './withModes';
+import equals from './equals';
 import request from './request';
 export {
   currentSession,
+  equals,
   createLocalStore,
   validators,
   request,
@@ -28,6 +30,7 @@ export {
 };
 export default {
   validators,
+  equals,
   wrappers: {
     withNetwork,
     withEvents,

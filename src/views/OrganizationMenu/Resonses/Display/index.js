@@ -7,7 +7,7 @@ import {uuid} from '../../../../ulils';
 class Display extends Page {
   componentWillUpdate() {
     super.componentWillUpdate();
-    this.props.needUpdate = true;
+    // this.props.needUpdate()
   }
 
   render() {

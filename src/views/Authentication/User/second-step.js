@@ -5,7 +5,7 @@ import template from './pug/index2.pug';
 import {uuid, currentSession, withForm, request} from '../../../ulils';
 import {isLogin, isPassword} from '../../../ulils/validators';
 import {Navigator} from '../../../Navigator';
-import ws from '../../../ws';
+// import ws from '../../../ws';
 
 /**
  * sign in or sign up subpage
@@ -52,10 +52,10 @@ SecondStep = withForm(SecondStep, {
             ...user,
             role: user.role.toUpperCase(),
           };
-          ws();
+          // ws();
           Navigator.showPage('/index');
         } catch (e) {
-          console.log(e);
+          console.log(e, 1);
           alert('Внутренняя ошибка. Повторите попытку позднее');
         }
       })
@@ -76,21 +76,24 @@ SecondStep = withForm(SecondStep, {
                             ...user,
                             role: user.role.toUpperCase(),
                           };
-                          ws();
+                          // ws();
                           page.props.requestNext();
                         } catch (e) {
-                          console.log(e);
+                          console.log(e, 2);
                           alert('Внутренняя ошибка. ' +
                             'Повторите попытку позднее');
                         }
                       })
                       .catch(
-                          (r) => alert('Внутренняя ошибка. ' +
-                            'Повторите попытку позднее'),
+                          (r) => {console.log(r, 3);
+                          alert('Внутренняя ошибка. ' +
+                            'Повторите попытку позднее')},
                       );
                 })
-                .catch((r) =>
-                  alert('Пользователь уже существует или неверный пароль'));
+                .catch((r) => {
+                  console.log(r, 4);
+                  alert('Пользователь уже существует или неверный пароль')
+                });
           },
       );
 },

@@ -730,6 +730,19 @@ class RequestManager {
         }).catch(reject);
     });
   }
+  tryGetDialog(id, page = 0) {
+    return new Promise((resolve, reject) => {
+      request
+        .get(`/api/chat/conversation/${id}?page=${page}`, {})
+        .then((r) => {
+          if (r.status === 200) {
+            resolve(r);
+          } else {
+            reject(r);
+          }
+        }).catch(reject);
+    });
+  }
 }
 
 const requestManager = new RequestManager();
