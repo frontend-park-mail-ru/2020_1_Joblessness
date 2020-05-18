@@ -730,10 +730,10 @@ class RequestManager {
         }).catch(reject);
     });
   }
-  tryGetDialog(id, page = 0) {
+  tryGetDialog(id) {
     return new Promise((resolve, reject) => {
       request
-        .get(`/api/chat/conversation/${id}?page=${page}`, {})
+        .get(`/api/chat/conversation/${id}`, {})
         .then((r) => {
           if (r.status === 200) {
             resolve(r);

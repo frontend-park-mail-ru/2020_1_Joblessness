@@ -6,7 +6,6 @@ div.responses-item--body
     div.response-person-holder
         +link(href='/users/' + locals.item['user_id']).user-avatar-link.black-link
             +avatar(noSelect=true src=locals.item.avatar).small
-            -console.log(locals.item)
             span #{locals.item.firstName} #{locals.item.lastName} @#{locals.item.tag}
         div.buttons
             +link(href="/vacancies/" + locals.item.vacancyId).black-link В

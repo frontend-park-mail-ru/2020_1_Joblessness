@@ -34,7 +34,7 @@ class Socket {
       try {
         const socket = new WebSocket(`${WS_DOMAIN}/${url}`);
         socket.onerror = () => {
-          setTimeout(createWs, 1000)
+          // setTimeout(createWs, 5000)
         }
         socket.onopen = () => {
           socket.send('')
@@ -54,6 +54,7 @@ class Socket {
   }
   onError = async (e) => {
     await this.createSocket(this.#url);
+    this.#ws.onerror = this.onError;
     this.#ws.send(this.#lastMsg)
   };
   onMessage = (m) => {
