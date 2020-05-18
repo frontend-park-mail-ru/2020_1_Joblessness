@@ -19,7 +19,6 @@ class LoadManager extends Page {
   componentDidMount() {
     super.componentDidMount();
     loadDialog(this);
-    addScroll(this);
   }
 }
 
@@ -96,10 +95,4 @@ const loadMessage = async (page, message) => {
     }
   });
   Navigator.updateAllPages();
-};
-
-const addScroll = (page) => {
-  document.getElementById('#messenger_display').addEventListener('scroll', () => {
-    console.log(1231);
-  })
 };
