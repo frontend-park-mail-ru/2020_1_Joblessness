@@ -1,36 +1,46 @@
-import {SummariesPage} from './index';
-import {SubRoutes} from './SubRoutes';
+import {Summaries} from './SummariesList';
+import createLoadableList from '../../LoadableList';
+import {Summary} from './Summary';
+import withLocalStore from '../localStore';
+import EmptyPage from '../../EmptyPage';
+import {requestManager} from '../../../ulils';
+import {getUserId} from '../getUserId';
+import {uuid} from '../../../ulils';
 
-const CONTAINER = '#users_current_section';
-
-export const constructRoute = (childRoutes = []) => [
+const createFullRoute = (childRoutes = []) => [
   {
     path: 'users/*',
-    childRoutes: [
-      {
-        path: '/*summaries',
-        innerPath: 'summaries',
-        element: ROOT_ELEMENT,
-        childRoutes: [
-          {
-            ...SubRoutes[0],
-            childRoutes,
-          },
-        ],
-      },
-    ],
+    childRoutes,
   },
 ];
-export const ROOT_ELEMENT = new SummariesPage(CONTAINER);
 
-const Routes = [
+const Routes = createLoadableList({
+    ListContainer: Summaries,
+    ListItem: Summary,
+    LoadManager: EmptyPage,
+  },
   {
-    path: '/*summaries',
-    element: ROOT_ELEMENT,
-    childRoutes: [
-      ...SubRoutes,
-    ],
-  },
-];
-
-export default Routes;
+    root: '/*summaries',
+    reducerKey: uuid(),
+    load: async (page = 0) => {
+      try {
+        const r = await requestManager.tryGetUserSummaries(getUserId(), page);
+        return await r.json()
+      } catch (e) {
+        alert('Не удалось загрузить список резюме');
+        return null
+      }
+    },
+    // enablePagination: true,
+    pagSize: 10,
+    withLocalStore,
+    extractFromStore: (s) => s.summaries,
+    insertIntoStore: summaries => s => ({summaries}),
+    pushIntoStore: summaries => s => ({summaries: [...s.summaries, ...summaries]}),
+    createRoute: (childRoutes = []) => childRoutes,
+    createFullRoute,
+    listSelector: '#users_current_section',
+    LoadManagerSelector: '#summaries_load_manager',
+  }
+);
+export default Routes

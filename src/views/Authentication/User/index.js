@@ -32,17 +32,14 @@ class NewSignUp extends Page {
       case 'signup':
         this.currentStep = 0;
         break;
-      case 'start':
+      case 'name':
         this.currentStep = 1;
         break;
-      case 'name':
+      case 'tag':
         this.currentStep = 2;
         break;
-      case 'tag':
-        this.currentStep = 3;
-        break;
       case 'next':
-        this.currentStep = 4;
+        this.currentStep = 3;
         break;
       default:
         this.currentStep = 0;
@@ -65,6 +62,8 @@ class NewSignUp extends Page {
             ?.childNodes[c * 2]
             ?.classList.remove('locked');
         }
+        if(this.currentStep > 0)
+          stepsHolder?.childNodes[0].classList.add('locked');
         }, 20);
   }
 }

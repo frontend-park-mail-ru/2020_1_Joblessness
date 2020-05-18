@@ -5,12 +5,14 @@ include ../../../../templates/pug/avatar
 div.responses-item--body
     div.response-person-holder
         +link(href='/users/' + locals.item['user_id']).user-avatar-link.black-link
-            +avatar(noSelect=true src=locals.item.avatar)
-            h1 Балицкий Михаил
+            +avatar(noSelect=true src=locals.item.avatar).small
+            span #{locals.item.firstName} #{locals.item.lastName} @#{locals.item.tag}
         div.buttons
-            +link(href="/vacancies/" + locals.item.vacancyId).black-link В
-            +link(href="/summaries/" + locals.item.summaryId).black-link Р
+            +link(href="/vacancies/" + locals.item.vacancyId id=locals.vacId).black-link В
+            +link(href="/summaries/" + locals.item.summaryId id=locals.sumId).black-link Р
     div.flex-1
     div.menu
+        div.message
+            div.msg(id=locals.selectDateId) Назначить собеседование
         div(id=locals.declineId).decline Отклонить
         div(id=locals.acceptId).accept Принять

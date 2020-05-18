@@ -6,6 +6,9 @@
   background: white
   border-radius: 10px
   @include SECTION_SHADOW
+  span
+    font-size: 1.5em
+    text-indent: 7px
   &--body
     display: flex
     flex-direction: column
@@ -46,5 +49,10 @@
         background-attachment: fixed
         font-size: 1.2em
         border-radius: 5px
-
         @include BACKGROUND_GRADIENT
+      .message
+        .msg
+          cursor: pointer
+        justify-self: flex-start
+        display: flex
+        flex: 1

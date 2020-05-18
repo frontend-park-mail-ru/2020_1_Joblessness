@@ -1,0 +1,117 @@
+@import "../../CONSTANTS"
+.experience
+  display: flex
+  margin-left: 76px
+  flex-direction: column
+  padding-bottom: 20px
+  .row
+    display: flex
+    flex-direction: row
+    *:not(:first-child)
+      margin-left: 7px
+  .company-name
+    &::first-letter
+      text-transform: uppercase
+  .company-role
+    font-size: 1.25em
+    &::first-letter
+      text-transform: uppercase
+  .company-experience
+    font-size: 1.5em
+    &::first-letter
+      text-transform: uppercase
+  .company-experience
+    &::first-letter
+      text-transform: uppercase
+  .responsibilities
+    &::first-letter
+      text-transform: uppercase
+  .connected
+    display: flex
+    flex-direction: column
+
+
+.paragraph-holder.ex.placing
+  transition: .8s
+  .paragraph-holder--text
+    transition: .8s
+    .string-field--input
+      transition: .8s
+    .field-line
+      transition: .8s
+    .company-role
+      h2
+        transition: .8s
+
+.paragraph-holder.ed.placing-start-state
+  padding-bottom: 20px
+  .paragraph-holder--text
+    padding-bottom: 0
+    margin: 0
+    border-radius: 0
+    box-shadow: none
+    .string-field--input
+      text-indent: 0
+      transition: 0s
+      height: auto
+      margin: 0
+      padding: 0
+    .field-line
+      flex: 0
+      transition: 0s
+    .company-name
+      &::first-letter
+        text-transform: uppercase
+    .company-role
+      font-size: 1.25em
+      &::first-letter
+        text-transform: uppercase
+    .company-experience
+      font-size: 0
+    .responsibilities
+      &::first-letter
+        text-transform: uppercase
+  .connected
+    display: flex
+    *:last-child
+      text-indent: 7px
+  .pad20
+    padding: 0 !important
+
+.paragraph-holder.ex.removing
+  padding-bottom: 20px
+  opacity: .2
+  .paragraph-holder--text
+    padding-bottom: 0
+    transition: .8s
+    margin: 0
+    border-radius: 0
+    box-shadow: none
+    .string-field--input
+      text-indent: 0
+      transition: .8s
+      height: auto
+      margin: 0
+      padding: 0
+    .field-line
+      flex: 0
+      transition: .8s
+    .company-name
+      &::first-letter
+        text-transform: uppercase
+    .company-role
+      font-size: 1.25em
+      &::first-letter
+        text-transform: uppercase
+    .company-experience
+      font-size: 1em
+    .company-experience
+      &::first-letter
+        text-transform: uppercase
+    .responsibilities
+      &::first-letter
+        text-transform: uppercase
+    h2
+      font-size: 0
+  .pad20
+    padding: 0 !important

@@ -51,7 +51,7 @@ const closeEvent = (p, h, scroll) => {
     document.getElementById('holder').style.height = '';
 
     p.removeEventListener('click', e);
-    ROOT_ELEMENT.props.random = uuid();
+    ROOT_ELEMENT.needUpdate();
     Navigator.removeRoutes(constructRoute());
     Navigator.updateAllPages();
     displayEvent(h);

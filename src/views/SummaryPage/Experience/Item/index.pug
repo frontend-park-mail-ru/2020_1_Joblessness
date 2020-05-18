@@ -2,20 +2,18 @@ include ../../../../templates/pug/forms
 include ../../../../templates/pug/fields
 
 mixin form(sum)
-    +field-holder.company-name
-        +field-name("Название компании")
-        +string-field(readonly=attributes.readonly id=sum.companyName)
+    +field-holder.company-name.flex-col
+        +string-field(readonly=attributes.readonly id=sum.companyName placeholder="Название компании")
             div.field-line
     +field-holder.company-role
-        +field-name("Должность")
-        +string-field(readonly=attributes.readonly id=sum.role)
+        +string-field(readonly=attributes.readonly id=sum.role placeholder="Должность")
             div.field-line
     +field-holder.company-experience
         +field-name("Работали с")
-        +string-field(readonly=attributes.readonly id=sum.experienceFrom)
+        +string-field(readonly=attributes.readonly id=sum.experienceFrom size="4")
             div.field-line
         +field-name("по")
-        +string-field(readonly=attributes.readonly id=sum.experienceTo)
+        +string-field(readonly=attributes.readonly id=sum.experienceTo size="4")
             div.field-line
     +field-holder.company-role
         +field-name("Обязанности")

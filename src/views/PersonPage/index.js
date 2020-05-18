@@ -1,16 +1,13 @@
 import './style.sass';
 import {
-  withChainedPages,
   uuid,
   requestManager,
 } from '../../ulils';
 import template from './index.pug';
 import {Page} from '../../Page';
 import {Navigator} from '../../Navigator';
-import {RootPath, ChainedRoutes} from './subRoutes';
 import {getUserId} from './getUserId';
 import withLocalStore from './localStore';
-import {withAuthManager} from '../../ulils/AuthManager';
 
 /**
  * User Page component
@@ -37,19 +34,6 @@ class UserPage extends Page {
       loadPersonSummaries(this);
       this.props.random = uuid();
     }
-  }
-
-  /**
-   *
-   */
-  componentDidMount() {
-    super.componentDidMount();
-    // const userId = getUserId();
-    // if (this.#prevUser !== userId) {
-    //   this.#prevUser = userId;
-    //   loadPersonInfo(this);
-    //   loadPersonSummaries(this);
-    // }
   }
 }
 
@@ -85,9 +69,7 @@ const loadPersonSummaries = async (page) => {
     console.log(e);
   }
 };
-UserPage = withAuthManager(UserPage);
 UserPage = withLocalStore(UserPage);
-UserPage = withChainedPages(UserPage, ChainedRoutes, null, RootPath);
 export {
   UserPage,
 };

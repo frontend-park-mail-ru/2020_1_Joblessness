@@ -1,8 +1,8 @@
 import {DECLINE, EDIT, PREVIEW, SUBMIT} from '../../../../CONSTANTS';
 import {Navigator} from '../../../../Navigator';
 
-const PLAY_REMOVE_ANIMATION = (props) => {
-  const holders = document.getElementsByClassName('paragraph-holder');
+const PLAY_REMOVE_ANIMATION = (page, props) => {
+  const holders = page.getContainer().getElementsByClassName('paragraph-holder');
   Array.from(holders).forEach((h) => {
     if (!h?.lastElementChild?.firstChild?.innerHTML) {
       h.classList.add('removing-empty');
@@ -23,11 +23,10 @@ export const createBeforeNext = (props) => (rootPage, page, mode, status) => {
     // Navigator.updateAllPages();
   } else if (mode === PREVIEW) {
     // Removing animation
-    PLAY_REMOVE_ANIMATION(props);
+    PLAY_REMOVE_ANIMATION(rootPage, props);
     Navigator.removeRoutes(props.EDIT_MODE_ROOT);
     setTimeout(() => {
       if (status === SUBMIT) {
-        // @TODO send request
         rootPage.props.setStore(props.SUBMIT_REDUCER);
       }
 

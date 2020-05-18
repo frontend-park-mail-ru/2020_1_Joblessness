@@ -1,32 +1,37 @@
 # 2020_1_Joblessness
 
-Ссылка на проект в интернете: http://5.23.54.85
 
-Запуск на локальной машине
+Ссылка на проект в интернете: https://hahao.ru
+=======
 
-Optimized build: npm run build
+## Сборка проекта
 
-Dev server: npm run start:dev
+Optimized build: 
 
-Состав команды
+```npm run build```
 
-Балицкий Михаил
+Dev server: 
 
-Куклин Сергей
+```npm run start:dev```
 
-Марат Ишимбаев
+## Технологии
 
-Менторы
+- Webpack
+- Sass
+## Состав команды
+
+- Балицкий Михаил
+
+- Куклин Сергей
+
+- Марат Ишимбаев
+
+## Менторы
 
 Backend: Артем Бакулев
 
 Frontend: Нозим Юнусов
 
-Репозитории
-
-Frontend: https://github.com/frontend-park-mail-ru/2020_1_Joblessness
+## Репозитории
 
 Backend:  https://github.com/go-park-mail-ru/2020_1_Joblessness
-
-//@TODO запилить крутой ридми с смешными картинками
-и информацией о пройденных тестах

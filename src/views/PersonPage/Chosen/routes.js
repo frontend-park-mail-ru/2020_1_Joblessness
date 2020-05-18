@@ -1,36 +1,46 @@
-import {ChosenPage} from './index';
-import {SubRoutes} from './SubRoutes';
+import {ChosenList} from './ChosenList';
+import createLoadableList from '../../LoadableList';
+import {Chosen} from './Chosen';
+import withLocalStore from '../localStore';
+import EmptyPage from '../../EmptyPage';
+import {requestManager} from '../../../ulils';
+import {getUserId} from '../getUserId';
+import {uuid} from '../../../ulils';
 
-const CONTAINER = '#users_current_section';
-
-export const constructRoute = (childRoutes = []) => [
+const createFullRoute = (childRoutes = []) => [
   {
     path: 'users/*',
-    childRoutes: [
-      {
-        path: '/*favourites',
-        innerPath: 'chosen',
-        element: ROOT_ELEMENT,
-        childRoutes: [
-          {
-            ...SubRoutes[0],
-            childRoutes,
-          },
-        ],
-      },
-    ],
+    childRoutes,
   },
 ];
-export const ROOT_ELEMENT = new ChosenPage(CONTAINER);
 
-const Routes = [
+const Routes = createLoadableList({
+    ListContainer: ChosenList,
+    ListItem: Chosen,
+    LoadManager: EmptyPage,
+  },
   {
-    path: '/*favourites',
-    element: ROOT_ELEMENT,
-    childRoutes: [
-      ...SubRoutes,
-    ],
-  },
-];
-
-export default Routes;
+    root: '/*favourites',
+    reducerKey: uuid(),
+    load: async (page = 0) => {
+      try {
+        const r = await requestManager.tryGetUserFavorites(getUserId(), page);
+        return await r.json()
+      } catch (e) {
+        alert('Не удалось загрузить избранное');
+        return null
+      }
+    },
+    // enablePagination: true,
+    pagSize: 10,
+    withLocalStore,
+    extractFromStore: (s) => s.chosen,
+    insertIntoStore: chosen => s => ({chosen}),
+    pushIntoStore: chosen => s => ({chosen: [...s.chosen, ...chosen]}),
+    createRoute: (childRoutes = []) => childRoutes,
+    createFullRoute,
+    listSelector: '#users_current_section',
+    LoadManagerSelector: '#chosen_load_manager',
+  }
+);
+export default Routes

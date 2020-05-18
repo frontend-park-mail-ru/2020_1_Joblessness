@@ -4,6 +4,7 @@ import {withChainedPages} from '../../ulils';
 import SubRoutes from './subRoutes';
 
 class SearchPage extends Page {
+
   render() {
     return template(this.props);
   }

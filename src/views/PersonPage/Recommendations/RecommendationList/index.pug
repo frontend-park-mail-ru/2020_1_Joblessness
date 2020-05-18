@@ -1,6 +1,7 @@
+include ../../../../templates/pug/link
 if locals.items && locals.items.length
     each r in locals.items
-        div(id=r.innerId)
+        +link(href='/vacancies/' + r.id id=r.innerId).black-link
 else
     h1.empty-message Не все сразу
 div#recommendations_load_manager(hidden=true)

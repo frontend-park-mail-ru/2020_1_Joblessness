@@ -6,7 +6,7 @@ import {request, requestManager, uuid} from '../../ulils';
 import {getUserId} from '../PersonPage/getUserId';
 import {Navigator} from '../../Navigator';
 import {isCreationPage} from './Education/routes';
-import {PERSON} from '../../CONSTANTS';
+import {ORGANIZATION, PERSON} from '../../CONSTANTS';
 
 
 class SummaryPage extends Page {
@@ -47,12 +47,13 @@ class SummaryPage extends Page {
 
     if (isCreationPage()) {
       if (currentSession.user.role === PERSON) {
-        loadUser(this);
+        if (currentSession.user.id !== this.props.getStore().user.id) {
+          loadUser(this);
+        }
         initCreateEvent(this);
       } else {
         alert('Авторизируйтесь как соискатель');
         setTimeout(() => Navigator.showPage('/'), 100);
-
       }
     } else {
       if (currentSession.user.id === this.props.getStore().user.id) {
@@ -85,8 +86,26 @@ const initCreateEvent = (page) => {
     .addEventListener('click', (e) => {
       const state = page.props.getStore();
 
-      if (!validateState(state)) {
-        alert('Не все поля верно заполнены');
+      let valid = true;
+      if (isNaN(state.mainInfo.preview.salaryFrom) || state.mainInfo.preview.salaryFrom === '') {
+        valid = false;
+        alert('Не верно указана минимальная заработная плата')
+      }
+      if (isNaN(state.mainInfo.preview.salaryTo) || state.mainInfo.preview.salaryTo === '') {
+        valid = false;
+        alert('Не верно указана максимальная заработная плата')
+      }
+      if (!state.mainInfo.preview.name.length > 25 || state.mainInfo.preview.name.length < 1) {
+        valid = false;
+        alert('Не верно указано название резюме');
+      }
+      const buttons = document.querySelectorAll('.edit-button');
+      if(buttons.length < 2) {
+        alert('Сохраните изменения перед созданием резюме');
+        valid = false;
+      }
+      // return true;
+      if (!valid || !validateState(state)) {
         return;
       }
       const body = {
@@ -141,7 +160,7 @@ const initCreateEvent = (page) => {
               preview: [],
               raw: [],
             },
-          })
+          });
           Navigator.showPage(`/summaries/${res.id}`);
         }
       )
@@ -160,10 +179,12 @@ const loadUser = (page) => {
           ...user,
         },
       }));
-      // page.props.random = uuid();
-      // Navigator.updateAllPages();
+      page.needUpdate();
+      Navigator.updateAllPages();
     })
-    .catch(console.log);
+    .catch(() => {
+      alert('Невозможно получить данные пользователя')
+    });
 };
 
 const createKeyWords = (state) => {
@@ -213,7 +234,6 @@ const loadSummary = (page) => {
     .tryGetSummary(getSumId())
     .then(async r => {
       const sum = await r.json();
-
       const mainInfo = {
         name: sum.name,
         description: sum.description,
@@ -235,7 +255,6 @@ const loadSummary = (page) => {
       })) ?? [];
       const experience = sum.experiences?.map(e => ({
         id: uuid(),
-        user: sum.author,
         companyName: e.companyName,
         role: e.role,
         experienceFrom: new Date(e.start).getFullYear(),
@@ -250,6 +269,7 @@ const loadSummary = (page) => {
         },
       })) ?? [];
       page.props.setStore(s => ({
+        user: sum.author,
         mainInfo: {
           preview: mainInfo,
           raw: mainInfo,
@@ -268,7 +288,7 @@ const loadSummary = (page) => {
       })
     })
     .catch(r => {
-      if(r.status === 404) {
+      if (r.status === 404) {
         Navigator.showPage('404');
       }
     })

@@ -4,8 +4,8 @@ import {ContactsPage} from './Contacts';
 import {AboutPage} from './About';
 
 const CONTAINER = '#users_current_section';
-
 const ROOT_ELEMENT = new SettingsPage(CONTAINER);
+
 const SubRoutes = [
   {
     path: 'baseInfo',

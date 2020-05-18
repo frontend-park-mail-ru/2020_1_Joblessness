@@ -26,7 +26,10 @@ ForthStep= withForm(ForthStep, {
     id: uuid(),
     required: true,
     validator: validators.isLogin,
-    warnMessage: 'Tag состоит из минимум 6 символов, в том числе из цифр, латинских букв, а также символов _ и .',
+    warnMessage: 'Tag состоит из латинских букв и цифр, а также "_" и "." Длина логина не менее 6 и не более 20',
+    update: (e,v) => {
+      return v.trim();
+    },
   },
 },
 {

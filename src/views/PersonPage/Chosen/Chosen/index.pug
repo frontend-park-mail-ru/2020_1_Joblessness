@@ -1,0 +1,15 @@
+include ../../../../templates/pug/link
+include ../../../../templates/pug/avatar
+include ../../../../templates/pug/name
+include ../../../../templates/pug/companyName
+
+if locals.info.isPerson
+    div.section.pad20
+        div.section--body.row
+            +avatar(src=locals.info.avatar noSelect).small
+            +name(locals.info.name, locals.info.surname, locals.info.tag)
+else
+    div.section.pad20
+        div.section--body.row
+            +avatar(src=locals.info.avatar noSelect).small
+            +company-name(locals.info.name, locals.info.tag)

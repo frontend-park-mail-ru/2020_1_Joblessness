@@ -14,13 +14,20 @@ export const loadManager = (Wrapee, props) => {
 const withLoad = (Wrapee, props) => {
 
   return class extends Wrapee {
-
-    componentWillMount() {
+    componentWillUpdate() {
+      super.componentWillUpdate();
       if (!this._isLoading) {
         this._isLoading = true;
         loadItems(this, props);
       }
     }
+    // componentWillMount() {
+    //   super.componentWillMount();
+    //   if (!this._isLoading) {
+    //     this._isLoading = true;
+    //     loadItems(this, props);
+    //   }
+    // }
   }
 };
 
@@ -51,9 +58,8 @@ const withLoadOnScroll = (Wrapee, props) => {
 
     componentWillMount() {
       super.componentDidMount();
-
       if (this.#lastEv) {
-        document.removeEventListener('scroll', this.#lastEv);
+        window.removeEventListener('scroll', this.#lastEv);
         this.#lastEv = null
       }
 
@@ -64,7 +70,7 @@ const withLoadOnScroll = (Wrapee, props) => {
         }
 
         if (!this.getContainer()) {
-          document.removeEventListener('scroll', ev);
+          window.removeEventListener('scroll', ev);
           return;
         }
 

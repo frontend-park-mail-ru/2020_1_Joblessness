@@ -13,9 +13,7 @@ export const addItem = (AddItem, props) => (childRoutes = []) => [
       if (!page.props.info) {
         page.props.info = [];
       }
-
       page.props.info.push(info);
-
       Navigator.updateAllPages();
     },
     childRoutes,

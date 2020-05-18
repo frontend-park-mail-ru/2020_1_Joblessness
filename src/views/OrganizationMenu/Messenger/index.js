@@ -1,6 +1,5 @@
 import {Page} from '../../../Page';
 import withLocalStore from '../localStore';
-import {uuid} from '../../../ulils';
 import template from './index.pug'
 import './style.sass'
 class Messenger extends Page {
@@ -13,7 +12,7 @@ Messenger = withLocalStore(Messenger, {
   updateMessenger: (page, oldS, newS) => {
     if(oldS.currentPage !== newS.currentPage &&
       newS.currentPage === 'messenger') {
-      page.props.random = uuid();
+      page.needUpdate()
     }
   }
 });

@@ -77,6 +77,11 @@ export const withForm = (WrappedComponent, inputFields, submitField,
               validators.isFunction(fields[i][1].defaultValue) ?
               fields[i][1].defaultValue(this) : fields[i][1].defaultValue;
           }
+          if(fields[i][1].update) {
+            el.addEventListener('keyup', e => {
+              el.firstElementChild.value = fields[i][1].update(el, e.target.value);
+            });
+          }
           if (el.firstElementChild.nodeName === 'INPUT') {
             el.addEventListener('keypress', (e) => {
               if (e.key === 'Enter') {
@@ -97,6 +102,11 @@ export const withForm = (WrappedComponent, inputFields, submitField,
           }
         }
         const lastEl = document.getElementById(fields[fields.length - 1][1].id);
+        if(fields[fields.length - 1][1].update) {
+          lastEl.addEventListener('keyup', e => {
+            lastEl.firstElementChild.value = fields[fields.length - 1][1].update(lastEl, e.target.value);
+          });
+        }
         if (fields[fields.length - 1][1].defaultValue) {
           lastEl.firstElementChild.value =
             validators.isFunction(fields[fields.length - 1][1].defaultValue) ?
@@ -146,20 +156,21 @@ export const withForm = (WrappedComponent, inputFields, submitField,
     showWarning = (inputBlock, warnMessage) => {
       const warnBlock = inputBlock.lastElementChild;
       warnBlock.textContent = warnMessage || 'Обязательное поле';
-      const tid = setTimeout(
-          () => {
-            warnBlock.textContent = '';
-          }, 10000,
-      );
+      //@TODO optional
+      // const tid = setTimeout(
+      //     () => {
+      //       warnBlock.textContent = '';
+      //     }, 10000,
+      // );
       /**
        * remove warning on click or after 10 sec
        */
-      const removeWarn = () => {
-        clearTimeout(tid);
-        warnBlock.textContent = '';
-        document.removeEventListener('click', removeWarn, true);
-      };
-      document.addEventListener('click', removeWarn, true);
+      // const removeWarn = () => {
+      //   clearTimeout(tid);
+      //   warnBlock.textContent = '';
+      //   document.removeEventListener('click', removeWarn, true);
+      // };
+      // document.addEventListener('click', removeWarn, true);
     };
 
     /**
@@ -182,6 +193,8 @@ export const withForm = (WrappedComponent, inputFields, submitField,
         if (!validator(inputText)) {
           this.showWarning(inputBlock, warnMessage);
           return false;
+        } else {
+          inputBlock.lastElementChild.textContent = '';
         }
         return {
           field: key,

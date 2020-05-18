@@ -13,9 +13,9 @@ import {Navigator} from '../../../Navigator';
 export function getDocHeight() {
   const D = document;
   return Math.max(
-      D.body.scrollHeight, D.documentElement.scrollHeight,
-      D.body.offsetHeight, D.documentElement.offsetHeight,
-      D.body.clientHeight, D.documentElement.clientHeight,
+    D.body.scrollHeight, D.documentElement.scrollHeight,
+    D.body.offsetHeight, D.documentElement.offsetHeight,
+    D.body.clientHeight, D.documentElement.clientHeight,
   );
 }
 
@@ -38,45 +38,45 @@ const loadOnScroll = (page) => {
       const {type, since, desc, requestBody} = page.props.getStore().bar.preview;
       Navigator.showPage(window.location.pathname + `?type=${type}&since=${since}&desc=${desc}&request=${requestBody}`, true, false);
       requestManager.trySearch(page.props.getStore().bar.preview)
-          .then(async (r) => {
-            const res = await r.json();
-            const persons = res.persons?.map((p) => ({
-              ...p,
-              innerId: uuid(),
-            })) ?? [];
-            const vacancies = res.vacancies?.map((p) => ({
-              ...p,
-              innerId: uuid(),
-            })) ?? [];
-            const organizations = res.organizations?.map((p) => ({
-              ...p,
-              innerId: uuid(),
-            })) ?? [];
-            if (persons.length + vacancies.length + organizations.length === 0) {
-              page.props.setStore((s) => ({
-                bar: {
-                  ...s.bar,
-                  preview: {
-                    ...s.bar.preview,
-                    since: Number(s.bar.preview.since) - 1,
-                  },
-                },
-              }));
-              return;
-            }
+        .then(async (r) => {
+          const res = await r.json();
+          const persons = res.persons?.map((p) => ({
+            ...p,
+            innerId: uuid(),
+          })) ?? [];
+          const vacancies = res.vacancies?.map((p) => ({
+            ...p,
+            innerId: uuid(),
+          })) ?? [];
+          const organizations = res.organizations?.map((p) => ({
+            ...p,
+            innerId: uuid(),
+          })) ?? [];
+          if (persons.length + vacancies.length + organizations.length === 0) {
             page.props.setStore((s) => ({
-              search: {
-                persons: [...s.search.persons, ...persons],
-                vacancies: [...s.search.vacancies, ...vacancies],
-                organizations: [...s.search.organizations, ...organizations],
+              bar: {
+                ...s.bar,
+                preview: {
+                  ...s.bar.preview,
+                  since: Number(s.bar.preview.since) - 1,
+                },
               },
             }));
-            page.props.requestNextNoUpdate();
-          })
-          .catch((e) => {
-            console.log(e);
-            alert('Похоже, сервер недоступен');
-          });
+            return;
+          }
+          page.props.setStore((s) => ({
+            search: {
+              persons: [...s.search.persons, ...persons],
+              vacancies: [...s.search.vacancies, ...vacancies],
+              organizations: [...s.search.organizations, ...organizations],
+            },
+          }));
+          page.props.requestNextNoUpdate();
+        })
+        .catch((e) => {
+          console.log(e);
+          alert('Похоже, сервер недоступен');
+        });
     }
     // if(e.scrollTop >= e)
   };
@@ -126,35 +126,35 @@ const clickEvent = (page) => () => {
   const {type, since, desc, requestBody} = page.props.getStore().bar.preview;
   Navigator.showPage(window.location.pathname + `?type=${type}&since=${since}&desc=${desc}&request=${requestBody}`, true, false);
   requestManager.trySearch(page.props.getStore().bar.preview)
-      .then(async (r) => {
-        const res = await r.json();
-        const persons = res.persons?.map((p) => ({...p, innerId: uuid()})) ?? [];
-        const vacancies = res.vacancies?.map((p) => ({
-          ...p,
-          innerId: uuid(),
-        })) ?? [];
-        const organizations = res.organizations?.map((p) => ({
-          ...p,
-          innerId: uuid(),
-        })) ?? [];
-        page.props.setStore({
-          search: {
-            persons,
-            vacancies,
-            organizations,
-          },
-        });
-        page.props.requestNextNoUpdate();
-      })
-      .catch((e) => {
-        console.log(e);
-        alert('Похоже, сервер недоступен');
+    .then(async (r) => {
+      const res = await r.json();
+      const persons = res.persons?.map((p) => ({...p, innerId: uuid()})) ?? [];
+      const vacancies = res.vacancies?.map((p) => ({
+        ...p,
+        innerId: uuid(),
+      })) ?? [];
+      const organizations = res.organizations?.map((p) => ({
+        ...p,
+        innerId: uuid(),
+      })) ?? [];
+      page.props.setStore({
+        search: {
+          persons,
+          vacancies,
+          organizations,
+        },
       });
+      page.props.requestNextNoUpdate();
+    })
+    .catch((e) => {
+      console.log(e);
+      alert('Похоже, сервер недоступен');
+    });
 };
 
 const setTypeEvent = (page, type) => (e) => {
   Array.from(document.querySelectorAll('.selected'))
-      .forEach((d) => d.classList.remove('selected'));
+    .forEach((d) => d.classList.remove('selected'));
   e.target.classList.add('selected');
   page.props.setStore((s) => ({
     bar: {
@@ -169,8 +169,7 @@ const setTypeEvent = (page, type) => (e) => {
 };
 
 class Bar extends Page {
-  #wasMounted;
-
+  #lastPath;
   constructor(props) {
     super(props);
     this.props.searchId = uuid();
@@ -211,22 +210,35 @@ class Bar extends Page {
 
     const {type, request, since, desc} = getSearchParameters();
 
-    if (!(type && request && since && desc)) {
+    if (!(type || request || since || desc)) {
+      all.classList.add('selected');
+      this.props.setStore((s) => ({
+        bar: {
+          ...s.bar,
+          raw: {
+            type: '',
+            since: 0,
+            desc: '',
+            requestBody: ''
+          },
+        },
+      }));
+      findEvent();
       return;
     }
-    search.firstChild.firstChild.value = request;
+    search.firstChild.firstChild.value = request || '';
     this.props.setStore((s) => ({
       bar: {
         ...s.bar,
         raw: {
-          type: type ? type : s.bar.raw.type,
+          type: type ? type : (s.bar.raw.type || ''),
           since: 0,
-          desc: desc ? desc : s.bar.raw.desc,
-          requestBody: request ? request : s.bar.raw.requestBody,
+          desc: desc ? desc : (s.bar.raw.desc || ''),
+          requestBody: request ? request : (s.bar.raw.requestBody || ''),
         },
       },
     }));
-    if (type === '') {
+    if (!type || type === '') {
       all.classList.add('selected');
     } else if (type === 'person') {
       users.classList.add('selected');

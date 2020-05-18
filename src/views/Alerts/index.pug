@@ -1,2 +1,6 @@
-each alert in locals.alerts
+- alerts = locals.alerts.slice(0, 5)
+- hiddenAlerts = locals.alerts.slice(5)
+each alert in alerts
     div(id=alert.id).alerts--item
+each alert in hiddenAlerts
+    div(id=alert.id).hidden.alerts--item

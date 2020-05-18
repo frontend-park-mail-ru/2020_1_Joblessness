@@ -1,6 +1,5 @@
 mixin link
     a(href="javascript:;"
-        data-page=attributes.href
         onclick="linkGo(\"" + (attributes.href ? attributes.href: window.location.pathname) + "\")"
         class=attributes.class
         style=attributes.style

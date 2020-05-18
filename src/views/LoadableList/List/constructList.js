@@ -33,8 +33,10 @@ const withItems = (Wrapee, props) => {
 
     componentWillMount() {
       super.componentWillMount();
+      console.log([...this.#currentRoutes]);
       if(this.#currentRoutes.length) {
-        Navigator.removeRoutes(props.createFullRoute(props.listRoute(this.#currentRoutes)));
+        for(let r of this.#currentRoutes)
+        Navigator.removeRoutes(props.createFullRoute(props.listRoute([r])));
       }
     }
 
@@ -48,7 +50,7 @@ const withItems = (Wrapee, props) => {
           })
         );
       Navigator.addRoutes(props.createFullRoute(props.listRoute(newRoutes)));
-      this.currentRoutes = [...newRoutes];
+      this.#currentRoutes = [...newRoutes];
       Navigator.updateAllPages();
     }
   }
@@ -67,6 +69,7 @@ const createReducers = (props) => {
       if (!isEqSorted(oldList, newList) || oldList.length !== page.props.items.length) {
         page.props.items = newList.map(i => ({...i,innerId: uuid()}));
         page.needUpdate();
+        Navigator.updateAllPages();
       }
     }
   }

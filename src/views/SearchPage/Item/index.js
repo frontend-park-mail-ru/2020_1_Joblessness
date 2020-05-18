@@ -19,9 +19,6 @@ class Item extends Page {
     } else {
       if (parent) {
         parent.style.transitionDuration = '0';
-        // parent.firstChild.style.transform = this._rot;
-        // parent.firstChild.style.opacity = this._val;
-        // parent.firstChild.style.transformOrigin = this._trans ?? 'left center';
       }
     }
   }

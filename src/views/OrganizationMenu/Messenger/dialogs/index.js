@@ -1,6 +1,6 @@
 import {Page} from '../../../../Page';
 import withLocalStore from '../../localStore';
-import {uuid} from '../../../../ulils';
+import {equals, requestManager, uuid} from '../../../../ulils';
 import template from './index.pug'
 import {Navigator} from '../../../../Navigator';
 import {constructRoute} from '../routes';
@@ -10,32 +10,18 @@ import './style.sass'
 
 class Dialogs extends Page {
 
-  constructor(props) {
-    super(props);
-    this.props.dialogs = [
-        {
-          user: 'mikstime',
-          id: 1,
-          elemId: uuid()
-        },
-        {
-          user: 'emitskim',
-          id: 2,
-          elemId: uuid()
-        }
-      ]
-  }
-
   render() {
     return template(this.props)
   }
 
   componentDidMount() {
     super.componentDidMount();
-
+    if(!this.props.dialogs) {
+      return
+    }
     for(let d of this.props.dialogs) {
       const el = document.querySelector(`#${d.elemId}`);
-      el.addEventListener('click', () => {
+      el?.addEventListener('click', () => {
         Navigator.removeRoutes(constructRoute(DIALOGS_ROUTES));
         this.props.setStore(s => ({
           messenger: {
@@ -52,12 +38,16 @@ class Dialogs extends Page {
 
 Dialogs = withLocalStore(Dialogs, {
   updateDialogs: (page, oldS, newS) => {
-    if(oldS.messenger.currentPage !== newS.messenger.currentPage &&
+    if(!equals(oldS.messenger.dialogs,newS.messenger.dialogs)) {
+      page.props.dialogs = newS.messenger.dialogs;
+    }
+    if(oldS.messenger.currentPage !== newS.messenger.currentPage&&
       newS.messenger.currentPage === 'dialogs') {
-      page.props.random = uuid();
+      page.props.needUpdate()
     }
   }
 });
+
 export {
   Dialogs
 }

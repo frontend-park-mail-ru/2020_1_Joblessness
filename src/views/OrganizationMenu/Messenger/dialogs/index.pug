@@ -1,2 +1,9 @@
-each d in locals.dialogs
-    div.dialog--item(id=d.elemId) #{d.user}
+include ../../../../templates/pug/avatar
+if locals.dialogs && locals.dialogs.length
+    each d in locals.dialogs
+        div.dialog--item(id=d.elemId)
+            div.dialog--item--body
+                +avatar(noSelect=true src=d.avatar).small
+                span #{d.user} @#{d.tag}
+else
+    div Здесь будут отображаться Ваши диалоги

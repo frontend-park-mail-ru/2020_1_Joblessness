@@ -1,4 +1,4 @@
-export const DOMAIN = 'http://5.23.54.85';
+export const DOMAIN = 'https://hahao.ru';//'http://5.23.54.85';
 // 'http://localhost:8001';
 export const GET_HEADERS = {
   credentials: 'include',

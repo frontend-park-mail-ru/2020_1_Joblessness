@@ -45,7 +45,7 @@ class Navigator {
         try {
           route.element.requestRender();
         } catch (e) {
-          console.error(e);
+          // console.error(e);
         }
         this.showChildren(route.childRoutes, path.replace(route.path.raw, ''));
         if (route.path.raw !== 'any' && !route.path.alwaysOn) break;
@@ -66,7 +66,7 @@ class Navigator {
               .innerHTML = route.element[1]()
           }
         } catch (e) {
-          console.error(e);
+          // console.error(e);
         }
 
         this.showChildren(
@@ -143,6 +143,9 @@ class Navigator {
       if (e[0] === '?') {
         this.showPage(e);
         this.updateAllPages();
+      }
+      if(e === '/') {
+        this.showPage('/?');
       }
       if (e[0] === '/') {
         this.showPage(e);

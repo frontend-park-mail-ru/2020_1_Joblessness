@@ -13,15 +13,14 @@ mixin input-field-settings
         div.form-input-err
 
 mixin settings-block
-    div.settings-holder--title
-        h1 #{attributes.title}
-    div.settings-holder--holder
-        div.settings-holder--body
+    span.section--title #{attributes.title}
+    div.section.pad20
+        div.section--body
             block
 
 mixin settings-item(name)
     div.settings-holder-item
         div.settings-holder-item--header
-            h2 #{name}
+            span #{name}
         div.settings-holder-item--input
             +input-field-settings(id=attributes.id readonly=attributes.readonly)

@@ -1,0 +1,22 @@
+mixin input-field-settings
+    div.input-field-auth-holder.settings-input(id=attributes.id)
+        input.fancy-input.no-indent(
+            class=attributes.class
+            style=attributes.style
+            autofocus!=attributes.autofocus
+            readonly!=attributes.readonly
+            type=attributes.type || "text"
+            placeholder=attributes.placeholder
+            value=attributes.value)
+        block
+        div.input-field-auth-holder--line
+        div.form-input-err
+span.responses-holder--close#select_date_hide
+div.select-date--body
+    h1 Выбрать дату собеседования
+    span После выбора даты Вы сможете написать соискателю для проведения собеседования
+    div.birth-container
+        +input-field-settings(placeholder="день" id=locals.inputFields.day.id)
+        +input-field-settings(placeholder="месяц" id=locals.inputFields.month.id)
+        +input-field-settings(placeholder="год" id=locals.inputFields.year.id)
+    div.submit-button(id=locals.inputFields.submitField.id) Применить

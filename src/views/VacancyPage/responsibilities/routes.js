@@ -49,6 +49,7 @@ const ResponsibilitiesRoutes = createEditor({
       raw: [...s.responsibilities.raw, item],
     },
   }),
+  MAX_SIZE: 5,
   ROOT: 'responsibilities/',
   EDITOR_HOLDER_SELECTOR: '#vacancy_responsibilities',
   ROOT_TEMPLATE: (childRoutes = []) => [
@@ -57,6 +58,9 @@ const ResponsibilitiesRoutes = createEditor({
       childRoutes,
     },
   ],
+  ON_ITEM_LIMIT : () => {
+    alert('Не более 5 параграфов')
+  },
   onApply: (props, page) => new Promise((resolve, reject) => {
     if (!isCreationPage()) {
       const responsibilities = page.props.getStore().responsibilities;

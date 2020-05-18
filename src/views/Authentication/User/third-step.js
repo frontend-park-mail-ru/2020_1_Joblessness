@@ -29,6 +29,7 @@ ThirdStep = withForm(ThirdStep,
         required: true,
         validator: (s) => s.length,
         warnMessage: 'Имя не может быть пустой строкой',
+
       },
       lastName: {
         id: uuid(),

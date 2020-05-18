@@ -1,0 +1,153 @@
+@import url("https://fonts.googleapis.com/css?family=Istok+Web&display=swap");
+.education {
+  display: flex;
+  margin-left: 76px;
+  flex-direction: column;
+  padding-bottom: 20px;
+}
+.education .row {
+  display: flex;
+  flex-direction: row;
+}
+.education .row *:not(:first-child) {
+  margin-left: 7px;
+}
+.education .type {
+  color: #454545;
+}
+.education .graduated::first-letter {
+  text-transform: uppercase;
+}
+.education .speciality {
+  font-size: 1.25em;
+}
+.education .speciality::first-letter {
+  text-transform: uppercase;
+}
+.education .institution {
+  font-size: 1.5em;
+}
+.education .institution::first-letter {
+  text-transform: uppercase;
+}
+.education .connected {
+  display: flex;
+  flex-direction: column;
+}
+
+.paragraph-holder.removing-totally {
+  opacity: 0;
+  height: 0;
+  padding: 0 !important;
+  margin: 0;
+}
+.paragraph-holder.removing-totally .paragraph-holder--text {
+  height: 0;
+  padding: 0;
+  margin: 0;
+}
+
+.paragraph-holder.ed.placing {
+  transition: 0.3s;
+}
+.paragraph-holder.ed.placing .paragraph-holder--text {
+  transition: 0.3s;
+}
+.paragraph-holder.ed.placing .paragraph-holder--text .string-field--input {
+  transition: 0.3s;
+}
+.paragraph-holder.ed.placing .paragraph-holder--text .field-line {
+  transition: 0.3s;
+}
+.paragraph-holder.ed.placing .paragraph-holder--text .company-role h2 {
+  transition: 0.3s;
+}
+
+.paragraph-holder.ed.placing-start-state {
+  padding-bottom: 20px;
+}
+.paragraph-holder.ed.placing-start-state .paragraph-holder--text {
+  padding-bottom: 0;
+  margin: 0;
+  border-radius: 0;
+  box-shadow: none;
+}
+.paragraph-holder.ed.placing-start-state .paragraph-holder--text .string-field--input {
+  text-indent: 0;
+  transition: 0s;
+  height: auto;
+  margin: 0;
+  padding: 0;
+}
+.paragraph-holder.ed.placing-start-state .paragraph-holder--text .field-line {
+  flex: 0;
+  transition: 0s;
+}
+.paragraph-holder.ed.placing-start-state .paragraph-holder--text .company-name.sub .string-field--input {
+  font-size: 1.25em;
+}
+.paragraph-holder.ed.placing-start-state .paragraph-holder--text .company-name .string-field--input {
+  font-size: 1.5em;
+}
+.paragraph-holder.ed.placing-start-state .paragraph-holder--text .company-role .string-field--input {
+  font-size: 1em;
+}
+.paragraph-holder.ed.placing-start-state .paragraph-holder--text .company-role h2 {
+  transition: 0s;
+  font-size: 0;
+}
+.paragraph-holder.ed.placing-start-state .connected {
+  display: flex;
+}
+.paragraph-holder.ed.placing-start-state .connected *:last-child {
+  text-indent: 7px;
+}
+.paragraph-holder.ed.placing-start-state .pad20 {
+  padding: 0 !important;
+}
+
+.paragraph-holder.ed.removing {
+  padding-bottom: 20px;
+}
+.paragraph-holder.ed.removing .paragraph-holder--text {
+  padding-bottom: 0;
+  transition: 0.3s;
+  margin: 0;
+  border-radius: 0;
+  box-shadow: none;
+}
+.paragraph-holder.ed.removing .paragraph-holder--text .string-field--input {
+  text-indent: 0;
+  transition: 0.3s;
+  height: auto;
+  margin: 0;
+  padding: 0;
+}
+.paragraph-holder.ed.removing .paragraph-holder--text .field-line {
+  flex: 0;
+  transition: 0.3s;
+}
+.paragraph-holder.ed.removing .paragraph-holder--text .company-name.sub .string-field--input {
+  font-size: 1.25em;
+}
+.paragraph-holder.ed.removing .paragraph-holder--text .company-name .string-field--input {
+  font-size: 1.5em;
+}
+.paragraph-holder.ed.removing .paragraph-holder--text .company-role .string-field--input {
+  font-size: 1em;
+}
+.paragraph-holder.ed.removing .paragraph-holder--text .company-role h2 {
+  transition: 0.3s;
+  font-size: 0;
+}
+.paragraph-holder.ed.removing .connected {
+  display: flex;
+}
+.paragraph-holder.ed.removing .connected *:last-child {
+  text-indent: 7px;
+}
+.paragraph-holder.ed.removing .pad20 {
+  padding: 0 !important;
+}
+
+/*# sourceMappingURL=education.css.map */

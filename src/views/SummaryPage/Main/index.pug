@@ -3,15 +3,14 @@ include ../../../templates/pug/fields
 
 mixin form(sum)
     +field-holder.company-name
-        +field-name("Название")
-        +string-field(readonly=attributes.readonly id=sum.name)
+        +string-field(readonly=attributes.readonly id=sum.name placeholder="Название резюме")
             div.field-line
     +field-holder.company-role
-        +field-name("Описание")
+        +field-name("Дополнительно")
         +string-field(readonly=attributes.readonly id=sum.description)
             div.field-line
     +field-holder.company-experience
-        +field-name("Зарплата от")
+        +field-name("Желаемая зарплата от")
         +string-field(readonly=attributes.readonly id=sum.salaryFrom)
             div.field-line
         +field-name("до")

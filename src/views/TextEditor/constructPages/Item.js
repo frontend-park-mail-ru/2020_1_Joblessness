@@ -6,21 +6,26 @@ export const item = (Wrapee, props) => {
 
 const withEditAndLoad = (Wrapee, props) => {
   return class extends Wrapee {
+    #mounted = false
     componentWillUpdate() {
       super.componentWillUpdate();
-
-      props.CUSTOM_LISTENERS && props.CUSTOM_LISTENERS.init(this, props);
+      if(!this.#mounted) {
+        this.#mounted = true;
+        props.CUSTOM_LISTENERS && props.CUSTOM_LISTENERS.init(this, props);
+      }
     }
     componentDidMount() {
       super.componentDidMount();
-      const parent = document.querySelector(this.container);
+      const parent = this.getContainer();
       const el = parent.firstChild;
       if (!this._prevLen || this._prevLen >= props.EXTRACT_REDUCER(this.props.getStore()).raw.length) {
         const e = parent.parentNode;
         e?.classList.add('placing-start');
+        e?.classList.add('placing-start-state');
         setTimeout(
             () => {
             e?.classList.add('placing');
+            e?.classList.remove('placing-start-state');
             setTimeout(() => {
               e?.classList.remove('placing-start');
               e?.classList.remove('placing');

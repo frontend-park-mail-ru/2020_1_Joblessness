@@ -7,6 +7,10 @@
   border-radius: 10px;
   box-shadow: 0px 3px 13px 0px rgba(0, 0, 0, 0.5);
 }
+.responses-item span {
+  font-size: 1.5em;
+  text-indent: 7px;
+}
 .responses-item--body {
   display: flex;
   flex-direction: column;
@@ -56,6 +60,14 @@
   font-size: 1.2em;
   border-radius: 5px;
   background-image: linear-gradient(to right, #0acffe 0%, #495aff 100%) !important;
+}
+.responses-item--body .menu .message {
+  justify-self: flex-start;
+  display: flex;
+  flex: 1;
+}
+.responses-item--body .menu .message .msg {
+  cursor: pointer;
 }
 
 /*# sourceMappingURL=style.css.map */

@@ -7,7 +7,7 @@ import {Edit} from './Edit';
 import {AddItem} from './AddItem';
 import {ModeManager} from './ModeManager';
 import {Item} from './Item';
-import {requestManager} from '../../../ulils';
+import {requestManager, uuid} from '../../../ulils';
 import {isCreationPage} from '../isCreationPage';
 import {getVacId} from '../getVacId';
 
@@ -49,6 +49,7 @@ const ConditionsRoutes = createEditor({
       raw: [...s.conditions.raw, item],
     },
   }),
+  MAX_SIZE: 5,
   ROOT: 'conditions/',
   EDITOR_HOLDER_SELECTOR: '#vacancy_conditions',
   ROOT_TEMPLATE: (childRoutes = []) => [
@@ -57,6 +58,9 @@ const ConditionsRoutes = createEditor({
       childRoutes,
     },
   ],
+  ON_ITEM_LIMIT : () => {
+    alert('Не более 5 параграфов')
+  },
   onApply: (props, page) => new Promise((resolve, reject) => {
     if (!isCreationPage()) {
       const conditions = page.props.getStore().conditions;

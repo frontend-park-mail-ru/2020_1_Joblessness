@@ -73,13 +73,13 @@ const initEvents = (page, fields) => {
   const salaryToField = document.querySelector(`#${fields.salaryTo}`);
 
   updateEvent(page, 'name', nameField,
-      raiseWarn((s) => s.length >= 5 && s.length <= 15, '5-15 символов'));
+      raiseWarn((s) => s.length >= 1 && s.length <= 30, '1-30 символов'));
   updateEvent(page, 'description', descriptionField,
-      raiseWarn((s) => s.length <= 30, 'До 30 символов'));
+      raiseWarn((s) => s.length <= 50, 'До 50 символов'));
   updateEvent(page, 'salaryFrom', salaryFromField,
-      raiseWarn((v) => Number(v) > 0, 'Положительное число'));
+      raiseWarn((v) => Number(v) > 0, 'Минимальная зарплата'));
   updateEvent(page, 'salaryTo', salaryToField,
-      raiseWarn((v) => Number(v) > 0, 'Положительное число'));
+      raiseWarn((v) => Number(v) > 0, 'Максимальная зарплата'));
 };
 
 const raiseWarn = (validator, msg) => (v, el) => {

@@ -54,26 +54,25 @@ AboutPage = withForm(AboutPage,
         id: uuid(),
         validator: validators.isDay,
         warnMessage: 'DD',
-        defaultValue: (page) => new Date(page.props.getStore().user.birthday).getDate(),
+        defaultValue: (page) => page.props.getStore().user.birthday !== "0001-01-01T00:00:00Z" ? new Date(page.props.getStore().user.birthday).getDate(): '',
       },
       month: {
         id: uuid(),
         validator: (s) => validators.isMonthId(Number(s) - 1),
         warnMessage: 'MM',
-        defaultValue: (page) => new Date(page.props.getStore().user.birthday).getMonth() + 1,
+        defaultValue: (page) => page.props.getStore().user.birthday !== "0001-01-01T00:00:00Z" ? new Date(page.props.getStore().user.birthday).getMonth() + 1 : '',
       },
       year: {
         id: uuid(),
         validator: validators.isYear,
         warnMessage: 'YYYY',
-        defaultValue: (page) => new Date(page.props.getStore().user.birthday).getFullYear(),
+        defaultValue: (page) => page.props.getStore().user.birthday !== "0001-01-01T00:00:00Z" ? new Date(page.props.getStore().user.birthday).getFullYear() : '',
       },
     },
     {
       id: uuid(),
     },
     (form, page) => {
-      console.log(form);
       const user = page.props.getStore().user;
       if (!form.gender) {
         delete form.gender;
