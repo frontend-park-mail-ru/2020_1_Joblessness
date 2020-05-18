@@ -5,17 +5,21 @@ import {requestManager, uuid} from '../../../../ulils';
 import {Navigator} from '../../../../Navigator';
 import {constructRoute} from '../../routes';
 import {AddItemRoutes} from '../../Container/routes';
-import {openDialog} from '../../Messenger';
 
 class Item extends Page {
   #accept;
   #decline;
   #selectDate;
+  #sum;
+  #vac;
+
   constructor(props) {
     super(props);
     this.#accept = uuid();
     this.#decline = uuid();
     this.#selectDate = uuid();
+    this.#sum = uuid();
+    this.#vac = uuid();
   }
 
   render() {
@@ -23,7 +27,9 @@ class Item extends Page {
       ...this.props,
       acceptId: this.#accept,
       declineId: this.#decline,
-      selectDateId: this.#selectDate
+      selectDateId: this.#selectDate,
+      sumId: this.#sum,
+      vacId: this.#vac,
     });
   }
 
@@ -32,6 +38,12 @@ class Item extends Page {
     acceptEvent(this, this.#accept);
     declineEvent(this, this.#decline);
     selectDateEvent(this, this.#selectDate);
+    // document.querySelector(`#${this.#sum}`)?.addEventListener('click', () =>{
+    //   document.querySelector('#responses_close')?.click()
+    // })
+    // document.querySelector(`#${this.#vac}`)?.addEventListener('click', () =>{
+    //   document.querySelector('#responses_close')?.click()
+    // })
   }
 }
 

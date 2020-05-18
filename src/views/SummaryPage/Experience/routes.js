@@ -124,11 +124,11 @@ const initValues = (page, fields) => {
   const {companyName, role, experienceFrom,
     experienceTo, responsibilities} = page.props.getStore().experience.raw.find((i) => i.id === page.props.info.id);
   //
-  companyNameField.value = companyName;
-  roleField.value = role;
-  experienceFromField.value = experienceFrom;
-  experienceToField.value = experienceTo;
-  responsibilitiesField.value = responsibilities;
+  companyNameField.value = companyName || '';
+  roleField.value = role || '';
+  experienceFromField.value = experienceFrom || '';
+  experienceToField.value = experienceTo || '';
+  responsibilitiesField.value = responsibilities || '';
 };
 
 

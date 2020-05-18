@@ -10,12 +10,13 @@ import USER_ROUTES from './views/PersonPage/routes';
 import AUTHENTICATION_ROUTES from './views/Authentication/routes';
 import SEARCH_ROUTES from './views/SearchPage/routes';
 import ORGANIZATION_MENU_ROUTES from './views/OrganizationMenu/routes';
-import ROOT_ROUTES from './views/RootElement'
-import ALERTS_ROUTES from './views/Alerts'
-import METRICS_ROUTES from './views/Metrics'
-import './styles/index.sass'
-import './views/legacy-sum.sass'
-import ws from './ws'
+import ROOT_ROUTES from './views/RootElement';
+import ALERTS_ROUTES from './views/Alerts';
+import METRICS_ROUTES from './views/Metrics';
+import USER_CHAT_ROUTES from './views/PersonChat/routes'
+import './styles/index.sass';
+import './views/legacy-sum.sass';
+import ws from './ws';
 
 
 /**
@@ -34,19 +35,6 @@ const init = () => {
 };
 
 /**
- * Register service-worker
- */
-const registerServiceWorker = () => {
-  navigator.serviceWorker.register('src/service-worker.js')
-    .then((registration) => {
-      if (!registration.active) {
-        // Is not active
-      }
-      console.log('Service worker is active');
-    });
-};
-
-/**
  * App
  */
 class App {
@@ -56,6 +44,7 @@ class App {
   constructor() {
     const routes = [
       ...ROOT_ROUTES,
+      ...USER_CHAT_ROUTES,
       ...ALERTS_ROUTES,
       ...ORGANIZATION_MENU_ROUTES,
       ...SEARCH_ROUTES,

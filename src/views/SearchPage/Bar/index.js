@@ -169,7 +169,7 @@ const setTypeEvent = (page, type) => (e) => {
 };
 
 class Bar extends Page {
-
+  #lastPath;
   constructor(props) {
     super(props);
     this.props.searchId = uuid();
@@ -210,8 +210,20 @@ class Bar extends Page {
 
     const {type, request, since, desc} = getSearchParameters();
 
-    console.log({type, request, since, desc});
     if (!(type || request || since || desc)) {
+      all.classList.add('selected');
+      this.props.setStore((s) => ({
+        bar: {
+          ...s.bar,
+          raw: {
+            type: '',
+            since: 0,
+            desc: '',
+            requestBody: ''
+          },
+        },
+      }));
+      findEvent();
       return;
     }
     search.firstChild.firstChild.value = request || '';
@@ -226,7 +238,7 @@ class Bar extends Page {
         },
       },
     }));
-    if (type === '') {
+    if (!type || type === '') {
       all.classList.add('selected');
     } else if (type === 'person') {
       users.classList.add('selected');

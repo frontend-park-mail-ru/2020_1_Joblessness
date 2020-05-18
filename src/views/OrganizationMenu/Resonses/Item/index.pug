@@ -8,8 +8,8 @@ div.responses-item--body
             +avatar(noSelect=true src=locals.item.avatar).small
             span #{locals.item.firstName} #{locals.item.lastName} @#{locals.item.tag}
         div.buttons
-            +link(href="/vacancies/" + locals.item.vacancyId).black-link В
-            +link(href="/summaries/" + locals.item.summaryId).black-link Р
+            +link(href="/vacancies/" + locals.item.vacancyId id=locals.vacId).black-link В
+            +link(href="/summaries/" + locals.item.summaryId id=locals.sumId).black-link Р
     div.flex-1
     div.menu
         div.message

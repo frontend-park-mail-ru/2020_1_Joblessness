@@ -117,10 +117,10 @@ const initValues = (page, fields) => {
   const {institution, speciality, graduated, type} =
     page.props.getStore().education.raw.find((i) => i.id === page.props.info.id);
   //
-  institutionField.value = institution;
-  specialityField.value = speciality;
-  graduatedField.value = graduated;
-  typeField.value = type;
+  institutionField.value = institution || '';
+  specialityField.value = speciality || '';
+  graduatedField.value = graduated || '';
+  typeField.value = type || '';
 };
 
 
@@ -138,7 +138,7 @@ const initEvents = (page, fields) => {
   updateEvent(page, 'graduated', graduatedField,
       raiseWarn(n => 1900 <= parseInt(n) && parseInt(n) <= new Date().getFullYear() + 10, 'Год YYYY'), n => 1900 <= parseInt(n) && parseInt(n) <= new Date().getFullYear() + 10);
   updateEvent(page, 'type', typeField,
-      raiseWarn((s) => s.length <= 30, 'До 30 символов'), (s) => s.length <= 10);
+      raiseWarn((s) => s.length <= 30, 'До 30 символов'), (s) => s.length <= 30);
 };
 
 const raiseWarn = (validator, msg) => (v, el) => {

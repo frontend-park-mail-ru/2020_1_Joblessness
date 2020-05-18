@@ -1,0 +1,65 @@
+@import "../../CONSTANTS"
+.user-chat
+  &.hidden
+    display: none !important
+  position: fixed
+  bottom: 0
+  right: 0
+  z-index: 1000
+  width: 50px
+  height: 50px
+  background: white
+  display: flex
+  flex-direction: column
+  justify-content: stretch
+  align-items: stretch
+  border-radius: 50px 0 0 0
+  transition: .3s
+  &--body
+    padding-top: 50px
+    display: flex
+    overflow: scroll
+    flex: 1
+    justify-content: center
+    transform: scale(0)
+  @include SECTION_SHADOW
+  &.visible
+    .user-chat--body
+      transform: scale(1)
+    width: 300px
+    height: 80vh
+    background: white
+    border-radius: 20px 20px 0 0
+    margin-right: 10px
+    transition: .3s
+    @media(max-width: 600px)
+      width: 100%
+    @media(max-height: 500px)
+      height: 100%
+  &--hide
+    position: absolute
+    top: 10px
+    left: 10px
+    width: 30px
+    font-size: 30px
+    height: 30px
+    display: flex
+    justify-content: center
+    align-items: center
+    opacity: .5
+    transition: .2s ease-in-out
+    &:hover
+      font-size: 35px
+      opacity: .9
+    &:active
+      font-size: 25px
+      opacity: 1
+    &:before
+      cursor: pointer
+      content: '×'
+.chat--display
+  flex:  1
+  display: flex
+  justify-content: stretch
+  align-items: stretch
+  flex-direction: column

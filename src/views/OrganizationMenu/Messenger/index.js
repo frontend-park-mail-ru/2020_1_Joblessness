@@ -1,6 +1,5 @@
 import {Page} from '../../../Page';
 import withLocalStore from '../localStore';
-import {uuid} from '../../../ulils';
 import template from './index.pug'
 import './style.sass'
 class Messenger extends Page {
@@ -19,8 +18,4 @@ Messenger = withLocalStore(Messenger, {
 });
 export {
   Messenger
-}
-
-export const openDialog = (id) => {
-  console.log(id)
 }

@@ -1,4 +1,5 @@
 import {DOMAIN} from './ulils/request';
+import {ORGANIZATION} from './CONSTANTS';
 // const wsDomain = DOMAIN.replace('https://', 'wss://');
 // export default () => {
 //   try {
@@ -71,4 +72,11 @@ class Socket {
 }
 
 const ws = new Socket('api/chat');
+ws.subscribe({
+  onMessage: (m) => {
+    if(!m.userTwo) {
+      alert(m.message);
+    }
+  }
+});
 export default ws
