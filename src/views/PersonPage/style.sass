@@ -5,6 +5,7 @@
   display: flex
   @media(max-width: 800px)
     flex-direction: column
+
   .tag
     color: $GRAY
     background: none
@@ -23,14 +24,14 @@ $FADING: rgba(255, 255, 255, .5)
     background: $FADING
     color: rgba(0, 0, 0, .7) !important
 
-  .sections-holder--item
+  &--item
     text-align: center
+    cursor: pointer
     flex: 1
     color: rgba(0, 0, 0, .4)
     display: flex
     justify-content: center
     align-items: center
-
     h2
       font-weight: 200
 
@@ -64,6 +65,7 @@ $FADING: rgba(255, 255, 255, .5)
     display: flex
     flex: 1
     align-items: baseline
+
   select
     &:disabled
       color: black
@@ -81,6 +83,7 @@ $FADING: rgba(255, 255, 255, .5)
     background-color: transparent
     background-position: right .7em top 50%, 0 0
     background-size: .65em auto, 100%
+
     &:focus
       outline: none
       border: none
@@ -89,16 +92,21 @@ $FADING: rgba(255, 255, 255, .5)
 .birth-container
   display: flex
   justify-content: space-between
+
   .settings-input
     margin: 0 20px 0 20px
+
     &:first-child
       margin-left: 0
+
     &:last-child
       margin-right: 0
+
 .birth-tag
   h2
     text-align: left
     margin: 10px 0 0 0
+
     &:first-child
       margin-left: 0
 
@@ -106,6 +114,6 @@ $FADING: rgba(255, 255, 255, .5)
   margin-top: 3px
 
 .empty-message
-  font-size: 10vw!important
+  font-size: 10vw !important
   opacity: .3
   margin: 10px

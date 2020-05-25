@@ -24,6 +24,8 @@ class VacancyPreview extends Page {
     if (!this._wasMount) {
       this._wasMount = true;
       playMountAnimation(parent);
+      if(parent.firstChild)
+        parent.firstChild.style.transformOrigin = 'left center';
       setTimeout(() => addHideAnimation(this), 1);
     } else {
       parent.style.transitionDuration = '0';

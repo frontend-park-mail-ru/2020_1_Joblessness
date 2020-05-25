@@ -1,21 +1,34 @@
 include ../../../../../templates/pug/link
-div.summary-item-holder--body
-    +link(href="/summaries/" + locals.summary.id).summary-item-holder--link.black-link
-        h1.company-name #{locals.summary.name}
-    div.flex-1
+//div.summary-item-holder--body
+//    +link(href="/summaries/" + locals.summary.id).summary-item-holder--link.black-link
+//        h1.company-name #{locals.summary.name}
+//    div.flex-1
+//    div.person--info--location
+//        if locals.summary.salaryFrom
+//            div
+//                p от&nbsp
+//                h2 #{locals.summary.salaryFrom}
+//                if !locals.summary.salaryTo
+//                    p &#8381;
+//                else
+//                    |&nbsp
+//        if locals.summary.salaryTo
+//            div
+//                p до&nbsp
+//                h2 #{locals.summary.salaryTo}
+//                p &#8381;
+//    div.flex-1
+//    +link(href="/vacancies/") Посмотреть
+
+
+div.vacancy-holder--body
+    +link(href="/summaries/" + locals.summary.id).black-link
+        h1 #{locals.summary.name}
     div.person--info--location
         if locals.summary.salaryFrom
-            div
-                p от&nbsp
-                h2 #{locals.summary.salaryFrom}
-                if !locals.summary.salaryTo
-                    p &#8381;
-                else
-                    |&nbsp
+            h2 от #{locals.summary.salaryFrom}&nbsp
         if locals.summary.salaryTo
-            div
-                p до&nbsp
-                h2 #{locals.summary.salaryTo}
-                p &#8381;
-    div.flex-1
-    div.chose-summary(id=locals.selectId) Выбрать
+            h2 до #{locals.summary.salaryTo}&nbsp
+        if locals.summary.salaryFrom || locals.summary.salaryTo
+            h2 &#8381;
+    +link(id=locals.selectId) Выбрать

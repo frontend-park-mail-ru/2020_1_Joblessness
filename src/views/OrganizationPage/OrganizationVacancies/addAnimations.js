@@ -27,12 +27,13 @@ const addHideAnimation = (page, smooth) => {
     const {x, width} = parent.getBoundingClientRect();
     const {x: sX, width: sWidth} = holder.parentNode.getBoundingClientRect();
     let val = 1;
-    let trans = 'center';
-    if (x <= sX) {
-      val = (x - sX + width) / width;
+    let trans = 'center center';
+    const offset = 20;
+    if (x - offset<= sX) {
+      val = (x - offset - sX + width) / width;
       trans = 'right center';
-    } else if (x + width >= sX + sWidth) {
-      val = (sWidth - x + sX) / width;
+    } else if (x + offset + width >= sX + sWidth) {
+      val = (sWidth - x - offset + sX) / width;
       trans = 'left center';
     }
     val = val >= 0 ? val : 0;

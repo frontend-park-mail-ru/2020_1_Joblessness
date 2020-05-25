@@ -69,12 +69,19 @@ class Socket {
   subscribe = (sub) => {
     this.#subs.push(sub)
   }
+  connect = () => {
+    try {
+      this.#ws.close();
+    }catch (e) {
+    }
+    this.createSocket(this.#url);
+  }
 }
 
 const ws = new Socket('api/chat');
 ws.subscribe({
   onMessage: (m) => {
-    if(!m.userTwo) {
+    if(!m.userTwo && m && m.message) {
       alert(m.message);
     }
   }

@@ -5,13 +5,15 @@
     width: 100vw
   justify-content: flex-start
   &--holder
+    @media(min-width: 800px)
+      margin: 0 -20px 0 -20px
     overflow-x: scroll
     overflow-y: hidden
   &--body
     display: flex
     flex-direction: row
   &--separator
-    padding: 15px
+    padding: 10px
 
 .preview
   padding: 10px

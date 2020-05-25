@@ -1,0 +1,13 @@
+include user
+include org
+include unauth
+div.nav-bar--body
+    div.flex-3.flex
+    +link(href="/search").nav-bar--logo
+    div.flex-1.flex
+    if(locals.user.role === 'PERSON')
+        +user
+    else if(locals.user.role === 'ORGANIZATION')
+        +organization
+    else
+        +unauthenticated

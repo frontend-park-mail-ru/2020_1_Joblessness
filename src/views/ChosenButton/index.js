@@ -14,8 +14,6 @@ const getCurrentId = () => Number(window.location.pathname.replace(/\D/g, ''));
 
 class ChosenButton extends Page {
   #elemId;
-  #prevElem;
-  #prevEvent;
 
   constructor(props) {
     super(props);
@@ -24,22 +22,17 @@ class ChosenButton extends Page {
 
   render() {
     return template({
-      ...this.props,
       elemId: this.#elemId,
     });
   }
 
   componentWillUpdate() {
     super.componentWillUpdate();
-    if (this.#prevElem) {
-      this.#prevElem.removeEventListener('click', this.#prevEvent);
-    }
     if (currentSession.user.role === UNAUTHORISED ||
       currentSession.user.role === ORGANIZATION ||
       (!isOrgPage() && !isUserPage()) ||
-      currentSession.user.id === getCurrentId()) {
-      const holder = document.querySelector(this.container);
-      holder.style.display = 'none';
+      (!getCurrentId() || currentSession.user.id === getCurrentId())) {
+      this.getContainer().style.display = 'none';
     }
   }
 
@@ -53,11 +46,7 @@ class ChosenButton extends Page {
       .then(async (r) => {
         const res = await r.json();
         if (res.like) {
-          this.#prevElem =
-            document
-              .getElementById(this.#elemId)
-              .classList
-              .remove('not-chosen')
+          document.getElementById(this.#elemId).classList.remove('not-chosen')
         }
       })
       .catch(() => {
@@ -66,19 +55,12 @@ class ChosenButton extends Page {
 
   componentDidMount() {
     super.componentDidMount();
-    if (this.#prevElem) {
-      this.#prevElem.onclick = null //('click', this.#prevEvent);
-    }
     if (currentSession.user.role === UNAUTHORISED ||
       (!isOrgPage() && !isUserPage()) ||
       currentSession.user.id === getCurrentId()) {
-      const holder = document.querySelector(this.container);
-      holder.style.display = 'none';
+      this.getContainer().style.display = 'none';
     } else {
-      this.#prevElem = document.getElementById(this.#elemId);
-      this.#prevEvent = toggleEvent(this);
-      this.#prevElem.onclick = this.#prevEvent;// addEventListener('click', this.#prevEvent);
-
+      document.getElementById(this.#elemId).addEventListener('click', toggleEvent(this));
     }
   }
 

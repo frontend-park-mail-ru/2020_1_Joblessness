@@ -140,10 +140,6 @@ class Navigator {
     };
     window.linkGo = (e) => {
       e = e.replace(/&amp;amp;/g, '&');
-      if (e[0] === '?') {
-        this.showPage(e);
-        this.updateAllPages();
-      }
       if(e === '/') {
         this.showPage('/?');
       }
@@ -166,6 +162,7 @@ class Navigator {
    */
   updateAllPages() {
     this.showPage(window.location.pathname);
+    // this.showPage(window.location.pathname, false);
   }
   _parseObjectRoute = (route) => {
     if ( route ) {

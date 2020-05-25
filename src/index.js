@@ -18,7 +18,6 @@ import './styles/index.sass';
 import './views/legacy-sum.sass';
 import ws from './ws';
 
-
 /**
  * Init
  */
@@ -66,9 +65,8 @@ class App {
 const createApp = async () => {
   init();
   await loginOnReload();
-  // currentSession.session = {id: 12, role : 'ORGANIZATION'};
-  // ws();
-  // currentSession.session = {id: 13, role: 'PERSON'};
+  // currentSession.session = {id: 35, role : 'ORGANIZATION'};
+  currentSession.session = {id: 36, role: 'PERSON'};
   new App();
 };
 

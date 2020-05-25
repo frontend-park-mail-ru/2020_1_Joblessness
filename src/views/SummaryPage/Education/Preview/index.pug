@@ -1,28 +1,4 @@
-include ../../../../templates/pug/forms
-include ../../../../templates/pug/fields
-
-
-mixin institution(name)
-    div.institution #{name}
-        block
-mixin speciality(name)
-    div.speciality #{name}
-        block
-mixin graduated(year)
-    div.graduated #{year}
-        block
-
-mixin type(type)
-    div.type #{type}
-        block
-mixin form(sum)
-    div.education
-        +institution(sum.institution)
-        +speciality(sum.speciality)
-        div.row
-            +graduated(sum.graduated)
-            +type(sum.type)
-
+include export
 section.preview-mode
     each prev in locals.info
-        +form(prev)(readonly)
+        +education-form(prev)(readonly)

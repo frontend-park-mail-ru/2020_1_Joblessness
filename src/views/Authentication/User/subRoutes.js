@@ -2,8 +2,10 @@ import {SecondStep} from './second-step';
 import {ThirdStep} from './third-step';
 import {ForthStep} from './forth-step';
 import {FifthStep} from './fifth-step';
+import NAVIGATION_ROUTES from '../../Navigation/routes';
 
 const SubRoutes = [
+  ...NAVIGATION_ROUTES,
   {
     path: '^$|^/{1}$',
     next: 'signup/name',

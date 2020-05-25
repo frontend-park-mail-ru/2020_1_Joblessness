@@ -1,9 +1,25 @@
 @charset "UTF-8";
 @import url("https://fonts.googleapis.com/css?family=Istok+Web&display=swap");
-@import url("https://fonts.googleapis.com/css?family=Istok+Web&display=swap");
-@import url("https://fonts.googleapis.com/css?family=Istok+Web&display=swap");
-@import url("https://fonts.googleapis.com/css?family=Istok+Web&display=swap");
-@import url("https://fonts.googleapis.com/css?family=Istok+Web&display=swap");
+@media (min-width: 1200px) {
+  .page--holder {
+    padding-left: 300px;
+  }
+}
+@media (min-width: 1000px) and (max-width: 1200px) {
+  .page--holder {
+    padding-left: 200px;
+  }
+}
+@media (min-width: 800px) and (max-width: 1000px) {
+  .page--holder {
+    padding-left: 0;
+  }
+}
+@media (max-width: 800px) {
+  .page--holder {
+    padding-left: 0;
+  }
+}
 .page {
   display: flex;
   justify-content: stretch;
@@ -13,6 +29,8 @@
 }
 .page--holder {
   flex: 1;
+  align-self: stretch;
+  justify-self: stretch;
   align-items: center;
   display: flex;
   flex-direction: column;
@@ -363,9 +381,17 @@ a.section {
   flex-direction: column;
   padding-bottom: 20px;
 }
-@media (max-width: 800px) {
+@media (max-width: 1000px) {
   .education {
     margin-left: 0;
+  }
+  .education .options-holder {
+    display: none;
+  }
+}
+@media (max-width: 800px) {
+  .education {
+    margin-left: 20px;
   }
   .education .options-holder {
     display: none;
@@ -508,7 +534,23 @@ a.section {
   display: flex;
   margin-left: 76px;
   flex-direction: column;
-  padding-bottom: 20px;
+  padding-bottom: 10px;
+}
+@media (max-width: 1000px) {
+  .experience {
+    margin-left: 0;
+  }
+  .experience .options-holder {
+    display: none;
+  }
+}
+@media (max-width: 800px) {
+  .experience {
+    margin-left: 20px;
+  }
+  .experience .options-holder {
+    display: none;
+  }
 }
 .experience .row {
   display: flex;
@@ -728,12 +770,17 @@ a.section {
   overflow-x: scroll;
   overflow-y: hidden;
 }
+@media (min-width: 800px) {
+  .list--holder {
+    margin: 0 -20px 0 -20px;
+  }
+}
 .list--body {
   display: flex;
   flex-direction: row;
 }
 .list--separator {
-  padding: 15px;
+  padding: 10px;
 }
 
 .preview {

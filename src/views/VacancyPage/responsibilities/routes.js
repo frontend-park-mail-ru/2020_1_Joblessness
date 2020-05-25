@@ -66,7 +66,7 @@ const ResponsibilitiesRoutes = createEditor({
       const responsibilities = page.props.getStore().responsibilities;
       responsibilities.preview = responsibilities.raw;
       requestManager.tryChangeVacancy({
-        responsibilities: JSON.stringify(responsibilities),
+        responsibilities: JSON.stringify(responsibilities.preview),
       }, getVacId())
           .then(resolve)
           .catch(reject);

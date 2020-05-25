@@ -33,7 +33,6 @@ const withItems = (Wrapee, props) => {
 
     componentWillMount() {
       super.componentWillMount();
-      console.log([...this.#currentRoutes]);
       if(this.#currentRoutes.length) {
         for(let r of this.#currentRoutes)
         Navigator.removeRoutes(props.createFullRoute(props.listRoute([r])));

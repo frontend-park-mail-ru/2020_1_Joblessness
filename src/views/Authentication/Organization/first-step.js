@@ -3,7 +3,7 @@ import template from './pug/index1.pug';
 import {uuid, currentSession, withForm, request, requestManager} from '../../../ulils';
 import {isLogin, isPassword} from '../../../ulils/validators';
 import {Navigator} from '../../../Navigator';
-
+import ws from '../../../ws';
 /**
  * sign in or sign up subpage
  */
@@ -49,7 +49,7 @@ FirstStep = withForm(FirstStep, {
             ...user,
             role: user.role.toUpperCase(),
           };
-          Navigator.showPage('/index');
+          Navigator.showPage('/search');
         } catch (e) {
           console.log(e);
           alert('Внутренняя ошибка. Повторите попытку позднее');
@@ -66,11 +66,11 @@ FirstStep = withForm(FirstStep, {
                       .then(async (r) => {
                         try {
                           const user = await r.json();
-                          console.log(user);
                           currentSession.session = {
                             ...user,
                             role: user.role.toUpperCase(),
                           };
+                          ws.connect();
                           page.props.requestNext();
                         } catch (e) {
                           console.log(e);
@@ -83,9 +83,8 @@ FirstStep = withForm(FirstStep, {
                     'Повторите попытку позднее'),
                       );
                 })
-                .catch(console.log)
                 .catch((r) =>
-                  alert('Пользователь уже существует или неверный пароль'));
+                  alert('Организация уже существует или неверный пароль'));
           },
       );
 },

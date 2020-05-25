@@ -109,6 +109,19 @@ export class Page {
     return '';
   };
 
+  reset() {
+    // console.log(this.#pageId,
+    // this.#container,
+    // this.#prevRender,
+    // this.#prevProps,
+    // this.#prevContainerDom,
+    // this.#needUpdate,)
+    this.#container.dom = null
+    this.#prevContainerDom = null
+    this.#prevRender = null
+    this.#prevProps = null
+    this.#needUpdate = null
+  }
   /**
    *
    */

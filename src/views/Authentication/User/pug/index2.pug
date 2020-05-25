@@ -11,6 +11,6 @@ div.signup-holder--header
         |в существующую, чтобы легко управлять вашими резюме и откликами работодателей
 +input-field-auth(placeholder="Имя пользователя" autofocus=true id=locals.inputFields.login.id pattern="[1-9]{1,10}")
 +input-field-auth(placeholder="Пароль" type="password" id=locals.inputFields.password.id)
-div.next-button(id=locals.inputFields.submitField.id)
-    h1 Далее
-+link.pad20(href="/organizations/signup").black-link.underline Представитель компании?
+div.next-button.gradient-background.create-button(id=locals.inputFields.submitField.id)
+    div Далее
++link(href="/organizations/signup").submit-button Представитель компании?

@@ -8,7 +8,19 @@ import Item from './Item';
 
 const constructSubRoutes = (childRoutes = []) => [
   {
-    path: '^$|^/{1}$|index|index/',
+    path: '^$|^/$|search',
+    childRoutes,
+  },
+  {
+    path: 'search/vacancies',
+    childRoutes,
+  },
+  {
+    path: 'search/users',
+    childRoutes,
+  },
+  {
+    path: 'search/organizations',
     childRoutes,
   },
 ];

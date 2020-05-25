@@ -3,9 +3,11 @@ import ResponsibilitiesRoutes from './responsibilities/routes';
 import ConditionsRoutes from './conditions/routes';
 import withLocalStore from './localStore';
 import {Main} from './mainInfo';
+import NAVIGATION_ROUTES from '../Navigation/routes'
 const RootPath = 'vacancies/';
 const OrganizationInfo = withLocalStore(OrganizationInfoNoStore);
 const SubRoutes = [
+
   {
     path: 'vacInfo',
     alwaysOn: true,
@@ -16,6 +18,7 @@ const SubRoutes = [
     alwaysOn: true,
     element: new Main('#vacancy_main_info'),
   },
+  ...NAVIGATION_ROUTES,
   ...ResponsibilitiesRoutes,
   ...ConditionsRoutes,
 ];
