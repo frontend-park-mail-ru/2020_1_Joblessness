@@ -4,7 +4,6 @@ div.section
         div.name
             div.name--name #{locals.info.name}
             div.name--tag @#{locals.info.author.tag}
--console.log(locals.info.experiences, locals.info.education)
 if(locals.info.experience && locals.info.experience.length )
     +experience(locals.info.experience)
 if(locals.info.education && locals.info.education.length)

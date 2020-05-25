@@ -32,13 +32,13 @@ const Routes = createLoadableList({
             e.graduated = new Date(e.graduated).getFullYear();
             return e;
           }) || [],
-          experience: raw.experiences.map(e => ({
+          experience: raw.experiences?.map(e => ({
             companyName: e.companyName,
             responsibilities: e.responsibilities,
             role: e.role,
             experienceFrom: new Date(e.start).getFullYear(),
             experienceTo: new Date(e.stop).getFullYear()
-          })),
+          })) || [],
           id: raw.id,
           keywords: raw.keywords,
           name: raw.name,

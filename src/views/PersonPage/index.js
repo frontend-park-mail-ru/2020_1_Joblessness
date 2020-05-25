@@ -31,7 +31,7 @@ class UserPage extends Page {
     if (this.#prevUser !== getUserId()) {
       this.#prevUser = getUserId();
       loadPersonInfo(this);
-      this.props.random = uuid();
+      this.props.needUpdate();
     }
   }
 
@@ -46,6 +46,7 @@ const loadPersonInfo = async (page) => {
     page.props.setStore({
       user: {...user},
     });
+    page.props.random = uuid();
     Navigator.updateAllPages();
   } catch (e) {
     alert('Не удалось загрузить данные пользователя.');
@@ -54,7 +55,6 @@ const loadPersonInfo = async (page) => {
 };
 
 UserPage = withLocalStore(UserPage);
-
 export {
   UserPage,
 };
