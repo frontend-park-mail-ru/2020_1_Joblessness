@@ -1,16 +1,24 @@
 @import "../../CONSTANTS"
 
-.user-name
-  padding: 20px
+//.user-name
+//  padding: 20px
+//  display: flex
+//  @media(max-width: 800px)
+//    flex-direction: column
+//
+//  .tag
+//    color: $GRAY
+//    background: none
+.user--chosen
   display: flex
-  @media(max-width: 800px)
-    flex-direction: column
-
-  .tag
-    color: $GRAY
-    background: none
-
-$FADING: rgba(255, 255, 255, .5)
+  flex-direction: column
+  .section
+    padding: 5px
+$FADING_SELECTED: rgba(255, 255, 255, .5)
+$FADING_SELECTED_HOVER: rgba(255, 255, 255, .5)
+$FADING_SELECTED_CLICK: rgba(255, 255, 255, .6)
+$FADING_HOVER: rgba(255, 255, 255, .1)
+$FADING_CLICK: rgba(255, 255, 255, .2)
 .sections-holder
   width: 100%
   height: 50px
@@ -19,12 +27,15 @@ $FADING: rgba(255, 255, 255, .5)
   @include BACKGROUND_GRADIENT
   justify-content: stretch
   align-items: stretch
-
   .selected
-    background: $FADING
+    background: $FADING_SELECTED
     color: rgba(0, 0, 0, .7) !important
-
+    &:hover
+      background: $FADING_SELECTED_HOVER
+    &:active
+      background: $FADING_SELECTED_CLICK
   &--item
+    user-select: none
     text-align: center
     cursor: pointer
     flex: 1
@@ -32,6 +43,11 @@ $FADING: rgba(255, 255, 255, .5)
     display: flex
     justify-content: center
     align-items: center
+    transition: .3s background
+    &:hover
+      background: $FADING_HOVER
+    &:active
+      background: $FADING_CLICK
     h2
       font-weight: 200
 
@@ -51,11 +67,14 @@ $FADING: rgba(255, 255, 255, .5)
   align-items: baseline
 
 .settings-holder-item--header
-  text-align: right
   margin-right: 20px
   flex: 1
-  flex-grow: 2
-
+  //hyphens: auto
+  text-align: right
+  font-size: 1.25em
+  display: flex
+  align-items: center
+  justify-content: flex-end
 .settings-holder-item--input
   flex: 1
   flex-grow: 5
@@ -92,7 +111,20 @@ $FADING: rgba(255, 255, 255, .5)
 .birth-container
   display: flex
   justify-content: space-between
-
+  flex-wrap: wrap
+  @media(max-width: 349px)
+    .settings-holder-item--header
+      margin-top: 10px
+      margin-bottom: -15px
+      justify-content: flex-start
+  &--body
+    display: flex
+  .day
+    min-width: 35px
+  .month
+    min-width: 35px
+  .year
+    min-width: 70px
   .settings-input
     margin: 0 20px 0 20px
 
@@ -114,6 +146,13 @@ $FADING: rgba(255, 255, 255, .5)
   margin-top: 3px
 
 .empty-message
-  font-size: 10vw !important
+  @media (min-width: 1200px)
+    font-size: 120px
+  @media (max-width: 1000px)
+    width: 450px
+    max-width: calc(100vw - 20px)
+  @media (max-height: 500px)
+    font-size: 20vh
+  font-size: 10vw
   opacity: .3
   margin: 10px

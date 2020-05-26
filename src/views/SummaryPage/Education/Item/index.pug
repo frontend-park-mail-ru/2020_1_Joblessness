@@ -13,7 +13,7 @@ mixin form(sum)
     div.connected
         +field-holder.company-role
             +field-name("Год окончания")
-            +string-field(readonly=attributes.readonly id=sum.graduated size="4")
+            +string-field(readonly=attributes.readonly type="number" min="1900" max=new Date().getFullYear() + 10 id=sum.graduated size="4")
                 div.field-line
         +field-holder.company-role
             +field-name("Тип")

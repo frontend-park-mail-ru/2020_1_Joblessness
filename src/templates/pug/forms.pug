@@ -1,6 +1,6 @@
 mixin input-field
     div.form-input-wrapper(id=attributes.id)
-        input.form-input(type=attributes.type || "text" placeholder=attributes.placeholder value=attributes.value)
+        input.form-input(type=attributes.type || "text" min=attributes.min max=attributes.max placeholder=attributes.placeholder value=attributes.value)
         block
         div.form-input-err
 

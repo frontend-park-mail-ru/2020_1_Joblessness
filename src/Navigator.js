@@ -138,13 +138,14 @@ class Navigator {
         }
       }
     };
-    window.linkGo = (e) => {
-      e = e.replace(/&amp;amp;/g, '&');
-      if(e === '/') {
+    window.linkGo = (url, event) => {
+      event?.preventDefault();
+      url = url.replace(/&amp;amp;/g, '&');
+      if(url === '/') {
         this.showPage('/?');
       }
-      if (e[0] === '/') {
-        this.showPage(e);
+      if (url[0] === '/') {
+        this.showPage(url);
       } else {
         const loc = window.location.pathname.split('/');
         if (loc[loc.length - 1].length === 0) {
@@ -152,7 +153,7 @@ class Navigator {
         }
         loc.pop();
         const l = loc.join('/');
-        this.showPage(l.substr(1) + '/' + e);
+        this.showPage(l.substr(1) + '/' + url);
       }
     };
   }

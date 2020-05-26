@@ -12,14 +12,12 @@ const canEdit = (page) => {
 
 class Main extends Page {
   #nameId;
-  #descriptionId;
   #salaryFromId;
   #salaryToId;
 
   constructor(props) {
     super(props);
     this.#nameId = uuid();
-    this.#descriptionId = uuid();
     this.#salaryFromId = uuid();
     this.#salaryToId = uuid();
   }
@@ -27,7 +25,6 @@ class Main extends Page {
     return template({
       fields: {
         name: this.#nameId,
-        description: this.#descriptionId,
         salaryFrom: this.#salaryFromId,
         salaryTo: this.#salaryToId,
       },
@@ -40,14 +37,12 @@ class Main extends Page {
 
     initValues(this, {
         name: this.#nameId,
-        description: this.#descriptionId,
         salaryFrom: this.#salaryFromId,
         salaryTo: this.#salaryToId,
       },
     );
     initEvents(this, {
       name: this.#nameId,
-      description: this.#descriptionId,
       salaryFrom: this.#salaryFromId,
       salaryTo: this.#salaryToId,
     },
@@ -56,26 +51,21 @@ class Main extends Page {
 }
 const initValues = (page, fields) => {
   const nameField = document.querySelector(`#${fields.name}`);
-  const descriptionField = document.querySelector(`#${fields.description}`);
   const salaryFromField = document.querySelector(`#${fields.salaryFrom}`);
   const salaryToField = document.querySelector(`#${fields.salaryTo}`);
 
-  const {name, description, salaryFrom, salaryTo} = page.props.getStore().mainInfo.preview;
+  const {name, salaryFrom, salaryTo} = page.props.getStore().mainInfo.preview;
   nameField.value = name || '';
-  descriptionField.value = description || '';
   salaryFromField.value = salaryFrom || '';
   salaryToField.value = salaryTo || '';
 };
 const initEvents = (page, fields) => {
   const nameField = document.querySelector(`#${fields.name}`);
-  const descriptionField = document.querySelector(`#${fields.description}`);
   const salaryFromField = document.querySelector(`#${fields.salaryFrom}`);
   const salaryToField = document.querySelector(`#${fields.salaryTo}`);
 
   updateEvent(page, 'name', nameField,
       raiseWarn((s) => s.length >= 1 && s.length <= 25, '1-25 символов'));
-  updateEvent(page, 'description', descriptionField,
-      raiseWarn((s) => s.length <= 30, 'До 30 символов'));
   updateEvent(page, 'salaryFrom', salaryFromField,
       raiseWarn((v) => Number(v) > 0, 'Положительное число'));
   updateEvent(page, 'salaryTo', salaryToField,

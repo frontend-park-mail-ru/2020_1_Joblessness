@@ -31,7 +31,7 @@ class UserPage extends Page {
     if (this.#prevUser !== getUserId()) {
       this.#prevUser = getUserId();
       loadPersonInfo(this);
-      this.props.needUpdate();
+      this.needUpdate();
     }
   }
 

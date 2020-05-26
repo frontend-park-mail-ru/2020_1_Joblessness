@@ -5,6 +5,8 @@ mixin input-field-settings
             style=attributes.style
             autofocus!=attributes.autofocus
             readonly!=attributes.readonly
+            min=attributes.min
+            max=attributes.max
             type=attributes.type || "text"
             placeholder=attributes.placeholder
             value=attributes.value)

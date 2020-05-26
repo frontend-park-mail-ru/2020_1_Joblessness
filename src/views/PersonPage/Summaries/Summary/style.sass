@@ -1,9 +1,14 @@
 .user--summary
+  .section
+    margin-bottom: 10px
   &:hover
     .section
       transition: .1s transform
       transform: scale(1.01)
   .experience, .education
     margin-left: 0
-  .no-pad
+    @media(max-width: 800px)
+      margin-left: 20px
+  .section--title
+    padding-top: 0
     margin-top: 0

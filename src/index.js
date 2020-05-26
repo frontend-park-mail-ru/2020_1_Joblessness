@@ -18,6 +18,13 @@ import './styles/index.sass';
 import './views/legacy-sum.sass';
 import ws from './ws';
 
+window.onload = function () {
+  if(window.innerWidth < 350) {
+    const v = document.getElementById('viewport-width');
+    v.setAttribute('content','width=500');
+  }
+}
+
 /**
  * Init
  */
@@ -66,7 +73,7 @@ const createApp = async () => {
   init();
   await loginOnReload();
   // currentSession.session = {id: 35, role : 'ORGANIZATION'};
-  // currentSession.session = {id: 36, role: 'PERSON'};
+  // currentSession.session = {id: 13, role: 'PERSON'};
   new App();
 };
 

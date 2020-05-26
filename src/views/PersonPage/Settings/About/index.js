@@ -54,13 +54,16 @@ AboutPage = withForm(AboutPage,
         id: uuid(),
         validator: validators.isDay,
         warnMessage: 'DD',
-        defaultValue: (page) => page.props.getStore().user.birthday !== "0001-01-01T00:00:00Z" ? new Date(page.props.getStore().user.birthday).getDate(): '',
+        defaultValue: (page) => page.props.getStore().user.birthday !== "0001-01-01T00:00:00Z" ? new Date(page.props.getStore().user.birthday).getDate() < 10 ?
+          '0' + (new Date(page.props.getStore().user.birthday).getDate()) : new Date(page.props.getStore().user.birthday).getDate() : '',
       },
       month: {
         id: uuid(),
         validator: (s) => validators.isMonthId(Number(s) - 1),
         warnMessage: 'MM',
-        defaultValue: (page) => page.props.getStore().user.birthday !== "0001-01-01T00:00:00Z" ? new Date(page.props.getStore().user.birthday).getMonth() + 1 : '',
+        defaultValue: (page) => page.props.getStore().user.birthday !== "0001-01-01T00:00:00Z" ?
+          new Date(page.props.getStore().user.birthday).getMonth() + 1 < 10 ? '0' + (new Date(page.props.getStore().user.birthday).getMonth() + 1) :
+            new Date(page.props.getStore().user.birthday).getMonth() + 1 : '',
       },
       year: {
         id: uuid(),
@@ -82,7 +85,7 @@ AboutPage = withForm(AboutPage,
       }
       if (form.day && form.year && form.month) {
         const oldBirth = new Date(user.birthday);
-        const newBirth = new Date(Number(form.year), Number(form.month) - 1, Number(form.day) );
+        const newBirth = new Date(Number(form.year), Number(form.month) - 1, Number(form.day) + 1 );
         if (
           oldBirth.getFullYear() === newBirth.getFullYear() &&
         oldBirth.getMonth() === newBirth.getMonth() &&
@@ -92,7 +95,7 @@ AboutPage = withForm(AboutPage,
           delete form.year;
           delete form.month;
         } else {
-          form.birthday = newBirth.toISOString();
+          form.birthday = newBirth.toJSON();
           delete form.day;
           delete form.year;
           delete form.month;

@@ -26,6 +26,27 @@ const Routes = createLoadableList({
       try {
         const r = await requestManager.tryGetUserFavorites(getUserId(), page);
         return await r.json()
+
+        // return [
+        //   {
+        //     avatar: "https://hb.bizmrg.com/imgs-hh/default-avatar.png",
+        //     id: 33,
+        //     innerId: "_50e2mx0m2",
+        //     isPerson: false,
+        //     name: "Ресторан",
+        //     surname: "",
+        //     tag: "restaurant"
+        //   },
+        //   {
+        //     avatar: "https://hb.bizmrg.com/imgs-hh/default-avatar.png",
+        //     id: 33,
+        //     innerId: "_50e2mx0m2",
+        //     isPerson: true,
+        //     name: "Ресторан",
+        //     surname: "",
+        //     tag: "restaurant"
+        //   }
+        // ]
       } catch (e) {
         alert('Не удалось загрузить избранное');
         return null

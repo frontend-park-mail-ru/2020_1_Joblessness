@@ -1,0 +1,26 @@
+@import "../../../CONSTANTS"
+.person--info
+  display: flex
+  align-items: center
+  &--section
+    padding-left: 15px
+  &--avatar
+  &--phone,
+  &--email
+    color: $GRAY
+    font-size: 1.25em
+  &--phone
+    padding-right: 3px
+  &--email:not(:first-child)
+    padding-left: 3px
+    border-left: 1px solid $GRAY
+
+  .name
+    padding: 0
+    &--tag
+      text-indent: 0
+    &--name
+      text-indent: 0
+  &--row
+    align-items: baseline
+    display: flex

@@ -7,13 +7,14 @@ import {getUserId} from '../PersonPage/getUserId';
 import {Navigator} from '../../Navigator';
 import {isCreationPage} from './Education/routes';
 import {ORGANIZATION, PERSON} from '../../CONSTANTS';
-
+import Share from '../../ulils/share';
 
 class SummaryPage extends Page {
   #submitText;
 
   render() {
     return template({
+      link: isCreationPage() ? null : this.props.getStore().user.id === currentSession.user.id ? null : `/users/${this.props.getStore().user.id}`,
       ...this.props,
       id: getSumId(),
       submitText: this.#submitText,
@@ -22,12 +23,14 @@ class SummaryPage extends Page {
 
   componentWillUpdate() {
     super.componentWillUpdate();
-    if (!isCreationPage())
+    if (!isCreationPage()) {
+      console.log('load');
       loadSummary(this);
-    else
+    } else
       this.props.reloadStore();
 
     if (isCreationPage()) {
+      lastLoaded = null;
       if (currentSession.user.role === PERSON) {
         this.#submitText = 'Создать резюме'
       } else {
@@ -37,7 +40,7 @@ class SummaryPage extends Page {
       if (currentSession.user.id === this.props.getStore().user.id) {
         this.#submitText = 'Удалить резюме'
       } else {
-        this.#submitText = ''
+        this.#submitText = 'Поделиться ВКонтакте'
       }
     }
   }
@@ -58,11 +61,28 @@ class SummaryPage extends Page {
     } else {
       if (currentSession.user.id === this.props.getStore().user.id) {
         initDeleteEvent(this);
+      } else {
+        console.log(this.props.getStore())
+        initShareEvent(this);
       }
     }
   }
 }
 
+const initShareEvent = (page) => {
+  const store = page.props.getStore();
+  const info = store.mainInfo.preview;
+  const exp = store.experience.preview.length ? ', опытом работы' : '';
+  const ed = store.education.preview.length ? exp ? ' и образованием.' : ', образованием.' : '';
+  document
+    .querySelector('#create_summary_button')
+    .addEventListener('click', (e) => {
+      Share.vkontakte(`https://hahao.ru/summaries/${getSumId()}`,
+        `Резюме "${info.name}" на сайте HaHaO.RU,
+с желаемой зарплатой от ${info.salaryFrom} до ${info.salaryTo} руб${!(exp || ed) ? '.' : ''}${exp}${exp && !ed ? '.' : ''}${ed}`,
+        store.user.avatar)
+    })
+}
 const initDeleteEvent = (page) => {
   document
     .querySelector('#create_summary_button')
@@ -70,7 +90,7 @@ const initDeleteEvent = (page) => {
       requestManager.tryDeleteSummary(getSumId())
         .then(
           async (r) => {
-            alert('Резюме удалено');
+            alert('Резюме удалено','success');
             Navigator.showPage(`/users/${getUserId()}`);
           }
         )
@@ -85,7 +105,6 @@ const initCreateEvent = (page) => {
     .querySelector('#create_summary_button')
     .addEventListener('click', (e) => {
       const state = page.props.getStore();
-
       let valid = true;
       if (isNaN(state.mainInfo.preview.salaryFrom) || state.mainInfo.preview.salaryFrom === '') {
         valid = false;
@@ -94,6 +113,10 @@ const initCreateEvent = (page) => {
       if (isNaN(state.mainInfo.preview.salaryTo) || state.mainInfo.preview.salaryTo === '') {
         valid = false;
         alert('Не верно указана максимальная заработная плата')
+      }
+      if (state.mainInfo.preview.salaryFrom > state.mainInfo.preview.salaryTo) {
+        valid = false;
+        alert('Минимальная заработная плата не может быть больше максимальной')
       }
       if (!state.mainInfo.preview.name.length > 25 || state.mainInfo.preview.name.length < 1) {
         valid = false;
@@ -110,7 +133,6 @@ const initCreateEvent = (page) => {
       }
       const body = {
         name: state.mainInfo.preview.name.trim(),
-        description: state.mainInfo.preview.description.trim(),
         salaryFrom: Number(state.mainInfo.preview.salaryFrom),
         salaryTo: Number(state.mainInfo.preview.salaryTo),
         keywords: createKeyWords(state),
@@ -132,18 +154,16 @@ const initCreateEvent = (page) => {
       request.post('/api/summaries', body).then(
         async (r) => {
           const res = await r.json();
-          alert('Резюме усепшно создано');
+          alert('Резюме усепшно создано','success');
           page.props.setStore({
             mainInfo: {
               raw: {
                 name: '',
-                description: '',
                 salaryFrom: '',
                 salaryTo: '',
               },
               preview: {
                 name: '',
-                description: '',
                 salaryFrom: '',
                 salaryTo: '',
               },
@@ -236,7 +256,6 @@ const loadSummary = (page) => {
       const sum = await r.json();
       const mainInfo = {
         name: sum.name,
-        description: sum.description,
         salaryFrom: sum.salaryFrom,
         salaryTo: sum.salaryTo,
       };
@@ -283,7 +302,7 @@ const loadSummary = (page) => {
           raw: experience,
         }
       }), () => {
-        page.props.random = uuid();
+        page.needUpdate();
         Navigator.updateAllPages();
       })
     })

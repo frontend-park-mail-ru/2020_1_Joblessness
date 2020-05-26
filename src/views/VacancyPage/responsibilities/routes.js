@@ -58,7 +58,7 @@ const ResponsibilitiesRoutes = createEditor({
       childRoutes,
     },
   ],
-  ON_ITEM_LIMIT : () => {
+  ON_ITEM_LIMIT: () => {
     alert('Не более 5 параграфов')
   },
   onApply: (props, page) => new Promise((resolve, reject) => {
@@ -68,8 +68,8 @@ const ResponsibilitiesRoutes = createEditor({
       requestManager.tryChangeVacancy({
         responsibilities: JSON.stringify(responsibilities.preview),
       }, getVacId())
-          .then(resolve)
-          .catch(reject);
+        .then(resolve)
+        .catch(reject);
     } else {
       resolve();
     }

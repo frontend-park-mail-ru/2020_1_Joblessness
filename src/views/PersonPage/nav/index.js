@@ -108,9 +108,10 @@ const updateLinks = (page) => {
     }
   } else {
     if(r) {
-      r.style.display = 'block';
+      r.style.display = '';
     }
     if(c) {
+      c.style.display = '';
     }
   }
 };

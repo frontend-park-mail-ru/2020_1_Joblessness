@@ -1,4 +1,10 @@
 include export
 section.preview-mode
-    each prev in locals.info
-        +experience-form(prev)(readonly)
+    if(locals.info.length)
+        each prev in locals.info
+            +experience-form(prev)(readonly)
+    else
+        if locals.isCreation
+            span.education--paragraph.creation Нажмите на карандаш, чтобы указать информацию
+        else
+            span.education--paragraph Скоро появится

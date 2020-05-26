@@ -49,13 +49,7 @@ ContactsPage = withForm(ContactsPage,
     (form, page) => {
       const user = page.props.getStore().user;
       form.phone = form.phone?.replace(/[\-()]/g, '');
-      if (!form.email) {
-        delete form.email;
-      }
-      if (!form.phone) {
-        delete form.phone;
-      }
-
+      console.log(form)
       if (form.email === user.email) {
         delete form.email;
       }
@@ -69,11 +63,11 @@ ContactsPage = withForm(ContactsPage,
           .tryChangePerson(form)
           .then((r) => {
             if (form.email && form.phone) {
-              alert('Телефон и email изменены');
+              alert('Телефон и email изменены','success');
             } else if (form.email) {
-              alert('email измененен');
+              alert('email измененен','success');
             } else {
-              alert('Телефон изменен');
+              alert('Телефон изменен','success');
             }
             page.props.setStore((s) => ({
               user: {
@@ -82,7 +76,7 @@ ContactsPage = withForm(ContactsPage,
               },
             }));
             Navigator.updateAllPages();
-          });
+          }).catch(() => alert('Не удалось изменить данные'))
     },
 );
 

@@ -5,9 +5,11 @@ import {withAuthManager} from '../../ulils/AuthManager';
 import {requestManager, uuid} from '../../ulils';
 import {Navigator} from '../../Navigator';
 import withLocalStore from './localStore';
-import {ORGANIZATION, PERSON} from '../../CONSTANTS';
+import {ORGANIZATION, PERSON, UNAUTHORISED} from '../../CONSTANTS';
 import {getVacId} from './getVacId';
 import {isCreationPage} from '../SummaryPage/Education/routes';
+import Share from '../../ulils/share';
+import {getSumId} from '../SummaryPage/localStore';
 
 /**
  * Vacancy creation page
@@ -20,6 +22,7 @@ class CreateVacancyPage extends Page {
 
   render() {
     return template({
+      link : isCreationPage() ? null : currentSession.user.id === this.props.getStore().organization.id ? null : `/organizations/${this.props.getStore().organization.id}`,
       ...this.props.inputFields,
       submitText: this.#submitText,
     });
@@ -46,7 +49,7 @@ class CreateVacancyPage extends Page {
         if (currentSession.user.role !== ORGANIZATION) {
           this.#submitText = 'Откликнуться на вакансию'
         } else {
-          this.#submitText = ''
+          this.#submitText = 'Поделиться ВКонтакте'
         }
       }
     }
@@ -68,13 +71,30 @@ class CreateVacancyPage extends Page {
         } else {
           if(currentSession.user.role === PERSON) {
             initResponseEvent(this);
-          } else {
+          } else if(currentSession.user.role === UNAUTHORISED){
             initSignUpEvent(this);
+          } else {
+            initShareEvent(this);
           }
         }
     }
   }
 }
+
+const initShareEvent = (page) => {
+  const store = page.props.getStore();
+  const info = store.mainInfo.preview;
+
+  document
+    .querySelector('#create_vacancy_button')
+    .addEventListener('click', (e) => {
+      Share.vkontakte(`https://hahao.ru/summaries/${getSumId()}`,
+        `Вакансия "${info.name}" на сайте HaHaO.RU,
+с зарплатой от ${info.salaryFrom} до ${info.salaryTo} руб.`,
+        store.organization.avatar)
+    })
+}
+
 let lastLoaded;
 const loadVacancy = page => {
   if (lastLoaded === getVacId()) {
@@ -201,7 +221,7 @@ const initCreateEvent = page => {
           .tryCreateVacancy(body)
           .then(async(r) => {
             const res = await r.json();
-            alert('Вакансия успешно создана');
+            alert('Вакансия успешно создана','success');
             page.props.setStore({
               responsibilities: {
                 preview: [],
@@ -241,9 +261,10 @@ const initDeleteEvent = page => {
       requestManager
         .tryDeleteVacancy(getVacId())
         .then(() => {
-          alert('Вакансия успешно удалена');
+          alert('Вакансия успешно удалена','success');
           Navigator.showPage(`/organizations/${currentSession.user.id}`)
         })
+        .catch(() => alert('Невозможно удалить вакансию'))
     })
 };
 

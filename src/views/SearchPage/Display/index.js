@@ -2,12 +2,68 @@ import {Page} from '../../../Page';
 import template from './index.pug';
 import './style.sass';
 import {withLocalStore} from '../withLocalStore';
+
 class Display extends Page {
-  #oldEv;
-  #inProgress;
+  #oldSearch
+  #toShow
   render() {
-    return template(this.props.getStore().search);
+    return template(this.#toShow);
   }
+
+  componentWillUpdate() {
+    super.componentWillUpdate();
+    const search = this.props.getStore().search;
+    if(this.#oldSearch === search)
+      return;
+    this.#oldSearch = search;
+    let result = [];
+    let i = 0;// current page
+    let p = 10;// page size
+    let index = 0;
+    while (true) {
+      const orgs = search.organizations;
+      const vacs = search.vacancies;
+      const users = search.persons;
+
+      const page = {
+        organizations: [],
+        persons: [],
+        vacancies: [],
+      };
+
+
+      const minI = Math.min(orgs.length, vacs.length, users.length);
+      for (let ind = i * p; ind < minI; ind++) {
+        page.organizations.push(orgs[ind]);
+        page.vacancies.push(vacs[ind]);
+        page.persons.push(users[ind]);
+      }
+
+      const startInd = minI < i * p ? i * p : minI;
+
+      if (minI < orgs.length) {
+        const endInd = orgs.length > i * p + p ? p + i * p : orgs.length;
+        for (let ind = startInd; ind < endInd; ind++)
+          page.organizations.push(orgs[ind]);
+      }
+      if (minI < vacs.length) {
+        const endInd = vacs.length > i * p + p ? p + i * p : vacs.length;
+        for (let ind = startInd; ind < endInd; ind++)
+          page.vacancies.push(vacs[ind]);
+      }
+      if (minI < users.length) {
+        const endInd = users.length >= i * p + p ? p + i * p : users.length;
+        for (let ind = startInd; ind < endInd; ind++)
+          page.persons.push(users[ind]);
+      }
+      if (!page.persons.length && !page.vacancies.length && !page.organizations.length)
+        break;
+      result.push(page);
+      i++;
+    }
+    this.#toShow = result;
+  }
+
   // componentDidMount() {
   //   super.componentDidMount();
   //   if(this.#oldEv)

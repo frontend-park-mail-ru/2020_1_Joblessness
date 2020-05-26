@@ -1,3 +1,11 @@
 section.preview-mode.responsibility
-    each prev in locals.info
-        div(class= prev.classList.join(" ")) !{prev.text}
+    if(locals.info && locals.info.length)
+        each prev in locals.info
+            div(class= prev.classList.join(" ")) !{prev.text}
+    else
+        span.paragraph
+            |Организация не добавила описание, возможно она сделает это позднее.
+            br
+            |А пока можете насладиться шуткой про котиков:
+        span.paragraph
+            |!{locals.jokes[locals.jokesInd]}

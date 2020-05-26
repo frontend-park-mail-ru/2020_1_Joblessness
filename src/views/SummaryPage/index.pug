@@ -1,11 +1,20 @@
+include ../../templates/pug/link
 if locals.id
     a(href='/api/summaries/' + locals.id + '/print' target="_blank" ).print-summary#print_summary
 else
     div.hidden#print_summary
 section.page--holder
-    div.page--body
-        div.section.maxw100vw
-            section.section--body.pad20#summary_info
+    if(locals.link)
+        +link(href=locals.link).black-link
+            div.page--body
+                div.section.maxw100vw
+                    section.section--body.padlr20
+                        div.person--info#summary_info
+    else
+        div.page--body
+            div.section.maxw100vw
+                section.section--body.padlr20
+                    div.person--info#summary_info
     div.page--body
         h1.section--title Основная информация
         section.section

@@ -72,11 +72,11 @@ BaseInfoPage = withForm(BaseInfoPage,
           .tryChangePerson(form)
           .then(() => {
             if (form.firstName && form.lastName) {
-              alert('Имя и Фамилия изменены');
+              alert('Имя и Фамилия изменены', 'success');
             } else if (form.firstName) {
-              alert('Имя изменено');
+              alert('Имя изменено','success');
             } else {
-              alert('Фамилия изменена');
+              alert('Фамилия изменена','success');
             }
             page.props.setStore((s) => ({
               user: {

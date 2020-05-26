@@ -15,7 +15,7 @@ class Item extends Page {
     const parent = document.querySelector(this.container);
     if (!this._wasMount) {
       this._wasMount = true;
-      playMountAnimation(parent);
+      parent.classList.add('placing')
     } else {
       if (parent) {
         parent.style.transitionDuration = '0';

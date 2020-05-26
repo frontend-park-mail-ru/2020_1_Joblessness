@@ -509,7 +509,7 @@ class RequestManager {
       request
         .put('/api/vacancies/' + slug, form)
         .then((r) => {
-          if (r.status === 200) {
+          if (r.status === 204) {
             resolve(r);
           } else {
             reject(r);

@@ -5,7 +5,7 @@ import {currentSession, fileToB64, uuid} from '../../../ulils';
 import {DOMAIN} from '../../../ulils/request';
 import {Navigator} from '../../../Navigator';
 import {withAuthManager} from '../../../ulils/AuthManager';
-
+import './style.sass'
 /**
  * Organization info subpage
  */

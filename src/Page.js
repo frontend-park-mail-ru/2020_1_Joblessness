@@ -109,18 +109,15 @@ export class Page {
     return '';
   };
 
+  /**
+   * clears all stored data
+   */
   reset() {
-    // console.log(this.#pageId,
-    // this.#container,
-    // this.#prevRender,
-    // this.#prevProps,
-    // this.#prevContainerDom,
-    // this.#needUpdate,)
-    this.#container.dom = null
-    this.#prevContainerDom = null
-    this.#prevRender = null
-    this.#prevProps = null
-    this.#needUpdate = null
+    this.#container.dom = null;
+    this.#prevContainerDom = null;
+    this.#prevRender = null;
+    this.#prevProps = null;
+    this.#needUpdate = null;
   }
   /**
    *
@@ -143,8 +140,7 @@ export class Page {
 
     if (!toShow && toShow !== '' ) {
       console.error(`
-              Render function must return string.
-              Setting innerHTML is not supported anymore!`);
+              Render function must return string!`);
     }
 
     if (this.#needUpdate || this.#prevRender !== toShow ||

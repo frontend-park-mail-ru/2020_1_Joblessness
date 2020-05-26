@@ -5,16 +5,12 @@ mixin form(sum)
     +field-holder.company-name
         +string-field(readonly=attributes.readonly id=sum.name placeholder="Название резюме")
             div.field-line
-    +field-holder.company-role
-        +field-name("Дополнительно")
-        +string-field(readonly=attributes.readonly id=sum.description)
-            div.field-line
     +field-holder.company-experience
         +field-name("Желаемая зарплата от")
-        +string-field(readonly=attributes.readonly id=sum.salaryFrom)
+        +string-field(readonly=attributes.readonly type="number" min="1" max="1000000000" id=sum.salaryFrom)
             div.field-line
         +field-name("до")
-        +string-field(readonly=attributes.readonly id=sum.salaryTo)
+        +string-field(readonly=attributes.readonly type="number" min="1" max="1000000000" id=sum.salaryTo)
             div.field-line
         | &#8381;
 

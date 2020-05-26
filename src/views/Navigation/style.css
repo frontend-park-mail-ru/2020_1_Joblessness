@@ -10,6 +10,7 @@
   padding-top: 280px;
   z-index: 200;
   width: calc((100% - 600px) / 2);
+  max-width: 250px;
   background: rgba(255, 255, 255, 0.1);
   height: 100%;
 }

@@ -21,9 +21,9 @@ const initApplyEvent = (props) => (page) => (e) => {
         },
     ).catch(
         () => {
-          page.props.requestNextNoUpdate(page, PREVIEW, SUBMIT);
-          page.setMode(PREVIEW);
-          // alert('Неудалось обновить данные. Попробуйте еще раз.');
+          // page.props.requestNextNoUpdate(page, PREVIEW, SUBMIT);
+          // page.setMode(PREVIEW);
+          alert('Неудалось обновить данные. Попробуйте еще раз.');
           // page.props.requestNextNoUpdate(page, PREVIEW);
           // page.setMode(PREVIEW);
         },

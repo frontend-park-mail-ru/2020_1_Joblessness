@@ -1,4 +1,20 @@
 @import "../../CONSTANTS"
+@keyframes mount
+  0%
+    opacity: 0
+    transform: scale(0)
+  50%
+    opacity: .0
+    transform: scale(0)
+  80%
+    opacity: 1
+    transform: scale(1.05)
+  100%
+    opacity: 1
+    transform: scale(1)
+.person--info, .organization--info, .chosen-holder
+  animation: mount .4s ease-in-out
+
 .section
   @media(max-width: 800px)
     box-shadow: none
@@ -26,6 +42,7 @@
     justify-content: stretch
     flex-direction: column
     align-items: stretch
+
   &--title
     font-size: 1.5em
     font-weight: 600

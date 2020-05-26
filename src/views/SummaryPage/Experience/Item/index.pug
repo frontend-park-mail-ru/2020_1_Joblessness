@@ -10,10 +10,10 @@ mixin form(sum)
             div.field-line
     +field-holder.company-experience
         +field-name("Работали с")
-        +string-field(readonly=attributes.readonly id=sum.experienceFrom size="4")
+        +string-field(readonly=attributes.readonly type="number" min="1900" max=new Date().getFullYear() id=sum.experienceFrom size="4")
             div.field-line
         +field-name("по")
-        +string-field(readonly=attributes.readonly id=sum.experienceTo size="4")
+        +string-field(readonly=attributes.readonly type="number" min="1900" max=new Date().getFullYear() id=sum.experienceTo size="4")
             div.field-line
     +field-holder.company-role
         +field-name("Обязанности")
