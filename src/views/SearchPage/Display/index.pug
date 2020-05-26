@@ -14,13 +14,13 @@ section.section--body
         if(item.organizations && item.organizations.length)
             span.section--title Организации
             each org in item.organizations
-                +link(href="/organizations/" + org.id id=org.innerId).section.search-item
+                +link(href="/organizations/" + org.id id=org.innerId).section.search-item.start
         if(item.persons && item.persons.length)
             span.section--title Пользователи
             each per in item.persons
-                +link(href="/users/" + per.id id=per.innerId).section.search-item
+                +link(href="/users/" + per.id id=per.innerId).section.search-item.start
         if(item.vacancies && item.vacancies.length)
             span.section--title Вакансии
             each vac in item.vacancies
-                +link(href="/vacancies/" + vac.id id=vac.innerId).section.search-item
+                +link(href="/vacancies/" + vac.id id=vac.innerId).section.search-item.start
         div#search_lower_items
