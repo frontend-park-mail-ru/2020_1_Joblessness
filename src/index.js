@@ -61,7 +61,7 @@ class App {
       ...CREATE_SUMMARY_ROUTES,
       ...CREATE_VACANCY_ROUTES,
       {
-        path: '404',
+        path: '.*',
         element: new NotFoundPage('#root'),
       },
     ];

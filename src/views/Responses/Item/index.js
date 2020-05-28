@@ -3,6 +3,7 @@ import './style.sass';
 import template from './index.pug';
 import {requestManager, uuid, withForm} from '../../../ulils';
 import {Navigator} from '../../../Navigator';
+import {ORGANIZATION} from '../../../CONSTANTS';
 
 class Item extends Page {
   accept;

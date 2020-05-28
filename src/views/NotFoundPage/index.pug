@@ -1,0 +1,8 @@
+include ../../templates/pug/link
+div.page--holder
+    div.page--body.notfound
+        div.page--section--solid
+            div.notfound--man ¯\_(ツ)_/¯
+        div
+            div.notfound--message #{locals.messages[locals.messageId]}
+        +link(href='/search').submit-button На главную

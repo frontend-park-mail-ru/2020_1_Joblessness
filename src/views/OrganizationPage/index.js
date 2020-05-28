@@ -54,7 +54,13 @@ class OrganizationPage extends Page {
             }));
             Navigator.updateAllPages();
           })
-          .catch(console.log);
+          .catch( (e) => {
+            if(e.status === 404 || e.status === 500) {
+              Navigator.showPage('404');
+              return;
+            }
+            console.log(e)
+          });
     }
   }
 }

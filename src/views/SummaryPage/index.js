@@ -58,6 +58,10 @@ class SummaryPage extends Page {
         setTimeout(() => Navigator.showPage('/'), 100);
       }
     } else {
+      if(!getSumId()) {
+        Navigator.showPage('404')
+        return;
+      }
       if (currentSession.user.id === this.props.getStore().user.id) {
         initDeleteEvent(this);
       } else {

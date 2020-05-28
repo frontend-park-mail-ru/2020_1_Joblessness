@@ -66,6 +66,10 @@ class CreateVacancyPage extends Page {
         setTimeout(() => Navigator.showPage('/'), 100);
       }
     } else {
+      if(!getVacId()) {
+        Navigator.showPage('404');
+        return;
+      }
         if (currentSession.user.id === this.props.getStore().organization.id) {
           initDeleteEvent(this);
         } else {

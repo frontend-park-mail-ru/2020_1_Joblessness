@@ -1,0 +1,20 @@
+.notfound {
+  display: flex;
+  align-items: center;
+  margin: auto;
+  justify-content: center;
+}
+.notfound--man {
+  width: 100%;
+  font-size: 100px;
+  text-align: center;
+  color: transparent;
+  background-image: linear-gradient(to right, rgba(10, 207, 254, 0.5) 0%, rgba(73, 90, 255, 0.5) 100%);
+  -webkit-background-clip: text;
+}
+.notfound--message {
+  font-size: 3em;
+  text-align: center;
+}
+
+/*# sourceMappingURL=style.css.map */

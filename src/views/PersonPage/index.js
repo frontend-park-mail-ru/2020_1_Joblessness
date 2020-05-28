@@ -49,6 +49,10 @@ const loadPersonInfo = async (page) => {
     page.props.random = uuid();
     Navigator.updateAllPages();
   } catch (e) {
+    if(e.status === 404 || e.status === 500) {
+      Navigator.showPage('404');
+      return ;
+    }
     alert('Не удалось загрузить данные пользователя.');
     console.log(e);
   }

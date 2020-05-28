@@ -1,9 +1,18 @@
 import {Page} from '../../../Page';
 import template from './index.pug'
+import {ORGANIZATION} from '../../../CONSTANTS';
+import {Navigator} from '../../../Navigator';
 
 class Container extends Page {
   render() {
     return template(this.props)
+  }
+  componentDidMount() {
+    super.componentDidMount();
+    if(currentSession.user.role !== ORGANIZATION) {
+      Navigator.showPage('404');
+      return;
+    }
   }
 }
 
