@@ -1,23 +1,6 @@
 import {DOMAIN} from './ulils/request';
 import {ORGANIZATION} from './CONSTANTS';
-// const wsDomain = DOMAIN.replace('https://', 'wss://');
-// export default () => {
-//   try {
-//     const ws = new WebSocket(`${wsDomain}/api/chat`);
-//     ws.onopen = (e) => {
-//       ws.send('')
-//     };
-//     ws.onmessage = (...msg) => {
-//       try {
-//         alert(JSON.parse(msg[0].data).message);
-//       } catch (e) {
-//         console.log(e)
-//       }
-//     }
-//   } catch (e) {
-//     console.log(e)
-//   }
-// }
+
 const WS_DOMAIN = DOMAIN.replace('https://', 'wss://');
 
 class Socket {
@@ -36,7 +19,7 @@ class Socket {
         const socket = new WebSocket(`${WS_DOMAIN}/${url}`);
         socket.onerror = () => {
           // setTimeout(createWs, 5000)
-        }
+        };
         socket.onopen = () => {
           socket.send('')
           this.#ws = socket;
@@ -50,11 +33,11 @@ class Socket {
     }
     createWs();
   });
-  onClose = (c) => {
+  onClose = async (c) => {
     this.#subs.forEach(s => s.onMessage?.(c));
+    await this.createSocket(this.#url);
   }
   onError = async (e) => {
-    await this.createSocket(this.#url);
     this.#ws.onerror = this.onError;
     this.#ws.send(this.#lastMsg)
   };
@@ -64,17 +47,22 @@ class Socket {
   }
   sendMessage = async (m) => {
     this.#lastMsg = JSON.stringify(m);
-    this.#ws.send(this.#lastMsg)
+    try {
+      this.#ws.send(this.#lastMsg)
+    } catch (e) {
+      await this.createSocket(this.#url);
+      this.#ws.send(this.#lastMsg);
+    }
   }
   subscribe = (sub) => {
     this.#subs.push(sub)
   }
-  connect = () => {
+  connect = async () => {
     try {
       this.#ws.close();
     }catch (e) {
     }
-    this.createSocket(this.#url);
+    await this.createSocket(this.#url);
   }
 }
 

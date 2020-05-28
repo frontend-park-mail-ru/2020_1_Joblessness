@@ -1,0 +1,5 @@
+if(locals.role === 'ORGANIZATION')
+    div.enter-msg#chat_input(contentEditable=true autofocus placeholder='Напишите соискателю')
+else
+    div.enter-msg#chat_input(contentEditable=true placeholder='Напишите организации')
+div.send-msg.hidden#chat_send &#8680;

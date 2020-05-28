@@ -1,24 +1,28 @@
 @import "../../CONSTANTS"
 .user-chat
+  cursor: pointer
+  overflow: hidden
+  &:hover
+    transform: scale(1.05)
   &.hidden
     display: none !important
   position: fixed
   bottom: 0
   right: 0
   z-index: 1000
-  width: 50px
-  height: 50px
+  width: 70px
+  height: 70px
   background: white
   display: flex
   flex-direction: column
   justify-content: stretch
   align-items: stretch
-  border-radius: 50px 0 0 0
+  border-radius: 70px 0 0 0
   transition: .3s
   &--body
+    overflow: hidden
     padding-top: 50px
     display: flex
-    overflow: scroll
     flex: 1
     justify-content: center
     transform: scale(0)
@@ -34,6 +38,7 @@
     transition: .3s
     @media(max-width: 600px)
       width: 100%
+      margin: 0
     @media(max-height: 500px)
       height: 100%
   &--hide
@@ -61,5 +66,33 @@
   flex:  1
   display: flex
   justify-content: stretch
+  overflow: hidden
   align-items: stretch
   flex-direction: column
+
+.user-chat
+  &--icon
+    padding: 10px 0 0 10px
+    width: 70px
+    height: 70px
+    display: flex
+    justify-content: center
+    align-items: center
+    position: fixed
+    transform: scale(.9)
+    opacity: .5
+    transition: scale, opacity .3s
+    &:hover
+      transform: scale(.95)
+      opacity: .6
+    &:active
+      transform: scale(.92)
+      opacity: .7
+
+.user-chat.visible
+  cursor: default
+  &:hover
+    transform: scale(1.0)
+    @include SECTION_SHADOW_ACTIVE
+  .user-chat--icon
+    display: none

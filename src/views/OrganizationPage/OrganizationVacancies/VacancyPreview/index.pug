@@ -7,6 +7,6 @@ div.vacancy-holder--body
         if locals.vacancy.salaryTo
             h2 до #{locals.vacancy.salaryTo}&nbsp
         if locals.vacancy.salaryFrom || locals.vacancy.salaryTo
-            h2 &#8381;
+            i.fas.fa-ruble-sign
     div.flex-1.flex
-    +link(href="/vacancies/" + locals.vacancy.id) Посмотреть
+    div.submit-button Посмотреть

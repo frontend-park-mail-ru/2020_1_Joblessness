@@ -2,7 +2,7 @@ import {Page} from '../../Page';
 import template from './index.pug'
 import './style.sass'
 import {withAuthManager} from '../../ulils/AuthManager';
-import {PERSON} from '../../CONSTANTS';
+import {PERSON, UNAUTHORISED} from '../../CONSTANTS';
 import {Navigator} from '../../Navigator';
 import DIALOGS_ROUTES from './ChatDialogs/routes';
 import DIALOG_ROUTES from './ChatDialog/routes';
@@ -16,8 +16,8 @@ class PersonChat extends Page {
 
   componentDidMount() {
     super.componentDidMount();
-    const el =document.querySelector('#user-chat')
-    if(currentSession.user.role !== PERSON) {
+    const el =document.querySelector('#user-chat');
+    if(currentSession.user.role === UNAUTHORISED) {
       el.classList.add('hidden')
     } else {
       el.classList.remove('hidden')
@@ -26,7 +26,7 @@ class PersonChat extends Page {
       e.stopPropagation()
       if(!this.#shown) {
         this.getContainer().classList.add('visible');
-        setTimeout(() => this.#shown = true, 100)
+        setTimeout(() => this.#shown = true, 100);
         Navigator.addRoutes([
           {
             path: 'userChat',
@@ -44,14 +44,15 @@ class PersonChat extends Page {
       if(this.#shown) {
         this.getContainer().classList.remove('visible')
         setTimeout(() => this.#shown = false, 100)
+        this.needUpdate();
         Navigator.removeRoutes([
           {
             path: 'userChat',
             element: ROOT_ELEMENT,
             alwaysOn: true,
             childRoutes: [
-              ...DIALOGS_ROUTES,
               ...DIALOG_ROUTES,
+              ...DIALOGS_ROUTES,
             ]
           }
         ])

@@ -24,7 +24,6 @@ class SummaryPage extends Page {
   componentWillUpdate() {
     super.componentWillUpdate();
     if (!isCreationPage()) {
-      console.log('load');
       loadSummary(this);
     } else
       this.props.reloadStore();
@@ -62,7 +61,6 @@ class SummaryPage extends Page {
       if (currentSession.user.id === this.props.getStore().user.id) {
         initDeleteEvent(this);
       } else {
-        console.log(this.props.getStore())
         initShareEvent(this);
       }
     }

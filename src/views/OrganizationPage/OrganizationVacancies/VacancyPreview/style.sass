@@ -1,7 +1,14 @@
 @import "../../../../CONSTANTS"
 .vacancy-holder
   margin: 15px 15px 15px 0
-
+  cursor: pointer
+  &:hover
+    transform: scale(1.01)
+    transition: transform .1s
+    .vacancy-holder--body
+      @include SECTION_SHADOW_ACTIVE
+  .submit-button
+    font-size: 1.25em
   &--body
     -moz-hyphens: auto
     -webkit-hyphens: auto

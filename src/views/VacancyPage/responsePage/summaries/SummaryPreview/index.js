@@ -55,7 +55,7 @@ const initResponseEvent = (page, id) => {
     requestManager
         .trySendSummary(getVacId(), page.props.summary.id)
         .then(async (r) => {
-          alert('резюме успешно отправлено');
+          alert('резюме успешно отправлено', 'success');
           Navigator.showPage(`/vacancies/${getVacId()}`);
         }).catch((r) => {
           alert('Не удалось оставить отклик');

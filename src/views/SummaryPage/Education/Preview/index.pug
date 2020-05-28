@@ -5,8 +5,7 @@ section.preview-mode
             +education-form(prev)(readonly)
     else
         if locals.isCreation
-            span.education--paragraph.creation Не забудьте сохранить изменения перед отправкой резюме
+            span.education--paragraph.creation Не забудьте сохранить изменения перед отправкой резюме&nbsp
                 span.gray-message (Данное сообщение не появится в итоговом резюме)
-            //document.getElementById('vk_share_button').innerHTML = VK.Share.button('http://mysite.com', {type: 'link'});
         else
             span.education--paragraph Будет получено

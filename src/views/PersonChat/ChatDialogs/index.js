@@ -7,11 +7,15 @@ import {constructRoute} from '../ChatDialog/routes';
 import DIALOGS_ROUTES from './routes';
 import DIALOG_ROUTES from '../ChatDialog/routes';
 import './style.sass'
+import {ORGANIZATION} from '../../../CONSTANTS';
 
 class Dialogs extends Page {
 
   render() {
-    return template(this.props)
+    return template({
+      ...this.props,
+      isUserTag: currentSession.user.role === ORGANIZATION
+    })
   }
 
   componentDidMount() {
@@ -30,6 +34,7 @@ class Dialogs extends Page {
           }
         }));
         Navigator.addRoutes(constructRoute(DIALOG_ROUTES));
+        Navigator.updateAllPages();
         Navigator.updateAllPages();
       })
     }

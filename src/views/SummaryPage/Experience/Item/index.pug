@@ -3,10 +3,10 @@ include ../../../../templates/pug/fields
 
 mixin form(sum)
     +field-holder.company-name.flex-col
-        +string-field(readonly=attributes.readonly id=sum.companyName placeholder="Название компании")
+        +string-field(readonly=attributes.readonly id=sum.companyName placeholder="Название компании").no-indent
             div.field-line
     +field-holder.company-role
-        +string-field(readonly=attributes.readonly id=sum.role placeholder="Должность")
+        +string-field(readonly=attributes.readonly id=sum.role placeholder="Должность").no-indent
             div.field-line
     +field-holder.company-experience
         +field-name("Работали с")

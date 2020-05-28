@@ -1,9 +1,7 @@
-import {Dialog} from './index';
 import LOAD_MANAGER_ROUTES from './loadManager'
-import {ROOT_ELEMENT} from '../routes';
-export const CONTAINER = '#chat_display';
-export const DISPLAY_ELEMENT = new Dialog(CONTAINER);
-
+import INPUT_ROUTES from './Input'
+import DISPLAY_ROUTES from './Display'
+import DIALOG_ROUTES from './index'
 export const constructRoute = (childRoutes = []) => [
   {
     path: 'userChat',
@@ -11,12 +9,9 @@ export const constructRoute = (childRoutes = []) => [
   }
 ];
 const Routes = [
+  ...DIALOG_ROUTES,
   ...LOAD_MANAGER_ROUTES,
-  {
-    path : 'display',
-    element: DISPLAY_ELEMENT,
-    alwaysOn: true,
-  },
+  ...DISPLAY_ROUTES,
+  ...INPUT_ROUTES,
 ];
-
 export default Routes

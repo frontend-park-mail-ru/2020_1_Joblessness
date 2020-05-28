@@ -1,10 +1,3 @@
-//mixin link
-//    a(href="javascript:;"
-//        onclick="linkGo(\"" + (attributes.href ? attributes.href: window.location.pathname) + "\")"
-//        class=attributes.class
-//        style=attributes.style
-//        id=attributes.id)
-//        block
 mixin link
     a(href=attributes.href
         onclick="linkGo(\"" + (attributes.href ? attributes.href: window.location.pathname) + "\", event)"

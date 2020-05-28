@@ -52,7 +52,7 @@ class App {
       ...ROOT_ROUTES,
       ...USER_CHAT_ROUTES,
       ...ALERTS_ROUTES,
-      ...ORGANIZATION_MENU_ROUTES,
+      // ...ORGANIZATION_MENU_ROUTES,
       ...SEARCH_ROUTES,
       ...AUTHENTICATION_ROUTES,
       ...USER_ROUTES,
@@ -72,7 +72,7 @@ class App {
 const createApp = async () => {
   init();
   await loginOnReload();
-  // currentSession.session = {id: 35, role : 'ORGANIZATION'};
+  // currentSession.session = {id: 46, role : 'ORGANIZATION'};
   // currentSession.session = {id: 13, role: 'PERSON'};
   new App();
 };

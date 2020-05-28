@@ -43,7 +43,9 @@ class NavigationBar extends Page {
       this.getContainer().classList.remove('open');
       mask.classList.remove('open')
     })
-
+    document.querySelector('#nav_bar_back').addEventListener('click', () => {
+      window.history.back()
+    })
     updateContainer(this);
     updateLinks(this);
   }
@@ -86,6 +88,11 @@ const updateLinks = (page) => {
 
   const links = [org, user, auth, start, startVacs, startUsers, vac, sum];
   links.forEach(l => l?.classList.remove(CLASS));
+  if(window.location.pathname.includes('vacancies/') && window.location.pathname.includes('response')) {
+    document.querySelector('#nav_bar_back')?.classList.remove('not-shown')
+  } else {
+    document.querySelector('#nav_bar_back')?.classList.add('not-shown')
+  }
   const current = getCurrentPage();
   if(currentSession.user.role === ORGANIZATION) {
     switch (current) {

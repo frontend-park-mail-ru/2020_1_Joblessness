@@ -10,6 +10,7 @@ const Routes = [
     element: ROOT_ELEMENT,
     alwaysOn: true,
     childRoutes: [
+      // ...DIALOG_ROUTES,
       // ...DIALOGS_ROUTES,
     ]
   }

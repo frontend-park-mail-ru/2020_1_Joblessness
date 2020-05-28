@@ -3,7 +3,7 @@ include ../../../templates/pug/fields
 
 mixin form(sum)
     +field-holder.company-name
-        +string-field(readonly=attributes.readonly id=sum.name placeholder="Название резюме")
+        +string-field(readonly=attributes.readonly id=sum.name placeholder="Название резюме").no-indent
             div.field-line
     +field-holder.company-experience
         +field-name("Желаемая зарплата от")
@@ -12,6 +12,6 @@ mixin form(sum)
         +field-name("до")
         +string-field(readonly=attributes.readonly type="number" min="1" max="1000000000" id=sum.salaryTo)
             div.field-line
-        | &#8381;
+        i.fas.fa-ruble-sign
 
 +form(locals.fields)(readonly=!locals.canEdit)

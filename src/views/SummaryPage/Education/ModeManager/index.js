@@ -1,7 +1,6 @@
 import {Page} from '../../../../Page';
 import template from './index.pug';
 import {withAuthManager} from '../../../../ulils/AuthManager';
-import {getUserId} from '../../../PersonPage/getUserId';
 import {DECLINE, PREVIEW} from '../../../../CONSTANTS';
 
 class ModeManager extends Page {

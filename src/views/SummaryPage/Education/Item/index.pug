@@ -4,11 +4,11 @@ include ../../../../templates/pug/fields
 mixin form(sum)
     +field-holder.company-name.flex-col
         //+field-name("Учебное заведение")
-        +string-field(readonly=attributes.readonly id=sum.institution placeholder="Учебное заведение")
+        +string-field(readonly=attributes.readonly id=sum.institution placeholder="Учебное заведение").no-indent
             div.field-line
     +field-holder.company-name.sub.flex-col
         //+field-name("Специальность")
-        +string-field(readonly=attributes.readonly id=sum.speciality placeholder="Специальность")
+        +string-field(readonly=attributes.readonly id=sum.speciality placeholder="Специальность").no-indent
             div.field-line
     div.connected
         +field-holder.company-role

@@ -1,6 +1,6 @@
 - alerts = locals.alerts.slice(0, 5)
 - hiddenAlerts = locals.alerts.slice(5)
 each alert in alerts
-    div(id=alert.id).alerts--item(class=(alert.type === 'error' ? 'error' : (alert.type==='warn' ? 'warn' : 'success')))
+    div.alerts--item(id=alert.id class=(alert.type === 'error' ? 'error' : (alert.type==='warn' ? 'warn' : 'success')))
 each alert in hiddenAlerts
     div(id=alert.id).hidden.alerts--item

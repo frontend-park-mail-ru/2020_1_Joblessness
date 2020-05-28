@@ -72,7 +72,7 @@ const Routes = createEditor({
         role: false,
         experienceFrom: false,
         experienceTo: false,
-        responsibilities: false,
+        responsibilities: true,
       },
     }),
     init: (page, props) => {

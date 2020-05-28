@@ -15,7 +15,7 @@ class Item extends Page {
       parent.classList.add('placing');
       setTimeout(() => parent.classList.remove('start'), 100);
     } else {
-      setTimeout(() => parent.classList.remove('start'), 10);
+      parent.classList.remove('start')
       if (parent) {
         parent.style.transitionDuration = '0';
       }

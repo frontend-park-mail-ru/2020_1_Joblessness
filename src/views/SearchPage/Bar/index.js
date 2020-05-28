@@ -117,10 +117,12 @@ const clickEvent = (page) => () => {
   page.props.setStore((s) => ({
     bar: {
       ...s.bar,
-      preview: s.bar.raw,
+      preview: {
+        ...s.bar.raw,
+        requestBody: s.bar.raw.requestBody.replace(/#|@/g, '')
+      }
     },
   }));
-
   requestManager.trySearch(page.props.getStore().bar.preview)
     .then(async (r) => {
       const res = await r.json();

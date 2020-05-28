@@ -14,17 +14,43 @@
   background: rgba(255, 255, 255, 0.1);
   height: 100%;
 }
+@media (min-width: 1000px) {
+  .nav-bar--icon {
+    display: none !important;
+  }
+}
+.nav-bar--icon {
+  padding: 10px 10px 0 0;
+  width: 70px;
+  height: 70px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: absolute;
+  margin-left: -8px;
+  transform: scale(0.9);
+  opacity: 0.5;
+  transition: scale, opacity 0.3s;
+}
+.nav-bar--icon:hover {
+  transform: scale(0.95);
+  opacity: 0.6;
+}
+.nav-bar--icon:active {
+  transform: scale(0.92);
+  opacity: 0.7;
+}
 @media (max-width: 1000px) {
   .nav-bar {
     max-width: 300px;
-    width: 0;
-    height: 0;
     bottom: 0;
     top: auto;
     box-shadow: 0px 3px 13px 0px rgba(0, 0, 0, 0.5);
     overflow: hidden;
-    border-radius: 0 50px 0 0;
-    padding: 0 50px 50px 0;
+    border-radius: 0 70px 0 0;
+    padding: 0;
+    width: 70px;
+    height: 70px;
     background: white;
   }
   .nav-bar .nav-bar--body {
@@ -83,7 +109,7 @@
     box-shadow: 0px 3px 13px 0px rgba(0, 0, 0, 0.5);
     background: white;
     overflow: hidden;
-    border-radius: 0 50px 0 0;
+    border-radius: 0 70px 0 0;
     display: flex;
   }
   .nav-bar.open .nav-bar--logo {
@@ -100,7 +126,7 @@
     align-items: stretch;
     height: 100%;
     font-size: 1.5em;
-    margin-bottom: 50px;
+    margin-bottom: 70px;
     transform: scale(1);
   }
 }
@@ -134,6 +160,45 @@
 @media (max-width: 1000px) {
   .nav-bar.user {
     background: white;
+  }
+}
+
+@media (max-width: 1000px) {
+  .nav-bar {
+    cursor: pointer;
+  }
+  .nav-bar:hover {
+    transform: scale(1.05);
+  }
+}
+
+@media (max-width: 1000px) {
+  .nav-bar.open:hover {
+    transform: scale(1);
+    box-shadow: 0px 3px 13px 0px rgba(0, 0, 0, 0.6);
+  }
+}
+
+.nav-bar.open {
+  cursor: default;
+  border-radius: 0;
+}
+@media (max-width: 1000px) {
+  .nav-bar.open:hover {
+    transform: scale(1);
+    box-shadow: 0px 3px 13px 0px rgba(0, 0, 0, 0.6);
+  }
+  .nav-bar.open .nav-bar--icon {
+    display: none;
+  }
+}
+
+.nav-bar--back.not-shown {
+  margin-top: 40px;
+}
+@media (min-width: 1000px) {
+  .nav-bar--back.not-shown {
+    display: none;
   }
 }
 
