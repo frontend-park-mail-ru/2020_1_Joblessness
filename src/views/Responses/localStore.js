@@ -1,11 +1,8 @@
 import {createLocalStore} from '../../ulils';
 
 const withLocalStore = createLocalStore({
-  messenger: {
-    dialogs: [],
-    messages: []
-  }
-}, false, () => `messages/${currentSession.user.id}`, false);
+  responses: [],
+}, true, () => `responses/${currentSession.user.id}`, true);
 export default withLocalStore;
 
 export {

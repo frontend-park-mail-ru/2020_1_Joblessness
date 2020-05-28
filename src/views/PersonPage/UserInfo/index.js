@@ -25,6 +25,8 @@ class UserInfo extends Page {
       itemId: this.#elemId,
       info: this.props.getStore().user,
       currentId: currentSession.user.id,
+      id: (!location.pathname.includes('users')) && location.pathname.replace(/\D+/g, ''),
+      href: (!location.pathname.includes('users')) && this.props.getStore().user.id !== currentSession.user.id && '/users/' + this.props.getStore().user.id
     });
   }
 

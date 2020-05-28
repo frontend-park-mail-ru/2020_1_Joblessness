@@ -5,6 +5,7 @@ import './style.sass'
 import {withAuthManager} from '../../ulils/AuthManager';
 import {currentSession, requestManager} from '../../ulils';
 import {ORGANIZATION, PERSON, UNAUTHORISED} from '../../CONSTANTS';
+import ws from '../../ws';
 
 const USER = 'USER';
 const ORGP = 'ORGP';
@@ -16,6 +17,7 @@ const HOME_VAC = 'HOME_VAC';
 const HOME_ORG = 'HOME_ORG';
 const HOME_USR = 'HOME_USR';
 const CLASS = 'current';
+const RESPS = 'RESPS';
 class NavigationBar extends Page {
   render() {
     return template({
@@ -63,11 +65,13 @@ const signOut = () => {
   requestManager.tryLogout({})
     .then(() => {
       document.getElementById('sign-out')?.removeEventListener('click', signOut);
+      ws.close();
       currentSession.session = null;
       Navigator.showPage('/');
     })
     .catch(() => {
       currentSession.session = null;
+      ws.close();
       Navigator.showPage('/');
     });
 };
@@ -85,8 +89,9 @@ const updateLinks = (page) => {
 
   const vac = container.querySelector('.nav--vac');
   const sum = container.querySelector('.nav--sum');
+  const res = container.querySelector('.nav--res');
 
-  const links = [org, user, auth, start, startVacs, startUsers, vac, sum];
+  const links = [org, res, user, auth, start, startVacs, startUsers, vac, sum];
   links.forEach(l => l?.classList.remove(CLASS));
   if(window.location.pathname.includes('vacancies/') && window.location.pathname.includes('response')) {
     document.querySelector('#nav_bar_back')?.classList.remove('not-shown')
@@ -100,6 +105,7 @@ const updateLinks = (page) => {
       case HOME: updateLink(start); break;
       case HOME_USR: updateLink(startUsers); break;
       case VACC: updateLink(vac); break;
+      case RESPS: updateLink(res); break;
     }
     return;
   }
@@ -126,7 +132,7 @@ const getCurrentPage = () => {
   const path = window.location.pathname;
   // Can be sped up using Regexp groups
   if(path.includes('signup')) return AUTH;
-
+  if(path.includes('responses')) return RESPS;
   if(path.includes('search/vacancies')) return HOME_VAC;
   if(path.includes('search/users')) return HOME_USR;
   if(path.includes('search/organizations')) return HOME_ORG;

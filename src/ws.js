@@ -64,6 +64,13 @@ class Socket {
     }
     await this.createSocket(this.#url);
   }
+  close = () => {
+    try {
+      this.#ws.close();
+    } catch (e) {
+
+    }
+  }
 }
 
 const ws = new Socket('api/chat');

@@ -1,0 +1,44 @@
+include ../../../templates/pug/link
+include ../../../templates/pug/avatar
+mixin input-field-settings
+    div.input-field-auth-holder.settings-input(id=attributes.id)
+        input.fancy-input.no-indent(
+            class=attributes.class
+            style=attributes.style
+            autofocus!=attributes.autofocus
+            readonly!=attributes.readonly
+            type=attributes.type || "text"
+            placeholder=attributes.placeholder
+            value=attributes.value)&attributes(attributes)
+        block
+        div.input-field-auth-holder--line
+        div.form-input-err
+
+div.section
+    +link(href='/users/' + locals.info['user_id']).user-avatar-link.black-link
+        +avatar(noSelect=true src=locals.info.avatar).small
+    span.name
+        span.name--name #{locals.info.firstName}
+        span.name--name #{locals.info.lastName}
+        span.name--tag @#{locals.info.tag}
+    div.responses-item--buttons
+        +link(href="/vacancies/" + locals.info.vacancyId).black-link.responses-item--button
+            i.fab.fa-bootstrap
+        +link(href="/summaries/" + locals.info.summaryId).black-link.responses-item--button
+            i.fas.fa-file-alt
+div.flex-1
+div.menu
+    div.responses-item--main-buttons
+        div.msg(id=locals.selectDateId).interview-button Назначить собеседование
+        div(id=locals.declineId).decline-button Отклонить
+        div(id=locals.acceptId).submit-button Принять
+div.select-date.invisible
+    span.select-date--message Вы можете изменить дату собеседования в любое время
+    div.birth-container.no-wrap
+        +input-field-settings(placeholder="день" type="number" min="1" max="31" id = locals.inputFields.day.id)
+        +input-field-settings(placeholder="месяц" type="number" min="1" max="12" id = locals.inputFields.month.id)
+        +input-field-settings(placeholder="год" type="number"
+            min=new Date().getFullYear() max=new Date().getFullYear() + 1 id = locals.inputFields.year.id)
+    div.responses-item--main-buttons
+        div(id=locals.declineFormId).decline-button Отменить
+        div(id=id = locals.inputFields.submitField.id).submit-button Сохранить

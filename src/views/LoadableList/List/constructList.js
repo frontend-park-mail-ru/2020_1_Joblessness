@@ -45,7 +45,7 @@ const withItems = (Wrapee, props) => {
         .map(i => ({
             path: i.innerId,
             alwaysOn: true,
-            element: updateItem(new props.ListItem(`#${i.innerId}`), i),
+            element: updateItem(new props.ListItem(`#${i.innerId}`), i, props),
           })
         );
       Navigator.addRoutes(props.createFullRoute(props.listRoute(newRoutes)));
@@ -55,8 +55,11 @@ const withItems = (Wrapee, props) => {
   }
 };
 
-const updateItem = (item, info) => {
+const updateItem = (item, info, props) => {
   item.props.info = info;
+  item.props.remove = () => {
+    Navigator.removeRoutes(props.createFullRoute(props.listRoute([info.innerId])))
+  };
   return item;
 }
 

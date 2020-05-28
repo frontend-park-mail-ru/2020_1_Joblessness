@@ -1,15 +1,13 @@
 @import "../../../CONSTANTS"
 .print-summary
-  position: absolute
-  right: 50px
-  top: 50px
-  width: 30px
-  height: 30px
-  border-radius: 50%
-  background: white
+  color: black
   display: flex
+  transition: .1s
   justify-content: center
   align-items: center
-  font-size: 20px
-  color: black
-  @include SECTION_SHADOW
+  font-size: 19px
+  opacity: .5
+  width: 40px
+  height: 40px
+  &:hover
+    opacity: .6

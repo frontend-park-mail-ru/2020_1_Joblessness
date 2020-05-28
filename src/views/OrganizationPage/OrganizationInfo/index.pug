@@ -1,6 +1,6 @@
 include ../../../templates/pug/avatar
 include ../../../templates/pug/phone
-
+include ../../../templates/pug/link
 
 mixin name(name, tag)
     div.name
@@ -13,24 +13,13 @@ if(locals.info.id === locals.currentId)
         +avatar(src=locals.info.avatar id=locals.itemId).medium
 else
     div.organization--info--avatar
-        +avatar(src=locals.info.avatar id=locals.itemId noSelect).medium
+        if(locals.href)
+            +link(href=locals.href)
+                +avatar(src=locals.info.avatar id=locals.itemId noSelect).medium
+        else
+            +avatar(src=locals.info.avatar id=locals.itemId noSelect).medium
 div.organization--info--section
     +name(locals.info.name, locals.info.tag)
     if(locals.info.site)
         a(href='//' + locals.info.site target="_blank" _target="blank").person--info--phone #{locals.info.site}
-
-
-//div.person-info--avatar
-//    if(locals.info.id === locals.currentId)
-//        +avatar(src=locals.info.avatar id=locals.itemId).medium
-//    else
-//        +avatar(src=locals.info.avatar id=locals.itemId noSelect).medium
-//div.person--info--section
-//    +name(locals.info.firstName, locals.info.lastName, locals.info.tag)
-//    div.person--info--row
-//        if(locals.info.phone)
-//            +phone(locals.info.phone).person--info--phone
-//            //span.person--info--sep |
-//        if(locals.info.email)
-//            div.person--info--email
-//                span #{locals.info.email}
+div#chosen_button.chosen-holder

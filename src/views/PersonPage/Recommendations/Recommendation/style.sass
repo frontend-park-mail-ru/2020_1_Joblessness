@@ -1,10 +1,11 @@
 .user--recommendation
   .section
     padding: 5px
-  &:hover
-    .section
-      padding: 5px
-      transition: .1s transform
-      transform: scale(1.01)
+  @media(min-width: 1000px)
+    &:hover
+      .section
+        padding: 5px
+        transition: .1s transform
+        transform: scale(1.01)
   .section--title
     margin-top: 10px

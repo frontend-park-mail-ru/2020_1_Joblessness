@@ -109,11 +109,11 @@ AboutPage = withForm(AboutPage,
         requestManager.tryChangePerson(form)
             .then((r) => {
               if (form.birthday && form.gender) {
-                alert('Пол и дата рождения изменены');
+                alert('Пол и дата рождения изменены', 'success');
               } else if (form.birthday) {
-                alert('Дата рождения изменена');
+                alert('Дата рождения изменена', 'success');
               } else {
-                alert('Пол изменен');
+                alert('Пол изменен', 'success');
               }
               page.props.setStore((s) => ({
                 user: {

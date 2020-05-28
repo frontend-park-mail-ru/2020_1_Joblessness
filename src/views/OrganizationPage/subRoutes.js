@@ -82,12 +82,12 @@ const mainInfoRoutes = createEditor({
 );
 
 const SubRoutes = [
-  ...ChosenButtonRoutes,
   {
     path: 'orgInfo',
     alwaysOn: true,
     element: new OrganizationInfo('#organization_org_info'),
   },
+  ...ChosenButtonRoutes,
   ...mainInfoRoutes,
   ...VacanciesRoutes,
   ...LoadManagerRoutes,

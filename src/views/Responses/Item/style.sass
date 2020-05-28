@@ -1,0 +1,66 @@
+@import "../../../CONSTANTS"
+.responses-item.removing
+  transition-duration: .3s
+.responses-item
+  .section
+    padding: 5px
+    transition: .1s
+  &:hover
+    .section
+      @include SECTION_SHADOW_ACTIVE
+      transform: scale(1.01)
+  &--buttons
+    display: flex
+    flex: 1
+    align-items: flex-end
+    justify-content: space-evenly
+    flex-direction: column
+  &--button
+    display: flex
+    justify-content: center
+    align-items: center
+    width: 26px
+    height: 26px
+    font-size: 18px
+    opacity: .3
+    background-attachment: fixed
+    border-radius: 5px
+    transition: .1s opacity, transform
+    &:hover
+      opacity: .5
+      transform: scale(1.02)
+    &:active
+      opacity: .6
+      transform: scale(1.01)
+  &--main-buttons
+    .invisible
+      display: none
+    margin-top: 10px
+    .submit-button
+      width: auto
+    display: flex
+    justify-content: flex-end
+    align-items: center
+    .decline-button
+      font-size: 1.5em
+      opacity: .5
+      &:hover
+        opacity: .6
+      cursor: pointer
+      margin-right: 10px
+    .interview-button
+      flex: 1
+      cursor: pointer
+      opacity: .5
+      &:hover
+        opacity: .6
+      &:hover
+      font-size: 1.5em
+
+.select-date
+  transition: transform .3s
+  transform-origin: top center
+  &--message
+    font-size: 1.25em
+.select-date.invisible
+  transform: scale(0,0)

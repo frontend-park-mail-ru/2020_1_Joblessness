@@ -1,7 +1,6 @@
 include ../../../SearchPage/Item/org
 include ../../../SearchPage/Item/user
-
-if locals.info.isPerson
+if !locals.info.isPerson
     div.section
         +organization(locals.info)
 else

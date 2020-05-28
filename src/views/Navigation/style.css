@@ -14,7 +14,7 @@
   background: rgba(255, 255, 255, 0.1);
   height: 100%;
 }
-@media (min-width: 1000px) {
+@media (min-width: 1001px) {
   .nav-bar--icon {
     display: none !important;
   }
@@ -88,7 +88,7 @@
   background: rgba(0, 0, 0, 0.1);
 }
 
-@media (min-width: 1000px) {
+@media (min-width: 1001px) {
   .nav-bar--content {
     font-size: 1.25em;
   }
@@ -196,7 +196,7 @@
 .nav-bar--back.not-shown {
   margin-top: 40px;
 }
-@media (min-width: 1000px) {
+@media (min-width: 1001px) {
   .nav-bar--back.not-shown {
     display: none;
   }

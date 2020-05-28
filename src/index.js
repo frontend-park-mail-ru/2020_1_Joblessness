@@ -9,7 +9,7 @@ import CREATE_SUMMARY_ROUTES from './views/SummaryPage/routes';
 import USER_ROUTES from './views/PersonPage/routes';
 import AUTHENTICATION_ROUTES from './views/Authentication/routes';
 import SEARCH_ROUTES from './views/SearchPage/routes';
-import ORGANIZATION_MENU_ROUTES from './views/OrganizationMenu/routes';
+import RESPONSES_ROUTES from './views/Responses/routes'
 import ROOT_ROUTES from './views/RootElement';
 import ALERTS_ROUTES from './views/Alerts';
 import METRICS_ROUTES from './views/Metrics';
@@ -52,7 +52,7 @@ class App {
       ...ROOT_ROUTES,
       ...USER_CHAT_ROUTES,
       ...ALERTS_ROUTES,
-      // ...ORGANIZATION_MENU_ROUTES,
+      ...RESPONSES_ROUTES,
       ...SEARCH_ROUTES,
       ...AUTHENTICATION_ROUTES,
       ...USER_ROUTES,
@@ -72,7 +72,7 @@ class App {
 const createApp = async () => {
   init();
   await loginOnReload();
-  // currentSession.session = {id: 46, role : 'ORGANIZATION'};
+  // currentSession.session = {id: 35, role : 'ORGANIZATION'};
   // currentSession.session = {id: 13, role: 'PERSON'};
   new App();
 };

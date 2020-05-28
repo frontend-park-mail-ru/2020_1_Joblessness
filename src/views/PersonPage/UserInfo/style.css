@@ -1,4 +1,5 @@
 .person--info {
+  box-shadow: none !important;
   display: flex;
   align-items: center;
 }

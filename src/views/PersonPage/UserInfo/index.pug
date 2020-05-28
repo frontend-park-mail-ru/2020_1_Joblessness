@@ -1,18 +1,26 @@
 include ../../../templates/pug/avatar
 include ../../../templates/pug/name
 include ../../../templates/pug/phone
-
+include ../../../templates/pug/link
 div.person-info--avatar
     if(locals.info.id === locals.currentId)
         +avatar(src=locals.info.avatar id=locals.itemId).medium
     else
-        +avatar(src=locals.info.avatar id=locals.itemId noSelect).medium
+        if(locals.href)
+            +link(href=locals.href)
+                +avatar(src=locals.info.avatar id=locals.itemId noSelect).medium
+        else
+            +avatar(src=locals.info.avatar id=locals.itemId noSelect).medium
 div.person--info--section
     +name(locals.info.firstName, locals.info.lastName, locals.info.tag)
     div.person--info--row
         if(locals.info.phone)
             +phone(locals.info.phone).person--info--phone
-            //span.person--info--sep |
         if(locals.info.email)
             div.person--info--email
                 span #{locals.info.email}
+div#chosen_button.chosen-holder
+if locals.id
+    a(href='/api/summaries/' + locals.id + '/print' target="_blank" ).print-summary#print_summary
+else
+    div.hidden#print_summary

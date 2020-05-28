@@ -1,10 +1,11 @@
 .user--summary
   .section
     margin-bottom: 10px
-  &:hover
-    .section
-      transition: .1s transform
-      transform: scale(1.01)
+  @media(min-width: 1000px)
+    &:hover
+      .section
+        transition: .1s transform
+        transform: scale(1.01)
   .experience, .education
     margin-left: 0
     @media(max-width: 800px)

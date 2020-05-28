@@ -29,6 +29,7 @@ class OrganizationInfo extends Page {
       itemId: this.#elemId,
       info: this.props.getStore().organization,
       currentId: currentSession.user.id,
+      href: (!location.pathname.includes('organizations')) && this.props.getStore().organization.id !== currentSession.user.id && '/organizations/' + this.props.getStore().organization.id
     });
   }
 
