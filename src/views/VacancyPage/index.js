@@ -66,10 +66,6 @@ class CreateVacancyPage extends Page {
         setTimeout(() => Navigator.showPage('/'), 100);
       }
     } else {
-      if(!getVacId()) {
-        Navigator.showPage('404');
-        return;
-      }
         if (currentSession.user.id === this.props.getStore().organization.id) {
           initDeleteEvent(this);
         } else {
@@ -137,8 +133,9 @@ const loadVacancy = page => {
       })
     })
     .catch(r => {
-      if(r.status === 404) {
+      if(r.status === 404 || r.status === 500) {
         Navigator.showPage('404');
+        return;
       }
     })
 };
@@ -153,8 +150,15 @@ const loadOrg = (page) => {
           ...org,
         }
       });
+      Navigator.updateAllPages();
     })
-    .catch(console.log);
+    .catch((r) => {
+      if(r.status === 404 || r.status === 500) {
+        Navigator.showPage('404');
+        return;
+      }
+      alert('Невозможно загрузить информацию об организации')
+    });
 };
 const initSignUpEvent = (page) => {
   document
@@ -265,8 +269,10 @@ const initDeleteEvent = page => {
       requestManager
         .tryDeleteVacancy(getVacId())
         .then(() => {
+          Navigator.showPage(`/organizations/${currentSession.user.id}`);
+          lastLoaded = null
           alert('Вакансия успешно удалена','success');
-          Navigator.showPage(`/organizations/${currentSession.user.id}`)
+          return;
         })
         .catch(() => alert('Невозможно удалить вакансию'))
     })

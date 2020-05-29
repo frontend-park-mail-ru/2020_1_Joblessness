@@ -237,6 +237,7 @@ a.section {
 }
 .avatar--body {
   background-size: cover;
+  background-position: center;
   margin: 10px;
   flex: 1;
   border-radius: 50%;

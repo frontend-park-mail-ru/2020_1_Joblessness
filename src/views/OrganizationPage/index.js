@@ -31,6 +31,7 @@ class OrganizationPage extends Page {
   componentDidMount() {
     super.componentDidMount();
     const orgId = getOrgId();
+
     if (this.#prevOrg !== orgId) {
       this.#prevOrg = orgId;
       this.props.reloadStore();

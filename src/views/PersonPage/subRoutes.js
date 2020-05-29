@@ -39,12 +39,12 @@ const SubRoutes = [
     alwaysOn: true,
     element: new UserInfo('#users_info'),
   },
+  ...ChosenButtonRoutes,
   {
     path: 'nav',
     alwaysOn: true,
     element: new NavPage('#users_nav'),
   },
-  ...ChosenButtonRoutes,
   ...SETTINGS_ROUTES,
   ...RECOMMENDATION_ROUTES,
   ...CHOSEN_ROUTES,

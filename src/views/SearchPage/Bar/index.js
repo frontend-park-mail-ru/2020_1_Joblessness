@@ -18,14 +18,17 @@ export function getDocHeight() {
     D.body.clientHeight, D.documentElement.clientHeight,
   );
 }
-
+let isLoading = false;
 const loadOnScroll = (page) => {
   const ev = (e) => {
     if (!document.querySelector('#search_bar')) {
       document.removeEventListener('scroll', ev);
       return;
     }
-    if (window.scrollY + window.innerHeight >= getDocHeight()) {
+    if(isLoading)
+      return;
+    if (window.scrollY + window.innerHeight >= getDocHeight() - 20) {
+      isLoading = true;
       page.props.setStore((s) => ({
         bar: {
           ...s.bar,
@@ -60,6 +63,7 @@ const loadOnScroll = (page) => {
                 },
               },
             }));
+            isLoading = false;
             return;
           }
           page.props.setStore((s) => ({
@@ -69,9 +73,11 @@ const loadOnScroll = (page) => {
               organizations: [...s.search.organizations, ...organizations],
             },
           }));
+          isLoading = false;
           page.props.requestNextNoUpdate();
         })
         .catch((e) => {
+          isLoading = false;
           console.log(e);
           alert('Похоже, сервер недоступен');
         });

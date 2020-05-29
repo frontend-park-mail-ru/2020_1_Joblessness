@@ -66,7 +66,7 @@ const ConditionsRoutes = createEditor({
       const conditions = page.props.getStore().conditions;
       conditions.preview = conditions.raw;
       requestManager.tryChangeVacancy({
-        conditions: JSON.stringify(conditions),
+        conditions: JSON.stringify(conditions.preview),
       }, getVacId())
           .then(resolve)
           .catch(reject);

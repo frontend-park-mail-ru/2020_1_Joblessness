@@ -63,7 +63,7 @@
     transition: .2s
 
   &--item
-    cursor: pointer
+    cursor: pointer !important
     padding: 20px
 
     &:hover
@@ -118,7 +118,7 @@
 .nav-bar--mask
   transition: .3s
   background: rgba(0,0,0,0)
-  z-index: 10
+  z-index: 190
   left: 0
   bottom: 0
   position: fixed
@@ -145,7 +145,6 @@
 
 .nav-bar
   @media(max-width: 1000px)
-    cursor: pointer
     &:hover
       transform: scale(1.05)
 .nav-bar.open

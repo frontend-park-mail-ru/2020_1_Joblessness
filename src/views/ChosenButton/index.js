@@ -31,7 +31,7 @@ class ChosenButton extends Page {
     if (currentSession.user.role === UNAUTHORISED ||
       currentSession.user.role === ORGANIZATION ||
       (!isOrgPage() && !isUserPage()) ||
-      (!getCurrentId() || currentSession.user.id === getCurrentId())) {
+      (!getCurrentId()) || (currentSession.user.id === getCurrentId())) {
       this.getContainer().style.display = 'none';
     }
   }
@@ -55,9 +55,9 @@ class ChosenButton extends Page {
 
   componentDidMount() {
     super.componentDidMount();
-    if (currentSession.user.role === UNAUTHORISED ||
+    if (currentSession.user.role !== PERSON ||
       (!isOrgPage() && !isUserPage()) ||
-      currentSession.user.id === getCurrentId()) {
+      currentSession.user.id === getCurrentId() || !getCurrentId()) {
       this.getContainer().style.display = 'none';
     } else {
       document.getElementById(this.#elemId).addEventListener('click', toggleEvent(this));
