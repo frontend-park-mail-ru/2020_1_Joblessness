@@ -1,6 +1,10 @@
 .search-item
   display: flex
   padding: 0 20px 0 20px
+  @media(min-width: 1000px)
+    &:hover
+      transition: .1s transform
+      transform: scale(1.01)
   &--link
     display: flex
     color: black

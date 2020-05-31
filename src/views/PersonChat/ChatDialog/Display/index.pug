@@ -1,0 +1,24 @@
+-if(locals.messages && locals.messages.length) {
+-for(let i = 1; i < locals.messages.length; i++) {
+-   if(locals.isOrg) {
+-     if(locals.messages[i-1].message === 'Ваше резюме было просмотренно, Вы приглашены на собеседование.')
+-       locals.messages[i-1].message = 'Вы пригласили соискателя на собеседование.'
+-     if(locals.messages[i-1].message === 'Ваше резюме было отклонено.')
+-       locals.messages[i-1].message = 'Вы отклонили резюме соискателя.'
+-     if(locals.messages[i-1].message === 'Ваше резюме было одобрено.')
+-       locals.messages[i-1].message = 'Вы одобрили резюме соискателя.'
+-   }
+-   if(!locals.messages[i].userTwo) {
+-      locals.messages[i].system = true
+-      continue
+-   }
+-   if(locals.messages[i-1].toYou === locals.messages[i].toYou)
+-      locals.messages[i].linked = true
+-}
+- if(!locals.messages[0].userTwo) {
+-   locals.messages[0].system = true
+- }
+-}
+
+each m in locals.messages
+    div.message(class=(m.toYou ? 'to' : 'from') + (m.linked ? ' linked' : '') + (m.system ? ' system' : '')) #{m.message}

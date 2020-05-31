@@ -1,4 +1,4 @@
-export default (o1, o2) => {
+const isEqual = (o1, o2) => {
   if (typeof o1 === 'string' || typeof o1 === 'function' ||
     typeof o1 === 'number' || o1 === null || o1 === undefined) {
     return o1 === o2;
@@ -23,3 +23,4 @@ export default (o1, o2) => {
   }
   return true;
 };
+export default isEqual

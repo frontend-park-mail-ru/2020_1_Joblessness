@@ -5,7 +5,7 @@ import {currentSession, fileToB64, uuid} from '../../../ulils';
 import {DOMAIN} from '../../../ulils/request';
 import {Navigator} from '../../../Navigator';
 import {withAuthManager} from '../../../ulils/AuthManager';
-
+import './style.sass'
 /**
  * Organization info subpage
  */
@@ -25,6 +25,8 @@ class UserInfo extends Page {
       itemId: this.#elemId,
       info: this.props.getStore().user,
       currentId: currentSession.user.id,
+      id: (!location.pathname.includes('users')) && location.pathname.replace(/\D+/g, ''),
+      href: (!location.pathname.includes('users')) && this.props.getStore().user.id !== currentSession.user.id && '/users/' + this.props.getStore().user.id
     });
   }
 

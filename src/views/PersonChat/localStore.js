@@ -5,7 +5,7 @@ const withLocalStore = createLocalStore({
     dialogs: [],
     messages: []
   }
-}, true, () => `messages/${currentSession.user.id}`, true);
+}, false, () => `messages/${currentSession.user.id}`, false);
 export default withLocalStore;
 
 export {

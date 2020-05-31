@@ -12,12 +12,17 @@
   overflow-x: scroll;
   overflow-y: hidden;
 }
+@media (min-width: 800px) {
+  .list--holder {
+    margin: 0 -20px 0 -20px;
+  }
+}
 .list--body {
   display: flex;
   flex-direction: row;
 }
 .list--separator {
-  padding: 15px;
+  padding: 10px;
 }
 
 .preview {
@@ -32,6 +37,46 @@
 }
 .preview--content {
   margin-left: 10px;
+}
+
+.list--warn {
+  height: 250px;
+  font-size: 70px;
+  opacity: 0.3;
+  display: flex;
+  margin: 0;
+  align-items: center;
+  animation: mount-warn 0.4s ease-in-out;
+}
+@media (max-width: 1000px) {
+  .list--warn {
+    width: 450px;
+    max-width: calc(100vw - 20px);
+  }
+}
+@media (max-width: 410px) {
+  .list--warn {
+    display: none;
+  }
+}
+
+@keyframes mount-warn {
+  0% {
+    opacity: 0;
+    transform: scale(0);
+  }
+  50% {
+    opacity: 0;
+    transform: scale(0);
+  }
+  80% {
+    opacity: 0.35;
+    transform: scale(1.05);
+  }
+  100% {
+    opacity: 0.3;
+    transform: scale(1);
+  }
 }
 
 /*# sourceMappingURL=index.css.map */

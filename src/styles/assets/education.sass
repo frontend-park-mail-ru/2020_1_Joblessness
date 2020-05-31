@@ -1,11 +1,19 @@
 @import "../../CONSTANTS"
+.education--paragraph
+  font-size: 1.25em
+  @media (min-width: 1000px)
+    margin-left: 76px
 .education
   display: flex
   margin-left: 76px
   flex-direction: column
   padding-bottom: 20px
-  @media (max-width: 800px)
+  @media (max-width: 1000px)
     margin-left: 0
+    .options-holder
+      display: none
+  @media (max-width: 800px)
+    margin-left: 20px
     .options-holder
       display: none
   .row

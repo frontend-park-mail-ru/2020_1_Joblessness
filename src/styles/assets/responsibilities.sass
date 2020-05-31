@@ -4,7 +4,17 @@
   display: flex
   padding-left: 76px
   flex-direction: column
-
+  .options-holder
+    width: 76px
+  @media (max-width: 1000px)
+    margin-left: 0
+    padding-left: 0
+    .options-holder
+      display: none
+  @media (max-width: 800px)
+    padding-left: 20px
+    .options-holder
+      display: none
 .paragraph-holder.rp.placing
   transition: .3s
   .paragraph-holder--text
@@ -23,7 +33,7 @@
     padding: 0 !important
 
 .paragraph-holder.rp.removing
-  padding-bottom: 0px
+  padding-bottom: 0
   .paragraph-holder--text
     padding-bottom: 0
     transition: .3s

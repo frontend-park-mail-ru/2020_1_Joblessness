@@ -105,7 +105,7 @@ class Navigator {
               .innerHTML = route.element[1]()
           }
         } catch (e) {
-          console.error(e);
+          // console.error(e);
         }
 
         this.showChildren(
@@ -131,24 +131,25 @@ class Navigator {
       }
       for (const route of this.#routes) {
         if (route.path.comp.test(path)) {
-          route.element.requestRender();
+          try {
+            route.element.requestRender();
+          } catch (e) {
+            // console.error(e)
+          }
           this.showChildren(
             route.childRoutes, path.replace(route.path.raw, ''));
           break;
         }
       }
     };
-    window.linkGo = (e) => {
-      e = e.replace(/&amp;amp;/g, '&');
-      if (e[0] === '?') {
-        this.showPage(e);
-        this.updateAllPages();
-      }
-      if(e === '/') {
+    window.linkGo = (url, event) => {
+      event?.preventDefault();
+      url = url.replace(/&amp;amp;/g, '&');
+      if(url === '/') {
         this.showPage('/?');
       }
-      if (e[0] === '/') {
-        this.showPage(e);
+      if (url[0] === '/') {
+        this.showPage(url);
       } else {
         const loc = window.location.pathname.split('/');
         if (loc[loc.length - 1].length === 0) {
@@ -156,7 +157,7 @@ class Navigator {
         }
         loc.pop();
         const l = loc.join('/');
-        this.showPage(l.substr(1) + '/' + e);
+        this.showPage(l.substr(1) + '/' + url);
       }
     };
   }
@@ -166,6 +167,7 @@ class Navigator {
    */
   updateAllPages() {
     this.showPage(window.location.pathname);
+    // this.showPage(window.location.pathname, false);
   }
   _parseObjectRoute = (route) => {
     if ( route ) {

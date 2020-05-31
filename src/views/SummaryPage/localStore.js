@@ -6,13 +6,11 @@ const withLocalStore = createLocalStore({
   mainInfo: {
     raw: {
       name: '',
-      description: '',
       salaryFrom: '',
       salaryTo: '',
     },
     preview: {
       name: '',
-      description: '',
       salaryFrom: '',
       salaryTo: '',
     },

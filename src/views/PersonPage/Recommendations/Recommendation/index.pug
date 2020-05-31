@@ -1,17 +1,16 @@
+include ../../../../templates/pug/avatar
 div.section
-    div.section--body
-        div.name
-            div.name--name #{locals.info.name}
-            div.name--tag ##{locals.info.organization.tag}
-        if(locals.info.responsibilities && locals.info.responsibilities.length)
-            div.preview
-                span.preview--title Обязанности
-                div.preview--content
-                    each r in locals.info.responsibilities
-                        div !{r.text}
-        if(locals.info.conditions && locals.info.conditions.length)
-            div.preview
-                span.preview--title Условия
-                div.preview--content
-                    each r in locals.info.conditions
-                        div !{r.text}
+    +avatar(src=locals.info.organization.avatar noSelect).small
+    div.name
+        div.name--name #{locals.info.name}
+        div.name--tag ##{locals.info.organization.tag}
+if(locals.info.responsibilities && locals.info.responsibilities.length)
+    h1.section--title Обязанности
+    div.paragraph-holder--text
+        each r in locals.info.responsibilities
+            div.paragraph !{r.text}
+if(locals.info.conditions && locals.info.conditions.length)
+    h1.section--title Условия
+    div.paragraph-holder--text
+        each r in locals.info.conditions
+            div.paragraph !{r.text}

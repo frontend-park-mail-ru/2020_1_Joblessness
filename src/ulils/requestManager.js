@@ -509,7 +509,7 @@ class RequestManager {
       request
         .put('/api/vacancies/' + slug, form)
         .then((r) => {
-          if (r.status === 200) {
+          if (r.status === 204) {
             resolve(r);
           } else {
             reject(r);
@@ -730,10 +730,10 @@ class RequestManager {
         }).catch(reject);
     });
   }
-  tryGetDialog(id) {
+  tryGetDialog(id, page = 0) {
     return new Promise((resolve, reject) => {
       request
-        .get(`/api/chat/conversation/${id}`, {})
+        .get(`/api/chat/conversation/${id}?page=${page}`, {})
         .then((r) => {
           if (r.status === 200) {
             resolve(r);

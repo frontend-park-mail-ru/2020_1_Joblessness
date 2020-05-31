@@ -31,10 +31,10 @@ class UserPage extends Page {
     if (this.#prevUser !== getUserId()) {
       this.#prevUser = getUserId();
       loadPersonInfo(this);
-      loadPersonSummaries(this);
-      this.props.random = uuid();
+      this.needUpdate();
     }
   }
+
 }
 
 const loadPersonInfo = async (page) => {
@@ -49,26 +49,15 @@ const loadPersonInfo = async (page) => {
     page.props.random = uuid();
     Navigator.updateAllPages();
   } catch (e) {
+    if(e.status === 404 || e.status === 500) {
+      Navigator.showPage('404');
+      return ;
+    }
     alert('Не удалось загрузить данные пользователя.');
     console.log(e);
   }
 };
 
-const loadPersonSummaries = async (page) => {
-  try {
-    const userId = getUserId();
-    const res = await requestManager.tryGetUserSummaries(userId);
-    const summaries = await res.json();
-    page.props.setStore({
-      summaries: [...summaries],
-    });
-    page.props.random = uuid();
-    Navigator.updateAllPages();
-  } catch (e) {
-    alert('Не удалось загрузить данные пользователя.');
-    console.log(e);
-  }
-};
 UserPage = withLocalStore(UserPage);
 export {
   UserPage,

@@ -1,3 +1,8 @@
 section.preview-mode.responsibility
-    each prev in locals.info
-        div(class= prev.classList.join(" ")) !{prev.text}
+    if(locals.info.length)
+        each prev in locals.info
+            div(class= prev.classList.join(" ")) !{prev.text}
+    else if locals.isCreation
+        div.paragraph Не забудьте сохранить изменения перед созданием вакансии
+    else
+        div.paragraph Свяжитесь с организацией для уточнения условий работы

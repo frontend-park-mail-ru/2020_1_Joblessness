@@ -1,0 +1,17 @@
+include ../../templates/pug/link
+mixin user
+    +link(href="/users/")
+        div.nav-bar--item
+            div.nav-bar--content.nav--user Моя страница
+    +link(href="/search")
+        div.nav-bar--item
+            div.nav-bar--content.nav--home Главная
+    +link(href="/search/vacancies")
+        div.nav-bar--item
+            div.nav-bar--content.nav--vacs Вакансии
+    +link(href="/summaries/create")
+        div.nav-bar--item
+            div.nav-bar--content.nav--sum Создать резюме
+    +link(href="/search")#sign-out
+        div.nav-bar--item
+            div.nav-bar--content Выйти

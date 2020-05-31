@@ -2,6 +2,8 @@ mixin input-field-settings
     div.input-field-auth-holder.settings-input(id=attributes.id)
         input.fancy-input.no-indent(
             class=attributes.class
+            min=attributes.min
+            max=attributes.max
             style=attributes.style
             readonly!=attributes.readonly
             autofocus!=attributes.autofocus
@@ -23,16 +25,3 @@ mixin settings-item(name)
             h2 #{name}
         div.settings-holder-item--input
             +input-field-settings(readonly!=attributes.readonly)
-
-
-div.settings-list
-    +settings-block(title='Базовая информация')
-        +settings-item("Имя")
-        +settings-item("Фамилия")
-    +settings-block(title='Место жительства')
-        +settings-item("Страна")
-        +settings-item("Город")
-        +settings-item("Станция метро")
-    +settings-block(title='Контактная информация')
-        +settings-item("Телефон")
-        +settings-item("Email")

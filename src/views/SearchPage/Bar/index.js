@@ -18,14 +18,17 @@ export function getDocHeight() {
     D.body.clientHeight, D.documentElement.clientHeight,
   );
 }
-
+let isLoading = false;
 const loadOnScroll = (page) => {
   const ev = (e) => {
     if (!document.querySelector('#search_bar')) {
       document.removeEventListener('scroll', ev);
       return;
     }
-    if (window.scrollY + window.innerHeight >= getDocHeight()) {
+    if(isLoading)
+      return;
+    if (window.scrollY + window.innerHeight >= getDocHeight() - 20) {
+      isLoading = true;
       page.props.setStore((s) => ({
         bar: {
           ...s.bar,
@@ -35,8 +38,6 @@ const loadOnScroll = (page) => {
           },
         },
       }));
-      const {type, since, desc, requestBody} = page.props.getStore().bar.preview;
-      Navigator.showPage(window.location.pathname + `?type=${type}&since=${since}&desc=${desc}&request=${requestBody}`, true, false);
       requestManager.trySearch(page.props.getStore().bar.preview)
         .then(async (r) => {
           const res = await r.json();
@@ -62,6 +63,7 @@ const loadOnScroll = (page) => {
                 },
               },
             }));
+            isLoading = false;
             return;
           }
           page.props.setStore((s) => ({
@@ -71,14 +73,15 @@ const loadOnScroll = (page) => {
               organizations: [...s.search.organizations, ...organizations],
             },
           }));
+          isLoading = false;
           page.props.requestNextNoUpdate();
         })
         .catch((e) => {
+          isLoading = false;
           console.log(e);
           alert('Похоже, сервер недоступен');
         });
     }
-    // if(e.scrollTop >= e)
   };
   return ev;
 };
@@ -120,11 +123,12 @@ const clickEvent = (page) => () => {
   page.props.setStore((s) => ({
     bar: {
       ...s.bar,
-      preview: s.bar.raw,
+      preview: {
+        ...s.bar.raw,
+        requestBody: s.bar.raw.requestBody.replace(/#|@/g, '')
+      }
     },
   }));
-  const {type, since, desc, requestBody} = page.props.getStore().bar.preview;
-  Navigator.showPage(window.location.pathname + `?type=${type}&since=${since}&desc=${desc}&request=${requestBody}`, true, false);
   requestManager.trySearch(page.props.getStore().bar.preview)
     .then(async (r) => {
       const res = await r.json();
@@ -137,6 +141,21 @@ const clickEvent = (page) => () => {
         ...p,
         innerId: uuid(),
       })) ?? [];
+      const oldS =  page.props.getStore().search;
+      const items = []
+      if(oldS.organizations) {
+        items.push(...oldS.organizations)
+      }
+      if(oldS.persons) {
+        items.push(...oldS.persons)
+      }
+      if(oldS.vacancies) {
+        items.push(...oldS.vacancies)
+      }
+      for(let i of items) {
+        i.element.reset();
+        delete i.element
+      }
       page.props.setStore({
         search: {
           persons,
@@ -145,6 +164,14 @@ const clickEvent = (page) => () => {
         },
       });
       page.props.requestNextNoUpdate();
+      const type = page.props.getStore().bar.preview.type;
+      const newType = type === 'organization' ? 'organizations' :
+        type === 'vacancy' ? 'vacancies' :
+          type === 'person' ? 'users' : '';
+      if (type === '')
+        Navigator.showPage('/search');
+      else
+        Navigator.showPage('/search/' + newType);
     })
     .catch((e) => {
       console.log(e);
@@ -181,10 +208,19 @@ class Bar extends Page {
     return template(this.props);
   }
 
+  componentWillUpdate() {
+    super.componentWillUpdate();
+    if(window.location.pathname !== this.#lastPath && window.location.pathname !== this.#lastPath + '/' ) {
+      this.#lastPath = window.location.pathname
+      this.needUpdate()
+    }
+  }
+
   componentDidMount() {
     super.componentDidMount();
-    const parent = document.querySelector(this.container);
+
     document.addEventListener('scroll', loadOnScroll(this));
+
     const search = document.getElementById(this.props.searchId);
     const click = document.getElementById(this.props.clickId);
     const typeEl = document.getElementById(this.props.typeId);
@@ -208,37 +244,23 @@ class Bar extends Page {
     orgs.addEventListener('click', setTypeEvent(this, 'organization'));
     vacs.addEventListener('click', setTypeEvent(this, 'vacancy'));
 
-    const {type, request, since, desc} = getSearchParameters();
-
-    if (!(type || request || since || desc)) {
-      all.classList.add('selected');
-      this.props.setStore((s) => ({
-        bar: {
-          ...s.bar,
-          raw: {
-            type: '',
-            since: 0,
-            desc: '',
-            requestBody: ''
-          },
-        },
-      }));
-      findEvent();
-      return;
-    }
-    search.firstChild.firstChild.value = request || '';
+    const type =location.pathname.includes('/vacancies') ? 'vacancy' :
+      location.pathname.includes('/organizations') ? 'organization' :
+        location.pathname.includes('/users') ? 'person' : '';
+    search.firstChild.firstChild.value = this.props.getStore().bar.raw.requestBody || '';
     this.props.setStore((s) => ({
       bar: {
         ...s.bar,
         raw: {
-          type: type ? type : (s.bar.raw.type || ''),
+          type: type,
           since: 0,
-          desc: desc ? desc : (s.bar.raw.desc || ''),
-          requestBody: request ? request : (s.bar.raw.requestBody || ''),
+          desc: (s.bar.raw.desc || ''),
+          requestBody: (s.bar.raw.requestBody || ''),
         },
       },
     }));
-    if (!type || type === '') {
+
+    if (!type) {
       all.classList.add('selected');
     } else if (type === 'person') {
       users.classList.add('selected');

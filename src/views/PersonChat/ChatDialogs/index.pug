@@ -1,9 +1,17 @@
 include ../../../templates/pug/avatar
-if locals.dialogs && locals.dialogs.length
-    each d in locals.dialogs
-        div.chat--item(id=d.elemId)
-            div.chat--item--body
-                +avatar(noSelect=true src=d.avatar).small
-                span #{d.user} @#{d.tag}
-else
-    div Здесь будут отображаться Ваши диалоги
+div#chat_display_load_manager
+div.chat--dialogs
+    if locals.dialogs && locals.dialogs.length
+        each d in locals.dialogs
+            div.chat--item(id=d.elemId)
+                div.chat--item--body
+                    +avatar(noSelect=true src=d.avatar).small.fixed
+                    span.name
+                        span.name--name #{d.user}
+                        span.name--tag #{locals.isUserTag ? '@' : '#'}#{d.tag}
+    else
+        div.messenger--info Здесь будут отображаться Ваши диалоги&nbsp
+            if !locals.isUserTag
+                div.messenger--hint (Чтобы начать диалог с организацией, отправьте ей свое резюме)
+            else
+                div.messenger--hint (Чтобы начался диалог, соискатель должен отправить вам свое резюме)

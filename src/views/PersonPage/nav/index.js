@@ -70,7 +70,7 @@ NavPage = withEvents(NavPage, 'events',
         id: recomendationsId,
         eventName: 'click',
         event: (e, page, id) => {
-          showSubPage('', true);
+          showSubPage('recommendations', true);
         },
       },
     },
@@ -86,18 +86,14 @@ const updateLinks = (page) => {
     case 'settings':
       document.getElementById(settingsId)?.classList.add('selected');
       break;
-    case 'summaries':
-      document.getElementById(summariesId)?.classList.add('selected');
+    case 'recommendations':
+      document.getElementById(recomendationsId)?.classList.add('selected');
       break;
     case 'favourites':
       document.getElementById(favouritesId)?.classList.add('selected');
       break;
     default:
-      if(page.props.user.id !== getUserId()) {
-        showSubPage('summaries');
-      } else {
-        document.getElementById(recomendationsId)?.classList.add('selected');
-      }
+      document.getElementById(summariesId)?.classList.add('selected');
       break;
   }
   const r = document.getElementById(recomendationsId);
@@ -112,9 +108,10 @@ const updateLinks = (page) => {
     }
   } else {
     if(r) {
-      r.style.display = 'block';
+      r.style.display = '';
     }
     if(c) {
+      c.style.display = '';
     }
   }
 };

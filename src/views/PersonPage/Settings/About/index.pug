@@ -3,16 +3,19 @@ include ../shared
 +settings-block(title='О себе')
     div.input-field-auth-holder.settings-input.sex-container
         div.sex-container--body
-            span Пол
-            div
+            div.settings-holder-item--header
+                span Пол
+            div.settings-holder-item--input
                 select(id=locals.inputFields.gender.id disabled=!locals.canChange)
                     each g in locals.GENDERS
                         option(value=g.value selected=Number(g.value) === Number(locals.user.gender)) !{g.meaning}
                 div.input-field-auth-holder--line
     div.birth-tag
-        span Дата рождения
-    div.birth-container
-        +input-field-settings(placeholder="день" readonly=!locals.canChange id=locals.inputFields.day.id)
-        +input-field-settings(placeholder="месяц" readonly=!locals.canChange id=locals.inputFields.month.id)
-        +input-field-settings(placeholder="год" readonly=!locals.canChange id=locals.inputFields.year.id)
+        div.birth-container
+            div.settings-holder-item--header
+                span Дата рождения
+            div.birth-container--body.settings-holder-item--input
+                +input-field-settings(placeholder="день" type="number" min="1" max="31" readonly=!locals.canChange id=locals.inputFields.day.id).day
+                +input-field-settings(placeholder="месяц" type="number" min="1" max="12" readonly=!locals.canChange id=locals.inputFields.month.id).month
+                +input-field-settings(placeholder="год" type="number" min="1900" max=new Date().getFullYear() readonly=!locals.canChange id=locals.inputFields.year.id).year
     div.submit-button.about-submit(id=locals.inputFields.submitField.id) Сохранить

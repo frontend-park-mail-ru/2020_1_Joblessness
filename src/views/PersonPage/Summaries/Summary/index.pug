@@ -1,19 +1,10 @@
+include education
+include experience
 div.section
-    div.section--body
         div.name
             div.name--name #{locals.info.name}
             div.name--tag @#{locals.info.author.tag}
-
-if(locals.info.education && locals.info.education.length)
-    div.preview
-        span.preview--title Образование
-        div.preview--content
-            each r in locals.info.education
-                div !{r}
 if(locals.info.experience && locals.info.experience.length )
-    div.preview
-        span.preview--title Условия
-        div.preview--content
-            each r in locals.info.experience
-                div !{r}
-//
+    +experience(locals.info.experience)
+if(locals.info.education && locals.info.education.length)
+    +education(locals.info.education)

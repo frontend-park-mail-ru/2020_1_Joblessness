@@ -33,7 +33,6 @@ const withItems = (Wrapee, props) => {
 
     componentWillMount() {
       super.componentWillMount();
-      console.log([...this.#currentRoutes]);
       if(this.#currentRoutes.length) {
         for(let r of this.#currentRoutes)
         Navigator.removeRoutes(props.createFullRoute(props.listRoute([r])));
@@ -46,7 +45,7 @@ const withItems = (Wrapee, props) => {
         .map(i => ({
             path: i.innerId,
             alwaysOn: true,
-            element: updateItem(new props.ListItem(`#${i.innerId}`), i),
+            element: updateItem(new props.ListItem(`#${i.innerId}`), i, props),
           })
         );
       Navigator.addRoutes(props.createFullRoute(props.listRoute(newRoutes)));
@@ -56,8 +55,11 @@ const withItems = (Wrapee, props) => {
   }
 };
 
-const updateItem = (item, info) => {
+const updateItem = (item, info, props) => {
   item.props.info = info;
+  item.props.remove = () => {
+    Navigator.removeRoutes(props.createFullRoute(props.listRoute([info.innerId])))
+  };
   return item;
 }
 

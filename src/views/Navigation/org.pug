@@ -1,0 +1,20 @@
+include ../../templates/pug/link
+mixin organization
+    +link(href="/organizations/")
+        div.nav-bar--item
+            div.nav-bar--content.nav--org Моя страница
+    +link(href="/search")
+        div.nav-bar--item
+            div.nav-bar--content.nav--home Главная
+    +link(href="/search/users")
+        div.nav-bar--item
+            div.nav-bar--content.nav--people Соискатели
+    +link(href="/vacancies/create")
+        div.nav-bar--item
+            div.nav-bar--content.nav--vac Создать вакансию
+    +link(href="/responses")
+        div.nav-bar--item
+            div.nav-bar--content.nav--res Отклики
+    +link(href="/search")#sign-out
+        div.nav-bar--item
+            div.nav-bar--content Выйти

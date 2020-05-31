@@ -1,0 +1,37 @@
+.select-date
+  display: flex
+  justify-content: stretch
+  align-items: stretch
+  position: absolute
+  top: 0
+  height: 100%
+  width: 100%
+  left: 0
+  background: rgba(255,255,255,1)
+  z-index: 5
+  &--body
+    flex: 1
+    display: flex
+    flex-direction: column
+    align-items: center
+    justify-content: center
+    padding: 20px
+  .submit-button
+    align-self: flex-end
+.select-date.hidden
+  height: 0
+  width: 0
+  overflow: hidden
+
+@keyframes select-date-an
+  0%
+    height: 0
+    width: 0
+  100%
+    height: 100%
+    width: 100%
+
+.submit--birth
+  max-width: 716px
+  width: 100%
+  //justify-self: flex-end

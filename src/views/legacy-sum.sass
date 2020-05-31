@@ -45,14 +45,30 @@
 
 .responsibilities
   display: flex
-  margin: 5px 0 5px 0
+  margin: 10px 0 5px 0
   padding: 0
+  p:first-child
+    margin-left: 0
   p
-    padding: 3px
-    background: $LIGHT_GRAY_2
+    padding: 5px
+    background: white
+    @include SECTION_SHADOW
     margin: 0 5px 0 5px
     border-radius: 5px
-
+  @media(max-width: 800px)
+    &
+      margin: 0
+    p
+      background: transparent
+      box-shadow: none
+      padding: 0
+      margin: 0 5px 0 0
+      font-size: 1.25em
+      &:after
+        content: ','
+      &:last-child
+        &:after
+          content: ''
 .create-summary-section--body
   flex: 1
 .options
@@ -169,10 +185,6 @@
     b
       font-weight: 600
 
-.responsibilities
-  display: flex
-  margin: 5px 0 5px 0
-  padding: 0
 
 .start-adding
   width: 100%
@@ -313,10 +325,6 @@
     b
       font-weight: 600
 
-.responsibilities
-  display: flex
-  margin: 5px 0 5px 0
-  padding: 0
 .submit-button
   width: 100%
   font-size: 32px

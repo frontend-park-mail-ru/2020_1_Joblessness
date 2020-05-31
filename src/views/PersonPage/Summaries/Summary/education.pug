@@ -1,0 +1,6 @@
+include ../../../SummaryPage/Education/Preview/export
+
+mixin education(edu)
+    h1.section--title Образование
+    each r in edu
+        +education-form(r)(readonly)

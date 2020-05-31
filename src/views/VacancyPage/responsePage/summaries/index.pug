@@ -1,5 +1,6 @@
-
+div.list--separator
 div.create-vacancy.vacancy-holder#create-vacancy-holder
 if locals.summaries
     each vac in locals.summaries
-        div.summary-item-holder(id=vac.innerId)
+        div.vacancy-holder.black-link(id=vac.innerId)
+    div.list--separator

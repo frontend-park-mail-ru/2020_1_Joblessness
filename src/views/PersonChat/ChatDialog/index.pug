@@ -1,23 +1,10 @@
+include ../../../templates/pug/link
 div.chat--header
-    div.back#chat_back &#8592;
-    div.name #{locals.currentPerson && locals.currentPerson.user}
+    div.back#chat_back
+        i.fas.fa-arrow-left
+    if locals.currentPerson && locals.currentPerson.user
+        +link(href=(locals.isOrg ? '/organizations/' : '/users/') + locals.currentPerson.id).black-link.name #{locals.currentPerson && locals.currentPerson.user}
     div
-div.chat--body
-    -if(locals.messages && locals.messages.length) {
-    -for(let i = 1; i < locals.messages.length; i++) {
-    -   if(!locals.messages[i].userTwo) {
-    -      locals.messages[i].system = true
-    -      continue
-    -   }
-    -   if(locals.messages[i-1].toYou === locals.messages[i].toYou)
-    -      locals.messages[i].linked = true
-    -}
-    - if(!locals.messages[0].userTwo) {
-    -   locals.messages[0].system = true
-    - }
-    -}
-    each m in locals.messages
-        div.message(class=(m.toYou ? 'to' : 'from') + (m.linked ? ' linked' : '') + (m.system ? ' system' : '')) #{m.message}
-div.chat--write
-    div.enter-msg#chat_input(contentEditable=true placeholder='Напишите организации')
-    div.send-msg.hidden#chat_send &#8680;
+div.chat--body#chat_dialog
+div.chat--write#chat_input_holder
+div(hidden).hidden#chat_dialog_lm

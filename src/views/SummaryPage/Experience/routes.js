@@ -72,7 +72,7 @@ const Routes = createEditor({
         role: false,
         experienceFrom: false,
         experienceTo: false,
-        responsibilities: false,
+        responsibilities: true,
       },
     }),
     init: (page, props) => {
@@ -120,7 +120,6 @@ const initValues = (page, fields) => {
   const experienceToField = document.querySelector(`#${fields.experienceTo}`);
   const responsibilitiesField = document.querySelector(`#${fields.responsibilities}`);
 
-  // console.log(page.props.item, page.props, page.props.getStore().experience.raw);
   const {companyName, role, experienceFrom,
     experienceTo, responsibilities} = page.props.getStore().experience.raw.find((i) => i.id === page.props.info.id);
   //
@@ -141,7 +140,7 @@ const initEvents = (page, fields) => {
 
 
   updateEvent(page, 'companyName', companyNameField,
-      raiseWarn((s) => s.length >= 5 && s.length <= 15, '5-15 символов'), (s) => s.length >= 5 && s.length <= 15);
+      raiseWarn((s) => s.length >= 1 && s.length <= 30, '1-30 символов'), (s) => s.length >= 1 && s.length <= 30);
   updateEvent(page, 'role', roleField,
       raiseWarn((s) => s.length <= 30, 'До 30 символов'), (s) => s.length <= 30);
   updateEvent(page, 'experienceFrom', experienceFromField,
@@ -149,7 +148,7 @@ const initEvents = (page, fields) => {
   updateEvent(page, 'experienceTo', experienceToField,
       raiseWarn(isYear, 'YYYY'), isYear);
   updateEvent(page, 'responsibilities', responsibilitiesField,
-      raiseWarn((s) => /^[a-zA-Z0-9а-яА-ЯёЁ_, ]*$/.test(s), 'Ключевые слова через запятую'), (s) => /^[a-zA-Z0-9а-яА-ЯёЁ_, ]*$/.test(s));
+      raiseWarn((s) => /^[a-zA-Z0-9а-яА-ЯёЁ_.\-, ]*$/.test(s), 'Ключевые слова через запятую'), (s) => /^[a-zA-Z0-9а-яА-ЯёЁ_, ]*$/.test(s));
 };
 
 const raiseWarn = (validator, msg) => (v, el) => {
@@ -184,7 +183,6 @@ const updateEvent = (page, fieldName, el, convert = (v) => v, validate = (v) => 
           },
         }),
     );
-    console.log(page.props.getStore());
   };
   el.addEventListener('input', event);
 };

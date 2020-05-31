@@ -1,18 +1,25 @@
 include ../../../templates/pug/avatar
 include ../../../templates/pug/phone
-
+include ../../../templates/pug/link
 
 mixin name(name, tag)
-    span.name--name #{name || ""}&nbsp
-    if tag
-        span.name--tag @#{tag}&nbsp
+    div.name
+        span.name--name #{name || ""}&nbsp
+        if tag
+            span.name--tag ##{tag}&nbsp
 
 if(locals.info.id === locals.currentId)
-    +avatar(src=locals.info.avatar id=locals.itemId)
+    div.organization--info--avatar
+        +avatar(src=locals.info.avatar id=locals.itemId).medium
 else
-    +avatar(src=locals.info.avatar id=locals.itemId noSelect)
-+name(locals.info.name, locals.info.tag)
-if(locals.info.phone)
-    +phone(locals.info.phone)
-if(locals.info.site)
-    span.site #{locals.info.site}
+    div.organization--info--avatar
+        if(locals.href)
+            +link(href=locals.href)
+                +avatar(src=locals.info.avatar id=locals.itemId noSelect).medium
+        else
+            +avatar(src=locals.info.avatar id=locals.itemId noSelect).medium
+div.organization--info--section
+    +name(locals.info.name, locals.info.tag)
+    if(locals.info.site)
+        a(href='//' + locals.info.site target="_blank" _target="blank").person--info--phone #{locals.info.site}
+div#chosen_button.chosen-holder

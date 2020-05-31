@@ -1,0 +1,34 @@
+.person--info {
+  box-shadow: none !important;
+  display: flex;
+  align-items: center;
+}
+.person--info--section {
+  padding-left: 15px;
+}
+.person--info--phone, .person--info--email {
+  color: #454545;
+  font-size: 1.25em;
+}
+.person--info--phone {
+  padding-right: 3px;
+}
+.person--info--email:not(:first-child) {
+  padding-left: 3px;
+  border-left: 1px solid #454545;
+}
+.person--info .name {
+  padding: 0;
+}
+.person--info .name--tag {
+  text-indent: 0;
+}
+.person--info .name--name {
+  text-indent: 0;
+}
+.person--info--row {
+  align-items: baseline;
+  display: flex;
+}
+
+/*# sourceMappingURL=style.css.map */

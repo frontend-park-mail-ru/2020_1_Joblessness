@@ -5,7 +5,7 @@ mixin name(name, tag)
     div.name
         span.name--name #{name || ""}&nbsp
         if tag
-            span.name--tag @#{tag}&nbsp
+            span.name--tag ##{tag}&nbsp
 
 mixin organization(item)
     +avatar.small(src=item.avatar noSelect)

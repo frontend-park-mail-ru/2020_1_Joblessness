@@ -5,7 +5,7 @@ import template from './pug/index2.pug';
 import {uuid, currentSession, withForm, request} from '../../../ulils';
 import {isLogin, isPassword} from '../../../ulils/validators';
 import {Navigator} from '../../../Navigator';
-// import ws from '../../../ws';
+import ws from '../../../ws';
 
 /**
  * sign in or sign up subpage
@@ -47,15 +47,13 @@ SecondStep = withForm(SecondStep, {
       .then(async (r) => {
         try {
           const user = await r.json();
-          console.log(user);
           currentSession.session = {
             ...user,
             role: user.role.toUpperCase(),
           };
-          // ws();
-          Navigator.showPage('/index');
+          ws.connect();
+          Navigator.showPage('/search');
         } catch (e) {
-          console.log(e, 1);
           alert('Внутренняя ошибка. Повторите попытку позднее');
         }
       })
@@ -71,27 +69,24 @@ SecondStep = withForm(SecondStep, {
                       .then(async (r) => {
                         try {
                           const user = await r.json();
-                          console.log(user);
                           currentSession.session = {
                             ...user,
                             role: user.role.toUpperCase(),
                           };
-                          // ws();
+                          ws.connect();
                           page.props.requestNext();
                         } catch (e) {
-                          console.log(e, 2);
                           alert('Внутренняя ошибка. ' +
                             'Повторите попытку позднее');
                         }
                       })
                       .catch(
-                          (r) => {console.log(r, 3);
+                          (r) => {
                           alert('Внутренняя ошибка. ' +
                             'Повторите попытку позднее')},
                       );
                 })
                 .catch((r) => {
-                  console.log(r, 4);
                   alert('Пользователь уже существует или неверный пароль')
                 });
           },

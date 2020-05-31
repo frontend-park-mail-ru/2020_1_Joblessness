@@ -1,4 +1,20 @@
 @import "../../CONSTANTS"
+@keyframes mount
+  0%
+    opacity: 0
+    transform: scale(0)
+  50%
+    opacity: .0
+    transform: scale(0)
+  80%
+    opacity: 1
+    transform: scale(1.05)
+  100%
+    opacity: 1
+    transform: scale(1)
+.person--info, .organization--info, .chosen-holder
+  animation: mount .4s ease-in-out
+
 .section
   @media(max-width: 800px)
     box-shadow: none
@@ -11,6 +27,10 @@
       background: rgba(255, 255, 255, .7)
   @media(min-width: 1000px)
     max-width: 600px
+  @media(min-width: 1000px)
+    &:hover
+      @include SECTION_SHADOW_ACTIVE
+      transition: box-shadow .1s
   margin-top: 20px
   display: flex
   max-width: 800px
@@ -26,6 +46,7 @@
     justify-content: stretch
     flex-direction: column
     align-items: stretch
+
   &--title
     font-size: 1.5em
     font-weight: 600
@@ -60,3 +81,7 @@ a.section
     justify-content: center
     flex-direction: column
     align-items: center
+.options
+  &:hover
+    transition: .1s
+    @include SECTION_SHADOW_ACTIVE

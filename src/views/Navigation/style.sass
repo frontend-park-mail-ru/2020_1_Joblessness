@@ -1,0 +1,167 @@
+@import "../../CONSTANTS"
+.nav-bar
+  @media(min-width: 1001px)
+    &--icon
+      display: none !important
+  &--icon
+    padding: 10px 10px 0 0
+    width: 70px
+    height: 70px
+    display: flex
+    justify-content: center
+    align-items: center
+    position: absolute
+    margin-left: -8px
+    transform: scale(.9)
+    opacity: .5
+    transition: scale, opacity .3s
+    &:hover
+      transform: scale(.95)
+      opacity: .6
+    &:active
+      transform: scale(.92)
+      opacity: .7
+  transition: .3s
+  @media(max-width: 1000px)
+    max-width: 300px
+    bottom: 0
+    top: auto
+    @include SECTION_SHADOW
+    overflow: hidden
+    border-radius: 0 70px 0 0
+    padding: 0
+    width: 70px
+    height: 70px
+    background: white
+    .nav-bar--body
+      transform: scale(0)
+  visibility: visible
+  position: fixed
+  top: 0
+  display: flex
+  align-items: stretch
+  flex-direction: column
+  left: 0
+  padding-top: 280px
+  z-index: 200
+  width: calc((100% - 600px) / 2)
+  max-width: 250px
+  background: rgba(255, 255, 255, .1)
+  height: 100%
+  &--body
+    display: flex
+    flex-direction: column
+  &--content
+    padding: 10px
+    display: inline
+    border-radius: 15px
+    //font-size: 1.5em
+    white-space: nowrap
+    margin-left: 5%
+    color: black
+    opacity: .5
+    transition: .2s
+
+  &--item
+    cursor: pointer !important
+    padding: 20px
+
+    &:hover
+      .nav-bar--content
+        opacity: 1
+        background: rgba(0, 0, 0, .1)
+
+      .nav-bar--content.current
+        opacity: 1
+        background: rgba(0, 0, 0, .15)
+
+    .nav-bar--content.current
+      opacity: 1
+      background: rgba(0, 0, 0, .1)
+
+@media (min-width: 1001px)
+  .nav-bar
+    &--content
+      font-size: 1.25em
+@media (min-width: 1200px)
+  .nav-bar
+    &--content
+      font-size: 1.5em
+.nav-bar.open
+  @media(max-width: 1000px)
+    .nav-bar--logo
+      background-image: url("logo.svg")
+      background-position: center
+      background-repeat: no-repeat
+      align-self: center
+      width: 200px
+      background-size: contain
+      height: 200px
+    justify-content: center
+    width: 80%
+    max-width: 300px
+    height: 100%
+    bottom: 0
+    top: auto
+    @include SECTION_SHADOW
+    background: white
+    overflow: hidden
+    border-radius: 0 70px 0 0
+    display: flex
+    .nav-bar--body
+      justify-content: stretch
+      align-items: stretch
+      height: 100%
+      font-size: 1.5em
+      margin-bottom: 70px
+      transform: scale(1)
+.nav-bar--mask
+  transition: .3s
+  background: rgba(0,0,0,0)
+  z-index: 190
+  left: 0
+  bottom: 0
+  position: fixed
+.nav-bar--mask.open
+  @media(max-width: 1000px)
+    background: rgba(0,0,0,.2)
+    z-index: 10
+    top: 0
+    left: 0
+    right: 0
+    bottom: 0
+    position: fixed
+
+
+.nav-bar.vac
+.nav-bar.sum
+.nav-bar.org
+.nav-bar.user
+  margin-top: 280px
+  background: transparent
+  padding-top: 0
+  @media (max-width: 1000px)
+    background: white
+
+.nav-bar
+  @media(max-width: 1000px)
+    &:hover
+      transform: scale(1.05)
+.nav-bar.open
+  @media(max-width: 1000px)
+    &:hover
+      transform: scale(1)
+      @include SECTION_SHADOW_ACTIVE
+.nav-bar.open
+  cursor: default
+  border-radius: 0
+  @media(max-width: 1000px)
+    &:hover
+      transform: scale(1.0)
+      @include SECTION_SHADOW_ACTIVE
+    .nav-bar--icon
+      display: none
+.nav-bar--back.not-shown
+  margin-top: 40px
+  @media (min-width: 1001px)
+    display: none

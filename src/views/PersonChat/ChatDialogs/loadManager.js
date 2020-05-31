@@ -2,17 +2,20 @@ import {Page} from '../../../Page';
 import withLocalStore from '../localStore';
 import {equals, requestManager, uuid} from '../../../ulils';
 import {Navigator} from '../../../Navigator';
-import {PERSON} from '../../../CONSTANTS';
+import {PERSON, UNAUTHORISED} from '../../../CONSTANTS';
 
 class LoadManager extends Page {
-  #loading
+  #loading;
   render() {
     return ''
+  }
+  componentWillUpdate() {
+    super.componentWillUpdate();
   }
 
   componentDidMount() {
     super.componentDidMount();
-    if(this.#loading || currentSession.user.role !== PERSON)
+    if(this.#loading || currentSession.user.role === UNAUTHORISED )
       return;
     this.#loading = true;
     loadDialogs(this);
@@ -30,6 +33,7 @@ const sleep = (t) =>new Promise(resolve => {setTimeout(resolve, t)})
 const loadDialogs = async (page) => {
   try {
     const dialogs = await (await requestManager.tryGetDialogs()).json();
+    // const dialogs = JSON.parse(`[{"chatter_id":13,"avatar":"https://hb.bizmrg.com/imgs-hh/default-avatar.png","chatter_name":"Михаил","tag":"tagname","interview_date":"0001-01-01T00:00:00Z"}]`);
     const mappedDialogs = dialogs.map(d => ({
       user : d['chatter_name'],
       id: d['chatter_id'],

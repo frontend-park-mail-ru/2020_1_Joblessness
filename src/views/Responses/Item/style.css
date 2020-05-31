@@ -1,0 +1,82 @@
+.responses-item.removing {
+  transition-duration: 0.3s;
+}
+
+.responses-item .section {
+  padding: 5px;
+  transition: 0.1s;
+}
+.responses-item:hover .section {
+  box-shadow: 0px 3px 13px 0px rgba(0, 0, 0, 0.6);
+  transform: scale(1.01);
+}
+.responses-item--buttons {
+  display: flex;
+  flex: 1;
+  align-items: flex-end;
+  justify-content: space-evenly;
+  flex-direction: column;
+}
+.responses-item--button {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 26px;
+  height: 26px;
+  font-size: 18px;
+  opacity: 0.3;
+  background-attachment: fixed;
+  border-radius: 5px;
+  transition: 0.1s opacity, transform;
+}
+.responses-item--button:hover {
+  opacity: 0.5;
+  transform: scale(1.02);
+}
+.responses-item--button:active {
+  opacity: 0.6;
+  transform: scale(1.01);
+}
+.responses-item--main-buttons {
+  margin-top: 10px;
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+}
+.responses-item--main-buttons .invisible {
+  display: none;
+}
+.responses-item--main-buttons .submit-button {
+  width: auto;
+}
+.responses-item--main-buttons .decline-button {
+  font-size: 1.5em;
+  opacity: 0.5;
+  cursor: pointer;
+  margin-right: 10px;
+}
+.responses-item--main-buttons .decline-button:hover {
+  opacity: 0.6;
+}
+.responses-item--main-buttons .interview-button {
+  flex: 1;
+  cursor: pointer;
+  opacity: 0.5;
+  font-size: 1.5em;
+}
+.responses-item--main-buttons .interview-button:hover {
+  opacity: 0.6;
+}
+.select-date {
+  transition: transform 0.3s;
+  transform-origin: top center;
+}
+.select-date--message {
+  font-size: 1.25em;
+}
+
+.select-date.invisible {
+  transform: scale(0, 0);
+}
+
+/*# sourceMappingURL=style.css.map */

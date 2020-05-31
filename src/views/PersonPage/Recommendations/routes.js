@@ -17,11 +17,11 @@ const Routes = createLoadableList({
     LoadManager: EmptyPage,
   },
   {
-    root: '.*/',
+    root: '/*recommendations',
     reducerKey: uuid(),
     load: async () => {
-      const r = await request.get('/api/recommendation');
       try {
+        const r = await request.get('/api/recommendation');
         const res = await r.json();
         for(let r of res) {
           if(r.responsibilities) {
@@ -48,5 +48,4 @@ const Routes = createLoadableList({
     LoadManagerSelector: '#recommendations_load_manager',
   }
 );
-console.log(Routes)
 export default Routes

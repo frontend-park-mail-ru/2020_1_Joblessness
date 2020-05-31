@@ -1,16 +1,16 @@
+include ../../templates/pug/link
 mixin section-title
     div.section-title.cover(class=attributes.class)
         block
 
-
 section.page--holder
     div.page--body
         div.section.maxw100vw
-            section.section--body.pad20#vacancy_org_info
+            section.section--body.padlr20.organization--info#vacancy_org_info
     div.page--body
-        span.section--title Основная информация
+        h1.section--title Основная информация
         section.section
-            section.section--body.pad20#vacancy_main_info
+            div.page-holder--body.flex-row.width100.vacancy-main-info#vacancy_main_info
 
         span.section--title Обязанности
         section.page--section--solid.tools
@@ -21,5 +21,5 @@ section.page--holder
             section.page-holder--body.flex-row.width100#vacancy_conditions
 
         if(locals.submitText)
-            section.section.gradient-background.create-button#create_vacancy_button
+            section.page-section.gradient-background.create-button#create_vacancy_button
                 div #{locals.submitText}

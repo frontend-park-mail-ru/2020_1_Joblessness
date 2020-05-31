@@ -1,11 +1,20 @@
 @import "../../CONSTANTS"
+$RED : red
+$ORANGE : orange
+$GREEN : green
 .alerts
   position: fixed
   z-index: 10000
   height: 0
   top: 0
-  width: 100%
+  width: 200px
   left: 0
+  &--item.error
+    border-left: 2px solid $RED
+  &--item.warn
+    border-left: 2px solid $ORANGE
+  &--item.success
+    border-left: 2px solid $GREEN
   &--item
     z-index: 10000
     width: 90%
@@ -15,8 +24,10 @@
     background: white
     height: 30px
     margin: 10px 5% 10px 5%
-    border-radius: 15px
-    @include SECTION_SHADOW
+    background: rgba(255,255,255,1)
+    //border-radius: 15px
+    //@include VERY_LIGHT_GRADIENT
+    //@include SECTION_SHADOW
     transition: .2s
     &:hover
       transform: scale(1.01)
@@ -31,7 +42,7 @@
 @keyframes mount-item
   0%
     margin-top: 25px
-    height: 0px
+    height: 0
   100%
     margin-top: 10px
     height: 30px

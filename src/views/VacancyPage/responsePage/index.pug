@@ -1,13 +1,8 @@
-mixin section-title
-    div.section-title.cover(class=attributes.class)
-        block
+section.page--holder.light-grad
+    div.page--body
 
-div.page-holder.response-holder.light-background
-    div.cover.gradient-background
-        div.cover.light-background
-            +section-title.width80
-                h1 Откликнуться на вакансию
-    div(hidden)#response_load_manager
-    div.page-solid-section.vacancy-list
-            div.vacancy-list--holder
+        div.page--body
+            h1.section--title Откликнуться на вакансию
+            div.list--holder
                 div.vacancy-list--body#response_summaries
+            div.hidden#response_load_manager

@@ -1,3 +1,4 @@
+@import "../../../CONSTANTS"
 .chat
   &--item
     width: 100%
@@ -11,9 +12,29 @@
       background: rgba(255,255,255,.3)
     &--body
       align-items: center
+      cursor: pointer
       display: flex
       flex: 1
       padding: 5px
       flex-direction: row
+      &:hover
+        @include VERY_LIGHT_GRADIENT
       span
         text-indent: 5px
+.messenger
+  &--hint
+    hyphens: auto
+    display: inline
+    font-style: italic
+    color: $GRAY
+  &--info
+    padding-left: 15px
+    padding-right: 10px
+    padding-bottom: 50px
+    font-size: 1.25em
+    //text-align: center
+    //margin: 5px
+.chat--dialogs
+  display: flex
+  flex-direction: column
+  overflow-y: scroll

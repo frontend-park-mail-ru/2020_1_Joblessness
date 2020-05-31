@@ -47,6 +47,7 @@ alert = (msg, type = 'error') => {
   };
   const alertItem = {
     id: newId,
+    type
   };
   ALERTS_ELEMENT.props.setStore(s => ({
     alerts: [

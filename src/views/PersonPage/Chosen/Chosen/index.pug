@@ -1,15 +1,8 @@
-include ../../../../templates/pug/link
-include ../../../../templates/pug/avatar
-include ../../../../templates/pug/name
-include ../../../../templates/pug/companyName
-
-if locals.info.isPerson
-    div.section.pad20
-        div.section--body.row
-            +avatar(src=locals.info.avatar noSelect).small
-            +name(locals.info.name, locals.info.surname, locals.info.tag)
+include ../../../SearchPage/Item/org
+include ../../../SearchPage/Item/user
+if !locals.info.isPerson
+    div.section
+        +organization(locals.info)
 else
-    div.section.pad20
-        div.section--body.row
-            +avatar(src=locals.info.avatar noSelect).small
-            +company-name(locals.info.name, locals.info.tag)
+    div.section
+        +user(locals.info)

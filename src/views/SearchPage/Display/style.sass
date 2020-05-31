@@ -10,3 +10,24 @@
     display: flex
     h2
       margin: 0
+  &--counter
+    font-size: 1.25em
+    text-align: end
+    margin-bottom: -1.25em
+    opacity: .5
+    margin-top: 20px
+    height: 0
+    @media(max-width: 800px)
+      margin-bottom: -1.25em*.7
+      margin-right: 20px
+.search-item.placing
+  animation: placing-search .3s ease-in-out
+.search-item.start
+  transform: scale(0)
+@keyframes placing-search
+  0%
+    transform: scale(0)
+  50%
+    transform: scale(0)
+  100%
+    transform: scale(1)

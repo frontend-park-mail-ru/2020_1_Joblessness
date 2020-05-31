@@ -25,7 +25,15 @@ const Routes = createLoadableList({
     load: async (page = 0) => {
       try {
         const r = await requestManager.tryGetUserFavorites(getUserId(), page);
-        return await r.json()
+        const res = await r.json()
+        return res.map(i => {
+          if(!('surname' in i ))
+            return i;
+          i.firstName = i.name;
+          i.lastName = i.surname;
+          return i;
+        })
+        // return JSON.parse('[{"id":33,"tag":"restaurant","avatar":"https://hb.bizmrg.com/imgs-hh/default-avatar.png","isPerson":false,"name":"Ресторан","surname":""},{"id":40,"tag":"zavod.","avatar":"https://hb.bizmrg.com/imgs-hh/default-avatar.png","isPerson":false,"name":"Завод","surname":""},{"id":36,"tag":"AleshaPupin","avatar":"https://hb.bizmrg.com/imgs-hh/36-avatar.jpg","isPerson":true,"name":"Алексей","surname":"Пупин"}]')
       } catch (e) {
         alert('Не удалось загрузить избранное');
         return null

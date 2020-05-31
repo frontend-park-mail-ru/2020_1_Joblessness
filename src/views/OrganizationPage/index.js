@@ -20,13 +20,21 @@ class OrganizationPage extends Page {
     return template(this.props);
   }
 
+  componentWillUpdate() {
+    super.componentWillUpdate();
+
+    const orgId = getOrgId();
+    if (this.#prevOrg !== orgId)
+      this.needUpdate()
+  }
+
   componentDidMount() {
     super.componentDidMount();
     const orgId = getOrgId();
+
     if (this.#prevOrg !== orgId) {
       this.#prevOrg = orgId;
       this.props.reloadStore();
-      this.props.random = uuid();
       Navigator.updateAllPages();
       requestManager.tryGetOrg(orgId)
           .then( async (r) => {
@@ -47,7 +55,13 @@ class OrganizationPage extends Page {
             }));
             Navigator.updateAllPages();
           })
-          .catch(console.log);
+          .catch( (e) => {
+            if(e.status === 404 || e.status === 500) {
+              Navigator.showPage('404');
+              return;
+            }
+            console.log(e)
+          });
     }
   }
 }

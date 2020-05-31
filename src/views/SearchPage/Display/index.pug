@@ -8,16 +8,19 @@ mixin vacancy-preview
 
 section.section--body
     div#search_upper_items
-    if(locals.organizations && locals.organizations.length)
-        span.section--title Организации
-        each org in locals.organizations
-            +link(href="/organizations/" + org.id id=org.innerId).section
-    if(locals.persons && locals.persons.length)
-        span.section--title Пользователи
-        each per in locals.persons
-            +link(href="/users/" + per.id id=per.innerId).section
-    if(locals.vacancies && locals.vacancies.length)
-        span.section--title Вакансии
-        each vac in locals.vacancies
-            +link(href="/vacancies/" + vac.id id=vac.innerId).section
-    div#search_lower_items
+    each item, index in locals
+        if(index > 0)
+            div.display-holder--counter страница #{index + 1}
+        if(item.organizations && item.organizations.length)
+            span.section--title Организации
+            each org in item.organizations
+                +link(href="/organizations/" + org.id id=org.innerId).section.search-item.start
+        if(item.persons && item.persons.length)
+            span.section--title Пользователи
+            each per in item.persons
+                +link(href="/users/" + per.id id=per.innerId).section.search-item.start
+        if(item.vacancies && item.vacancies.length)
+            span.section--title Вакансии
+            each vac in item.vacancies
+                +link(href="/vacancies/" + vac.id id=vac.innerId).section.search-item.start
+        div#search_lower_items

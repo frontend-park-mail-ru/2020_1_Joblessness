@@ -1,8 +1,11 @@
 mixin string-field
     div.string-field
         input.string-field--input(
+            class=attributes.class
             size=attributes.size
             id=attributes.id
+            min=attributes.min
+            max=attributes.max
             readonly!=attributes.readonly
             type=attributes.type || "text"
             placeholder=attributes.placeholder

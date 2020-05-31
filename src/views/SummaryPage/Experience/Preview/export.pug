@@ -1,0 +1,28 @@
+include ../../../../templates/pug/forms
+include ../../../../templates/pug/fields
+
+mixin company-name(companyName)
+    div.company-name
+        h2 #{companyName}
+
+mixin company-role(companyRole)
+    div.company-role #{companyRole}
+
+mixin company-experience(from, to)
+    div.company-experience
+        |с&nbsp
+        b #{from}
+        | &nbspпо&nbsp
+        b #{to || 'нынешнее время'}
+
+mixin responsibilities(resps)
+    div.responsibilities
+        - let respList = resps ? resps.split(",").map( s => s.trim() ) : []
+        each r in respList
+            p #{r}
+mixin experience-form(sum)
+    div.experience
+        +company-name(sum.companyName)
+        +company-role(sum.role)
+        +company-experience(sum.experienceFrom, sum.experienceTo)
+        +responsibilities(sum.responsibilities)

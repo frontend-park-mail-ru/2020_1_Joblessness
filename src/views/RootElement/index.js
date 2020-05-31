@@ -1,6 +1,5 @@
 import {Page} from '../../Page';
 import template from './index.pug'
-import {Header} from '../Header';
 /**
  * To append Header as subpage
  */
@@ -25,13 +24,6 @@ const Routes = [
     path: 'root',
     alwaysOn: true,
     element: ROOT_ELEMENT,
-    childRoutes: [
-      {
-        path: 'header',
-        alwaysOn: true,
-        element: new Header('#nav-elements'),
-      },
-    ],
   },
 ];
 

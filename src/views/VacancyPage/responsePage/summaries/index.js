@@ -1,5 +1,5 @@
 import {Page} from '../../../../Page';
-import './style.sass';
+// import './style.sass';
 import template from './index.pug';
 
 /**

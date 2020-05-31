@@ -60,6 +60,8 @@ class NewSignUp extends Page {
             ?.childNodes[c * 2]
             ?.classList.remove('locked');
         }
+        if(this.currentStep > 0)
+          stepsHolder?.childNodes[0].classList.add('locked');
         }, 20);
   }
 }

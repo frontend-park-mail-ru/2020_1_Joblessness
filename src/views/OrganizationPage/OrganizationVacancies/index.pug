@@ -1,7 +1,12 @@
-
+include ../../../templates/pug/link
 div.list--separator
 div.create-vacancy.vacancy-holder#create-vacancy-holder
-if locals.vacancies
+if locals.vacancies && locals.vacancies.length
     each vac in locals.vacancies
-        div.vacancy-holder(id=vac.innerId)
+        +link(href="/vacancies/" + vac.id id=vac.innerId).vacancy-holder.black-link
+else
+    if locals.isOwnPage
+        h1.list--warn Создайте первую вакансию
+    else
+        h1.list--warn Вакансии появятся позже
 div.list--separator

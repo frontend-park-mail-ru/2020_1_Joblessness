@@ -1,9 +1,6 @@
 import {Page} from '../../../Page';
 import template from './index.pug';
 import './style.sass';
-import {
-  playMountAnimation,
-} from '../../OrganizationPage/OrganizationVacancies/addAnimations';
 
 class Item extends Page {
   render() {
@@ -15,8 +12,10 @@ class Item extends Page {
     const parent = document.querySelector(this.container);
     if (!this._wasMount) {
       this._wasMount = true;
-      playMountAnimation(parent);
+      parent.classList.add('placing');
+      setTimeout(() => parent.classList.remove('start'), 100);
     } else {
+      parent.classList.remove('start')
       if (parent) {
         parent.style.transitionDuration = '0';
       }

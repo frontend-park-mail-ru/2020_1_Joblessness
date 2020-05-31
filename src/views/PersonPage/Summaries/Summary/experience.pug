@@ -1,0 +1,6 @@
+include ../../../SummaryPage/Experience/Preview/export
+
+mixin experience(exp)
+    h1.section--title Опыт работы
+    each e in exp
+        +experience-form(e)(readonly)

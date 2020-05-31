@@ -110,6 +110,16 @@ export class Page {
   };
 
   /**
+   * clears all stored data
+   */
+  reset() {
+    this.#container.dom = null;
+    this.#prevContainerDom = null;
+    this.#prevRender = null;
+    this.#prevProps = null;
+    this.#needUpdate = null;
+  }
+  /**
    *
    */
   getContainer() {
@@ -130,8 +140,7 @@ export class Page {
 
     if (!toShow && toShow !== '' ) {
       console.error(`
-              Render function must return string.
-              Setting innerHTML is not supported anymore!`);
+              Render function must return string!`);
     }
 
     if (this.#needUpdate || this.#prevRender !== toShow ||

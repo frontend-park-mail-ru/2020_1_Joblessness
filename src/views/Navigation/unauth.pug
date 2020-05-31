@@ -1,0 +1,11 @@
+include ../../templates/pug/link
+mixin unauthenticated
+    +link(href="/search")
+        div.nav-bar--item
+            div.nav-bar--content.nav--home Главная
+    +link(href="/search/vacancies")
+        div.nav-bar--item
+            div.nav-bar--content.nav--vacs Вакансии
+    +link(href="/signup")
+        div.nav-bar--item
+            div.nav-bar--content.nav--auth Авторизация
